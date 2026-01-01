@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"86c1cae0bee49bdc","type":"file","file":"paper/Deep_Learning-Based_BSDE_Solver_for_Libor.pdf","x":-400,"y":-240,"width":400,"height":400},
+		{"id":"704062e3e3efc609","type":"text","text":"Monte Carlo","x":180,"y":-360,"width":109,"height":60},
+		{"id":"00ba1cfc1cfc223f","x":197,"y":34,"width":123,"height":60,"type":"text","text":"Browian motion"}
+	],
+	"edges":[
+		{"id":"04aa25a81b614f4e","fromNode":"86c1cae0bee49bdc","fromSide":"right","toNode":"704062e3e3efc609","toSide":"left"},
+		{"id":"2a365eeb841ec7f7","fromNode":"86c1cae0bee49bdc","fromSide":"right","toNode":"00ba1cfc1cfc223f","toSide":"left"}
+	]
+}

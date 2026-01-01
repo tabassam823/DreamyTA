@@ -1,0 +1,269 @@
+{
+  "main": {
+    "id": "398f127e6b1e3900",
+    "type": "split",
+    "children": [
+      {
+        "id": "90c568b5a305a179",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "20fed5f05a0475b1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Replication/phase0.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "phase0"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4ba537aa042ef2fc",
+    "type": "split",
+    "children": [
+      {
+        "id": "c40d213367596153",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e33936fe2683637",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "38d750c91b0c3cd4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ff1a5bbf9ca24e95",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      },
+      {
+        "id": "4c607714eb3ecdb6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "287f258bfd651da9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Replication/phase0.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of phase0"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 224.5
+  },
+  "right": {
+    "id": "2be21e54251959f5",
+    "type": "split",
+    "children": [
+      {
+        "id": "9f1085aa09918c44",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f4c016249b3139c2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Replication/phase0.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for phase0"
+            }
+          },
+          {
+            "id": "418c9b37a14becc8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "notes/deep_learning_bsde.pdf",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from deep_learning_bsde"
+            }
+          },
+          {
+            "id": "b2a9353aae5b5d5c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "c816a6e5cfd12495",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "9a96fc51d30b74ee",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "notes/deep_learning_bsde.pdf",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of deep_learning_bsde"
+            }
+          },
+          {
+            "id": "3866c047beb62ade",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "paper/Deep_Learning-Based_BSDE_Solver_for_Libor.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Deep_Learning-Based_BSDE_Solver_for_Libor"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "20fed5f05a0475b1",
+  "lastOpenFiles": [
+    "Replication/phase0.md",
+    "Replication/venv/lib/python3.12/site-packages/__pycache__/ipykernel_launcher.cpython-312.pyc",
+    "Replication/venv/share/jupyter/kernels/python3/logo-svg.svg",
+    "Replication/venv/share/jupyter/kernels/python3/logo-64x64.png",
+    "Replication/venv/share/jupyter/kernels/python3/logo-32x32.png",
+    "Replication/venv/share/jupyter/kernels/python3/kernel.json",
+    "Replication/venv/share/jupyter/kernels/python3",
+    "Replication/venv/share/jupyter/kernels",
+    "Replication/venv/share/jupyter",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel-7.1.0.dist-info/licenses/LICENSE",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel-7.1.0.dist-info/licenses",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel-7.1.0.dist-info/WHEEL",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel-7.1.0.dist-info/REQUESTED",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel-7.1.0.dist-info/RECORD",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel/resources/logo-svg.svg",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel/resources/logo-64x64.png",
+    "Replication/venv/lib/python3.12/site-packages/ipykernel/resources/logo-32x32.png",
+    "Replication/venv/lib/python3.12/site-packages/debugpy/_vendored/pydevd/pydevd_plugins/extensions/README.md",
+    "Replication/venv/lib/python3.12/site-packages/pyzmq-27.1.0.dist-info/licenses/LICENSE.md",
+    "Replication/venv/lib/python3.12/site-packages/zmq/backend/cffi/README.md",
+    "paper/Bab2/Bab2.md",
+    "vqe_optimal_portfolio.png",
+    "venv/lib/python3.12/site-packages/scipy/ndimage/tests/dots.png",
+    "venv/lib/python3.12/site-packages/scipy/fft/_pocketfft/LICENSE.md",
+    "asset_correlation.png",
+    "venv/lib/python3.12/site-packages/seaborn-0.13.2.dist-info/LICENSE.md",
+    "venv/lib/python3.12/site-packages/matplotlib/mpl-data/sample_data/logo2.png",
+    "venv/lib/python3.12/site-packages/idna-3.11.dist-info/licenses/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/splitmix64/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/sfc64/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/philox/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/pcg64/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/mt19937/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/distributions/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/fft/pocketfft/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/LICENSE.md",
+    "venv/lib/python3.12/site-packages/numpy/random/LICENSE.md",
+    "venv/lib/python3.12/site-packages/pyparsing/ai/best_practices.md",
+    "venv/lib/python3.12/site-packages/soupsieve-2.8.1.dist-info/licenses/LICENSE.md",
+    "paper/Bab1.md",
+    "paper/Bab1/Bab1.md",
+    "paper/Bab2/Bab2_1.md",
+    "paper/Bab2/Bab2_2.md",
+    "paper/Bab2/Bab2_3.md",
+    "paper/Bab2/dasar_teori.md",
+    "paper/Relation.canvas"
+  ]
+}
