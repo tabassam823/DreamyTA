@@ -1,0 +1,122 @@
+\section{Pemetaan QUBO ke Hamiltonian Ising}
+
+\begin{frame}{Formulasi Fungsi Objektif}
+    Masalah optimisasi portfolio dirumuskan sebagai masalah QUBO:
+    \begin{equation}
+        C(x) = -\lambda \sum_{i=1}^{N} \mu_i x_i + (1-\lambda) \sum_{i=1}^{N} \sum_{j=i+1}^{N} \sigma_{ij} x_i x_j + p \left( \sum_{i=1}^{N} x_i - \frac{N}{2} \right)^2
+    \end{equation}
+    Di mana:
+    \begin{itemize}
+        \item $x_i \in \{0, 1\}$: Variabel keputusan biner.
+        \item $N$: Jumlah total aset.
+        \item $\mu_i$: Pengembalian yang diharapkan dari aset $i$.
+        \item $\sigma_{ij}$: Kovarian antara aset $i$ dan $j$.
+        \item $\lambda$: Parameter penghindaran risiko ($0 \le \lambda \le 1$).
+        \item $p$: Koefisien penalti untuk batasan kardinalitas ($\sum x_i = N/2$).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ekspansi Batasan}
+    Mengekspansi suku penalti kuadrat:
+    \begin{align*}
+        \left( \sum_{i=1}^{N} x_i - \frac{N}{2} \right)^2 &= \left( \sum_{i=1}^{N} x_i \right)^2 - N \sum_{i=1}^{N} x_i + \frac{N^2}{4} \\
+        &= \sum_{i=1}^{N} x_i + 2 \sum_{i<j} x_i x_j - N \sum_{i=1}^{N} x_i + \text{konst} \\
+        &= \sum_{i=1}^{N} (1 - N) x_i + 2 \sum_{i<j} x_i x_j + \text{konst}
+    \end{align*}
+    Mensubstitusi kembali ke dalam $C(x)$ menghasilkan koefisien yang dikelompokkan.
+\end{frame}
+
+\begin{frame}{Pengelompokan Koefisien}
+    Menulis ulang $C(x)$ dengan koefisien linier ($Q_i$) dan kuadratik ($Q_{ij}$):
+    \begin{equation}
+        C(x) = \sum_{i=1}^{N} Q_i x_i + \sum_{i=1}^{N} \sum_{j=i+1}^{N} Q_{ij} x_i x_j + \text{konst}
+    \end{equation}
+    \begin{block}{Koefisien}
+        \begin{itemize}
+            \item \textbf{Linier ($Q_i$):}
+            $Q_i = -\lambda \mu_i + p(1 - N)$
+            \item \textbf{Kuadratik ($Q_{ij}$):}
+            $Q_{ij} = (1-\lambda) \sigma_{ij} + 2p$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Transformasi ke Hamiltonian Ising}
+    Pemetaan ke model Ising menggunakan $x_i = \frac{1 - Z_i}{2}$, dengan $Z_i \in \{1, -1\}$ (nilai eigen Pauli-Z).
+    \vspace{0.5cm}
+    
+    \textbf{1. Suku Linier:}
+    $$ \sum_{i} Q_i x_i = \sum_{i} \frac{Q_i}{2} - \sum_{i} \frac{Q_i}{2} Z_i $$
+
+    \textbf{2. Suku Kuadratik:}
+    $$ \sum_{i<j} Q_{ij} x_i x_j = \sum_{i<j} \frac{Q_{ij}}{4} (1 - Z_i - Z_j + Z_i Z_j) $$
+\end{frame}
+
+\begin{frame}{Ekspresi Hamiltonian Akhir}
+    Hamiltonian diberikan oleh $H = \sum_{i} h_i Z_i + \sum_{i<j} J_{ij} Z_i Z_j$.
+    \vspace{0.5cm}
+
+    \begin{block}{Koefisien}
+        \begin{equation}
+            h_i = \frac{\lambda \mu_i}{2} - \frac{1-\lambda}{4} \sum_{j \neq i}^N \sigma_{ij}
+        \end{equation}
+        \begin{equation}
+            J_{ij} = \frac{(1-\lambda) \sigma_{ij} + 2p}{4}
+        \end{equation}
+    \end{block}
+\end{frame}
+
+\section{VQE dan CVaR}
+
+\begin{frame}{Latar Belakang VQE dan CVaR}
+    \textbf{Tujuan VQE:} Meminimalkan $E(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta}) | \hat{H} | \psi(\boldsymbol{\theta}) \rangle$.
+    \vspace{0.5cm}
+
+    \textbf{CVaR Standar (Conditional Value-at-Risk):}
+    Alih-alih rata-rata, gunakan rata-rata dari energi ekor. Untuk energi yang diurutkan $E_{(1)} \le \dots \le E_{(K)}$:
+    \begin{equation}
+        CVaR_\alpha(E) = \frac{1}{\lceil \alpha K \rceil} \sum_{k=1}^{\lceil \alpha K \rceil} E_{(k)}
+    \end{equation}
+    Ketika $\alpha = 1$, ini menghasilkan energi rata-rata standar.
+\end{frame}
+
+\section{Weighted CVaR (WCVaR)}
+
+\begin{frame}{Weighted CVaR (WCVaR)}
+    \begin{block}{Definisi}
+        \begin{equation}
+            WCVaR_\alpha(E) = \sum_{k=1}^{\lceil \alpha K \rceil} w_k E_{(k)}
+        \end{equation}
+        dengan batasan $\sum w_k = 1$.
+    \end{block}
+
+    \textbf{Perbedaan dari CVaR Standar:}
+    \begin{itemize}
+        \item \textbf{CVaR Standar:} Bobot seragam $w_k = \frac{1}{\lceil \alpha K \rceil}$.
+        \item \textbf{WCVaR:} Bobot tidak seragam, biasanya meluruh secara eksponensial.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Manfaat Teoritis WCVaR}
+    \begin{itemize}
+        \item \textbf{Lanskap yang Lebih Halus:} Tidak seperti optimisasi energi minimum ($\alpha \to 0$), WCVaR memberikan lanskap yang lebih halus dan dapat diturunkan.
+        \item \textbf{Menghindari Dataran Tandus:} Tidak seperti ekspektasi penuh ($\alpha=1$), ini berfokus pada keadaan energi rendah, mencegah derau energi tinggi menghapus gradien.
+        \item \textbf{Panduan:} Bobot eksponensial mendorong pengoptimal secara agresif menuju keadaan dasar sejati ($E_{(1)}$).
+    \end{itemize}
+\end{frame}
+
+\section{Skema Pembobotan}
+
+\begin{frame}{Skema Pembobotan (Lampiran A)}
+    \begin{enumerate}
+        \item \textbf{Berbasis Energi:} $w_k = \exp [ -\beta(E_{(k)} - E_0) ]$ (Performa buruk).
+        \item \textbf{Berbasis Peringkat:} $w_k = \exp(-\beta k)$ (Sederhana dan efektif).
+        \item \textbf{Eksponensial Bertahap (Dipilih):}
+        $$ w_k = \begin{cases} 
+            \exp(-\beta_1 k) & k < N_1 \\
+            \exp(-\beta_2 (k - N_1)) \cdot w_{N_1 - 1} & N_1 \le k < N_2 \\
+            \dots & \dots
+        \end{cases} $$
+    \end{enumerate}
+    Metode bertahap memungkinkan kontrol yang lebih rinci dan digunakan untuk hasil utama makalah.
+\end{frame}

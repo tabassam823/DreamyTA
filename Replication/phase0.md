@@ -14,7 +14,7 @@ Where:
 *   $μ_i$ is the expected return of asset $i$.
 *   $σ_{ij}$ is the covariance between assets $i$ and $j$.
 *   $λ$ is the risk aversion parameter ($0 \le λ \le 1$).
-*   $p$ is the penalty coefficient for the cardinality constraint ($\sum x_i = N/2$).
+*   $p$ is the penalty coefficient for the cardinality constraint ($\sum x_i = N/2$). 
 
 ### Expansion of the Constraint Term
 
@@ -142,3 +142,43 @@ This assigns significantly higher weight to the lowest energies ($E_{(1)}, E_{(2
 1.  **Smoother Landscape vs. Min-Energy:** Purely minimizing the minimum sampled energy (equivalent to $\alpha \to 0$) creates a discontinuous, jagged landscape that is hard for classical optimizers (like COBYLA or CMA-ES) to traverse.
 2.  **Focus vs. Mean:** Minimizing the full expectation value ($\alpha=1$) often leads to "barren plateaus" or getting stuck in local minima because high-energy states wash out the gradients of the ground state path.
 3.  **WCVaR Advantage:** By using a weighted tail, WCVaR provides a middle ground. It heavily prioritizes the ground state (like min-energy) but retains enough contribution from slightly higher energy states (the "tail") to provide a smoother, differentiable gradient slope towards the minimum. The exponential decay ensures that as the optimizer improves, it is driven more aggressively towards the true ground state $E_{(1)}$ rather than just the average of the tail.
+
+---
+
+## 3. Appendix A: Weights in WCVaR Cost Function
+
+This section details the specific weighting schemes used in the Weighted Conditional Value-at-Risk (WCVaR) cost function, as described in Appendix A of the paper.
+
+The WCVaR cost function is defined as:
+$$ WCVaR_\alpha(E) = \sum_{k=1}^{\lceil \alpha K \rceil} w_k E_{(k)} $$
+subject to the normalization condition $\sum_{k=1}^{\lceil \alpha K \rceil} w_k = 1$.
+
+The paper explores three variants of the exponential weighting function.
+
+### 1. Energy-Based Exponential Weighting
+This variant uses weights based on the energy difference from the minimum observed energy $E_0 = E_{(1)}$:
+$$ w_k = \exp \left[ -\beta(E_{(k)} - E_0) \right] $$
+where $\beta$ is an inverse temperature parameter.
+*   **Performance:** This method yielded the worst performance in the paper's experiments and was not considered for the final results.
+
+### 2. Rank-Based Exponential Weighting
+This variant assigns weights based solely on the rank $k$ of the energy value in the sorted list:
+$$ w_k = \exp(-\beta k) $$
+where $\beta$ is the decay parameter.
+*   **Performance:** This method performed well, particularly when $\alpha$ is large. It is considered a viable alternative due to its simplicity (fewer hyperparameters).
+
+### 3. Piecewise Exponential Weighting (Selected Method)
+To allow different decay rates across different segments of the sampled distribution, a piecewise function is defined:
+
+$$ w_k = \begin{cases} 
+\exp(-\beta_1 k) & \text{if } k < N_1 \\
+\exp(-\beta_2 (k - N_1)) \cdot w_{N_1 - 1} & \text{if } N_1 \le k < N_2 \\
+\exp(-\beta_3 (k - N_2)) \cdot w_{N_2 - 1} & \text{if } k \ge N_2 
+\end{cases} $$
+
+Where:
+*   $N_1$ and $N_2$ ($N_1 < N_2$) are integer transition points.
+*   $\beta_1, \beta_2, \beta_3 > 0$ are decay parameters for each segment.
+*   The terms $w_{N_1-1}$ and $w_{N_2-1}$ ensure continuity at the transition points, meaning the starting weight of a new segment equals the last weight of the previous segment.
+
+*   **Performance:** This method outperformed the rank-based version (though not significantly) and was adopted as the primary weighting function for the paper's main results. It allows fine-grained control over how much emphasis is placed on the lowest-energy states versus the rest of the tail.

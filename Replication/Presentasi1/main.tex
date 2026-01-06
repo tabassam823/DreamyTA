@@ -1,0 +1,38 @@
+\documentclass{beamer}
+
+% Theme selection
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% Title setup
+\title[Portfolio Optimization VQE]{Achieving High Quality Portfolio Optimization with VQE}
+\subtitle{Phase 0: Theoretical Derivation}
+\author{Team DreamyTA}
+\date{\today}
+
+\begin{document}
+
+% Title Page
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Table of Contents
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+% Content Inputs
+% The content is split into multiple files for better organization
+\input{VQE.tex}
+\input{CMAes.tex}
+
+\end{document}
