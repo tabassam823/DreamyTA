@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "90c568b5a305a179",
+        "id": "3269ff9d7d9e73c4",
         "type": "tabs",
         "children": [
           {
-            "id": "20fed5f05a0475b1",
+            "id": "a4ca17f0c28479a0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Replication/phase0.md",
-                "mode": "preview",
+                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "phase0"
+              "title": "hasil_gemini_adv"
             }
           }
         ]
@@ -33,6 +33,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
+        "dimension": 32.36914600550964,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -79,6 +80,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
+        "dimension": 67.63085399449037,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -86,13 +88,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Replication/phase0.md",
+                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of phase0"
+              "title": "Outline of hasil_gemini_adv"
             }
           }
         ]
@@ -216,54 +218,53 @@
       "bases:Create new base": false
     }
   },
-  "active": "287f258bfd651da9",
+  "active": "a4ca17f0c28479a0",
   "lastOpenFiles": [
-    "Replication/Presentasi1/doc.toc",
-    "Replication/Presentasi1/doc.pdf",
-    "Replication/Presentasi1/doc.out",
-    "Replication/Presentasi1/doc.aux",
-    "Replication/Presentasi1/doc.log",
-    "Replication/Presentasi1/doc.tex",
-    "Replication/Presentasi1/CMAes.tex",
-    "Replication/Presentasi1/Step7.png",
-    "Replication/Presentasi1/Step6.png",
-    "Replication/Presentasi1/Step5.png",
-    "Replication/Presentasi1/Step4.png",
-    "Replication/Presentasi1/Step3.png",
-    "Replication/Presentasi1/Step2.png",
-    "Replication/Presentasi1/Step1.png",
-    "Replication/Presentasi1/main.snm",
-    "Replication/Presentasi1/main.toc",
-    "Replication/Presentasi1/main.nav",
-    "Replication/Presentasi1/main.out",
+    "Latex/PakHeru_Presentasi1/hasil_gemini_adv_formal.md",
+    "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+    "Latex/PakHeru_Presentasi1/Rencana_Presentasi1.md",
+    "Latex/PakGagus_Presentasi1/hasil_gemini_adv_ori.md",
+    "Latex/PakHeru_Presentasi1/Presentasi1.pdf",
+    "Latex/PakGagus_Presentasi1/rencana_presentasi_konsep.md",
+    "Latex/PakGagus_Presentasi1/Presentasi_konsep.synctex(busy)",
+    "Latex/PakGagus_Presentasi1/pdflatex35488.fls",
+    "Latex/PakGagus_Presentasi1/pdflatex35400.fls",
+    "Latex/PakGagus_Presentasi1/pdflatex34359.fls",
+    "Latex/PakGagus_Presentasi1/pdflatex34281.fls",
+    "Latex/PakGagus_Presentasi1/pdflatex34193.fls",
+    "Latex/PakGagus_Presentasi1/pdflatex33911.fls",
+    "Latex/PakGagus_Presentasi1/pdflatex33684.fls",
+    "Latex/PakGagus_Presentasi1/Ilustrasi_CMA_ES.png",
+    "Latex/PakGagus_Presentasi1/Perbandingan_Bobot_WCVaR.png",
+    "Latex/PakGagus_Presentasi1/Sumur_Penalti.png",
+    "Latex/PakGagus_Presentasi1/Efficient_Frontier.png",
+    "Latex/PakGagus_Presentasi1/alur_slide4.png",
+    "Latex/PakGagus_Presentasi1/puppeteer-config.json",
+    "Latex/PakGagus_Presentasi1/alur_slide4.md",
+    "Latex/PakGagus_Presentasi1/Gambar_1b.png",
+    "Latex/PakGagus_Presentasi1/Gambar_1a.png",
+    "Latex/PakGagus_Presentasi1/rencana_presentasi1.md",
+    "Latex/PakGagus_Presentasi1/hasil_gemini_adv.md",
+    "Latex/PakGagus_Presentasi1/hasil_gemini_adv_rev.md",
+    "Latex/PakHeru_Presentasi1/paper84.md",
+    "paper84.md",
+    "Latex/KajianAwal/Bab2/rencana5.md",
+    "Latex/KajianAwal/Bab2/rencana2.md",
+    "Latex/KajianAwal/Bab2/rencana3.md",
+    "Latex/KajianAwal/Bab2/prompt1.md",
+    "Latex/KajianAwal/Bab2/progress.md",
+    "Latex/KajianAwal/Bab2/dasar_teori.md",
+    "Latex/KajianAwal/Bab2/Saran_Pengeditan_Bab_2_kedua.md",
+    "Latex/KajianAwal/Bab2/Saran_Pengeditan_Bab_2.md",
+    "Latex/KajianAwal/Bab2/Rencana.md",
+    "Latex/KajianAwal/Bab2/Groups.md",
+    "Latex/KajianAwal/Bab2/Groups 1.md",
+    "Latex/KajianAwal/Bab2/Bab2_3.md",
+    "Latex/KajianAwal/Bab2/Bab2_2.md",
+    "Latex/KajianAwal/Bab2/Bab2_1.md",
     "Latex/KajianAwal/bab3_flowchart.png",
-    "Latex/bab3_flowchart.png",
-    "Replication/phase0.md",
-    "Replication/venv/share/jupyter/kernels/python3/logo-svg.svg",
-    "Replication/venv/lib/python3.12/site-packages/debugpy/_vendored/pydevd/pydevd_plugins/extensions/README.md",
-    "Replication/venv/lib/python3.12/site-packages/pyzmq-27.1.0.dist-info/licenses/LICENSE.md",
-    "Replication/venv/lib/python3.12/site-packages/zmq/backend/cffi/README.md",
-    "paper/Bab2/Bab2.md",
-    "venv/lib/python3.12/site-packages/scipy/fft/_pocketfft/LICENSE.md",
-    "venv/lib/python3.12/site-packages/seaborn-0.13.2.dist-info/LICENSE.md",
-    "venv/lib/python3.12/site-packages/idna-3.11.dist-info/licenses/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/splitmix64/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/sfc64/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/philox/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/pcg64/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/mt19937/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/src/distributions/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/fft/pocketfft/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy-2.4.0.dist-info/licenses/numpy/random/LICENSE.md",
-    "venv/lib/python3.12/site-packages/numpy/random/LICENSE.md",
-    "venv/lib/python3.12/site-packages/pyparsing/ai/best_practices.md",
-    "venv/lib/python3.12/site-packages/soupsieve-2.8.1.dist-info/licenses/LICENSE.md",
-    "paper/Bab1.md",
-    "paper/Bab1/Bab1.md",
-    "paper/Bab2/Bab2_1.md",
-    "paper/Bab2/Bab2_2.md",
-    "paper/Bab2/Bab2_3.md",
+    "Latex/PakGagus_Pitching/bab3_flowchart.png",
+    "paper/bab3_flowchart.png",
     "paper/Relation.canvas"
   ]
 }

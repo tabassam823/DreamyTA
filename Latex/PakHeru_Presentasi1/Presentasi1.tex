@@ -1,0 +1,234 @@
+\documentclass{beamer}
+
+% Theme selection
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% Title information
+\title[Strategi Investasi Kompetitif]{Strategi Investasi Kompetitif: Pendekatan Game Theory dan Portofolio Log-Optimal}
+\subtitle{Analisis Matematis Berdasarkan Permainan $\phi$ (\textit{The $\phi$-Game})}
+\date{\today}
+
+\begin{document}
+
+% Slide 1: Title
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 2: Daftar Isi
+\begin{frame}{Daftar Isi}
+    \tableofcontents
+\end{frame}
+
+\section{Pendahuluan}
+
+% Slide 2: Pendahuluan - Model Pasar Saham
+\begin{frame}{Pendahuluan: Model Pasar Saham}
+    \begin{itemize}
+        \item \textbf{Vektor Pasar ($X$):} 
+        $X = (X_1, \dots, X_m)$ di mana $X_i \ge 0$ adalah \textit{return} (nilai kembalian) per unit modal.
+        \item \textbf{Vektor Portofolio ($b$):} 
+        $b = (b_1, \dots, b_m)$ dengan kendala:
+        \begin{itemize}
+            \item $b_i \ge 0$ (tanpa \textit{short selling}).
+            \item $\sum_{i=1}^m b_i = 1$ (modal penuh).
+        \end{itemize}
+        \item \textbf{Modal Akhir ($S$):} 
+        Variabel acak $S = b^t X = \sum b_i X_i$.
+        \item \textbf{Konteks Stokastik:} 
+        $X$ ditarik dari fungsi distribusi bersama $F(x)$ yang diasumsikan diketahui.
+    \end{itemize}
+\end{frame}
+
+% Slide 3: Kerangka Game Theory (Zero-Sum)
+\begin{frame}{Kerangka Game Theory (\textit{Zero-Sum})}
+    \begin{block}{Definisi Permainan}
+        \begin{itemize}
+            \item \textbf{Pemain:} Dua investor (Pemain 1 vs Pemain 2).
+            \item \textbf{Tujuan:} Memaksimalkan ekspektasi fungsi imbal hasil:
+            $$E\phi(S_1/S_2)$$
+            \item \textbf{Kriteria:} 
+            \begin{itemize}
+                \item Kemenangan ditentukan oleh rasio kekayaan $S_1/S_2$.
+                \item $\phi(t)$ adalah fungsi monoton naik (\textit{non-decreasing}).
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+    \begin{alertblock}{Hipotesis Utama}
+        Keberadaan strategi universal \textbf{Portofolio Log-Optimal ($b^*$)} yang tangguh (\textit{robust}) terhadap berbagai fungsi $\phi$.
+    \end{alertblock}
+\end{frame}
+
+\section{Kerangka Teoretis}
+
+% Slide 4: Formalisasi Strategi Permainan
+\begin{frame}{Formalisasi Strategi Permainan}
+    \textbf{Ruang Strategi Dua Tahap:}
+    \begin{enumerate}
+        \item \textbf{Randomisasi Awal ($W$):} Memilih variabel acak adil (\textit{Fair Random Variable}) dengan $W \ge 0$ dan $E[W] \le 1$.
+        \item \textbf{Alokasi Aset ($b$):} Memilih portofolio saham.
+    \end{enumerate}
+    
+    \vspace{0.5cm}
+    \textbf{Persamaan Payoff (1.1):}
+    $$E \phi\left(\frac{W_{1}b_{1}^{\prime}X}{W_{2}b_{2}^{\prime}X}\right) = \iiint \phi\left(\frac{w_{1}b_{1}^{\prime}x}{w_{2}b_{2}^{\prime}x}\right) dG_{1} dG_{2} dF$$
+    
+    \vspace{0.5cm}
+    \textbf{Masalah Minimax:}
+    Mencari titik pelana ($v$) untuk keseimbangan strategi antara kedua pemain.
+\end{frame}
+
+% Slide 5: Permainan Primitif (phi-Game)
+\begin{frame}{Permainan Primitif ($\phi$-Game)}
+    \begin{itemize}
+        \item \textbf{Definisi:} Permainan murni pemilihan distribusi probabilitas tanpa melibatkan pasar saham.
+        \item \textbf{Masalah:} Memilih $W_1, W_2$ untuk memaksimumkan $E\phi(W_1/W_2)$.
+        \item \textbf{Pertanyaan Kunci:}
+        \begin{center}
+            \textit{Kapan strategi optimal adalah strategi murni ($W=1$, tanpa judi)?}
+        \end{center}
+    \end{itemize}
+\end{frame}
+
+\section{Teorema Fundamental}
+
+% Slide 6: Teorema 1 - Syarat Strategi Murni
+\begin{frame}{Teorema 1: Syarat Strategi Murni}
+    \begin{theorem}
+        Permainan memiliki solusi optimal murni $W_{1}^{*} = W_{2}^{*} = 1$ jika dan hanya jika $\phi'(1) \ge 0$ dan untuk semua $t > 0$:
+        $$\left(\frac{t-1}{t}\right)\phi'(1) \le \phi(t)-\phi(1) \le (t-1)\phi'(1)$$
+    \end{theorem}
+    
+    \begin{itemize}
+        \item \textbf{Interpretasi Geometris:} Fungsi $\phi$ harus bersifat \textbf{konkaf (cekung)} di sekitar titik 1.
+        \item \textbf{Implikasi:} Untuk fungsi utilitas yang menghindari risiko (seperti $\ln t$ atau $t^\alpha$ dengan $0 \le \alpha \le 1$), strategi terbaik adalah "diam" (tidak berjudi).
+    \end{itemize}
+\end{frame}
+
+% Slide 7: Keluarga Konveks (Convex Families)
+\begin{frame}{Keluarga Konveks (\textit{Convex Families})}
+    \begin{block}{Definisi}
+        Himpunan variabel acak $\mathcal{S}$ disebut konveks jika untuk setiap $S_1, S_2 \in \mathcal{S}$ dan $0 \le \lambda \le 1$, berlaku:
+        $$\lambda S_1 + (1-\lambda)S_2 \in \mathcal{S}$$
+    \end{block}
+    
+    \textbf{Contoh Relevan:}
+    \begin{itemize}
+        \item Portofolio standar.
+        \item Portofolio dengan kendala linear (misal: tanpa utang).
+        \item Strategi sekuensial (multi-tahap).
+    \end{itemize}
+    
+    \textit{Relevansi: Sifat ini memungkinkan penggunaan teorema minimax.}
+\end{frame}
+
+% Slide 8: Teorema 2 - Ekuivalensi Fundamental
+\begin{frame}{Teorema 2: Ekuivalensi Logaritmik dan Linear}
+    Untuk keluarga konveks $\mathcal{S}$, pernyataan berikut adalah ekuivalen untuk $S^* \in \mathcal{S}$:
+    
+    \begin{enumerate}
+        \item \textbf{Sifat Log-Optimal:}
+        $$E \ln(S/S^*) \le 0 \quad \text{untuk semua } S \in \mathcal{S}$$
+        \item \textbf{Sifat Dominasi Linear (Supermartingale):}
+        $$E(S/S^*) \le 1 \quad \text{untuk semua } S \in \mathcal{S}$$
+    \end{enumerate}
+    
+    \vspace{0.5cm}
+    \textbf{Sketsa Bukti:}
+    \begin{itemize}
+        \item Linear $\to$ Log: Menggunakan Ketidaksamaan Jensen.
+        \item Log $\to$ Linear: Menggunakan Metode Variasi (perturbasi $\lambda \to 0$) dan kontradiksi.
+    \end{itemize}
+\end{frame}
+
+% Slide 9: Teorema 3 - Pemisahan Variabel
+\begin{frame}{Teorema 3: Pemisahan Variabel (\textit{Separation Theorem})}
+    \begin{theorem}
+        Strategi optimal dalam permainan pasar saham terfaktor menjadi dua komponen independen:
+    \end{theorem}
+    
+    \begin{enumerate}
+        \item \textbf{Komponen Judi ($W^*$):} 
+        Solusi dari permainan primitif (bergantung pada preferensi risiko $\phi$).
+        \item \textbf{Komponen Investasi ($b^*$):} 
+        Selalu \textbf{Portofolio Log-Optimal}. Strategi ini bersifat universal dan tidak bergantung pada $\phi$.
+    \end{enumerate}
+    
+    \vspace{0.3cm}
+    \textbf{Mekanisme Bukti:}
+    Menggunakan substitusi variabel $Z = \frac{W_2 S_2}{S^*}$ yang mereduksi masalah kompleks pasar saham kembali menjadi masalah permainan primitif sederhana.
+\end{frame}
+
+\section{Analisis Multi-tahap dan Stabilitas}
+
+% Slide 10: Permainan Multi-tahap (Multistage)
+\begin{frame}{Permainan Multi-tahap (\textit{Multistage})}
+    \textbf{Model:}
+    Investasi berulang selama $n$ periode dengan \textit{compounding} (bunga-berbunga) dan \textit{rebalancing}.
+    
+    \begin{block}{Teorema 4 (Strategi Myopic)}
+        Strategi terbaik adalah memaksimalkan $E[\ln S]$ pada tiap langkah secara independen (\textit{greedy}).
+    \end{block}
+    
+    \begin{itemize}
+        \item \textbf{Dasar Matematis:} Sifat aditif fungsi logaritma:
+        $$\ln\left(\prod_{k=1}^n b_k' X_k\right) = \sum_{k=1}^n \ln(b_k' X_k)$$
+        \item \textbf{Implikasi:} Tidak perlu mengorbankan keuntungan hari ini demi strategi masa depan yang kompleks.
+    \end{itemize}
+\end{frame}
+
+% Slide 11: Randomisasi Posterior (Observasi Modal)
+\begin{frame}{Randomisasi Posterior: Mengintip Modal Lawan}
+    \textbf{Skenario Baru:}
+    Pemain dapat mengamati rasio modal $S_1/S_2$ di tengah permainan.
+    
+    \vspace{0.5cm}
+    \textbf{Pertanyaan Psikologis:}
+    \textit{Jika saya tertinggal jauh dari lawan, apakah saya harus mengubah strategi menjadi lebih agresif (Jockeying for position)?}
+    
+    \vspace{0.5cm}
+    \textbf{Intuisi dari Judi Murni:}
+    Dalam judi tanpa saham, pemain yang kalah memang seringkali harus mengambil risiko ekstrem ("All-in") untuk mengejar ketertinggalan.
+\end{frame}
+
+% Slide 12: Teorema 5 - Stabilitas Strategi
+\begin{frame}{Teorema 5: Kemenangan Strategi "Buta"}
+    \begin{alertblock}{Hasil Kontraintuitif}
+        Di pasar saham, strategi optimal tetaplah \textbf{Log-Optimal ($b^*$)} dengan randomisasi awal standar ($W^*$).
+    \end{alertblock}
+    
+    \vspace{0.3cm}
+    \textbf{Mengapa demikian?}
+    \begin{itemize}
+        \item Portofolio $S^*$ memiliki sifat dominasi linear:
+        $$E[S_{lawan}/S^*] \le 1$$
+        \item Secara statistik, segala penyimpangan lawan dari $S^*$ (misal: spekulasi berlebih) justru akan merugikan modal relatif mereka sendiri.
+        \item Oleh karena itu, kita tidak perlu bermanuver taktis (mengubah strategi). Cukup disiplin pada rencana awal.
+    \end{itemize}
+\end{frame}
+
+\section{Kesimpulan}
+
+% Slide 13: Kesimpulan
+\begin{frame}{Kesimpulan}
+    \begin{enumerate}
+        \item \textbf{Penyatuan Teori:} 
+        Portofolio Log-Optimal adalah solusi universal untuk berbagai tujuan investasi ($\phi$) dalam kerangka kompetitif.
+        
+        \item \textbf{Konsep "Fair Reach":} 
+        Hukum $E(S/S^*) \le 1$ menjamin bahwa tidak ada strategi lain yang bisa secara konsisten mengalahkan log-optimal dalam jangka panjang.
+        
+        \item \textbf{Implikasi Praktis:} 
+        Investor dapat fokus memaksimalkan pertumbuhan logaritmik portofolio sendiri (\textit{self-growth}) tanpa perlu bereaksi berlebihan terhadap pergerakan modal pesaing.
+    \end{enumerate}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,64 @@
+\section{Pemetaan QUBO ke Hamiltonian Ising}
+
+\subsection{Formulasi Fungsi Objektif}
+
+Masalah optimisasi portfolio dirumuskan sebagai masalah QUBO:
+\begin{equation}
+    C(x) = -\lambda \sum_{i=1}^{N} \mu_i x_i + (1-\lambda) \sum_{i=1}^{N} \sum_{j=i+1}^{N} \sigma_{ij} x_i x_j + p \left( \sum_{i=1}^{N} x_i - \frac{N}{2} \right)^2
+\end{equation}
+
+Di mana:
+\begin{itemize}
+    \item $x_i \in \{0, 1\}$: Variabel keputusan biner.
+    \item $N$: Jumlah total aset.
+    \item $\mu_i$: Pengembalian yang diharapkan dari aset $i$.
+    \item $\sigma_{ij}$: Kovarian antara aset $i$ dan $j$.
+    \item $\lambda$: Parameter penghindaran risiko ($0 \le \lambda \le 1$).
+    \item $p$: Koefisien penalti untuk batasan kardinalitas ($\sum x_i = N/2$).
+\end{itemize}
+
+\subsection{Ekspansi Batasan}
+
+Mengekspansi suku penalti kuadrat:
+\begin{align*}
+    \left( \sum_{i=1}^{N} x_i - \frac{N}{2} \right)^2 &= \left( \sum_{i=1}^{N} x_i \right)^2 - N \sum_{i=1}^{N} x_i + \frac{N^2}{4} \\
+    &= \sum_{i=1}^{N} x_i + 2 \sum_{i<j} x_i x_j - N \sum_{i=1}^{N} x_i + \text{konst} \\
+    &= \sum_{i=1}^{N} (1 - N) x_i + 2 \sum_{i<j} x_i x_j + \text{konst}
+\end{align*}
+
+Mensubstitusi kembali ke dalam $C(x)$ menghasilkan koefisien yang dikelompokkan.
+
+\subsection{Pengelompokan Koefisien}
+
+Menulis ulang $C(x)$ dengan koefisien linier ($Q_i$) dan kuadratik ($Q_{ij}$):
+\begin{equation}
+    C(x) = \sum_{i=1}^{N} Q_i x_i + \sum_{i=1}^{N} \sum_{j=i+1}^{N} Q_{ij} x_i x_j + \text{konst}
+\end{equation}
+
+\textbf{Koefisien:}
+\begin{itemize}
+    \item \textbf{Linier ($Q_i$):} $Q_i = -\lambda \mu_i + p(1 - N)$
+    \item \textbf{Kuadratik ($Q_{ij}$):} $Q_{ij} = (1-\lambda) \sigma_{ij} + 2p$
+\end{itemize}
+
+\subsection{Transformasi ke Hamiltonian Ising}
+
+Pemetaan ke model Ising menggunakan $x_i = \frac{1 - Z_i}{2}$, dengan $Z_i \in \{1, -1\}$ (nilai eigen Pauli-Z).
+
+\textbf{1. Suku Linier:}
+$$ \sum_{i} Q_i x_i = \sum_{i} \frac{Q_i}{2} - \sum_{i} \frac{Q_i}{2} Z_i $$
+
+\textbf{2. Suku Kuadratik:}
+$$ \sum_{i<j} Q_{ij} x_i x_j = \sum_{i<j} \frac{Q_{ij}}{4} (1 - Z_i - Z_j + Z_i Z_j) $$
+
+\subsection{Ekspresi Hamiltonian Akhir}
+
+Hamiltonian diberikan oleh $H = \sum_{i} h_i Z_i + \sum_{i<j} J_{ij} Z_i Z_j$, dengan koefisien:
+
+\begin{equation}
+    h_i = \frac{\lambda \mu_i}{2} - \frac{1-\lambda}{4} \sum_{j \neq i}^N \sigma_{ij}
+\end{equation}
+
+\begin{equation}
+    J_{ij} = \frac{(1-\lambda) \sigma_{ij} + 2p}{4}
+\end{equation}

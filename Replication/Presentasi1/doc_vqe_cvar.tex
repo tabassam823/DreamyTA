@@ -1,0 +1,52 @@
+\section{VQE dan CVaR}
+
+\subsection{Latar Belakang VQE dan CVaR}
+
+\textbf{Tujuan VQE:} Meminimalkan $E(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta}) | \hat{H} | \psi(\boldsymbol{\theta}) \rangle$.
+
+\textbf{CVaR Standar (Conditional Value-at-Risk):} Alih-alih rata-rata, gunakan rata-rata dari energi ekor. Untuk energi yang diurutkan $E_{(1)} \le \dots \le E_{(K)}$:
+
+\begin{equation}
+    CVaR_\alpha(E) = \frac{1}{\lceil \alpha K \rceil} \sum_{k=1}^{\lceil \alpha K \rceil} E_{(k)}
+\end{equation}
+
+Ketika $\alpha = 1$, ini menghasilkan energi rata-rata standar.
+
+\subsection{Penjelasan Intuitif CVaR}
+
+Metode ini memperkenalkan cara penilaian ("Scoring") baru untuk algoritma kuantum. Biasanya, algoritma kuantum seperti VQE mencoba meminimalkan \textbf{rata-rata} energi. Namun, pendekatan ini mengusulkan penggunaan \textbf{CVaR (Conditional Value at Risk)} untuk menemukan solusi terbaik lebih cepat.
+
+Berikut adalah penjelasan langkah demi langkah dari proses tersebut:
+
+\subsubsection{Proses Sampling (Pengambilan Data)}
+Komputer kuantum bekerja secara probabilistik:
+\begin{enumerate}
+    \item \textbf{Langkah 1:} Komputer kuantum menjalankan sirkuit dengan parameter tertentu ($\theta$).
+    \item \textbf{Langkah 2:} Hasilnya diukur dalam bentuk \textbf{Bitstring} (disebut $x_i$). Contoh: `10110`.
+    \item \textbf{Langkah 3:} Energi/biaya dari bitstring tersebut dihitung menggunakan rumus Hamiltonian ($H_c$) yang telah diturunkan: $E(x_i) = \langle x_i | H_c | x_i \rangle$.
+    \item \textbf{Langkah 4:} Proses ini diulangi sebanyak $K$ kali (misalnya 1000 kali) untuk mendapatkan daftar bitstring beserta energinya.
+\end{enumerate}
+
+\subsubsection{Mengurutkan (Sorting)}
+Data energi diurutkan dari yang terkecil (terbaik) ke yang terbesar (terburuk):
+\begin{itemize}
+    \item $E_{(1)}$ adalah energi paling rendah (jawaban terbaik).
+    \item $E_{(K)}$ adalah energi paling tinggi (jawaban terburuk).
+\end{itemize}
+
+\subsubsection{Perbedaan Metode Lama vs CVaR}
+\textbf{A. Metode Lama (Mean/Rata-rata):}
+Biasanya ($\alpha = 1.0$), kita mengambil rata-rata dari \textbf{SEMUA} hasil. Masalahnya, jika komputer kuantum sering memberikan jawaban buruk (energi tinggi), nilai rata-ratanya akan buruk, yang dapat membingungkan algoritma optimisasi.
+
+\textbf{B. Metode CVaR (Fokus pada yang Terbaik):}
+Metode CVaR ($\alpha < 1.0$) berfokus pada hasil terbaik saja. Misal $\alpha = 0.1$ (10\%), kita hanya mengambil \textbf{10\% data teratas} (energi terendah) dan menghitung rata-ratanya.
+
+\subsubsection{Analogi Sederhana}
+Bayangkan mencari murid terpintar untuk lomba olimpiade:
+\begin{itemize}
+    \item \textbf{Metode Lama (Mean):} Melihat rata-rata nilai seluruh kelas. Jika banyak murid bernilai rendah, rata-rata turun, menyembunyikan potensi murid jenius.
+    \item \textbf{Metode CVaR:} Hanya melihat rata-rata dari \textbf{top 10 murid}. Ini memberikan gambaran lebih baik tentang potensi maksimal.
+\end{itemize}
+
+\subsubsection{Kesimpulan}
+Menggunakan CVaR sebagai \textit{Cost Function} membantu algoritma VQE untuk \textbf{lebih agresif} mengejar \textit{Ground State} (solusi optimal), tanpa terganggu oleh "ekor" distribusi yang buruk.

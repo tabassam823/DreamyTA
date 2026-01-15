@@ -1,0 +1,422 @@
+\documentclass[10pt]{beamer}
+
+% Konfigurasi Tema
+\usetheme{Madrid}
+\usecolortheme{whale}
+
+% Paket Tambahan
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+
+% Meta Data Presentasi
+\title[Optimisasi Portofolio VQE]{Optimisasi Portofolio Berkualitas Tinggi dengan Variational Quantum Eigensolver (VQE)}
+\subtitle{Pendekatan Hibrida Menggunakan Weighted CVaR dan CMA-ES}
+\author{Nama Presenter} % Ganti dengan nama Anda
+\institute[Nama Institusi]{Departemen Fisika / Komputasi \\ Nama Institusi Anda}
+\date{\today}
+
+% Penomoran Seksi Otomatis (Slide Pembuka Bagian)
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Outline Bagian}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% Memulai Dokumen
+\begin{document}
+
+% --- SLIDE 1: JUDUL ---
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \textit{\footnotesize [Saran Gambar: Ilustrasi artistik grafik saham digabungkan dengan simbol sirkuit kuantum atau Bola Bloch]}
+    \end{center}
+\end{frame}
+
+% --- SLIDE 2: DAFTAR ISI ---
+\begin{frame}{Daftar Isi Keseluruhan}
+    \tableofcontents
+\end{frame}
+
+% --- SLIDE 2: LATAR BELAKANG ---
+\section{Pendahuluan}
+\begin{frame}{Latar Belakang Masalah}
+    \begin{itemize}
+        \item \textbf{Optimisasi Portofolio:} Masalah fundamental keuangan.
+        \begin{itemize}
+            \item Tujuan: Alokasi modal untuk \textbf{maksimalkan untung} dan \textbf{minimalkan risiko}.
+        \end{itemize}
+        \item \textbf{Formulasi QUBO:} Masalah diterjemahkan ke model \textit{Quadratic Unconstrained Binary Optimization}.
+        \item \textbf{Tantangan Komputasi:}
+        \begin{itemize}
+            \item Termasuk kategori \textbf{NP-hard}.
+            \item Komputer klasik kesulitan seiring bertambahnya jumlah aset.
+        \end{itemize}
+        \item \textbf{Solusi Kuantum:} Potensi efisiensi komputasi untuk ruang pencarian yang besar.
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    % Ruang untuk Gambar
+    \begin{alertblock}{Saran Visualisasi}
+        \centering
+        Diagram Alur: Data Saham $\rightarrow$ Rumus Matematika (QUBO) $\rightarrow$ Tembok Penghalang (NP-hard) $\rightarrow$ Solusi (Komputer Kuantum)
+    \end{alertblock}
+\end{frame}
+
+% --- SLIDE 3: PERANGKAT NISQ ---
+\begin{frame}{Perangkat Komputasi Era NISQ}
+    \begin{columns}
+        \column{0.6\textwidth}
+        \begin{itemize}
+            \item \textbf{Algoritma Kandidat:}
+            \begin{itemize}
+                \item VQE (\textit{Variational Quantum Eigensolver})
+                \item QAOA (\textit{Quantum Approximate Optimization Algorithm})
+            \end{itemize}
+            \item \textbf{Sifat Hibrida:} Kerjasama CPU dan QPU.
+            \begin{itemize}
+                \item \textbf{QPU:} Menghitung energi sistem (rumit).
+                \item \textbf{CPU:} Optimasi parameter (klasik).
+            \end{itemize}
+            \item \textbf{Era NISQ:} Perangkat saat ini masih "bising" (\textit{noisy}), namun VQE dinilai cukup tangguh (\textit{robust}).
+        \end{itemize}
+        
+        \column{0.4\textwidth}
+        % Ruang untuk Gambar
+        \begin{exampleblock}{Ilustrasi}
+            \centering
+            Gambar skema loop tertutup antara CPU (Klasik) dan QPU (Quantum).
+        \end{exampleblock}
+    \end{columns}
+\end{frame}
+
+% --- SLIDE 4: TANTANGAN TEKNIS ---
+\begin{frame}{Tantangan Teknis VQE pada Keuangan}
+    \begin{itemize}
+        \item \textbf{Perbedaan Domain:}
+        \begin{itemize}
+            \item \textit{Kimia:} Molekul kompleks, superposisi rumit.
+            \item \textit{Keuangan:} Hamiltonian komutatif, lebih sederhana.
+        \end{itemize}
+        \item \textbf{Ground State:} Solusi berupa \textit{Computational Basis State} (Deretan biner 0 dan 1).
+        \item \textbf{Masalah Nilai Ekspektasi:}
+        \begin{itemize}
+            \item Menggunakan rata-rata energi biasa kurang efektif.
+            \item Dapat mengaburkan solusi optimal yang spesifik (jarum dalam jerami).
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- SLIDE 5: SOLUSI DIUSULKAN ---
+\begin{frame}{Solusi yang Diusulkan}
+    \begin{enumerate}
+        \item \textbf{Fungsi Biaya Baru (CVaR):}
+        \begin{itemize}
+            \item Mengganti rata-rata standar dengan \textit{Conditional Value-at-Risk}.
+            \item Fokus pada ekor distribusi energi terendah.
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{Inovasi: Weighted CVaR (WCVaR):}
+        \begin{itemize}
+            \item Memberi bobot prioritas pada solusi terbaik (ranking atas).
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{Pengoptimasi CMA-ES:}
+        \begin{itemize}
+            \item \textit{Covariance Matrix Adaptation Evolution Strategy}.
+            \item Bebas turunan (\textit{derivative-free}) untuk menangani lanskap energi kasar.
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+% --- SLIDE 6: PRAPEMROSESAN DATA ---
+\section{Landasan Teori}
+\begin{frame}{Prapemrosesan Data Saham}
+    \textbf{Input:} Matriks harga aset ($P$) sepanjang waktu ($M$).
+    
+    \vspace{0.5cm}
+    \textbf{Tahapan Transformasi:}
+    \begin{enumerate}
+        \item Hitung \textbf{Return Harian} ($r_{ki}$): Standarisasi perubahan harga.
+        \item Hitung \textbf{Ekspektasi Return} ($\mu_i$):
+        \begin{itemize}
+            \item Merepresentasikan potensi \textcolor{blue}{Keuntungan}.
+        \end{itemize}
+        \item Hitung \textbf{Matriks Kovariansi} ($\sigma_{ij}$):
+        \begin{itemize}
+            \item Merepresentasikan tingkat \textcolor{red}{Risiko} dan korelasi antar aset.
+        \end{itemize}
+    \end{enumerate}
+
+    \vspace{0.5cm}
+    \begin{block}{Saran Gambar}
+        \centering
+        Tabel ilustrasi: Harga Rupiah $\rightarrow$ Persentase Return $\rightarrow$ Vektor $\mu$ \& Matriks $\sigma$.
+    \end{block}
+\end{frame}
+
+% --- SLIDE 7: MODEL MATEMATIKA ---
+\begin{frame}{Model Matematika Portofolio}
+    \begin{itemize}
+        \item \textbf{Tujuan 1 (Max):} Keuntungan Portofolio ($C_1$).
+        \item \textbf{Tujuan 2 (Min):} Risiko Portofolio ($C_2$).
+        \item \textbf{Kendala:} Total investasi $\le$ Modal ($B$).
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \textbf{Fungsi Objektif Gabungan:}
+    \begin{equation*}
+        C' = -\lambda C_1 + (1-\lambda)C_2
+    \end{equation*}
+    \begin{small}
+    Dimana $\lambda$ (0 s.d 1) adalah faktor pengatur selera risiko investor.
+    \end{small}
+
+    \vspace{0.5cm}
+    \begin{exampleblock}{Saran Gambar}
+        \centering
+        Grafik \textit{Efficient Frontier} (Kurva Pareto): Sumbu X (Risiko) vs Sumbu Y (Return).
+    \end{exampleblock}
+\end{frame}
+
+% --- SLIDE 8: QUBO \& PENALTI ---
+\begin{frame}{Formulasi QUBO \& Metode Penalti}
+    \begin{itemize}
+        \item \textbf{Variabel Biner ($x_i$):}
+        \begin{itemize}
+            \item $1$: Aset dipilih (Beli).
+            \item $0$: Aset tidak dipilih.
+        \end{itemize}
+        \item \textbf{Constraint:} Harus memilih tepat $N/2$ aset.
+        \item \textbf{Metode Penalti:}
+        \begin{itemize}
+            \item Menambahkan suku kuadratik ke fungsi tujuan:
+            \[ P = p \left( \sum x_i - \frac{N}{2} \right)^2 \]
+            \item Menciptakan "tembok energi" yang tinggi jika aturan dilanggar.
+        \end{itemize}
+    \end{itemize}
+
+    \vspace{0.3cm}
+    \begin{alertblock}{Analogi Fisika}
+        \centering
+        Mirip energi potensial pegas ($U \sim kx^2$). Memaksa sistem kembali ke posisi setimbang ($N/2$).
+        \\ \footnotesize{[Saran Gambar: Grafik parabola "sumur energi"]}
+    \end{alertblock}
+\end{frame}
+
+% --- SLIDE 9: IMPLEMENTASI VQE ---
+\begin{frame}{Implementasi VQE: Dari Keuangan ke Fisika}
+    \textbf{1. Mapping Variabel:}
+    \[ x_i \in \{0,1\} \xrightarrow{\text{Transformasi}} s_i \in \{+1,-1\} \xrightarrow{\text{Operator}} \hat{Z}_i \]
+    
+    \vspace{0.3cm}
+    \textbf{2. Hamiltonian Sistem:}
+    \[ \hat{H} = -\sum h_i \hat{Z}_i - \sum J_{ij} \hat{Z}_i \hat{Z}_j \]
+    \begin{itemize}
+        \item $h_i$: Representasi Return saham (bias linear).
+        \item $J_{ij}$: Representasi Risiko/Kovariansi (interaksi kuadratik).
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{3. Tujuan:} 
+    Mencari energi terendah ($\min \langle H \rangle$) $\equiv$ Profit Maksimal.
+\end{frame}
+
+% --- SLIDE 10: KONSEP CVAR ---
+\begin{frame}{Conditional Value-at-Risk (CVaR)}
+    \begin{columns}
+        \column{0.6\textwidth}
+        \begin{itemize}
+            \item \textbf{Masalah Rata-rata (Expectation Value):}
+            \begin{itemize}
+                \item Sering menyesatkan jika solusi optimal jarang muncul (probabilitas rendah).
+            \end{itemize}
+            \item \textbf{Konsep CVaR:}
+            \begin{itemize}
+                \item Hanya menghitung rata-rata dari $\alpha\%$ sampel terbaik (energi terendah).
+                \item Mengabaikan sampel energi tinggi (solusi buruk).
+            \end{itemize}
+            \item \textbf{Parameter $\alpha$:} Mengatur keseimbangan antara eksplorasi dan stabilitas.
+        \end{itemize}
+        
+        \column{0.4\textwidth}
+        \begin{block}{Visualisasi}
+            \centering
+            [Saran Gambar: Histogram distribusi energi, dengan area $\alpha\%$ terendah diarsir]
+        \end{block}
+    \end{columns}
+\end{frame}
+
+% --- SLIDE 11: INOVASI WCVAR ---
+\section{Desain Algoritma}
+\begin{frame}{Inovasi: Weighted CVaR (WCVaR)}
+    \textbf{Kritik terhadap CVaR Standar:}
+    \begin{itemize}
+        \item Memberi bobot sama rata pada semua sampel di area "Top $\alpha$".
+        \item Juara 1 dan Juara 10 dianggap sama pentingnya.
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Solusi WCVaR:}
+    \begin{itemize}
+        \item Memberi bobot berbeda ($w_k$) berdasarkan peringkat.
+        \item Solusi ranking 1 mendapat bobot \textbf{jauh lebih besar}.
+        \item Memberi sinyal kuat ke optimizer untuk mengejar solusi elit.
+    \end{itemize}
+
+    \vspace{0.3cm}
+    \begin{exampleblock}{Perbandingan Bobot}
+        \centering
+        [Saran Gambar: Grafik garis datar (CVaR) vs Kurva meluruh eksponensial (WCVaR)]
+    \end{exampleblock}
+\end{frame}
+
+% --- SLIDE 12: OPTIMIZER CMA-ES ---
+\begin{frame}{Optimizer: CMA-ES}
+    \textbf{Tantangan WCVaR:}
+    \begin{itemize}
+        \item Menghasilkan lanskap fungsi biaya yang kasar (\textit{non-smooth}) dan berisik.
+        \item Optimizer berbasis gradien sering macet.
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \textbf{Mengapa CMA-ES?}
+    \begin{itemize}
+        \item \textit{Covariance Matrix Adaptation Evolution Strategy}.
+        \item \textbf{Evolutionary:} Berbasis populasi, bukan titik tunggal.
+        \item \textbf{Derivative-free:} Tidak butuh turunan matematika.
+        \item \textbf{Robust:} Tangguh terhadap jebakan minima lokal.
+    \end{itemize}
+\end{frame}
+
+% --- SLIDE 13: ANSATZ ---
+\begin{frame}{Desain Sirkuit Kuantum (Ansatz)}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Desain 1: Two-Local Ansatz}
+        \begin{itemize}
+            \item Struktur standar.
+            \item Lapisan Rotasi ($R_y, R_z$) + Entanglement ($CNOT$) berantai.
+        \end{itemize}
+        \vspace{1cm}
+        \begin{block}{Gambar 1a}
+            \centering
+            [Diagram Sirkuit Two-Local]
+        \end{block}
+        
+        \column{0.5\textwidth}
+        \textbf{Desain 2: Block Ansatz}
+        \begin{itemize}
+            \item Menggunakan modul blok fungsional.
+            \item Menciptakan korelasi yang lebih dalam dan kompleks.
+        \end{itemize}
+        \vspace{1cm}
+        \begin{block}{Gambar 1b}
+            \centering
+            [Diagram Sirkuit Block Ansatz]
+        \end{block}
+    \end{columns}
+\end{frame}
+
+% --- SLIDE 14: SETUP EKSPERIMEN ---
+\section{Hasil Numerik}
+\begin{frame}{Setup Eksperimen}
+    \begin{itemize}
+        \item \textbf{Data Pasar Riil (2024):}
+        \begin{itemize}
+            \item 6 Saham China (A-shares).
+            \item 6 Saham Amerika Serikat (US Equities).
+        \end{itemize}
+        \item \textbf{Ukuran Sistem:} 12 Aset (12 Qubit).
+        \begin{itemize}
+            \item Cukup kompleks untuk bukti konsep.
+            \item Dapat diverifikasi kebenarannya dengan \textit{brute force} klasik.
+        \end{itemize}
+        \item \textbf{Metrik Penilaian: Top-10 Hit Rate}
+        \begin{itemize}
+            \item Iterasi dianggap SUKSES jika solusi benar (\textit{Ground State}) masuk dalam \textbf{10 tebakan probabilitas tertinggi}.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --- SLIDE 15: HASIL PERFORMA ---
+\begin{frame}{Hasil Performa: WCVaR vs CVaR}
+    \begin{columns}
+        \column{0.6\textwidth}
+        \begin{itemize}
+            \item \textbf{Stabilitas WCVaR:}
+            \begin{itemize}
+                \item Unggul dan stabil di berbagai nilai $\alpha$.
+                \item Tidak perlu \textit{tuning} parameter yang rumit.
+            \end{itemize}
+            \item \textbf{Sensitivitas CVaR:}
+            \begin{itemize}
+                \item Hanya bekerja baik pada $\alpha$ yang sangat kecil.
+                \item Performa turun drastis pada $\alpha$ besar.
+            \end{itemize}
+            \item \textbf{Optimizer:} CMA-ES konvergen jauh lebih cepat dibanding COBYLA.
+        \end{itemize}
+        
+        \column{0.4\textwidth}
+        \begin{alertblock}{Grafik Hasil}
+            \centering
+            [Saran Gambar: Grafik Probability Success vs Iterasi. Garis CMA-ES+WCVaR paling atas]
+        \end{alertblock}
+    \end{columns}
+\end{frame}
+
+% --- SLIDE 16: EVALUASI PEMBOBOTAN ---
+\begin{frame}{Evaluasi Resep Pembobotan}
+    \textbf{Kami menguji 4 varian pembobotan:}
+    \begin{enumerate}
+        \item \textbf{CVaR Standar:} Bobot rata (kurang optimal).
+        \item \textbf{Energy-based:} Berdasarkan nilai energi (Paling buruk, tidak stabil).
+        \item \textbf{Rank-based:} Berdasarkan urutan ranking (Sangat efektif).
+        \item \textbf{Piecewise Exponential:} Kustom 3 zona (Terbaik, tapi rumit).
+    \end{enumerate}
+    
+    \vspace{0.5cm}
+    \begin{block}{Rekomendasi}
+        Metode \textbf{Rank-based (W3)} direkomendasikan karena memberikan keseimbangan terbaik antara kesederhanaan dan performa tinggi.
+    \end{block}
+\end{frame}
+
+% --- SLIDE 17: KESIMPULAN ---
+\section{Kesimpulan}
+\begin{frame}{Kesimpulan}
+    \begin{itemize}
+        \item \textbf{Sinergi adalah Kunci:}
+        \begin{itemize}
+            \item Penggabungan fungsi biaya \textbf{WCVaR} dan optimizer \textbf{CMA-ES} memberikan hasil paling konsisten.
+        \end{itemize}
+        \item \textbf{Mengatasi Kendala NISQ:}
+        \begin{itemize}
+            \item Pendekatan ini efektif menangani lanskap energi yang kasar dan gangguan (\textit{noise}).
+        \end{itemize}
+        \item \textbf{Fleksibilitas:}
+        \begin{itemize}
+            \item Jenis Ansatz (Two-local vs Block) tidak memberikan perbedaan performa yang signifikan, memberikan kebebasan desain.
+        \end{itemize}
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \centering
+    \textbf{Metode ini menjanjikan untuk penerapan optimisasi portofolio praktis di era komputasi kuantum saat ini.}
+\end{frame}
+
+% --- SLIDE 18: PENUTUP ---
+\begin{frame}
+    \centering
+    \Huge \textbf{Terima Kasih}
+    
+    \vspace{1cm}
+    \Large Sesi Tanya Jawab (Q\&A)
+\end{frame}
+
+\end{document}

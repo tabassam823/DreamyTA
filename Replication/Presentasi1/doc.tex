@@ -12,9 +12,8 @@
 \geometry{margin=1in}
 
 % Title setup
-\title{Mencapai Optimisasi Portfolio Berkualitas Tinggi dengan VQE\\
-\large Fase 0: Penurunan Teoritis}
-\author{Tim DreamyTA}
+\title{Achieving High Quality Portfolio Optimization with the Variational Quantum Eigensolver}
+\author{Putra Naufal Tabassam}
 \date{\today}
 
 \begin{document}
@@ -24,166 +23,13 @@
 \tableofcontents
 \newpage
 
-\section{Pemetaan QUBO ke Hamiltonian Ising}
-
-\subsection{Formulasi Fungsi Objektif}
-
-Masalah optimisasi portfolio dirumuskan sebagai masalah QUBO:
-\begin{equation}
-    C(x) = -\lambda \sum_{i=1}^{N} \mu_i x_i + (1-\lambda) \sum_{i=1}^{N} \sum_{j=i+1}^{N} \sigma_{ij} x_i x_j + p \left( \sum_{i=1}^{N} x_i - \frac{N}{2} \right)^2
-\end{equation}
-
-Di mana:
-\begin{itemize}
-    \item $x_i \in \{0, 1\}$: Variabel keputusan biner.
-    \item $N$: Jumlah total aset.
-    \item $\mu_i$: Pengembalian yang diharapkan dari aset $i$.
-    \item $\sigma_{ij}$: Kovarian antara aset $i$ dan $j$.
-    \item $\lambda$: Parameter penghindaran risiko ($0 \le \lambda \le 1$).
-    \item $p$: Koefisien penalti untuk batasan kardinalitas ($\sum x_i = N/2$).
-\end{itemize}
-
-\subsection{Ekspansi Batasan}
-
-Mengekspansi suku penalti kuadrat:
-\begin{align*}
-    \left( \sum_{i=1}^{N} x_i - \frac{N}{2} \right)^2 &= \left( \sum_{i=1}^{N} x_i \right)^2 - N \sum_{i=1}^{N} x_i + \frac{N^2}{4} \\
-    &= \sum_{i=1}^{N} x_i + 2 \sum_{i<j} x_i x_j - N \sum_{i=1}^{N} x_i + \text{konst} \\
-    &= \sum_{i=1}^{N} (1 - N) x_i + 2 \sum_{i<j} x_i x_j + \text{konst}
-\end{align*}
-
-Mensubstitusi kembali ke dalam $C(x)$ menghasilkan koefisien yang dikelompokkan.
-
-\subsection{Pengelompokan Koefisien}
-
-Menulis ulang $C(x)$ dengan koefisien linier ($Q_i$) dan kuadratik ($Q_{ij}$):
-\begin{equation}
-    C(x) = \sum_{i=1}^{N} Q_i x_i + \sum_{i=1}^{N} \sum_{j=i+1}^{N} Q_{ij} x_i x_j + \text{konst}
-\end{equation}
-
-\textbf{Koefisien:}
-\begin{itemize}
-    \item \textbf{Linier ($Q_i$):} $Q_i = -\lambda \mu_i + p(1 - N)$
-    \item \textbf{Kuadratik ($Q_{ij}$):} $Q_{ij} = (1-\lambda) \sigma_{ij} + 2p$
-\end{itemize}
-
-\subsection{Transformasi ke Hamiltonian Ising}
-
-Pemetaan ke model Ising menggunakan $x_i = \frac{1 - Z_i}{2}$, dengan $Z_i \in \{1, -1\}$ (nilai eigen Pauli-Z).
-
-\textbf{1. Suku Linier:}
-$$ \sum_{i} Q_i x_i = \sum_{i} \frac{Q_i}{2} - \sum_{i} \frac{Q_i}{2} Z_i $$
-
-\textbf{2. Suku Kuadratik:}
-$$ \sum_{i<j} Q_{ij} x_i x_j = \sum_{i<j} \frac{Q_{ij}}{4} (1 - Z_i - Z_j + Z_i Z_j) $$
-
-\subsection{Ekspresi Hamiltonian Akhir}
-
-Hamiltonian diberikan oleh $H = \sum_{i} h_i Z_i + \sum_{i<j} J_{ij} Z_i Z_j$, dengan koefisien:
-
-\begin{equation}
-    h_i = \frac{\lambda \mu_i}{2} - \frac{1-\lambda}{4} \sum_{j \neq i}^N \sigma_{ij}
-\end{equation}
-
-\begin{equation}
-    J_{ij} = \frac{(1-\lambda) \sigma_{ij} + 2p}{4}
-\end{equation}
-
-\section{VQE dan CVaR}
-
-\subsection{Latar Belakang VQE dan CVaR}
-
-\textbf{Tujuan VQE:} Meminimalkan $E(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta}) | \hat{H} | \psi(\boldsymbol{\theta}) \rangle$.
-
-\textbf{CVaR Standar (Conditional Value-at-Risk):} Alih-alih rata-rata, gunakan rata-rata dari energi ekor. Untuk energi yang diurutkan $E_{(1)} \le \dots \le E_{(K)}$:
-
-\begin{equation}
-    CVaR_\alpha(E) = \frac{1}{\lceil \alpha K \rceil} \sum_{k=1}^{\lceil \alpha K \rceil} E_{(k)}
-\end{equation}
-
-Ketika $\alpha = 1$, ini menghasilkan energi rata-rata standar.
-
-\section{Weighted CVaR (WCVaR)}
-
-\subsection{Definisi}
-
-\begin{equation}
-    WCVaR_\alpha(E) = \sum_{k=1}^{\lceil \alpha K \rceil} w_k E_{(k)}
-\end{equation}
-dengan batasan $\sum w_k = 1$.
-
-\textbf{Perbedaan dari CVaR Standar:}
-\begin{itemize}
-    \item \textbf{CVaR Standar:} Bobot seragam $w_k = \frac{1}{\lceil \alpha K \rceil}$.
-    \item \textbf{WCVaR:} Bobot tidak seragam, biasanya meluruh secara eksponensial.
-\end{itemize}
-
-\subsection{Manfaat Teoritis WCVaR}
-
-\begin{itemize}
-    \item \textbf{Lanskap yang Lebih Halus:} Tidak seperti optimisasi energi minimum ($\alpha \to 0$), WCVaR memberikan lanskap yang lebih halus dan dapat diturunkan.
-    \item \textbf{Menghindari Dataran Tandus:} Tidak seperti ekspektasi penuh ($\alpha=1$), ini berfokus pada keadaan energi rendah, mencegah derau energi tinggi menghapus gradien.
-    \item \textbf{Panduan:} Bobot eksponensial mendorong pengoptimal secara agresif menuju keadaan dasar sejati ($E_{(1)}$).
-\end{itemize}
-
-\subsection{Skema Pembobotan}
-
-Beberapa skema pembobotan yang dapat digunakan (sebagaimana dijelaskan dalam Lampiran A):
-
-\begin{enumerate}
-    \item \textbf{Berbasis Energi:} $w_k = \exp [ -\beta(E_{(k)} - E_0) ]$ (Performa buruk).
-    \item \textbf{Berbasis Peringkat:} $w_k = \exp(-\beta k)$ (Sederhana dan efektif).
-    \item \textbf{Eksponensial Bertahap (Dipilih):}
-    $$ w_k = \begin{cases} 
-        \exp(-\beta_1 k) & k < N_1 \\
-        \exp(-\beta_2 (k - N_1)) \cdot w_{N_1 - 1} & N_1 \le k < N_2 \\
-        \dots & \dots
-    \end{cases} $$
-\end{enumerate}
-
-Metode bertahap memungkinkan kontrol yang lebih rinci dan digunakan untuk hasil utama makalah.
-
-\section{Optimisasi CMA-ES}
-
-\subsection{Gambaran Umum}
-
-\textbf{Covariance Matrix Adaptation Evolution Strategy (CMA-ES)} adalah algoritma optimisasi numerik stokastik tanpa turunan yang kuat dengan karakteristik berikut:
-
-\begin{itemize}
-    \item Algoritma optimisasi numerik stokastik tanpa turunan yang kuat.
-    \item \textbf{Tipe:} Algoritma Evolusioner (domain kontinu).
-    \item \textbf{Kasus Penggunaan:} Fungsi objektif non-konveks, tidak terkondisi dengan baik, multimodal, atau berisik.
-    \item \textbf{Relevansi dengan VQE:} Digunakan untuk mengoptimalkan parameter $\boldsymbol{\theta}$ dari sirkuit variasional ketika gradien sulit dihitung atau berisik (misalnya, pada perangkat keras NISQ).
-\end{itemize}
-
-\subsection{Cara Kerja CMA-ES}
-
-Algoritma mempertahankan distribusi Gaussian $\mathcal{N}(m, \sigma^2 C)$ dan memperbaruinya secara iteratif:
-
-\begin{enumerate}
-    \item \textbf{Pengambilan Sampel:} Menghasilkan populasi solusi kandidat baru (keturunan) dari distribusi saat ini.
-    \item \textbf{Seleksi:} Mengevaluasi kebugaran (energi) dan memilih kandidat terbaik.
-    \item \textbf{Adaptasi:} Memperbarui parameter distribusi:
-        \begin{itemize}
-            \item \textbf{Mean ($m$):} Bergerak menuju solusi yang lebih baik.
-            \item \textbf{Ukuran Langkah ($\sigma$):} Mengontrol eksplorasi vs. eksploitasi.
-            \item \textbf{Matriks Kovarian ($C$):} Mempelajari bentuk lanskap (korelasi antar variabel) untuk memandu pencarian.
-        \end{itemize}
-\end{enumerate}
-
-\subsection{Ilustrasi Proses CMA-ES}
-
-Proses optimisasi CMA-ES dapat divisualisasikan melalui beberapa langkah:
-
-\begin{enumerate}
-    \item \textbf{Inisialisasi:} Pencarian dimulai dengan mean awal dan distribusi yang luas.
-    \item \textbf{Pengambilan Sampel \& Seleksi:} Kandidat diambil sampelnya; yang terbaik (biru) dipilih untuk memandu pembaruan.
-    \item \textbf{Adaptasi:} Distribusi bergeser dan membentuk ulang (pembaruan kovarian) menuju lembah.
-    \item \textbf{Eksplorasi:} Algoritma mengeksplorasi lanskap, memanjang sepanjang arah optimal.
-    \item \textbf{Konvergensi Dimulai:} Ukuran langkah menurun saat populasi berpusat pada minimum.
-    \item \textbf{Penyetelan Halus:} Lokalisasi presisi dari optimum.
-    \item \textbf{Optimisasi Selesai:} Distribusi konvergen ke minimum global.
-\end{enumerate}
+\input{doc_QUBO.tex}
+\pagebreak
+\input{doc_vqe_cvar.tex}
+\pagebreak
+\input{doc_wcvar.tex}
+\pagebreak
+\input{doc_cmaes.tex}
 
 \section{Kesimpulan}
 

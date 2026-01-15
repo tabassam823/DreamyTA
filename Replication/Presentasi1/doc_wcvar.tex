@@ -1,0 +1,43 @@
+\section{Weighted CVaR (WCVaR)}
+
+\subsection{Definisi}
+
+\begin{equation}
+    WCVaR_\alpha(E) = \sum_{k=1}^{\lceil \alpha K \rceil} w_k E_{(k)}
+\end{equation}
+dengan batasan $\sum w_k = 1$.
+
+\textbf{Perbedaan dari CVaR Standar:}
+\begin{itemize}
+    \item Bobot seragam $w_k = \frac{1}{\lceil \alpha K \rceil}$.
+    \item WCVaR: Bobot tidak seragam, biasanya meluruh secara eksponensial.
+\end{itemize}
+
+\subsection{Penjelasan Intuitif WCVaR}
+
+WCVaR dapat dianalogikan seperti guru yang memilih tim Olimpiade dari 10 murid terbaik, namun memberikan bobot pengaruh lebih besar kepada "Juara 1" sebagai kapten tim dibandingkan murid lainnya. Hal ini memaksa algoritma untuk lebih agresif mengejar solusi \textit{ground state} (terbaik absolut) karena kesalahan pada solusi terbaik akan memberikan dampak penalti yang jauh lebih besar terhadap skor akhir dibandingkan solusi yang hanya sekadar "cukup oke".
+
+\subsection{Manfaat Teoritis WCVaR}
+
+\begin{itemize}
+    \item \textbf{Lanskap yang Lebih Halus:} Tidak seperti optimisasi energi minimum ($\alpha \to 0$), WCVaR memberikan lanskap yang lebih halus dan dapat diturunkan.
+    \item \textbf{Menghindari Dataran Tandus:} Tidak seperti ekspektasi penuh ($\alpha=1$), ini berfokus pada keadaan energi rendah, mencegah derau energi tinggi menghapus gradien.
+    \item \textbf{Panduan:} Bobot eksponensial mendorong pengoptimal secara agresif menuju keadaan dasar sejati ($E_{(1)}$).
+\end{itemize}
+
+\subsection{Skema Pembobotan}
+
+Beberapa skema pembobotan yang dapat digunakan (sebagaimana dijelaskan dalam Lampiran A):
+
+\begin{enumerate}
+    \item \textbf{Berbasis Energi:} $w_k = \exp [ -\beta(E_{(k)} - E_0) ]$ (Performa buruk).
+    \item \textbf{Berbasis Peringkat:} $w_k = \exp(-\beta k)$ (Sederhana dan efektif).
+    \item \textbf{Eksponensial Bertahap (Dipilih):}
+    $$ w_k = \begin{cases} 
+        \exp(-\beta_1 k) & k < N_1 \\
+        \exp(-\beta_2 (k - N_1)) \cdot w_{N_1 - 1} & N_1 \le k < N_2 \\
+        \dots & \dots
+    \end{cases} $$
+\end{enumerate}
+
+Metode bertahap memungkinkan kontrol yang lebih rinci dan digunakan untuk hasil utama makalah.
