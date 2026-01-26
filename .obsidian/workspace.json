@@ -8,20 +8,35 @@
         "type": "tabs",
         "children": [
           {
-            "id": "a4ca17f0c28479a0",
+            "id": "d49c5ebbf9cdd175",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+                "file": "paper/Combination.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hasil_gemini_adv"
+              "title": "Combination"
+            }
+          },
+          {
+            "id": "554ca3a9f401a1f7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Replication/VQE_Medium/rencana_vqe2.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "rencana_vqe2"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -33,7 +48,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 32.36914600550964,
+        "dimension": 40,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -80,7 +95,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 67.63085399449037,
+        "dimension": 60,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -88,13 +103,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+                "file": "Replication/VQE_Medium/rencana_vqe2.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of hasil_gemini_adv"
+              "title": "Outline of rencana_vqe2"
             }
           }
         ]
@@ -218,28 +233,34 @@
       "bases:Create new base": false
     }
   },
-  "active": "a4ca17f0c28479a0",
+  "active": "554ca3a9f401a1f7",
   "lastOpenFiles": [
-    "Latex/PakHeru_Presentasi1/hasil_gemini_adv_formal.md",
+    "paper/Bayesian/Characterizing_the_Nash_equilibria_of_a_three_player_Bayesian_quantum_game.pdf",
+    "paper/Bayesian/s11128-017-1593-z.pdf",
+    "paper/Bayesian/2408.02058v1.pdf",
+    "paper/Bayesian/Lowe_2024_J._Phys._A__Math._Theor._57_065303.pdf",
+    "paper/Bayesian/s11128-014-0824-9.pdf",
+    "paper/Bayesian/s10898-018-0688-0.pdf",
+    "paper/Bayesian/NeurIPS-2023-physics-informed-bayesian-optimization-of-variational-quantum-circuits-Paper-Conference.pdf",
+    "paper/Bayesian",
+    "Replication/VQE_Medium/__pycache__/vqe_derivation.cpython-312.pyc",
+    "Replication/VQE_Medium/__pycache__",
+    "Replication/VQE_Medium/vqe_derivation.py",
+    "paper/Combination.md",
+    "Replication/VQE_Medium/rencana_vqe2.md",
+    "paper/rencana_proposal.md",
+    "Combination.md > Modern Portofolio Theory (Markowitz Model).md",
+    "paper/bab3_metodologi.md",
     "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+    "Latex/PakHeru_Presentasi1/hasil_gemini_adv_formal.md",
     "Latex/PakHeru_Presentasi1/Rencana_Presentasi1.md",
     "Latex/PakGagus_Presentasi1/hasil_gemini_adv_ori.md",
-    "Latex/PakHeru_Presentasi1/Presentasi1.pdf",
     "Latex/PakGagus_Presentasi1/rencana_presentasi_konsep.md",
-    "Latex/PakGagus_Presentasi1/Presentasi_konsep.synctex(busy)",
-    "Latex/PakGagus_Presentasi1/pdflatex35488.fls",
-    "Latex/PakGagus_Presentasi1/pdflatex35400.fls",
-    "Latex/PakGagus_Presentasi1/pdflatex34359.fls",
-    "Latex/PakGagus_Presentasi1/pdflatex34281.fls",
-    "Latex/PakGagus_Presentasi1/pdflatex34193.fls",
-    "Latex/PakGagus_Presentasi1/pdflatex33911.fls",
-    "Latex/PakGagus_Presentasi1/pdflatex33684.fls",
     "Latex/PakGagus_Presentasi1/Ilustrasi_CMA_ES.png",
     "Latex/PakGagus_Presentasi1/Perbandingan_Bobot_WCVaR.png",
     "Latex/PakGagus_Presentasi1/Sumur_Penalti.png",
     "Latex/PakGagus_Presentasi1/Efficient_Frontier.png",
     "Latex/PakGagus_Presentasi1/alur_slide4.png",
-    "Latex/PakGagus_Presentasi1/puppeteer-config.json",
     "Latex/PakGagus_Presentasi1/alur_slide4.md",
     "Latex/PakGagus_Presentasi1/Gambar_1b.png",
     "Latex/PakGagus_Presentasi1/Gambar_1a.png",
@@ -257,11 +278,6 @@
     "Latex/KajianAwal/Bab2/Saran_Pengeditan_Bab_2_kedua.md",
     "Latex/KajianAwal/Bab2/Saran_Pengeditan_Bab_2.md",
     "Latex/KajianAwal/Bab2/Rencana.md",
-    "Latex/KajianAwal/Bab2/Groups.md",
-    "Latex/KajianAwal/Bab2/Groups 1.md",
-    "Latex/KajianAwal/Bab2/Bab2_3.md",
-    "Latex/KajianAwal/Bab2/Bab2_2.md",
-    "Latex/KajianAwal/Bab2/Bab2_1.md",
     "Latex/KajianAwal/bab3_flowchart.png",
     "Latex/PakGagus_Pitching/bab3_flowchart.png",
     "paper/bab3_flowchart.png",
