@@ -1,0 +1,188 @@
+\documentclass{beamer}
+
+% Theme selection
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{braket} % For Dirac notation
+
+% Title information
+\title[Konstruksi Hamiltonian QBGT]{Konstruksi Hamiltonian pada Quantum Bayesian Game Theory (QBGT) untuk Optimasi Portofolio}
+\subtitle{Derivasi Matematis dari Teori Permainan ke Operator VQE}
+\date{\today}
+
+\begin{document}
+
+% Slide 0: Title
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 1: Definisi Masalah Bayesian
+\begin{frame}{Definisi Masalah Bayesian}
+    Pasar saham dapat dipandang sebagai permainan strategi antara Investor melawan "Nature" dengan informasi tidak lengkap (\textit{incomplete information}).
+    
+    \begin{itemize}
+        \item \textbf{Himpunan Tipe Nature:}
+        Alam memiliki dua kemungkinan kondisi:
+        $$ \Theta = \{\theta_{bull}, \theta_{bear}\} $$
+        
+        \item \textbf{Probabilitas Prior (Belief $q$):}
+        Merepresentasikan keyakinan investor terhadap kondisi pasar.
+        \begin{itemize}
+            \item \textbf{Statis (QBGT):} Bertindak sebagai bobot dalam konstruksi \textit{Grand Hamiltonian}.
+            \item \textbf{Dinamis:} Sebagaimana evolusi belief $q_t$ pada \textit{Chain Store Paradox}, dimana investor memperbarui keyakinan berdasarkan sinyal pasar (Bayesian Update).
+        \end{itemize}
+        $$ P(\theta_{bull}) = q, \quad P(\theta_{bear}) = 1-q $$
+        
+        \item \textbf{Matriks Payoff:}
+        Keuntungan (Return) bergantung pada kondisi pasar yang terjadi:
+        \begin{itemize}
+            \item Kondisi Bullish: Matriks $M_{bull}$ (High Return)
+            \item Kondisi Bearish: Matriks $M_{bear}$ (Loss/Low Return)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 2: Skema Kuantum EWL
+\begin{frame}{Skema Kuantum EWL (Eisert-Wilkens-Lewenstein)}
+    Protokol permainan kuantum standar memetakan strategi klasik ke dalam operasi unitary di ruang Hilbert.
+    
+    \begin{enumerate}
+        \item \textbf{State Awal:} Qubit dimulai dari keadaan dasar.
+        $$ |\psi_0\rangle = |00\dots0\rangle $$
+        
+        \item \textbf{Entanglement:} Operator $\hat{J}$ menciptakan korelasi kuantum antar pemain/aset.
+        $$ |\psi_{ent}\rangle = \hat{J} |\psi_0\rangle $$
+        
+        \item \textbf{Strategi Unitary:} Pemain (Investor) menerapkan strategi $\hat{U}$.
+        $$ |\psi_{strat}\rangle = (\hat{U}_A \otimes \hat{U}_B) |\psi_{ent}\rangle $$
+        
+        \item \textbf{State Akhir:} Setelah disentangling operation $\hat{J}^\dagger$.
+        $$ |\psi_f\rangle = \hat{J}^\dagger (\hat{U}_A \otimes \hat{U}_B) \hat{J} |00\dots0\rangle $$
+    \end{enumerate}
+\end{frame}
+
+% Slide 3: Integrasi Bayesian ke dalam EWL (The QBGT Model)
+\begin{frame}{Integrasi Bayesian ke dalam EWL (The QBGT Model)}
+    Dalam kerangka QBGT, pemain tidak menghadapi satu matriks payoff tunggal, melainkan superposisi dari beberapa kemungkinan payoff berdasarkan tipe Nature.
+    
+    \vspace{0.3cm}
+    \textbf{Ekspektasi Payoff Kuantum:}
+    Nilai harap keuntungan ($\Pi$) adalah jumlahan terbobot dari nilai ekspektasi operator pengukuran payoff ($\hat{\$}$) untuk setiap kondisi pasar:
+    
+    \begin{block}{Persamaan Ekspektasi Payoff}
+    $$ \Pi(\hat{U}) = q \cdot \langle \psi_f | \hat{\$}_{bull} | \psi_f \rangle + (1-q) \cdot \langle \psi_f | \hat{\$}_{bear} | \psi_f \rangle $$
+    \end{block}
+    
+    Dimana:
+    \begin{itemize}
+        \item $\hat{\$}_{bull/bear}$ adalah operator Hermisian yang merepresentasikan matriks payoff $M_{bull/bear}$.
+        \item $q$ adalah kepercayaan investor terhadap kondisi pasar Bullish.
+    \end{itemize}
+\end{frame}
+
+% Slide 4: Konstruksi Hamiltonian (Bagian 1 - Pembobotan)
+\begin{frame}{Konstruksi Hamiltonian (Bagian 1 - Pembobotan)}
+    Untuk menggunakan algoritma VQE (Variational Quantum Eigensolver), masalah \textit{Payoff Maximization} harus diubah menjadi \textit{Energy Minimization}.
+    $$ H \propto -\Pi $$
+    
+    Parameter portofolio (Return $\mu$ dan Risiko $\sigma$) dikombinasikan secara linear \textit{sebelum} dikonstruksi menjadi Hamiltonian sirkuit:
+    
+    \begin{columns}
+        \begin{column}{0.48\textwidth}
+            \begin{block}{Effective Return}
+            $$ \mu_{eff} = q\mu_{bull} + (1-q)\mu_{bear} $$
+            \end{block}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{block}{Effective Risk (Covariance)}
+            $$ \sigma_{eff} = q\sigma_{bull} + (1-q)\sigma_{bear} $$
+            \end{block}
+        \end{column}
+    \end{columns}
+    
+    \vspace{0.3cm}
+    Ini memungkinkan VQE mencari satu solusi robust yang sudah memperhitungkan ketidakpastian kedua skenario pasar.
+\end{frame}
+
+% Slide 5 (Baru): Formulasi Fungsi Biaya (Cost Function)
+\begin{frame}{Formulasi Fungsi Biaya Markowitz \& Penalti}
+    Sebelum dipetakan ke kuantum, kita definisikan fungsi objektif klasik yang menggabungkan tujuan investasi dan kendala.
+    
+    $$ O(x) = \underbrace{w \sum_{i,j} \sigma_{ij}^{eff} x_i x_j}_{\text{Minimalkan Risiko}} - \underbrace{(1-w) \sum_i \mu_i^{eff} x_i}_{\text{Maksimalkan Return}} + \underbrace{P \left(\sum_i x_i - B\right)^2}_{\text{Kendala Budget}} $$
+
+    \begin{itemize}
+        \item \textbf{$x_i \in \{0,1\}$:} Variabel keputusan (1 jika aset $i$ dipilih, 0 jika tidak).
+        \item \textbf{$w$ (Risk Aversion):} Parameter preferensi investor ($0 \le w \le 1$). 
+            \begin{itemize}
+                \item $w=1$: Hanya peduli risiko (Min Variance).
+                \item $w=0$: Hanya mengejar profit (Max Return).
+            \end{itemize}
+        \item \textbf{$\sigma_{ij}^{eff}$:} Matriks kovarians efektif (gabungan Bull/Bear).
+        \item \textbf{$\mu_i^{eff}$:} Vektor return efektif.
+        \item \textbf{$B$:} Target jumlah aset dalam portofolio (Cardinality Constraint).
+        \item \textbf{$P$:} Penalti energi yang sangat besar untuk memaksa solusi mematuhi kendala $B$.
+
+    \end{itemize}
+\end{frame}
+
+% Slide 5: Konstruksi Hamiltonian (Bagian 2 - Mapping ke Ising)
+\begin{frame}{Konstruksi Hamiltonian (Bagian 2 - Mapping ke Ising)}
+    Optimasi Markowitz menggunakan variabel biner $x_i \in \{0, 1\}$. Komputer kuantum menggunakan operator spin Pauli-Z $Z_i \in \{+1, -1\}$.
+    
+    \textbf{Transformasi Variabel:}
+    $$ x_i \rightarrow \frac{1-Z_i}{2} $$
+    
+    Substitusi ke dalam fungsi objektif $O(x)$:
+    $$ O(x(\vec{Z})) = w \sum_{ij} \sigma_{ij}^{eff} \left(\frac{1-Z_i}{2}\right) \left(\frac{1-Z_j}{2}\right) - \dots + P(\dots)^2 $$
+    
+    Ekspansi aljabar menghasilkan bentuk Ising yang siap untuk VQE:
+    $$ H \sim \sum_i h_i Z_i + \sum_{ij} J_{ij} Z_i Z_j $$
+\end{frame}
+
+% Slide 6: Hasil Akhir - Hamiltonian Sistem
+\begin{frame}{Hasil Akhir - Hamiltonian Sistem}
+    Setelah ekspansi aljabar, kita mendapatkan Hamiltonian Ising final yang siap dijalankan pada VQE:
+    
+    \begin{alertblock}{Ising Hamiltonian}
+    $$ H_{final} = \sum_i h_i Z_i + \sum_{i<j} J_{ij} Z_i Z_j + C $$
+    \end{alertblock}
+    
+    \begin{itemize}
+        \item \textbf{Longitudinal Field ($h_i$):} Bias lokal pada setiap qubit. Merepresentasikan return aset individu + efek penalti linear + bobot Bayesian.
+        \item \textbf{Coupling ($J_{ij}$):} Interaksi antar qubit. Merepresentasikan risiko kovarians antar aset + efek penalti kuadratik.
+        \item \textbf{Konstanta ($C$):} Pergeseran energi global (bisa diabaikan dalam optimasi).
+    \end{itemize}
+    
+    \textit{Ground State} dari Hamiltonian ini adalah strategi portofolio yang paling optimal dan robust terhadap ketidakpastian pasar.
+\end{frame}
+
+% Slide 7: Sintesis - The Giant Operator
+\begin{frame}{Sintesis: Operator Hamiltonian Raksasa}
+    Dalam konteks QBGT, Hamiltonian final ini sebenarnya adalah "Operator Raksasa" yang menggabungkan seluruh semesta kemungkinan.
+    
+    \begin{block}{The Grand Hamiltonian}
+    $$ \hat{H}_{QBG} = \sum_{\theta \in \Theta} P(\theta) \cdot \hat{H}_{\theta} $$
+    \end{block}
+    
+    Untuk kasus dua kondisi pasar (Bull/Bear), operator ini menjadi superposisi linear dari Hamiltonian spesifik per-kondisi:
+    
+    $$ \hat{H}_{QBG} = q \cdot \hat{H}_{Bull} + (1-q) \cdot \hat{H}_{Bear} $$
+    
+    \begin{itemize}
+        \item $\hat{H}_{Bull}$: Operator energi yang "menghukum" strategi defensif saat pasar naik.
+        \item $\hat{H}_{Bear}$: Operator energi yang "menghukum" strategi agresif saat pasar turun.
+        \item $\hat{H}_{QBG}$: Operator kompromi yang mencari \textit{Ground State} penengah (Robust Strategy).
+    \end{itemize}
+    
+    Inilah inti dari penggabungan Game Theory dan Fisika Kuantum: \textbf{Menemukan keseimbangan energi di antara realitas yang bertentangan.}
+\end{frame}
+
+\end{document}
