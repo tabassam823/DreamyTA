@@ -1,0 +1,170 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\title{Replikasi Hardware-Efficient VQE}
+\subtitle{Studi Kasus: Molekul Hidrogen ($H_2$) pada Quantum Hardware}
+\author{Tim Replikasi DreamyTA}
+\date{\today}
+
+\begin{document}
+
+% Slide 1: Title
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 2: Introduction
+\begin{frame}{Pendahuluan}
+    \begin{itemize}
+        \item \textbf{Tujuan}: Mereplikasi hasil paper seminal Kandala et al. (Nature 2017) tentang \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE).
+        \item \textbf{Fokus Utama}: Estimasi energi ground state molekul kecil ($H_2$, $LiH$, $BeH_2$) menggunakan \textit{noisy quantum hardware}.
+        \item \textbf{Metode}: Algoritma hybrid quantum-classical (VQE) dengan ansatz yang efisien secara hardware dan optimizer SPSA.
+    \end{itemize}
+\end{frame}
+
+% Slide 3: Hardware-Efficient Ansatz
+\begin{frame}{Hardware-Efficient Ansatz}
+    \begin{itemize}
+        \item Masalah pada hardware NISQ: Kedalaman sirkuit terbatas (koherensi pendek).
+        \item \textbf{Solusi Kandala et al.}: Gunakan gate native hardware.
+        \item \textbf{Struktur}:
+        \begin{equation}
+            U(\theta) = U_{ENT} \cdot U_{ROT}^{(d)} \cdots U_{ENT} \cdot U_{ROT}^{(0)}
+        \end{equation}
+        \item \textbf{Rotasi}: Euler decomposition $R_Z(\alpha) R_X(\beta) R_Z(\gamma)$.
+        \item \textbf{Entanglement}: CNOT gates (topologi linear/star).
+    \end{itemize}
+\end{frame}
+
+% Slide Baru: Visualisasi Sirkuit
+\begin{frame}[fragile]{Visualisasi Sirkuit (2 Qubit, d=1)}
+    \begin{itemize}
+        \item Struktur sirkuit pada simulasi (inisialisasi nol):
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Pasted image.png}
+    \end{center}
+    \footnotesize
+    \begin{itemize}
+        \item Lapisan Rotasi: Gate $R_Z, R_X, R_Z$ dengan parameter bebas.
+        \item Lapisan Entanglement: CNOT menghubungkan qubit 0 dan 1.
+    \end{itemize}
+\end{frame}
+
+% Slide 4: Konstruksi Hamiltonian
+\begin{frame}{Konstruksi Hamiltonian ($H_2$)}
+    \begin{itemize}
+        \item \textbf{Mapping}: Parity Mapping (mengurangkan jumlah qubit).
+        \item \textbf{Z2 Tapering}: Memanfaatkan simetri untuk mereduksi 4 qubit $\rightarrow$ 2 qubit.
+        \item \textbf{Hamiltonian Akhir (2 Qubit)}:
+        \begin{equation}
+            H = g_0 I + g_1 Z_0 + g_2 Z_1 + g_3 Z_0 Z_1 + g_4 X_0 X_1
+        \end{equation}
+        \item Term $X_0 X_1$ merepresentasikan efek kuantum (entanglement) yang krusial.
+    \end{itemize}
+    \vspace{0.3cm}
+    \textbf{Definisi Parameter}:
+    \footnotesize
+    \begin{itemize}
+        \item $H$: Operator Hamiltonian (Energi Total Sistem).
+        \item $g_i$: Koefisien riil yang bergantung pada jarak antar-atom.
+        \item $I, Z, X$: Operator Pauli (Gate kuantum dasar).
+        \item Indeks $0, 1$: Label qubit tempat operator bekerja.
+    \end{itemize}
+\end{frame}
+
+% Slide 5: SPSA Optimizer
+\begin{frame}{Optimizer: SPSA}
+    \begin{itemize}
+        \item \textbf{Simultaneous Perturbation Stochastic Approximation (SPSA)}.
+        \item \textbf{Keunggulan}: Hanya membutuhkan \textbf{2 evaluasi fungsi} per iterasi, berapapun jumlah parameternya.
+        \item \textbf{Estimasi Gradien}:
+        \begin{equation}
+            \hat{g}_k = \frac{f(\theta_k + c_k \Delta_k) - f(\theta_k - c_k \Delta_k)}{2 c_k} \Delta_k^{-1}
+        \end{equation}
+        \item Sangat cocok untuk eksperimen kuantum yang memiliki noise shot (pengukuran).
+    \end{itemize}
+    \vspace{0.3cm}
+    \textbf{Definisi Parameter}:
+    \footnotesize
+    \begin{itemize}
+        \item $\hat{g}_k$: Estimasi gradien pada iterasi ke-$k$.
+        \item $\theta_k$: Vektor parameter sirkuit pada langkah $k$.
+        \item $c_k$: Konstanta \textit{step-size} untuk perturbasi.
+        \item $\Delta_k$: Vektor perturbasi acak (distribusi Bernoulli $\pm 1$).
+        \item $f(\cdot)$: Fungsi objektif (Ekspektasi Energi).
+    \end{itemize}
+\end{frame}
+
+% Slide 6: Implementasi
+\begin{frame}{Implementasi Sistem}
+    \begin{itemize}
+        \item \textbf{Framework}: PennyLane.
+        \item \textbf{Modul Utama}:
+        \begin{itemize}
+            \item \texttt{he\_ansatz.py}: Sirkuit parametrik.
+            \item \texttt{molecular\_hamiltonians.py}: Generator Hamiltonian $H_2, LiH$.
+            \item \texttt{spsa\_optimizer.py}: Optimizer kustom (2 evals).
+            \item \texttt{vqe\_runner.py}: Loop eksekusi VQE.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 7: Hasil - Konvergensi VQE
+\begin{frame}{Hasil: Konvergensi VQE ($H_2$)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item \textbf{Konfigurasi}: Depth=1, 2 Qubit.
+                \item \textbf{Iterasi}: 200 step.
+                \item \textbf{Energi Tercapai}: -1.607 Ha.
+                \item \textbf{Energi Eksak}: -1.851 Ha.
+                \item \textbf{Error}: $\approx$ 243 mHa.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{vqe_convergence.png}
+        \end{column}
+    \end{columns}
+    \vspace{0.2cm}
+    \footnotesize{\textbf{Deskripsi}: Grafik menunjukkan penurunan energi (kurva biru) seiring bertambahnya iterasi optimasi SPSA. Garis putus-putus merah adalah energi minimum teoretis (Full-CI). Fluktuasi pada kurva biru disebabkan oleh sifat stokastik dari optimizer SPSA.}
+\end{frame}
+
+% Slide 8: Hasil - Kurva Disosiasi
+\begin{frame}{Hasil: Kurva Disosiasi $H_2$}
+    \begin{itemize}
+        \item Scanning jarak ikatan $0.3 \AA$ hingga $2.5 \AA$.
+        \item Membandingkan hasil VQE dengan Full CI (Exact Diagonalization).
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{h2_dissociation.png}
+        \vspace{0.2cm}
+        \\
+        \footnotesize{\textbf{Deskripsi}: Kurva energi potensial molekul $H_2$ sebagai fungsi jarak antar-atom. Titik-titik oranye menunjukkan hasil VQE yang mengikuti tren garis biru (hasil eksak/simulasi klasik), memvalidasi bahwa model berhasil menangkap fenomena pemutusan ikatan kimia.}
+    \end{center}
+\end{frame}
+
+% Slide 9: Analisis & Kesimpulan
+\begin{frame}{Kesimpulan}
+    \begin{itemize}
+        \item \textbf{Keberhasilan}:
+            \begin{itemize}
+                \item Berhasil mengimplementasikan HE-Ansatz dan SPSA secara manual.
+                \item Hamiltonian $H_2$ berhasil direduksi dan disimulasikan.
+                \item Kurva disosiasi mengikuti tren fisik yang benar.
+            \end{itemize}
+        \item \textbf{Tantangan}:
+            \begin{itemize}
+                \item Akurasi kimia ($< 1.6$ mHa) belum tercapai sepenuhnya dengan Depth=1.
+                \item Diperlukan tuning hyperparameter SPSA (learning rate decay) yang lebih halus.
+            \end{itemize}
+        \item \textbf{Next Steps}: Eksplorasi Depth > 1 dan mitigasi error (ZNE).
+    \end{itemize}
+\end{frame}
+
+\end{document}

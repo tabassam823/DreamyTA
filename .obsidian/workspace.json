@@ -8,41 +8,45 @@
         "type": "tabs",
         "children": [
           {
-            "id": "cd0c03421855a2e1",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "notes/EWS_Model.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "EWS_Model"
-            }
-          },
-          {
-            "id": "575d164b2d3c2b9f",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "1-s2.0-S0360544223021151-main.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "1-s2.0-S0360544223021151-main"
-            }
-          },
-          {
             "id": "a1abc627af69af20",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Replication/Hardware_efficient/PRD_Replication.md",
+                "file": "Replication/Hardware_efficient/Paper_Hardware_efficient.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Paper_Hardware_efficient"
+            }
+          },
+          {
+            "id": "16ea5ec9dcf2626c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/eigenvalue_problems.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PRD_Replication"
+              "title": "eigenvalue_problems"
+            }
+          },
+          {
+            "id": "f33657d262a56d52",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Rencana_Game_Theory_Identification"
             }
           }
         ],
@@ -113,13 +117,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Replication/Hardware_efficient/PRD_Replication.md",
+                "file": "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PRD_Replication"
+              "title": "Outline of Rencana_Game_Theory_Identification"
             }
           }
         ]
@@ -244,54 +248,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "a1abc627af69af20",
+  "active": "f33657d262a56d52",
   "lastOpenFiles": [
-    "1-s2.0-S0360544223021151-main.pdf",
+    "Latex/PakHeru_Presentasi3/debug_yf.py",
+    "Latex/PakHeru_Presentasi3/temp_verify_game_theory.py",
+    "Latex/PakHeru_Presentasi3/Game_Theory_Identification.ipynb",
+    "Latex/PakHeru_Presentasi3/Model_identification.ipynb",
+    "Latex/PakHeru_Presentasi3/recreate_notebook.py",
+    "Latex/PakHeru_Presentasi3/fix_quotes.py",
+    "Latex/PakHeru_Presentasi3/fix_notebook.py",
+    "Replication/Hardware_efficient/translate_nb.py",
+    "Replication/Hardware_efficient/All_Presentation.synctex(busy)",
+    "Replication/Hardware_efficient/pdflatex46777.fls",
+    "Replication/Hardware_efficient/All_Presentation.synctex.gz",
+    "Replication/Hardware_efficient/Presentasi_code/rencana_presentasi_HE.md",
+    "Replication/Hardware_efficient/Pasted image.png",
+    "Replication/Hardware_efficient/circuit_diagram.png",
+    "notes/Soal.md",
+    "Replication/Hardware_efficient/vqe_convergence.png",
+    "notes/eigenvalue_problems.md",
+    "Replication/Hardware_efficient/rencana_presentasi_HE.md",
+    "Replication/Hardware_efficient/Paper_Hardware_efficient.md",
+    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+    "Latex/PakHeru_Presentasi1/hasil_gemini_adv_formal.md",
+    "Replication/Paper_Hardware_efficient.md",
+    "notes/linear_operators_and_matrices.md",
     "Replication/Hardware_efficient/PRD_Replication.md",
+    "Latex/PakGagus_Presentasi2/rencana_vqe2.md",
+    "Replication/Hardware_efficient/h2_dissociation.png",
     "Paper_Hardware_efficient.md",
-    "Untitled",
-    "Replication/Hardware_efficient",
-    "notes/EWS_Model.pdf",
+    "Latex/PakGagus_Presentasi2/konvergensi.png",
+    "Latex/PakGagus_Presentasi2/rho.png",
+    "Latex/PakGagus_Presentasi2/sigma.png",
+    "Latex/PakGagus_Presentasi2/mu.png",
+    "Latex/PakGagus_Presentasi2/dfhead.png",
+    "Latex/PakGagus_Presentasi2/Circuit.png",
     "Latex/PakHeru_Presentasi2/DeepDive_ChainStoreParadox.md",
-    "paper/Sweet_Spot/Analogies_between_phase_transitions_ in_potential_games_and_quantum_phase_transitions.pdf",
-    "paper/VQE_Ansatz/Hardware_efficient_variational_quantum_eigensolver.pdf",
-    "paper/VQE_Ansatz/Hardware_efficient_variational_quantum_eigensolver",
-    "paper/VQE_Ansatz/Hardware_efficient",
-    "Latex/PakGagus_Presentasi2/VQE_Medium/circuit_visualization.png",
-    "Latex/PakGagus_Presentasi2/VQE_Medium/visualize_circuit.py",
-    "Latex/PakGagus_Presentasi2/VQE_Medium/pdflatex11360.fls",
-    "Latex/PakGagus_Presentasi2/VQE_Medium/VQE_Presentation.synctex.gz",
     "Latex/PakGagus_Presentasi2/VQE_Medium/rencana_vqe2.md",
     "Latex/PakHeru_Presentasi2/QBGT.md",
     "Latex/PakHeru_Presentasi2/DeepDive_Bayesian_EWL.md",
     "Latex/PakHeru_Presentasi2/Bayesian_game.md",
-    "Latex/PakHeru_Presentasi2/Pasted image.png",
     "Untitled.md",
     "Latex/PakHeru_Presentasi2/EWL_game.md",
-    "notes/eigenvalue_problems.md",
-    "notes/linear_operators_and_matrices.md",
     "prompt.md.md",
-    "notes/Pasted image (2).png",
-    "notes/Pasted image.png",
     "notes/completeness_relation_derivation.md",
     "2026-01-26.md",
     "paper/Combination.md",
     "Latex/PakHeru_Presentasi2/mermaid_graph.md",
-    "Latex/PakHeru_Presentasi2/mermaid_graph-1.png",
     "Latex/PakHeru_Presentasi2/slide_pakheru.md",
-    "Latex/PakHeru_Presentasi2/rencana_presentasi2.md",
-    "Replication/VQE_Medium/rencana_vqe2.md",
-    "paper/rencana_proposal.md",
-    "Combination.md > Modern Portofolio Theory (Markowitz Model).md",
-    "paper/bab3_metodologi.md",
-    "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
-    "Latex/PakHeru_Presentasi1/hasil_gemini_adv_formal.md",
-    "Latex/PakHeru_Presentasi1/Rencana_Presentasi1.md",
-    "Latex/PakGagus_Presentasi1/Ilustrasi_CMA_ES.png",
-    "Latex/PakGagus_Presentasi1/Perbandingan_Bobot_WCVaR.png",
-    "Latex/PakGagus_Presentasi1/Sumur_Penalti.png",
-    "Latex/PakGagus_Presentasi1/Efficient_Frontier.png",
-    "Latex/PakGagus_Presentasi1/alur_slide4.png",
     "paper/Relation.canvas"
   ]
 }

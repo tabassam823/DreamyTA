@@ -13,7 +13,6 @@
 % Meta information
 \title[Optimasi Portofolio dengan VQE]{Optimasi Portofolio Menggunakan Variational Quantum Eigensolver (VQE)}
 \subtitle{Replikasi Studi Kasus pada Saham Teknologi}
-\author{Tim Presentasi}
 \date{\today}
 
 \begin{document}
@@ -49,7 +48,7 @@
     
     \vspace{0.5cm}
     \begin{center}
-        \textit{[Visualisasi: Ilustrasi perbandingan grafik Risk vs Return]}
+        \includegraphics[width=0.35\textwidth]{risk_vs_return.png}
     \end{center}
 \end{frame}
 
@@ -88,7 +87,7 @@
 \section{Mapping Kuantum}
 \begin{frame}{Mapping ke Hamiltonian Kuantum}
     \begin{itemize}
-        	\item \textbf{Bagaimana komputer kuantum memahami masalah ini?}
+        	\item \textbf{Harus ada cara agar komputer kuantum memahami variabel biner}
         \item Mapping variabel biner $x_i \in \{0, 1\}$ ke operator spin/qubit $Z_i$.
         \item \textbf{Transformasi:}
         \begin{equation*}
@@ -96,6 +95,9 @@
         \end{equation*}
         \item Hasil akhirnya adalah \textbf{Ising Hamiltonian} yang akan diminimalkan energinya oleh VQE.
     \end{itemize}
+    \begin{equation*}
+        H = \sum_i h_i Z_i + \sum_{i<j} J_{ij} Z_i Z_j + \text{constant}
+    \end{equation*}
 \end{frame}
 
 % Slide 4: Persiapan Data & Studi Kasus
@@ -113,7 +115,9 @@
 
     \vspace{0.5cm}
     \begin{center}
-        \textit{[Visualisasi: Tabel Expected Returns dan Covariance Matrix]}
+        \includegraphics[width=0.45\textwidth]{mu.png}
+        \hfill
+        \includegraphics[width=0.45\textwidth]{sigma.png}
     \end{center}
 \end{frame}
 
@@ -133,6 +137,12 @@
         \end{itemize}
         \item \textbf{Proses:} Loop hibrid (Quantum Circuit $\leftrightarrow$ Classical Optimizer).
     \end{itemize}
+    \vspace{0.3cm}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{Circuit.png}
+        \hfill
+        \includegraphics[width=0.225\textwidth]{circuit_visualization.png}
+    \end{center}
 \end{frame}
 
 % Slide 6: Hasil Optimasi
@@ -145,7 +155,8 @@
                 	\item Penurunan nilai Cost function seiring iterasi (0 s.d 100).
             \end{itemize}
             \vspace{1cm}
-            \textit{[Placeholder Gambar Konvergensi]}
+            \includegraphics[width=\linewidth]{konvergensi.png}
+
         \end{column}
         \begin{column}{0.5\textwidth}
             \textbf{Hasil Akhir}
@@ -161,28 +172,4 @@
         \end{column}
     \end{columns}
 \end{frame}
-
-% Slide 7: Kesimpulan
-\section{Kesimpulan}
-\begin{frame}{Kesimpulan}
-    \begin{itemize}
-        	\item VQE berhasil mereplikasi pemilihan portofolio optimal yang mematuhi constraint.
-        \item Demonstrasi potensi algoritma kuantum jangka pendek (NISQ) untuk masalah keuangan.
-        \item \textbf{Langkah Selanjutnya:}
-        \begin{itemize}
-            	\item Meningkatkan jumlah aset.
-            	\item Menguji pada \textit{Real quantum device}.
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-% Closing Slide
-\begin{frame}
-    \centering
-    \Huge \textbf{Terima Kasih}
-    
-    \vspace{1cm}
-    \large Sesi Tanya Jawab
-\end{frame}
-
 \end{document}
