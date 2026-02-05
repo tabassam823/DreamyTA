@@ -8,49 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "a1abc627af69af20",
+            "id": "757a5f6ce45cbe67",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Replication/Hardware_efficient/Paper_Hardware_efficient.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Paper_Hardware_efficient"
-            }
-          },
-          {
-            "id": "16ea5ec9dcf2626c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/eigenvalue_problems.md",
+                "file": "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "eigenvalue_problems"
-            }
-          },
-          {
-            "id": "f33657d262a56d52",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Rencana_Game_Theory_Identification"
+              "title": "Penurunan_2.1"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -62,7 +33,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 72.41379310344827,
+        "dimension": 68.41379310344827,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -109,7 +80,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 27.586206896551722,
+        "dimension": 31.586206896551722,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -117,13 +88,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+                "file": "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Rencana_Game_Theory_Identification"
+              "title": "Outline of Penurunan_2.1"
             }
           }
         ]
@@ -248,54 +219,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "f33657d262a56d52",
+  "active": "757a5f6ce45cbe67",
   "lastOpenFiles": [
-    "Latex/PakHeru_Presentasi3/debug_yf.py",
-    "Latex/PakHeru_Presentasi3/temp_verify_game_theory.py",
-    "Latex/PakHeru_Presentasi3/Game_Theory_Identification.ipynb",
-    "Latex/PakHeru_Presentasi3/Model_identification.ipynb",
-    "Latex/PakHeru_Presentasi3/recreate_notebook.py",
-    "Latex/PakHeru_Presentasi3/fix_quotes.py",
-    "Latex/PakHeru_Presentasi3/fix_notebook.py",
-    "Replication/Hardware_efficient/translate_nb.py",
-    "Replication/Hardware_efficient/All_Presentation.synctex(busy)",
-    "Replication/Hardware_efficient/pdflatex46777.fls",
-    "Replication/Hardware_efficient/All_Presentation.synctex.gz",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.pdf",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.10.pdf",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.3.pdf",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.10.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.3.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.1.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.1.pdf",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Rangkuman.md",
+    "Latex/PakGagus_Presentasi3",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/vqe_runner.cpython-312.pyc",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/spsa_optimizer.cpython-312.pyc",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/molecular_hamiltonians.cpython-312.pyc",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/he_ansatz.cpython-312.pyc",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/experiments.cpython-312.pyc",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/Presentasi_paper/Presentasi_Hardware_Efficient.toc",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/Presentasi_code/rencana_presentasi_HE.md",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/vqe_convergence.png",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/h2_dissociation.png",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/circuit_diagram.png",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/Pasted image.png",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/Paper_Hardware_efficient.md",
+    "Latex/PakGagus_Presentasi2/Hardware_efficient/PRD_Replication.md",
+    "Latex/PakHeru_Presentasi3/Network.png",
+    "Penurunan_4.3.md",
+    "Penurunan_3.2.md",
+    "Payoff.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.md",
+    "Latex/PakHeru_Presentasi3/Rangkuman.md",
+    "Replication/Hardware_efficient/Paper_Hardware_efficient.md",
+    "notes/eigenvalue_problems.md",
+    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+    "Latex/PakHeru_Presentasi3/diagram_parameter.md",
+    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
+    "Latex/PakHeru_Presentasi3/diagram_parameter.png",
+    "Latex/PakHeru_Presentasi3/diagram_parameter-1.png",
+    "Pasted image 20260203144627.png",
+    "Untitled 1.md",
     "Replication/Hardware_efficient/Presentasi_code/rencana_presentasi_HE.md",
     "Replication/Hardware_efficient/Pasted image.png",
     "Replication/Hardware_efficient/circuit_diagram.png",
     "notes/Soal.md",
-    "Replication/Hardware_efficient/vqe_convergence.png",
-    "notes/eigenvalue_problems.md",
     "Replication/Hardware_efficient/rencana_presentasi_HE.md",
-    "Replication/Hardware_efficient/Paper_Hardware_efficient.md",
-    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
     "Latex/PakHeru_Presentasi1/hasil_gemini_adv_formal.md",
     "Replication/Paper_Hardware_efficient.md",
     "notes/linear_operators_and_matrices.md",
     "Replication/Hardware_efficient/PRD_Replication.md",
-    "Latex/PakGagus_Presentasi2/rencana_vqe2.md",
-    "Replication/Hardware_efficient/h2_dissociation.png",
-    "Paper_Hardware_efficient.md",
-    "Latex/PakGagus_Presentasi2/konvergensi.png",
-    "Latex/PakGagus_Presentasi2/rho.png",
-    "Latex/PakGagus_Presentasi2/sigma.png",
-    "Latex/PakGagus_Presentasi2/mu.png",
-    "Latex/PakGagus_Presentasi2/dfhead.png",
-    "Latex/PakGagus_Presentasi2/Circuit.png",
-    "Latex/PakHeru_Presentasi2/DeepDive_ChainStoreParadox.md",
-    "Latex/PakGagus_Presentasi2/VQE_Medium/rencana_vqe2.md",
-    "Latex/PakHeru_Presentasi2/QBGT.md",
-    "Latex/PakHeru_Presentasi2/DeepDive_Bayesian_EWL.md",
-    "Latex/PakHeru_Presentasi2/Bayesian_game.md",
-    "Untitled.md",
-    "Latex/PakHeru_Presentasi2/EWL_game.md",
-    "prompt.md.md",
-    "notes/completeness_relation_derivation.md",
-    "2026-01-26.md",
-    "paper/Combination.md",
-    "Latex/PakHeru_Presentasi2/mermaid_graph.md",
-    "Latex/PakHeru_Presentasi2/slide_pakheru.md",
     "paper/Relation.canvas"
   ]
 }

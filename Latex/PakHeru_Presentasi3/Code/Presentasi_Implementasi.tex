@@ -1,0 +1,338 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Presentasi Implementasi: Kode Python untuk Quantum Game Theory
+% Berdasarkan otak_atik.ipynb
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,physics}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+% Theme
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+
+% Code listing style
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\tiny,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{gray},
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    breaklines=true,
+    showstringspaces=false,
+    frame=single,
+    backgroundcolor=\color{gray!10}
+}
+
+% Judul
+\title{Implementasi Quantum Bayesian Game Theory}
+\subtitle{Kode Python untuk Analisis Pasar Keuangan}
+\author{Presentasi Tugas Akhir}
+\date{\today}
+
+\begin{document}
+
+% Slide Judul
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Outline
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Import Library dan Data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Import Library}
+\begin{lstlisting}
+import yfinance as yf
+import numpy as np
+import pandas as pd
+import scipy.linalg as la
+import networkx as nx
+import matplotlib.pyplot as plt
+\end{lstlisting}
+
+\vspace{0.3cm}
+Library yang digunakan:
+\begin{itemize}
+    \item \texttt{yfinance}: Mengambil data historis aset
+    \item \texttt{numpy}, \texttt{scipy}: Komputasi numerik dan aljabar linear
+    \item \texttt{networkx}: Analisis jaringan
+    \item \texttt{matplotlib}: Visualisasi
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Fungsi Pengambilan Data}
+\begin{lstlisting}
+def get_market_data(tickers, period="2y"):
+    data = yf.download(tickers, period=period)['Close']
+    returns = data.pct_change().dropna()
+    return returns
+
+# Eksekusi
+tickers = ['GC=F', 'SI=F']  # Gold dan Silver
+data_returns = get_market_data(tickers)
+\end{lstlisting}
+
+\vspace{0.3cm}
+\begin{itemize}
+    \item Mengambil data harga penutupan 2 tahun terakhir
+    \item Menghitung return harian menggunakan \texttt{pct\_change()}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Konstruksi Matriks Payoff}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Fungsi Analisis Quantum Game}
+\begin{lstlisting}
+def analyze_quantum_game(returns, leader_col, follower_col):
+    # Tentukan state: 0 jika naik (up), 1 jika turun (down)
+    L_state = (returns[leader_col] < 0).astype(int)
+    F_state = (returns[follower_col] < 0).astype(int)
+    
+    # Inisialisasi frekuensi dan akumulasi return
+    n_ij = np.zeros((2, 2))
+    sum_L = np.zeros((2, 2))
+    sum_F = np.zeros((2, 2))
+    
+    for i in range(len(returns)):
+        l, f = L_state.iloc[i], F_state.iloc[i]
+        n_ij[l, f] += 1
+        sum_L[l, f] += returns[leader_col].iloc[i]
+        sum_F[l, f] += returns[follower_col].iloc[i]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Perhitungan Payoff dan Amplitudo}
+\begin{lstlisting}
+    n_total = n_ij.sum()
+    
+    # Nilai payoff dengan Laplace Smoothing
+    payoff_L = sum_L / (n_ij + 1)
+    payoff_F = sum_F / (n_ij + 1)
+    
+    # Quantum State Coefficients (Amplitudo Probabilitas)
+    prob_matrix = n_ij / n_total
+    amplitudes = np.sqrt(prob_matrix)  # a00, a01, a10, a11
+    
+    return payoff_L, payoff_F, amplitudes, prob_matrix
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Hasil Matriks Payoff}
+    Output dari analisis Emas (GC=F) vs Perak (SI=F):
+    
+    \vspace{0.3cm}
+    
+    \textbf{Matriks Payoff Leader (Gold):}
+    \begin{equation*}
+        \begin{bmatrix} 0.0104 & 0.0045 \\ -0.0044 & -0.0107 \end{bmatrix}
+    \end{equation*}
+    
+    \textbf{Matriks Payoff Follower (Silver):}
+    \begin{equation*}
+        \begin{bmatrix} 0.0204 & -0.0085 \\ 0.0071 & -0.0212 \end{bmatrix}
+    \end{equation*}
+    
+    \textbf{Quantum State Coefficients:}
+    \begin{equation*}
+        \begin{bmatrix} 0.684 & 0.357 \\ 0.334 & 0.541 \end{bmatrix}
+    \end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Perhitungan Entropi Kuantum}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Konstruksi Matriks Densitas}
+\begin{lstlisting}
+# Matriks Densitas Global
+rho_LF = probs / np.sum(probs) 
+
+# Reduced Density Matrix untuk Leader (trace out Follower)
+rho_L = np.diag([probs[0,0] + probs[0,1], probs[1,0] + probs[1,1]])
+
+# Reduced Density Matrix untuk Follower (trace out Leader)
+rho_F = np.diag([probs[0,0] + probs[1,0], probs[0,1] + probs[1,1]])
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Fungsi Von Neumann Entropy}
+\begin{lstlisting}
+def von_neumann_entropy(rho):
+    """Menghitung entropi S = -Tr(rho * log2(rho))"""
+    eigvals = la.eigvalsh(rho)
+    # Filter nilai nol untuk menghindari error log
+    eigvals = eigvals[eigvals > 1e-12]
+    return -np.sum(eigvals * np.log2(eigvals))
+
+# Hitung Entropi
+s_L = von_neumann_entropy(rho_L)
+s_F = von_neumann_entropy(rho_F)
+s_LF = von_neumann_entropy(rho_LF)
+
+# Quantum Mutual Information
+qmi = s_L + s_F - s_LF
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Hasil Analisis Entropi}
+    \begin{table}
+        \centering
+        \begin{tabular}{lc}
+            \toprule
+            \textbf{Metrik} & \textbf{Nilai} \\
+            \midrule
+            Entropi Emas ($S_L$) & 0.9735 \\
+            Entropi Perak ($S_F$) & 0.9816 \\
+            Quantum Mutual Information ($I$) & 0.9724 \\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+    
+    \vspace{0.5cm}
+    
+    \textbf{Interpretasi}: Entanglement sangat kuat. Emas dan Perak memiliki ``jalur informasi'' yang hampir identik.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analisis Network Theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Membangun Quantum Financial Network}
+\begin{lstlisting}
+# Definisikan daftar aset
+tickers_list = ['GC=F', 'SI=F', 'CL=F', 'HG=F', 'BTC-USD', 'AAPL']
+
+# Bangun Matriks Adjasensi berdasarkan QMI
+G = nx.Graph()
+
+for i, a in enumerate(tickers_list):
+    for j, b in enumerate(tickers_list):
+        if i < j:
+            qmi_val = calculate_qmi_pair(all_data, a, b)
+            G.add_edge(a, b, weight=qmi_val)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Eigenvector Centrality Analysis}
+\begin{lstlisting}
+# Cari Leader Utama dengan Eigenvector Centrality
+centrality = nx.eigenvector_centrality(G, weight='weight')
+sorted_centrality = sorted(centrality.items(), 
+                           key=lambda x: x[1], reverse=True)
+\end{lstlisting}
+
+\vspace{0.3cm}
+
+\textbf{Hasil Centrality Analysis (Market Leaders):}
+\begin{table}
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        \textbf{Asset} & \textbf{Centrality} \\
+        \midrule
+        AAPL & 0.4642 \\
+        CL=F & 0.4158 \\
+        BTC-USD & 0.4054 \\
+        HG=F & 0.3980 \\
+        GC=F & 0.3812 \\
+        SI=F & 0.3789 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Konstruksi Hamiltonian}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Perhitungan Parameter Hamiltonian}
+\begin{lstlisting}
+# 1. Hitung parameter bias (h) dan interaksi (J)
+h_L = (pL[0,0] + pL[0,1]) - (pL[1,0] + pL[1,1])
+h_F = (pF[0,0] + pF[1,0]) - (pF[0,1] + pF[1,1])
+J_LF = qmi  # Quantum Mutual Information sebagai kekuatan interaksi
+
+# 2. Definisikan Operator Pauli-Z dan Identitas
+Z = np.array([[1, 0], [0, -1]])
+I_mat = np.eye(2)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Konstruksi Matriks Hamiltonian}
+\begin{lstlisting}
+# 3. Konstruksi Hamiltonian menggunakan Tensor Product
+# H = -hL(Z x I) - hF(I x Z) - J(Z x Z)
+H = -h_L * np.kron(Z, I_mat) - h_F * np.kron(I_mat, Z) \
+    - J_LF * np.kron(Z, Z)
+
+# 4. Mencari Ground State (Energi Terendah)
+eigenvalues, eigenvectors = la.eigh(H)
+ground_state_energy = eigenvalues[0]
+ground_state_vector = eigenvectors[:, 0]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Hasil Matriks Hamiltonian}
+    \textbf{Matriks Hamiltonian Sistem (4x4):}
+    \begin{equation*}
+        H = \begin{bmatrix}
+            -1.0596 & 0 & 0 & 0 \\
+            0 & 0.9997 & 0 & 0 \\
+            0 & 0 & 0.9451 & 0 \\
+            0 & 0 & 0 & -0.8852
+        \end{bmatrix}
+    \end{equation*}
+    
+    \vspace{0.3cm}
+    
+    \begin{itemize}
+        \item \textbf{Energi Ground State}: $-1.0596$
+        \item \textbf{Vektor Keadaan Paling Stabil}: $[1, 0, 0, 0]$ (keadaan $\ket{00}$)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Interpretasi Hasil}
+    \begin{itemize}
+        \item \textbf{Vektor Keadaan Stabil}: $\ket{00}$ (keduanya naik) adalah keadaan paling stabil
+        \item \textbf{Energi Sistem}: Jika jauh di atas ground state, pasar dalam kondisi \textbf{instabil}
+        \item \textbf{Prediksi Evolusi}: Menggunakan operator $U = e^{-iHt}$ untuk melihat evolusi waktu
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    
+    Metodologi telah bertransformasi dari analisis data historis menjadi model \textbf{mekanika kuantum stokastik}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kesimpulan}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Kesimpulan Implementasi}
+    Implementasi lengkap mencakup:
+    \begin{enumerate}
+        \item Pengambilan data pasar dengan \texttt{yfinance}
+        \item Konstruksi matriks payoff untuk Game Theory
+        \item Perhitungan Von Neumann Entropy
+        \item Quantum Mutual Information untuk mengukur entanglement
+        \item Network analysis dengan eigenvector centrality
+        \item Konstruksi Hamiltonian untuk prediksi evolusi pasar
+    \end{enumerate}
+\end{frame}
+
+\end{document}

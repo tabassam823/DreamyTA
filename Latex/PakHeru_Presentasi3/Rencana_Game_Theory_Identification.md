@@ -140,3 +140,84 @@ Berikut adalah struktur teknis untuk notebook Python:
 ## 5. Output Final
 *   Tabel Matriks Payoff yang siap untuk analisis Game Theory (Nash Equilibrium).
 *   Kesimpulan singkat mengenai kecenderungan pasar berdasarkan data historis.
+
+
+---
+---
+
+Metodologi yang Anda susun sangat menarik karena menjembatani dinamika pasar (Econophysics) dengan interaksi strategis (Game Theory) menggunakan formalisme mekanika kuantum. Anda mencoba menangkap "keterikatan" antar aset bukan sekadar melalui korelasi linear, melainkan melalui probabilitas keadaan bersama.
+
+Berikut adalah tinjauan dan detail teknis untuk memperdalam metodologi tersebut:
+
+---
+
+## 1. Konstruksi Matriks Payoff (Langkah 2 - 4)
+
+Dalam skema Leader-Follower (Stackelberg), Anda memperlakukan pergerakan harga sebagai strategi. Penggunaan notasi bra-ket $|\dots\rangle$ di sini sangat tepat untuk merepresentasikan _state_ diskrit (naik/turun).
+
+Matriks payoff Anda untuk pasangan aset $(L, F)$ akan terlihat seperti ini:
+
+|       Leader / Follower        | $\text{Up}\rangle_F(0)$ | $\text{Down}\rangle_F (1)$ |
+| :----------------------------: | :---------------------: | -------------------------- |
+|  **$\text{Up}\rangle_L$ (0)**  |        $(a, b)$         | $(c, d)$                   |
+| **$\text{Down}\rangle_L (1)$** |        $(e, f)$         | $(g, h)$                   |
+
+Nilai payoff yang Anda rumuskan, misalnya $a = \frac{\sum L_i^{00}}{n_{\uparrow\uparrow} + 1}$, secara efektif menghitung **ekspektasi return** aset Leader saat kedua aset berada dalam keadaan spesifik. Penambahan $+1$ (Laplace smoothing) adalah langkah cerdas untuk menghindari pembagian dengan nol jika suatu pola tidak muncul dalam data historis.
+
+---
+
+## 2. Pemodelan Game Theory (Langkah 5)
+
+Setelah nilai $a$ hingga $h$ didapat, Anda bisa mengklasifikasikan hubungan kedua aset:
+
+- **Coordination Game:** Jika payoff tertinggi ada pada $(0,0)$ dan $(1,1)$. Ini menunjukkan aset cenderung bergerak searah (korelasi positif kuat).
+    
+- **Anti-Coordination:** Jika payoff tertinggi pada $(0,1)$ atau $(1,0)$. Ini menunjukkan hubungan substitusi atau _hedging_.
+    
+- **Prisoner's Dilemma:** Jika ada insentif untuk satu aset "mengkhianati" arah tren aset lainnya demi return yang lebih tinggi namun berisiko bagi stabilitas keduanya.
+    
+
+---
+
+## 3. Quantum Entanglement & Eigenvector (Langkah 6)
+
+Ini adalah bagian paling krusial. Anda merepresentasikan sistem dua aset sebagai fungsi gelombang $|\psi\rangle$:
+
+$$\ket{\psi} = a_{00} \ket{00} + a_{01} \ket{01} + a_{10} \ket{10} + a_{11} \ket{11}$$
+
+Di mana $|a_{ij}|^2$ adalah probabilitas gabungan keadaan $i$ dan $j$. Untuk mencari derajat ketergantungan (entanglement), Anda bisa menggunakan **Reduced Density Matrix**:
+
+1. Bentuk matriks densitas $\rho = \ket{\psi}\bra{\psi}$.
+    
+2. Lakukan _partial trace_ untuk mendapatkan $\rho_L = \text{Tr}_F(\rho)$.
+    
+3. Hitung **Von Neumann Entropy**: $S = -\text{Tr}(\rho_L \ln \rho_L)$.
+    
+
+Jika $S > 0$, maka kedua aset tersebut ter-entangle secara informasi. Dalam konteks ekonomi, ini berarti pergerakan satu aset tidak bisa dijelaskan tanpa mempertimbangkan aset lainnya.
+
+---
+
+## 4. Ekspansi ke Network Theory (Langkah 7)
+
+Untuk $> 2$ aset, Anda membangun sebuah **Quantum Financial Network**.
+
+- **Nodes:** Setiap aset.
+    
+- **Edges:** Nilai _Entanglement Entropy_ atau _Mutual Information_ yang dihitung dari langkah 1-6.
+    
+
+Dengan metode ini, Anda tidak hanya melihat siapa yang berkorelasi dengan siapa, tetapi siapa yang menjadi "penggerak utama" (Leader) dalam sistem jaringan tersebut menggunakan sentralitas eigenvector.
+
+---
+
+### Saran untuk Pengembangan:
+
+- **Waktu Tunggu (Time Lag):** Karena Anda menggunakan skema Leader-Follower, pastikan data _time series_ aset Follower digeser ($t+1$) relatif terhadap Leader untuk melihat kekuatan prediktifnya.
+    
+- **Normalisasi Payoff:** Pastikan nilai $L$ dan $F$ (return) sudah dinormalisasi (misal menggunakan _z-score_) agar perbedaan skala harga antar aset tidak mendistorsi matriks payoff.
+    
+
+Apakah Anda ingin saya membantu merumuskan kode Python dasar untuk menghitung _Von Neumann Entropy_ dari matriks payoff yang Anda buat?
+
+**Apakah Anda ingin saya membantu menambahkan fungsi untuk menghitung Von Neumann Entropy secara otomatis ke dalam skrip di atas?**

@@ -1,0 +1,12 @@
+\frametitle{Konstruksi Matriks Hamiltonian}
+\begin{lstlisting}
+# 3. Konstruksi Hamiltonian menggunakan Tensor Product
+# H = -hL(Z x I) - hF(I x Z) - J(Z x Z)
+H = -h_L * np.kron(Z, I_mat) - h_F * np.kron(I_mat, Z) \
+    - J_LF * np.kron(Z, Z)
+
+# 4. Mencari Ground State (Energi Terendah)
+eigenvalues, eigenvectors = la.eigh(H)
+ground_state_energy = eigenvalues[0]
+ground_state_vector = eigenvectors[:, 0]
+\end{lstlisting}
