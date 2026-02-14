@@ -1,9 +1,3 @@
-Hubungan antara **persentase perubahan (arithmetic return)** dan **log return** merupakan konsep fundamental dalam analisis deret waktu keuangan.
-
-Berikut adalah turunan lengkap mengapa pendekatan tersebut bisa digunakan:
-
----
-
 ## 1. Definisi Dasar
 
 Misalkan $r_t$ adalah _simple return_ (pengembalian aritmetika) dari harga aset $S$ pada waktu $t$:

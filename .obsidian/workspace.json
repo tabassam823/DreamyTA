@@ -4,24 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "6b20c4fcef272f2f",
+        "id": "3e177722e3bf5682",
         "type": "tabs",
         "children": [
           {
-            "id": "757a5f6ce45cbe67",
+            "id": "fa0b80e23e837b3b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.md",
+                "file": "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_3.2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Penurunan_2.1"
+              "title": "Penurunan_3.2"
+            }
+          },
+          {
+            "id": "5b982101c115c344",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/PakGagus_Presentasi3/algoritma.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "algoritma"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -88,13 +103,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.md",
+                "file": "Latex/PakGagus_Presentasi3/algoritma.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Penurunan_2.1"
+              "title": "Outline of algoritma"
             }
           }
         ]
@@ -219,54 +234,56 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "757a5f6ce45cbe67",
+  "active": "5b982101c115c344",
   "lastOpenFiles": [
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.pdf",
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.10.pdf",
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.3.pdf",
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.10.md",
+    "Latex/PakGagus_Presentasi3/flowchart_algoritma.png",
+    "Latex/PakGagus_Presentasi3/puppeteer-config.json",
+    "Latex/PakGagus_Presentasi3/flowchart.mmd",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.synctex.gz",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.synctex(busy)",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/pdflatex12693.fls",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/pdflatex12307.fls",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.toc",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.out",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.log",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.fls",
+    "Latex/PakGagus_Presentasi3/format_pseudocode.png",
+    "Latex/PakGagus_Presentasi3/Pasted image.png",
+    "Latex/PakGagus_Presentasi3/algoritma_flowchart.png",
+    "Latex/PakGagus_Presentasi3/Perubahan.md",
+    "Latex/PakGagus_Presentasi3/backtest_plan.md",
+    "Latex/PakGagus_Presentasi3/backtest_equity_curve.png",
+    "Latex/PakGagus_Presentasi3/rencana_presentasi_analisis_numerik.md",
+    "Latex/PakGagus_Presentasi3/he_vqe_circuit.png",
+    "Latex/Untitled.md",
+    "Latex/PakGagus_Presentasi3/econophysics_vqe_results.png",
+    "Latex/PakGagus_Presentasi2/Screenshot from 2026-01-29 07-43-27.png",
+    "Latex/PakGagus_Presentasi2/probability_histogram.png",
+    "Latex/PakGagus_Presentasi2/sigma.png",
+    "paper84.md",
+    "Payoff.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_4.3.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_3.2.md",
+    "prompt.md.md",
+    "Untitled.canvas",
     "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.3.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.md",
+    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.10.md",
     "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.1.md",
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_1.1.pdf",
+    "2026-02-06.md",
+    "Untitled 1.canvas",
+    "Latex/PakHeru_Presentasi2/Pasted image.png",
+    "Latex/PakHeru_Presentasi2/mermaid_graph.md",
+    "Latex/PakGagus_Presentasi1/alur_slide4.md",
+    "Latex/PakGagus_Presentasi3/rencana_kombinasi.md",
     "Latex/PakHeru_Presentasi3/Wrapped_up/Rangkuman.md",
-    "Latex/PakGagus_Presentasi3",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/vqe_runner.cpython-312.pyc",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/spsa_optimizer.cpython-312.pyc",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/molecular_hamiltonians.cpython-312.pyc",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/he_ansatz.cpython-312.pyc",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/__pycache__/experiments.cpython-312.pyc",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/Presentasi_paper/Presentasi_Hardware_Efficient.toc",
     "Latex/PakGagus_Presentasi2/Hardware_efficient/Presentasi_code/rencana_presentasi_HE.md",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/vqe_convergence.png",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/h2_dissociation.png",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/circuit_diagram.png",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/Pasted image.png",
     "Latex/PakGagus_Presentasi2/Hardware_efficient/Paper_Hardware_efficient.md",
     "Latex/PakGagus_Presentasi2/Hardware_efficient/PRD_Replication.md",
-    "Latex/PakHeru_Presentasi3/Network.png",
-    "Penurunan_4.3.md",
-    "Penurunan_3.2.md",
-    "Payoff.md",
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_2.1.md",
     "Latex/PakHeru_Presentasi3/Rangkuman.md",
     "Replication/Hardware_efficient/Paper_Hardware_efficient.md",
     "notes/eigenvalue_problems.md",
     "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
-    "Latex/PakHeru_Presentasi3/diagram_parameter.md",
-    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
-    "Latex/PakHeru_Presentasi3/diagram_parameter.png",
-    "Latex/PakHeru_Presentasi3/diagram_parameter-1.png",
-    "Pasted image 20260203144627.png",
-    "Untitled 1.md",
-    "Replication/Hardware_efficient/Presentasi_code/rencana_presentasi_HE.md",
-    "Replication/Hardware_efficient/Pasted image.png",
-    "Replication/Hardware_efficient/circuit_diagram.png",
-    "notes/Soal.md",
-    "Replication/Hardware_efficient/rencana_presentasi_HE.md",
-    "Latex/PakHeru_Presentasi1/hasil_gemini_adv_formal.md",
-    "Replication/Paper_Hardware_efficient.md",
-    "notes/linear_operators_and_matrices.md",
-    "Replication/Hardware_efficient/PRD_Replication.md",
     "paper/Relation.canvas"
   ]
 }

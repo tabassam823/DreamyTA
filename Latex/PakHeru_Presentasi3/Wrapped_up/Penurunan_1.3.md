@@ -1,9 +1,3 @@
-Hubungan $\langle i | j \rangle = \delta_{ij}$ (ortonormalitas) dan ekspansi vektor keadaan $c_i = \langle i | \psi \rangle$ merupakan fondasi bagi ruang Hilbert dalam mekanika kuantum.
-
-Berikut adalah penjelasan konsep dan penurunan logisnya secara menyeluruh:
-
----
-
 ## 1. Memahami Simbol dan Notasi
 
 Sebelum masuk ke penurunan, kita harus membedah notasi Dirac tersebut:
@@ -80,11 +74,3 @@ $$\langle i | \psi \rangle = \sum_j c_j \delta_{ij}$$
 Sifat Delta Kronecker akan membuat seluruh deret bernilai nol kecuali saat $j = i$. Maka, persamaan "runtuh" menjadi:
 
 $$\langle i | \psi \rangle = c_i$$
-
----
-
-## 6. Ringkasan Konsep
-
-- **$c_i = \langle i | \psi \rangle$**: Menunjukkan bahwa koefisien ekspansi adalah proyeksi dari keadaan $|\psi\rangle$ ke basis $i$.
-- **Amplitudo Probabilitas**: Nilai $|c_i|^2$ memberikan probabilitas untuk menemukan sistem dalam keadaan basis $i$ saat dilakukan pengukuran.
-- **Operasi Dual**: Secara matematis, jika $| \psi \rangle$ adalah vektor kolom, maka $\langle \psi |$ adalah vektor baris konjugat kompleks ($| \psi \rangle^\dagger$).
