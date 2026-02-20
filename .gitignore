@@ -12,11 +12,6 @@ __pycache__/
 *.out
 *.toc
 *.synctex.gz
-*.pdf
-!main.pdf
-!Bab2_rev.pdf
-!Bab2_rev2.pdf
-!Deep_Learning-Based_BSDE_Solver_for_Libor.pdf
 
 # OS
 .DS_Store
