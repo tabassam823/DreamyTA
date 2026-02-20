@@ -39,12 +39,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
-                "mode": "source",
-                "source": false
+                "file": "notes/PakGagus_Presentasi3/Bias_Interaction_GT.md",
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "Rencana_revisi"
+              "title": "Bias_Interaction_GT"
             }
           }
         ],
@@ -115,13 +115,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
+                "file": "notes/PakGagus_Presentasi3/Bias_Interaction_GT.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Rencana_revisi"
+              "title": "Outline of Bias_Interaction_GT"
             }
           }
         ]
@@ -248,6 +248,12 @@
   },
   "active": "65b679af7d8ab952",
   "lastOpenFiles": [
+    "notes/PakGagus_Presentasi3/NP-hard.md",
+    "notes/PakGagus_Presentasi3/ising_hamiltonian.md",
+    "notes/PakGagus_Presentasi3/Bias_Interaction_GT.md",
+    "notes/PakGagus_Presentasi3/QMI.md",
+    "notes/PakGagus_Presentasi3/risk_aversion_endogen.md",
+    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
     "Latex/PakGagus_Presentasi4/spsa_website.ipynb",
     "Latex/PakGagus_Presentasi4/Pseudocode.synctex(busy)",
     "Latex/PakGagus_Presentasi4/pdflatex20081.fls",
@@ -258,7 +264,6 @@
     "Latex/PakGagus_Presentasi4/pdflatex19818.fls",
     "Latex/PakGagus_Presentasi4/pdflatex19513.fls",
     "Latex/PakGagus_Presentasi4/pdflatex19505.fls",
-    "Latex/PakGagus_Presentasi4/pdflatex19474.fls",
     "Latex/PakGagus_Presentasi4/generated_images/vqe_probs_adam.png",
     "Latex/PakGagus_Presentasi4/generated_images/vqe_convergence_adam.png",
     "Latex/PakGagus_Presentasi4/generated_images/vqe_probs.png",
@@ -270,14 +275,9 @@
     "Latex/PakGagus_Presentasi4/generated_images/payoff_matrix_2_3.png",
     "Latex/PakGagus_Presentasi4/generated_images/payoff_matrix_1_3.png",
     "Latex/PakGagus_Presentasi3/presentasi_analisis/Evaluasi.md",
-    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
-    "notes/PakGagus_Presentasi3/NP-hard.md",
     "Untitled.md",
     "notes/PakGagus_Presentasi3/von_neumann_entropy.md",
-    "notes/PakGagus_Presentasi3/QMI.md",
     "Von Neumann Entropy.md",
-    "notes/PakGagus_Presentasi3/ising_hamiltonian.md",
-    "notes/PakGagus_Presentasi3/risk_aversion_endogen.md",
     "NP-hard.md",
     "notes/PakGagus_Presentasi3/traveling_salesman_problem.md",
     "Traveling Salesman Problem.md",
