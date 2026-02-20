@@ -457,3 +457,5 @@ Vektor Keadaan Paling Stabil: [1. 0. 0. 0.]
     
 
 Metodologi Anda kini telah bertransformasi dari analisis data historis menjadi model **mekanika kuantum stokastik** yang utuh. Apakah Anda ingin mencoba mensimulasikan "guncangan" pada sistem untuk melihat bagaimana nilai $H$ berubah saat terjadi anomali pasar?
+
+hi nya masih ambigu
