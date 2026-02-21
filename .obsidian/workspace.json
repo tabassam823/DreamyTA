@@ -25,28 +25,18 @@
             "id": "5b982101c115c344",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.pdf"
+                "file": "Latex/Proposal/Struktur.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "presentasi_analisis_numerik"
-            }
-          },
-          {
-            "id": "65b679af7d8ab952",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "Latex/PakGagus_Presentasi3/algoritma_flowchart.png"
-              },
-              "icon": "lucide-image",
-              "title": "algoritma_flowchart"
+              "icon": "lucide-file",
+              "title": "Struktur"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -58,7 +48,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 68.41379310344827,
+        "dimension": 27.586206896551722,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -105,7 +95,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 31.586206896551722,
+        "dimension": 72.41379310344827,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -113,13 +103,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/PakGagus_Presentasi3/algoritma_flowchart.png",
+                "file": "Latex/Proposal/Struktur.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of algoritma_flowchart"
+              "title": "Outline of Struktur"
             }
           }
         ]
@@ -244,8 +234,14 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "65b679af7d8ab952",
+  "active": "5b982101c115c344",
   "lastOpenFiles": [
+    "Latex/Proposal/Struktur 1.md",
+    "Latex/Proposal/Struktur.md",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.pdf",
+    "paper/game_theory_vs_ising_model.pdf",
+    "paper/game theory vs ising model.pdf",
+    "Latex/PakGagus_Presentasi3/algoritma_flowchart.png",
     "Latex/PakHeru_Presentasi3/Network.png",
     "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
     "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
@@ -258,9 +254,6 @@
     "Latex/PakGagus_Presentasi4/check_grouping.py",
     "Latex/PakGagus_Presentasi4/inspect_pennylane.py",
     "Latex/PakGagus_Presentasi4/debug_cells_grouping.py",
-    "Latex/PakGagus_Presentasi4/debug_cells.py",
-    "Latex/PakGagus_Presentasi4/optimize_notebook.py",
-    "Latex/PakGagus_Presentasi4/spsa_website.ipynb",
     "Latex/PakGagus_Presentasi4/generated_images/vqe_probs_adam.png",
     "Latex/PakGagus_Presentasi4/generated_images/vqe_convergence_adam.png",
     "Latex/PakGagus_Presentasi4/generated_images/vqe_probs.png",
@@ -269,8 +262,6 @@
     "Latex/PakGagus_Presentasi4/generated_images/qmi_heatmap.png",
     "Latex/PakGagus_Presentasi4/generated_images/price_history.png",
     "Latex/PakGagus_Presentasi4/generated_images/performance_comparison.png",
-    "Latex/PakGagus_Presentasi4/generated_images/payoff_matrix_2_3.png",
-    "Latex/PakGagus_Presentasi4/generated_images/payoff_matrix_1_3.png",
     "Latex/PakGagus_Presentasi3/presentasi_analisis/Evaluasi.md",
     "notes/PakGagus_Presentasi3/NP-hard.md",
     "Untitled.md",
@@ -290,8 +281,6 @@
     "paper84.md",
     "Payoff.md",
     "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_4.3.md",
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_3.2.md",
-    "prompt.md.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
