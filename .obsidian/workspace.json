@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Soal_Jawaban/Soal_Teori_Grup_5.md",
+                "file": "notes/VQE/List_Study.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Soal_Teori_Grup_5"
+              "title": "List_Study"
             }
           }
         ]
@@ -33,7 +33,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 71.13997113997114,
+        "dimension": 57.24137931034484,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -54,7 +54,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "e",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -80,7 +80,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 28.860028860028862,
+        "dimension": 42.75862068965516,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -88,20 +88,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Soal_Jawaban/Soal_Teori_Grup_5.md",
+                "file": "notes/VQE/List_Study.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Soal_Teori_Grup_5"
+              "title": "Outline of List_Study"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 259.5
+    "width": 224.5
   },
   "right": {
     "id": "2be21e54251959f5",
@@ -221,52 +221,52 @@
   },
   "active": "fa0b80e23e837b3b",
   "lastOpenFiles": [
-    "notes/Soal_Jawaban/Soal_Teori_Grup.md",
-    "notes/Soal_Jawaban/Soal_Teori_Grup_5.md",
-    "notes/Soal_Jawaban/Soal_Teori_Grup_4.md",
-    "notes/Soal_Jawaban/Soal_Teori_Grup_3.md",
-    "notes/Soal_Jawaban/Soal_Teori_Grup_2.md",
-    "notes/Soal_Jawaban/Soal_Teori_Grup_1b.md",
-    "notes/Soal_Jawaban/Soal_Teori_Grup_1a.md",
-    "notes/Soal_Jawaban/ETS_Fismat_Lanjut.md",
-    "notes/Soal_Jawaban/EAS_Fismat_Lanjut_2c.md",
-    "notes/Soal_Jawaban/EAS_Fismat_Lanjut.md",
-    "notes/Soal_Jawaban/EAS_Fismat_Lanjut_1a.md",
-    "notes/Soal_Jawaban/EAS_Fismat_Lanjut_1b.md",
-    "notes/Soal_Jawaban/Quiz_Fismat_Lanjut_2.md",
-    "notes/Soal_Jawaban/EAS_Fismat_Lanjut_2b.md",
-    "notes/Soal_Jawaban/EAS_Fismat_Lanjut_2a.md",
-    "notes/Soal_Jawaban/Quiz_Fismat_Lanjut.md",
-    "notes/Soal_Jawaban/Quiz_Fismat_Lanjut_1.md",
-    "Latex/KajianAwal/Bab2/Bab2.md",
-    "notes/Soal.md",
-    "notes/Soal_Jawaban",
-    "notes/EAS_Fismat_Lanjut.md",
-    "notes/Quiz_Fismat_Lanjut.md",
-    "notes/Soal_Group_Theory.md",
-    "notes/jawaban2c.md",
-    "notes/jawaban2a.md",
-    "notes/jawaban2b.md",
+    "notes/VQE/IBM_Transpilation.html",
+    "notes/VQE/IBM_VQE_Chem (Copy).html",
+    "notes/VQE/IBM_SPSA.html",
+    "notes/VQE/Pennylane_SPSA (Copy).html",
+    "notes/VQE/Pennylane_SPSA.html",
+    "notes/VQE/IBM_VQE_General (Copy).html",
+    "notes/VQE/vqe.md",
+    "notes/VQE/List_Study.md",
+    "notes/VQE/Github_Efficient_SU2.html",
+    "notes/VQE/IBM_Efficient_SU2 (Copy).html",
+    "notes/VQE/IBM_Efficient_SU2.html",
+    "notes/VQE/IBM_VQE_General.html",
+    "notes/VQE/IBM_VQE_Chem.html",
+    "notes/vqe.md",
     "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_3.2.md",
-    "Latex/PakGagus_Presentasi3/presentasi_analisis/presentasi_analisis_numerik.pdf",
-    "paper/game_theory_vs_ising_model.pdf",
-    "paper/game theory vs ising model.pdf",
-    "Latex/PakGagus_Presentasi3/algoritma_flowchart.png",
-    "Latex/PakHeru_Presentasi3/Network.png",
-    "Latex/PakGagus_Presentasi4/fast_track_notebook.py",
-    "Latex/PakGagus_Presentasi4/check_grouping_count.py",
-    "Latex/PakGagus_Presentasi4/fix_notebook_error.py",
-    "Latex/PakGagus_Presentasi4/verify_grouping_logic.py",
-    "Latex/PakGagus_Presentasi4/check_grouping.py",
-    "Latex/PakGagus_Presentasi4/inspect_pennylane.py",
-    "Latex/PakGagus_Presentasi4/generated_images/vqe_probs_adam.png",
-    "Latex/PakGagus_Presentasi4/generated_images/vqe_convergence_adam.png",
-    "Latex/PakGagus_Presentasi4/generated_images/vqe_probs.png",
-    "Latex/PakGagus_Presentasi4/generated_images/vqe_convergence.png",
-    "Latex/PakGagus_Presentasi4/generated_images/statistics_table.png",
-    "Latex/PakGagus_Presentasi4/generated_images/qmi_heatmap.png",
-    "Latex/PakGagus_Presentasi4/generated_images/price_history.png",
-    "Latex/PakGagus_Presentasi4/generated_images/performance_comparison.png",
+    "learning/courses/quantum-computing-in-practice/index.md",
+    "Latex/Proposal/Struktur.md",
+    "Latex/Proposal/template_TA_ITS/halaman-depan/00-Logo-ITS.png",
+    "Latex/Proposal/template_TA_ITS/halaman-depan/00-BGcover.jpg",
+    "Latex/Proposal/template_TA_ITS/gambar/flowchart.png",
+    "Latex/Proposal/template_TA_ITS/gambar/foto.png",
+    "Latex/Proposal/template_TA_ITS/gambar/contoh.png",
+    "Latex/Proposal/template_TA_ITS/README.md",
+    "Latex/Proposal/template_TA_ITS_main_fix_alief/halaman-depan/00-Logo-ITS.png",
+    "Latex/Proposal/template_TA_ITS_main_fix_alief/halaman-depan/00-BGcover.jpg",
+    "Latex/Proposal/template_TA_ITS_main_fix_alief/gambar/foto.png",
+    "Latex/Proposal/template_TA_ITS_main_fix_alief/gambar/flowchart.png",
+    "Latex/Proposal/template_TA_ITS_main_fix_alief/gambar/contoh.png",
+    "Latex/Proposal/template_TA_ITS_main_fix_alief/README.md",
+    "Latex/Proposal/Struktur 1.md",
+    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
+    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+    "Latex/PakHeru_Presentasi3/diagram_parameter.md",
+    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/Evaluasi.md",
+    "notes/PakGagus_Presentasi3/NP-hard.md",
+    "Untitled.md",
+    "notes/PakGagus_Presentasi3/von_neumann_entropy.md",
+    "notes/PakGagus_Presentasi3/QMI.md",
+    "Von Neumann Entropy.md",
+    "notes/PakGagus_Presentasi3/ising_hamiltonian.md",
+    "notes/PakGagus_Presentasi3/risk_aversion_endogen.md",
+    "NP-hard.md",
+    "notes/PakGagus_Presentasi3/traveling_salesman_problem.md",
+    "Traveling Salesman Problem.md",
+    "Latex/PakGagus_Presentasi3/algoritma.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template-TA-Fisika-ITS.v.1.0 2022.01
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% oleh: 1. Sasfan Arman Wella, BRIN (sasfan.a.wella@gmail.com)
+%       2. Nadya Amalia, BRIN (amalianadd@gmail.com)
+%       3. Fitrotul Millah, ITS (fitrotulmillah2000@gmail.com)
+%       4. Nathasya Veronica, ITS (nathasyaveronica363@gmail.com) 
+%
+%  NB: Template ini bukanlah template resmi dari ITS, namun disusun
+%      berdasarkan pedoman penulisan laporan TA Fisika ITS
+%
+% [ Bila ada fitur yang ditambahkan dalam template ini, silahkan
+%   tambahkan nama Anda setelah nama pembuat template sebelumnya ]
+%
+%  Penjelasan singkat dari template ini 
+%  dapat dilihat pada file README
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%=====================================================================
+% FORMAT DAN PENGATURAN UMUM:
+%=====================================================================
+\documentclass[a5paper, 11pt, final, openright, twoside]{report}
+\input{pengaturan}
+\input{informasi}
+%=====================================================================
+
+%=====================================================================
+% KODE RINGKAS UNTUK SIMBOL DAN SATUAN:
+%=====================================================================
+\input{kodeUnit}
+%=====================================================================
+
+
+%=====================================================================
+\begin{document}
+%=====================================================================
+    \pagestyle{romawi}
+    \pagenumbering{roman}
+
+    \input{./halaman-depan/cover}
+    \halamanKosong
+    
+%---------------------------------------------------------------------
+%    HALAMAN DEPAN
+%---------------------------------------------------------------------
+    
+    % LEMBAR PENGESAHAN
+    \input{./halaman-depan/pengesahan}
+    \halamanKosong
+
+    % ABSTRAK
+    \input{./halaman-depan/abstrak}
+    \halamanKosong
+    
+    \input{./halaman-depan/abstract}
+    \halamanKosong
+    
+    % KATA PENGANTAR 
+    \input{./halaman-depan/kataPengantar}
+    %\halamanKosong 
+
+    % DAFTAR ISI  
+    \input{./halaman-depan/daftarIsi}
+    %\halamanKosong 
+    
+    % DAFTAR GAMBAR
+    \input{./halaman-depan/daftarGambar}
+    %\halamanKosong
+    
+    % DAFTAR TABEL
+    \input{./halaman-depan/daftarTabel}
+    %\halamanKosong
+    
+%---------------------------------------------------------------------
+%   KONTEN
+%   Silahkan buat file bab isian di folder "konten"
+%---------------------------------------------------------------------
+
+    \input{./konten/bab01}
+    \input{./konten/bab02}
+    \input{./konten/bab03}
+    \input{./konten/bab04}
+    \input{./konten/bab05}
+    
+%---------------------------------------------------------------------
+%   DAFTAR PUSTAKA
+%---------------------------------------------------------------------
+
+    \addtocontents{toc}{\vskip10pt}
+    \renewcommand{\bibname}{DAFTAR PUSTAKA}
+    \addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+    %\bibliographystyle{unsrt} % untuk style dengan nomor
+    \bibliographystyle{format-pustaka} % untuk style dengan nama
+    \bibliography{pustaka}
+    
+%---------------------------------------------------------------------
+%   APPENDIX
+%---------------------------------------------------------------------
+
+    {
+    \appendix
+    \addtocontents{toc}{\vskip10pt}
+    \renewcommand{\chaptername}{LAMPIRAN}
+    \input{./halaman-belakang/lampiran/lampiranA}
+    %\input{./halaman-belakang/lampiran/lampiranB}
+    }
+%---------------------------------------------------------------------
+%   BIOGRAFI PENULIS
+%---------------------------------------------------------------------
+
+    \input{./halaman-belakang/biografi}
+    
+%=====================================================================
+\end{document}
+%=====================================================================
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -28,6 +28,7 @@ dokumen ini adalah struktur proposal yang berisi bagian, bab, subbab, dan poin-p
     - **Model Stackelberg:** Dinamika Leader-Follower, asimetri informasi, dan logika *Backward Induction* dalam pengambilan keputusan aset.
 
 ## 2.3 Teori Informasi Kuantum & Game Theory
+- **Konsep Encoding Klasik ke Kuantum:** Penjelasan mengenai bagaimana informasi klasik (e.g., keputusan biner) direpresentasikan pada qubit, dan bagaimana superposisi memungkinkan probabilitas state yang melampaui determinisme klasik.
 - **Kuantisasi EWL (Eisert-Wilkens-Lewenstein):** Operator Entangling ($\hat{J}$) dan strategi Unitary.
 - **Matriks Densitas ($\rho$):** Representasi keadaan statistik sistem aset.
 - **Von Neumann Entropy:** Pengukuran ketidakpastian dalam sistem kuantum ($S = -\text{Tr}(\rho \ln \rho)$).
@@ -35,7 +36,9 @@ dokumen ini adalah struktur proposal yang berisi bagian, bab, subbab, dan poin-p
 
 ## 2.4 Quantum Algorithm (VQE)
 - **Dasar Matematika:** Persamaan Eigen ($H|\psi\rangle = E|\psi\rangle$) dan Prinsip Variasi.
-- **Variational Quantum Eigensolver:** Algoritma hibrid sebagai pencari Ground State (strategi optimal).
+- **Variational Quantum Eigensolver:**
+    - Algoritma hibrid sebagai pencari Ground State (strategi optimal/konfigurasi sistem).
+    - **Interpretasi Ground State sebagai Market Regime Optimal:** Penjelasan bagaimana ground state yang ditemukan VQE merepresentasikan alokasi aset atau kondisi pasar paling menguntungkan/stabil berdasarkan formulasi Hamiltonian Ising. Ini bukan prediksi waktu, melainkan identifikasi kondisi *equilibrium* yang paling diinginkan dari "game" pasar.
 - **Struktur Ansatz (Parameterized Quantum Circuit):**
     - **Rotasi Qubit Tunggal ($U_{rot}$):** Peran gerbang $R_y$ dan $R_z$ dalam pemetaan ruang strategi.
     - **Layer Entanglement ($U_{ent}$):** Penggunaan gerbang CNOT untuk memodelkan interdependensi aset.
@@ -46,12 +49,13 @@ dokumen ini adalah struktur proposal yang berisi bagian, bab, subbab, dan poin-p
 - **Formulasi Ising Hamiltonian:**
     - Transformasi QUBO ke model Ising.
     - Pemetaan variabel biner ($0,1$) ke operator Pauli-Z ($\sigma^z$).
+    - **Peran Parameter Ising ($h_i, J_{ij}$):** Bagaimana bias ($h_i$) dan interaksi ($J_{ij}$) yang berasal dari Game Theory dan QMI mengkodekan preferensi aset individual dan hubungan strategis antar aset, yang mendefinisikan "game" pasar yang akan diselesaikan VQE.
 
 # BAB 3: METODOLOGI PENELITIAN
 ## 3.1 Alur Penelitian (Flowchart)
 ## 3.2 Pengumpulan Data & Pra-pemrosesan
 - Akuisisi data LQ45 via Yahoo Finance.
-- **Diskretisasi Biner:** Penentuan state $|0\rangle$ (Up) dan $|1\rangle$ (Down).
+- **Diskretisasi Biner (Digitalisasi Data Finansial):** Transformasi *log return* kontinu menjadi state biner (misal: |0⟩ untuk naik, |1⟩ untuk turun), sebagai jembatan awal representasi data finansial pada qubit.
 - **Laplace Smoothing:** Stabilisasi probabilitas untuk perhitungan entropi.
 
 ## 3.3 Konstruksi Model Permainan (Mapping Pipeline)
