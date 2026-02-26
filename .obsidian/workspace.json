@@ -13,15 +13,58 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/VQE/List_Study.md",
+                "file": "notes/VQE/Gate_Function.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "List_Study"
+              "title": "Gate_Function"
+            }
+          },
+          {
+            "id": "f06c2fee4c119b41",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/jenis_optimasi_vqe.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "jenis_optimasi_vqe"
+            }
+          },
+          {
+            "id": "352c40365d598a2c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "hasil_gemini_adv"
+            }
+          },
+          {
+            "id": "c372efbd43152af0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Rencana_Game_Theory_Identification"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -33,7 +76,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 57.24137931034484,
+        "dimension": 54.206896551724135,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -54,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "variational principle",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -75,12 +118,13 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 42.75862068965516,
+        "dimension": 45.793103448275865,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -88,13 +132,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/VQE/List_Study.md",
+                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of List_Study"
+              "title": "Outline of hasil_gemini_adv"
             }
           }
         ]
@@ -219,54 +263,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "fa0b80e23e837b3b",
+  "active": "352c40365d598a2c",
   "lastOpenFiles": [
-    "notes/VQE/IBM_Transpilation.html",
-    "notes/VQE/IBM_VQE_Chem (Copy).html",
-    "notes/VQE/IBM_SPSA.html",
-    "notes/VQE/Pennylane_SPSA (Copy).html",
-    "notes/VQE/Pennylane_SPSA.html",
-    "notes/VQE/IBM_VQE_General (Copy).html",
-    "notes/VQE/vqe.md",
-    "notes/VQE/List_Study.md",
-    "notes/VQE/Github_Efficient_SU2.html",
-    "notes/VQE/IBM_Efficient_SU2 (Copy).html",
-    "notes/VQE/IBM_Efficient_SU2.html",
-    "notes/VQE/IBM_VQE_General.html",
-    "notes/VQE/IBM_VQE_Chem.html",
-    "notes/vqe.md",
-    "Latex/PakHeru_Presentasi3/Wrapped_up/Penurunan_3.2.md",
-    "learning/courses/quantum-computing-in-practice/index.md",
-    "Latex/Proposal/Struktur.md",
-    "Latex/Proposal/template_TA_ITS/halaman-depan/00-Logo-ITS.png",
-    "Latex/Proposal/template_TA_ITS/halaman-depan/00-BGcover.jpg",
-    "Latex/Proposal/template_TA_ITS/gambar/flowchart.png",
-    "Latex/Proposal/template_TA_ITS/gambar/foto.png",
-    "Latex/Proposal/template_TA_ITS/gambar/contoh.png",
-    "Latex/Proposal/template_TA_ITS/README.md",
-    "Latex/Proposal/template_TA_ITS_main_fix_alief/halaman-depan/00-Logo-ITS.png",
-    "Latex/Proposal/template_TA_ITS_main_fix_alief/halaman-depan/00-BGcover.jpg",
-    "Latex/Proposal/template_TA_ITS_main_fix_alief/gambar/foto.png",
-    "Latex/Proposal/template_TA_ITS_main_fix_alief/gambar/flowchart.png",
-    "Latex/Proposal/template_TA_ITS_main_fix_alief/gambar/contoh.png",
-    "Latex/Proposal/template_TA_ITS_main_fix_alief/README.md",
-    "Latex/Proposal/Struktur 1.md",
-    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
-    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
-    "Latex/PakHeru_Presentasi3/diagram_parameter.md",
-    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
-    "Latex/PakGagus_Presentasi3/presentasi_analisis/Evaluasi.md",
-    "notes/PakGagus_Presentasi3/NP-hard.md",
-    "Untitled.md",
-    "notes/PakGagus_Presentasi3/von_neumann_entropy.md",
-    "notes/PakGagus_Presentasi3/QMI.md",
     "Von Neumann Entropy.md",
-    "notes/PakGagus_Presentasi3/ising_hamiltonian.md",
-    "notes/PakGagus_Presentasi3/risk_aversion_endogen.md",
-    "NP-hard.md",
-    "notes/PakGagus_Presentasi3/traveling_salesman_problem.md",
-    "Traveling Salesman Problem.md",
-    "Latex/PakGagus_Presentasi3/algoritma.md",
+    "Payoff.md",
+    "prompt.md.md",
+    "Latex/PakHeru_Presentasi4/Rencana_Penjelasan_VQE.md",
+    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+    "Latex/PakHeru_Presentasi2/rencana_presentasi2.md",
+    "Latex/PakHeru_Presentasi2/presentasi2_1/presentasi2_1.pdf",
+    "Latex/PakHeru_Presentasi2/presentasi2/presentasi2.pdf",
+    "Latex/PakHeru_Presentasi2/DeepDive_Bayesian_EWL.md",
+    "Latex/PakHeru_Presentasi2/Bayesian_game.md",
+    "Latex/PakHeru_Presentasi2/DeepDive_ChainStoreParadox.md",
+    "Latex/PakHeru_Presentasi2/EWL_game.md",
+    "Latex/PakHeru_Presentasi2/mermaid_graph.md",
+    "notes/VQE/Gate_Function.md",
+    "notes/jenis_optimasi_vqe.md",
+    "notes/Parameter_Shift_Rule.md",
+    "Parameter_Shift_Rule.md",
+    "notes/jenis_ansatz.md",
+    "Latex/PakHeru_Presentasi4/Prediktibilitas_Algoritma.synctex.gz",
+    "Latex/PakHeru_Presentasi4/Prediktibilitas_Algoritma.synctex(busy)",
+    "Latex/PakHeru_Presentasi4/pdflatex13942.fls",
+    "notes/Pennylane_Haar_Measurement.html",
+    "notes/VQE/Pennylane_Haar_Measurement.html",
+    "notes/VQE/IBM_Transpilation (Copy).html",
+    "Latex/Proposal/README.md",
+    "Latex/Proposal/pustaka.bib",
+    "Latex/Proposal/pengaturan.tex",
+    "Latex/Proposal/halaman-depan/00-Logo-ITS.png",
+    "Latex/Proposal/halaman-depan/00-BGcover.jpg",
+    "Latex/Proposal/gambar/foto.png",
+    "Latex/Proposal/gambar/flowchart.png",
+    "Latex/Proposal/gambar/contoh.png",
+    "notes/VQE/vqe.md",
+    "Latex/PakHeru_Presentasi4/Pseudocode_VQE.png",
+    "Latex/PakHeru_Presentasi4/Pasted image.png",
+    "notes/VQE/Pennylane_SPSA.md",
+    "Latex/PakHeru_Presentasi4/Pennylane_SPSA.md",
+    "notes/VQE/spsa.md",
+    "Latex/PakHeru_Presentasi4/spsa_mntn.png",
+    "Latex/PakHeru_Presentasi4/VQE_Materials_Theory.png",
+    "Latex/PakHeru_Presentasi4/Quantum_gates.png",
+    "paper84.md",
+    "Latex/Proposal/Struktur.md",
+    "Latex/Proposal/Struktur 1.md",
+    "Latex/Untitled.md",
+    "Latex/PakHeru_Presentasi4/Algorithm_for_Prediction.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
