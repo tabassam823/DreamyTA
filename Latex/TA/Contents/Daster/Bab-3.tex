@@ -1,0 +1,46 @@
+\chapter{Metodologi Penelitian}
+
+\section{Alur Penelitian}
+Penelitian ini dijalankan secara sistematis mengikuti tahapan yang terstruktur, mulai dari identifikasi masalah, studi literatur, pengumpulan data, konstruksi model, hingga tahap evaluasi dan penarikan kesimpulan. Secara visual, alur ini direpresentasikan dalam sebuah \textit{flowchart} penelitian.
+
+\section{Pengumpulan Data \& Pra-pemrosesan}
+Data yang digunakan dalam penelitian ini adalah data sekunder berupa harga historis aset yang tergabung dalam indeks LQ45.
+\begin{itemize}
+    \item \textbf{Sumber Data:} Akuisisi data dilakukan melalui API Yahoo Finance.
+    \item \textbf{Digitalisasi Data Finansial:} Transformasi \textit{log return} kontinu menjadi \textit{state} biner menggunakan teknik diskretisasi sebagai jembatan menuju sistem qubit.
+    \item \textbf{Laplace Smoothing:} Diterapkan untuk menstabilkan perhitungan probabilitas pada estimasi entropi dan korelasi.
+\end{itemize}
+
+\section{Konstruksi Model Permainan (Mapping Pipeline)}
+Tahap ini menjelaskan bagaimana data finansial dipetakan ke dalam model \textit{Quantum Game Theory}.
+\begin{itemize}
+    \item \textbf{Matriks Payoff:} Perhitungan nilai utilitas menggunakan fungsi objektif Markowitz dengan parameter risiko ($\lambda$) yang ditentukan secara endogen.
+    \item \textbf{Dinamika Stackelberg:} Identifikasi peran \textit{Leader} dan \textit{Follower} berdasarkan kapitalisasi pasar untuk memodelkan asimetri informasi.
+    \item \textbf{Ekstraksi Parameter Hamiltonian:} Menentukan nilai bias ($h_i$) dari \textit{marginal payoff} dan nilai interaksi ($J_{ij}$) berdasarkan \textit{Quantum Mutual Information} (QMI).
+    \item \textbf{Klasifikasi Rezim:} Identifikasi apakah interaksi aset cenderung bersifat kooperatif (\textit{Coordination}) atau kompetitif (\textit{Anti-Coordination}).
+\end{itemize}
+
+\section{Implementasi Kuantum \& Optimasi}
+Proses optimasi dilakukan menggunakan algoritma VQE pada simulator kuantum.
+\begin{itemize}
+    \item \textbf{Formulasi Hamiltonian:} Membangun Hamiltonian total yang terdiri dari \textit{Cost Hamiltonian} ($H_{cost} = \sum h_i Z_i + \sum J_{ij} Z_i Z_j$) dan \textit{Constraint Hamiltonian} untuk memastikan seleksi aset yang tepat.
+    \item \textbf{Konfigurasi VQE:} Penentuan kedalaman sirkuit (\textit{depth}), inisialisasi parameter, dan pengaturan jumlah sampling (\textit{shots}).
+    \item \textbf{Optimasi SPSA:} Pembaruan parameter sirkuit secara iteratif untuk meminimalkan nilai ekspektasi energi hingga mencapai konvergensi.
+\end{itemize}
+
+\section{Evaluasi dan Analisis Kinerja}
+Hasil optimasi dievaluasi untuk mengukur efektivitas model.
+\begin{itemize}
+    \item \textbf{Identifikasi State Optimal:} Ekstraksi \textit{bitstring} dengan probabilitas tertinggi sebagai representasi alokasi aset terbaik.
+    \item \textbf{Backtesting \& Slidng Window:} Analisis historis untuk mengamati perubahan alokasi aset terhadap peristiwa makroekonomi (\textit{regime shift}).
+    \item \textbf{Validasi Metrik:} Perbandingan kinerja antara strategi berbasis kuantum dengan strategi klasik menggunakan metrik \textit{Sharpe Ratio} dan \textit{Trend Ratio}.
+\end{itemize}
+
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+    \begin{center}
+	Halaman ini sengaja dikosongkan
+    \end{center}
+\vspace*{\fill}
+\pagebreak

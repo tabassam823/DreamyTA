@@ -4,67 +4,52 @@
     "type": "split",
     "children": [
       {
-        "id": "3e177722e3bf5682",
+        "id": "62edc0eb390402a9",
         "type": "tabs",
         "children": [
           {
-            "id": "fa0b80e23e837b3b",
+            "id": "e95127be1c0fc7cf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/VQE/Gate_Function.md",
+                "file": "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Gate_Function"
+              "title": "Adv_Gemini_plan"
             }
           },
           {
-            "id": "f06c2fee4c119b41",
+            "id": "cf9b3f1b7c0f90f4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/jenis_optimasi_vqe.md",
+                "file": "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "jenis_optimasi_vqe"
+              "title": "Rencana_revisi"
             }
           },
           {
-            "id": "352c40365d598a2c",
+            "id": "a44a8c1066e3fd27",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+                "file": "Latex/PakGagus_Presentasi3/rencana_presentasi_analisis_numerik.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hasil_gemini_adv"
-            }
-          },
-          {
-            "id": "c372efbd43152af0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Rencana_Game_Theory_Identification"
+              "title": "rencana_presentasi_analisis_numerik"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -76,7 +61,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 54.206896551724135,
+        "dimension": 54.20689655172414,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -97,7 +82,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "variational principle",
+                "query": "payoff ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -118,13 +103,12 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 45.793103448275865,
+        "dimension": 45.79310344827586,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -132,13 +116,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+                "file": "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of hasil_gemini_adv"
+              "title": "Outline of Adv_Gemini_plan"
             }
           }
         ]
@@ -263,54 +247,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "352c40365d598a2c",
+  "active": "e95127be1c0fc7cf",
   "lastOpenFiles": [
-    "Von Neumann Entropy.md",
-    "Payoff.md",
-    "prompt.md.md",
+    "Latex/TA/Images/Candle1.png",
+    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
+    "Latex/PakGagus_Presentasi3/rencana_presentasi_analisis_numerik.md",
+    "Latex/PakGagus_Presentasi3/rencana_kombinasi.md",
+    "Latex/PakGagus_Presentasi3/Perubahan.md",
+    "Latex/PakGagus_Presentasi3/algoritma.md",
+    "Latex/PakGagus_Presentasi3/backtest_plan.md",
+    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
+    "Latex/KajianAwal/Bab2/2.1.md",
+    "Latex/PakGagus_Presentasi1/rencana_presentasi1.md",
+    "Latex/PakGagus_Presentasi1/rencana_presentasi_konsep.md",
     "Latex/PakHeru_Presentasi4/Rencana_Penjelasan_VQE.md",
-    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
-    "Latex/PakHeru_Presentasi2/rencana_presentasi2.md",
-    "Latex/PakHeru_Presentasi2/presentasi2_1/presentasi2_1.pdf",
-    "Latex/PakHeru_Presentasi2/presentasi2/presentasi2.pdf",
-    "Latex/PakHeru_Presentasi2/DeepDive_Bayesian_EWL.md",
-    "Latex/PakHeru_Presentasi2/Bayesian_game.md",
-    "Latex/PakHeru_Presentasi2/DeepDive_ChainStoreParadox.md",
-    "Latex/PakHeru_Presentasi2/EWL_game.md",
-    "Latex/PakHeru_Presentasi2/mermaid_graph.md",
-    "notes/VQE/Gate_Function.md",
-    "notes/jenis_optimasi_vqe.md",
-    "notes/Parameter_Shift_Rule.md",
-    "Parameter_Shift_Rule.md",
-    "notes/jenis_ansatz.md",
-    "Latex/PakHeru_Presentasi4/Prediktibilitas_Algoritma.synctex.gz",
-    "Latex/PakHeru_Presentasi4/Prediktibilitas_Algoritma.synctex(busy)",
-    "Latex/PakHeru_Presentasi4/pdflatex13942.fls",
-    "notes/Pennylane_Haar_Measurement.html",
-    "notes/VQE/Pennylane_Haar_Measurement.html",
-    "notes/VQE/IBM_Transpilation (Copy).html",
+    "Latex/PakGagus_Presentasi4/one_by_one.ipynb",
+    "Latex/TA/Struktur.md",
+    "Latex/Struktur 1.md",
+    "Latex/Struktur.md",
+    "Latex/TA/main.blg",
+    "Latex/TA/main.lof",
+    "Latex/TA/main.toc",
+    "Latex/TA/main.out",
+    "Latex/TA/main.synctex(busy)",
+    "Latex/TA/main.log",
+    "Latex/TA/main.fls",
+    "Latex/TA/pdflatex50529.fls",
+    "Latex/TA/pdflatex50507.fls",
+    "Latex/TA/Struktur 1.md",
+    "Latex/TA_Template/TA/Images/foto_3x4.jpg",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Sierpinski Triangle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Otto Cycle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Carnot Cycle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Brayton Cycle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Piston & Movable Wall.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Pas Foto 3x4.jpg",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Ordinary Otto P vs r.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Ordinary Otto P vs Eta.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Ordinary Otto Eta vs r.png",
     "Latex/Proposal/README.md",
-    "Latex/Proposal/pustaka.bib",
-    "Latex/Proposal/pengaturan.tex",
-    "Latex/Proposal/halaman-depan/00-Logo-ITS.png",
-    "Latex/Proposal/halaman-depan/00-BGcover.jpg",
-    "Latex/Proposal/gambar/foto.png",
-    "Latex/Proposal/gambar/flowchart.png",
-    "Latex/Proposal/gambar/contoh.png",
-    "notes/VQE/vqe.md",
-    "Latex/PakHeru_Presentasi4/Pseudocode_VQE.png",
-    "Latex/PakHeru_Presentasi4/Pasted image.png",
-    "notes/VQE/Pennylane_SPSA.md",
-    "Latex/PakHeru_Presentasi4/Pennylane_SPSA.md",
-    "notes/VQE/spsa.md",
-    "Latex/PakHeru_Presentasi4/spsa_mntn.png",
-    "Latex/PakHeru_Presentasi4/VQE_Materials_Theory.png",
-    "Latex/PakHeru_Presentasi4/Quantum_gates.png",
-    "paper84.md",
+    "Latex/template_TA_ITS_main_fix_alief/README.md",
     "Latex/Proposal/Struktur.md",
     "Latex/Proposal/Struktur 1.md",
-    "Latex/Untitled.md",
-    "Latex/PakHeru_Presentasi4/Algorithm_for_Prediction.md",
+    "notes/VQE/Gate_Function.md",
+    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+    "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
+    "notes/jenis_optimasi_vqe.md",
+    "Von Neumann Entropy.md",
+    "Payoff.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
