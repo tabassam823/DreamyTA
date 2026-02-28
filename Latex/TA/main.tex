@@ -1,0 +1,78 @@
+\documentclass[12pt,a4paper]{book}
+
+\input{preamble}
+
+\begin{document}
+
+\begin{titlepage}
+    \input{Contents/BagianDepan/"Cover Luar.tex"}
+\end{titlepage}
+
+\backgroundsetup{
+    scale = 1,
+    angle = 0,
+    opacity = 1,
+    firstpage = false,
+    contents = {}
+}
+
+\newpage
+\thispagestyle{empty}
+\vfill
+\begin{center}
+    Halaman ini sengaja dikosongkan
+\end{center}
+\vfill
+\clearpage
+	
+\pagenumbering{roman}
+
+\addcontentsline{toc}{chapter}{Halaman Judul}
+\include{Contents/BagianDepan/Cover Dalam}
+
+\addcontentsline{toc}{chapter}{Lembar Pengesahan}
+\include{Contents/BagianDepan/Lembar Pengesahan 1}
+
+\addcontentsline{toc}{chapter}{Lembar Orisinalitas}
+\include{Contents/BagianDepan/Lembar Orisinalitas 1}
+
+\addcontentsline{toc}{chapter}{Abstrak}
+\include{Contents/Abstrak/Abstrak}
+
+\addcontentsline{toc}{chapter}{Abstract}
+\include{Contents/Abstrak/Abstract}
+
+\addcontentsline{toc}{chapter}{Kata Pengantar}
+\include{Contents/BagianDepan/Kata Pengantar}
+
+\tableofcontents
+\newpage
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
+\include{Contents/Daster/Bab-1}
+\include{Contents/Daster/Bab-2}
+\include{Contents/Daster/Bab-3}
+		
+\bibliographystyle{apacite}
+\bibliography{Referensi}
+	
+\newpage
+\thispagestyle{empty}
+\vfill
+\begin{center}
+    Halaman ini sengaja dikosongkan
+\end{center}
+\vfill
+\clearpage
+
+\begin{appendices}
+    \include{Contents/BagianBelakang/Lampiran-A} 
+\end{appendices}
+
+\thispagestyle{empty}
+\include{Contents/BagianBelakang/Biodata Penulis}
+
+\end{document}
