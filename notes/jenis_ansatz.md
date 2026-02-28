@@ -65,7 +65,7 @@ Karena `PauliTwoDesign` mendekati distribusi Haar (2-design), ia secara teoretis
 # Two Local
 
 `TwoLocal` adalah kerangka kerja (*framework*) umum dalam Qiskit untuk membangun ansatz heuristik yang terdiri dari layer rotasi satu-qubit dan layer keterbelitan dua-qubit. Sebenarnya, `RealAmplitudes` dan `EfficientSU2` adalah bentuk khusus dari `TwoLocal`.
-
+	
 ### 1. Definisi Matematis
 Secara umum, sebuah sirkuit `TwoLocal` didefinisikan sebagai urutan operator unitari:
 $$U(\theta) = \left( \prod_{i=1}^{d} W_i(\theta_{W,i}) L_i(\theta_{L,i}) \right) L_0(\theta_{L,0})$$

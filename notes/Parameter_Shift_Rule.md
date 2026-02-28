@@ -39,7 +39,13 @@ $$U(s) = e^{-i\frac{s}{2}\sigma} = \cos\left(\frac{s}{2}\right) I - i \sin\left(
 
 Evaluasi $E(\theta + s)$ di mana $s$ adalah pergeseran:
 $$E(\theta + s) = \langle \psi(\theta) | U^\dagger(s) M U(s) | \psi(\theta) \rangle$$
-`mengapa s hanya berpengaruh pada U saja dan tidak pada $\psi$`
+```mengapa s hanya berpengaruh pada U saja dan tidak pada $\psi$ ```
+> **Penjelasan:** Hal ini didasarkan pada sifat eksponensial operator unitari. Karena $U(\theta + s) = e^{-i\frac{\theta+s}{2}\sigma} = e^{-i\frac{s}{2}\sigma} e^{-i\frac{\theta}{2}\sigma} = U(s)U(\theta)$, maka kita dapat menuliskan:
+> $$E(\theta + s) = \langle \psi | U^\dagger(\theta) U^\dagger(s) M U(s) U(\theta) | \psi \rangle$$
+> Dengan mendefinisikan $|\psi(\theta)\rangle = U(\theta)|\psi\rangle$, persamaan di atas menjadi:
+> $$E(\theta + s) = \langle \psi(\theta) | U^\dagger(s) M U(s) | \psi(\theta) \rangle$$
+> Jadi, $s$ dianggap sebagai pergeseran lokal (rotasi tambahan) pada state yang sudah dipreparasi oleh parameter $\theta$.
+
 $$E(\theta + s) = \langle \psi(\theta) | (\cos\frac{s}{2} I + i \sin\frac{s}{2} \sigma) M (\cos\frac{s}{2} I - i \sin\frac{s}{2} \sigma) | \psi(\theta) \rangle$$
 
 Setelah melakukan ekspansi aljabar:
