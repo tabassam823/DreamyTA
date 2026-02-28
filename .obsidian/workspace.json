@@ -92,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -159,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/Struktur.md",
+                "file": "Latex/PakGagus_Presentasi4/one_by_one.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Struktur"
+              "title": "Outline of one_by_one"
             }
           }
         ]
@@ -290,15 +290,16 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "6ffd84a3d986af61",
+  "active": "cf9b3f1b7c0f90f4",
   "lastOpenFiles": [
+    "Latex/PakGagus_Presentasi4/one_by_one_q.md",
+    "Latex/Struktur.md",
     "notes/jenis_optimasi_vqe.md",
     "notes/jenis_ansatz.md",
     "Latex/PakGagus_Presentasi3/rencana_presentasi_analisis_numerik.md",
     "Latex/PakGagus_Presentasi4/one_by_one.md",
     "Latex/PakGagus_Presentasi4/jenis_optimasi_vqe.md",
     "Latex/PakGagus_Presentasi4/jenis_ansatz.md",
-    "Latex/PakGagus_Presentasi4/one_by_one_q.md",
     "Traveling Salesman Problem.md",
     "Von Neumann Entropy.md",
     "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
@@ -315,7 +316,6 @@
     "Latex/PakGagus_Presentasi4/one_by_one.ipynb",
     "Latex/TA/Struktur.md",
     "Latex/Struktur 1.md",
-    "Latex/Struktur.md",
     "Latex/TA/main.blg",
     "Latex/TA/main.lof",
     "Latex/TA/main.toc",
