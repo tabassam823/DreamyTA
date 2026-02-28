@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
+                "file": "Latex/PakGagus_Presentasi4/one_by_one_q.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Adv_Gemini_plan"
+              "title": "one_by_one_q"
             }
           },
           {
@@ -27,12 +27,54 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
+                "file": "Latex/PakGagus_Presentasi4/one_by_one.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Rencana_revisi"
+              "title": "one_by_one"
+            }
+          },
+          {
+            "id": "ca9d7c1fff7add65",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/jenis_ansatz.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "jenis_ansatz"
+            }
+          },
+          {
+            "id": "d79d15cc9a4694d9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/jenis_optimasi_vqe.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "jenis_optimasi_vqe"
+            }
+          },
+          {
+            "id": "6ffd84a3d986af61",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/Struktur.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Struktur"
             }
           },
           {
@@ -49,7 +91,8 @@
               "title": "rencana_presentasi_analisis_numerik"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -61,7 +104,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 54.20689655172414,
+        "dimension": 44.275862068965516,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -108,7 +151,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 45.79310344827586,
+        "dimension": 55.72413793103448,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -116,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
+                "file": "Latex/Struktur.md",
                 "followCursor": false,
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Adv_Gemini_plan"
+              "title": "Outline of Struktur"
             }
           }
         ]
@@ -247,16 +290,24 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "e95127be1c0fc7cf",
+  "active": "6ffd84a3d986af61",
   "lastOpenFiles": [
-    "Latex/TA/Images/Candle1.png",
-    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
+    "notes/jenis_optimasi_vqe.md",
+    "notes/jenis_ansatz.md",
     "Latex/PakGagus_Presentasi3/rencana_presentasi_analisis_numerik.md",
+    "Latex/PakGagus_Presentasi4/one_by_one.md",
+    "Latex/PakGagus_Presentasi4/jenis_optimasi_vqe.md",
+    "Latex/PakGagus_Presentasi4/jenis_ansatz.md",
+    "Latex/PakGagus_Presentasi4/one_by_one_q.md",
+    "Traveling Salesman Problem.md",
+    "Von Neumann Entropy.md",
+    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
+    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
+    "Latex/TA/Images/Candle1.png",
     "Latex/PakGagus_Presentasi3/rencana_kombinasi.md",
     "Latex/PakGagus_Presentasi3/Perubahan.md",
     "Latex/PakGagus_Presentasi3/algoritma.md",
     "Latex/PakGagus_Presentasi3/backtest_plan.md",
-    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
     "Latex/KajianAwal/Bab2/2.1.md",
     "Latex/PakGagus_Presentasi1/rencana_presentasi1.md",
     "Latex/PakGagus_Presentasi1/rencana_presentasi_konsep.md",
@@ -284,17 +335,9 @@
     "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Pas Foto 3x4.jpg",
     "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Ordinary Otto P vs r.png",
     "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Ordinary Otto P vs Eta.png",
-    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Ordinary Otto Eta vs r.png",
     "Latex/Proposal/README.md",
     "Latex/template_TA_ITS_main_fix_alief/README.md",
     "Latex/Proposal/Struktur.md",
-    "Latex/Proposal/Struktur 1.md",
-    "notes/VQE/Gate_Function.md",
-    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
-    "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
-    "notes/jenis_optimasi_vqe.md",
-    "Von Neumann Entropy.md",
-    "Payoff.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
