@@ -191,9 +191,9 @@ Kita dapat menyatukan matriks payoff individual menjadi matriks strategi gabunga
 | **$\ket{1}_L$ (Down)** | $(-0.008416, 0.001911)$ | $(-0.012949, -0.01679)$ |
 
 ### 2. Pasangan BBCA (Leader) - ASII (Follower)
-| BBCA \ ASII | $\ket{0}_F$ (Up) | $\ket{1}_F$ (Down) |
-| :--- | :---: | :---: |
-| **$\ket{0}_L$ (Up)** | $(0.000379, 0.002092)$ | $(0.002674, -0.009162)$ |
+| BBCA \ ASII            |    $\ket{0}_F$ (Up)     |    $\ket{1}_F$ (Down)    |
+| :--------------------- | :---------------------: | :----------------------: |
+| **$\ket{0}_L$ (Up)**   | $(0.000379, 0.002092)$  | $(0.002674, -0.009162)$  |
 | **$\ket{1}_L$ (Down)** | $(-0.007749, 0.002314)$ | $(-0.013675, -0.017807)$ |
 
 **Interpretasi:**
