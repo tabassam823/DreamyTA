@@ -46,7 +46,7 @@ def perform_backtest(data_clean, tickers, start_idx, rebalance_days, lookback_da
         
         next_idx = rebalance_indices[i+1] if i+1 < len(rebalance_indices) else len(data_clean)
         
-        selected_indices = run_strategy_step_fn(train_data, tickers, **strategy_kwargs)
+        selected_indices = run_strategy_step_fn(train_data, tickers, curr_date=curr_date.date(), is_first_decision=(i == 0), **strategy_kwargs)
         print(f"[{curr_date.date()}] VQE Terpilih: {[tickers[idx] for idx in selected_indices]}")
         
         target_w_vqe = np.zeros(len(tickers))

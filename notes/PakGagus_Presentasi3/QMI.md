@@ -3,7 +3,7 @@
 
 Dalam teori informasi kuantum, **QMI** adalah ukuran korelasi total (baik korelasi klasik maupun korelasi kuantum/entanglement) antara dua subsistem dalam sebuah sistem kuantum yang lebih besar.
 
-Jika kita memiliki dua buah spin (atau qubit) $i$ dan $j$, QMI di antara keduanya didefinisikan menggunakan **[[Von Neumann Entropy]] ($S$)**:
+Jika kita memiliki dua buah spin (atau qubit) $i$ dan $j$, QMI di antara keduanya didefinisikan menggunakan **[[Kritik]] ($S$)**:
 
 $$I(i:j) = S(
 ho_i) + S(

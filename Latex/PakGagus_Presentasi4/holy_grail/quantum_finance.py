@@ -9,10 +9,11 @@ def compute_endogenous_lambda(log_returns, tickers):
     mu_avg = abs(mu_annual).mean()
     sigma_avg = sigma_annual.mean()
     if np.isnan(mu_avg) or np.isnan(sigma_avg) or (mu_avg + sigma_avg) == 0:
-        return 0.5 
+        return 0.5, mu_annual, sigma_annual, mu_avg, sigma_avg
     # Sigmoid / Logistic function based on Sharpe Ratio
     Z = mu_avg / sigma_avg
-    return 1.0 / (1.0 + np.exp(Z))
+    lam = 1.0 / (1.0 + np.exp(Z))
+    return lam, mu_annual, sigma_annual, mu_avg, sigma_avg
 
 def calc_payoff(ret_A, ret_B, st_A, st_B, lam):
     pA, pB, counts = np.zeros((2, 2)), np.zeros((2, 2)), np.zeros((2, 2))
@@ -42,7 +43,10 @@ def calc_qmi(st_A, st_B):
         eig = np.real(la.eigvalsh(rho))
         eig = eig[eig > 1e-12]
         return -np.sum(eig * np.log(eig))
-    return svn(rho_L) + svn(rho_F) - svn(rho_LF)
+    
+    sL, sF, sLF = svn(rho_L), svn(rho_F), svn(rho_LF)
+    qmi = sL + sF - sLF
+    return qmi, rho_L, rho_F, rho_LF, sL, sF, sLF, prob_joint
 
 def build_hamiltonian(h, J, n_assets, K=2, penalty_A=5.0):
     coeffs = []

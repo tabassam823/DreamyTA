@@ -7,6 +7,19 @@ Penelitian ini dijalankan secara sistematis mengikuti tahapan yang terstruktur, 
 Data yang digunakan dalam penelitian ini adalah data sekunder berupa harga historis aset yang tergabung dalam indeks LQ45.
 \begin{itemize}
     \item \textbf{Sumber Data:} Akuisisi data dilakukan melalui API Yahoo Finance.
+    \vspace{0.5em}
+    \begin{itemize}
+        \item[] \textbf{Algoritma Akuisisi Data:}
+        \item[-] \textbf{Input:} Daftar \textit{ticker} saham ($T$), Tanggal mulai ($t_{start}$), Tanggal akhir ($t_{end}$).
+        \item[-] \textbf{Proses:} 
+            \begin{enumerate}[label=\arabic*.]
+                \item Unduh harga harian ($P$).
+                \item Hapus nilai kosong (\textit{drop NaN}).
+                \item Urutkan berdasarkan waktu.
+            \end{enumerate}
+        \item[-] \textbf{Output:} Matriks \textit{time-series} harga ($P$).
+    \end{itemize}
+    \vspace{0.5em}
     \item \textbf{Digitalisasi Data Finansial:} Transformasi \textit{log return} kontinu menjadi \textit{state} biner menggunakan teknik diskretisasi sebagai jembatan menuju sistem qubit.
     \item \textbf{Laplace Smoothing:} Diterapkan untuk menstabilkan perhitungan probabilitas pada estimasi entropi dan korelasi.
 \end{itemize}
@@ -14,18 +27,113 @@ Data yang digunakan dalam penelitian ini adalah data sekunder berupa harga histo
 \section{Konstruksi Model Permainan (Mapping Pipeline)}
 Tahap ini menjelaskan bagaimana data finansial dipetakan ke dalam model \textit{Quantum Game Theory}.
 \begin{itemize}
-    \item \textbf{Matriks Payoff:} Perhitungan nilai utilitas menggunakan fungsi objektif Markowitz dengan parameter risiko ($\lambda$) yang ditentukan secara endogen.
+    \item \textbf{Dinamika Parameter Risiko Endogen:} Penentuan parameter risiko ($\lambda$) yang adaptif.
+    \vspace{0.5em}
+    \begin{itemize}
+        \item[] \textbf{Algoritma Kalkulasi $\lambda$:}
+        \item[-] \textbf{Input:} \textit{Log return} historis ($R$).
+        \item[-] \textbf{Proses:}
+            \begin{enumerate}[label=\arabic*.]
+                \item Hitung rata-rata \textit{return} tahunan absolut ($\mu_{avg}$) dan volatilitas tahunan ($\sigma_{avg}$).
+                \item Evaluasi rasio performa: $Z = \frac{\mu_{avg}}{\sigma_{avg}}$.
+                \item Terapkan fungsi \textit{sigmoid}: $\lambda = \frac{1}{1 + e^Z}$.
+            \end{enumerate}
+        \item[-] \textbf{Output:} Parameter risiko adaptif $\lambda \in (0, 1)$.
+    \end{itemize}
+    \vspace{0.5em}
+
+    \item \textbf{Matriks Payoff:} Perhitungan nilai utilitas menggunakan kombinasi \textit{return} dan penalti volatilitas berbobot $\lambda$.
+    \vspace{0.5em}
+    \begin{itemize}
+        \item[] \textbf{Algoritma Kalkulasi Matriks Payoff Ekspektasi:}
+        \item[-] \textbf{Input:} Rangkaian \textit{state} aksi biner ($s_A, s_B \in \{0, 1\}$), \textit{return} ($R_A, R_B$), dan $\lambda$.
+        \item[-] \textbf{Proses:}
+            \begin{enumerate}[label=\arabic*.]
+                \item Inisialisasi matriks \textit{payoff} ($p_A, p_B$) berukuran $2 \times 2$ dengan nilai 0.
+                \item Untuk setiap observasi waktu $t$:
+                \begin{itemize}
+                    \item Identifikasi profil kejadian $(i, j) = (s_{A, t}, s_{B, t})$.
+                    \item Hitung utilitas sesaat: $u_{A, t} = (1-\lambda)R_{A, t} - \lambda |R_{A, t}|$.
+                    \item Akumulasi ke elemen matriks: $p_A[i, j] \mathrel{+}= u_{A, t}$ dan tambah penghitung frekuensi.
+                \end{itemize}
+                \item Normalisasi setiap sel $p_A[i, j]$ dengan total frekuensi kejadian $(i, j)$.
+            \end{enumerate}
+        \item[-] \textbf{Output:} Matriks \textit{payoff} pemain ($p_A, p_B$).
+    \end{itemize}
+    \vspace{0.5em}
+
     \item \textbf{Dinamika Stackelberg:} Identifikasi peran \textit{Leader} dan \textit{Follower} berdasarkan kapitalisasi pasar untuk memodelkan asimetri informasi.
-    \item \textbf{Ekstraksi Parameter Hamiltonian:} Menentukan nilai bias ($h_i$) dari \textit{marginal payoff} dan nilai interaksi ($J_{ij}$) berdasarkan \textit{Quantum Mutual Information} (QMI).
+    
+    \item \textbf{Ekstraksi Parameter Hamiltonian:} Menentukan nilai bias laten ($h_i$) dari margin \textit{payoff} dan nilai kopling ($J_{ij}$) berdasarkan ukuran jarak entropik (\textit{Quantum Mutual Information}).
+    \vspace{0.5em}
+    \begin{itemize}
+        \item[] \textbf{Algoritma Kalkulasi Hamiltonian $h_i$ (Bias):}
+        \item[-] \textbf{Input:} Matriks \textit{payoff} seluruh pasangan aset, jumlah total aset ($N$).
+        \item[-] \textbf{Proses:}
+            \begin{enumerate}[label=\arabic*.]
+                \item Untuk setiap iterasi agregasi pada aset ke-$i$:
+                \item Hitung selisih \textit{payoff} marginal dari probabilitas koordinasi matriks $p$: $(p[1,0] + p[1,1]) - (p[0,0] + p[0,1])$.
+                \item Rata-ratakan selisih dari seluruh pasangan yang melibatkan aset $i$.
+            \end{enumerate}
+        \item[-] \textbf{Output:} Vektor parameter bias sentral $h_i$.
+    \end{itemize}
+    \vspace{0.5em}
+    \begin{itemize}
+        \item[] \textbf{Algoritma Kalkulasi Interaksi QMI ($J_{ij}$):}
+        \item[-] \textbf{Input:} \textit{State} biner aset $A$ dan $B$ ($s_A, s_B$).
+        \item[-] \textbf{Proses:}
+            \begin{enumerate}[label=\arabic*.]
+                \item Hitung probabilitas gabungan \textit{Laplace-smoothed} untuk setiap kuadran keadaan $\rho_{AB} = \text{diag}(\dots)$.
+                \item Lakukan reduksi untuk mendapatkan \textsl{reduced density matrix} marjinal $\rho_A = \text{tr}_B(\rho_{AB})$ dan $\rho_B = \text{tr}_A(\rho_{AB})$.
+                \item Hitung entropi Von Neumann: $S(\rho) = -\sum \lambda_k \ln(\lambda_k)$ untuk \textit{eigenvalue} $\lambda_k > 0$.
+                \item Ekstrak QMI: $J_{ij} = S(\rho_A) + S(\rho_B) - S(\rho_{AB})$.
+            \end{enumerate}
+        \item[-] \textbf{Output:} Nilai kopling keterikatan $J_{ij}$.
+    \end{itemize}
+    \vspace{0.5em}
+
     \item \textbf{Klasifikasi Rezim:} Identifikasi apakah interaksi aset cenderung bersifat kooperatif (\textit{Coordination}) atau kompetitif (\textit{Anti-Coordination}).
 \end{itemize}
 
 \section{Implementasi Kuantum \& Optimasi}
 Proses optimasi dilakukan menggunakan algoritma VQE pada simulator kuantum.
 \begin{itemize}
-    \item \textbf{Formulasi Hamiltonian:} Membangun Hamiltonian total yang terdiri dari \textit{Cost Hamiltonian} ($H_{cost} = \sum h_i Z_i + \sum J_{ij} Z_i Z_j$) dan \textit{Constraint Hamiltonian} untuk memastikan seleksi aset yang tepat.
-    \item \textbf{Konfigurasi VQE:} Penentuan kedalaman sirkuit (\textit{depth}), inisialisasi parameter, dan pengaturan jumlah sampling (\textit{shots}).
-    \item \textbf{Optimasi SPSA:} Pembaruan parameter sirkuit secara iteratif untuk meminimalkan nilai ekspektasi energi hingga mencapai konvergensi.
+    \item \textbf{Formulasi Hamiltonian Pembatas:} Agregasi operator observasi kuantum menjadi bentuk energi total dengan batasan kardinalitas.
+    \vspace{0.5em}
+    \begin{itemize}
+        \item[] \textbf{Algoritma Penempatan Hamiltonian:}
+        \item[-] \textbf{Input:} Vektor bias $h$, matriks interaksi $J$, batas alokasi $K$, faktor penalti $A$.
+        \item[-] \textbf{Proses:}
+            \begin{enumerate}[label=\arabic*.]
+                \item Tempatkan operator lokal Pauli-$Z_i$ berbobot skalar $h_i$ untuk setiap basis aset.
+                \item Tempatkan pasangan operator ikatan berbobot $J_{ij}Z_i Z_j$.
+                \item Injeksi konstanta pembatas global $A \times I$.
+                \item Aplikasikan penalti pada setiap elemen sekuensial $\frac{A}{2} Z_i Z_j$.
+            \end{enumerate}
+        \item[-] \textbf{Output:} Hamiltonian komputasional $H$.
+    \end{itemize}
+    \vspace{0.5em}
+
+    \item \textbf{Konfigurasi dan Eksekusi VQE dengan Optimasi SPSA:} Transformasi ising ke sirkuit parametrik kuantum hingga mendapatkan konfigurasi optimal.
+    \vspace{0.5em}
+    \begin{itemize}
+        \item[] \textbf{Algoritma VQE-SPSA:}
+        \item[-] \textbf{Input:} Operator Hamiltonian $H$, jumlah \textit{qubits} (aset), batas kedalaman \textit{ansatz} (\textit{depth}=1).
+        \item[-] \textbf{Proses:}
+            \begin{enumerate}[label=\arabic*.]
+                \item Deklarasikan arsitektur variatif (\textit{hardware-efficient ansatz}): Rotasi $RY$ dan $RZ$ diikuti cincin \textit{entanglement} $CNOT$.
+                \item Inisialisasi sudut rotasi $\vec{\theta}$ secara acak $\mathcal{U}(0, 2\pi)$.
+                \item Untuk siklus evaluasi konvergensi $k$:
+                \begin{itemize}
+                    \item Bangkitkan arah perturbasi stokastik biner $\vec{\Delta}_{k} \in \{-1, +1\}^m$.
+                    \item Evaluasi gradien aproksimasi simetris: 
+                    $g_k = \frac{\langle H(\vec{\theta} + c_k\vec{\Delta}_{k}) \rangle - \langle H(\vec{\theta} - c_k\vec{\Delta}_{k}) \rangle}{2 c_k \vec{\Delta}_{k}}$
+                    \item Perbarui sudut rotasi: $\vec{\theta} \mathrel{-}= a_k g_k$.
+                \end{itemize}
+                \item Ekstraksi probabilitas densitas pada bentuk gelombang (\textit{probability distribution}) dengan jumlah aset dipilih $= K$.
+            \end{enumerate}
+        \item[-] \textbf{Output:} Subset indeks aset bernilai \textit{state} `1' berprobabilitas tertinggi.
+    \end{itemize}
 \end{itemize}
 
 \section{Evaluasi dan Analisis Kinerja}
