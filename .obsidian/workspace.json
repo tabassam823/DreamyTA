@@ -69,30 +69,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Parameter_Shift_Rule.md",
+                "file": "notes/MPT_Markowitz.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Parameter_Shift_Rule"
+              "title": "MPT_Markowitz"
             }
           },
           {
-            "id": "352c40365d598a2c",
+            "id": "0d678814fdec1dcc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Variational_Principle.md",
+                "file": "notes/QMI.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Variational_Principle"
+              "title": "QMI"
             }
           },
           {
-            "id": "640268a12fb74c84",
+            "id": "2113a2a89f488bca",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -104,9 +104,23 @@
               "icon": "lucide-file",
               "title": "Lagrange_Multiplier"
             }
+          },
+          {
+            "id": "0d0ad082ca7a27be",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Variational_Principle.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Variational_Principle"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -139,7 +153,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "Variational_",
+                "query": "qmi.md",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -173,13 +187,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Parameter_Shift_Rule.md",
+                "file": "notes/Variational_Principle.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Parameter_Shift_Rule"
+              "title": "Outline of Variational_Principle"
             }
           }
         ]
@@ -304,54 +318,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "f06c2fee4c119b41",
+  "active": "0d0ad082ca7a27be",
   "lastOpenFiles": [
+    "notes/Lagrange_Multiplier.md",
+    "notes/Bias_Interaction_GT.md",
+    "notes/ising_hamiltonian.md",
+    "notes/QMI.md",
+    "notes/MPT_Markowitz.md",
     "notes/jenis_optimasi_vqe.md",
+    "notes/Variational_Principle.md",
+    "notes/PakGagus_Presentasi3/QMI.md",
+    "notes/von_neumann_entropy.md",
+    "notes/traveling_salesman_problem.md",
+    "notes/risk_aversion_endogen.md",
+    "notes/NP-hard.md",
+    "notes/Parameter_Shift_Rule.md",
+    "Latex/TA/Contents/Daster/Bab-5.tex",
+    "Latex/TA/Contents/Daster/Bab-4.tex",
+    "Latex/TA/Contents/Daster/Bab-3.tex",
+    "Latex/TA/Contents/Daster/Bab-2.tex",
+    "Latex/TA/Contents/Daster/Bab-1.tex",
+    "Latex/TA/Contents/BagianDepan/uraiansingkat.tex",
+    "Latex/TA/Contents/BagianDepan/pengesahan.tex",
+    "Latex/TA/Contents/BagianDepan/Lembar Pengesahan.tex",
+    "Latex/TA/Contents/BagianDepan/Lembar Pengesahan 1.tex",
+    "Latex/TA/Contents/BagianDepan/Lembar Orisinalitas.tex",
+    "Latex/TA/Images/foto_3x4.jpg",
+    "Latex/TA/Images/Candle1.png",
+    "Latex/Struktur.md",
+    "Latex/Struktur 1.md",
+    "Latex/PakGagus_Presentasi4/one_by_one_q.md",
+    "Latex/PakGagus_Presentasi4/one_by_one.md",
+    "Latex/PakGagus_Presentasi4/jenis_optimasi_vqe.md",
+    "Latex/PakGagus_Presentasi4/jenis_ansatz.md",
     "notes/TwoLocal_to_EfficientSU2.md",
     "notes/jenis_ansatz.md",
     "notes/VQE/Gate_Function.md",
-    "notes/Lagrange_Multiplier.md",
     "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
-    "notes/Variational_Principle.md",
-    "notes/Parameter_Shift_Rule.md",
     "Latex/PakHeru_Presentasi4/Rencana_Penjelasan_VQE.md",
     "Latex/Proposal/Struktur.md",
     "notes/linear_operators_and_matrices.md",
-    "notes/Marinatto_Weber.pdf",
-    "notes/Paper_Achieving.pdf",
-    "notes/Paper_Quantum_adv_Bayesian_game.pdf",
-    "notes/Paper_Quantum_Econophysics.pdf",
-    "Latex/PakHeru_Presentasi1/hasil_gemini_adv.md",
-    "Von Neumann Entropy.md",
-    "Payoff.md",
-    "prompt.md.md",
-    "Latex/PakHeru_Presentasi2/rencana_presentasi2.md",
-    "Latex/PakHeru_Presentasi2/presentasi2_1/presentasi2_1.pdf",
-    "Latex/PakHeru_Presentasi2/presentasi2/presentasi2.pdf",
-    "Latex/PakHeru_Presentasi2/DeepDive_Bayesian_EWL.md",
-    "Latex/PakHeru_Presentasi2/Bayesian_game.md",
-    "Latex/PakHeru_Presentasi2/DeepDive_ChainStoreParadox.md",
-    "Latex/PakHeru_Presentasi2/EWL_game.md",
-    "Latex/PakHeru_Presentasi2/mermaid_graph.md",
-    "Parameter_Shift_Rule.md",
-    "Latex/PakHeru_Presentasi4/Prediktibilitas_Algoritma.synctex.gz",
-    "Latex/PakHeru_Presentasi4/Prediktibilitas_Algoritma.synctex(busy)",
-    "Latex/PakHeru_Presentasi4/pdflatex13942.fls",
-    "notes/Pennylane_Haar_Measurement.html",
-    "Latex/Proposal/README.md",
     "Latex/Proposal/halaman-depan/00-Logo-ITS.png",
     "Latex/Proposal/halaman-depan/00-BGcover.jpg",
     "Latex/Proposal/gambar/foto.png",
     "Latex/Proposal/gambar/flowchart.png",
     "Latex/Proposal/gambar/contoh.png",
-    "notes/VQE/vqe.md",
     "Latex/PakHeru_Presentasi4/Pseudocode_VQE.png",
     "Latex/PakHeru_Presentasi4/Pasted image.png",
-    "notes/VQE/Pennylane_SPSA.md",
-    "Latex/PakHeru_Presentasi4/Pennylane_SPSA.md",
     "Latex/PakHeru_Presentasi4/spsa_mntn.png",
-    "Latex/PakHeru_Presentasi4/VQE_Materials_Theory.png",
-    "Latex/PakHeru_Presentasi4/Quantum_gates.png",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
