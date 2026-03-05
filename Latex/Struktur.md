@@ -39,23 +39,42 @@ dokumen ini adalah struktur proposal yang berisi bagian, bab, subbab, dan poin-p
     - **Siklus Ekonomi:** Fase Ekspansi, Puncak (Peak), Kontraksi, dan Palung (Trough).
     - **Klasifikasi Aset (Defensif vs Siklikal):** Karakteristik saham berbasis sensitivitas terhadap suku bunga dan daya beli (misal: Finance vs Consumer).
     - **Strategi Alokasi:** Pergeseran aset (Saham, Obligasi, Kas) dalam merespon kebijakan makro (Rotasi Sektoral).
-- **Modern Portfolio Theory (MPT):** Konsep Efficient Frontier dan optimalitas alokasi aset klasik.
 
-## 2.3 Game Theory (Klasik)
+## 2.3 Modern Portfolio Theory (MPT) & Pemetaan Ising Hamiltonian
+- **Fondasi Mean-Variance Optimization:**
+    - Definisi *Expected Return* ($\mu$) dan *Risk* (Matriks Kovarians $\Sigma$).
+    - Konsep *Efficient Frontier* dan optimalitas alokasi aset klasik.
+- **Matematika Model Markowitz:**
+    - Perhitungan *Logarithmic Returns* ($R_t$) dan Volatilitas Aset.
+    - Struktur Matriks Kovarians: Varians individu ($\sigma_i^2$) dan korelasi antar aset ($\sigma_{ij}$).
+- **Formulasi Fungsi Biaya (Cost Function) sebagai Energi Sistem:**
+    - Integrasi Resiko Total, Bobot Return, dan Parameter *Risk Aversion* ($\lambda$).
+    - Implementasi $\lambda$ Endogen sebagai fungsi penyeimbang resiko dan return.
+    - Penambahan Suku Penalti (Penalty Term) untuk kendala pemilihan tepat $K$ aset dari $N$ pilihan.
+- **Transformasi Masalah ke QUBO (Quadratic Unconstrained Binary Optimization):**
+    - Ekspansi kuadratik dari fungsi biaya Markowitz menjadi bentuk polinomial.
+    - Pemetaan variabel keputusan kontinu ke ruang biner ($x_i \in \{0,1\}$).
+    - Ekstraksi koefisien Linear ($C_i$) dan Quadratic ($Q_{ij}$) sebagai representasi matriks QUBO.
+- **Konversi QUBO ke Model Ising:**
+    - Transformasi variabel biner ke variabel spin ($x_i \to s_i$) melalui relasi $x_i = \frac{1-s_i}{2}$.
+    - Penurunan matematis parameter Hamiltonian Ising: Bias ($h_i$) dan Interaksi ($J_{ij}$).
+    - Representasi Hamiltonian dalam bentuk Operator Pauli-Z ($\sigma^z$) untuk kesiapan komputasi kuantum.
+
+## 2.4 Game Theory (Klasik)
 - **Definisi & Model Matematika:** Payoff Matrix, Nash Equilibrium, dan Pareto Optimum.
 - **Klasifikasi Permainan:** Coordination, Anti-Coordination, dan Mixed Strategy Game.
 - **Model Strategis Sekuensial:**
     - **Prisoner's Dilemma:** Analogi kegagalan pasar/bearish market.
     - **Model Stackelberg:** Dinamika Leader-Follower, asimetri informasi, dan logika *Backward Induction*.
 
-## 2.4 Teori Informasi Kuantum & Game Theory
+## 2.5 Teori Informasi Kuantum & Game Theory
 - **Konsep Encoding Klasik ke Kuantum:** Representasi informasi klasik pada qubit melalui superposisi dan probabilitas kuantum.
 - **Kuantisasi EWL (Eisert-Wilkens-Lewenstein):** Operator Entangling ($\hat{J}$) dan strategi Unitary.
 - **Matriks Densitas ($\rho$):** Representasi keadaan statistik sistem aset.
 - **Von Neumann Entropy:** Pengukuran ketidakpastian dalam sistem kuantum ($S = -\text{Tr}(\rho \ln \rho)$).
 - **Quantum Mutual Information (QMI):** Pengukuran korelasi total antar aset melalui sharing information.
 
-## 2.5 Quantum Algorithm (VQE)
+## 2.6 Quantum Algorithm (VQE)
 - **Dasar Matematika:** Persamaan Eigen ($H|\psi\rangle = E|\psi\rangle$) dan Prinsip Variasi.
 - **Variational Quantum Eigensolver:**
     - Algoritma hibrid sebagai pencari Ground State (strategi optimal).
