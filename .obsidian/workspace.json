@@ -4,53 +4,53 @@
     "type": "split",
     "children": [
       {
-        "id": "3e177722e3bf5682",
+        "id": "62edc0eb390402a9",
         "type": "tabs",
         "children": [
           {
-            "id": "fa0b80e23e837b3b",
+            "id": "e95127be1c0fc7cf",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/VQE/Gate_Function.md",
+                "file": "Latex/PakGagus_Presentasi4/one_by_one_q.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Gate_Function"
+              "title": "one_by_one_q"
             }
           },
           {
-            "id": "5a837120a5ab7d6c",
+            "id": "cf9b3f1b7c0f90f4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/jenis_ansatz.md",
+                "file": "Kritik.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "jenis_ansatz"
+              "title": "Kritik"
             }
           },
           {
-            "id": "c9a8958c1d3ef816",
+            "id": "ca9d7c1fff7add65",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/TwoLocal_to_EfficientSU2.md",
+                "file": "Latex/Struktur.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TwoLocal_to_EfficientSU2"
+              "title": "Struktur"
             }
           },
           {
-            "id": "612b8c55b9deb6a0",
+            "id": "d79d15cc9a4694d9",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -64,63 +64,35 @@
             }
           },
           {
-            "id": "f06c2fee4c119b41",
+            "id": "6ffd84a3d986af61",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/MPT_Markowitz.md",
+                "file": "Latex/Struktur.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "MPT_Markowitz"
+              "title": "Struktur"
             }
           },
           {
-            "id": "0d678814fdec1dcc",
+            "id": "a44a8c1066e3fd27",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/QMI.md",
+                "file": "Latex/PakGagus_Presentasi3/rencana_presentasi_analisis_numerik.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "QMI"
-            }
-          },
-          {
-            "id": "2113a2a89f488bca",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Lagrange_Multiplier.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Lagrange_Multiplier"
-            }
-          },
-          {
-            "id": "0d0ad082ca7a27be",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Variational_Principle.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Variational_Principle"
+              "title": "rencana_presentasi_analisis_numerik"
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -132,7 +104,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 54.20689655172414,
+        "dimension": 72.41379310344827,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -153,7 +125,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "qmi.md",
+                "query": "payoff ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -179,7 +151,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 45.79310344827586,
+        "dimension": 27.586206896551722,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -187,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Variational_Principle.md",
+                "file": "Latex/Struktur.md",
                 "followCursor": false,
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Variational_Principle"
+              "title": "Outline of Struktur"
             }
           }
         ]
@@ -318,54 +290,53 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "0d0ad082ca7a27be",
+  "active": "ca9d7c1fff7add65",
   "lastOpenFiles": [
-    "notes/Lagrange_Multiplier.md",
-    "notes/Bias_Interaction_GT.md",
-    "notes/ising_hamiltonian.md",
-    "notes/QMI.md",
-    "notes/MPT_Markowitz.md",
-    "notes/jenis_optimasi_vqe.md",
-    "notes/Variational_Principle.md",
-    "notes/PakGagus_Presentasi3/QMI.md",
-    "notes/von_neumann_entropy.md",
-    "notes/traveling_salesman_problem.md",
-    "notes/risk_aversion_endogen.md",
-    "notes/NP-hard.md",
-    "notes/Parameter_Shift_Rule.md",
-    "Latex/TA/Contents/Daster/Bab-5.tex",
-    "Latex/TA/Contents/Daster/Bab-4.tex",
-    "Latex/TA/Contents/Daster/Bab-3.tex",
-    "Latex/TA/Contents/Daster/Bab-2.tex",
-    "Latex/TA/Contents/Daster/Bab-1.tex",
-    "Latex/TA/Contents/BagianDepan/uraiansingkat.tex",
-    "Latex/TA/Contents/BagianDepan/pengesahan.tex",
-    "Latex/TA/Contents/BagianDepan/Lembar Pengesahan.tex",
-    "Latex/TA/Contents/BagianDepan/Lembar Pengesahan 1.tex",
-    "Latex/TA/Contents/BagianDepan/Lembar Orisinalitas.tex",
-    "Latex/TA/Images/foto_3x4.jpg",
-    "Latex/TA/Images/Candle1.png",
-    "Latex/Struktur.md",
-    "Latex/Struktur 1.md",
-    "Latex/PakGagus_Presentasi4/one_by_one_q.md",
+    "notes/jenis_ansatz.md",
+    "Kritik.md",
     "Latex/PakGagus_Presentasi4/one_by_one.md",
+    "paper/QMI_QNN.pdf",
+    "paper/EfficientSU2_SPSA.pdf",
+    "paper/QMI_Ising.pdf",
+    "paper/QMI_vns.pdf",
+    "paper/Exploring_new_variational_quantum_circuit_ansatzes_for_solving_SU2_matrix_models.pdf",
+    "paper/Estimating_quantum_mutual_information_through_a_quantum_neural_network.pdf",
+    "Latex/PakGagus_Presentasi3/presentasi_analisis/backtest_vqe_portfolio.png",
+    "Latex/PakGagus_Presentasi4/backtest_vqe_portfolio.png",
+    "Latex/PakGagus_Presentasi4/Holy_Grail_Expln.py",
+    "Latex/PakGagus_Presentasi4/one_by_one_q.md",
+    "Latex/PakGagus_Presentasi3/rencana_presentasi_analisis_numerik.md",
+    "Untitled.md",
+    "Latex/PakGagus_Presentasi4/holy_grail/main.py",
+    "Latex/PakGagus_Presentasi4/holy_grail/backtest.py",
+    "Latex/PakGagus_Presentasi4/holy_grail/strategy.py",
+    "Latex/Struktur.md",
+    "notes/jenis_optimasi_vqe.md",
     "Latex/PakGagus_Presentasi4/jenis_optimasi_vqe.md",
     "Latex/PakGagus_Presentasi4/jenis_ansatz.md",
-    "notes/TwoLocal_to_EfficientSU2.md",
-    "notes/jenis_ansatz.md",
-    "notes/VQE/Gate_Function.md",
-    "Latex/PakHeru_Presentasi3/Rencana_Game_Theory_Identification.md",
+    "Traveling Salesman Problem.md",
+    "Latex/PakGagus_Presentasi4/Rencana_revisi.md",
+    "Latex/PakHeru_Presentasi3/Adv_Gemini_plan.md",
+    "Latex/TA/Images/Candle1.png",
+    "Latex/PakGagus_Presentasi3/rencana_kombinasi.md",
+    "Latex/PakGagus_Presentasi3/Perubahan.md",
+    "Latex/PakGagus_Presentasi3/algoritma.md",
+    "Latex/PakGagus_Presentasi3/backtest_plan.md",
+    "Latex/KajianAwal/Bab2/2.1.md",
+    "Latex/PakGagus_Presentasi1/rencana_presentasi1.md",
+    "Latex/PakGagus_Presentasi1/rencana_presentasi_konsep.md",
     "Latex/PakHeru_Presentasi4/Rencana_Penjelasan_VQE.md",
-    "Latex/Proposal/Struktur.md",
-    "notes/linear_operators_and_matrices.md",
-    "Latex/Proposal/halaman-depan/00-Logo-ITS.png",
-    "Latex/Proposal/halaman-depan/00-BGcover.jpg",
-    "Latex/Proposal/gambar/foto.png",
-    "Latex/Proposal/gambar/flowchart.png",
-    "Latex/Proposal/gambar/contoh.png",
-    "Latex/PakHeru_Presentasi4/Pseudocode_VQE.png",
-    "Latex/PakHeru_Presentasi4/Pasted image.png",
-    "Latex/PakHeru_Presentasi4/spsa_mntn.png",
+    "Latex/TA/Struktur.md",
+    "Latex/Struktur 1.md",
+    "Latex/TA/Struktur 1.md",
+    "Latex/TA_Template/TA/Images/foto_3x4.jpg",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Sierpinski Triangle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Otto Cycle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Carnot Cycle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Brayton Cycle.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Piston & Movable Wall.png",
+    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Pas Foto 3x4.jpg",
+    "Latex/Proposal/README.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
