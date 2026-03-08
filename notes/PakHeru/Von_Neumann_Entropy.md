@@ -14,10 +14,7 @@ Dalam mekanika kuantum, keadaan sistem dideskripsikan oleh **matriks densitas** 
 
 **Entropi Von Neumann ($S$)** didefinisikan sebagai:
 
-$$S(
-ho) = -	\text{Tr}(
-ho \ln 
-ho)$$
+$$S(\rho) = -	\text{Tr}(\rho \ln \rho)$$
 
 Jika kita melakukan dekomposisi spektral pada $ho$ sedemikian sehingga $ho = \sum_i \lambda_i |i \rangle\langle i|$, di mana $\lambda_i$ adalah nilai eigen (eigenvalues) dari $ho$, maka rumus di atas dapat ditulis sebagai:
 
@@ -42,10 +39,7 @@ Sebagai mahasiswa fisika dan matematika, Anda harus memperhatikan sifat-Sifat be
 
 Salah satu aplikasi paling krusial dari Entropi Von Neumann adalah untuk mengukur korelasi total antara dua bagian sistem ($A$ dan $B$).
 
-$$I(A:B) = S(
-ho_A) + S(
-ho_B) - S(
-ho_{AB})$$
+$$I(A:B) = S(\rho_A) + S(\rho_B) - S(\rho_{AB})$$
 
 Dalam konteks **Model Ising**, jika kita ingin mencari parameter interaksi $J_{ij}$ antara spin $i$ dan $j$:
 1.  Kita menghitung matriks densitas terreduksi $ho_{ij}$ dari *ground state* Hamiltonian.
@@ -55,8 +49,7 @@ Dalam konteks **Model Ising**, jika kita ingin mencari parameter interaksi $J_{i
 ## 5. Hubungan dengan Termodinamika
 
 Dalam mekanika statistik kuantum, untuk ansambel kanonik pada suhu $T$, matriks densitasnya adalah:
-$$
-ho = \frac{e^{-\beta H}}{Z}$$
+$$\rho = \frac{e^{-\beta H}}{Z}$$
 di mana $\beta = 1/k_BT$ dan $Z = 	ext{Tr}(e^{-\beta H})$ adalah fungsi partisi.
 
 Jika kita substitusikan $ho$ ini ke dalam rumus Von Neumann:

@@ -1,4 +1,4 @@
-# Parameter Shift Rule (PSR)
+=# Parameter Shift Rule (PSR)
 
 Parameter Shift Rule adalah teknik fundamental dalam komputasi kuantum variabel (Variational Quantum Circuits) untuk menghitung gradien eksak dari nilai ekspektasi terhadap parameter sirkuit. Berbeda dengan *finite difference* yang hanya memberikan estimasi, PSR memberikan nilai gradien yang analitik dan eksak.
 
