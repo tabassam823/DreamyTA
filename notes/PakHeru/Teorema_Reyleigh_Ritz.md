@@ -1,79 +1,86 @@
 # Teorema Rayleigh-Ritz: Fondasi Matematis Prinsip Variasi
 
-Teorema Rayleigh-Ritz adalah pilar utama dalam analisis numerik dan mekanika kuantum yang memungkinkan kita untuk mengestimasi nilai eigen (terutama nilai eigen terkecil) dari sebuah operator tanpa harus melakukan diagonalisasi matriks secara langsung. Teorema ini menjadi alasan mengapa VQE (Variational Quantum Eigensolver) dapat bekerja.
+Dokumen ini menjelaskan bagaimana masalah mencari solusi persamaan Schrodinger diubah menjadi masalah optimasi fungsional menggunakan Kalkulus Variasi.
+
+## 1. Filosofi: Kecenderungan Alam Meminimalkan Energi
+Dalam fisika, sistem selalu cenderung menuju kondisi dengan energi terendah (*Ground State*). **Prinsip Variasi** adalah alat matematika yang memungkinkan kita "menebak" kondisi tersebut dengan jaminan bahwa tebakan kita tidak akan pernah lebih rendah dari kenyataan alam semesta.
 
 ---
 
-## 1. Definisi Matematis dalam Aljabar Linear
+## 2. Kalkulus Variasi: Mencari Titik Stasioner Energi
+Bayangkan energi sistem bukan sebagai angka, melainkan sebagai sebuah **fungsional** $E[\psi]$ yang bergantung pada bentuk fungsi gelombang (atau state) $|\psi\rangle$.
 
-Misalkan $A$ adalah sebuah matriks Hermitian (dalam kuantum, ini adalah Hamiltonian $\hat{H}$) berukuran $n \times n$. Karena $A$ Hermitian, maka:
-1.  Semua nilai eigennya adalah riil: $\lambda_0 \le \lambda_1 \le \dots \le \lambda_{n-1}$.
-2.  Vektor-vektor eigennya $\{|v_0\rangle, |v_1\rangle, \dots, |v_{n-1}\rangle\}$ membentuk basis ortonormal.
+### A. Definisi Fungsional Energi
+Energi rata-rata dari sebuah sistem didefinisikan sebagai hasil bagi Rayleigh:
+$$ E(\psi) = \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle} \qquad (1) $$
 
-### Hasil Bagi Rayleigh (Rayleigh Quotient)
-Untuk setiap vektor non-nol $|\psi\rangle \in \mathbb{C}^n$, Hasil Bagi Rayleigh didefinisikan sebagai:
-$$ R(A, \psi) = \frac{\langle \psi | A | \psi \rangle}{\langle \psi | \psi \rangle} $$
+> **Visualisasi (1): Jembatan Logika**
+> Mengapa kita membagi dengan $\langle \psi | \psi \rangle$? Karena kita ingin memastikan nilai energi tidak bergantung pada "panjang" vektor $|\psi\rangle$ (normalisasi). 
+> Jika $|\psi\rangle$ sudah ternormalisasi ($\langle \psi | \psi \rangle = 1$), maka $E(\psi) = \langle \psi | \hat{H} | \psi \rangle$.
 
-**Pernyataan Teorema:**
-Nilai dari $R(A, \psi)$ selalu berada di antara nilai eigen terkecil dan terbesar dari $A$:
-$$ \lambda_{\min} \le \frac{\langle \psi | A | \psi \rangle}{\langle \psi | \psi \rangle} \le \lambda_{\max} $$
+### B. Variasi Fungsional ($\delta E = 0$)
+Untuk mencari energi minimum, kita lakukan variasi kecil terhadap $|\psi\rangle$ dan menetapkan perubahannya menjadi nol.
+$$ \delta E = \delta \left[ \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle} \right] = 0 \qquad (2) $$
 
----
-
-## 2. Pembuktian Formal (Derivasi Runtut)
-
-Untuk memahami mengapa ini selalu benar, kita gunakan sifat basis dari vektor eigen.
-
-### Langkah 1: Ekspansi Vektor Trial
-Sembarang vektor $|\psi\rangle$ dapat dinyatakan sebagai kombinasi linear dari vektor eigen $|v_i\rangle$:
-$$ |\psi\rangle = \sum_{i=0}^{n-1} c_i |v_i\rangle $$
-di mana $c_i = \langle v_i | \psi \rangle$ adalah amplitudo probabilitas.
-
-### Langkah 2: Hitung Produk Dalam (Normalisasi)
-$$ \langle \psi | \psi \rangle = \left( \sum_j c_j^* \langle v_j | \right) \left( \sum_i c_i |v_i\rangle \right) = \sum_i |c_i|^2 $$
-*(Karena $\langle v_j | v_i \rangle = \delta_{ji}$)*
-
-### Langkah 3: Hitung Nilai Ekspektasi Pembilang
-$$ \langle \psi | A | \psi \rangle = \langle \psi | \left( A \sum_i c_i |v_i\rangle \right) $$
-Karena $A|v_i\rangle = \lambda_i |v_i\rangle$:
-$$ \langle \psi | A | \psi \rangle = \left( \sum_j c_j^* \langle v_j | \right) \left( \sum_i c_i \lambda_i |v_i\rangle \right) = \sum_i \lambda_i |c_i|^2 $$
-
-### Langkah 4: Substitusi ke Hasil Bagi Rayleigh
-$$ R(A, \psi) = \frac{\sum_i \lambda_i |c_i|^2}{\sum_i |c_i|^2} $$
-
-### Langkah 5: Pembuktian Batas Bawah ($\lambda_0$)
-Karena $\lambda_0 \le \lambda_i$ untuk semua $i$, maka kita bisa mengganti setiap $\lambda_i$ dengan $\lambda_0$ dalam pembilang:
-$$ \sum_i \lambda_i |c_i|^2 \ge \sum_i \lambda_0 |c_i|^2 = \lambda_0 \sum_i |c_i|^2 $$
-Jika kita bagi kedua sisi dengan $\sum_i |c_i|^2$, kita mendapatkan:
-$$ \frac{\langle \psi | A | \psi \rangle}{\langle \psi | \psi \rangle} \ge \lambda_0 $$
+> **Visualisasi (2): Perhitungan Linear (Uraian Variasi)**
+> Menggunakan aturan hasil bagi $(u/v)' = (u'v - uv')/v^2$:
+> $$ \delta E = \frac{\delta \langle \psi | \hat{H} | \psi \rangle \cdot \langle \psi | \psi \rangle - \langle \psi | \hat{H} | \psi \rangle \cdot \delta \langle \psi | \psi \rangle}{(\langle \psi | \psi \rangle)^2} = 0 $$
+> Agar hasil bagi ini nol, maka pembilangnya harus nol:
+> $$ \delta \langle \psi | \hat{H} | \psi \rangle \cdot \langle \psi | \psi \rangle = \langle \psi | \hat{H} | \psi \rangle \cdot \delta \langle \psi | \psi \rangle \qquad (3) $$
 
 ---
 
-## 3. Interpretasi Fisika: Energi Ground State
+## 3. Jembatan Logika: Menuju Persamaan Nilai Eigen
+Jika kita uraikan variasi pada persamaan (3) terhadap bra $\langle \psi |$:
+$$ \langle \delta \psi | \hat{H} | \psi \rangle \cdot \langle \psi | \psi \rangle = \langle \psi | \hat{H} | \psi \rangle \cdot \langle \delta \psi | \psi \rangle $$
+Pindahkan suku $\langle \psi | \psi \rangle$ ke bawah:
+$$ \langle \delta \psi | \hat{H} | \psi \rangle = \left( \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle} \right) \langle \delta \psi | \psi \rangle \qquad (4) $$
 
-Dalam mekanika kuantum, matriks $A$ adalah operator Hamiltonian $\hat{H}$ yang merepresentasikan total energi sistem. Nilai eigen terkecil $\lambda_0$ adalah energi **Ground State** ($E_0$).
+Karena suku dalam kurung adalah $E$, maka:
+$$ \langle \delta \psi | ( \hat{H} | \psi \rangle - E | \psi \rangle ) = 0 $$
+Karena variasi $\langle \delta \psi |$ bersifat sembarang, maka bagian dalam kurung harus nol:
+$$ \hat{H} | \psi \rangle = E | \psi \rangle \qquad (5) $$
 
-Teorema ini memberitahu kita bahwa:
-> "Jika kita menebak sembarang keadaan kuantum $|\psi\rangle$, energi rata-rata yang kita ukur tidak akan pernah lebih rendah dari energi ground state yang sebenarnya."
-
-### Konsekuensi Logis:
-1. Jika $E(\psi) = E_0$, maka $|\psi\rangle$ pastilah vektor eigen dari ground state (atau berada dalam subruang eigennya).
-2. Semakin "pintar" kita memilih $|\psi\rangle$, semakin dekat kita dengan solusi eksak.
-
----
-
-## 4. Hubungan dengan VQE (Variational Quantum Eigensolver)
-
-VQE meminjam teorema ini untuk mengubah masalah fisika menjadi masalah optimasi komputer klasik:
-
-1.  **Ansatz sebagai Parameterized Map:** Kita membuat sirkuit kuantum yang menghasilkan state $|\psi(\theta)\rangle$. $\theta$ adalah tuas yang kita putar untuk mengubah arah vektor dalam Hilbert space.
-2.  **Cost Function:** Kita definisikan fungsi biaya $J(\theta) = \langle \psi(\theta) | \hat{H} | \psi(\theta) \rangle$.
-3.  **Minimisasi:** Berdasarkan Teorema Rayleigh-Ritz, kita tahu bahwa nilai minimum global dari $J(\theta)$ adalah $E_0$.
-4.  **Hardware-Efficient:** Kita tidak perlu mendiagonalisasi $\hat{H}$ (yang berukuran $2^n \times 2^n$). Kita hanya perlu "menembak" berbagai nilai $\theta$ dan membiarkan prinsip variasi menuntun kita ke dasar lembah energi.
+**Kesimpulan Jembatan:** Mencari titik stasioner dari fungsional energi $E(\psi)$ identik dengan menyelesaikan persamaan nilai eigen Schrodinger.
 
 ---
 
-## 5. Ringkasan Aksioma
-1.  **Hermitisitas:** Hamiltonian harus bisa diukur (eigenvalues riil).
-2.  **Kelengkapan Basis:** State apa pun bisa didekati oleh kombinasi state dasar.
-3.  **Monotonisitas:** Energi rata-rata menurun seiring pendekatan trial state ke ground state.
+## 4. Reduksionisme: Pembuktian $E(\psi) \ge E_0$
+Sekarang kita buktikan bahwa tebakan apa pun ($|\psi\rangle$) selalu memberikan energi di atas atau sama dengan ground state ($E_0$).
+
+### A. Ekspansi dalam Basis Eigen
+Misalkan $\{|v_n\rangle\}$ adalah set vektor eigen dari $\hat{H}$ dengan energi $E_0 \le E_1 \le E_2 \dots$. Sembarang state $|\psi\rangle$ dapat ditulis sebagai:
+$$ |\psi\rangle = \sum_n c_n |v_n\rangle \qquad (6) $$
+
+> **Visualisasi (6): Operasi Matriks**
+> Secara linear, $|\psi\rangle$ adalah jumlahan berbobot dari state-state murni (basis eigen):
+> $$ |\psi\rangle = c_0 |v_0\rangle + c_1 |v_1\rangle + \dots = \begin{pmatrix} c_0 \\ c_1 \\ \vdots \end{pmatrix} $$
+
+### B. Substitusi ke Rayleigh Quotient
+$$ E(\psi) = \frac{\sum_n |c_n|^2 E_n}{\sum_n |c_n|^2} \qquad (7) $$
+
+> **Visualisasi (7): Perhitungan Linear**
+> Karena $E_n \ge E_0$ untuk semua $n$, maka:
+> $$ \sum_n |c_n|^2 E_n \ge \sum_n |c_n|^2 E_0 = E_0 \sum_n |c_n|^2 $$
+> Masukkan kembali ke pembilang persamaan (7):
+> $$ E(\psi) \ge \frac{E_0 \sum_n |c_n|^2}{\sum_n |c_n|^2} = E_0 \qquad (8) $$
+
+---
+
+## 5. Verifikasi & Parameter: Batas Bawah
+| Kondisi $\psi\rangle$              | Nilai $E(\psi)$   | Interpretasi Fisik                                 |
+| :--------------------------------- | :---------------- | -------------------------------------------------- |
+| **$\psi\rangle =v_0\rangle$**      | $E(\psi) = E_0$   | Tebakan tepat mengenai ground state.               |
+| **$\psi\rangle \perp v_0\rangle$** | $E(\psi) \ge E_1$ | Tebakan tidak mengandung komponen ground state.    |
+| **Sembarang $\psi\rangle$**        | $E(\psi) > E_0$   | Tebakan mengandung "pengotor" dari state eksitasi. |
+
+---
+
+## 6. Physical Insight: "Nature's Compass"
+Prinsip variasi bertindak sebagai **kompas** bagi algoritma VQE.
+1. Kita membuat sirkuit parametrik $|\psi(\theta)\rangle$.
+2. Kita menghitung energi $E(\theta)$ menggunakan QPU.
+3. Kita tahu dengan pasti bahwa semakin kecil $E(\theta)$, semakin dekat kita dengan solusi ekonomi optimal ($E_0$).
+
+**Mengapa ini penting untuk portofolio?**
+Karena kita tidak bisa mendiagonalkan matriks kovarians yang sangat besar, kita menggunakan Prinsip Variasi untuk "meraba" dasar lembah energi. Kita tidak perlu tahu di mana dasarnya, kita hanya perlu terus bergerak "ke bawah" sesuai petunjuk Teorema Rayleigh-Ritz.

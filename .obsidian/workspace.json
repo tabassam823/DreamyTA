@@ -8,21 +8,119 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0ec2f7a698a400e5",
+            "id": "aa25954f234720a1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/MD_File/bab1 1.md",
+                "file": "notes/PakHeru/Markowitz_QUBO_TA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "bab1 1"
+              "title": "Markowitz_QUBO_TA"
             }
           },
           {
-            "id": "aa25954f234720a1",
+            "id": "3415e9b59ec38519",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Pure_Markowitz_QUBO.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Pure_Markowitz_QUBO"
+            }
+          },
+          {
+            "id": "555d76698b9e70fd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/GT_to_h.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "GT_to_h"
+            }
+          },
+          {
+            "id": "7b2e3a033a7e24ec",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/PakHeru/Markowitz_QUBO.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Markowitz_QUBO"
+            }
+          },
+          {
+            "id": "a6837a9e720977cd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/SPSA.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SPSA"
+            }
+          },
+          {
+            "id": "d211193d3a9c6db2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Sumur_Potensial_Parabolik.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Sumur_Potensial_Parabolik"
+            }
+          },
+          {
+            "id": "0ba866f936f107f8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/PakHeru/Teorema_Reyleigh_Ritz.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Teorema_Reyleigh_Ritz"
+            }
+          },
+          {
+            "id": "b631dfe90ec914d0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/PakHeru/risk_aversion_endogen.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "risk_aversion_endogen"
+            }
+          },
+          {
+            "id": "52514127e43b86c1",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -34,8 +132,51 @@
               "icon": "lucide-file",
               "title": "QMI"
             }
+          },
+          {
+            "id": "8ef752c5bd36f921",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Sumur_Potensial_Parabolik.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Sumur_Potensial_Parabolik"
+            }
+          },
+          {
+            "id": "b329ca87789ab1ae",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/suku_pertama_kedua.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "suku_pertama_kedua"
+            }
+          },
+          {
+            "id": "f6af5838d4e2305b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/suku_pertama_kedua_pers1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "suku_pertama_kedua_pers1"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -47,7 +188,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 50.34482758620689,
+        "dimension": 69.6048632218845,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -94,7 +235,7 @@
       {
         "id": "4c607714eb3ecdb6",
         "type": "tabs",
-        "dimension": 49.65517241379311,
+        "dimension": 30.395136778115504,
         "children": [
           {
             "id": "287f258bfd651da9",
@@ -102,13 +243,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/MD_File/bab1 1.md",
+                "file": "notes/Pure_Markowitz_QUBO.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of bab1 1"
+              "title": "Outline of Pure_Markowitz_QUBO"
             }
           }
         ]
@@ -233,43 +374,44 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "0ec2f7a698a400e5",
+  "active": "3415e9b59ec38519",
   "lastOpenFiles": [
-    "notes/PakHeru/QMI.md",
+    "notes/GT_to_h.md",
+    "notes/Pure_Markowitz_QUBO.md",
+    "notes/PakHeru/Markowitz_QUBO_TA.md",
+    "notes/Sumur_Potensial_Parabolik.md",
+    "notes/Lagrange_Multiplier.md",
     "notes/PakHeru/Markowitz_QUBO.md",
-    "Markowitz_QUBO.pdf",
-    "Latex/TA/MD_File/bab2.md",
-    "Latex/TA/MD_File/bab1.md",
-    "Latex/TA/MD_File/bab1 1.md",
-    "MD_File/bab1.md",
-    "MD_File",
-    "prompt.md.md",
-    "GEMINI.md",
-    "Latex/TA/MD_File/bab3.md",
-    "Latex/TA/MD_File/bab4.md",
-    "Latex/TA/MD_File/bab5.md",
-    "Latex/TA/MD_File/GEMINI.md",
-    "notes/PakHeru/Parameter_Shift_Rule.md",
-    "notes/PakHeru/Lagrange_Multiplier.md",
-    "notes/PakHeru/Born_Rule.md",
-    "Kritik.md",
-    "Latex/PakGagus_Presentasi4/one_by_one_q.md",
-    "notes/PakHeru/ekspansi_state.md",
-    "Latex/PakGagus_Presentasi4/Prompt_update.md",
-    "notes/All_HG.py",
-    "Latex/PakGagus_Presentasi5/All_HG_GT.py",
-    "Latex/PakGagus_Presentasi5/All_HG_GT.ipynb",
-    "Latex/PakGagus_Presentasi5/Prompt_update.md",
-    "Latex/PakGagus_Presentasi5/All_HG.py",
-    "Latex/PakGagus_Presentasi4/jenis_ansatz.md",
-    "Untitled",
-    "notes/PakHeru/Dekomposisi_Hamiltonian.md",
+    "notes/PakHeru/Markowitz.md",
+    "notes/PakHeru/Teorema_Reyleigh_Ritz.md",
+    "notes/notes/GT_to_h.md",
+    "notes/notes",
+    "notes/PakHeru/main.toc",
+    "notes/PakHeru/main.aux",
+    "notes/PakHeru/main.synctex(busy)",
+    "notes/PakHeru/pdflatex38243.fls",
+    "notes/PakHeru/pdflatex38229.fls",
+    "notes/PakHeru/pdflatex38069.fls",
+    "notes/PakHeru/pdflatex38055.fls",
+    "notes/PakHeru/pdflatex38029.fls",
+    "notes/PakHeru/main.synctex.gz",
+    "notes/Italic_word.md",
     "notes/GEMINI.md",
-    "notes/PakHeru/Von_Neumann_Entropy.md",
+    "notes/PakHeru/QMI.md",
+    "notes/PakHeru/tmp_Born_Rule.md",
+    "notes/PakHeru/tmp_ekspansi_state.md",
+    "notes/PakHeru/tmp_Parameter_Shift_Rule.md",
+    "notes/PakHeru/tmp_Dekomposisi_Hamiltonian.md",
+    "notes/PakHeru/tmp_Teorema_Reyleigh_Ritz.md",
+    "notes/PakHeru/tmp_Lagrange_Multiplier.md",
+    "notes/PakHeru/tmp_risk_aversion_endogen.md",
+    "notes/PakHeru/tmp_Markowitz.md",
+    "notes/PakHeru/tmp_Markowitz_QUBO_TA.md",
+    "notes/SPSA.md",
     "notes/PakHeru/risk_aversion_endogen.md",
-    "paper/QUBO_QMI.pdf",
-    "notes/PakHeru",
-    "paper/QMI_QNN.pdf",
+    "notes/PakHeru/Born_Rule.md",
+    "notes/PakHeru/ekspansi_state.md",
+    "notes/PakHeru/Lagrange_Multiplier.md",
     "Latex/PakGagus_Presentasi3/presentasi_analisis/backtest_vqe_portfolio.png",
     "Latex/PakGagus_Presentasi4/backtest_vqe_portfolio.png",
     "Latex/TA/Images/Candle1.png",

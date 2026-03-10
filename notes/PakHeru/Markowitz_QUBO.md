@@ -28,6 +28,7 @@ Dimana:
 
 ### A. Suku Pertama: Risiko ($x^T \Sigma x$)
 $$ x^T \Sigma x = \sum_{i=1}^N \sum_{j=1}^N \Sigma_{ij} x_i x_j = \sum_i \Sigma_{ii} x_i^2 + \sum_{i \ne j} \Sigma_{ij} x_i x_j $$
+
 Karena $x_i \in \{0,1\}$, maka $x_i^2 = x_i$. Persamaan menjadi:
 $$ x^T \Sigma x = \sum_i \sigma_i^2 x_i + \sum_{i \ne j} \Sigma_{ij} x_i x_j $$
 
@@ -47,6 +48,7 @@ Dengan return harian $R_{i,t} = \frac{P_{i,t} - P_{i,t-1}}{P_{i,t-1}}$ dan $\bar
 ### B. Suku Kedua: Return ($\lambda \mu^T x$)
 Menghitung keuntungan yang diharapkan:
 $$ \mu_A = \frac{1}{T} \sum_{t=1}^T R_{A,t} $$
+[[suku_pertama_kedua]]
 Parameter $\lambda$ dapat ditentukan secara endogen (misal melalui fungsi sigmoid):
 $$ \lambda = \frac{1}{1 + e^{-\mu/\sigma}} $$
 [[risk_aversion_endogen]]
