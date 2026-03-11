@@ -1,31 +1,26 @@
 \chapter{Pendahuluan}
 
 \section{Latar Belakang}
-Pasar keuangan modern seringkali menunjukkan perilaku yang kompleks, terutama ketika terjadi krisis ekonomi di mana korelasi antar aset cenderung meningkat secara drastis, sebuah fenomena yang dikenal sebagai \textit{Financial Dilemma}. Metode optimasi portofolio klasik, seperti model \textit{Mean-Variance} pada \textit{Modern Portfolio Theory} oleh Markowitz, seringkali gagal dalam menangkap interaksi strategis dan ketergantungan non-linear antar aset dalam kondisi pasar yang ekstrem.
+Stabilitas pasar keuangan modern seringkali terdistorsi oleh fenomena korelasi ekstrem antar aset yang meningkat drastis selama periode krisis ekonomi, sebuah kondisi yang secara teknis diidentifikasi sebagai \textit{Financial Dilemma}. Model \textit{Mean-Variance} (MV) yang diusulkan oleh Markowitz (1952) telah menjadi fondasi utama dalam \textit{Modern Portfolio Theory}, namun model ini memiliki keterbatasan krusial dalam mengasumsikan distribusi return yang normal dan stasioner (Halim dan Yuliati, 2020). Ketidakmampuan model MV untuk menangkap anomali pasar dan ketergantungan non-linear menyebabkan estimasi risiko menjadi tidak akurat, terutama ketika data historis tidak lagi mencerminkan dinamika masa depan secara reliabel (Sikalo et al., 2022). Oleh karena itu, diperlukan transformasi fungsional objektif portofolio ke dalam kerangka \textit{Quadratic Unconstrained Binary Optimization} (QUBO) agar kompleksitas tersebut dapat dipetakan secara matematis ke dalam arsitektur komputasi kuantum (Wang et al., 2025).
 
-Munculnya teknologi \textit{Quantum Computing} membuka peluang baru dalam menyelesaikan masalah optimasi finansial yang sulit dipecahkan oleh komputer klasik. Penelitian ini mengeksplorasi penggunaan \textit{Game Theory} untuk memodelkan bias aset dan \textit{Mutual Information} untuk menggambarkan interaksi antar aset dengan menggunakan algoritma kuantum \textit{Variational Quantum Eigensolver} (VQE) untuk menemukan solusi optimal.
+Dalam upaya menangkap interaksi strategis antar partisipan pasar, penggunaan \textit{Game Theory} menawarkan pendekatan yang lebih dinamis dibandingkan sekadar ekstrapolasi statistik imbal hasil. Integrasi kerangka kerja multi-agen ke dalam model \textit{Ising} bertujuan untuk menggantikan parameter medan lokal ($h_i$) konvensional dengan nilai \textit{marginal payoff} yang diturunkan dari utilitas strategis partisipan (La Torre dan Maggistro, 2024). Pendekatan teori permainan ini memungkinkan deteksi bias aset secara lebih presisi, di mana setiap aset dipandang sebagai pemain yang bereaksi terhadap kondisi pasar guna mencapai ekuilibrium (Sikalo et al., 2022). Dengan mengadopsi formulasi \textit{minimax} atau strategi kooperatif dalam penentuan bias, model Hamiltonian \textit{Ising} dapat merepresentasikan preferensi risiko investor secara lebih eksplisit dan adaptif terhadap guncangan pasar eksternal (Wei et al., 2025).
 
-Beberapa poin utama yang melatarbelakangi penelitian ini adalah:
-\begin{itemize}
-    \item Fenomena korelasi tinggi antar aset saat krisis keuangan (\textit{Financial Dilemma}).
-    \item Keterbatasan metode optimasi klasik (\textit{Mean-Variance}) dalam menangkap interaksi strategis.
-    \item Potensi \textit{Quantum Computing} dalam optimasi finansial.
-\end{itemize}
+Selain bias individu, pemodelan korelasi antar aset menuntut metrik yang mampu melampaui limitasi koefisien kovarians linear yang sering kali menyesatkan pada kondisi \textit{bear market}. \textit{Quantum Mutual Information} (QMI) diimplementasikan sebagai instrumen untuk menyusun koefisien kopling ($J_{ij}$) dalam sistem Hamiltonian guna menangkap seluruh spektrum korelasi probabilistik, baik yang bersifat linear maupun non-linear (Wang et al., 2025). Pemanfaatan QMI memungkinkan dekomposisi struktur interaksi aset menjadi energi interaksi mekanika kuantum yang lebih akurat, yang merupakan prasyarat mutlak bagi keberhasilan algoritma \textit{Variational Quantum Eigensolver} (VQE) (Wei et al., 2025). Melalui sinergi antara \textit{Game Theory} dan QMI, optimasi portofolio tidak lagi hanya bergantung pada metrik statistik murni, melainkan pada sintesis informasi kuantum dan interaksi strategis yang lebih representatif terhadap realitas kompleksitas finansial.
 
 \section{Rumusan Masalah}
 Berdasarkan latar belakang tersebut, permasalahan yang akan dibahas dalam tugas akhir ini adalah:
 \begin{enumerate}
-    \item Bagaimana pendeteksian bias suatu aset menggunakan \textit{Game Theory}?
-    \item Bagaimana cara memodelkan interaksi non-linear antar lewat konstruksi \textit{Mutual Information} 
-    \item Bagaimana efektivitas \textit{Variational Quantum Eigensolver} (VQE) dalam mencari keputusan jual/beli suatu aset pada portofolio?
+    \item Bagaimana merumuskan bias aset sebagai parameter medan lokal ($h_i$) dalam model Hamiltonian \textit{Ising} melalui pendekatan utilitas \textit{Game Theory}?
+    \item Bagaimana mengonstruksi koefisien kopling ($J_{ij}$) antar aset menggunakan \textit{Quantum Mutual Information} (QMI) untuk menangkap interaksi non-linear?
+    \item Bagaimana efektivitas algoritma \textit{Variational Quantum Eigensolver} (VQE) dalam mencari solusi keadaan dasar (\textit{ground state}) untuk menentukan keputusan alokasi aset yang optimal?
 \end{enumerate}
 
 \section{Tujuan Penelitian}
 Dari rumusan masalah yang diberikan, tujuan dari pembuatan tugas akhir ini antara lain:
 \begin{enumerate}
-    \item Menganalisis pendeteksian bias suatu aset menggunakan \textit{Game Theory}.
-    \item Menganalisis cara memodelkan interaksi non-linear antar lewat konstruksi \textit{Mutual Information} 
-    \item Menganalisis efektivitas \textit{Variational Quantum Eigensolver} (VQE) dalam mencari keputusan jual/beli suatu aset pada portofolio.
+    \item Menganalisis formulasi bias aset sebagai parameter medan lokal ($h_i$) dalam model Hamiltonian \textit{Ising} berbasis kerangka kerja \textit{Game Theory}.
+    \item Mengonstruksi koefisien kopling ($J_{ij}$) antar aset melalui pemanfaatan \textit{Quantum Mutual Information} (QMI) guna merepresentasikan ketergantungan non-linear.
+    \item Mengevaluasi performa dan efektivitas algoritma \textit{Variational Quantum Eigensolver} (VQE) dalam menemukan solusi optimal pada model portofolio kuantum yang telah dibangun.
 \end{enumerate}
 
 \section{Batasan Masalah}

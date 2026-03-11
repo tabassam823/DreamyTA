@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "bab1"
             }
+          },
+          {
+            "id": "0885a494f37c5be2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/Contents/Metodologi/metodologi.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "metodologi"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -86,13 +101,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/MD_File/bab1.md",
+                "file": "Latex/TA/Contents/Metodologi/metodologi.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of bab1"
+              "title": "Outline of metodologi"
             }
           }
         ]
@@ -217,8 +232,10 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "55e2b249d4b770ab",
+  "active": "0885a494f37c5be2",
   "lastOpenFiles": [
+    "Latex/TA/Contents/Metodologi/algoritma.md",
+    "Latex/TA/MD_File/bab1.md",
     "Latex/TA/main.blg",
     "Latex/TA/main.lof",
     "Latex/TA/main.toc",
@@ -229,7 +246,6 @@
     "Latex/TA/pdflatex52064.fls",
     "Latex/TA/pdflatex52028.fls",
     "Latex/TA/main.synctex.gz",
-    "Latex/TA/Contents/BagianDepan/Lembar Orisinalitas.aux",
     "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Schwert_Anomali_Efficiency.md",
     "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Quantum_Portfolio_Optimization_with_Expert_Analysis.md",
     "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/QUBO_QAOA.md",
@@ -254,7 +270,6 @@
     "Latex/Filtered_Paper/Markowtiz_Fundamental/Multiagent_dynamic_financial_portfolio_management.md",
     "Latex/Filtered_Paper/Markowtiz_Fundamental/Markowitz_Model_Investment_Portfolio_Optimization.md",
     "Latex/Filtered_Paper/Markowtiz_Fundamental/Efficient_Asset_Allocation_Application_of_Game_Theory.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/Achieving_High_Quality_Portfolio_Optimization_with_the_Variational_Quantm_Eigensolver.md",
     "Latex/PakGagus_Presentasi3/presentasi_analisis/backtest_vqe_portfolio.png",
     "Latex/PakGagus_Presentasi4/backtest_vqe_portfolio.png",
     "Latex/TA/Images/Candle1.png",

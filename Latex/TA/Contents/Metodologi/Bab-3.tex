@@ -1,148 +1,88 @@
 \chapter{Metodologi Penelitian}
 
 \section{Alur Penelitian}
-Penelitian ini dijalankan secara sistematis mengikuti tahapan yang terstruktur, mulai dari identifikasi masalah, studi literatur, pengumpulan data, konstruksi model, hingga tahap evaluasi dan penarikan kesimpulan. Secara visual, alur ini direpresentasikan dalam sebuah \textit{flowchart} penelitian.
+Penelitian ini dijalankan secara sistematis melalui integrasi antara ekonofisika, teori permainan, dan komputasi kuantum variasional. Secara visual, alur penelitian ini direpresentasikan dalam Gambar 3.1 yang mengilustrasikan urutan proses mulai dari akuisisi data hingga evaluasi akhir. Struktur ini dirancang untuk memastikan bahwa setiap parameter yang diekstraksi dari data pasar memiliki landasan teoretis yang kuat sebelum dipetakan ke dalam sistem kuantum.
+
+Diagram alir di bawah ini menunjukkan mekanisme \textit{looping} pada optimasi VQE dan prosedur \textit{rolling window backtesting}. Penggunaan simbol belah ketupat menegaskan titik keputusan kritis, terutama pada penentuan konvergensi energi dan validasi kedalaman sirkuit (\textit{layering}). Alur ini menjamin bahwa model tetap adaptif terhadap perubahan rezim pasar selama periode observasi lima tahun.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=1.5cm, every node/.style={fill=white, font=\footnotesize}, align=center]
+        % Styles
+        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=0.8cm,text centered, draw=black, fill=gray!10]
+        \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=0.8cm, text centered, draw=black, fill=blue!5]
+        \tikzstyle{decision} = [diamond, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=red!5, aspect=2]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+        
+        % Nodes
+        \node (start) [startstop] {Mulai};
+        \node (data) [process, below of=start] {Akuisisi Data \& \\ Log Return};
+        \node (biner) [process, below of=data] {Digitalisasi Finansial \\ (Binerisasi State)};
+        
+        % Subgraph Simulation
+        \node (param) [process, below of=biner, yshift=-0.3cm] {Hitung $\lambda$, Payoff, \\ Bias ($h_i$) \& QMI ($J_{ij}$)};
+        \node (hamil) [process, below of=param] {Konstruksi \\ Hamiltonian $H$};
+        
+        % VQE Loop
+        \node (vqe_init) [process, below of=hamil] {Inisialisasi \\ Parameter $\theta$};
+        \node (spsa) [process, below of=vqe_init] {Update $\theta$ \\ via SPSA};
+        \node (conv) [decision, below of=spsa, yshift=-0.5cm] {Konvergen?};
+        
+        % Layer Loop
+        \node (layer_eval) [process, right of=conv, xshift=3cm] {Evaluasi Energi \\ pada Layer $L$};
+        \node (layer_dec) [decision, above of=layer_eval, yshift=1.5cm] {$E_L < E_{L-1}$?};
+        
+        % Backtest Loop
+        \node (rebal) [process, above of=layer_dec, yshift=1.5cm] {Eksekusi Rebalancing \\ \& Biaya Transaksi};
+        \node (end_dec) [decision, left of=rebal, xshift=-3cm] {Akhir \\ Periode?};
+        
+        \node (eval) [process, above of=end_dec, yshift=1cm] {Kalkulasi Metrik \\ Performa Akhir};
+        \node (stop) [startstop, above of=eval] {Selesai};
+
+        % Arrows
+        \draw [arrow] (start) -- (data);
+        \draw [arrow] (data) -- (biner);
+        \draw [arrow] (biner) -- (param);
+        \draw [arrow] (param) -- (hamil);
+        \draw [arrow] (hamil) -- (vqe_init);
+        \draw [arrow] (vqe_init) -- (spsa);
+        \draw [arrow] (spsa) -- (conv);
+        \draw [arrow] (conv) -- node[anchor=south] {Ya} (layer_eval);
+        \draw [arrow] (conv.west) -- ++(-0.5,0) -- ++(0,1.5) -- (spsa.west) node[anchor=east, yshift=-0.5cm] {Tidak};
+        
+        \draw [arrow] (layer_eval) -- (layer_dec);
+        \draw [arrow] (layer_dec) -- node[anchor=east] {Ya} (rebal);
+        \draw [arrow] (layer_dec.east) -- ++(0.5,0) -- ++(0,-3) -- (layer_eval.east) node[anchor=west, yshift=1.5cm] {Tambah \\ Layer};
+        
+        \draw [arrow] (rebal) -- (end_dec);
+        \draw [arrow] (end_dec) -- node[anchor=east] {Ya} (eval);
+        \draw [arrow] (end_dec.south) -- ++(0,-0.5) -- ++(6.5,0) -- ++(0,-8) -- (param.east) node[anchor=north, xshift=-3cm] {Tidak (Geser Window)};
+        \draw [arrow] (eval) -- (stop);
+
+    \end{tikzpicture}
+    \caption{Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}
+    \label{fig:flowchart}
+\end{figure}
 
 \section{Pengumpulan Data \& Pra-pemrosesan}
-Data yang digunakan dalam penelitian ini adalah data sekunder berupa harga historis aset yang tergabung dalam indeks LQ45.
-\begin{itemize}
-    \item \textbf{Sumber Data:} Akuisisi data dilakukan melalui API Yahoo Finance.
-    \vspace{0.5em}
-    \begin{itemize}
-        \item[] \textbf{Algoritma Akuisisi Data:}
-        \item[-] \textbf{Input:} Daftar \textit{ticker} saham ($T$), Tanggal mulai ($t_{start}$), Tanggal akhir ($t_{end}$).
-        \item[-] \textbf{Proses:} 
-            \begin{enumerate}[label=\arabic*.]
-                \item Unduh harga harian ($P$).
-                \item Hapus nilai kosong (\textit{drop NaN}).
-                \item Urutkan berdasarkan waktu.
-            \end{enumerate}
-        \item[-] \textbf{Output:} Matriks \textit{time-series} harga ($P$).
-    \end{itemize}
-    \vspace{0.5em}
-    \item \textbf{Digitalisasi Data Finansial:} Transformasi \textit{log return} kontinu menjadi \textit{state} biner menggunakan teknik diskretisasi sebagai jembatan menuju sistem qubit.
-    \item \textbf{Laplace Smoothing:} Diterapkan untuk menstabilkan perhitungan probabilitas pada estimasi entropi dan korelasi.
-\end{itemize}
+Data yang digunakan dalam penelitian ini merupakan data sekunder berupa harga penutupan (\textit{closing price}) historis dari empat instrumen saham dengan sektor yang berbeda untuk menjamin diversifikasi sistemik. Akuisisi data dilakukan secara otomatis melalui \textit{Application Programming Interface} (API) Yahoo Finance dengan rentang waktu observasi selama lima tahun menggunakan \textit{timeframe} harian (\textit{daily}). Prosedur awal melibatkan pembersihan data dari nilai kosong (\textit{missing values}) serta sinkronisasi deret waktu antar aset guna memastikan konsistensi dalam perhitungan korelasi silang.
+
+Tahap digitalisasi finansial dilakukan dengan mentransformasi harga mentah $P_t$ menjadi nilai \textit{log return} kontinu melalui persamaan $R_t = \ln(P_t / P_{t-1})$. Penggunaan \textit{log return} dipilih karena sifatnya yang aditif dan kemampuannya untuk menormalkan distribusi data finansial yang umumnya bersifat \textit{heavy-tailed}. Selanjutnya, dilakukan diskretisasi status menjadi variabel biner $s_i \in \{+1, -1\}$, di mana kenaikan harga ($R_t > 0$) dipetakan ke dalam \textit{state} naik ($+1$) yang setara dengan basis $|0\rangle$, sedangkan penurunan ($R_t \leq 0$) dipetakan ke \textit{state} turun ($-1$) atau basis $|1\rangle$.
 
 \section{Konstruksi Model Permainan (Mapping Pipeline)}
-Tahap ini menjelaskan bagaimana data finansial dipetakan ke dalam model \textit{Quantum Game Theory}.
-\begin{itemize}
-    \item \textbf{Dinamika Parameter Risiko Endogen:} Penentuan parameter risiko ($\lambda$) yang adaptif.
-    \vspace{0.5em}
-    \begin{itemize}
-        \item[] \textbf{Algoritma Kalkulasi $\lambda$:}
-        \item[-] \textbf{Input:} \textit{Log return} historis ($R$).
-        \item[-] \textbf{Proses:}
-            \begin{enumerate}[label=\arabic*.]
-                \item Hitung rata-rata \textit{return} tahunan absolut ($\mu_{avg}$) dan volatilitas tahunan ($\sigma_{avg}$).
-                \item Evaluasi rasio performa: $Z = \frac{\mu_{avg}}{\sigma_{avg}}$.
-                \item Terapkan fungsi \textit{sigmoid}: $\lambda = \frac{1}{1 + e^Z}$.
-            \end{enumerate}
-        \item[-] \textbf{Output:} Parameter risiko adaptif $\lambda \in (0, 1)$.
-    \end{itemize}
-    \vspace{0.5em}
+Penentuan parameter risiko dalam model ini menggunakan pendekatan endogen yang adaptif terhadap volatilitas pasar melalui variabel $\lambda$. Nilai $\lambda$ dihitung berdasarkan rasio rata-rata imbal hasil tahunan ($\mu_{avg}$) terhadap volatilitas tahunan ($\sigma_{avg}$) menggunakan fungsi \textit{sigmoid} untuk membatasi rentang nilai antara 0 dan 1. Parameter ini merepresentasikan sensitivitas sistem terhadap risiko, di mana nilai $\lambda$ yang tinggi menunjukkan dominasi pinalti volatilitas dalam fungsi utilitas agen.
 
-    \item \textbf{Matriks Payoff:} Perhitungan nilai utilitas menggunakan kombinasi \textit{return} dan penalti volatilitas berbobot $\lambda$.
-    \vspace{0.5em}
-    \begin{itemize}
-        \item[] \textbf{Algoritma Kalkulasi Matriks Payoff Ekspektasi:}
-        \item[-] \textbf{Input:} Rangkaian \textit{state} aksi biner ($s_A, s_B \in \{0, 1\}$), \textit{return} ($R_A, R_B$), dan $\lambda$.
-        \item[-] \textbf{Proses:}
-            \begin{enumerate}[label=\arabic*.]
-                \item Inisialisasi matriks \textit{payoff} ($p_A, p_B$) berukuran $2 \times 2$ dengan nilai 0.
-                \item Untuk setiap observasi waktu $t$:
-                \begin{itemize}
-                    \item Identifikasi profil kejadian $(i, j) = (s_{A, t}, s_{B, t})$.
-                    \item Hitung utilitas sesaat: $u_{A, t} = (1-\lambda)R_{A, t} - \lambda |R_{A, t}|$.
-                    \item Akumulasi ke elemen matriks: $p_A[i, j] \mathrel{+}= u_{A, t}$ dan tambah penghitung frekuensi.
-                \end{itemize}
-                \item Normalisasi setiap sel $p_A[i, j]$ dengan total frekuensi kejadian $(i, j)$.
-            \end{enumerate}
-        \item[-] \textbf{Output:} Matriks \textit{payoff} pemain ($p_A, p_B$).
-    \end{itemize}
-    \vspace{0.5em}
+Interaksi strategis antar aset dimodelkan melalui matriks imbalan (\textit{payoff matrix}) $2 \times 2$ yang dibangun dari fungsi utilitas pinalti $u = (1-\lambda)R - \lambda|R|$. Dari matriks ini, nilai \textit{bias} lokal ($h_i$) diekstraksi dari margin \textit{payoff} yang mencerminkan kecenderungan arah individu suatu aset. Sementara itu, parameter interaksi atau kopling ($J_{ij}$) diderivasi menggunakan kerangka \textit{Quantum Mutual Information} (QMI) yang dihitung dari matriks densitas \textit{mixed state}. Integrasi kedua parameter ini memungkinkan klasifikasi rezim permainan pasar, apakah cenderung bersifat koordinatif atau kompetitif.
 
-    \item \textbf{Dinamika Stackelberg:} Identifikasi peran \textit{Leader} dan \textit{Follower} berdasarkan kapitalisasi pasar untuk memodelkan asimetri informasi.
-    
-    \item \textbf{Ekstraksi Parameter Hamiltonian:} Menentukan nilai bias laten ($h_i$) dari margin \textit{payoff} dan nilai kopling ($J_{ij}$) berdasarkan ukuran jarak entropik (\textit{Quantum Mutual Information}).
-    \vspace{0.5em}
-    \begin{itemize}
-        \item[] \textbf{Algoritma Kalkulasi Hamiltonian $h_i$ (Bias):}
-        \item[-] \textbf{Input:} Matriks \textit{payoff} seluruh pasangan aset, jumlah total aset ($N$).
-        \item[-] \textbf{Proses:}
-            \begin{enumerate}[label=\arabic*.]
-                \item Untuk setiap iterasi agregasi pada aset ke-$i$:
-                \item Hitung selisih \textit{payoff} marginal dari probabilitas koordinasi matriks $p$: $(p[1,0] + p[1,1]) - (p[0,0] + p[0,1])$.
-                \item Rata-ratakan selisih dari seluruh pasangan yang melibatkan aset $i$.
-            \end{enumerate}
-        \item[-] \textbf{Output:} Vektor parameter bias sentral $h_i$.
-    \end{itemize}
-    \vspace{0.5em}
-    \begin{itemize}
-        \item[] \textbf{Algoritma Kalkulasi Interaksi QMI ($J_{ij}$):}
-        \item[-] \textbf{Input:} \textit{State} biner aset $A$ dan $B$ ($s_A, s_B$).
-        \item[-] \textbf{Proses:}
-            \begin{enumerate}[label=\arabic*.]
-                \item Hitung probabilitas gabungan \textit{Laplace-smoothed} untuk setiap kuadran keadaan $\rho_{AB} = \text{diag}(\dots)$.
-                \item Lakukan reduksi untuk mendapatkan \textsl{reduced density matrix} marjinal $\rho_A = \text{tr}_B(\rho_{AB})$ dan $\rho_B = \text{tr}_A(\rho_{AB})$.
-                \item Hitung entropi Von Neumann: $S(\rho) = -\sum \lambda_k \ln(\lambda_k)$ untuk \textit{eigenvalue} $\lambda_k > 0$.
-                \item Ekstrak QMI: $J_{ij} = S(\rho_A) + S(\rho_B) - S(\rho_{AB})$.
-            \end{enumerate}
-        \item[-] \textbf{Output:} Nilai kopling keterikatan $J_{ij}$.
-    \end{itemize}
-    \vspace{0.5em}
+\section{Implementasi Kuantum \& Optimasi VQE}
+Pemetaan masalah alokasi aset ke dalam arsitektur kuantum dilakukan dengan membangun operator Hamiltonian Ising total yang terdiri dari komponen biaya ($H_{cost}$) dan komponen pinalti ($H_{penalty}$). Hamiltonian biaya merepresentasikan fungsi objektif investasi yang disusun dari parameter $h_i$ dan $J_{ij}$, sedangkan Hamiltonian pinalti berfungsi sebagai batasan keras (\textit{hard constraint}) untuk menjaga kardinalitas portofolio pada target $K$ aset. Struktur energi ini memastikan bahwa solusi optimal yang ditemukan tidak hanya meminimalkan risiko, tetapi juga mematuhi batasan operasional investasi.
 
-    \item \textbf{Klasifikasi Rezim:} Identifikasi apakah interaksi aset cenderung bersifat kooperatif (\textit{Coordination}) atau kompetitif (\textit{Anti-Coordination}).
-\end{itemize}
-
-\section{Implementasi Kuantum \& Optimasi}
-Proses optimasi dilakukan menggunakan algoritma VQE pada simulator kuantum.
-\begin{itemize}
-    \item \textbf{Formulasi Hamiltonian Pembatas:} Agregasi operator observasi kuantum menjadi bentuk energi total dengan batasan kardinalitas.
-    \vspace{0.5em}
-    \begin{itemize}
-        \item[] \textbf{Algoritma Penempatan Hamiltonian:}
-        \item[-] \textbf{Input:} Vektor bias $h$, matriks interaksi $J$, batas alokasi $K$, faktor penalti $A$.
-        \item[-] \textbf{Proses:}
-            \begin{enumerate}[label=\arabic*.]
-                \item Tempatkan operator lokal Pauli-$Z_i$ berbobot skalar $h_i$ untuk setiap basis aset.
-                \item Tempatkan pasangan operator ikatan berbobot $J_{ij}Z_i Z_j$.
-                \item Injeksi konstanta pembatas global $A \times I$.
-                \item Aplikasikan penalti pada setiap elemen sekuensial $\frac{A}{2} Z_i Z_j$.
-            \end{enumerate}
-        \item[-] \textbf{Output:} Hamiltonian komputasional $H$.
-    \end{itemize}
-    \vspace{0.5em}
-
-    \item \textbf{Konfigurasi dan Eksekusi VQE dengan Optimasi SPSA:} Transformasi ising ke sirkuit parametrik kuantum hingga mendapatkan konfigurasi optimal.
-    \vspace{0.5em}
-    \begin{itemize}
-        \item[] \textbf{Algoritma VQE-SPSA:}
-        \item[-] \textbf{Input:} Operator Hamiltonian $H$, jumlah \textit{qubits} (aset), batas kedalaman \textit{ansatz} (\textit{depth}=1).
-        \item[-] \textbf{Proses:}
-            \begin{enumerate}[label=\arabic*.]
-                \item Deklarasikan arsitektur variatif (\textit{hardware-efficient ansatz}): Rotasi $RY$ dan $RZ$ diikuti cincin \textit{entanglement} $CNOT$.
-                \item Inisialisasi sudut rotasi $\vec{\theta}$ secara acak $\mathcal{U}(0, 2\pi)$.
-                \item Untuk siklus evaluasi konvergensi $k$:
-                \begin{itemize}
-                    \item Bangkitkan arah perturbasi stokastik biner $\vec{\Delta}_{k} \in \{-1, +1\}^m$.
-                    \item Evaluasi gradien aproksimasi simetris: 
-                    $g_k = \frac{\langle H(\vec{\theta} + c_k\vec{\Delta}_{k}) \rangle - \langle H(\vec{\theta} - c_k\vec{\Delta}_{k}) \rangle}{2 c_k \vec{\Delta}_{k}}$
-                    \item Perbarui sudut rotasi: $\vec{\theta} \mathrel{-}= a_k g_k$.
-                \end{itemize}
-                \item Ekstraksi probabilitas densitas pada bentuk gelombang (\textit{probability distribution}) dengan jumlah aset dipilih $= K$.
-            \end{enumerate}
-        \item[-] \textbf{Output:} Subset indeks aset bernilai \textit{state} `1' berprobabilitas tertinggi.
-    \end{itemize}
-\end{itemize}
+Proses pencarian nilai energi terendah dilakukan menggunakan algoritma \textit{Variational Quantum Eigensolver} (VQE) dengan \textit{ansatz} \textit{EfficientSU(2)}. Optimasi parameter sudut $\theta$ pada sirkuit kuantum dijalankan menggunakan metode \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) karena ketahanannya terhadap gangguan \textit{noise} pada simulator. Penentuan jumlah lapisan (\textit{layers}) dilakukan melalui analisis sensitivitas energi, di mana sistem akan terus menambah kedalaman sirkuit selama terjadi penurunan energi signifikan, guna menghindari fenomena \textit{over-parameterization} atau \textit{barren plateaus}.
 
 \section{Evaluasi dan Analisis Kinerja}
-Hasil optimasi dievaluasi untuk mengukur efektivitas model.
-\begin{itemize}
-    \item \textbf{Identifikasi State Optimal:} Ekstraksi \textit{bitstring} dengan probabilitas tertinggi sebagai representasi alokasi aset terbaik.
-    \item \textbf{Backtesting \& Slidng Window:} Analisis historis untuk mengamati perubahan alokasi aset terhadap peristiwa makroekonomi (\textit{regime shift}).
-    \item \textbf{Validasi Metrik:} Perbandingan kinerja antara strategi berbasis kuantum dengan strategi klasik menggunakan metrik \textit{Sharpe Ratio} dan \textit{Trend Ratio}.
-\end{itemize}
+Validasi efektivitas model dilakukan melalui simulasi \textit{backtesting} dengan mekanisme \textit{rolling window} bulanan selama periode lima tahun. Pada setiap titik \textit{rebalancing}, model melakukan observasi data historis tiga bulan ke belakang untuk memperbarui parameter Hamiltonian dan menjalankan ulang optimasi VQE. Protokol ini secara eksplisit memperhitungkan biaya transaksi dan dampak harga (\textit{slippage}) untuk mencerminkan kondisi perdagangan riil di bursa saham.
+
+Kinerja portofolio kuantum dievaluasi secara komprehensif menggunakan metrik finansial standar seperti \textit{Sharpe Ratio}, \textit{Maximum Drawdown} (MDD), dan total imbal hasil akumulatif. Analisis difokuskan pada kemampuan algoritma dalam menjaga stabilitas konvergensi energi serta efisiensi pemilihan aset dibandingkan dengan strategi \textit{benchmark} klasik. Interpretasi akhir dilakukan untuk mengidentifikasi apakah model berbasis \textit{Quantum Game Theory} mampu memberikan perlindungan nilai yang lebih baik selama periode volatilitas pasar yang ekstrem.
 
 \newpage
 \thispagestyle{empty}
