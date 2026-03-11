@@ -1,0 +1,97 @@
+\section{Lagrange Multiplier dalam Markowitz-QUBO}\label{appendix-c}
+
+\hypertarget{definisi-mengapa-a-disebut-bobot-penalti-lagrange-multiplier}{%
+\subsection{\texorpdfstring{Definisi: Mengapa \(A\) disebut Bobot Penalti (Lagrange Multiplier)?}{Definisi: Mengapa A disebut Bobot Penalti (Lagrange Multiplier)?}}\label{definisi-mengapa-a-disebut-bobot-penalti-lagrange-multiplier}}
+
+Dalam konteks \textbf{QUBO (Quadratic Unconstrained Binary Optimization)}, kata kuncinya adalah ``\emph{Unconstrained}'' (Tanpa Kendala). Algoritma kuantum seperti QAOA atau mesin \emph{annealing} hanya bisa meminimalkan fungsi energi tanpa batasan eksternal.
+
+Namun, dalam dunia nyata, kita memiliki batasan (seperti: ``harus memilih tepat \(K\) aset''). Untuk memasukkan batasan ini ke dalam fungsi yang ``tanpa batasan'', kita menggunakan \textbf{Metode Penalti}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(A\) sebagai Bobot Penalti}: Menentukan seberapa besar ``hukuman'' (peningkatan energi) yang diberikan jika solusi melanggar batasan.
+\item
+  \textbf{\(A\) sebagai Lagrange Multiplier}: Secara fungsional bertindak seperti pengali \(\lambda\) dalam kalkulus, yang menghubungkan fungsi objektif utama dengan fungsi kendala.
+\end{itemize}
+
+\hypertarget{hubungan-dengan-metode-lagrange-standar}{%
+\subsection{Hubungan dengan Metode Lagrange Standar}\label{hubungan-dengan-metode-lagrange-standar}}
+
+Suku penalti tersebut adalah adaptasi dari \textbf{Metode Lagrange Multiplier} untuk optimasi diskrit. Dalam optimasi kontinu standar:
+
+\[\min f(x) \quad \text{dengan kendala} \quad g(x) = 0\]
+
+Dirumuskan menjadi fungsi Lagrangian: \[\mathcal{L}(x, \lambda) = f(x) + \lambda g(x)\]
+
+Dalam QUBO, kita menggunakan variasi yang disebut \textbf{Penalty Method} (bagian dari \emph{Augmented Lagrangian Method}). Perbedaannya, kita menguadratkan kendalanya: \(A(g(x))^2\).
+
+\textbf{Mengapa dikuadratkan?} 1. \textbf{Selalu Positif}: Jika \(g(x) \neq 0\) (baik positif atau negatif), nilai \((g(x))^2\) akan selalu positif, sehingga menambah energi (memberi penalti). 2. \textbf{Kesesuaian QUBO}: Bentuk kuadrat memastikan hubungan antar variabel tetap dalam orde dua (kuadratik), yang merupakan syarat format QUBO.
+
+\hypertarget{penurunan-rumus-penalti}{%
+\subsection{Penurunan Rumus Penalti}\label{penurunan-rumus-penalti}}
+
+Berikut adalah langkah transformasi dari kendala menjadi suku penalti:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Kendala Asli}: \(\sum_{i=1}^N x_i = K\) (Jumlah aset yang dipilih harus sama dengan \(K\)).
+\item
+  \textbf{Bentuk Normal Kendala}: \(g(x) = \sum_{i=1}^N x_i - K = 0\).
+\item
+  \textbf{Konstruksi Penalti Kuadratik}: Agar nilai minimum fungsi tepat berada di titik di mana \(\sum x_i - K = 0\), kita kuadratkan selisihnya: \[ P(x) = A \cdot (g(x))^2 = A \left( \sum_{i=1}^N x_i - K \right)^2 \]
+\end{enumerate}
+
+Jika \(\sum x_i = K\), maka \((K - K)^2 = 0\) (Tanpa penalti). Jika terjadi pelanggaran, energi naik sebesar \(A \times (\text{error})^2\).
+
+\hypertarget{fungsi-umum-lagrange-multiplier}{%
+\subsection{Fungsi Umum Lagrange Multiplier}\label{fungsi-umum-lagrange-multiplier}}
+
+Fungsi utama Lagrange Multiplier (\(A\)) adalah sebagai \textbf{penyeimbang antara dua tujuan yang saling bertentangan}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Optimalitas (Fungsi Objektif)}: Mencari nilai sekecil atau sebesar mungkin (misal: risiko terkecil atau keuntungan terbesar).
+\item
+  \textbf{Validitas (Kendala)}: Memastikan solusi tersebut memenuhi syarat yang ditetapkan (misal: jumlah aset pas).
+\end{enumerate}
+
+\textbf{Analogi Sederhana:} Bayangkan Anda sedang berbelanja. * \textbf{Fungsi Objektif}: Membeli barang sebanyak mungkin (memuaskan keinginan). * \textbf{Kendala}: Uang di dompet terbatas. * \textbf{Lagrange Multiplier (\(A\))}: Adalah ``konsekuensi'' jika Anda \emph{over-budget}. Jika \(A\) terlalu kecil, Anda mungkin nekat berutang (melanggar kendala). Jika \(A\) sangat besar, Anda akan sangat hati-hati agar pengeluaran pas dengan dompet, meskipun keinginan belum sepenuhnya terpenuhi.
+
+Dalam QUBO, nilai \(A\) harus dipilih agar cukup besar sehingga kendala tidak dilanggar, tetapi tidak terlalu besar sehingga menutupi detail dari fungsi risiko dan return yang ingin kita optimalkan.
+
+\hypertarget{strategi-menentukan-nilai-a}{%
+\subsection{\texorpdfstring{Strategi Menentukan Nilai \(A\)}{Strategi Menentukan Nilai A}}\label{strategi-menentukan-nilai-a}}
+
+Menentukan nilai \(A\) yang tepat adalah salah satu tantangan utama dalam QUBO. Jika \(A\) terlalu kecil, algoritma akan menghasilkan solusi yang melanggar batasan. Jika \(A\) terlalu besar, ``lanskap energi'' menjadi terlalu curam sehingga sulit bagi algoritma untuk menemukan solusi optimal global.
+
+Berikut adalah beberapa pendekatan untuk mendapatkan nilai \(A\):
+
+\hypertarget{a.-pendekatan-teoretis-upper-bound}{%
+\subsubsection{Pendekatan Teoretis (Upper Bound)}\label{a.-pendekatan-teoretis-upper-bound}}
+
+Secara matematis, \(A\) harus lebih besar daripada perubahan maksimum yang mungkin terjadi pada fungsi objektif utama (risiko dan return) jika satu variabel berubah. \[ A > \max | \Delta (\text{Risiko} - \text{Return}) | \] Tujuannya adalah memastikan bahwa keuntungan dari ``curang'' (melanggar batasan) tidak pernah lebih besar daripada kerugian akibat hukuman penalti.
+
+\hypertarget{b.-rule-of-thumb-praktis}{%
+\subsubsection{Rule of Thumb (Praktis)}\label{b.-rule-of-thumb-praktis}}
+
+Seringkali, praktisi menggunakan nilai \(A\) yang setara atau sedikit lebih besar dari nilai koefisien terbesar dalam matriks kovarians atau return. - Jika \(\Sigma_{ij}\) dan \(\mu_i\) berada di rentang \([0, 1]\), nilai \(A\) sering kali dimulai dari \(1\) hingga \(10\).
+
+\hypertarget{c.-pencarian-grid-grid-search-hyperparameter-tuning}{%
+\subsubsection{Pencarian Grid (Grid Search / Hyperparameter Tuning)}\label{c.-pencarian-grid-grid-search-hyperparameter-tuning}}
+
+Dalam pendekatan ini, \(A\) diperlakukan seperti hyperparameter dalam machine learning: 1. Pilih serangkaian nilai (misal: \(0.1, 1, 10, 100\)). 2. Jalankan optimasi untuk setiap nilai. 3. Pilih nilai \(A\) terkecil yang masih memberikan solusi valid (memenuhi \(\sum x_i = K\)).
+
+\hypertarget{d.-penalti-dinamis-annealing-schedule}{%
+\subsubsection{Penalti Dinamis (Annealing Schedule)}\label{d.-penalti-dinamis-annealing-schedule}}
+
+Beberapa algoritma memulai dengan nilai \(A\) yang kecil agar sistem dapat mengeksplorasi ruang solusi secara bebas pada awal proses, kemudian secara bertahap meningkatkan \(A\) untuk ``memaksa'' sistem masuk ke wilayah solusi yang valid di akhir proses.
+
+\hypertarget{e.-normalisasi-fungsi-objektif}{%
+\subsubsection{Normalisasi Fungsi Objektif}\label{e.-normalisasi-fungsi-objektif}}
+
+Agar pemilihan \(A\) lebih konsisten, seringkali suku risiko dan return dinormalisasi terlebih dahulu ke rentang \([0, 1]\). Dengan demikian, nilai \(A\) dapat ditentukan secara lebih intuitif (misal: \(A=1.5\) pasti lebih dominan daripada fungsi objektif yang sudah dinormalisasi).

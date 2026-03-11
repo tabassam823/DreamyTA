@@ -1,0 +1,398 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{graphicx}
+\usepackage[indonesian]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc}
+\usepackage{tocloft}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\title{Penurunan Model Markowitz ke Ising Hamiltonian}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\hypertarget{pendahuluan-risk-return-trade-off}{%
+\section{Pendahuluan: Risk-Return Trade-off}\label{pendahuluan-risk-return-trade-off}}
+
+Dalam teori portofolio, kita mencari keseimbangan antara risiko dan keuntungan. Fungsi energi (objektif) dinyatakan sebagai: \[ E = \text{Risiko Total} - \text{Bobot Return} + \text{Penalti Batasan} \]
+
+Tujuan utama adalah mencari \textbf{ground state} (kondisi energi minimum) yang berarti: 
+\begin{itemize}
+    \item Meminimalkan risiko (\(\min x^T \Sigma x\))
+    \item Memaksimalkan return (\(\max \mu^T x \implies \min -\lambda \mu^T x\))
+    \item Memenuhi batasan jumlah aset yang dibeli (Penalty term)
+\end{itemize}
+
+Secara matematis, model Markowitz \hyperref[appendix-a]{(lihat Appendix A)} untuk variabel biner \(x_i \in \{0, 1\}\) adalah:
+\[ \min_{x \in \{0,1\}^N} \mathcal{L}(x) = x^T \Sigma x - \lambda \mu^T x + A \left(\sum_{i=1}^N x_i - K \right)^2 \] Dimana: 
+\begin{itemize}
+    \item \(N\): Jumlah total aset tersedia.
+    \item \(x_i\): Keputusan investasi (\(1\) jika dibeli, \(0\) jika tidak).
+    \item \(\mu\): Vektor expected return.
+    \item \(\lambda\): Parameter \emph{risk aversion} (toleransi risiko).
+    \item \(\Sigma\): Matriks kovarians (risiko antar aset).
+    \item \(K\): Jumlah aset yang ingin dipilih.
+    \item \(A\): Faktor penalti (Lagrange multiplier) untuk memastikan batasan terpenuhi.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{detail-komponen-matematis}{%
+\section{Detail Komponen Matematis}\label{detail-komponen-matematis}}
+
+\hypertarget{a.-suku-pertama-risiko-xt-sigma-x}{%
+\subsection{\texorpdfstring{Suku Pertama: Risiko (\(x^T \Sigma x\))}{Suku Pertama: Risiko (x\^{}T \textbackslash Sigma x)}}\label{a.-suku-pertama-risiko-xt-sigma-x}}
+
+\[ x^T \Sigma x = \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j = \sum_i \sigma^2_i x_i^2 + \sum_{i \ne j} \sigma_{ij} x_i x_j \]
+
+Karena \(x_i \in \{0,1\}\), maka \(x_i^2 = x_i\). Persamaan menjadi: \[ x^T \Sigma x = \sum_i \sigma_i^2 x_i + \sum_{i \ne j} \sigma_{ij} x_i x_j \]
+
+Dimana \(\sigma^2_i\) adalah varians aset \(i\), dan \(\sigma_{ij}\) adalah kovarians antar aset. Kovarians dapat dihitung melalui perkalian deviasi standar kedua aset (\(\sigma_i \sigma_j\)) dengan koefisien korelasi (\(\rho_{ij}\)): \[ \sigma_{ij} = \sigma_i \sigma_j \rho_{ij} \]
+
+Secara statistik, komponen-komponen ini dihitung sebagai berikut: 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+    \item \textbf{Varians (\(\sigma_i^2\)):} mengukur volatilitas aset tunggal. \[ \sigma_i^2 = \frac{1}{T-1} \sum_{t=1}^T (R_{i,t} - \bar{R}_i)^2 \]
+    \item \textbf{Kovarians (\(\sigma_{ij}\)):} mengukur hubungan pergerakan antar dua aset. \[ \sigma_{ij} = \frac{1}{T-1} \sum_{t=1}^T (R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) \]
+    \item \textbf{Korelasi (\(\rho_{ij}\)):} menormalisasi kovarians ke dalam rentang {[}-1, 1{]}. \[ \rho_{ij} = \frac{\sigma_{ij}}{\sigma_i \sigma_j} \]
+\end{enumerate}
+Dengan return harian \(R_{i,t} = \frac{P_{i,t} - P_{i,t-1}}{P_{i,t-1}}\) dan \(\bar{R}_i\) adalah rata-rata return.
+
+\hypertarget{b.-suku-kedua-return-lambda-mut-x}{%
+\subsection{\texorpdfstring{Suku Kedua: Return (\(\lambda \mu^T x\))}{Suku Kedua: Return (\textbackslash lambda \textbackslash mu\^{}T x)}}\label{b.-suku-kedua-return-lambda-mut-x}}
+
+Menghitung keuntungan yang diharapkan: \[ \mu_A = \frac{1}{T} \sum_{t=1}^T R_{A,t} \] suku pertama kedua Parameter \(\lambda\) dapat ditentukan secara endogen (misal melalui fungsi sigmoid): \[ \lambda = \frac{1}{1 + e^{-\mu/\sigma}} \] Untuk penjelasan lebih detail, \hyperref[appendix-b]{(lihat Appendix B)} \\
+
+\subsection{\texorpdfstring{Suku Ketiga: Penalti Batasan (\(A (\sum x_i - K)^2\))}{Suku Ketiga: Penalti Batasan}}\label{c.-suku-ketiga-penalti-batasan}
+
+Karena QUBO adalah model optimasi \emph{unconstrained} (tanpa kendala), batasan atau \emph{constraint} harus dimasukkan ke dalam fungsi objektif sebagai penalti. Suku ini memastikan bahwa jumlah aset yang dipilih mendekati atau sama dengan \(K\).
+
+\[ P(x) = A \left( \sum_{i=1}^N x_i - K \right)^2 \]
+
+Karakteristik suku penalti: 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+    \item \textbf{Fungsi}: Jika \(\sum x_i = K\), maka nilai penalti adalah 0 (minimum). Jika terjadi pelanggaran (\(\sum x_i \neq K\)), nilai energi akan meningkat secara kuadratik, sehingga algoritma akan menghindari solusi tersebut.
+    \item \textbf{Konstanta \(A\)}: Merupakan bobot penalti (\hyperref[appendix-c]{(lihat Appendix C)}). Nilai \(A\) harus dipilih cukup besar agar pelanggaran batasan ``dihukum'' lebih berat daripada potensi keuntungan dari risiko atau return, namun tidak terlalu besar sehingga merusak lanskap energi optimasi.
+    \item \textbf{Bentuk Ekspansi}: \[ A \left( \sum x_i - K \right)^2 = A \left( \sum_i x_i + 2 \sum_{i < j} x_i x_j - 2K \sum_i x_i + K^2 \right) \] Ini menunjukkan bahwa batasan memberikan kontribusi baik pada suku linear maupun suku interaksi (kuadratik) dalam QUBO.
+\end{enumerate}
+
+\hypertarget{transformasi-markowitz-ke-qubo-general-form}{%
+\section{Transformasi Markowitz ke QUBO (General Form)}\label{transformasi-markowitz-ke-qubo-general-form}}
+
+Untuk mentransformasikan model Markowitz ke dalam bentuk QUBO \(\min \sum_{i,j} Q_{ij} x_i x_j\), kita harus mengekspansi seluruh suku dalam fungsi objektif \(\mathcal{L}(x)\).
+
+\hypertarget{langkah-1-ekspansi-suku-suku-objektif}{%
+\subsection{Ekspansi Suku-Suku Objektif}\label{langkah-1-ekspansi-suku-suku-objektif}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Risiko:} \(\sum_i \sigma_i^2 x_i + \sum_{i \neq j} \sigma_{ij} x_i x_j\)
+\item
+  \textbf{Return:} \(-\lambda \sum_i \mu_i x_i\)
+\item
+  \textbf{Penalti:} \(A \left( \sum_i x_i - K \right)^2 = A \left( \sum_i x_i^2 + 2 \sum_{i < j} x_i x_j - 2K \sum_i x_i + K^2 \right)\)
+\end{enumerate}
+
+\hypertarget{langkah-2-penggabungan-dan-penyederhanaan}{%
+\subsection{Penggabungan dan Penyederhanaan}\label{langkah-2-penggabungan-dan-penyederhanaan}}
+
+Substitusi properti biner \(x_i^2 = x_i\): \[ \mathcal{L}(x) = \sum_i \sigma_i^2 x_i + \sum_{i \neq j} \sigma_{ij} x_i x_j - \lambda \sum_i \mu_i x_i + A \left( \sum_i x_i + 2 \sum_{i < j} x_i x_j - 2K \sum_i x_i + K^2 \right) \]
+
+Kelompokkan berdasarkan derajat variabel (\(x_i\) dan \(x_i x_j\)): \[ \mathcal{L}(x) = \sum_i (\sigma_i^2 - \lambda \mu_i + A - 2AK) x_i + \sum_{i \neq j} (\sigma_{ij} + A) x_i x_j + AK^2 \]
+
+\hypertarget{langkah-3-definisi-matriks-qubo-q}{%
+\subsection{\texorpdfstring{Definisi Matriks QUBO (\(Q\))}{Langkah 3: Definisi Matriks QUBO (Q)}}\label{langkah-3-definisi-matriks-qubo-q}}
+
+Dalam format standar QUBO, koefisien dibagi menjadi diagonal (\(Q_{ii}\)) dan off-diagonal (\(Q_{ij}\)): 
+\begin{itemize}
+    \item \textbf{Elemen Diagonal (Suku Linear \(x_i\)):} \[ Q_{ii} = \sigma_i^2 - \lambda \mu_i + A(1 - 2K) \]
+    \item \textbf{Elemen Off-Diagonal (Suku Interaksi \(x_i x_j\)):} \[ Q_{ij} = \sigma_{ij} + A \]
+\end{itemize}
+
+Sehingga fungsi objektif akhir dalam bentuk QUBO adalah: \[ \mathcal{L}(x) = \sum_{i=1}^N Q_{ii} x_i + \sum_{i < j}^N 2Q_{ij} x_i x_j + \text{offset} \] di mana \(\text{offset} = AK^2\). Dalam prakteknya, konstanta ini sering diabaikan karena tidak mempengaruhi lokasi titik minimum (\emph{ground state}).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{interpretasi-koefisien}{%
+\subsection{Interpretasi Koefisien:}\label{interpretasi-koefisien}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\(Q_{ii}\)}: Mengukur ``daya tarik'' aset \(i\) secara individu. Nilai akan mengecil (lebih disukai) jika return \(\mu_i\) tinggi atau varians \(\sigma_i^2\) rendah.
+\item
+  \textbf{\(Q_{ij}\)}: Mengukur hubungan antar dua aset. Nilai akan membesar (dihindari) jika kovarians \(\sigma_{ij}\) positif atau penalti \(A\) besar, yang memaksa sistem untuk memilih tepat \(K\) aset.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{transformasi-qubo-ke-ising-general-form}{%
+\section{Transformasi QUBO ke Ising (General Form)}\label{transformasi-qubo-ke-ising-general-form}}
+
+Untuk sistem \(N\) aset, kita menggunakan transformasi \(x_i = \frac{1 - s_i}{2}\) pada setiap variabel.
+
+\hypertarget{langkah-1-substitusi-ke-bentuk-qubo}{%
+\subsection{Substitusi ke Bentuk QUBO}\label{langkah-1-substitusi-ke-bentuk-qubo}}
+
+\[ E(s) = \sum_i Q_{ii} \left( \frac{1-s_i}{2} \right) + \sum_{i<j} 2Q_{ij} \left( \frac{1-s_i}{2} \right) \left( \frac{1-s_j}{2} \right) + \text{offset} \]
+
+\hypertarget{langkah-2-identifikasi-parameter-hamiltonian}{%
+\subsection{Identifikasi Parameter Hamiltonian}\label{langkah-2-identifikasi-parameter-hamiltonian}}
+
+Setelah ekspansi aljabar, kita mendapatkan bentuk Ising \(H = \sum_{i<j} J_{ij} s_i s_j + \sum_i h_i s_i + C\):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Interaksi (Coupling \(J_{ij}\)):} \[ J_{ij} = \frac{Q_{ij}}{2} \]
+\item
+  \textbf{Medan Lokal (Field \(h_i\)):} \[ h_i = -\frac{1}{2} Q_{ii} - \sum_{j \neq i} \frac{Q_{ij}}{2} \]
+\item
+  \textbf{Konstanta (Energy Offset \(C\)):} \[ C = \text{offset} + \sum_i \frac{Q_{ii}}{2} + \sum_{i<j} \frac{Q_{ij}}{2} \]
+\end{itemize}
+
+\hypertarget{representasi-operator-pauli}{%
+\subsection{Representasi Operator Pauli}\label{representasi-operator-pauli}}
+
+\[ \hat{H} = \sum_{i<j} J_{ij} \hat{Z}_i \hat{Z}_j + \sum_i h_i \hat{Z}_i + C \cdot \hat{I} \] Formula ini berlaku untuk jumlah aset \(N\) berapapun, menjadikannya model yang skalabel untuk optimasi portofolio besar.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ekspektasi-energi-dan-optimasi-parametrik}{%
+\section{Ekspektasi Energi dan Optimasi Parametrik}\label{ekspektasi-energi-dan-optimasi-parametrik}}
+
+Tujuan kita adalah mencari parameter \(\theta\) yang meminimalkan nilai ekspektasi Hamiltonian.
+
+\hypertarget{a.-ansatz-tanpa-entanglement}{%
+\subsection{Ansatz Tanpa Entanglement}\label{a.-ansatz-tanpa-entanglement}}
+
+Jika kita menggunakan \emph{ansatz} produk \(|\psi(\theta)\rangle = \bigotimes_{i=1}^N R_y(\theta_i)|0\rangle\), nilai ekspektasi energinya adalah: \[ \langle E(\theta) \rangle = \sum_{i<j} J_{ij} \cos(2\theta_i)\cos(2\theta_j) + \sum_i h_i \cos(2\theta_i) + C \]
+
+Fungsi ini adalah lanskap energi non-linear yang akan ditelusuri oleh \emph{optimizer} klasik. Secara fisik, \(\theta_i\) menentukan probabilitas ``spin'' aset \(i\) mengarah ke \(+1\) atau \(-1\).
+
+\hypertarget{b.-gradien-analitik}{%
+\subsection{Gradien Analitik}\label{b.-gradien-analitik}}
+
+Gradien terhadap parameter \(\theta_k\) dapat dihitung secara langsung: \[ \frac{\partial \langle E \rangle}{\partial \theta_k} = -2\sin(2\theta_k) \left[ \sum_{j \neq k} J_{kj} \cos(2\theta_j) + h_k \right] \]
+
+Persamaan gradien ini menunjukkan bahwa perubahan pada satu aset \(\theta_k\) dipengaruhi oleh ``medan efektif'' yang dihasilkan oleh aset lainnya (\(J_{kj}\)) dan medan lokalnya sendiri (\(h_k\)).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{fondasi-teoritis-prinsip-variasi}{%
+\section{Fondasi Teoritis: Prinsip Variasi}\label{fondasi-teoritis-prinsip-variasi}}
+
+Penurunan pada Bab 5 adalah contoh spesifik untuk 2 aset. Secara umum, algoritma VQE (Variational Quantum Eigensolver) didasarkan pada salah satu postulat fundamental dalam mekanika kuantum, yaitu \textbf{Prinsip Variasi} (atau Teorema Rayleigh-Ritz \hyperref[appendix-d]{(lihat Appendix D)}).
+
+\hypertarget{a.-postulat-ground-state}{%
+\subsection{Postulat Ground State}\label{a.-postulat-ground-state}}
+
+Setiap sistem kuantum didefinisikan oleh operator Hamiltonian \(\hat{H}\). Energi dari state mana pun \(|\psi\rangle\) dinyatakan sebagai nilai ekspektasi: \[ E(\psi) = \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle} \]
+
+Prinsip variasi menyatakan bahwa untuk sembarang \emph{trial state} (state percobaan) \(|\psi\rangle\), nilai ekspektasi energinya tidak akan pernah lebih rendah dari energi \emph{ground state} (\(E_0\)): \[ E(\psi) \ge E_0 \]
+
+\hypertarget{b.-generalisasi-hamiltonian-untuk-n-aset}{%
+\subsection{\texorpdfstring{Generalisasi Hamiltonian untuk \(N\) Aset}{Generalisasi Hamiltonian untuk N Aset}}\label{b.-generalisasi-hamiltonian-untuk-n-aset}}
+
+Berdasarkan transformasi Ising pada Bab 4, Hamiltonian untuk \(N\) aset dapat dituliskan secara umum sebagai: \[ \hat{H} = \sum_{i=1}^N \sum_{j>i}^N J_{ij} \hat{Z}_i \hat{Z}_j + \sum_{i=1}^N h_i \hat{Z}_i + \text{offset} \cdot \hat{I} \]
+
+Untuk sebuah \emph{trial state} \(|\psi(\theta)\rangle\), nilai ekspektasi energi total adalah: \[ \langle E(\theta) \rangle = \sum_{i<j} J_{ij} \langle \hat{Z}_i \hat{Z}_j \rangle_{\theta} + \sum_i h_i \langle \hat{Z}_i \rangle_{\theta} + \text{offset} \]
+
+Jika kita menggunakan \emph{ansatz} rotasi independen seperti pada Bab 5, di mana \(|\psi(\theta)\rangle = \bigotimes_{i=1}^N R_y(\theta_i)|0\rangle\), maka: 1. \textbf{Suku Linear:} \(\langle \hat{Z}_i \rangle = \cos(2\theta_i)\) 2. \textbf{Suku Interaksi:} \(\langle \hat{Z}_i \hat{Z}_j \rangle = \cos(2\theta_i)\cos(2\theta_j)\)
+
+Sehingga fungsi biaya (cost function) yang akan diminimalkan secara klasik adalah: \[ J(\theta) = \sum_{i<j} J_{ij} \cos(2\theta_i)\cos(2\theta_j) + \sum_i h_i \cos(2\theta_i) + \text{offset} \]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{algoritma-variational-quantum-eigensolver-vqe}{%
+\section{Algoritma Variational Quantum Eigensolver (VQE)}\label{algoritma-variational-quantum-eigensolver-vqe}}
+
+VQE adalah algoritma \emph{hybrid quantum-classical} yang memetakan masalah minimisasi energi ke dalam loop optimasi parameter \(\theta\).
+
+\hypertarget{a.-alur-kerja-hybrid-secara-matematis}{%
+\subsection{Alur Kerja Hybrid secara Matematis}\label{a.-alur-kerja-hybrid-secara-matematis}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Preparasi State:} QPU menyiapkan state \(|\psi(\theta)\rangle = U(\theta)|0\rangle^{\otimes n}\).
+\item
+  \textbf{Dekomposisi Hamiltonian} \hyperref[appendix-e]{(lihat Appendix E)}: Hamiltonian \(\hat{H}\) adalah kombinasi linear suku-suku Pauli \(P_k \in \{I, X, Y, Z\}^{\otimes n}\): \[ \hat{H} = \sum_k c_k \hat{P}_k \]
+\item
+  \textbf{Pengukuran:} Nilai ekspektasi dihitung sebagai: \[ \langle \hat{H} \rangle_{\theta} = \sum_k c_k \langle \psi(\theta) | \hat{P}_k | \psi(\theta) \rangle \]
+\item
+  \textbf{Optimasi:} Optimizer klasik mencari \(\theta^*\) yang meminimalkan \(\langle \hat{H} \rangle_{\theta}\).
+\end{enumerate}
+
+\hypertarget{b.-optimasi-parameter-spsa-vs.-gradient-descent}{%
+\subsection{Optimasi Parameter: SPSA vs.~Gradient Descent}\label{b.-optimasi-parameter-spsa-vs.-gradient-descent}}
+
+Dalam sistem kuantum riil (noisy), estimasi gradien menggunakan \textit{Parameter Shift Rule} \hyperref[appendix-f]{(lihat Appendix F)} atau beda hingga (\textit{finite difference}) sangat rentan terhadap \emph{noise} karena memerlukan banyak pengukuran (\(2N\) pengukuran per iterasi).
+
+\hypertarget{masalah-gradient-descent-gd}{%
+\subsubsection{Masalah Gradient Descent (GD)}\label{masalah-gradient-descent-gd}}
+
+GD menghitung turunan parsial terhadap setiap parameter \(\theta_i\) secara bergantian. Pada lanskap energi yang ``kasar'' akibat \emph{noise} statistik (\emph{shot noise}), GD cenderung terjebak pada \emph{local minima} atau gagal konvergen karena estimasi gradien yang bias.
+
+\hypertarget{mekanisme-spsa-simultaneous-perturbation-stochastic-approximation}{%
+\subsubsection{Mekanisme SPSA (Simultaneous Perturbation Stochastic Approximation)}\label{mekanisme-spsa-simultaneous-perturbation-stochastic-approximation}}
+
+SPSA adalah algoritma optimasi stokastik yang jauh lebih efisien untuk VQE. Alih-alih mengukur gradien satu per satu, SPSA melakukan perturbasi pada \textbf{seluruh parameter sekaligus} menggunakan vektor acak \(\Delta\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Perturbasi Acak:} Pilih vektor \(\Delta_k\) di mana setiap elemen bernilai \(\pm 1\) secara acak (distribusi Bernoulli).
+\item
+  \textbf{Estimasi Gradien Stokastik:} Hitung gradien pendekatan \(g(\theta_k)\) hanya dengan \textbf{dua pengukuran} fungsi biaya: \[ \hat{g}(\theta_k) = \frac{E(\theta_k + c_k \Delta_k) - E(\theta_k - c_k \Delta_k)}{2 c_k \Delta_k} \] di mana \(c_k\) adalah besarnya perturbasi yang mengecil seiring iterasi.
+\item
+  \textbf{Update Parameter:} \[ \theta_{k+1} = \theta_k - a_k \hat{g}(\theta_k) \]
+\end{enumerate}
+
+\hypertarget{keunggulan-spsa-untuk-markowitz-vqe}{%
+\subsubsection{Keunggulan SPSA untuk Markowitz-VQE}\label{keunggulan-spsa-untuk-markowitz-vqe}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Efisiensi Skalabilitas:} Hanya memerlukan 2 \emph{evaluasi fungsi} per iterasi, terlepas dari jumlah aset \(N\). GD memerlukan \(2N\) evaluasi.
+\item
+  \textbf{Robustness terhadap Noise:} SPSA memiliki sifat ``averaging'' alami yang membuatnya lebih tahan terhadap fluktuasi statistik hasil pengukuran QPU dibandingkan \emph{optimizer} berbasis gradien analitik.
+\item
+  \textbf{Konvergensi Global:} Karena sifat stokastiknya, SPSA memiliki peluang lebih besar untuk melompati \emph{local minima} kecil pada lanskap energi portfolio.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{arsitektur-ansatz-efficientsu2}{%
+\section{Arsitektur Ansatz: EfficientSU2}\label{arsitektur-ansatz-efficientsu2}}
+
+Untuk menangani korelasi aset yang kompleks (suku \(J_{ij}\)), kita memerlukan \emph{ansatz} yang memiliki \emph{entanglement}.
+
+\hypertarget{a.-formulasi-unitari-ansatz}{%
+\subsection{Formulasi Unitari Ansatz}\label{a.-formulasi-unitari-ansatz}}
+
+Sirkuit \texttt{EfficientSU2} didefinisikan sebagai operator uniter \(U(\theta)\) yang terdiri dari \(d\) lapisan (\emph{layers}): \[ U(\theta) = L_d \dots L_1 L_0 \] Di mana setiap lapisan \(L_l\) (untuk \(l > 0\)) terdiri dari: 1. \textbf{Entanglement Layer (\(V_{ent}\)):} Biasanya berupa gerbang CNOT linear atau full. \[ V_{ent} = \prod_{(i,j) \in \text{pairs}} CX_{i,j} \] 2. \textbf{Rotation Layer (\(R(\theta)\)):} \[ R_i(\theta) = R_z(\theta_{i,l,2}) R_y(\theta_{i,l,1}) \]
+
+\hypertarget{b.-efek-entanglement-pada-ekspektasi-derivasi-2-qubit}{%
+\subsection{Efek Entanglement pada Ekspektasi (Derivasi 2-Qubit)}\label{b.-efek-entanglement-pada-ekspektasi-derivasi-2-qubit}}
+
+\textbf{Filosofi:} Entanglement adalah sumber daya non-lokal yang memungkinkan \emph{ansatz} mengeksplorasi korelasi yang tidak dapat dipisahkan (\emph{non-separable}).
+
+\textbf{Jembatan Logika:} Kita bandingkan nilai ekspektasi \(\langle \hat{Z}_1 \hat{Z}_2 \rangle\) antara sistem tanpa \emph{entanglement} (Bab 6) dan sistem dengan \emph{entanglement} (1 \emph{layer} CNOT).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{State Awal (Setelah Rotasi \(R_y\)):} \[ |\phi\rangle = R_y(2\theta_1)|0\rangle \otimes R_y(2\theta_2)|0\rangle \] \[ |\phi\rangle = (\cos\theta_1 |0\rangle + \sin\theta_1 |1\rangle) \otimes (\cos\theta_2 |0\rangle + \sin\theta_2 |1\rangle) \] \emph{(Catatan: Menggunakan konvensi Bab 5 di mana rotasi menghasilkan \(\cos\theta\))}
+\item
+  \textbf{Aplikasi Entanglement (CNOT):} \[ |\psi\rangle = CX_{1,2} |\phi\rangle \] \[ |\psi\rangle = \cos\theta_1\cos\theta_2 |00\rangle + \cos\theta_1\sin\theta_2 |01\rangle + \sin\theta_1\cos\theta_2 |11\rangle + \sin\theta_1\sin\theta_2 |10\rangle \] \emph{(Perhatikan bahwa koefisien \(|10\rangle\) dan \(|11\rangle\) tertukar karena kontrol qubit 1 bernilai 1)}
+\item
+  \textbf{Pengukuran Ekspektasi \(\langle \hat{Z}_1 \hat{Z}_2 \rangle\):} \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = \sum_{x \in \{0,1\}^2} P(x) \cdot \text{val}(\hat{Z}_1\hat{Z}_2) \] \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = (|\cos\theta_1\cos\theta_2|^2) \cdot (1) + (|\cos\theta_1\sin\theta_2|^2) \cdot (-1) + (|\sin\theta_1\cos\theta_2|^2) \cdot (1) + (|\sin\theta_1\sin\theta_2|^2) \cdot (-1) \] \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = \cos^2\theta_1(\cos^2\theta_2 - \sin^2\theta_2) + \sin^2\theta_1(\cos^2\theta_2 - \sin^2\theta_2) \] \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = (\cos^2\theta_1 + \sin^2\theta_1) \cos(2\theta_2) = \cos(2\theta_2) \]
+\end{enumerate}
+
+\textbf{Kesimpulan Jembatan:} Dibandingkan dengan sistem tanpa \emph{entanglement} (\(\cos 2\theta_1 \cos 2\theta_2\)), \emph{entanglement} ``mencampur'' parameter sehingga korelasi antar \emph{qubit} tidak lagi bersifat multiplikatif sederhana. Ini memberikan derajat kebebasan bagi VQE untuk merepresentasikan kovarians aset yang kompleks dalam model Markowitz.
+
+\hypertarget{c.-konvergensi-menuju-ground-state}{%
+\subsection{Konvergensi Menuju Ground State}\label{c.-konvergensi-menuju-ground-state}}
+
+\textbf{Filosofi:} Optimasi adalah proses ``pendinginan'' numerik di mana state \(|\psi(\theta)\rangle\) dipaksa sejajar dengan eigenvector energi terendah.
+
+\textbf{Jembatan Logika:} Menggunakan Ekspansi State \hyperref[appendix-g]{(lihat Appendix G)} dalam basis eigen Hamiltonian \(\hat{H} |v_i\rangle = E_i |v_i\rangle\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Ekspansi State Parametrik:} \[ |\psi(\theta)\rangle = \sum_{i=0}^{2^n-1} \alpha_i(\theta) |v_i\rangle \] di mana \(\sum |\alpha_i(\theta)|^2 = 1\).
+\item
+  \textbf{Ekspektasi Energi:} \[ E(\theta) = \sum_i E_i |\alpha_i(\theta)|^2 \]
+\item
+  \textbf{Proses Minimisasi:} Selama iterasi optimasi klasik, parameter \(\theta\) diperbarui sedemikian sehingga bobot probabilitas \(\alpha_i\) untuk \(i > 0\) (state eksitasi) menuju nol, dan bobot untuk \(i=0\) (\emph{ground state}) menuju satu: \[ \lim_{\theta \to \theta^*} |\alpha_0(\theta)|^2 \approx 1 \] \[ \lim_{\theta \to \theta^*} E(\theta) \approx E_0 \]
+\end{enumerate}
+
+Hasil akhirnya adalah state \(|\psi(\theta^*)\rangle\) yang merupakan aproksimasi terbaik dari solusi portfolio optimal dalam ruang Hilbert.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{implementasi-dan-penentuan-solusi-portfolio}{%
+\section{Implementasi dan Penentuan Solusi Portfolio}\label{implementasi-dan-penentuan-solusi-portfolio}}
+
+Setelah konvergensi dicapai pada \(\theta^*\), kita melakukan ekstraksi solusi melalui pengukuran akhir.
+
+\hypertarget{a.-estimasi-probabilitas-appendix-h}{%
+\subsection{Estimasi Probabilitas (\hyperref[appendix-h]{(lihat Appendix H)})}\label{a.-estimasi-probabilitas-appendix-h}}
+
+Probabilitas terpilihnya konfigurasi portfolio biner \(x \in \{0, 1\}^N\) diberikan oleh: \[ P(x) = |\langle x | \psi(\theta^*) \rangle|^2 \]
+
+Dalam eksekusi riil dengan \(M\) kali percobaan (\emph{shots}), probabilitas ini diestimasi sebagai: \[ \hat{P}(x) = \frac{\text{jumlah kemunculan bitstring } x}{M} \]
+
+\hypertarget{b.-decoding-ke-keputusan-investasi}{%
+\subsection{Decoding ke Keputusan Investasi}\label{b.-decoding-ke-keputusan-investasi}}
+
+Hasil akhir adalah \emph{bitstring} \(x\) dengan probabilitas tertinggi: \[ x_{opt} = \arg\max_x \hat{P}(x) \] - Jika \(x_{opt} = [1, 0, 1, 0]\), maka keputusannya adalah membeli aset 1 dan 3, serta tidak membeli aset 2 dan 4.
+
+\hypertarget{c.-verifikasi-constraint-post-selection}{%
+\subsection{Verifikasi Constraint (Post-Selection)}\label{c.-verifikasi-constraint-post-selection}}
+
+Karena suku penalti \(A\) dalam QUBO, solusi yang paling sering muncul diharapkan memenuhi batasan \(\sum x_i = K\). Jika solusi terbaik melanggar batasan, kita dapat melakukan \emph{post-selection} dengan mengambil solusi terbaik berikutnya dalam distribusi probabilitas yang memenuhi syarat batasan tersebut.
+
+
+\newpage
+\appendix
+% Hanya section utama yang diberi prefix "Appendix"
+\renewcommand{\thesection}{Appendix~\Alph{section}}
+% Sub-appendix menggunakan format pendek tanpa kata "Appendix"
+\renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\Alph{section}.\arabic{subsection}.\arabic{subsubsection}}
+% Sesuaikan lebar kolom di TOC:
+%   - section: 5.5em untuk menampung "Appendix A"
+%   - subsection: indent setelah section, numwidth normal untuk "A.1"
+%   - subsubsection: indent & numwidth untuk "A.1.1"
+\addtocontents{toc}{%
+  \protect\setlength{\protect\cftsecnumwidth}{6.5em}%
+}
+\input{appendix_A.tex}
+
+\newpage
+\input{appendix_B.tex}
+
+\newpage
+\input{appendix_C.tex}
+
+\newpage
+\input{appendix_D.tex}
+
+\newpage
+\input{appendix_E.tex}
+
+\newpage
+\input{appendix_F.tex}
+
+\newpage
+\input{appendix_G.tex}
+
+\newpage
+\input{appendix_H.tex}
+
+\end{document}

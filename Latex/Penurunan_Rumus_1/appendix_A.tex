@@ -1,0 +1,93 @@
+\section{Markowitz: Model Portofolio Modern}\label{appendix-a}
+
+Model Markowitz, atau dikenal sebagai \textbf{Modern Portfolio Theory (MPT)}, diperkenalkan oleh Harry Markowitz pada tahun 1952. Berikut adalah langkah-langkah penurunan rumusnya dari tingkat filosofis hingga menjadi persamaan optimasi biner.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{fondasi-filosofis-dan-aksioma-dasar}{%
+\subsection{Fondasi Filosofis dan Aksioma Dasar}\label{fondasi-filosofis-dan-aksioma-dasar}}
+
+Penurunan ini bermula dari beberapa postulat tentang perilaku manusia dan pasar:
+
+\hypertarget{a.-aksioma-rasionalitas-risk-aversion}{%
+\subsubsection{Aksioma Rasionalitas (Risk Aversion)}\label{a.-aksioma-rasionalitas-risk-aversion}}
+
+Investasi bukan sekadar mencari keuntungan sebesar-besarnya. Investor diasumsikan rasional: - Jika ada dua aset dengan \textbf{return yang sama}, investor akan memilih yang memiliki \textbf{risiko lebih rendah}. - Jika ada dua aset dengan \textbf{risiko yang sama}, investor akan memilih yang memiliki \textbf{return lebih tinggi}.
+
+\hypertarget{b.-konvensi-risiko-sebagai-volatilitas}{%
+\subsubsection{Konvensi Risiko sebagai Volatilitas}\label{b.-konvensi-risiko-sebagai-volatilitas}}
+
+Dalam pandangan Markowitz, risiko bukanlah ``kemungkinan bangkrut'', melainkan \textbf{ketidakpastian}. Secara statistik, ketidakpastian diukur sebagai dispersi dari rata-rata, yaitu \textbf{Varians (\(\sigma^2\))} atau \textbf{Deviasi Standar (\(\sigma\))}.
+
+\hypertarget{c.-filosofi-diversifikasi}{%
+\subsubsection{Filosofi Diversifikasi}\label{c.-filosofi-diversifikasi}}
+
+``Don't put all your eggs in one basket.'' Markowitz membuktikan secara matematis bahwa menggabungkan aset yang tidak berkorelasi sempurna dapat menurunkan risiko total portofolio tanpa harus mengurangi return yang diharapkan.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{postulat-matematis-mean-variance-optimization}{%
+\subsection{Postulat Matematis: Mean-Variance Optimization}\label{postulat-matematis-mean-variance-optimization}}
+
+Diberikan \(N\) aset, kita mendefinisikan dua variabel statistik utama: 1. \textbf{Expected Return (\(\mu\)):} Nilai rata-rata keuntungan di masa depan. 2. \textbf{Kovarians (\(\Sigma\)):} Matriks yang merangkum varians tiap aset (diagonal) dan hubungan pergerakan antar aset (off-diagonal).
+
+Tujuan investor adalah meminimalkan risiko total portofolio: \[ \text{Minimize } \sigma_p^2 = \sum_{i,j} w_i w_j \Sigma_{ij} \]
+
+\hypertarget{konstruksi-matriks-kovarians-sigma}{%
+\subsubsection{\texorpdfstring{Konstruksi Matriks Kovarians (\(\Sigma\))}{Konstruksi Matriks Kovarians (\textbackslash Sigma)}}\label{konstruksi-matriks-kovarians-sigma}}
+
+Risiko portofolio bukan sekadar jumlah risiko aset individu, melainkan bagaimana aset-aset tersebut bergerak bersama. Matriks \(\Sigma\) (ukuran \(N \times N\)) dirumuskan sebagai:
+
+\[ \Sigma = \begin{pmatrix} 
+\sigma_1^2 & \sigma_{12} & \dots & \sigma_{1N} \\
+\sigma_{21} & \sigma_2^2 & \dots & \sigma_{2N} \\
+\vdots & \vdots & \ddots & \vdots \\
+\sigma_{N1} & \sigma_{N2} & \dots & \sigma_N^2
+\end{pmatrix} \]
+
+Dimana: 1. \textbf{Elemen Diagonal (\(\sigma_i^2\)):} Merupakan \textbf{Varians} dari aset \(i\). Ini mewakili risiko intrinsik atau volatilitas aset tersebut. 2. \textbf{Elemen Off-Diagonal (\(\sigma_{ij}\)):} Merupakan \textbf{Kovarians} antara aset \(i\) dan \(j\). Kovarians tidak bisa didapatkan hanya dari \(\sigma\) masing-masing aset, melainkan membutuhkan \textbf{Koefisien Korelasi (\(\rho_{ij}\))}.
+
+Hubungan matematisnya adalah: \[ \sigma_{ij} = \rho_{ij} \cdot \sigma_i \cdot \sigma_j \]
+
+Di mana: - \(\sigma_i, \sigma_j\): Deviasi standar (volatilitas) masing-masing aset. - \textbf{Koefisien Korelasi (\(\rho_{ij}\)):} Didapatkan dengan menormalisasi kovarians terhadap produk deviasi standar kedua aset: \[ \rho_{ij} = \frac{\sigma_{ij}}{\sigma_i \cdot \sigma_j} \] - Rentang nilai \(\rho_{ij}\) adalah \([-1, 1]\): - \textbf{1:} Korelasi positif sempurna (bergerak searah). - \textbf{0:} Tidak ada hubungan linear. - \textbf{-1:} Korelasi negatif sempurna (bergerak berlawanan arah).
+
+\hypertarget{bagaimana-sigma-didapatkan}{%
+\paragraph{\texorpdfstring{Bagaimana \(\Sigma\) didapatkan?}{Bagaimana \textbackslash Sigma didapatkan?}}\label{bagaimana-sigma-didapatkan}}
+
+Misalkan kita memiliki matriks return terpusat \(\tilde{R}\) berukuran \(T \times N\) (dimana setiap elemen sudah dikurangi rata-ratanya, \(R_{it} - \bar{R}_i\)). Matriks \(\Sigma\) didapat dari perkalian dot product antar kolom aset: \[ \Sigma = \frac{1}{T-1} \tilde{R}^T \tilde{R} \]
+
+Dalam perkalian ini, kolom aset \(i\) yang dikalikan dengan dirinya sendiri (\(\tilde{R}_i \cdot \tilde{R}_i\)) mengisi posisi diagonal sebagai varians, sedangkan perkalian antar kolom berbeda (\(\tilde{R}_i \cdot \tilde{R}_j\)) mengisi posisi off-diagonal sebagai kovarians.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{transformasi-ke-model-keputusan-biner-x-in-01}{%
+\subsection{\texorpdfstring{Transformasi ke Model Keputusan Biner (\(x \in \{0,1\}\))}{Transformasi ke Model Keputusan Biner (x \textbackslash in \textbackslash\{0,1\textbackslash\})}}\label{transformasi-ke-model-keputusan-biner-x-in-01}}
+
+Dalam model Markowitz asli, variabelnya adalah bobot (\(w \in [0,1]\)). Namun, dalam masalah seleksi aset (seperti pada komputasi kuantum), kita sering menggunakan variabel keputusan biner: - \(x_i = 1\): Aset dipilih untuk masuk portofolio. - \(x_i = 0\): Aset tidak dipilih.
+
+Maka, fungsi objektif dasarnya adalah: \[ \text{Objektif} = \underbrace{x^T \Sigma x}_{\text{Risiko}} - \underbrace{\lambda \mu^T x}_{\text{Return}} \] Dimana \(\lambda\) adalah \textbf{Risk Aversion Coefficient}. Jika \(\lambda\) besar, investor sangat mengejar return. Jika \(\lambda\) kecil, investor sangat menghindari risiko.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{penanganan-batasan-the-penalty-term}{%
+\subsection{Penanganan Batasan (The Penalty Term)}\label{penanganan-batasan-the-penalty-term}}
+
+Dalam dunia nyata, investasi memiliki batasan (\emph{constraints}), misalnya: ``Saya hanya ingin memilih tepat \(K\) aset dari \(N\) pilihan.'' Secara matematis: \[ \sum_{i=1}^N x_i = K \]
+
+Dalam teknik optimasi konvensional, kita menggunakan metode \textbf{Appendix C}. Namun, agar persamaan ini bisa diselesaikan oleh sistem Ising atau QUBO (yang bersifat \emph{unconstrained}), kita harus mengubah ``batasan keras'' (\emph{hard constraint}) menjadi ``penalti lunak'' (\emph{soft penalty}).
+
+\hypertarget{mengapa-kuadratik}{%
+\subsubsection{Mengapa Kuadratik?}\label{mengapa-kuadratik}}
+
+Kita menggunakan bentuk selisih kuadrat: \[ \text{Penalti} = A \left( \sum x_i - K \right)^2 \] - Jika \(\sum x_i = K\), maka \((K-K)^2 = 0\). Tidak ada penalti (energi minimum). - Jika \(\sum x_i \neq K\), maka nilai tersebut akan dikuadratkan (selalu positif) dan dikalikan dengan konstanta \(A\) yang besar. Ini akan meningkatkan total energi secara drastis, sehingga sistem akan dipaksa menjauhi solusi yang melanggar batasan ini.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{formulasi-akhir-the-markowitz-lagrangian}{%
+\subsection{Formulasi Akhir (The Markowitz Lagrangian)}\label{formulasi-akhir-the-markowitz-lagrangian}}
+
+Dengan menggabungkan semua postulat di atas, kita mendapatkan fungsi energi total (Hamiltonian) yang digunakan dalam optimasi:
+
+\[ \min_{x \in \{0,1\}^N} \mathcal{L}(x) = \underbrace{x^T \Sigma x}_{\text{Postulat Risiko}} - \underbrace{\lambda \mu^T x}_{\text{Aksioma Return}} + \underbrace{A \left(\sum_{i=1}^N x_i - K \right)^2}_{\text{Konvensi Batasan}} \]
+
+Persamaan ini merangkum seluruh filosofi Markowitz: 1. \textbf{Suku pertama} menjaga agar aset yang dipilih tidak saling bergejolak (diversifikasi). 2. \textbf{Suku kedua} menarik sistem ke arah keuntungan yang lebih tinggi. 3. \textbf{Suku ketiga} memastikan solusi yang ditemukan adalah solusi yang valid sesuai batasan jumlah aset.

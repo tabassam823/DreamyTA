@@ -1,1 +1,0 @@
-buatkan aku catatan md baru yang berisi penurunan rumus lengkap dari foto @Pasted\ image.png (bahkan penjelasan lebih lengkap untuk yang tidak ada di foto) dengan tujuan membuktikan cara mendapatkan completness relation dan penjelasan grafiknya

@@ -1,0 +1,19 @@
+\hypertarget{detail-komponen-matematis}{%
+\section{Detail Komponen Matematis}\label{detail-komponen-matematis}}
+
+\subsection{Ekstraksi Data dan Probabilitas Gabungan}\label{ekstraksi-data}
+Data historis pergerakan \emph{candlestick} dikuantisasi menjadi partisi dua \emph{state} biner diskret ortogonal: "Naik" (\(|1\rangle\)) dan "Turun" (\(|0\rangle\)). Kalkulasi interdependensi probabilitas gabungan divalidasi sebagai \( P(a,b) = n_{ab} / N \). Parameter dinamika operasional utilitas interaksi partisipan (Game Theory) membangun bias \emph{marginal payoff} (\( h_i \)) \hyperref[appendix-i]{(lihat Appendix I)}, dan turunan entropi terukur matriks murni atau QMI menyusun koefisien kopling (\( J_{ij} \)) \hyperref[appendix-j]{(lihat Appendix J)}.
+
+\subsection{\texorpdfstring{Suku Pertama: Risiko (\(x^T \Sigma x\))}{Suku Pertama: Risiko (x\^{}T \textbackslash Sigma x)}}\label{a.-suku-pertama-risiko-xt-sigma-x}
+Metrik variabilitas stabilitas diestimasi menggunakan turunan dimensi kovariansi alokasi kuadratik:
+\[ x^T \Sigma x = \sum_i \sigma_i^2 x_i + \sum_{i \ne j} \sigma_{ij} x_i x_j \qquad (2) \]
+Dimana \(\sigma_i^2\) merepresentasikan nilai varians aset \(i\) dan \( \sigma_{ij} = \rho_{ij} \sigma_i \sigma_j \) menginterpretasikan turunan kovarians korelasi Pearson.
+
+\subsection{\texorpdfstring{Suku Kedua: Return (\(\lambda \mu^T x\))}{Suku Kedua: Return (\textbackslash lambda \textbackslash mu\^{}T x)}}\label{b.-suku-kedua-return-lambda-mut-x}
+Ekspektasi logaritmik \emph{return} (\(\mu_i\)) dirata-rata empiris, \( \mu_i = \frac{1}{T} \sum R_{i,t} \). Limit parameteris risiko adaptif (\(\lambda\)) \hyperref[appendix-b]{(lihat Appendix B)} disusun analitis melalui fungsi limit sigmoid skalar: \( \lambda = (1 + e^{-\mu/\sigma})^{-1} \).
+
+\subsection{\texorpdfstring{Suku Ketiga: Penalti Batasan (\(A (\sum x_i - K)^2\))}{Suku Ketiga: Penalti Batasan}}\label{c.-suku-ketiga-penalti-batasan}
+Formulasi QUBO mensyaratkan konversi \emph{constraints} observasional menjadi format \emph{penalty term} asimetrik (\emph{unconstrained}). Diferensiasi linear ko-variatif penalti diekspansi menjadi:
+\[ P(x) = A \left( \sum_{i=1}^N x_i^2 + 2\sum_{i<j} x_i x_j - 2K\sum_{i=1}^N x_i + K^2 \right) \qquad (3) \]
+
+

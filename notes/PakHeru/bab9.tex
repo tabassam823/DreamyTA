@@ -1,0 +1,21 @@
+\hypertarget{implementasi-dan-penentuan-solusi-portfolio}{%
+\section{Implementasi dan Penentuan Solusi Portfolio}\label{implementasi-dan-penentuan-solusi-portfolio}}
+
+Setelah konvergensi dicapai pada \(\theta^*\), kita melakukan ekstraksi solusi melalui pengukuran akhir.
+
+\hypertarget{a.-estimasi-probabilitas-appendix-h}{%
+\subsection{Estimasi Probabilitas (\hyperref[appendix-h]{(lihat Appendix H)})}\label{a.-estimasi-probabilitas-appendix-h}}
+
+Probabilitas terpilihnya konfigurasi portfolio biner \(x \in \{0, 1\}^N\) diberikan oleh: \[ P(x) = |\langle x | \psi(\theta^*) \rangle|^2 \]
+
+Dalam eksekusi riil dengan \(M\) kali percobaan (\emph{shots}), probabilitas ini diestimasi sebagai: \[ \hat{P}(x) = \frac{\text{jumlah kemunculan bitstring } x}{M} \]
+
+\hypertarget{b.-decoding-ke-keputusan-investasi}{%
+\subsection{Decoding ke Keputusan Investasi}\label{b.-decoding-ke-keputusan-investasi}}
+
+Hasil akhir adalah \emph{bitstring} \(x\) dengan probabilitas tertinggi: \[ x_{opt} = \arg\max_x \hat{P}(x) \] - Jika \(x_{opt} = [1, 0, 1, 0]\), maka keputusannya adalah membeli aset 1 dan 3, serta tidak membeli aset 2 dan 4.
+
+\hypertarget{c.-verifikasi-constraint-post-selection}{%
+\subsection{Verifikasi Constraint (Post-Selection)}\label{c.-verifikasi-constraint-post-selection}}
+
+Karena suku penalti \(A\) dalam QUBO, solusi yang paling sering muncul diharapkan memenuhi batasan \(\sum x_i = K\). Jika solusi terbaik melanggar batasan, kita dapat melakukan \emph{post-selection} dengan mengambil solusi terbaik berikutnya dalam distribusi probabilitas yang memenuhi syarat batasan tersebut.

@@ -1,0 +1,8 @@
+\section{Quantum Algorithm (VQE)}
+\textit{Variational Quantum Eigensolver} (VQE) adalah algoritma hibrid klasik-kuantum untuk mencari nilai eigen terendah dari sebuah Hamiltonian.
+\begin{itemize}
+    \item \textbf{Prinsip Variasi:} Menggunakan persamaan eigen $H|\psi\rangle = E|\psi\rangle$ untuk mencari \textit{ground state} yang diinterpretasikan sebagai kondisi ekuilibrium pasar paling stabil.
+    \item \textbf{Struktur Ansatz:} Terdiri dari rotasi qubit tunggal ($R_y, R_z$) untuk pemetaan ruang strategi dan \textit{layer entanglement} (CNOT) untuk memodelkan interdependensi aset.
+    \item \textbf{Teknik Optimasi:} Menggunakan optimisator klasik seperti SPSA (\textit{Simultaneous Perturbation Stochastic Approximation}) atau COBYLA.
+    \item \textbf{Ising Hamiltonian:} Pemetaan masalah optimasi ke dalam model Ising dengan parameter bias ($h_i$) dan interaksi ($J_{ij}$).
+\end{itemize}

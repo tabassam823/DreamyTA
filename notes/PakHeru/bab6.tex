@@ -1,0 +1,24 @@
+\hypertarget{fondasi-teoritis-prinsip-variasi}{%
+\section{Fondasi Teoritis: Prinsip Variasi}\label{fondasi-teoritis-prinsip-variasi}}
+
+Penurunan pada Bab 5 adalah contoh spesifik untuk 2 aset. Secara umum, algoritma VQE (Variational Quantum Eigensolver) didasarkan pada salah satu postulat fundamental dalam mekanika kuantum, yaitu \textbf{Prinsip Variasi} (atau Teorema Rayleigh-Ritz \hyperref[appendix-d]{(lihat Appendix D)}).
+
+\hypertarget{a.-postulat-ground-state}{%
+\subsection{Postulat Ground State}\label{a.-postulat-ground-state}}
+
+Setiap sistem kuantum didefinisikan oleh operator Hamiltonian \(\hat{H}\). Energi dari state mana pun \(|\psi\rangle\) dinyatakan sebagai nilai ekspektasi: \[ E(\psi) = \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle} \]
+
+Prinsip variasi menyatakan bahwa untuk sembarang \emph{trial state} (state percobaan) \(|\psi\rangle\), nilai ekspektasi energinya tidak akan pernah lebih rendah dari energi \emph{ground state} (\(E_0\)): \[ E(\psi) \ge E_0 \]
+
+\hypertarget{b.-generalisasi-hamiltonian-untuk-n-aset}{%
+\subsection{\texorpdfstring{Generalisasi Hamiltonian untuk \(N\) Aset}{Generalisasi Hamiltonian untuk N Aset}}\label{b.-generalisasi-hamiltonian-untuk-n-aset}}
+
+Berdasarkan transformasi Ising pada Bab 4, Hamiltonian untuk \(N\) aset dapat dituliskan secara umum sebagai: \[ \hat{H} = \sum_{i=1}^N \sum_{j>i}^N J_{ij} \hat{Z}_i \hat{Z}_j + \sum_{i=1}^N h_i \hat{Z}_i + \text{offset} \cdot \hat{I} \]
+
+Untuk sebuah \emph{trial state} \(|\psi(\theta)\rangle\), nilai ekspektasi energi total adalah: \[ \langle E(\theta) \rangle = \sum_{i<j} J_{ij} \langle \hat{Z}_i \hat{Z}_j \rangle_{\theta} + \sum_i h_i \langle \hat{Z}_i \rangle_{\theta} + \text{offset} \]
+
+Jika kita menggunakan \emph{ansatz} rotasi independen seperti pada Bab 5, di mana \(|\psi(\theta)\rangle = \bigotimes_{i=1}^N R_y(\theta_i)|0\rangle\), maka: 1. \textbf{Suku Linear:} \(\langle \hat{Z}_i \rangle = \cos(2\theta_i)\) 2. \textbf{Suku Interaksi:} \(\langle \hat{Z}_i \hat{Z}_j \rangle = \cos(2\theta_i)\cos(2\theta_j)\)
+
+Sehingga fungsi biaya (cost function) yang akan diminimalkan secara klasik adalah: \[ J(\theta) = \sum_{i<j} J_{ij} \cos(2\theta_i)\cos(2\theta_j) + \sum_i h_i \cos(2\theta_i) + \text{offset} \]
+
+

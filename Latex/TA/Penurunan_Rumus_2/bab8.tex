@@ -1,0 +1,49 @@
+\hypertarget{arsitektur-ansatz-efficientsu2}{%
+\section{Arsitektur Ansatz: EfficientSU2}\label{arsitektur-ansatz-efficientsu2}}
+
+Untuk menangani korelasi aset yang kompleks (suku \(J_{ij}\)), kita memerlukan \emph{ansatz} yang memiliki \emph{entanglement}.
+
+\hypertarget{a.-formulasi-unitari-ansatz}{%
+\subsection{Formulasi Unitari Ansatz}\label{a.-formulasi-unitari-ansatz}}
+
+Sirkuit \texttt{EfficientSU2} didefinisikan sebagai operator uniter \(U(\theta)\) yang terdiri dari \(d\) lapisan (\emph{layers}): \[ U(\theta) = L_d \dots L_1 L_0 \] Di mana setiap lapisan \(L_l\) (untuk \(l > 0\)) terdiri dari: 1. \textbf{Entanglement Layer (\(V_{ent}\)):} Biasanya berupa gerbang CNOT linear atau full. \[ V_{ent} = \prod_{(i,j) \in \text{pairs}} CX_{i,j} \] 2. \textbf{Rotation Layer (\(R(\theta)\)):} \[ R_i(\theta) = R_z(\theta_{i,l,2}) R_y(\theta_{i,l,1}) \]
+
+\hypertarget{b.-efek-entanglement-pada-ekspektasi-derivasi-2-qubit}{%
+\subsection{Efek Entanglement pada Ekspektasi (Derivasi 2-Qubit)}\label{b.-efek-entanglement-pada-ekspektasi-derivasi-2-qubit}}
+
+\textbf{Filosofi:} Entanglement adalah sumber daya non-lokal yang memungkinkan \emph{ansatz} mengeksplorasi korelasi yang tidak dapat dipisahkan (\emph{non-separable}).
+
+\textbf{Jembatan Logika:} Kita bandingkan nilai ekspektasi \(\langle \hat{Z}_1 \hat{Z}_2 \rangle\) antara sistem tanpa \emph{entanglement} (Bab 6) dan sistem dengan \emph{entanglement} (1 \emph{layer} CNOT).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{State Awal (Setelah Rotasi \(R_y\)):} \[ |\phi\rangle = R_y(2\theta_1)|0\rangle \otimes R_y(2\theta_2)|0\rangle \] \[ |\phi\rangle = (\cos\theta_1 |0\rangle + \sin\theta_1 |1\rangle) \otimes (\cos\theta_2 |0\rangle + \sin\theta_2 |1\rangle) \] \emph{(Catatan: Menggunakan konvensi Bab 5 di mana rotasi menghasilkan \(\cos\theta\))}
+\item
+  \textbf{Aplikasi Entanglement (CNOT):} \[ |\psi\rangle = CX_{1,2} |\phi\rangle \] \[ |\psi\rangle = \cos\theta_1\cos\theta_2 |00\rangle + \cos\theta_1\sin\theta_2 |01\rangle + \sin\theta_1\cos\theta_2 |11\rangle + \sin\theta_1\sin\theta_2 |10\rangle \] \emph{(Perhatikan bahwa koefisien \(|10\rangle\) dan \(|11\rangle\) tertukar karena kontrol qubit 1 bernilai 1)}
+\item
+  \textbf{Pengukuran Ekspektasi \(\langle \hat{Z}_1 \hat{Z}_2 \rangle\):} \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = \sum_{x \in \{0,1\}^2} P(x) \cdot \text{val}(\hat{Z}_1\hat{Z}_2) \] \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = (|\cos\theta_1\cos\theta_2|^2) \cdot (1) + (|\cos\theta_1\sin\theta_2|^2) \cdot (-1) + (|\sin\theta_1\cos\theta_2|^2) \cdot (1) + (|\sin\theta_1\sin\theta_2|^2) \cdot (-1) \] \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = \cos^2\theta_1(\cos^2\theta_2 - \sin^2\theta_2) + \sin^2\theta_1(\cos^2\theta_2 - \sin^2\theta_2) \] \[ \langle \hat{Z}_1 \hat{Z}_2 \rangle = (\cos^2\theta_1 + \sin^2\theta_1) \cos(2\theta_2) = \cos(2\theta_2) \]
+\end{enumerate}
+
+\textbf{Kesimpulan Jembatan:} Dibandingkan dengan sistem tanpa \emph{entanglement} (\(\cos 2\theta_1 \cos 2\theta_2\)), \emph{entanglement} ``mencampur'' parameter sehingga korelasi antar \emph{qubit} tidak lagi bersifat multiplikatif sederhana. Ini memberikan derajat kebebasan bagi VQE untuk merepresentasikan kovarians aset yang kompleks dalam model Markowitz.
+
+\hypertarget{c.-konvergensi-menuju-ground-state}{%
+\subsection{Konvergensi Menuju Ground State}\label{c.-konvergensi-menuju-ground-state}}
+
+\textbf{Filosofi:} Optimasi adalah proses ``pendinginan'' numerik di mana state \(|\psi(\theta)\rangle\) dipaksa sejajar dengan eigenvector energi terendah.
+
+\textbf{Jembatan Logika:} Menggunakan Ekspansi State \hyperref[appendix-g]{(lihat Appendix G)} dalam basis eigen Hamiltonian \(\hat{H} |v_i\rangle = E_i |v_i\rangle\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Ekspansi State Parametrik:} \[ |\psi(\theta)\rangle = \sum_{i=0}^{2^n-1} \alpha_i(\theta) |v_i\rangle \] di mana \(\sum |\alpha_i(\theta)|^2 = 1\).
+\item
+  \textbf{Ekspektasi Energi:} \[ E(\theta) = \sum_i E_i |\alpha_i(\theta)|^2 \]
+\item
+  \textbf{Proses Minimisasi:} Selama iterasi optimasi klasik, parameter \(\theta\) diperbarui sedemikian sehingga bobot probabilitas \(\alpha_i\) untuk \(i > 0\) (state eksitasi) menuju nol, dan bobot untuk \(i=0\) (\emph{ground state}) menuju satu: \[ \lim_{\theta \to \theta^*} |\alpha_0(\theta)|^2 \approx 1 \] \[ \lim_{\theta \to \theta^*} E(\theta) \approx E_0 \]
+\end{enumerate}
+
+Hasil akhirnya adalah state \(|\psi(\theta^*)\rangle\) yang merupakan aproksimasi terbaik dari solusi portfolio optimal dalam ruang Hilbert.
+
+

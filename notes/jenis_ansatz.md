@@ -21,12 +21,12 @@ $$|\psi(\theta)\rangle = L_d(\theta_d) \prod_{i=0}^{d-1} [W_i L_i(\theta_i)] |0\
 *   **Layer Keterbelitan ($W_i$)**: Menggunakan gerbang $CX$ dengan pola seperti *Linear*, *Circular*, atau *Full*.
 
 ### 3. Perbandingan dengan EfficientSU2
-| Fitur | RealAmplitudes | EfficientSU2 (Default) |
-| :--- | :--- | :--- |
-| **Gerbang Rotasi** | $R_y$ | $R_y$ dan $R_z$ |
-| **Amplitudo** | Selalu Real ($\mathbb{R}$) | Kompleks ($\mathbb{C}$) |
-| **Jumlah Parameter** | $n \times (d+1)$ | $n \times 2 \times (d+1)$ |
-| **Kegunaan** | Kimia (Hamiltonian Real) | Umum / ML |
+| Fitur                | RealAmplitudes             | EfficientSU2 (Default)    |
+| :------------------- | :------------------------- | :------------------------ |
+| **Gerbang Rotasi**   | $R_y$                      | $R_y$ dan $R_z$           |
+| **Amplitudo**        | Selalu Real ($\mathbb{R}$) | Kompleks ($\mathbb{C}$)   |
+| **Jumlah Parameter** | $n \times (d+1)$           | $n \times 2 \times (d+1)$ |
+| **Kegunaan**         | Kimia (Hamiltonian Real)   | Umum / ML                 |
 
 ### 4. Keunggulan dalam Optimasi
 1.  **Efisiensi Parameter**: Karena hanya menggunakan satu jenis gerbang rotasi ($R_y$), jumlah parameter yang perlu dioptimasi menjadi setengah dari `EfficientSU2`. Hal ini mempercepat konvergensi algoritma optimasi.
@@ -82,10 +82,10 @@ Kekuatan utama `TwoLocal` adalah kemampuannya untuk dikonfigurasi secara bebas:
 3.  **Entanglement Strategy**: Menentukan bagaimana qubit saling terhubung (Linear, Full, Circular, atau kustom).
 
 ### 3. Hubungan dengan Ansatz Lain
-| Nama Ansatz | Konfigurasi `TwoLocal` |
-| :--- | :--- |
-| **RealAmplitudes** | `rotation_blocks='ry'`, `entanglement_blocks='cx'` |
-| **EfficientSU2** | `rotation_blocks=['ry', 'rz']`, `entanglement_blocks='cx'` |
+| Nama Ansatz        | Konfigurasi `TwoLocal`                                     |
+| :----------------- | :--------------------------------------------------------- |
+| **RealAmplitudes** | `rotation_blocks='ry'`, `entanglement_blocks='cx'`         |
+| **EfficientSU2**   | `rotation_blocks=['ry', 'rz']`, `entanglement_blocks='cx'` |
 
 ### 4. Mekanisme Optimasi
 Karena `TwoLocal` adalah bentuk umum, ia mewarisi semua properti optimasi dari ansatz heuristik lainnya:

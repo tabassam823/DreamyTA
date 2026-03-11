@@ -1,0 +1,108 @@
+\section{Risk Aversion Endogen: Pendekatan Sigmoid}\label{appendix-b}
+
+\hypertarget{urgensi-mengapa-sigmoid}{%
+\subsection{Urgensi: Mengapa Sigmoid?}\label{urgensi-mengapa-sigmoid}}
+
+Dalam model Markowitz statis, \(\lambda\) (bobot return) seringkali dipilih secara subjektif (misal \(\lambda=0.5\)). Namun, pasar yang riil bersifat dinamis. Kita membutuhkan fungsi yang bisa mengubah rasio performa aset (\(\mu/\sigma\)) menjadi bobot keputusan yang halus namun memiliki batas yang jelas. Fungsi Sigmoid adalah kandidat sempurna karena ia memetakan input tak terbatas menjadi output dalam rentang \((0, 1)\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{aksioma-intuisi-psikologi-keputusan}{%
+\subsection{Aksioma \& Intuisi: Psikologi Keputusan}\label{aksioma-intuisi-psikologi-keputusan}}
+
+Ada tiga aksioma dasar yang melandasi penggunaan fungsi ini: 1. \textbf{Aksioma Signal-to-Noise:} Investor tidak melihat keuntungan (\(\mu\)) secara terisolasi, melainkan selalu membandingkannya dengan derau/risiko (\(\sigma\)). Rasio \(\mu/\sigma\) adalah penggerak utama keputusan. 2. \textbf{Aksioma Saturasi:} Nafsu terhadap keuntungan tidak tumbuh linear tanpa batas. Ada titik di mana tambahan keuntungan tidak lagi menambah ``nafsu'' secara signifikan (titik jenuh/saturasi). 3. \textbf{Aksioma Batas:} Parameter \(\lambda\) harus berada di antara 0 (fokus total pada risiko) dan 1 (fokus total pada return).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{reduksionisme-kasus-minimal-mu-sigma}{%
+\subsection{\texorpdfstring{Reduksionisme: Kasus Minimal (\(\mu = \sigma\))}{Reduksionisme: Kasus Minimal (\textbackslash mu = \textbackslash sigma)}}\label{reduksionisme-kasus-minimal-mu-sigma}}
+
+Mari kita lihat apa yang terjadi jika risiko suatu aset tepat sama dengan keuntungan yang diharapkan.
+
+\hypertarget{a.-kondisi-seimbang}{%
+\subsubsection{Kondisi Seimbang}\label{a.-kondisi-seimbang}}
+
+Jika \(\mu = \sigma\), maka rasio \(\mu/\sigma = 1\). \[ \lambda = \frac{1}{1 + e^{-1}} \qquad (1) \]
+
+\begin{quote}
+\textbf{Visualisasi (1): Jembatan Logika} Secara numerik: \[ \lambda \approx \frac{1}{1 + 0.367} \approx 0.731 \] Karena \(\mu/\sigma\) positif dan cukup kuat, sistem ``condong'' untuk mengejar return (\(\lambda > 0.5\)). Sebaliknya, jika \(\mu = 0\) (tidak ada return), maka \(\lambda = 0.5\) (netral).
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{jembatan-logika-formalisme-fungsi-aktivasi}{%
+\subsection{Jembatan Logika: Formalisme Fungsi Aktivasi}\label{jembatan-logika-formalisme-fungsi-aktivasi}}
+
+Dalam \emph{Machine Learning}, sigmoid digunakan sebagai gerbang (\emph{gate}). Dalam VQE Portofolio, \(\lambda\) adalah gerbang yang menentukan seberapa besar ``angin return'' boleh meniup partikel kita keluar dari ``lembah risiko''.
+
+\hypertarget{a.-persamaan-umum}{%
+\subsubsection{Persamaan Umum}\label{a.-persamaan-umum}}
+
+\[ \lambda(\mu, \sigma) = \frac{1}{1 + e^{-(\mu/\sigma)}} \qquad (2) \]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{derivasi-indeks-persamaan}{%
+\subsection{Derivasi \& Indeks Persamaan}\label{derivasi-indeks-persamaan}}
+
+Mari kita turunkan bagaimana perubahan kecil pada risiko (\(\Delta \sigma\)) memengaruhi selera investasi kita.
+
+\hypertarget{a.-sensitivitas-selera-terhadap-risiko}{%
+\subsubsection{Sensitivitas Selera terhadap Risiko}\label{a.-sensitivitas-selera-terhadap-risiko}}
+
+Turunan \(\lambda\) terhadap \(\sigma\) menunjukkan seberapa cepat selera kita berubah saat pasar mulai bergejolak: \[ \frac{\partial \lambda}{\partial \sigma} = \frac{e^{-(\mu/\sigma)} \cdot (-\mu/\sigma^2)}{(1 + e^{-(\mu/\sigma)})^2} \qquad (3) \]
+
+\begin{quote}
+\textbf{Visualisasi (3): Perhitungan Linear} Kita sederhanakan menggunakan properti turunan sigmoid \(f'(x) = f(x)(1-f(x))\): \[ \frac{\partial \lambda}{\partial \sigma} = \lambda(1-\lambda) \cdot \left(\frac{\mu}{\sigma^2}\right) \] Misalkan pada titik netral \(\lambda = 0.5\) dan \(\mu/\sigma^2 = 2\): \[ \frac{\partial \lambda}{\partial \sigma} = (0.5)(0.5) \cdot 2 = 0.5 \] Ini menunjukkan bahwa pada kondisi netral, perubahan volatilitas memiliki dampak 50\% terhadap pergeseran selera investasi kita.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{verifikasi-parameter-batas-ekstrem}{%
+\subsection{Verifikasi \& Parameter: Batas Ekstrem}\label{verifikasi-parameter-batas-ekstrem}}
+
+Kita uji model ini pada tiga kondisi pasar yang berbeda:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Kondisi Pasar
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rasio \(\mu/\sigma\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Nilai \(\lambda\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Perilaku VQE
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Pasar Euphoria} & \(\mu \gg \sigma\) & \(\lambda \to 1\) & Memilih aset return tertinggi, abaikan risiko. \\
+\textbf{Pasar Netral} & \(\mu = 0\) & \(\lambda = 0.5\) & Keseimbangan antara keamanan dan cuan. \\
+\textbf{Pasar Panic} & \(\mu \ll 0\) & \(\lambda \to 0\) & Memilih aset paling aman (varians terendah). \\
+\end{longtable}
+
+\begin{quote}
+\textbf{Visualisasi (6): Contoh Perhitungan} Jika pasar sedang jatuh (\(\mu = -10, \sigma = 2\)): \[ \text{Rasio} = -5 \implies \lambda = \frac{1}{1 + e^5} \approx \frac{1}{1 + 148} \approx 0.006 \] Nilai \(\lambda \approx 0\) ini akan membuat Hamiltonian VQE didominasi oleh suku risiko \(x^T \Sigma x\).
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{physical-insight-efek-termostat-kuantum}{%
+\subsection{Physical Insight: Efek ``Termostat'' Kuantum}\label{physical-insight-efek-termostat-kuantum}}
+
+Bayangkan \(\lambda\) sebagai sebuah \textbf{termostat} otomatis. 1. Saat pasar ``panas'' (return tinggi), termostat membuka katup return lebar-lebar (\(\lambda \uparrow\)). 2. Saat pasar ``dingin'' (risiko tinggi), termostat menutup katup return dan menyalakan mode aman (\(\lambda \downarrow\)).
+
+\textbf{Hubungan dengan Ising Hamiltonian:} Parameter \(\lambda\) endogen ini secara otomatis mengatur ulang kekuatan \textbf{Field Lokal (\(h_i\))} terhadap \textbf{Kopling (\(J_{ij}\))}. Tanpa campur tangan manusia, sirkuit kuantum Anda akan menyesuaikan ``arah ukurannya'' sendiri sesuai dengan iklim data yang masuk.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{kesimpulan}{%
+\subsection{Kesimpulan}\label{kesimpulan-b}}
+
+Dengan menggunakan fungsi sigmoid: - Kita menghindari bias subjektif dalam memilih \(\lambda\). - Kita memberikan sifat \textbf{non-linear} yang lebih mirip dengan perilaku asli manusia. - Kita memastikan bahwa sistem kuantum selalu memiliki skala energi yang konsisten.

@@ -1,0 +1,48 @@
+\section{Quantum Mutual Information: Ekstraksi Parameter Kopling (\texorpdfstring{\(J_{ij}\)}{J\_ij})}\label{appendix-j}
+
+\subsection{Konvensi Dasar dan Sistem Komposit}\label{konvensi-dasar-dan-sistem-komposit}
+Matematika sistem terkuantisasi mendefinisikan proyektor representasi probabilitas instrumen fisika analitik tunggal (\emph{qubit}) dalam ruang absolut Hilbert $\mathbb{C}^2$ melalui identifikasi basis komputasi ortonormal deterministik. Terminologi logis menetapkan determinasi vektor status referensial mekanikal secara eksak, di mana instrumen pergerakan polar (penurunan/kenaikan harga) dinyatakan berurutan melalui state energi dasar $|0\rangle$ dan eksitasi sistematis $|1\rangle$:
+\begin{equation}
+|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \qquad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+\end{equation}
+Sistem interaksi makroskopis yang diobservasi dalam bursa mematuhi fungsional linear kombinasi bipartit, mentransformasi demensi probabilitas eksponensial menggunakan operator mekanika perkalian tensor $\mathbb{C}^2 \otimes \mathbb{C}^2$. Ruang komposit tersebut membentuk agregat empat kombinasi probabilitas pengamatan sistematis, membentangkan vektor superposisi amplitudinal matriks representatif observasi kompleks $|\psi\rangle_{ij}$ deterministik linear utuh:
+\begin{align}
+|\psi\rangle_{ij} &= \sum_{a,b \in \{0,1\}} \alpha_{ab} |ab\rangle \\
+|\psi\rangle_{ij} &= \alpha_{00} \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} + \alpha_{01} \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} + \alpha_{10} \begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \end{pmatrix} + \alpha_{11} \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix} = \begin{pmatrix} \alpha_{00} \\ \alpha_{01} \\ \alpha_{10} \\ \alpha_{11} \end{pmatrix}
+\end{align}
+
+\subsection{Karakterisasi Matriks Densitas: \emph{Pure State} vs \emph{Mixed State}}\label{konstruksi-matriks-densitas}
+Sistem informasi absolut tanpa dispersi probabilistik merepresentasikan determinasi kuantum koheren melalui \emph{outer product} rank-1 keadaan murni absolut empirikal, $ \rho_{ij}^{(pure)} = |\psi\rangle\langle\psi| $. Model mekanika ini dikesampingkan dalam perhitungan interdependensi klasik data historis \emph{candlestick} komputasional, sebab entri \emph{off-diagonal}-nya mendistorsi koherensi yang berakibat pada pembatalan kuantifikasi entropikal rasional sistem gabungan analitis konseptual murni logis ($S(\rho)=0$):
+\begin{align}
+\rho_{ij}^{(pure)} &= \begin{pmatrix} \alpha_{00} \\ \alpha_{01} \\ \alpha_{10} \\ \alpha_{11} \end{pmatrix} \begin{pmatrix} \alpha_{00}^* & \alpha_{01}^* & \alpha_{10}^* & \alpha_{11}^* \end{pmatrix} \\
+\rho_{ij}^{(pure)} &= \begin{pmatrix} |\alpha_{00}|^2 & \alpha_{00}\alpha_{01}^* & \alpha_{00}\alpha_{10}^* & \alpha_{00}\alpha_{11}^* \\ \alpha_{01}\alpha_{00}^* & |\alpha_{01}|^2 & \alpha_{01}\alpha_{10}^* & \alpha_{01}\alpha_{11}^* \\ \alpha_{10}\alpha_{00}^* & \alpha_{10}\alpha_{01}^* & |\alpha_{10}|^2 & \alpha_{10}\alpha_{11}^* \\ \alpha_{11}\alpha_{00}^* & \alpha_{11}\alpha_{01}^* & \alpha_{11}\alpha_{10}^* & |\alpha_{11}|^2 \end{pmatrix}
+\end{align}
+Bursa berfluktuasi klasik ekuivalen matriks densitas asimetrik empirikal keadaan campuran (\emph{mixed state}) yang menjamin penjabaran observasi stokastik secara realistik terkalibrasi analitis tanpa komplikasi interferensi. Proyektor diagonal murni ini meletakkan nilai representasional riwayat probabilitas fungsional distribusi makroskopis $P(a,b)$ ke dalam ekuilibrium matriks Hermitian logis:
+\begin{align}
+\rho_{ij}^{(mixed)} &= \sum_{a,b \in \{0,1\}} P(a,b) |ab\rangle\langle ab| \\
+\rho_{ij}^{(mixed)} &= \begin{pmatrix} P(00) & 0 & 0 & 0 \\ 0 & P(01) & 0 & 0 \\ 0 & 0 & P(10) & 0 \\ 0 & 0 & 0 & P(11) \end{pmatrix}
+\end{align}
+Keterikatan individual tiap entitas portofolio diekskresi fungsional dari relasinya melalui rumusan eliminasi ekuivalen observasi kuantum spesifik matriks terreduksi (\emph{partial trace}) komplementernya. Evaluasi terisolir ini mendistribusikan parameter probabilitas marjinal mekanis dalam batasan observasi ekuivalensi diagonal sistem partisi empirikal matriks linier:
+\begin{align}
+\rho_i &= \text{Tr}_j(\rho_{ij}^{(mixed)}) = \sum_{b \in \{0, 1\}} \langle b | \rho_{ij}^{(mixed)} | b \rangle = \begin{pmatrix} P(i=0) & 0 \\ 0 & P(i=1) \end{pmatrix} \\
+\rho_j &= \text{Tr}_i(\rho_{ij}^{(mixed)}) = \sum_{a \in \{0, 1\}} \langle a | \rho_{ij}^{(mixed)} | a \rangle = \begin{pmatrix} P(j=0) & 0 \\ 0 & P(j=1) \end{pmatrix}
+\end{align}
+
+\subsection{Kalkulasi \emph{Quantum Mutual Information} (QMI) dan \emph{Coupling}}\label{kalkulasi-mutual-information-dan-parameter-interaksi}
+Dispersi ketidakpastian observasi makroskopis keadaan sistem probabilistik terdistribusi diukur secara ekstensif menggunakan rumusan entropi kuantum diferensial \emph{Von Neumann}:
+\begin{equation}
+S(\rho) = -\text{Tr}(\rho \ln \rho)
+\end{equation}
+Karena matriks densitas yang dikaji diformulasikan murni secara diagonal, probabilitas deterministik dispersi ini berekivalensi analitik absolut logis terhadap representasi limit teoretis Shannon komputasional ($S = -\sum P \ln P$). Seterusnya ekuasi ketergantungan metrik sistem komposit diproyeksikan empiris operasional melalui rumusan distribusi \emph{Quantum Mutual Information} (QMI):
+\begin{equation}
+I(i:j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}^{(mixed)})
+\end{equation}
+Batasan suhu tinggi (\emph{high-temperature limit}) energi ekuilibrium termal matriks kinetik proyektor interaksi deterministik \emph{econophysics} mendeklarasikan aproksimasi dependensi linear empirikal $I(i:j) \approx \frac{1}{2}(\beta J_{ij})^2$. Dengan mengakomodasi postulat operasional tersebut, skalar magnitude asimetrik kopling dinamis diformulasikan konvergen simetris dengan eksponensial QMI rasional sekuensial:
+\begin{equation}
+|J_{ij}| \approx \frac{1}{\beta}\sqrt{2I(i:j)} \propto \sqrt{I(i:j)} 
+\end{equation}
+Derajat korelasi dispersif arah fluktuasi dependensi variabel (\text{sgn}) ditransformasikan logis empiris diferensial signifikansi koefisien linear polaritas metrik spasial Pearson ($\rho_{ij}^{Pearson}$). Mendefinisikan agregasi suhu fundamental pasar ($T \sim \sigma_{avg}$) asimetri logis dengan resolusi parameter fisika $\kappa \approx \sqrt{2}k_BT$, skenario interaksi partisi direduksi pada persamaan Hamiltonian eksak final ini:
+\begin{align}
+J_{ij} &= \kappa \cdot \text{sgn}(\rho_{ij}^{Pearson}) \sqrt{I(i:j)} \\
+\text{sgn}(\rho_{ij}^{Pearson}) &= \frac{\rho_{ij}^{Pearson}}{|\rho_{ij}^{Pearson}|}
+\end{align}

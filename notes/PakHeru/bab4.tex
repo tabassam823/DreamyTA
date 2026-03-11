@@ -1,0 +1,31 @@
+\hypertarget{transformasi-qubo-ke-ising-general-form}{%
+\section{Transformasi QUBO ke Ising (General Form)}\label{transformasi-qubo-ke-ising-general-form}}
+
+\subsection{Jembatan Formalisme \& Logika}
+Penyederhanaan model limitasi probabilistik konvensional dari fungsi biner ekuivalen (\(x_i \in \{0, 1\}\)) ditranslasikan rasional ke ranah \emph{physics} representasi limit probabilitas \emph{spin} deterministik elektron (\(s_i \in \{+1, -1\}\)) menggunakan \emph{affine transform}:
+\[ x_i = \frac{1 - s_i}{2} \qquad (8) \]
+Transformasi komputasional deterministik ekuivalen linear asimetrik ini menjamin bahwa setiap turunan gradien rasional probabilitas utilitas kalkulatif terproyeksi \emph{exact} pada orientasi operator \emph{spin} kuantum dengan limit rentang proporsional penskalaan $1/2$. Titik optimum limit Hamiltonian ekuasi operasional \emph{ground state} akan selalu linier bersilangan logis secara eksak fungsional komputasional asimetrik utilitas ekspektasi rasional absolut mikro strategis.
+
+\subsection{Dekomposisi Hamiltonian Ising Murni}
+Mensubstitusi pemetaan \emph{affine} asimetris murni persamaan (8) ke utilitas QUBO ekuasi (6) menghasilkan bentuk fungsional energi turunan:
+\[ H_{pure} = \sum_{i=1}^N Q_{ii} \frac{1-s_i}{2} + \sum_{i<j} 2Q_{ij} \left(\frac{1-s_i}{2}\right)\left(\frac{1-s_j}{2}\right) \qquad (9) \]
+Diekspansi menjadi persamaan deret:
+\[ H_{pure} = \sum_i \frac{Q_{ii}}{2} - \sum_i \frac{Q_{ii}}{2} s_i + \sum_{i<j} \frac{Q_{ij}}{2} (1 - s_i - s_j + s_i s_j) \qquad (10) \]
+Di mana komponen interaksi observasional turunan diekstrak mutlak $J_{ij}^{pure} = Q_{ij}/2 = \sigma_{ij}/2$ dan ekuivalen medan bias fungsional $h_i^{pure} = -Q_{ii}/2 - \sum_{j \neq i} Q_{ij}/2$.
+
+Selanjutnya, penalti fungsional $H_{pen}$ dimodifikasi operasional asimetris linear proporsional dengan menggunakan identitas operator \((\sum s_i)^2 = N + 2 \sum_{i<j} s_i s_j\):
+\[ H_{pen} = \frac{A}{2} \sum_{i<j}  s_i s_j - A \left( \frac{N}{2} - K \right) \sum_i s_i + \text{konstanta} \qquad (11) \]
+
+\subsection{Visualisasi Perhitungan Matriks dan Interaksi Hybrid}
+Energi Hamiltonian akhir diturunkan melalui agregasi fungsional parameter operasional deterministik komponen murni ekuasi $H_{pure}$ dan struktur komputasional penalti $H_{pen}$:
+\[ \hat{H}_{final} = \sum_{i<j} J_{ij}^{total} \hat{Z}_i \hat{Z}_j + \sum_i h_i^{total} \hat{Z}_i + C \cdot \hat{I} \qquad (12) \]
+
+\textbf{1. Matriks Interaksi (\(J_{ij}\)):} \\
+Nilai parameter limit energi \emph{Hamiltonian} interaksi spesifik agregat \emph{Ising coupling} (\(J_{ij}^{total} = J_{ij}^{pure} + J_{ij}^{pen}\)) dibentuk ekuivalen hibrid operasional dekomposisi fungsi. Mengartikulasikan QMI \hyperref[appendix-j]{(lihat Appendix J)} sebagai representasional $J_{ij}^{pure}$:
+\[ J_{ij}^{total} = \underbrace{\kappa \cdot \text{sgn}(\rho_{ij}) \sqrt{I(i:j)}}_{J_{ij}^{pure}} + \underbrace{\frac{A}{2}}_{J_{ij}^{pen}} \qquad (13) \]
+
+\textbf{2. Vektor Medan Lokal (\(h_i\)):} \\
+Matriks vektor medan lokal observasional diferensial ekuasi ($h_i^{total} = h_i^{pure} + h_i^{pen}$) mereduksi kohesi \emph{Game Theory payoff} \hyperref[appendix-i]{(lihat Appendix I)} diferensial rasional sebagai asimetris substitusi parameter ekuivalen $h_i^{pure}$:
+\[ h_i^{total} = \underbrace{\frac{E[i|+] - E[i|-]}{2}}_{h_i^{pure}} - \underbrace{A\left(\frac{N}{2} - K\right)}_{h_i^{pen}} \qquad (14) \]
+
+

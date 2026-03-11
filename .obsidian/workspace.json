@@ -4,179 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "342a0f9766fbb87d",
+        "id": "86067914ce5dde18",
         "type": "tabs",
         "children": [
           {
-            "id": "aa25954f234720a1",
+            "id": "55e2b249d4b770ab",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/PakHeru/Markowitz_QUBO_TA.md",
+                "file": "Latex/TA/MD_File/bab1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Markowitz_QUBO_TA"
-            }
-          },
-          {
-            "id": "3415e9b59ec38519",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Pure_Markowitz_QUBO.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Pure_Markowitz_QUBO"
-            }
-          },
-          {
-            "id": "555d76698b9e70fd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/GT_to_h.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "GT_to_h"
-            }
-          },
-          {
-            "id": "7b2e3a033a7e24ec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/PakHeru/Markowitz_QUBO.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Markowitz_QUBO"
-            }
-          },
-          {
-            "id": "a6837a9e720977cd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/SPSA.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "SPSA"
-            }
-          },
-          {
-            "id": "d211193d3a9c6db2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Sumur_Potensial_Parabolik.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Sumur_Potensial_Parabolik"
-            }
-          },
-          {
-            "id": "0ba866f936f107f8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/PakHeru/Teorema_Reyleigh_Ritz.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Teorema_Reyleigh_Ritz"
-            }
-          },
-          {
-            "id": "b631dfe90ec914d0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/PakHeru/risk_aversion_endogen.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "risk_aversion_endogen"
-            }
-          },
-          {
-            "id": "52514127e43b86c1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/PakHeru/QMI.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "QMI"
-            }
-          },
-          {
-            "id": "8ef752c5bd36f921",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Sumur_Potensial_Parabolik.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Sumur_Potensial_Parabolik"
-            }
-          },
-          {
-            "id": "b329ca87789ab1ae",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/suku_pertama_kedua.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "suku_pertama_kedua"
-            }
-          },
-          {
-            "id": "f6af5838d4e2305b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/suku_pertama_kedua_pers1.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "suku_pertama_kedua_pers1"
+              "title": "bab1"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -188,7 +33,6 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 69.6048632218845,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -209,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "payoff ",
+                "query": "spsa",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -233,23 +77,22 @@
         ]
       },
       {
-        "id": "4c607714eb3ecdb6",
+        "id": "c38e9d58e7528e8a",
         "type": "tabs",
-        "dimension": 30.395136778115504,
         "children": [
           {
-            "id": "287f258bfd651da9",
+            "id": "9e5bcccc9ae69aaf",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Pure_Markowitz_QUBO.md",
+                "file": "Latex/TA/MD_File/bab1.md",
                 "followCursor": false,
-                "showSearch": true,
+                "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pure_Markowitz_QUBO"
+              "title": "Outline of bab1"
             }
           }
         ]
@@ -272,17 +115,17 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Replication/phase0.md",
+                "file": "notes/Bias_Interaction_GT.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for phase0"
+              "title": "Backlinks for Bias_Interaction_GT"
             }
           },
           {
@@ -374,44 +217,44 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "3415e9b59ec38519",
+  "active": "55e2b249d4b770ab",
   "lastOpenFiles": [
-    "notes/GT_to_h.md",
-    "notes/Pure_Markowitz_QUBO.md",
-    "notes/PakHeru/Markowitz_QUBO_TA.md",
-    "notes/Sumur_Potensial_Parabolik.md",
-    "notes/Lagrange_Multiplier.md",
-    "notes/PakHeru/Markowitz_QUBO.md",
-    "notes/PakHeru/Markowitz.md",
-    "notes/PakHeru/Teorema_Reyleigh_Ritz.md",
-    "notes/notes/GT_to_h.md",
-    "notes/notes",
-    "notes/PakHeru/main.toc",
-    "notes/PakHeru/main.aux",
-    "notes/PakHeru/main.synctex(busy)",
-    "notes/PakHeru/pdflatex38243.fls",
-    "notes/PakHeru/pdflatex38229.fls",
-    "notes/PakHeru/pdflatex38069.fls",
-    "notes/PakHeru/pdflatex38055.fls",
-    "notes/PakHeru/pdflatex38029.fls",
-    "notes/PakHeru/main.synctex.gz",
-    "notes/Italic_word.md",
-    "notes/GEMINI.md",
-    "notes/PakHeru/QMI.md",
-    "notes/PakHeru/tmp_Born_Rule.md",
-    "notes/PakHeru/tmp_ekspansi_state.md",
-    "notes/PakHeru/tmp_Parameter_Shift_Rule.md",
-    "notes/PakHeru/tmp_Dekomposisi_Hamiltonian.md",
-    "notes/PakHeru/tmp_Teorema_Reyleigh_Ritz.md",
-    "notes/PakHeru/tmp_Lagrange_Multiplier.md",
-    "notes/PakHeru/tmp_risk_aversion_endogen.md",
-    "notes/PakHeru/tmp_Markowitz.md",
-    "notes/PakHeru/tmp_Markowitz_QUBO_TA.md",
-    "notes/SPSA.md",
-    "notes/PakHeru/risk_aversion_endogen.md",
-    "notes/PakHeru/Born_Rule.md",
-    "notes/PakHeru/ekspansi_state.md",
-    "notes/PakHeru/Lagrange_Multiplier.md",
+    "Latex/TA/main.blg",
+    "Latex/TA/main.lof",
+    "Latex/TA/main.toc",
+    "Latex/TA/main.out",
+    "Latex/TA/main.synctex(busy)",
+    "Latex/TA/main.log",
+    "Latex/TA/main.fls",
+    "Latex/TA/pdflatex52064.fls",
+    "Latex/TA/pdflatex52028.fls",
+    "Latex/TA/main.synctex.gz",
+    "Latex/TA/Contents/BagianDepan/Lembar Orisinalitas.aux",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Schwert_Anomali_Efficiency.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Quantum_Portfolio_Optimization_with_Expert_Analysis.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/QUBO_QAOA.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Quantum_Econophysics.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/QUBO_QMI.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/QUBO_PortofolioOpt.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Multiagent_dynamic_financial_portfolio_management.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Markowitz_Model_Investment_Portfolio_Optimization.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Efficient_Asset_Allocation_Application_of_Game_Theory.md",
+    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Achieving_High_Quality_Portfolio_Optimization_with_the_Variational_Quantm_Eigensolver.md",
+    "Latex/TA/Filtered_Paper/Game_Theory/game_theory_vs_ising_model.md",
+    "Latex/TA/Filtered_Paper/Game_Theory/Multiagent_dynamic_financial_portfolio_management.md",
+    "Latex/TA/Filtered_Paper/Game_Theory/ISING_GT.md",
+    "Latex/TA/Filtered_Paper/Game_Theory/Game_Theory_for_predicting_stocks_closing_prices.md",
+    "Latex/TA/Filtered_Paper/Y_quantum.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/Schwert_Anomali_Efficiency.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/Quantum_Portfolio_Optimization_with_Expert_Analysis.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/Quantum_Econophysics.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/QUBO_QMI.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/QUBO_QAOA.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/QUBO_PortofolioOpt.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/Multiagent_dynamic_financial_portfolio_management.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/Markowitz_Model_Investment_Portfolio_Optimization.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/Efficient_Asset_Allocation_Application_of_Game_Theory.md",
+    "Latex/Filtered_Paper/Markowtiz_Fundamental/Achieving_High_Quality_Portfolio_Optimization_with_the_Variational_Quantm_Eigensolver.md",
     "Latex/PakGagus_Presentasi3/presentasi_analisis/backtest_vqe_portfolio.png",
     "Latex/PakGagus_Presentasi4/backtest_vqe_portfolio.png",
     "Latex/TA/Images/Candle1.png",

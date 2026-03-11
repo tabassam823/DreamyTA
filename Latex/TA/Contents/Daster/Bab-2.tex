@@ -1,46 +1,15 @@
 \chapter{Tinjauan Pustaka}
 
-\section{Dasar Analisis Teknikal \& Representasi Data Finansial}
-Analisis teknikal merupakan metodologi untuk memprediksi arah pergerakan harga di masa depan melalui studi data pasar historis.
-\begin{itemize}
-    \item \textbf{Visualisasi Runtun Waktu (Time-Series):} Representasi grafik harga di mana sumbu-X menunjukkan waktu ($t$) dan sumbu-Y menunjukkan harga ($P$). Fluktuasi harga dianggap sebagai pergerakan stokastik.
-    \item \textbf{Anatomi Candlestick (OHLC):} Menggunakan empat variabel utama yaitu \textit{Open, High, Low,} dan \textit{Close} dalam satu jendela waktu ($\Delta t$).
-    \item \textbf{Timeframe \& Sampling Data:} Transformasi data dari harga ($P_t$) menjadi \textit{Logarithmic Returns} ($R_t$) dilakukan untuk mencapai stasioneritas data.
-\end{itemize}
+\input{Contents/Daster/Bab-2.1.tex}
 
-\section{Dinamika Pasar \& Analisis Fundamental}
-Analisis fundamental berfokus pada nilai intrinsik aset berdasarkan faktor ekonomi dan keuangan.
-\begin{itemize}
-    \item \textbf{Mekanisme Penggerak Harga:} Proses \textit{price discovery} melalui \textit{Auction Theory} (\textit{bid} dan \textit{ask}) serta hukum penawaran dan permintaan.
-    \item \textbf{Metrik Valuasi \& Risiko:} Penggunaan rasio seperti P/E \textit{Ratio}, \textit{Dividend Yield}, serta pengukuran kinerja seperti \textit{Sharpe Ratio} dan \textit{Sortino Ratio}.
-    \item \textbf{Makroekonomi \& Siklus Pasar:} Pemahaman terhadap rezim pasar (\textit{Bullish, Bearish, Sideways}) serta dampak kebijakan moneter (inflasi dan suku bunga).
-    \item \textbf{Modern Portfolio Theory (MPT):} Konsep \textit{Efficient Frontier} untuk alokasi aset yang optimal secara klasik.
-\end{itemize}
+\input{Contents/Daster/Bab-2.2.tex}
 
-\section{Game Theory (Klasik)}
-Teori permainan menyediakan kerangka matematis untuk menganalisis interaksi antar agen yang rasional.
-\begin{itemize}
-    \item \textbf{Model Matematika:} Melibatkan \textit{Payoff Matrix, Nash Equilibrium,} dan \textit{Pareto Optimum}.
-    \item \textbf{Klasifikasi Permainan:} Terdiri dari \textit{Coordination, Anti-Coordination,} dan \textit{Mixed Strategy Game}.
-    \item \textbf{Model Strategis Sekuensial:} Contohnya adalah \textit{Prisoner's Dilemma} sebagai analogi kegagalan pasar, dan model \textit{Stackelberg} untuk dinamika \textit{Leader-Follower}.
-\end{itemize}
+\input{Contents/Daster/Bab-2.3.tex}
 
-\section{Teori Informasi Kuantum \& Game Theory}
-Penggabungan teori informasi kuantum ke dalam teori permainan memungkinkan ruang strategi yang lebih luas melalui superposisi dan keterkaitan (\textit{entanglement}).
-\begin{itemize}
-    \item \textbf{Kuantisasi EWL:} Skema Eisert-Wilkens-Lewenstein menggunakan operator \textit{entangling} ($\hat{J}$) dan strategi uniter untuk memetakan permainan klasik ke ranah kuantum.
-    \item \textbf{Representasi State:} Menggunakan matriks densitas ($\rho$) dan pengukuran ketidakpastian melalui \textit{Von Neumann Entropy} ($S = -\text{Tr}(\rho \ln \rho)$).
-    \item \textbf{Quantum Mutual Information (QMI):} Digunakan untuk mengukur korelasi total antar aset melalui pertukaran informasi kuantum.
-\end{itemize}
+\input{Contents/Daster/Bab-2.4.tex}
 
-\section{Quantum Algorithm (VQE)}
-\textit{Variational Quantum Eigensolver} (VQE) adalah algoritma hibrid klasik-kuantum untuk mencari nilai eigen terendah dari sebuah Hamiltonian.
-\begin{itemize}
-    \item \textbf{Prinsip Variasi:} Menggunakan persamaan eigen $H|\psi\rangle = E|\psi\rangle$ untuk mencari \textit{ground state} yang diinterpretasikan sebagai kondisi ekuilibrium pasar paling stabil.
-    \item \textbf{Struktur Ansatz:} Terdiri dari rotasi qubit tunggal ($R_y, R_z$) untuk pemetaan ruang strategi dan \textit{layer entanglement} (CNOT) untuk memodelkan interdependensi aset.
-    \item \textbf{Teknik Optimasi:} Menggunakan optimisator klasik seperti SPSA (\textit{Simultaneous Perturbation Stochastic Approximation}) atau COBYLA.
-    \item \textbf{Ising Hamiltonian:} Pemetaan masalah optimasi ke dalam model Ising dengan parameter bias ($h_i$) dan interaksi ($J_{ij}$).
-\end{itemize}
+\input{Contents/Daster/Bab-2.5.tex}
+
 
 \newpage
 \thispagestyle{empty}
