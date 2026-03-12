@@ -25,6 +25,7 @@
     1. **Awal Subbab:** Saat memperkenalkan aksioma atau postulat dasar.
     2. **Jembatan Matematis:** Sebagai landasan teoretis saat melakukan operasi atau transisi antar persamaan.
     3. **Penutup Subbab:** Saat menjustifikasi validitas dan keberlakuan bentuk akhir yang diperoleh.
+    4. **Menggunakan Format Harvard**
 - **Bahasa & Tipografi:** Bahasa Indonesia yang komunikatif, namun tetap menggunakan istilah teknis Fisika/Kuantum dalam Bahasa Inggris jika lebih akurat secara saintifik. Gunakan format *italic* untuk setiap istilah teknis (*technical terms*) atau bahasa serapan asing guna menjaga konsistensi gaya selingkung jurnal ilmiah.
 
 ---

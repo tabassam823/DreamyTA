@@ -27,16 +27,100 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Contents/Metodologi/metodologi.md",
+                "file": "notes/Hybrid_H/Pure_Markowitz_QUBO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "metodologi"
+              "title": "Pure_Markowitz_QUBO"
+            }
+          },
+          {
+            "id": "e438991ec4398ed2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/PakGagus_Presentasi4/jenis_ansatz.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "jenis_ansatz"
+            }
+          },
+          {
+            "id": "7a28ce74bf32d29c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/PakHeru/Born_Rule.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Born_Rule"
+            }
+          },
+          {
+            "id": "c763a820eeb32620",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/Lagrange_Multiplier.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Lagrange_Multiplier"
+            }
+          },
+          {
+            "id": "4165b98916c017b0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/SPSA.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SPSA"
+            }
+          },
+          {
+            "id": "9fd71902eb89ed43",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TwoLocal_to_EfficientSU2"
+            }
+          },
+          {
+            "id": "3054ad31b31294ef",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/QMI.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "QMI"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -68,10 +152,10 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "spsa",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
-                "collapseAll": false,
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
               },
@@ -101,13 +185,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/Contents/Metodologi/metodologi.md",
+                "file": "Latex/TA/MD_File/QMI.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of metodologi"
+              "title": "Outline of QMI"
             }
           }
         ]
@@ -130,7 +214,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Bias_Interaction_GT.md",
+                "file": "Latex/TA/MD_File/QMI.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -140,7 +224,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Bias_Interaction_GT"
+              "title": "Backlinks for QMI"
             }
           },
           {
@@ -149,12 +233,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/deep_learning_bsde.pdf",
+                "file": "Latex/TA/MD_File/QMI.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from deep_learning_bsde"
+              "title": "Outgoing links from QMI"
             }
           },
           {
@@ -213,7 +297,8 @@
               "title": "Deep_Learning-Based_BSDE_Solver_for_Libor"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -232,44 +317,45 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "0885a494f37c5be2",
+  "active": "3054ad31b31294ef",
   "lastOpenFiles": [
-    "Latex/TA/Contents/Metodologi/algoritma.md",
-    "Latex/TA/MD_File/bab1.md",
+    "Latex/TA/Filtered_Paper/Menezes.md",
+    "Latex/TA/Filtered_Paper/Mitarai.md",
+    "Latex/TA/Filtered_Paper/Preskill.md",
+    "Latex/TA/Filtered_Paper/Yamamoto.md",
+    "Latex/TA/Filtered_Paper/Mitarai.pdf",
+    "Latex/TA/Filtered_Paper/Yamamoto.pdf",
+    "Latex/TA/Filtered_Paper/Preskill.pdf",
+    "Latex/TA/Filtered_Paper/Menezes.pdf",
+    "book/Quantum_Computation_and_Quantum_Informat.pdf",
+    "Latex/TA/MD_File/Parameter_Shift_Rule.md",
+    "Latex/TA/MD_File/QMI.md",
+    "Latex/TA/MD_File/GT_to_h.md",
     "Latex/TA/main.blg",
     "Latex/TA/main.lof",
     "Latex/TA/main.toc",
     "Latex/TA/main.out",
     "Latex/TA/main.synctex(busy)",
-    "Latex/TA/main.log",
-    "Latex/TA/main.fls",
-    "Latex/TA/pdflatex52064.fls",
-    "Latex/TA/pdflatex52028.fls",
-    "Latex/TA/main.synctex.gz",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Schwert_Anomali_Efficiency.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Quantum_Portfolio_Optimization_with_Expert_Analysis.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/QUBO_QAOA.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Quantum_Econophysics.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/QUBO_QMI.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/QUBO_PortofolioOpt.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Multiagent_dynamic_financial_portfolio_management.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Markowitz_Model_Investment_Portfolio_Optimization.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Efficient_Asset_Allocation_Application_of_Game_Theory.md",
-    "Latex/TA/Filtered_Paper/Markowtiz_Fundamental/Achieving_High_Quality_Portfolio_Optimization_with_the_Variational_Quantm_Eigensolver.md",
-    "Latex/TA/Filtered_Paper/Game_Theory/game_theory_vs_ising_model.md",
-    "Latex/TA/Filtered_Paper/Game_Theory/Multiagent_dynamic_financial_portfolio_management.md",
-    "Latex/TA/Filtered_Paper/Game_Theory/ISING_GT.md",
-    "Latex/TA/Filtered_Paper/Game_Theory/Game_Theory_for_predicting_stocks_closing_prices.md",
-    "Latex/TA/Filtered_Paper/Y_quantum.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/Schwert_Anomali_Efficiency.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/Quantum_Portfolio_Optimization_with_Expert_Analysis.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/Quantum_Econophysics.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/QUBO_QMI.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/QUBO_QAOA.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/QUBO_PortofolioOpt.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/Multiagent_dynamic_financial_portfolio_management.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/Markowitz_Model_Investment_Portfolio_Optimization.md",
-    "Latex/Filtered_Paper/Markowtiz_Fundamental/Efficient_Asset_Allocation_Application_of_Game_Theory.md",
+    "notes/Hybrid_H/Pure_Markowitz_QUBO.md",
+    "notes/PakHeru/Markowitz_QUBO.md",
+    "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
+    "Latex/TA/MD_File/Von_Neumann_Entropy.md",
+    "Latex/TA/MD_File/Variational_Principle.md",
+    "notes/TwoLocal_to_EfficientSU2.md",
+    "Latex/TA/MD_File/Teorema_Reyleigh_Ritz.md",
+    "Latex/TA/MD_File/jenis_ansatz.md",
+    "Latex/TA/MD_File/jenis_optimasi_vqe.md",
+    "Latex/TA/MD_File/Lagrange_Multiplier.md",
+    "Latex/TA/MD_File/risk_aversion_endogen.md",
+    "Latex/TA/MD_File/Sumur_Potensial_Parabolik.md",
+    "Latex/TA/MD_File/Dekomposisi_Hamiltonian.md",
+    "Latex/TA/MD_File/SPSA.md",
+    "notes/PakHeru/Born_Rule.md",
+    "Latex/TA/Filtered_Paper/VQE/EfficientSU2_SPSA.md",
+    "notes/Sumur_Potensial_Parabolik.md",
+    "notes/Lagrange_Multiplier.md",
+    "notes/PakHeru/Dekomposisi_Hamiltonian.md",
+    "Latex/TA/Images/bid_ask.png",
     "Latex/PakGagus_Presentasi3/presentasi_analisis/backtest_vqe_portfolio.png",
     "Latex/PakGagus_Presentasi4/backtest_vqe_portfolio.png",
     "Latex/TA/Images/Candle1.png",
@@ -279,7 +365,6 @@
     "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Carnot Cycle.png",
     "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Quantum Brayton Cycle.png",
     "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Piston & Movable Wall.png",
-    "Latex/TA/Final_Project___Fractional_Quantum_Heat_Engine/Images/Pas Foto 3x4.jpg",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

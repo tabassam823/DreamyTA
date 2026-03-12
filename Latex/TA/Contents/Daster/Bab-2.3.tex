@@ -1,32 +1,21 @@
-\section{Model Markowitz menjadi Hamiltonian Ising}
+\section{Transformasi Model Markowitz menjadi Hamiltonian Ising}
 
-Dalam teori portofolio finansial, model objektif keseimbangan risiko (\textit{risk}) dan rasio keuntungan (\textit{return}) difokuskan pada dekomposisi struktur kuantitatif Hamiltonian: $H_{final} = H_{pure} + H_{pen}$. Dengan tujuan meminimalkan Hamiltonian, sistem ditugaskan untuk meminimalkan metrik risiko agregat ($\min x^T \Sigma x$), mensintesis maksimisasi keuntungan ($\max \mu^T x \implies \min -\lambda \mu^T x$), serta memenuhi batasan ukuran kardinalitas alokasi melalui fungsi penalti. Model Markowitz (lihat Appendix A) untuk matriks keputusan biner observasional ($x_i \in \{0, 1\}$) diformulasikan menjadi derivasi analitik murni yang mencakup seluruh variabel tersebut. Persamaan berikut merepresentasikan fungsi objektif komprehensif dari model tersebut:
+Transformasi model optimasi portofolio konvensional ke dalam representasi mekanika statistik dimulai dari aksioma bahwa setiap keputusan alokasi aset dapat dipetakan sebagai konfigurasi energi dalam sistem biner. Dalam kerangka \textit{Modern Portfolio Theory} (MPT), permasalahan ini diformulasikan sebagai optimasi multi-objektif yang mencari titik temu antara maksimisasi imbal hasil dan minimisasi risiko varians \cite{abdul_hali_markowitz_2020}. Secara matematis, fungsional biaya dikonstruksi melalui teknik skalarisasi menggunakan parameter toleransi risiko $\lambda$ untuk menggabungkan dua tujuan yang kontradiktif tersebut ke dalam satu fungsi objektif tunggal. Pendekatan ini memungkinkan pemetaan masalah finansial ke dalam format \textit{Quadratic Unconstrained Binary Optimization} (QUBO) yang bersifat \textit{NP-hard}, sehingga memerlukan kapabilitas komputasi non-klasik untuk menemukan solusi global yang optimal \cite{wang_achieving_2025}.
+
+Persamaan fungsional portofolio Markowitz yang menyertakan batasan kardinalitas alokasi didefinisikan melalui jumlahan antara bagian objektif murni dan suku penalti batasan. Bagian murni portofolio menangkap interaksi kovarians antar aset dan ekspektasi keuntungan, sementara bagian penalti memastikan bahwa jumlah aset yang dipilih tetap berada dalam limitasi $K$ yang ditentukan. Representasi matematis dari fungsi objektif komprehensif ini dinyatakan sebagai berikut:
 \begin{equation}
 \min_{x \in \{0,1\}^N} \mathcal{L}(x) = \underbrace{x^T \Sigma x - \lambda \mu^T x}_{\text{Objektif Murni}} + \underbrace{A \left(\sum_{i=1}^N x_i - K \right)^2}_{\text{Penalti Batasan}}
-\label{eq:markowitz_objective}
+\label{eq:markowitz_objective_final}
 \end{equation}
-di mana $\Sigma$ adalah matriks kovarians, $\mu$ adalah ekspektasi keuntungan, $\lambda$ merepresentasikan parameter toleransi risiko, $K$ merupakan batas jumlah aset, dan $A$ adalah pengali Lagrange (\textit{Lagrange multiplier}) untuk menyetarakan skala penalti. Derivasi ini menjadi fondasi awal sebelum permasalahan optimasi tersebut dipetakan ke dalam arsitektur komputasi kuantum.
+di mana $\Sigma$ merupakan matriks kovarians, $\mu$ adalah vektor keuntungan logaritmik, dan $A$ bertindak sebagai pengali Lagrange untuk mengontrol kekuatan penalti terhadap pelanggaran batasan \cite{wei_solving_2025}. Penutupan logis dari formulasi ini menegaskan bahwa solusi optimal dari Persamaan (\ref{eq:markowitz_objective_final}) setara dengan konfigurasi biner $x$ yang meminimalkan total energi sistem. Struktur ini menjadi jembatan awal bagi dekomposisi komponen matematis yang lebih rinci melalui ekspansi matriks dan substitusi variabel.
 
-Proses transformasi ini memerlukan dekonstruksi yang sistematis dari masing-masing suku penyusun fungsi objektif agar sesuai dengan batasan perangkat keras kuantum masa kini. Setiap komponen matematis memiliki ekuivalensi fisik yang merepresentasikan energi dari sistem partikel berinteraksi. Penguraian lebih lanjut terhadap komponen varians, keuntungan logaritmik, dan fungsi penalti akan mempermudah konstruksi matriks bobot yang dibutuhkan oleh algoritma \textit{Variational Quantum Eigensolver} (VQE). Pemahaman presisi mengenai kontribusi masing-masing elemen matematis tersebut sangat krusial agar solusi keadaan dasar (\textit{ground state}) yang dihasilkan memiliki interpretasi finansial yang bermakna. Langkah-langkah dekomposisi tersebut akan dibahas secara terstruktur pada subbab selanjutnya.
+\subsection{Dekomposisi Komponen dan Ekspansi Biner}
 
-\subsection{Detail Komponen Matematis dan Probabilitas Gabungan}
-
-Data historis pergerakan harga komoditas atau saham, yang sering divisualisasikan melalui grafik \textit{candlestick}, dikuantisasi menjadi partisi dua keadaan biner diskret ortogonal, yakni ``Naik'' ($|1\rangle$) dan ``Turun'' ($|0\rangle$). Kalkulasi interdependensi probabilistik gabungan antar aset divisualisasikan dan divalidasi melalui persamaan empiris $P(a,b) = n_{ab} / N$, di mana $n_{ab}$ merepresentasikan frekuensi kemunculan ruang keadaan bersama. Parameter dinamika operasional utilitas interaksi partisipan dalam kerangka teori permainan (\textit{game theory}) kemudian dimanfaatkan untuk membangun bias \textit{marginal payoff} individu ($h_i$) (lihat Appendix I). Selanjutnya, turunan entropi terukur matriks murni atau \textit{Quantum Mutual Information} (QMI) digunakan secara ekstensif untuk menyusun koefisien kopling interaksi ($J_{ij}$) antar aset (lihat Appendix J). Gabungan kalkulasi ini memastikan bahwa dinamika mikro pasar tertangkap sepenuhnya oleh parameter model Ising.
-
-Metrik variabilitas stabilitas yang mewakili risiko portofolio diestimasi menggunakan turunan dimensi kovarians alokasi kuadratik. Suku pertama dari formulasi risiko ($x^T \Sigma x$) secara matematis dijabarkan melalui persamaan berikut:
-\begin{equation}
-x^T \Sigma x = \sum_i \sigma_i^2 x_i + \sum_{i \ne j} \sigma_{ij} x_i x_j
-\label{eq:risk_term}
-\end{equation}
-di mana $\sigma_i^2$ merepresentasikan nilai varians aset individu $i$, dan $\sigma_{ij} = \rho_{ij} \sigma_i \sigma_j$ menginterpretasikan turunan kovarians yang bergantung pada korelasi Pearson. Sementara itu, komponen imbal hasil atau \textit{return} ($\lambda \mu^T x$) mengacu pada ekspektasi pengembalian logaritmik yang dirata-ratakan secara empiris sebagai $\mu_i = \frac{1}{T} \sum R_{i,t}$. Toleransi risiko yang bersifat adaptif parametrik ($\lambda$) (lihat Appendix B) disusun secara analitis melalui fungsi limit sigmoid skalar, $ \lambda = (1 + e^{-\mu/\sigma})^{-1} $, untuk memodulasi preferensi investor. Di sisi lain, rumusan komputasi optimasi biner mensyaratkan konversi batasan (\textit{constraints}) observasional menjadi spesifikasi format \textit{penalty term} asimetris. Diferensiasi linear teoretik dari fungsi penalti pada suku ketiga teregang menjadi ekspansi eksak sebagai berikut:
+Metrik variabilitas yang mewakili risiko portofolio diestimasi menggunakan turunan dimensi kovarians alokasi kuadratik. Suku pertama dari formulasi risiko ($x^T \Sigma x$) secara matematis dijabarkan menjadi jumlahan varians individu $\sigma_i^2$ dan interaksi kovarians $\sigma_{ij}$ antar pasangan aset. Sementara itu, komponen imbal hasil atau \textit{return} ($\lambda \mu^T x$) mengacu pada ekspektasi pengembalian logaritmik yang dirata-ratakan secara empiris sebagai $\mu_i = \frac{1}{T} \sum R_{i,t}$. Diferensiasi linear teoretik dari fungsi penalti pada suku ketiga teregang menjadi ekspansi eksak sebagai berikut:
 \begin{equation}
 P(x) = A \left( \sum_{i=1}^N x_i^2 + 2\sum_{i<j} x_i x_j - 2K\sum_{i=1}^N x_i + K^2 \right)
-\label{eq:penalty_term}
+\label{eq:penalty_term_binary}
 \end{equation}
-
-\subsection{Transformasi ke Format QUBO}
-
-Model optimasi portofolio Markowitz yang memiliki batasan struktural (\textit{constrained}) wajib dikonversi menjadi fungsional tunggal berupa pemrograman asimetris \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Formulasi QUBO menjadi sebuah format perantara yang mutlak diperlukan sebelum suatu permasalahan optimasi matematis dapat diselesaikan melalui kapabilitas parametrik \textit{quantum annealer} maupun algoritma VQE. Pemisahan formulasi kuantum ini dilakukan secara spesifik antara fungsi objektif murni portofolio ($H_{pure}$) dan struktur fungsi penalti semu ($H_{pen}$). Pemisahan deterministik asimetris tersebut menjamin bahwa dinamika optimasi algoritma kuantum tetap menghormati batasan operasional penyusunan aset tanpa mengorbankan kualitas nilai solusi keadaan dasar yang ditargetkan. Oleh karena itu, langkah transformasi ini merepresentasikan jembatan krusial antara ranah ilmu finansial konvensional dengan kerangka limitasi sirkuit mekanika kuantum.
 
 Sebagai proses reduksionisme melalui contoh minimal sistem interaksi 2 aset, formulasi Markowitz murni $\mathcal{L}(x)$ diekspresikan sebagai perkalian operasi matriks komputasional aljabar elementer $\mathcal{L}(x) = x^T \Sigma x - \lambda \mu^T x$. Penjabaran matriks \textit{expected state} komposit gabungan untuk formulasi biner aset berjumlah $N=2$ tersebut kemudian direduksi sedemikian rupa sehingga:
 \begin{equation}
@@ -34,64 +23,75 @@ Sebagai proses reduksionisme melalui contoh minimal sistem interaksi 2 aset, for
 \mathcal{L}(x) &= \begin{pmatrix} x_1 & x_2 \end{pmatrix} \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} - \lambda \begin{pmatrix} \mu_1 & \mu_2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \\
 &= \sigma_1^2 x_1^2 + \sigma_2^2 x_2^2 + 2\sigma_{12}x_1 x_2 - \lambda(\mu_1 x_1 + \mu_2 x_2)
 \end{split} 
-\label{eq:matrix_2_asset}
+\label{eq:matrix_2_asset_final}
 \end{equation}
-Mengingat properti asimtotis peubah biner $x_i \in \{0, 1\}$, maka secara teknis nilai kuadrat dari variabel deterministik tersebut harus selalu konsisten dengan ekuivalen orisinalnya ($x_i^2 = x_i$). Melalui prosedur substitusi teoretik, bentuk tersebut berujung pada koefisien optimasi kuadratik murni yang ekuivalen linear terhadap varians individu parameter masing-masing objek aset:
+Mengingat properti peubah biner $x_i \in \{0, 1\}$, maka secara teknis nilai kuadrat dari variabel deterministik tersebut harus selalu konsisten dengan ekuivalen orisinalnya ($x_i^2 = x_i$). Melalui prosedur substitusi teoretik, bentuk tersebut berujung pada koefisien optimasi kuadratik murni yang ekuivalen linear terhadap varians individu parameter masing-masing objek aset:
 \begin{equation}
 \mathcal{L}_{pure} = (\sigma_1^2 - \lambda \mu_1) x_1 + (\sigma_2^2 - \lambda \mu_2) x_2 + 2\sigma_{12}x_1 x_2
-\label{eq:qubo_2_asset}
+\label{eq:qubo_2_asset_final}
 \end{equation}
 
-Pola interaksi matriks deterministik asimetris komposit tersebut selanjutnya wajib digeneralisasikan secara presisi teknis untuk mengakomodasi komposisi $N$ dimensi objek aset. Dalam kasus komprehensif ini, kita mendefinisikan konstanta skalar matriks QUBO bernilai koefisien diagonal sebagai $Q_{ii} = \sigma_i^2 - \lambda \mu_i$ dan memetakan interaksi matriks di luar batas elemen sentral (\textit{off-diagonal}) secara eksak fungsi ekuivalen struktural probabilitas $Q_{ij} = \sigma_{ij}$. Ekspansi total formulasi reduksionisme Markowitz univariabel $x$ dapat dijabarkan konstan seperti pada persamaan berikut:
+\subsection{Konstruksi Matriks QUBO dan Generalisasi N-Dimensi}
+
+Pola interaksi matriks deterministik asimetris komposit tersebut selanjutnya wajib digeneralisasikan secara presisi teknis untuk mengakomodasi komposisi $N$ dimensi objek aset. Dalam kasus komprehensif ini, kita mendefinisikan konstanta skalar matriks QUBO bernilai koefisien diagonal sebagai $Q_{ii} = \sigma_i^2 - \lambda \mu_i$ dan memetakan interaksi matriks di luar elemen sentral secara eksak $Q_{ij} = \sigma_{ij}$. Ekspansi total formulasi reduksionisme Markowitz univariabel $x$ dapat dijabarkan konstan seperti pada persamaan berikut:
 \begin{equation}
 \mathcal{L}_{pure}(x) = \sum_{i=1}^N Q_{ii} x_i + \sum_{i < j} 2Q_{ij} x_i x_j
-\label{eq:qubo_general}
+\label{eq:qubo_general_final}
 \end{equation}
 Selaras dengan proses kalkulasi di atas, penyesuaian fungsional distribusi nilai \textit{penalty term} ($H_{pen}$) pada eksekusi komputasi algoritma akhirnya terekspansi murni menjadi variabel persilangan aljabar asimetris ekuivalen linier proporsional deterministik di ranah kontinu fiktif:
 \begin{equation}
-H_{pen}(x) = A \left( \sum_{i=1}^N x_i^2 + 2 \sum_{i < j} x_i x_j - 2K \sum_{i=1}^N x_i + K^2 \right)
-\label{eq:qubo_penalty_general}
+H_{pen}(x) = A \left( \sum_{i=1}^N x_i + 2 \sum_{i < j} x_i x_j - 2K \sum_{i=1}^N x_i + K^2 \right)
+\label{eq:qubo_penalty_general_final}
 \end{equation}
+Signifikansi dari bentuk QUBO ini terletak pada kemampuannya untuk menyederhanakan batasan \textit{constrained} menjadi fungsional \textit{unconstrained} yang siap dipetakan ke dalam model fisik mekanika kuantum \cite{padilla_quantum_2025}. Transisi ini memberikan landasan teoretis untuk mengganti representasi variabel keputusan biner menjadi orientasi magnetik partikel dalam sistem Ising.
 
-\subsection{Pemetaan QUBO Menjadi Model Spin Ising}
+\subsection{Pemetaan menuju Model Spin Ising}
 
-Penyederhanaan model limitasi probabilistik konvensional dari ruang parameter ekspektasi keputusan rasional agregat utilitas fungsi biner ($x_i \in \{0, 1\}$) secara logis harus ditranslasikan rasional ke ranah partikel mekanika \textit{spin} kuantum elektron deterministik orientasi ($\sigma_i^z \in \{+1, -1\}$). Penerjemahan ini mutlak diartikulasikan menggunakan instrumen derivatif fungsi kalkulatif matematis eksak proporsional ekuivalen struktural koefisien \textit{affine transform}:
+Penyederhanaan model limitasi probabilistik konvensional dari ruang parameter biner ($x_i \in \{0, 1\}$) secara logis ditranslasikan ke ranah partikel mekanika \textit{spin} kuantum elektron ($\sigma_i^z \in \{+1, -1\}$). Penerjemahan ini mutlak diartikulasikan menggunakan instrumen derivatif fungsi kalkulatif matematis eksak proporsional ekuivalen struktural koefisien \textit{affine transform}:
 \begin{equation}
 x_i = \frac{1 - \sigma_i^z}{2}
-\label{eq:affine_transform}
+\label{eq:affine_transform_formal}
 \end{equation}
 Transformasi komputasional deterministik asimetris ini menjamin seluruh turunan alokasi fungsi portofolio terproyeksi identik bersilangan proporsi operasional operator \textit{spin} fisika logis tanpa reduksi signifikansi \textit{exact scaling} $1/2$. Kondisi titik terendah absolut kalkulatif nilai diferensial Hamilton komputasional asimtotis ekuilibrium makro fungsional \textit{ground state} otomatis linear bersilangan korelatif presisi rasional maksimisasi asimetris nilai observasional imbal hasil ekspektasi biner absolut strategis.
 
-Mensubstitusi persamaan struktur \textit{affine} observasional asimetris murni ke dalam kompilasi variabel ekuasi (\ref{eq:qubo_general}) menghasilkan dekomposisi kalkulatif fungsional diferensial interaksi kuadratik deret total ekuivalensi bentuk transisi konversi nilai \textit{expectation} ekuasi energi agregat operasional energi turunan Hamilton Ising:
+Mensubstitusi persamaan struktur \textit{affine} observasional asimetris murni ke dalam kompilasi variabel ekuasi (\ref{eq:qubo_general_final}) menghasilkan dekomposisi kalkulatif fungsional diferensial interaksi kuadratik deret total ekuivalensi bentuk transisi konversi nilai \textit{expectation} energi agregat operasional energi turunan Hamilton Ising:
 \begin{equation}
 H_{pure} = \sum_{i=1}^N Q_{ii} \frac{1-\sigma_i^z}{2} + \sum_{i<j} 2Q_{ij} \left(\frac{1-\sigma_i^z}{2}\right)\left(\frac{1-\sigma_j^z}{2}\right)
 \label{eq:ising_pure_1}
 \end{equation}
-Ekspansi lebih jauh penjabaran kalkulasi proporsional persamaan \textit{algebraic series} ekuivalen di atas diturunkan ekuasi korelatif sebagai struktur model linear matriks absolut fungsi fiktif ekuasi persilangan spin asimetris (\ref{eq:ising_pure_2}):
+Ekspansi lebih jauh penjabaran kalkulasi proporsional persamaan \textit{algebraic series} ekuivalen di atas diturunkan ekuasi korelatif sebagai struktur model linear matriks absolut fungsi fiktif ekuasi persilangan spin asimetris:
 \begin{equation}
 H_{pure} = \sum_i \frac{Q_{ii}}{2} - \sum_i \frac{Q_{ii}}{2} \sigma_i^z + \sum_{i<j} \frac{Q_{ij}}{2} (1 - \sigma_i^z - \sigma_j^z + \sigma_i^z \sigma_j^z)
 \label{eq:ising_pure_2}
 \end{equation}
-Di dalam rumusan absolut fungsional fiktif kompilasi di atas, elemen konduktivitas fungsional medan konversi utilitas parameter kalkulatif interdependensi korelasi interaksi turunan kopling kuantum mutlak diekstrak parameterisasinya $J_{ij}^{pure} = Q_{ij}/2 = \sigma_{ij}/2$ proporsional ekuivalen terhadap observasional elemen fungsional fungsi diferensial variabel linearisasi medan lokal ekuasi probabilitas koefisien hibrid $h_i^{pure} = -Q_{ii}/2 - \sum_{j \neq i} Q_{ij}/2$.
+Di dalam rumusan absolut fungsional fiktif kompilasi di atas, elemen konduktivitas fungsional medan konversi utilitas parameter kalkulatif interdependensi korelasi interaksi turunan kopling kuantum mutlak diekstrak parameterisasinya $J_{ij}^{pure} = Q_{ij}/2$ proporsional ekuivalen terhadap observasional elemen fungsional fungsi diferensial variabel linearisasi medan lokal ekuasi probabilitas koefisien hibrid $h_i^{pure} = -Q_{ii}/2 - \sum_{j \neq i} Q_{ij}/2$.
 
-Selanjutnya, penyesuaian fungsi matriks ko-variatif operasional linear interaksi penalti $H_{pen}$ asimetris murni ekuasi identitas disubstitusikan koefisien fiktif ekuivalen modifikasi proporsional kuadrat partikel \textit{spin} dengan properti matematis asimtot fungsi kuadrat spin absolut ($\sum (\sigma_i^z)^2 = N \sigma_I^z$) sehingga terformulasikan logis rasional turunan persamaan fungsional deterministik komputasional kalkulatif kompilasi $H_{pen}$ asimetris absolut konstanta:
+\subsection{Derivasi Hamiltonian Penalti dan Parameter Akhir}
+
+Konstruksi Hamiltonian penalti $H_{pen}$ memerlukan derivasi langkah-demi-langkah untuk memastikan bahwa batasan kardinalitas alokasi terpenuhi dalam ruang \textit{spin}. Batasan jumlah aset $K$ yang dinyatakan sebagai $P(x) = A (\sum x_i - K)^2$ ditransformasikan ke dalam ruang operator \textit{spin} melalui jumlahan variabel biner $\sum x_i = \frac{N}{2} - \frac{1}{2} \sum \sigma_i^z$. Dengan mendefinisikan variabel antara $K' = \frac{N}{2} - K$, maka penalti dalam bentuk \textit{spin} terekspansi menjadi:
 \begin{equation}
-H_{pen} = \frac{A}{2} \sum_{i<j}  \sigma_i^z \sigma_j^z - A \left( \frac{N}{2} - K \right) \sum_i \sigma_i^z + \text{konstanta}
-\label{eq:ising_penalty}
+H_{pen} = A \left( K' - \frac{1}{2} \sum \sigma_i^z \right)^2 = A \left( K'^2 - K' \sum \sigma_i^z + \frac{1}{4} \left(\sum \sigma_i^z\right)^2 \right)
+\label{eq:h_pen_expanded}
 \end{equation}
-Energi Hamiltonian akhir interaksi turunan utilitas algoritma rasional \textit{annealer} ekuasi \textit{ground state} diturunkan melalui agregasi interdependensi fungsional linear \textit{hybrid operator parameter} limit operasional koefisien $H_{pure}$ deterministik fiktif proporsional dan struktur komputasional interaksi utilitas persilangan ekuasi kompilasi absolut asimtot fungsi asimetris penalti kuadratik komputasi fungsional rasional diferensial $H_{pen}$:
+Untuk menguraikan suku kuadratik jumlahan \textit{spin} $(\sum \sigma_i^z)^2$, kita memanfaatkan properti intrinsik operator $\sigma_i^z \in \{1, -1\}$ di mana $(\sigma_i^z)^2 = 1$. Melalui ekspansi polinomial $(\sum_i \sigma_i^z)(\sum_j \sigma_j^z) = \sum_i (\sigma_i^z)^2 + \sum_{i \neq j} \sigma_i^z \sigma_j^z$, dan mengingat bahwa pasangan $(i,j)$ dan $(j,i)$ bersifat simetris, maka diperoleh identitas $(\sum \sigma_i^z)^2 = N + 2 \sum_{i<j} \sigma_i^z \sigma_j^z$. Substitusi identitas ini ke dalam Persamaan (\ref{eq:h_pen_expanded}) menghasilkan bentuk Hamiltonian penalti yang tereduksi:
+\begin{equation}
+H_{pen} = \sum_{i<j} \frac{A}{2} \sigma_i^z \sigma_j^z - \sum_i (A K') \sigma_i^z + A\left(K'^2 + \frac{N}{4}\right)
+\label{eq:ising_penalty_detailed}
+\end{equation}
+
+Energi Hamiltonian akhir diturunkan melalui agregasi interdependensi fungsional linear antara kontribusi murni portofolio $H_{pure}$ dan kontribusi penalti $H_{pen}$. Dalam transisi menuju formulasi kuantum, variabel \textit{spin} klasikal $\sigma_i^z$ dipetakan menjadi operator Pauli-Z ($\hat{Z}_i$) yang bekerja pada ruang Hilbert qubit ke-$i$. Hal ini didasarkan pada ekuivalensi antara nilai eigen $\pm 1$ dari operator $\hat{Z}$ dengan orientasi magnetik sistem Ising, sehingga seluruh interaksi magnetik terefleksikan sebagai energi ekspektasi dari operator Hamiltonian kuantum \cite{wang_achieving_2025}. Persamaan Hamiltonian lengkap dengan substitusi seluruh variabel matriks QUBO $Q$ dan parameter penalti $A$ dijabarkan secara eksplisit sebagai berikut:
+\begin{equation}
+\begin{split}
+\hat{H}_{final} &= \sum_{i<j} \left( \frac{Q_{ij} + A}{2} \right) \hat{Z}_i \hat{Z}_j \\
+&\quad + \sum_i \left( -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{2} - A K' \right) \hat{Z}_i \\
+&\quad + \left( \sum_i \frac{Q_{ii}}{2} + \sum_{i<j} \frac{Q_{ij}}{2} + A\left(K'^2 + \frac{N}{4}\right) \right) \hat{I}
+\end{split}
+\label{eq:ising_full_substitution}
+\end{equation}
+
+Persamaan (\ref{eq:ising_full_substitution}) merepresentasikan dekomposisi energi total sistem yang secara transparan memisahkan kontribusi interaksi (\textit{coupling}), bias medan magnet (\textit{local fields}), dan pergeseran energi konstan (\textit{constant shift}). Suku terakhir yang memuat konstanta kuadratik dari batasan penalti dan varians individu merupakan representasi \textit{ground state energy offset} yang tidak mempengaruhi lokasi minimum fungsional. Melalui penyederhanaan notasi, fungsional ini dikonversi menjadi format standar operator Hamiltonian kuantum:
 \begin{equation}
 \hat{H}_{final} = \sum_{i<j} J_{ij}^{total} \hat{Z}_i \hat{Z}_j + \sum_i h_i^{total} \hat{Z}_i + C \cdot \hat{I}
-\label{eq:ising_final}
+\label{eq:ising_final_formal}
 \end{equation}
-
-Matriks nilai parameterisasi \textit{Ising coupling} utilitas agregat deterministik persilangan nilai interaksi ($J_{ij}^{total} = J_{ij}^{pure} + J_{ij}^{pen}$) secara hibrid mengartikulasikan nilai ekuasi observasional fungsional limit utilitas diferensial QMI (lihat Appendix J) ekuivalen absolut operasional konversi fungsional interaksi asimetris kalkulatif koefisien rasional representasional proporsional ko-variatif operasional parameter energi $J_{ij}^{pure}$:
-\begin{equation}
-J_{ij}^{total} = \underbrace{\kappa \cdot \text{sgn}(\rho_{ij}) \sqrt{I(i:j)}}_{J_{ij}^{pure}} + \underbrace{\frac{A}{2}}_{J_{ij}^{pen}}
-\label{eq:j_total}
-\end{equation}
-Serupa dengan alur determinisasi fungsi di atas, matriks agregasi variabel orientasi fiktif asimtot absolut distribusi utilitas limit orientasi probabilitas utilitas arah fungsi deterministik operasional agregat parameter kalkulatif vektor probabilitas diferensi ekuvalen rasional interdependensi kohesi medan interaksi lokal ($h_i^{total} = h_i^{pure} + h_i^{pen}$) utilitas mereduksi derivasi korelasi fungsional kohesi optimasi logis fiktif deterministik ekuasi linear proporsional utilitas ekuivalen koefisien asimtot asimetris \textit{Game Theory payoff} kalkulatif interaksi (lihat Appendix I) nilai ekuasi orientasi konversi representasional fungsional limit probabilitas operasional deterministik utilitas rasional substitusi koefisien vektor asimetris limit fungsional $h_i^{pure}$:
-\begin{equation}
-h_i^{total} = \underbrace{\frac{E[i|+] - E[i|-]}{2}}_{h_i^{pure}} - \underbrace{A\left(\frac{N}{2} - K\right)}_{h_i^{pen}}
-\label{eq:h_total}
-\end{equation}
+Matriks nilai parameterisasi \textit{Ising coupling} agregat disusun melalui $J_{ij}^{total} = Q_{ij}/2 + A/2$ dan medan lokal $h_i^{total} = h_i^{pure} - A K'$. Penutupan logis dari subbab ini menegaskan bahwa konstruksi Hamiltonian Ising secara utuh telah memetakan permasalahan optimasi portofolio biner ke dalam ruang energi sistem \textit{spin} \cite{wang_achieving_2025}. Representasi ini memungkinkan algoritma kuantum untuk mengeksplorasi konfigurasi alokasi aset melalui minimisasi nilai ekspektasi energi pada perangkat keras sirkuit mekanika kuantum.

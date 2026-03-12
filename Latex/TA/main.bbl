@@ -1,3 +1,298 @@
 \begin{thebibliography}{}
 
+\bibitem [\protect \citeauthoryear {%
+Abdul~Hali%
+\ \BBA {} Yuliati%
+}{%
+Abdul~Hali%
+\ \BBA {} Yuliati%
+}{%
+{\protect \APACyear {2020}}%
+}]{%
+abdul_hali_markowitz_2020}
+\APACinsertmetastar {%
+abdul_hali_markowitz_2020}%
+\begin{APACrefauthors}%
+Abdul~Hali, N.%
+\BCBT {}\ \BBA {} Yuliati, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{{\APACmonth{10}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Markowitz {Model} {Investment} {Portfolio}
+  {Optimization}: a {Review} {Theory}} {Markowitz {Model} {Investment}
+  {Portfolio} {Optimization}: a {Review} {Theory}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{International Journal of Research in Community
+  Services}{1}{3}{14--18}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://journal.rescollacomm.com/index.php/ijrcs/article/view/104}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.46336/ijrcs.v1i3.104} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Dao%
+}{%
+Dao%
+}{%
+{\protect \APACyear {2025}}%
+}]{%
+dao_exploring_2025}
+\APACinsertmetastar {%
+dao_exploring_2025}%
+\begin{APACrefauthors}%
+Dao, H\BPBI L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{06}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Exploring new variational quantum circuit ansatzes for
+  solving {SU}(2) matrix models} {Exploring new variational quantum circuit
+  ansatzes for solving {SU}(2) matrix models}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{The European Physical Journal C}{85}{6}{705}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://link.springer.com/10.1140/epjc/s10052-025-14322-7}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1140/epjc/s10052-025-14322-7} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Fedorov%
+, Peng%
+, Govind%
+\BCBL {}\ \BBA {} Alexeev%
+}{%
+Fedorov%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+fedorov_vqe_2022}
+\APACinsertmetastar {%
+fedorov_vqe_2022}%
+\begin{APACrefauthors}%
+Fedorov, D\BPBI A.%
+, Peng, B.%
+, Govind, N.%
+\BCBL {}\ \BBA {} Alexeev, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{{\APACmonth{01}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{VQE} method: a short survey and recent developments}
+  {{VQE} method: a short survey and recent developments}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Materials Theory}{6}{1}{2}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://materialstheory.springeropen.com/articles/10.1186/s41313-021-00032-6}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1186/s41313-021-00032-6} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Hidalgo%
+}{%
+Hidalgo%
+}{%
+{\protect \APACyear {2006}}%
+}]{%
+hidalgo_quantum_2006}
+\APACinsertmetastar {%
+hidalgo_quantum_2006}%
+\begin{APACrefauthors}%
+Hidalgo, E\BPBI G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum {Econophysics}} {Quantum {Econophysics}}.{\BBCQ}
+\newblock
+\begin{APACrefURL} [{2026-03-11}]\url{https://arxiv.org/abs/physics/0609245}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Version Number: 3}
+\newblock
+\begin{APACrefDOI} \doi{10.48550/ARXIV.PHYSICS/0609245} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+La~Torre%
+\ \BBA {} Maggistro%
+}{%
+La~Torre%
+\ \BBA {} Maggistro%
+}{%
+{\protect \APACyear {2026}}%
+}]{%
+la_torre_multi-agent_2026}
+\APACinsertmetastar {%
+la_torre_multi-agent_2026}%
+\begin{APACrefauthors}%
+La~Torre, D.%
+\BCBT {}\ \BBA {} Maggistro, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2026}{{\APACmonth{01}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Multi-agent dynamic financial portfolio management: a
+  differential game approach} {Multi-agent dynamic financial portfolio
+  management: a differential game approach}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Annals of Operations Research}{356}{1}{559--580}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://link.springer.com/10.1007/s10479-024-06070-w}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s10479-024-06070-w} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Padilla%
+}{%
+Padilla%
+}{%
+{\protect \APACyear {2025}}%
+}]{%
+padilla_quantum_2025}
+\APACinsertmetastar {%
+padilla_quantum_2025}%
+\begin{APACrefauthors}%
+Padilla, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{09}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum {Approximate} {Optimization} {Algorithm} for
+  {Portfolio} {Selection}: {A} {Comparative} {Study} with {Classical}
+  {Markowitz} {Optimization}} {Quantum {Approximate} {Optimization} {Algorithm}
+  for {Portfolio} {Selection}: {A} {Comparative} {Study} with {Classical}
+  {Markowitz} {Optimization}}.{\BBCQ}
+\newblock
+
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Sikalo%
+, Arnaut-Berilo%
+\BCBL {}\ \BBA {} Zaimovic%
+}{%
+Sikalo%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+sikalo_efficient_2022}
+\APACinsertmetastar {%
+sikalo_efficient_2022}%
+\begin{APACrefauthors}%
+Sikalo, M.%
+, Arnaut-Berilo, A.%
+\BCBL {}\ \BBA {} Zaimovic, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{{\APACmonth{03}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Efficient {Asset} {Allocation}: {Application} of {Game}
+  {Theory}-{Based} {Model} for {Superior} {Performance}} {Efficient {Asset}
+  {Allocation}: {Application} of {Game} {Theory}-{Based} {Model} for {Superior}
+  {Performance}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{International Journal of Financial Studies}{10}{1}{20}.
+\newblock
+\begin{APACrefURL} [{2026-03-11}]\url{https://www.mdpi.com/2227-7072/10/1/20}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.3390/ijfs10010020} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Wang%
+, Lv%
+, Ma%
+, Cai%
+\BCBL {}\ \BBA {} Zhang%
+}{%
+Wang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2025}}%
+}]{%
+wang_achieving_2025}
+\APACinsertmetastar {%
+wang_achieving_2025}%
+\begin{APACrefauthors}%
+Wang, A.%
+, Lv, Z.%
+, Ma, Z.%
+, Cai, D.%
+\BCBL {}\ \BBA {} Zhang, Z.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{08}}}{}.
+\newblock
+\APACrefbtitle {Achieving {High}-{Quality} {Portfolio} {Optimization} with the
+  {Variational} {Quantum} {Eigensolver}.} {Achieving {High}-{Quality}
+  {Portfolio} {Optimization} with the {Variational} {Quantum} {Eigensolver}.}
+\newblock
+\APACaddressPublisher{}{arXiv}.
+\newblock
+\begin{APACrefURL} [{2026-03-11}]\url{http://arxiv.org/abs/2508.18625}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{arXiv:2508.18625 [quant-ph]}
+\newblock
+\begin{APACrefDOI} \doi{10.48550/arXiv.2508.18625} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Wei%
+\ \protect \BOthers {.}}{%
+Wei%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2025}}%
+}]{%
+wei_solving_2025}
+\APACinsertmetastar {%
+wei_solving_2025}%
+\begin{APACrefauthors}%
+Wei, H.%
+, Wang, Y\BPBI J.%
+, Yang, H.%
+, Yang, X.%
+, Cao, M.%
+, Xu, Q.%
+\BDBL {}Zhao, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{07}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Solving {Multiple} {Discretization} {Portfolio}
+  {Optimization} {Problem} with {Quantum}-{Classical} {Hybrid} {Algorithms}}
+  {Solving {Multiple} {Discretization} {Portfolio} {Optimization} {Problem}
+  with {Quantum}-{Classical} {Hybrid} {Algorithms}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Computational Economics}{}{}{}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://link.springer.com/10.1007/s10614-025-11061-5}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s10614-025-11061-5} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
 \end{thebibliography}

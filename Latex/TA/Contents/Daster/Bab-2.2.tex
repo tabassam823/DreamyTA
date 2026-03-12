@@ -1,37 +1,32 @@
 \section{Dasar Analisis Teknikal \& Representasi Data Finansial}
 
-\subsection{Visualisasi Time-Series}
-Representasi data finansial dalam bentuk deret waktu (\textit{time-series}) memungkinkan analis untuk mengamati perilaku harga dalam koordinat dua dimensi. Sumbu horizontal ($x$) merepresentasikan waktu ($t$) dengan interval tertentu, sementara sumbu vertikal ($y$) menunjukkan variabel harga ($P$). Fluktuasi yang muncul pada grafik tersebut merupakan manifestasi dari pergerakan stokastik yang dipengaruhi oleh berbagai variabel laten di pasar. Analisis visual terhadap tren harga memberikan wawasan awal mengenai momentum dan volatilitas yang sedang terjadi. Kejelasan dalam visualisasi deret waktu merupakan langkah krusial sebelum menerapkan pemodelan matematis yang lebih kompleks.
+\subsection{Visualisasi Deret Waktu dan Transisi Keadaan}
+Representasi data finansial dalam bentuk deret waktu (\textit{time-series}) memungkinkan ekstraksi informasi mengenai dinamika harga sebagai fungsi stokastik terhadap waktu. Dalam koordinat Cartesian, sumbu horizontal merepresentasikan interval waktu ($\Delta t$) dan sumbu vertikal menunjukkan harga aset ($P$). Setiap lilin (\textit{candlestick}) pada grafik menyederhanakan perilaku harga ke dalam empat titik data kritis: pembukaan, tertinggi, terendah, dan penutupan. Secara teoretis, pola yang terbentuk dari pergerakan harga dapat dipetakan ke dalam empat transisi keadaan utama, yaitu kenaikan berulang ($U \to U$), kenaikan diikuti penurunan ($U \to D$), penurunan diikuti kenaikan ($D \to U$), dan penurunan berulang ($D \to D$). Pendekatan ini memungkinkan analisis sistematis terhadap momentum dan potensi pembalikan harga tanpa mengabaikan volatilitas intrapriode \cite{hidalgo_quantum_2006}.
 
-Pola-pola geometris yang terbentuk pada grafik seringkali dianggap mencerminkan psikologi kolektif dari para pelaku pasar. Dalam kerangka fisik, pergerakan ini dapat dianologikan sebagai lintasan partikel dalam ruang fase yang dipengaruhi oleh gaya eksternal maupun memori internal. Fenomena seperti \textit{support} dan \textit{resistance} muncul sebagai area di mana probabilitas pembalikan harga meningkat secara signifikan. Figure \ref{fig:time_series_vis} menyajikan perbandingan antara visualisasi harga mentah (\textit{raw price}) dengan hasil pembersihan data melalui metode \textit{smoothing}. Pemahaman terhadap struktur \textit{time-series} menjadi prasyarat untuk mengidentifikasi anomali atau pola berulang yang memiliki nilai prediktif.
+Pemetaan transisi keadaan tersebut bertindak sebagai dasar bagi pemodelan stokastik dalam kerangka teori informasi dan ekonofisika. Area di mana konsentrasi transisi harga cenderung melambat seringkali diidentifikasi sebagai level \textit{support} atau \textit{resistance} yang memiliki probabilitas pembalikan tinggi. Dalam konteks operasional hardware kuantum, representasi keadaan ini dapat dianalogikan dengan sistem dua tingkat (\textit{two-level system}) yang merepresentasikan probabilitas naik atau turunnya harga. Kejelasan dalam visualisasi deret waktu ini sangat krusial sebelum data diolah lebih lanjut menggunakan algoritma berbasis optimasi energi. Figure \ref{fig:price_transitions} mengilustrasikan bagaimana empat pola transisi keadaan tersebut muncul dalam struktur grafik harga harian.
 
 \begin{figure}[htbp]
     \centering
-    % Draft Image: Grafik garis time-series harga saham yang dilengkapi dengan garis tren (trendlines) serta identifikasi area support dan resistance.
+    % Draft Image: Grafik candlestick yang diberi anotasi transisi state: U-U, U-D, D-U, dan D-D untuk menunjukkan pola pergerakan harga.
     \vspace{2cm}
-    \caption{Visualisasi deret waktu harga aset yang menunjukkan fluktuasi harga relatif terhadap fungsi waktu.}
-    \label{fig:time_series_vis}
+    \caption{Representasi transisi keadaan harga ($U$ dan $D$) dalam visualisasi \textit{candlestick}.}
+    \label{fig:price_transitions}
 \end{figure}
 
-\subsection{Anatomi Candlestick dan Visualisasi Lainnya}
-Sistem koordinat harga-waktu yang paling populer dalam analisis teknikal adalah grafik \textit{candlestick}, yang menyediakan empat informasi harga kritis dalam satu jendela waktu ($\Delta t$). Variabel tersebut meliputi harga pembukaan (\textit{open}), tertinggi (\textit{high}), terendah (\textit{low}), dan penutupan (\textit{close}), yang secara kolektif merangkum dinamika transaksi selama periode tersebut. Bagian tubuh (\textit{body}) dari \textit{candlestick} menunjukkan jarak antara harga pembukaan dan penutupan, sementara sumbu (\textit{wick}) merepresentasikan ekstremitas harga yang sempat tercapai. Interpretasi visual terhadap anatomi ini memberikan indikasi langsung mengenai kekuatan momentum antara pihak pembeli dan penjual. Dominasi satu sisi seringkali tercermin dari ukuran dan warna \textit{body} yang terbentuk secara sekuensial.
-
-Penggunaan \textit{candlestick} memungkinkan deteksi cepat terhadap pola pembalikan arah atau kelanjutan tren tanpa memerlukan kalkulasi statistik yang rumit di awal. Sebagai contoh, pola \textit{pin bar} atau \textit{doji} seringkali mengindikasikan adanya penolakan harga pada level tertentu, yang menunjukkan kelelahan momentum. Selain \textit{candlestick}, terdapat pula alternatif visualisasi seperti grafik \textit{Heikin-Ashi} yang bertujuan untuk mereduksi \textit{noise} pada data harga. Setiap jenis grafik memiliki karakteristik unik dalam merepresentasikan volatilitas dan mempermudah identifikasi tren utama. Efektivitas penggunaan instrumen visual ini sangat bergantung pada pengalaman analis dalam mengenali struktur pasar yang relevan.
-
-\subsection{Timeframe dan Sampling Data}
-Penentuan resolusi data atau \textit{timeframe} merupakan variabel krusial yang menentukan kedalaman dan presisi analisis sistem stokastik di pasar finansial. Penggunaan data harian (\textit{daily}) mungkin cukup untuk analisis investasi jangka panjang, namun tidak memadai untuk strategi \textit{high-frequency trading} yang memerlukan resolusi milidetik. Semakin tinggi resolusi sampling data, semakin besar volume data yang harus diproses dan semakin tinggi pula \textit{noise} yang muncul dalam deret waktu. Pemilihan \textit{timeframe} harus disesuaikan dengan cakupan waktu investasi dan karakteristik volatilitas aset yang sedang dianalisis. Ketepatan dalam sampling data memastikan bahwa model yang dibangun tidak kehilangan informasi penting pada skala mikro.
-
-Dalam analisis kuantitatif, transformasi data dari harga mentah ($P_t$) menjadi imbal hasil logaritmik (\textit{logarithmic returns}) $R_t$ sangat diperlukan untuk mencapai sifat stasioneritas. Persamaan berikut mendefinisikan transformasi tersebut:
+\subsection{Stasioneritas dan Transformasi Imbal Hasil}
+Data harga mentah seringkali bersifat non-stasioner karena adanya tren jangka panjang yang membuat parameter statistiknya tidak konsisten sepanjang waktu. Untuk mengatasi kendala tersebut, dilakukan transformasi data menjadi imbal hasil logaritmik (\textit{logarithmic returns}) $R_t$ guna mencapai sifat stasioneritas. Transformasi ini sangat penting agar analisis mengenai distribusi probabilitas dan korelasi memiliki validitas matematis yang tinggi. Persamaan berikut mendefinisikan perhitungan imbal hasil logaritmik sebagai selisih nilai logaritma natural harga pada dua waktu berurutan:
 \begin{equation}
-R_t = \ln\left(\frac{P_t}{P_{t-1}}\right)
-\label{eq:log_returns}
+R_t = \ln(P_t) - \ln(P_{t-1})
+\label{eq:log_returns_final}
 \end{equation}
-Proses ini bertujuan untuk menormalisasi varians dan memastikan bahwa data memiliki sifat statistik yang lebih konsisten untuk diolah menggunakan model ekonofisika. Data harga mentah seringkali bersifat \textit{non-stationary} dan memiliki tren yang tidak stabil, sehingga sulit untuk dianalisis menggunakan metode statistik standar. Dengan menggunakan \textit{logarithmic returns}, analisis mengenai distribusi probabilitas dan autokorelasi dapat dilakukan dengan tingkat validitas yang lebih tinggi. Figure \ref{fig:log_returns_dist} menunjukkan perbedaan distribusi antara harga mentah dan imbal hasil logaritmik yang mendekati distribusi normal namun tetap memiliki karakteristik \textit{fat-tailed}.
+Penggunaan logaritma natural memberikan keuntungan berupa aditivitas antar periode waktu dan normalisasi skala harga yang berbeda \cite{abdul_hali_markowitz_2020}. Melalui transformasi pada Persamaan (2), data finansial menjadi lebih sesuai untuk diintegrasikan ke dalam model optimasi portofolio yang mengasumsikan distribusi probabilitas tertentu.
+
+Stasioneritas data merupakan prasyarat mutlak dalam penerapan metode statistik standar maupun algoritma pembelajaran mesin di bidang ekonomi. Tanpa proses normalisasi, estimasi terhadap matriks kovarians akan menjadi bias dan tidak mencerminkan risiko yang sebenarnya. Transformasi ini juga memungkinkan identifikasi anomali berupa \textit{fat-tails} dalam distribusi imbal hasil yang sering ditemukan pada sistem finansial yang kompleks. Hasil akhir dari transformasi ini adalah deret waktu yang memiliki rata-rata konstan, sehingga mempermudah proses optimasi bobot aset pada tahap selanjutnya. Figure \ref{fig:stationarity_comparison} menyajikan perbandingan antara data harga asli yang memiliki tren dengan data imbal hasil logaritmik yang telah ternormalisasi.
 
 \begin{figure}[htbp]
     \centering
-    % Draft Image: Perbandingan dua panel; panel kiri menunjukkan grafik harga mentah yang non-stationary, panel kanan menunjukkan histogram log-returns yang menunjukkan fenomena leptokurtic.
+    % Draft Image: Perbandingan grafik harga (non-stationary) dan grafik log-returns (stationary) untuk menunjukkan efek normalisasi.
     \vspace{2cm}
-    \caption{Transformasi data harga menjadi \textit{logarithmic returns} untuk mencapai stasioneritas dalam analisis deret waktu.}
-    \label{fig:log_returns_dist}
+    \caption{Perbandingan data harga mentah dengan hasil transformasi imbal hasil logaritmik.}
+    \label{fig:stationarity_comparison}
 \end{figure}

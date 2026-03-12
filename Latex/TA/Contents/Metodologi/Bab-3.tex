@@ -7,57 +7,64 @@ Diagram alir di bawah ini menunjukkan mekanisme \textit{looping} pada optimasi V
 
 \begin{figure}[ht]
     \centering
-    \begin{tikzpicture}[node distance=1.5cm, every node/.style={fill=white, font=\footnotesize}, align=center]
+    \begin{tikzpicture}[node distance=1.3cm, every node/.style={fill=white, font=\footnotesize}, align=center]
         % Styles
-        \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=0.8cm,text centered, draw=black, fill=gray!10]
+        \tikzstyle{startstop} = [ellipse, minimum width=2.5cm, minimum height=0.6cm, text centered, draw=black, fill=gray!10]
         \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=0.8cm, text centered, draw=black, fill=blue!5]
         \tikzstyle{decision} = [diamond, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=red!5, aspect=2]
+        \tikzstyle{connector} = [circle, draw=black, minimum size=0.5cm, text centered, inner sep=2pt]
         \tikzstyle{arrow} = [thick,->,>=stealth]
         
-        % Nodes
+        % KOLOM 1: Pra-pemrosesan & Pemetaan
         \node (start) [startstop] {Mulai};
-        \node (data) [process, below of=start] {Akuisisi Data \& \\ Log Return};
-        \node (biner) [process, below of=data] {Digitalisasi Finansial \\ (Binerisasi State)};
-        
-        % Subgraph Simulation
-        \node (param) [process, below of=biner, yshift=-0.3cm] {Hitung $\lambda$, Payoff, \\ Bias ($h_i$) \& QMI ($J_{ij}$)};
+        \node (data) [process, below of=start] {Akuisisi Data \& \\ \textit{Log Return}};
+        \node (biner) [process, below of=data] {Digitalisasi Finansial \\ (\textit{Binerisasi State})};
+        \node (param) [process, below of=biner] {Hitung $\lambda$, \textit{Payoff}, \\ \textit{Bias} ($h_i$) \& QMI ($J_{ij}$)};
         \node (hamil) [process, below of=param] {Konstruksi \\ Hamiltonian $H$};
+        \node (c1a) [connector, below of=hamil] {1};
+        \node (c3b) [connector, left of=param, xshift=-1cm] {3};
         
-        % VQE Loop
-        \node (vqe_init) [process, below of=hamil] {Inisialisasi \\ Parameter $\theta$};
+        % KOLOM 2: Optimasi Kuantum (VQE)
+        \node (c1b) [connector, right of=start, xshift=3.5cm] {1};
+        \node (vqe_init) [process, below of=c1b] {Inisialisasi \\ Parameter $\theta$};
         \node (spsa) [process, below of=vqe_init] {Update $\theta$ \\ via SPSA};
         \node (conv) [decision, below of=spsa, yshift=-0.5cm] {Konvergen?};
+        \node (layer_eval) [process, below of=conv, yshift=-0.8cm] {Evaluasi Energi \\ pada \textit{Layer} $L$};
+        \node (layer_dec) [decision, below of=layer_eval, yshift=-0.5cm] {$E_L < E_{L-1}$?};
+        \node (c2a) [connector, below of=layer_dec, yshift=-0.8cm] {2};
         
-        % Layer Loop
-        \node (layer_eval) [process, right of=conv, xshift=3cm] {Evaluasi Energi \\ pada Layer $L$};
-        \node (layer_dec) [decision, above of=layer_eval, yshift=1.5cm] {$E_L < E_{L-1}$?};
-        
-        % Backtest Loop
-        \node (rebal) [process, above of=layer_dec, yshift=1.5cm] {Eksekusi Rebalancing \\ \& Biaya Transaksi};
-        \node (end_dec) [decision, left of=rebal, xshift=-3cm] {Akhir \\ Periode?};
-        
-        \node (eval) [process, above of=end_dec, yshift=1cm] {Kalkulasi Metrik \\ Performa Akhir};
-        \node (stop) [startstop, above of=eval] {Selesai};
+        % KOLOM 3: Evaluasi & Backtesting
+        \node (c2b) [connector, right of=c1b, xshift=3.5cm] {2};
+        \node (rebal) [process, below of=c2b] {Eksekusi \textit{Rebalancing} \\ \& Biaya Transaksi};
+        \node (end_dec) [decision, below of=rebal, yshift=-0.5cm] {Akhir \\ Periode?};
+        \node (eval) [process, below of=end_dec, yshift=-0.8cm] {Kalkulasi Metrik \\ Performa Akhir};
+        \node (stop) [startstop, below of=eval] {Selesai};
+        \node (c3a) [connector, right of=eval, xshift=1.2cm] {3};
 
-        % Arrows
+        % Alur Kolom 1
         \draw [arrow] (start) -- (data);
         \draw [arrow] (data) -- (biner);
         \draw [arrow] (biner) -- (param);
         \draw [arrow] (param) -- (hamil);
-        \draw [arrow] (hamil) -- (vqe_init);
+        \draw [arrow] (hamil) -- (c1a);
+        \draw [arrow] (c3b) -- (param);
+
+        % Alur Kolom 2
+        \draw [arrow] (c1b) -- (vqe_init);
         \draw [arrow] (vqe_init) -- (spsa);
         \draw [arrow] (spsa) -- (conv);
-        \draw [arrow] (conv) -- node[anchor=south] {Ya} (layer_eval);
-        \draw [arrow] (conv.west) -- ++(-0.5,0) -- ++(0,1.5) -- (spsa.west) node[anchor=east, yshift=-0.5cm] {Tidak};
-        
+        \draw [arrow] (conv) -- node[anchor=east] {Ya} (layer_eval);
+        \draw [arrow] (conv.west) -- ++(-0.5,0) |- (spsa.west) node[pos=0.25, fill=white] {Tidak};
         \draw [arrow] (layer_eval) -- (layer_dec);
-        \draw [arrow] (layer_dec) -- node[anchor=east] {Ya} (rebal);
-        \draw [arrow] (layer_dec.east) -- ++(0.5,0) -- ++(0,-3) -- (layer_eval.east) node[anchor=west, yshift=1.5cm] {Tambah \\ Layer};
-        
+        \draw [arrow] (layer_dec) -- node[anchor=east] {Ya} (c2a);
+        \draw [arrow] (layer_dec.east) -- ++(0.6,0) |- (layer_eval.east) node[pos=0.25, anchor=west] {Tambah \\ \textit{Layer}};
+
+        % Alur Kolom 3
+        \draw [arrow] (c2b) -- (rebal);
         \draw [arrow] (rebal) -- (end_dec);
         \draw [arrow] (end_dec) -- node[anchor=east] {Ya} (eval);
-        \draw [arrow] (end_dec.south) -- ++(0,-0.5) -- ++(6.5,0) -- ++(0,-8) -- (param.east) node[anchor=north, xshift=-3cm] {Tidak (Geser Window)};
         \draw [arrow] (eval) -- (stop);
+        \draw [arrow] (end_dec.east) -| (c3a.north) node[pos=0.75, fill=white] {Tidak};
 
     \end{tikzpicture}
     \caption{Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}

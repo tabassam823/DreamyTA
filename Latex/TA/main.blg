@@ -9,13 +9,9 @@ White space in argument---line 16 of file main.aux
  : \@input{Contents/BagianDepan/Lembar
  :                                     Pengesahan.aux}
 I'm skipping whatever remains of this command
-White space in argument---line 20 of file main.aux
- : \@input{Contents/BagianDepan/Lembar
- :                                     Orisinalitas 1.aux}
-I'm skipping whatever remains of this command
 A level-1 auxiliary file: Contents/Abstrak/Abstrak.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstract.aux
-White space in argument---line 32 of file main.aux
+White space in argument---line 28 of file main.aux
  : \@input{Contents/BagianDepan/Kata
  :                                   Pengantar.aux}
 I'm skipping whatever remains of this command
@@ -23,12 +19,10 @@ A level-1 auxiliary file: Contents/Pendahuluan/Bab-1.aux
 A level-1 auxiliary file: Contents/Daster/Bab-2.aux
 A level-1 auxiliary file: Contents/Metodologi/Bab-3.aux
 The style file: apacite.bst
-A level-1 auxiliary file: Contents/BagianBelakang/Lampiran-A.aux
-White space in argument---line 84 of file main.aux
+White space in argument---line 94 of file main.aux
  : \@input{Contents/BagianBelakang/Biodata
  :                                         Penulis.aux}
 I'm skipping whatever remains of this command
-I found no \citation commands---while reading file main.aux
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
@@ -39,46 +33,53 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Referensi.bib
+Database file #2: Filtered_Paper.bib
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
-You've used 0 entries,
+Warning--No journal in hidalgo_quantum_2006
+ptr=1, stack=
+
+---the literal stack isn't empty for entry hidalgo_quantum_2006
+while executing---line 5079 of file apacite.bst
+Warning--No journal in padilla_quantum_2025
+You've used 9 entries,
             6951 wiz_defined-function locations,
-            1274 strings with 10822 characters,
-and the built_in function-call counts, 43 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 1
-:= -- 32
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+            1339 strings with 13402 characters,
+and the built_in function-call counts, 18968 in all, are:
+= -- 2214
+> -- 154
+< -- 1001
++ -- 1013
+- -- 18
+* -- 1374
+:= -- 3732
+add.period$ -- 36
+call.type$ -- 9
+change.case$ -- 169
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+cite$ -- 20
+duplicate$ -- 473
+empty$ -- 734
+format.name$ -- 271
+if$ -- 3410
 int.to.chr$ -- 0
-int.to.str$ -- 0
+int.to.str$ -- 27
 missing$ -- 0
-newline$ -- 3
-num.names$ -- 0
-pop$ -- 0
+newline$ -- 265
+num.names$ -- 72
+pop$ -- 271
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 52
 quote$ -- 0
-skip$ -- 1
+skip$ -- 1097
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 1074
+swap$ -- 293
+text.length$ -- 34
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 0
-warning$ -- 0
-while$ -- 0
+type$ -- 720
+warning$ -- 2
+while$ -- 106
 width$ -- 0
-write$ -- 2
-(There were 6 error messages)
+write$ -- 325
+(There were 5 error messages)
