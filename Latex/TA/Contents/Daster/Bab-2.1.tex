@@ -1,32 +1,46 @@
 \section{Dinamika Pasar Finansial}
 
-\subsection{Mekanisme Penggerak Harga dan Dinamika Makro}
-Aksioma utama dalam dinamika pasar finansial menyatakan bahwa harga merupakan manifestasi dari proses pencarian nilai yang efisien atau \textit{price discovery}. Interaksi antara penawaran (\textit{bid}) dan permintaan (\textit{ask}) dalam \textit{order book} menciptakan fluktuasi harga yang merepresentasikan penyerapan informasi oleh para partisipan pasar. Secara sistemik, variabel makroekonomi seperti tingkat inflasi dan kebijakan moneter bank sentral bertindak sebagai perturbasi eksternal yang mempengaruhi likuiditas secara global. Pergeseran suku bunga acuan secara langsung mengubah biaya modal (\textit{cost of capital}) yang kemudian terefleksi dalam perubahan rezim pasar (\textit{market regimes}). Fenomena ini menunjukkan bahwa pergerakan harga tidak hanya bersifat stokastik lokal, tetapi juga terikat pada siklus ekonomi yang lebih luas \cite{abdul_hali_markowitz_2020}.
+\subsection{Mekanisme Penggerak Harga Berdasarkan Dinamika Makro}
+Dalam pasar fiansial, terdapat aksioma utama yang menyatakan bahwa harga merupakan manifestasi dari proses pencarian nilai yang efisien atau \textit{price discovery}. Interaksi antara penawaran (\textit{bid}) dan permintaan (\textit{ask}) dalam \textit{order book} menciptakan fluktuasi harga yang merepresentasikan informasi oleh para partisipan pasar. Variabel makroekonomi seperti tingkat inflasi dan kebijakan moneter bank sentral bertindak sebagai gangguan eksternal yang mempengaruhi likuiditas secara global. Pergeseran suku bunga (\textit{interest rate}) secara langsung dapat mengubah biaya modal (\textit{cost of capital}) yang selanjutnya berdampak pada perubahan rezim pasar (\textit{market regimes}). Fenomena finansial tersebut menunjukkan bahwa pergerakan harga tidak hanya bersifat stokastik yang seluruhnya acak, namun juga terikat pada siklus ekonomi yang lebih luas \cite{abdul_hali_markowitz_2020}.
 
-Dalam perspektif ekonofisika, interaksi mikroskopis antar pelaku pasar membentuk struktur makroskopis yang dikenal sebagai tren atau kecenderungan arah harga. Ketidakseimbangan volume beli dan jual memicu terjadinya \textit{price slippage} yang mendorong sistem menuju titik kesetimbangan baru secara dinamis. Peristiwa makroekonomi yang signifikan seringkali menjadi katalis bagi transisi fase antara keadaan \textit{bullish} dan \textit{bearish} melalui mekanisme umpan balik positif. Oleh karena itu, identifikasi rezim pasar menjadi krusial untuk memahami karakteristik volatilitas yang melekat pada setiap periode waktu. Pemahaman mendalam mengenai mekanisme ini menjadi prasyarat dalam membangun model prediksi yang tangguh terhadap perubahan struktural ekonomi.
+Dalam perspektif ekonofisika, interaksi mikroskopis antar pelaku pasar membentuk struktur makroskopis yang dikenal sebagai tren atau kecenderungan arah harga. Ketidakseimbangan volume beli dan jual memicu terjadinya \textit{price slippage} sehingga memaksa sistem menuju titik kesetimbangan baru secara dinamis dan berkala. Peristiwa makroekonomi yang signifikan seringkali menjadi katalis bagi transisi fase antara keadaan \textit{bullish} dan \textit{bearish} rezim pasar melalui mekanisme \text{possitive feedback} \cite{dao_exploring_2025}. Oleh karena itu, identifikasi rezim pasar menjadi krusial untuk memahami karakteristik volatilitas yang melekat pada setiap periode waktu. Pemahaman mendalam mengenai mekanisme ini menjadi prasyarat dalam membangun model prediksi yang tangguh terhadap perubahan struktural ekonomi.
 
 \begin{figure}[htbp]
     \centering
-    % Draft Image: Ilustrasi mekanisme price discovery dan pengaruh variabel makro terhadap pergeseran supply-demand curve di pasar.
-    \vspace{2cm}
+    \begin{tikzpicture}[
+        node distance=4cm,
+        block/.style={rectangle, draw, fill=gray!5, text width=3.2cm, text centered, minimum height=1.2cm, font=\small\sffamily, thick},
+        arrow/.style={-stealth, thick}
+    ]
+        % Nodes
+        \node (monetary) [block] {Kebijakan Moneter \\ \& Suku Bunga};
+        \node (liquidity) [block, right of=monetary] {Likuiditas \& \\ \textit{Cost of Capital}};
+        \node (orderbook) [block, right of=liquidity] {Interaksi \textit{Order Book} (\textit{Bid-Ask})};
+        \node (discovery) [block, right of=orderbook] {\textit{Price Discovery} \& Kesetimbangan};
+
+        % Connections with labels
+        \draw [arrow] (monetary) -- node[anchor=south, font=\scriptsize\itshape] {} (liquidity);
+        \draw [arrow] (liquidity) -- node[anchor=south, font=\scriptsize\itshape] {} (orderbook);
+        \draw [arrow] (orderbook) -- node[anchor=south, font=\scriptsize\itshape] {} (discovery);
+
+    \end{tikzpicture}
     \caption{Skema interaksi \textit{order book} dan pengaruh kebijakan moneter terhadap likuiditas pasar.}
     \label{fig:order_book_macro}
 \end{figure}
 
-\subsection{Diversifikasi dan Teori Portofolio Modern}
-Prinsip diversifikasi merupakan pilar fundamental dalam \textit{Modern Portfolio Theory} (MPT) yang bertujuan untuk mereduksi risiko spesifik tanpa mengurangi ekspektasi imbal hasil secara signifikan. Melalui penggabungan aset-aset dengan korelasi rendah, fluktuasi negatif pada satu instrumen dapat dikompensasi oleh pergerakan positif pada instrumen lainnya. Namun, risiko sistemik yang berkaitan dengan kegagalan pasar secara keseluruhan tetap tidak dapat dieliminasi sepenuhnya melalui strategi ini. Keberhasilan diversifikasi sangat bergantung pada stabilitas matriks kovarians antar aset dalam berbagai kondisi pasar \cite{abdul_hali_markowitz_2020}. Oleh karena itu, pemilihan bobot aset menjadi permasalahan optimasi matematis yang krusial untuk mencapai efisiensi alokasi modal.
+\subsection{Diversifikasi pada Teori Portofolio Modern}
+Prinsip diversifikasi merupakan pilar fundamental dalam \textit{Modern Portfolio Theory} (MPT) yang bertujuan untuk mereduksi risiko spesifik tanpa mengurangi \textit{expected returns} secara signifikan. Teknik ini menggunakan penggabungan aset-aset dengan korelasi rendah, sehingga fluktuasi negatif pada satu instrumen dapat dikompensasi oleh pergerakan positif pada instrumen lainnya. Namun, risiko yang berkaitan dengan kegagalan pasar secara keseluruhan tetap tidak dapat dihindari sepenuhnya melalui strategi ini. Keberhasilan diversifikasi sangat bergantung pada stabilitas matriks kovarians antar aset dalam berbagai kondisi pasar \cite{abdul_hali_markowitz_2020}. Oleh karena itu, pemilihan bobot aset menjadi permasalahan optimasi matematis yang krusial untuk mencapai efisiensi alokasi modal.
 
-Secara formal, risiko portofolio dinyatakan melalui varians portofolio $\sigma_p^2$ yang merupakan fungsi dari vektor bobot $w$ dan matriks kovarians $\Sigma$. Persamaan berikut mendefinisikan hubungan kuadratik tersebut dalam ruang vektor:
+Secara matematis, risiko portofolio dinyatakan melalui varians portofolio $\sigma_p^2$ yang merupakan fungsi dari vektor bobot $w$ dan matriks kovarians $\Sigma$. Persamaan berikut mendefinisikan hubungan kuadratik tersebut dalam ruang vektor:
 \begin{equation}
 \sigma_p^2 = w^T \Sigma w
 \label{eq:portfolio_variance_simple}
 \end{equation}
-Minimisasi fungsi objektif pada Persamaan (1) di bawah kendala tertentu akan menghasilkan titik-titik optimal pada \textit{efficient frontier}. Analisis terhadap interaksi antar variabel ini memastikan bahwa struktur portofolio tetap berada dalam batas toleransi risiko yang ditetapkan. Pendekatan ini menjadi landasan bagi pengembangan metode optimasi yang lebih kompleks, termasuk penggunaan algoritma kuantum pada bab selanjutnya. Penutupan logis dari subbab ini menegaskan bahwa efisiensi diversifikasi adalah prasyarat utama sebelum melakukan ekstraksi informasi dari deret waktu harga.
+Minimisasi fungsi objektif pada Persamaan (\ref{eq:portfolio_variance_simple}) di bawah batasan tertentu akan menghasilkan titik-titik optimal pada \textit{efficient frontier} sebagaimana pada gambar \ref{fig:efficient_frontier_simple}. Interaksi antar variabel tersebut juga harus dianalisis untuk memastikan bahwa struktur portofolio tetap berada dalam batas toleransi risiko yang ditetapkan. Pendekatan inilah yang menjadi landasan bagi pengembangan metode optimasi yang lebih kompleks, termasuk penggunaan algoritma kuantum pada bab selanjutnya. 
 
 \begin{figure}[htbp]
     \centering
-    % Draft Image: Grafik Efficient Frontier yang menunjukkan pergeseran risiko akibat diversifikasi aset.
-    \vspace{2cm}
+    \includegraphics[width=0.75\textwidth]{Images/Efficient_Frontier.png}
     \caption{Representasi kurva \textit{Efficient Frontier} dalam ruang risiko dan imbal hasil.}
     \label{fig:efficient_frontier_simple}
 \end{figure}

@@ -1,32 +1,23 @@
-\section{Dasar Analisis Teknikal \& Representasi Data Finansial}
+\section{Representasi Data Finansial}
 
 \subsection{Visualisasi Deret Waktu dan Transisi Keadaan}
-Representasi data finansial dalam bentuk deret waktu (\textit{time-series}) memungkinkan ekstraksi informasi mengenai dinamika harga sebagai fungsi stokastik terhadap waktu. Dalam koordinat Cartesian, sumbu horizontal merepresentasikan interval waktu ($\Delta t$) dan sumbu vertikal menunjukkan harga aset ($P$). Setiap lilin (\textit{candlestick}) pada grafik menyederhanakan perilaku harga ke dalam empat titik data kritis: pembukaan, tertinggi, terendah, dan penutupan. Secara teoretis, pola yang terbentuk dari pergerakan harga dapat dipetakan ke dalam empat transisi keadaan utama, yaitu kenaikan berulang ($U \to U$), kenaikan diikuti penurunan ($U \to D$), penurunan diikuti kenaikan ($D \to U$), dan penurunan berulang ($D \to D$). Pendekatan ini memungkinkan analisis sistematis terhadap momentum dan potensi pembalikan harga tanpa mengabaikan volatilitas intrapriode \cite{hidalgo_quantum_2006}.
+Data finansial biasanya direpresentasikan dalam bentuk deret waktu (\textit{time-series}) sehingga memungkinkan ekstraksi informasi mengenai dinamika harga sebagai fungsi stokastik terhadap waktu. Di dalam grafik pergerakan harga, sumbu horizontal merepresentasikan interval waktu ($\Delta t$) dan sumbu vertikal menunjukkan harga aset ($P$). Setiap lilin (\textit{candlestick}) pada grafik memberikan penyederhanaan perilaku harga ke dalam empat titik data kritis: pembukaan, tertinggi, terendah, dan penutupan. Pola yang terbentuk dari pergerakan harga tersebut dapat dipetakan ke dalam empat transisi keadaan utama, yaitu kenaikan berulang ($U \to U$), kenaikan diikuti penurunan ($U \to D$), penurunan diikuti kenaikan ($D \to U$), dan penurunan berulang ($D \to D$). Pembacaan data seperti ini memungkinkan analisis yang sistematik terhadap momentum dan potensi pembalikan harga tanpa mengabaikan volatilitas di dalam periode tertentu \cite{hidalgo_quantum_2006}.
 
-Pemetaan transisi keadaan tersebut bertindak sebagai dasar bagi pemodelan stokastik dalam kerangka teori informasi dan ekonofisika. Area di mana konsentrasi transisi harga cenderung melambat seringkali diidentifikasi sebagai level \textit{support} atau \textit{resistance} yang memiliki probabilitas pembalikan tinggi. Dalam konteks operasional hardware kuantum, representasi keadaan ini dapat dianalogikan dengan sistem dua tingkat (\textit{two-level system}) yang merepresentasikan probabilitas naik atau turunnya harga. Kejelasan dalam visualisasi deret waktu ini sangat krusial sebelum data diolah lebih lanjut menggunakan algoritma berbasis optimasi energi. Figure \ref{fig:price_transitions} mengilustrasikan bagaimana empat pola transisi keadaan tersebut muncul dalam struktur grafik harga harian.
+Pemetaan transisi keadaan tersebut bertindak sebagai dasar bagi pemodelan stokastik dalam kerangka teori informasi dan ekonofisika. Area di mana konsentrasi transisi harga cenderung melambat seringkali diidentifikasi sebagai level \textit{support} atau \textit{resistance} yang memiliki probabilitas pembalikan tinggi. Dalam konteks operasional hardware kuantum, representasi keadaan ini dapat dianalogikan dengan sistem dua tingkat (\textit{two-level system}) yang merepresentasikan probabilitas naik atau turunnya harga. Visualisasi deret waktu ini sangat penting sebelum data diolah lebih lanjut menggunakan algoritma berbasis optimasi energi. Figure \ref{fig:price_transitions} mengilustrasikan bagaimana empat pola transisi keadaan tersebut muncul dalam struktur grafik harga harian.
 
 \begin{figure}[htbp]
     \centering
-    % Draft Image: Grafik candlestick yang diberi anotasi transisi state: U-U, U-D, D-U, dan D-D untuk menunjukkan pola pergerakan harga.
-    \vspace{2cm}
-    \caption{Representasi transisi keadaan harga ($U$ dan $D$) dalam visualisasi \textit{candlestick}.}
+    \includegraphics[width=0.75\textwidth]{Images/OHLC.png}
+    \caption{Representasi transisi keadaan harga ($U$ dan $D$) dalam visualisasi \textit{candlestick} \protect\cite{ibrahim_bitcoin_2020}.}
     \label{fig:price_transitions}
 \end{figure}
 
-\subsection{Stasioneritas dan Transformasi Imbal Hasil}
-Data harga mentah seringkali bersifat non-stasioner karena adanya tren jangka panjang yang membuat parameter statistiknya tidak konsisten sepanjang waktu. Untuk mengatasi kendala tersebut, dilakukan transformasi data menjadi imbal hasil logaritmik (\textit{logarithmic returns}) $R_t$ guna mencapai sifat stasioneritas. Transformasi ini sangat penting agar analisis mengenai distribusi probabilitas dan korelasi memiliki validitas matematis yang tinggi. Persamaan berikut mendefinisikan perhitungan imbal hasil logaritmik sebagai selisih nilai logaritma natural harga pada dua waktu berurutan:
+\subsection{Parameter \textit{Risk Aversion} Endogen melalui Fungsi Aktivasi Sigmoid}
+Dalam teori keuangan perilaku, \textit{risk aversion} seringkali dipandang sebagai parameter statis yang ditentukan oleh karakteristik individu seperti faktor usia dan horison investasi. Secara tradisional, diasumsikan bahwa investor dengan usia lebih muda memiliki \textit{risk aversion} yang rendah karena memiliki kapasitas menanggung risiko yang lebih besar, sedangkan investor pada usia lanjut cenderung memiliki \textit{risk aversion} yang lebih tinggi demi menjaga stabilitas aset \cite{abdul_hali_markowitz_2020}. Namun, pendekatan ini tidak memperhitungkan anomali pasar yang bersifat transien dan fluktuatif sama sekali. Oleh karena itu, diperlukan sebuah mekanisme penentuan parameter yang tidak hanya bergantung pada profil subjek, melainkan secara aktif menyesuaikan diri (\textit{self-adjusting}) terhadap dinamika pasar yang muncul dari data finansial secara \textit{real-time}.
+
+Penggunaan fungsi aktivasi sigmoid dapat menggambarkan pemetaan rasio performa aset ke dalam rentang kontinu $[0, 1]$, yang mana berfungsi untuk membatasi pengaruh imbal hasil terhadap risiko dalam formulasi energi. Pendekatan ini digunakan untuk menyesuaikan bobot keputusan sesuai dengan kondisi psikologi pasar yang terepresentasikan melalui volatilitas dan ekspektasi imbal hasil. Secara matematis, parameter $\lambda$ didefinisikan sebagai fungsi dari imbal hasil diharapkan ($\mu$) dan deviasi standar ($\sigma$) melalui transformasi non-linear sehingga dapat dinyatakan dalam persamaan berikut:
 \begin{equation}
-R_t = \ln(P_t) - \ln(P_{t-1})
-\label{eq:log_returns_final}
+\lambda(\mu, \sigma) = \frac{1}{1 + e^{-(\mu/\sigma)}}
+\label{eq:sigmoid_risk_aversion}
 \end{equation}
-Penggunaan logaritma natural memberikan keuntungan berupa aditivitas antar periode waktu dan normalisasi skala harga yang berbeda \cite{abdul_hali_markowitz_2020}. Melalui transformasi pada Persamaan (2), data finansial menjadi lebih sesuai untuk diintegrasikan ke dalam model optimasi portofolio yang mengasumsikan distribusi probabilitas tertentu.
-
-Stasioneritas data merupakan prasyarat mutlak dalam penerapan metode statistik standar maupun algoritma pembelajaran mesin di bidang ekonomi. Tanpa proses normalisasi, estimasi terhadap matriks kovarians akan menjadi bias dan tidak mencerminkan risiko yang sebenarnya. Transformasi ini juga memungkinkan identifikasi anomali berupa \textit{fat-tails} dalam distribusi imbal hasil yang sering ditemukan pada sistem finansial yang kompleks. Hasil akhir dari transformasi ini adalah deret waktu yang memiliki rata-rata konstan, sehingga mempermudah proses optimasi bobot aset pada tahap selanjutnya. Figure \ref{fig:stationarity_comparison} menyajikan perbandingan antara data harga asli yang memiliki tren dengan data imbal hasil logaritmik yang telah ternormalisasi.
-
-\begin{figure}[htbp]
-    \centering
-    % Draft Image: Perbandingan grafik harga (non-stationary) dan grafik log-returns (stationary) untuk menunjukkan efek normalisasi.
-    \vspace{2cm}
-    \caption{Perbandingan data harga mentah dengan hasil transformasi imbal hasil logaritmik.}
-    \label{fig:stationarity_comparison}
-\end{figure}
+Jika ditinjau secara numerik, Ketika pasar berada dalam kondisi \textit{euphoria} ($\mu \gg \sigma$), nilai $\lambda$ akan mendekati satu sehingga algoritma secara otomatis memprioritaskan pemaksimalan imbal hasil. Sebaliknya, pada kondisi \textit{panic} ($\mu \ll 0$), nilai $\lambda$ akan meluruh menuju nol dan menggeser fokus optimasi sepenuhnya pada meminimalkan risiko atau varians aset \cite{lucas_ising_2014}. 

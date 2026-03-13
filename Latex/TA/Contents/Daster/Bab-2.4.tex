@@ -1,15 +1,11 @@
-\section{Game Theory (Klasik) dan Quantum Mutual Information}
+\section{Game Theory klasik}
 
-Teori permainan (\textit{game theory}) dalam sistem finansial dipostulatkan sebagai interaksi strategis antar agen rasional yang direpresentasikan melalui matriks imbalan (\textit{payoff matrix}) dalam kerangka \textit{non zero-sum game}. Interaksi ini menghasilkan keseimbangan dinamis (\textit{dynamic equilibrium}) di mana keputusan kolektif partisipan pasar memanifestasikan akumulasi sentimen yang memengaruhi fluktuasi harga secara stokastik. Struktur interaksi tersebut memungkinkan pemetaan preferensi strategis agen ke dalam parameter fungsional yang merepresentasikan bias arah individu terhadap pergerakan pasar. Melalui kerangka ini, formasi harga tidak lagi dipandang sebagai entitas terisolasi, melainkan sebagai hasil dari optimasi utilitas agen yang saling bergantung satu sama lain.
+\subsection{Matriks \textit{Payoff}}
 
-Formulasi \textit{expected payoff} agen pasar dipetakan sebagai vektor deterministik awal yang secara matematis ekuivalen dengan konsep bias medan lokal (\textit{local field bias}) pada model Hamiltonian Ising. Pemetaan ini menjembatani dinamika ekonomi perilaku klasik dengan arsitektur komputasi kuantum melalui transformasi nilai \textit{bias} tunggal ($h_i$) dari hasil observasi historis. Parameter korelasi kopling ($J_{ij}$) selanjutnya diekstraksi menggunakan kerangka \textit{Quantum Mutual Information} guna menangkap ketergantungan non-linear antar aset. Integrasi antara teori permainan dan mekanika statistik ini menyediakan landasan operasional untuk membangun model optimasi portofolio yang mampu merepresentasikan kompleksitas interaksi pasar secara presisi.
+Teori permainan dalam sistem finansial menyatakan bahwa pergerakan harga merupakan hasil dari interaksi strategis antar agen rasional yang berusaha memaksimalkan utilitasnya. Dalam kerangka \textit{non zero-sum game}, interaksi ini dimodelkan melalui ruang konfigurasi biner yang merepresentasikan empat status kemungkinan antara pasangan saham $i$ dan $j$ pada setiap waktu $t$. Konsep \textit{Mixed Strategy Nash Equilibrium} (MSNE) diaplikasikan dengan menggunakan probabilitas historis sebagai proksi strategi pelaku pasar untuk mencapai titik keseimbangan \cite{menezes_ex_2025}. Pendekatan ini digunakan supaya sistem dapat menangkap dinamika asimetris yang seringkali terabaikan dalam model statistik konvensional yang hanya menggunakan identifikasi konfigurasi Naik-Naik ($UU$), Naik-Turun ($UD$), Turun-Naik ($DU$), dan Turun-Turun ($DD$). Penentuan orientasi $+1$ dan $-1$ berfungsi sebagai variabel biner yang mendasari seluruh formalisme optimasi pada tahap selanjutnya.
 
-\subsection{Matriks Probabilitas Imbalan (Payoff)}
-
-Aksioma utama teori permainan dalam sistem finansial menyatakan bahwa pergerakan harga merupakan hasil dari interaksi strategis antar agen rasional yang berusaha memaksimalkan utilitasnya. Dalam kerangka \textit{non zero-sum game}, interaksi ini dimodelkan melalui ruang konfigurasi biner yang merepresentasikan empat status kemungkinan antara pasangan saham $i$ dan $j$ pada setiap waktu $t$. Konsep \textit{Mixed Strategy Nash Equilibrium} (MSNE) diaplikasikan dengan menggunakan probabilitas historis sebagai proksi strategi pelaku pasar untuk mencapai titik keseimbangan (Menezes et al., 2025). Pendekatan ini memungkinkan sistem untuk menangkap dinamika asimetris yang seringkali terabaikan dalam model statistik konvensional melalui identifikasi konfigurasi Naik-Naik ($UU$), Naik-Turun ($UD$), Turun-Naik ($DU$), dan Turun-Turun ($DD$). Penentuan orientasi $+1$ dan $-1$ berfungsi sebagai variabel biner yang mendasari seluruh formalisme optimasi pada tahap selanjutnya.
-
-Matriks imbalan (\textit{payoff matrix}) $V_i$ mengkodifikasi insentif strategis bagi Saham $i$ terhadap respon pergerakan Saham $j$ guna mengukur potensi keuntungan relatif. Setiap elemen $R_{xy}$ dalam matriks tersebut merepresentasikan imbal hasil historis yang diperoleh ketika Saham $i$ berada pada kondisi $x$ dan pasangannya pada kondisi $y$. Visualisasi matriks $2 \times 2$ ini memberikan gambaran komprehensif mengenai struktur ketergantungan antar aset secara individual dalam ruang keadaan biner $s \in \{+1, -1\}$. Penggunaan representasi linear ini esensial untuk memisahkan kontribusi imbal hasil murni dari faktor risiko sistemik lainnya yang memengaruhi portofolio. Dengan menetapkan matriks $V_i$, operasionalisasi strategi campuran dapat dilakukan secara matematis melalui distribusi probabilitas gabungan fungsional.
-\begin{table}[h!]
+Matriks imbalan (\textit{payoff matrix}) $V_i$ merepresentasikan insentif strategis bagi Saham $i$ terhadap respon pergerakan Saham $j$ sebagai pengukuran potensi keuntungan relatif. Setiap elemen $R_{xy}$ dalam matriks tersebut merepresentasikan imbal hasil historis yang diperoleh ketika Saham $i$ berada pada kondisi $x$ dan pasangannya pada kondisi $y$. Visualisasi matriks $2 \times 2$ pada Gambar \ref{fig:payoff_matrix} memberikan gambaran mengenai struktur ketergantungan antar aset secara individual dalam ruang keadaan biner $s \in \{+1, -1\}$. Representasi ini digunakan  untuk memisahkan kontribusi imbal hasil murni dari faktor risiko sistemik lainnya yang memengaruhi portofolio. Dengan menetapkan matriks $V_i$, operasionalisasi strategi campuran dapat dilakukan secara matematis melalui distribusi probabilitas gabungan fungsional.
+\begin{figure}[h!]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
@@ -18,120 +14,51 @@ $i \setminus j$ & Naik ($+1$) & Turun ($-1$) \\ \hline
 \textbf{Turun ($-1$)} & $R_{DU}$ & $R_{DD}$ \\ \hline
 \end{tabular}
 \caption{Matriks \textit{Payoff} Saham $i$ ($V_i$)}
-\label{tab:payoff_matrix}
-\end{table}
+\label{fig:payoff_matrix}
+\end{figure}
 
-Representasi matematis dari matriks imbalan tersebut didefinisikan sebagai operator linear yang memetakan status interaksi pasangan aset. Jembatan matematis antara frekuensi kejadian historis dan nilai harapan imbalan dibangun melalui normalisasi distribusi data pada rentetan waktu $t = 1, \dots, N$. Probabilitas gabungan $P(s_i, s_j)$ dihitung dengan membagi frekuensi kemunculan konfigurasi $n(s_i, s_j)$ terhadap total agregat observasi $N$ sebagaimana dirumuskan dalam ekuasi berikut:
+Representasi matematis tersebut didefinisikan sebagai operator linear yang memetakan status interaksi pasangan aset. Selanjutnya, frekuensi kejadian historis dan nilai harapan imbalan dibangun melalui normalisasi distribusi data pada rentetan waktu $t = 1, \dots, N$. Probabilitas gabungan $P(s_i, s_j)$ dihitung dengan membagi frekuensi kemunculan konfigurasi $n(s_i, s_j)$ terhadap total agregat observasi $N$ sebagaimana dirumuskan dalam ekuasi berikut:
 \begin{equation}
 P(s_i, s_j) = \frac{n(s_i, s_j)}{N}
 \label{eq:joint_probability}
 \end{equation}
-Distribusi $P(s_i, s_j)$ tersebut mengekstrak informasi yang bersifat ortogonal terhadap sistem, di mana ekspektasi linear akan menjadi parameter $h_i$ sementara ketergantungan informasinya dipetakan menjadi parameter $J_{ij}$ (Wang et al., 2025). Perhitungan nilai harapan imbalan (\textit{expected payoff}) dilakukan dengan menjumlahkan hasil perkalian antara probabilitas tersebut dengan nilai imbalan yang sesuai pada seluruh spektrum kemungkinan logis:
+Distribusi $P(s_i, s_j)$ tersebut menghasilkan informasi yang bersifat ortogonal terhadap sistem, di mana ekspektasi linear akan menjadi parameter $h_i$ sementara ketergantungan informasinya dipetakan menjadi parameter $J_{ij}$ \cite{wang_achieving_2025}. Perhitungan nilai harapan imbalan (\textit{expected payoff}) dilakukan dengan menjumlahkan hasil perkalian antara probabilitas tersebut dengan nilai imbalan yang sesuai pada seluruh spektrum kemungkinan logis sebagaimana persamaan berikut.
 \begin{equation}
 E[i|s_i] = \sum_{s_j \in \{+1, -1\}} P(s_j) \cdot V(s_i, s_j)
 \label{eq:expected_payoff}
 \end{equation}
 
-Sebagai penutup logis, bentuk akhir dari \textit{expected payoff} mencerminkan akumulasi sentimen pasar yang terkuantifikasi secara deterministik bagi setiap entitas aset. Signifikansi dari perolehan nilai $E[i|s_i]$ terletak pada kemampuannya untuk mendefinisikan gradien keuntungan strategis bagi setiap aset dalam fase eskalasi maupun kontraksi. Hal ini memungkinkan sistem untuk mengidentifikasi arah pergerakan yang paling menguntungkan melalui fungsi dekomposisi linear sebagai berikut:
+Bentuk akhir dari \textit{expected payoff} yang didapatkan akan menunjukkan akumulasi sentimen pasar secara terkuantifikasi bagi setiap aset yang dianalisis. nilai $E[i|s_i]$ juga mampu mendefinisikan gradien keuntungan strategis bagi setiap aset dalam fase \textit{euphoria} maupun \textit{panic}. Hal ini memungkinkan sistem untuk mengidentifikasi arah pergerakan yang paling menguntungkan melalui fungsi dekomposisi linear sebagai berikut:
 \begin{align}
 E[i|+] &= P(+1)V(+1,+1) + P(-1)V(+1,-1) \label{eq:payoff_positive} \\
 E[i|-] &= P(+1)V(-1,+1) + P(-1)V(-1,-1) \label{eq:payoff_negative}
 \end{align}
-Dengan demikian, transisi menuju parameter fisik Hamiltonian dapat dilakukan dengan landasan teoretis yang mapan dan mampu merepresentasikan kompleksitas interaksi pasar secara presisi.
 
 \subsection{Ekuivalensi ke Parameter Hamilton Bias ($h_i$)}
 
-Landasan teoretis untuk menghubungkan teori permainan dengan mekanika statistik dibangun melalui aksioma pemetaan energi terhadap utilitas dalam sistem kompleks. Dalam model Hamiltonian Ising, parameter medan lokal atau bias ($h_i$) bertanggung jawab atas kecenderungan orientasi \textit{spin} individu dalam sistem yang merepresentasikan keputusan beli atau jual (Lucas, 2014). Postulat utama menyatakan bahwa nilai energi Hamiltonian berbanding terbalik dengan nilai utilitas atau \textit{payoff} ekonomi melalui prinsip kesetaraan $H \equiv -E$. Prinsip ini memastikan bahwa algoritma minimisasi energi kuantum akan secara otomatis mengarah pada titik maksimisasi keuntungan strategis. Konfigurasi ekuasi mekanika partikel untuk entitas tunggal dengan ekspektasi medan lokal didefinisikan secara presisi melalui hubungan berikut:
+Penghubungan teori permaian dengan mekanika statistik dibangun dengan dari aksioma pemetaan energi terhadap utilitas dalam sistem kompleks \cite{saslow_economic_1999}. Dalam model Hamiltonian Ising, parameter medan lokal atau bias ($h_i$) bertanggung jawab atas kecenderungan orientasi \textit{spin} individu dalam sistem yang merepresentasikan keputusan beli atau jual \cite{lucas_ising_2014}. Postulat utama menyatakan bahwa nilai energi Hamiltonian berbanding terbalik dengan nilai utilitas atau \textit{payoff} ekonomi melalui prinsip kesetaraan $H \equiv -E$. Dengan prinsip ini, algoritma minimisasi energi kuantum akan secara otomatis mengarah pada titik maksimisasi keuntungan strategis. Konfigurasi persamaan mekanika partikel untuk entitas tunggal dengan ekspektasi medan lokal didefinisikan secara presisi melalui hubungan berikut:
 \begin{equation}
 H_{lokal}(s_i) = -h_i s_i
 \label{eq:h_local}
 \end{equation}
 
-Penurunan parameter $h_i$ dimulai dengan mendefinisikan kontribusi energi lokal bagi setiap kemungkinan orientasi biner yang tersedia dalam ruang Hilbert. Jika variabel \textit{spin} berada pada status $+1$, maka kontribusi energinya adalah $-h_i$, yang harus selaras dengan nilai utilitas negatif $-E[i|+]$ berdasarkan aksioma pemetaan sebelumnya. Sebaliknya, pada status $-1$, kontribusi energi sistem menjadi $+h_i$ yang disetarakan secara identitas dengan nilai $-E[i|-]$ sebagai representasi energi potensial. Jembatan aljabar ini dibangun untuk mencari selisih energi ($\Delta H$) yang diperlukan dalam pemetaan parameter bias tunggal secara konsisten:
+Penurunan parameter $h_i$ dimulai dengan definisi dari kontribusi energi lokal bagi setiap kemungkinan dalam orientasi biner yang tersedia dalam ruang Hilbert. Jika variabel \textit{spin} berada pada status $+1$, maka kontribusi energinya adalah $-h_i$, yang harus selaras dengan nilai utilitas negatif $-E[i|+]$ berdasarkan aksioma sebelumnya. Sebaliknya, pada status $-1$, kontribusi energi sistem menjadi $+h_i$ yang disesuaikan secara identitas dengan nilai $-E[i|-]$ sebagai representasi energi potensial. Proses matematis ini dilakukan untuk mencari selisih energi ($\Delta H$) yang diperlukan dalam pemetaan parameter bias tunggal secara konsisten:
 \begin{align}
 H_{lokal}(+1) &= -h_i(1) = -h_i \equiv -E[i|+] \label{eq:equiv_positive} \\
 H_{lokal}(-1) &= -h_i(-1) = +h_i \equiv -E[i|-] \label{eq:equiv_negative}
 \end{align}
-Langkah operasional selanjutnya melibatkan evaluasi selisih energi antara kedua status orientasi untuk menghasilkan pemetaan identitas linear. Melalui operasi pengurangan antara kedua status energi tersebut, diperoleh hubungan $2h_i$ yang merepresentasikan total fluktuasi medan lokal sistem:
+Langkah selanjutnya ialah melibatkan evaluasi selisih energi antara kedua status orientasi untuk menghasilkan pemetaan identitas linear. Kedua status energi yang ada dilakukan operasi pengurangan sehingga diperoleh hubungan $2h_i$ yang merepresentasikan total fluktuasi medan lokal sistem:
 \begin{equation}
 \Delta H = H_{lokal}(-1) - H_{lokal}(+1) = (+h_i) - (-h_i) = 2h_i
 \label{eq:delta_h}
 \end{equation}
 
-Justifikasi matematis untuk mendapatkan nilai eksak dari parameter bias $h_i$ dilakukan dengan memadankan selisih energi tersebut terhadap diferensial utilitas imbalan pasar. Dengan mensubstitusikan hubungan $-E[i|-] - (-E[i|+])$ ke dalam persamaan selisih energi, maka diperoleh hubungan antara medan magnet fiktif dan ekspektasi keuntungan:
+Perhitungan matematis untuk mendapatkan nilai eksak dari parameter bias $h_i$ didapatkan dari selisih energi yang sudah didapat terhadap diferensial utilitas imbalan pasar. Dengan mensubstitusikan hubungan $-E[i|-] - (-E[i|+])$ ke dalam persamaan selisih energi, maka diperoleh hubungan antara medan magnet sintetis dan ekspektasi keuntungan:
 \begin{equation}
 2h_i = E[i|+] - E[i|-]
 \end{equation}
-Bentuk akhir parameter bias $h_i$ diturunkan secara rasional dengan membagi selisih ekspektasi tersebut untuk mencapai normalisasi energi. Faktor normalisasi $1/2$ muncul secara konsisten karena variabel \textit{spin} memiliki rentang jarak sebesar dua unit dari status minimum ke status maksimum (Yamamoto et al., 2021):
+Faktor normalisasi $1/2$ muncul karena variabel \textit{spin} memiliki rentang jarak sebesar dua unit dari status minimum ke status maksimum \cite{reifenstein_coherent_2021}. sehingga didapatkan persamaan bentuk $h_i$:
 \begin{equation}
 h_i = \frac{E[i|+] - E[i|-]}{2}
 \label{eq:h_i_final}
 \end{equation}
-
-Kesimpulan teknis dari derivasi ini menunjukkan bahwa $h_i$ berfungsi sebagai medan magnet eksternal atau gaya pasang surut (\textit{tidal forces}) dalam sistem portofolio kuantum. Keberadaan parameter ini memungkinkan sistem untuk menangkap tarikan strategis intrinsik suatu aset bahkan sebelum mempertimbangkan interaksi antar-aset melalui parameter kopling ($J_{ij}$). Signifikansi dari parameter $h_i$ terletak pada perannya sebagai penggerak utama transisi fase dalam proses optimasi portofolio yang dinamis. Dengan demikian, pemetaan ini berhasil mentransformasi dinamika insentif ekonomi menjadi kuantitas fisik yang dapat dimanipulasi oleh sirkuit variasional kuantum secara efisien.
-
-\subsection{Konvensi Dasar dan Sistem Komposit Kuantum}
-
-Aksioma dasar dalam komputasi kuantum menyatakan bahwa status sistem fisik terkecil direpresentasikan oleh vektor dalam ruang Hilbert kompleks dua dimensi $\mathbb{C}^2$ (Nielsen dan Chuang, 2010). Dalam konteks ekonofisika, instrumen finansial tunggal dipetakan ke dalam basis komputasi ortonormal $|0\rangle$ dan $|1\rangle$, yang masing-masing merepresentasikan status \textit{ground state} dan \textit{excited state}. Representasi ini berfungsi sebagai \textit{embedding} data keuangan ke dalam formalisme mekanika kuantum, di mana status $|0\rangle$ (atau \textit{spin up}) mengindikasikan probabilitas 100\% sistem berada pada kondisi dasar, sementara $|1\rangle$ (atau \textit{spin down}) mewakili fluktuasi ekstrem. Penggunaan vektor kolom ini memberikan akses pada instrumen matematika kuantum untuk menganalisis dinamika probabilitas yang melekat pada pergerakan harga aset. Kesesuaian antara status biner ini dengan pergerakan harga pasar memungkinkan operasionalisasi algoritma kuantum dalam domain keuangan secara sistematis.
-\begin{equation}
-|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \qquad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
-\label{eq:qubit_basis}
-\end{equation}
-
-Interaksi antara dua aset finansial $i$ dan $j$ dimodelkan melalui konstruksi sistem komposit dalam ruang Hilbert yang diperluas melalui operasi \textit{tensor product} ($\otimes$). Ruang status ini membesar secara eksponensial menjadi dimensi $2^2 = 4$, yang menghasilkan empat kombinasi basis kemungkinan: $|00\rangle$, $|01\rangle$, $|10\rangle$, dan $|11\rangle$. Setiap status umum $|\psi\rangle_{ij}$ diderivasi sebagai superposisi linear dari keempat basis tersebut dengan amplitudo probabilitas kompleks $\alpha_{ab}$ (Nielsen dan Chuang, 2010). Struktur bipartit ini memungkinkan sistem untuk menangkap korelasi silang antar aset melalui representasi vektor kolom tunggal yang mengkodifikasi seluruh kemungkinan interaksi dalam ruang biner. Transformasi ini merupakan langkah krusial untuk mentransisikan korelasi statistik menjadi besaran fisik yang dapat dimanipulasi oleh sirkuit kuantum. Figure \ref{fig:tensor_basis} mengilustrasikan konstruksi basis ruang Hilbert bipartit melalui operasi \textit{tensor product} yang memetakan status individu aset ke dalam ruang komposit empat dimensi.
-\begin{equation}
-|\psi\rangle_{ij} = \alpha_{00} \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} + \alpha_{01} \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} + \alpha_{10} \begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \end{pmatrix} + \alpha_{11} \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix} = \begin{pmatrix} \alpha_{00} \\ \alpha_{01} \\ \alpha_{10} \\ \alpha_{11} \end{pmatrix}
-\label{eq:tensor_product}
-\end{equation}
-
-\subsection{Karakterisasi Matriks Densitas \textit{Mixed State}}
-
-Pembedaan antara \textit{pure state} dan \textit{mixed state} menjadi krusial dalam pemetaan data statistik klasik ke dalam operator kuantum. Secara teoretis, \textit{pure state} didefinisikan sebagai \textit{outer product} dari vektor status $\rho_{ij}^{(pure)} = |\psi\rangle\langle\psi|$, namun penggunaan formalisme ini pada data \textit{candlestick} historis akan menghasilkan proyektor \textit{rank-1} dengan entropi gabungan bernilai nol (Nielsen dan Chuang, 2010). Kondisi tersebut mengakibatkan hilangnya informasi korelasi sejati karena \textit{Quantum Mutual Information} (QMI) hanya akan menjadi jumlahan entropi marginal tanpa kontribusi interdependensi. Oleh karena itu, sistem yang memiliki ketidakpastian klasik seperti bursa saham harus direpresentasikan melalui \textit{mixed state} guna menjaga integritas informasi statistik yang terkandung dalam data. Pendekatan ini menjamin bahwa representasi kuantum tetap setia pada karakteristik dispersif dari data historis yang diobservasi.
-
-Implementasi \textit{mixed state} untuk data finansial dilakukan dengan membangun matriks densitas diagonal yang berisi probabilitas gabungan historis $P(s_i, s_j)$. Nilai probabilitas $P(00)$ hingga $P(11)$ diekstraksi secara empiris melalui normalisasi frekuensi kemunculan setiap konfigurasi biner dalam deret waktu observasi (Mantegna dan Stanley, 2000). Jika $n(a, b)$ merepresentasikan jumlah observasi di mana aset $i$ berada pada status $a$ dan aset $j$ pada status $b$, maka probabilitas gabungan diderivasi melalui hubungan berikut:
-\begin{equation}
-P(a, b) = \frac{n(a, b)}{\sum_{a', b' \in \{0, 1\}} n(a', b')}
-\label{eq:joint_prob_derivation}
-\end{equation}
-Matriks $\rho_{ij}^{(mixed)}$ ini mencerminkan \textit{ensemble} historis di mana elemen \textit{off-diagonal} bernilai nol karena data pasar klasik tidak mengandung superposisi fisik secara intrinsik. Struktur ini menjamin bahwa matriks bersifat Hermitian ($\rho = \rho^\dagger$) dan memiliki \textit{trace} bernilai satu, sesuai dengan prinsip normalisasi probabilitas total. Dengan menggunakan representasi diagonal, QMI yang dihasilkan akan ekuivalen secara matematis dengan \textit{classical mutual information}, yang memberikan landasan interpretasi yang lebih solid terhadap realitas data pasar.
-\begin{equation}
-\rho_{ij}^{(mixed)} = \begin{pmatrix} P(00) & 0 & 0 & 0 \\ 0 & P(01) & 0 & 0 \\ 0 & 0 & P(10) & 0 \\ 0 & 0 & 0 & P(11) \end{pmatrix}
-\label{eq:mixed_state}
-\end{equation}
-
-Untuk mengekstrak informasi lokal dari salah satu aset dalam sistem komposit, diaplikasikan operasi \textit{partial trace} terhadap sub-sistem lainnya. Filosofi dari operasi ini adalah menjumlahkan seluruh kemungkinan status aset $j$ untuk mengobservasi perilaku marginal aset $i$ secara terisolasi (Preskill, 2018). Nilai probabilitas marginal $P(i=a)$ dan $P(j=b)$ diperoleh melalui reduksi elemen diagonal matriks densitas gabungan, yang secara matematis merepresentasikan marginalisasi distribusi probabilitas diskret:
-\begin{align}
-P(i=a) &= \sum_{b \in \{0, 1\}} P(a, b) \label{eq:marginal_i} \\
-P(j=b) &= \sum_{a \in \{0, 1\}} P(a, b) \label{eq:marginal_j}
-\end{align}
-Hasil dari reduksi ini adalah matriks densitas lokal $\rho_i$ dan $\rho_j$ yang tetap mempertahankan sifat diagonal, di mana elemen-elemennya merepresentasikan probabilitas marginal pasar. Sebagai penutup logis, proses aljabar ini merupakan jembatan yang menghubungkan struktur korelasi global sistem dengan karakteristik individu setiap instrumen dalam portofolio, yang menjamin validitas pemetaan informasi. Keberhasilan ekstraksi parameter lokal ini mengonfirmasi bahwa formalisme kuantum mampu mereplikasi dinamika marjinal aset secara presisi dan konsisten.
-\begin{align}
-\rho_i &= \text{Tr}_j(\rho_{ij}^{(mixed)}) = \sum_{b \in \{0, 1\}} \langle b | \rho_{ij}^{(mixed)} | b \rangle = \begin{pmatrix} P(i=0) & 0 \\ 0 & P(i=1) \end{pmatrix} \label{eq:partial_trace_i} \\
-\rho_j &= \text{Tr}_i(\rho_{ij}^{(mixed)}) = \sum_{a \in \{0, 1\}} \langle a | \rho_{ij}^{(mixed)} | a \rangle = \begin{pmatrix} P(j=0) & 0 \\ 0 & P(j=1) \end{pmatrix} \label{eq:partial_trace_j}
-\end{align}
-
-\subsection{Kalkulasi \textit{Quantum Mutual Information} dan \textit{Coupling} ($J_{ij}$)}
-
-Kuantifikasi ketidakpastian dalam sistem kuantum dilakukan melalui perhitungan entropi \textit{Von Neumann} ($S$) yang diterapkan pada matriks densitas. Untuk matriks densitas diagonal yang diderivasi dari data klasik, rumusan ini secara otomatis tereduksi menjadi \textit{Shannon entropy} standar karena hanya elemen diagonal yang memberikan kontribusi pada \textit{trace} operator logaritma (Shannon, 1948). Perhitungan dilakukan dengan menjumlahkan $-p \ln(p)$ untuk setiap elemen diagonal, yang mencerminkan derajat dispersi informasi baik pada tingkat marginal maupun gabungan. Ekuivalensi numerik ini memastikan bahwa transisi dari domain informasi klasik ke operator kuantum tetap konsisten secara matematis tanpa ambiguitas operasional. Keseragaman formalisme ini memberikan legitimasi teoretis bagi penggunaan metrik kuantum untuk menganalisis data keuangan yang bersifat klasik secara fundamental.
-\begin{equation}
-S(\rho) = -\text{Tr}(\rho \ln \rho)
-\label{eq:von_neumann}
-\end{equation}
-
-\textit{Quantum Mutual Information} (QMI) didefinisikan sebagai selisih antara jumlahan entropi marginal dengan entropi gabungan sistem bipartit. Parameter $I(i:j)$ ini mengukur total korelasi, baik klasik maupun kuantum, yang dibagikan antara dua aset dalam ruang Hilbert (Nielsen dan Chuang, 2010). Dalam konteks portofolio dengan \textit{mixed state} diagonal, QMI secara presisi menangkap ketergantungan statistik antar aset yang akan digunakan sebagai landasan untuk membangun interaksi fisik. Nilai QMI yang besar mengindikasikan adanya informasi bersama yang signifikan, sementara nilai nol menunjukkan independensi statistik yang sempurna antara kedua instrumen finansial tersebut. Objektifitas metrik ini memungkinkan identifikasi struktur keterkaitan pasar yang seringkali tersembunyi di balik fluktuasi harga stokastik.
-\begin{equation}
-I(i:j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}^{(mixed)})
-\label{eq:qmi}
-\end{equation}
-
-Transformasi nilai QMI menjadi parameter kopling ($J_{ij}$) dalam model Hamiltonian Ising merupakan sebuah \textit{ansatz} desain yang termotivasi oleh prinsip mekanika statistik. Motivasi utama diderivasi dari batasan suhu tinggi (\textit{high-temperature limit}) pada distribusi Boltzmann, di mana korelasi antar \textit{spin} berbanding lurus dengan kuadrat dari parameter interaksi (Menezes et al., 2025). Meskipun penggunaan relasi ini pada data klasik merupakan bentuk ekstrapolasi, \textit{ansatz} $J_{ij} \propto \sqrt{I(i:j)}$ memenuhi persyaratan fisik di mana kekuatan interaksi membesar secara monoton seiring dengan meningkatnya informasi bersama. Kalibrasi skala dilakukan melalui koefisien $\kappa$ yang menghubungkan satuan informasi dengan satuan energi risiko pasar. Justifikasi penggunaan \textit{ansatz} ini didasarkan pada kemampuannya untuk mengonversi ketergantungan informasional menjadi tegangan interaktif dalam lanskap energi portofolio. Figure \ref{fig:qmi_mapping} menampilkan pemetaan antara nilai \textit{Quantum Mutual Information} terhadap kekuatan parameter kopling $J_{ij}$ berdasarkan \textit{ansatz} mekanika statistik.
-\begin{equation}
-|J_{ij}| \approx \frac{1}{\beta}\sqrt{2I(i:j)} \propto \sqrt{I(i:j)}
-\label{eq:j_ij_propto}
-\end{equation}
-
-Karena QMI selalu bernilai positif, arah interaksi ditentukan secara terpisah menggunakan koefisien korelasi Pearson ($\rho_{ij}^{Pearson}$) guna membedakan fenomena \textit{co-movement} dan \textit{hedging}. Tanda negatif pada $J_{ij}$ mengindikasikan interaksi \textit{ferromagnetic} atau pergerakan searah, sedangkan tanda positif mewakili interaksi \textit{antiferromagnetic} (Yamamoto et al., 2021). Melalui integrasi fungsi \textit{signum}, diperoleh bentuk akhir parameter interaksi yang secara holistik merepresentasikan dinamika ketergantungan antar aset. Sebagai penutup logis, parameter $J_{ij}$ ini berfungsi sebagai pengatur topologi energi dalam Hamiltonian yang memungkinkan algoritma kuantum menemukan konfigurasi portofolio optimal dengan mempertimbangkan risiko sistemik. Integrasi parameter ini melengkapi arsitektur model Ising yang kini siap dioperasikan dalam kerangka optimasi portofolio berbasis komputasi kuantum variasional.
-\begin{align}
-J_{ij} &= \kappa \cdot \text{sgn}(\rho_{ij}^{Pearson}) \sqrt{I(i:j)} \label{eq:j_ij_final} \\
-\text{sgn}(\rho_{ij}^{Pearson}) &= \frac{\rho_{ij}^{Pearson}}{|\rho_{ij}^{Pearson}|} \label{eq:sgn_pearson}
-\end{align}
