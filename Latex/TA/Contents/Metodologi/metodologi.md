@@ -8,7 +8,7 @@ graph TD
     B --> C[Binerisasi State & Digitalisasi Finansial]
     
     subgraph "Siklus Rebalancing (Rolling Window)"
-        D[Hitung Lambda, Payoff, Bias & QMI] --> E[Konstruksi Hamiltonian H]
+        D[Hitung Probabilitas, Payoff, Bias & QMI] --> E[Konstruksi Hamiltonian H]
         
         subgraph "Optimasi VQE-SPSA"
             E --> F[Inisialisasi Parameter Theta]
@@ -47,7 +47,7 @@ graph TD
 Tahap awal penelitian melibatkan pengambilan data harga penutupan historis empat saham sektoral melalui *interface* `yfinance`. Data tersebut ditransformasi menjadi *log return* $R_t = \ln(P_t / P_{t-1})$ untuk menjamin stasioneritas dan sifat aditif. Selanjutnya, dilakukan diskretisasi status menjadi variabel biner $s_i \in \{+1, -1\}$, di mana kenaikan dipetakan ke basis $|0\rangle$ dan penurunan ke basis $|1\rangle$.
 
 ### 2.2. Pemodelan Game Theory dan Ekstraksi Parameter
-Dalam setiap jendela observasi (*sliding window*), parameter risiko endogen $\lambda$ dihitung secara adaptif berdasarkan rasio $\mu/\sigma$. Nilai ini diintegrasikan ke dalam fungsi utilitas pinalti $u = (1-\lambda)R - \lambda|R|$ untuk membangun matriks imbalan $2 \times 2$. Parameter *bias* ($h_i$) diperoleh dari margin *payoff*, sementara parameter interaksi ($J_{ij}$) diderivasi dari *Quantum Mutual Information* (QMI) menggunakan entropi *Von Neumann*.
+Dalam setiap jendela observasi (*sliding window*), distribusi probabilitas gabungan $P(s_i, s_j)$ dihitung dari frekuensi kemunculan konfigurasi biner historis. Probabilitas ini merepresentasikan *mixed strategy* dari setiap pasangan aset dalam mencapai keseimbangan pasar. Interaksi strategis antar aset dimodelkan melalui matriks imbalan (*payoff matrix*) yang berisi nilai *return* historis rata-rata. Parameter *bias* ($h_i$) diderivasi melalui selisih nilai harapan imbalan (*expected payoff*), sementara parameter interaksi ($J_{ij}$) diderivasi dari *Quantum Mutual Information* (QMI) menggunakan entropi *Von Neumann*.
 
 ### 2.3. Iterasi Optimasi VQE dan Penentuan Layer
 Proses optimasi dilakukan melalui algoritma *Variational Quantum Eigensolver* (VQE). Terdapat dua simpul iterasi utama pada tahap ini:

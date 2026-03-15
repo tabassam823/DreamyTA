@@ -1,21 +1,39 @@
 \section{Representasi Data Finansial}
 
 \subsection{Visualisasi Deret Waktu dan Transisi Keadaan}
-Data finansial biasanya direpresentasikan dalam bentuk deret waktu (\textit{time-series}) sehingga memungkinkan ekstraksi informasi mengenai dinamika harga sebagai fungsi stokastik terhadap waktu. Di dalam grafik pergerakan harga, sumbu horizontal merepresentasikan interval waktu ($\Delta t$) dan sumbu vertikal menunjukkan harga aset ($P$). Setiap lilin (\textit{candlestick}) pada grafik memberikan penyederhanaan perilaku harga ke dalam empat titik data kritis: pembukaan, tertinggi, terendah, dan penutupan. Pola yang terbentuk dari pergerakan harga tersebut dapat dipetakan ke dalam empat transisi keadaan utama, yaitu kenaikan berulang ($U \to U$), kenaikan diikuti penurunan ($U \to D$), penurunan diikuti kenaikan ($D \to U$), dan penurunan berulang ($D \to D$). Pembacaan data seperti ini memungkinkan analisis yang sistematik terhadap momentum dan potensi pembalikan harga tanpa mengabaikan volatilitas di dalam periode tertentu \cite{hidalgo_quantum_2006}.
-
-Pemetaan transisi keadaan tersebut bertindak sebagai dasar bagi pemodelan stokastik dalam kerangka teori informasi dan ekonofisika. Area di mana konsentrasi transisi harga cenderung melambat seringkali diidentifikasi sebagai level \textit{support} atau \textit{resistance} yang memiliki probabilitas pembalikan tinggi. Dalam konteks operasional hardware kuantum, representasi keadaan ini dapat dianalogikan dengan sistem dua tingkat (\textit{two-level system}) yang merepresentasikan probabilitas naik atau turunnya harga. Visualisasi deret waktu ini sangat penting sebelum data diolah lebih lanjut menggunakan algoritma berbasis optimasi energi. Figure \ref{fig:price_transitions} mengilustrasikan bagaimana empat pola transisi keadaan tersebut muncul dalam struktur grafik harga harian.
+Data finansial biasanya direpresentasikan dalam bentuk deret waktu (\textit{time-series}) sehingga memungkinkan ekstraksi informasi mengenai dinamika harga sebagai fungsi stokastik terhadap waktu. Di dalam grafik pergerakan harga pada Gambar \ref{fig:price_time_series}, sumbu horizontal merepresentasikan interval waktu ($\Delta t$) dan sumbu vertikal menunjukkan harga aset ($P$). Setiap sudut pada garis merepresentasikan penutupan harga di setiap \textit{timeframe} yang ditentukan. Selain representasi garis, pergerakan harga juga bisa lebih spesifik direpresentasikan ke dalam bentuk grafik lilin (\textit{candlestick}). Setiap lilin (\textit{candlestick}) sebagaimana pada Gambar \ref{fig:price_transitions} memberikan penyederhanaan perilaku harga ke dalam empat titik data kritis: pembukaan, tertinggi, terendah, dan penutupan. Kemudian pola yang terbentuk dari pergerakan harga tersebut dapat dipetakan ke dalam empat transisi keadaan utama, yaitu kenaikan berulang ($U \to U$), kenaikan diikuti penurunan ($U \to D$), penurunan diikuti kenaikan ($D \to U$), dan penurunan berulang ($D \to D$).
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.75\textwidth]{Images/OHLC.png}
-    \caption{Representasi transisi keadaan harga ($U$ dan $D$) dalam visualisasi \textit{candlestick} \protect\cite{ibrahim_bitcoin_2020}.}
-    \label{fig:price_transitions}
+    \begin{subfigure}[b]{0.75\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Chart.png}
+        \caption{Grafik pergerakan harga aset dalam grafik \textit{time-series}}
+        \label{fig:price_time_series}
+    \end{subfigure}
+    \\ \vspace{0.5cm}
+    \begin{subfigure}[b]{0.75\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/OHLC.png}
+        \caption{Representasi transisi keadaan harga ($U$ dan $D$) dalam visualisasi \textit{candlestick} \protect\cite{ibrahim_bitcoin_2020}}
+        \label{fig:price_transitions}
+    \end{subfigure}
+    \caption{Visualisasi representasi data finansial: (a) grafik pergerakan harga dalam deret waktu dan (b) visualisasi transisi keadaan harga melalui \textit{candlestick}.}
+    \label{fig:financial_data_rep}
 \end{figure}
 
-\subsection{Parameter \textit{Risk Aversion} Endogen melalui Fungsi Aktivasi Sigmoid}
-Dalam teori keuangan perilaku, \textit{risk aversion} seringkali dipandang sebagai parameter statis yang ditentukan oleh karakteristik individu seperti faktor usia dan horison investasi. Secara tradisional, diasumsikan bahwa investor dengan usia lebih muda memiliki \textit{risk aversion} yang rendah karena memiliki kapasitas menanggung risiko yang lebih besar, sedangkan investor pada usia lanjut cenderung memiliki \textit{risk aversion} yang lebih tinggi demi menjaga stabilitas aset \cite{abdul_hali_markowitz_2020}. Namun, pendekatan ini tidak memperhitungkan anomali pasar yang bersifat transien dan fluktuatif sama sekali. Oleh karena itu, diperlukan sebuah mekanisme penentuan parameter yang tidak hanya bergantung pada profil subjek, melainkan secara aktif menyesuaikan diri (\textit{self-adjusting}) terhadap dinamika pasar yang muncul dari data finansial secara \textit{real-time}.
+Pemetaan transisi keadaan tersebut bertindak sebagai dasar bagi pemodelan stokastik dalam kerangka teori informasi dan ekonofisika. Area di mana konsentrasi transisi harga cenderung melambat seringkali diidentifikasi sebagai level \textit{support} atau \textit{resistance} yang memiliki probabilitas pembalikan tinggi. Dalam konteks operasional hardware kuantum, representasi keadaan ini dapat dianalogikan dengan sistem dua tingkat (\textit{two-level system}) yang merepresentasikan probabilitas naik atau turunnya harga. Visualisasi deret waktu pada Gambar \ref{fig:financial_data_rep} sangat penting sebelum data diolah lebih lanjut menggunakan algoritma berbasis optimasi energi.
 
-Penggunaan fungsi aktivasi sigmoid dapat menggambarkan pemetaan rasio performa aset ke dalam rentang kontinu $[0, 1]$, yang mana berfungsi untuk membatasi pengaruh imbal hasil terhadap risiko dalam formulasi energi. Pendekatan ini digunakan untuk menyesuaikan bobot keputusan sesuai dengan kondisi psikologi pasar yang terepresentasikan melalui volatilitas dan ekspektasi imbal hasil. Secara matematis, parameter $\lambda$ didefinisikan sebagai fungsi dari imbal hasil diharapkan ($\mu$) dan deviasi standar ($\sigma$) melalui transformasi non-linear sehingga dapat dinyatakan dalam persamaan berikut:
+
+
+\subsection{Parameter \textit{Risk Aversion} Endogen melalui Fungsi Aktivasi Sigmoid}
+\textit{Risk aversion} merupakan parameter yang merepresentasikan tingkat keengganan investor terhadap ketidakpastian dalam upaya menjaga stabilitas utilitas ekspektasian dari portofolio investasi. Secara konvensional, variabel ini seringkali dipandang sebagai parameter statis yang hanya ditentukan oleh karakteristik demografis individu, seperti faktor usia dan horison investasi. Investor berusia muda umumnya memiliki \textit{risk aversion} yang rendah karena kapasitas penanggungan risiko yang lebih luas, sedangkan investor lanjut usia cenderung meningkatkan \textit{risk aversion} demi menjaga stabilitas aset \cite{abdul_hali_markowitz_2020}. Namun demikian, pendekatan statis ini tidak bisa menyesuaikan angkanya terhadap anomali pasar yang bersifat fluktuatif dan tidak terduga. Oleh karena itu, diperlukan sebuah mekanisme penentuan parameter yang bersifat endogen dan mampu melakukan penyesuaian diri (\textit{self-adjusting risk aversion}) secara \textit{real-time} terhadap dinamika pasar yang terekstraksi dari data finansial aktual.
+
+Penggunaan fungsi aktivasi sigmoid dapat menggambarkan pemetaan rasio performa aset ke dalam rentang kontinu $[0, 1]$, yang mana berfungsi untuk membatasi pengaruh imbal hasil terhadap risiko dalam formulasi energi. Pendekatan ini digunakan untuk menyesuaikan bobot keputusan sesuai dengan kondisi psikologi pasar yang terepresentasikan melalui volatilitas dan ekspektasi imbal hasil. Secara matematis, parameter $\lambda \in [0, 1]$ didefinisikan sebagai fungsi dari imbal hasil diharapkan ($\mu$):
+\begin{equation}
+\mu = \sum_{i=1}^N \omega_i r_i
+\end{equation}
+dan standar deviasi ($\sigma$)  sehingga dapat dinyatakan dalam persamaan (\ref{eq:sigmoid_risk_aversion}).
 \begin{equation}
 \lambda(\mu, \sigma) = \frac{1}{1 + e^{-(\mu/\sigma)}}
 \label{eq:sigmoid_risk_aversion}

@@ -1,9 +1,7 @@
 \chapter{Metodologi Penelitian}
 
 \section{Alur Penelitian}
-Penelitian ini dijalankan secara sistematis melalui integrasi antara ekonofisika, teori permainan, dan komputasi kuantum variasional. Secara visual, alur penelitian ini direpresentasikan dalam Gambar 3.1 yang mengilustrasikan urutan proses mulai dari akuisisi data hingga evaluasi akhir. Struktur ini dirancang untuk memastikan bahwa setiap parameter yang diekstraksi dari data pasar memiliki landasan teoretis yang kuat sebelum dipetakan ke dalam sistem kuantum.
-
-Diagram alir di bawah ini menunjukkan mekanisme \textit{looping} pada optimasi VQE dan prosedur \textit{rolling window backtesting}. Penggunaan simbol belah ketupat menegaskan titik keputusan kritis, terutama pada penentuan konvergensi energi dan validasi kedalaman sirkuit (\textit{layering}). Alur ini menjamin bahwa model tetap adaptif terhadap perubahan rezim pasar selama periode observasi lima tahun.
+Tugas akhir ini dijalankan secara sistematis melalui integrasi antara ekonofisika, teori permainan, dan komputasi kuantum variasional. Alur penelitian ini dapat direpresentasikan dalam Gambar \ref{fig:flowchart} yang mengilustrasikan urutan proses mulai dari akuisisi data hingga evaluasi akhir. Setiap parameter yang digunakan di dalam struktur ini harus memiliki landasan teoretis yang kuat sebelum dimasukkan ke dalam sistem kuantum mengingat jauhnya bidang antara fisika dan ekonomi. Detail lebih dalam dari diagram alir pada Gambar \ref{fig:flowchart} akan dijelaskan di subbab selanjutnya.
 
 \begin{figure}[ht]
     \centering
@@ -17,11 +15,11 @@ Diagram alir di bawah ini menunjukkan mekanisme \textit{looping} pada optimasi V
         
         % KOLOM 1: Pra-pemrosesan & Pemetaan
         \node (start) [startstop] {Mulai};
-        \node (data) [process, below of=start] {Akuisisi Data \& \\ \textit{Log Return}};
-        \node (biner) [process, below of=data] {Digitalisasi Finansial \\ (\textit{Binerisasi State})};
-        \node (param) [process, below of=biner] {Hitung $\lambda$, \textit{Payoff}, \\ \textit{Bias} ($h_i$) \& QMI ($J_{ij}$)};
-        \node (hamil) [process, below of=param] {Konstruksi \\ Hamiltonian $H$};
-        \node (c1a) [connector, below of=hamil] {1};
+        \node (data) [process, below of=start, yshift=-0.5cm] {Akuisisi Data \& \\ \textit{Log Return}};
+        \node (biner) [process, below of=data, yshift=-0.5cm] {Digitalisasi Finansial \\ (\textit{Binerisasi State})};
+        \node (param) [process, below of=biner, yshift=-0.5cm] {Hitung Probabilitas,\\ $\lambda$, \textit{Payoff}, Bias \\($h_i$) \& QMI ($J_{ij}$)};
+        \node (hamil) [process, below of=param, yshift=-0.5cm] {Konstruksi \\ Hamiltonian $H$};
+        \node (c1a) [connector, below of=hamil, yshift=-0.5cm] {1};
         \node (c3b) [connector, left of=param, xshift=-1cm] {3};
         
         % KOLOM 2: Optimasi Kuantum (VQE)
@@ -70,26 +68,25 @@ Diagram alir di bawah ini menunjukkan mekanisme \textit{looping} pada optimasi V
     \caption{Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}
     \label{fig:flowchart}
 \end{figure}
-
 \section{Pengumpulan Data \& Pra-pemrosesan}
-Data yang digunakan dalam penelitian ini merupakan data sekunder berupa harga penutupan (\textit{closing price}) historis dari empat instrumen saham dengan sektor yang berbeda untuk menjamin diversifikasi sistemik. Akuisisi data dilakukan secara otomatis melalui \textit{Application Programming Interface} (API) Yahoo Finance dengan rentang waktu observasi selama lima tahun menggunakan \textit{timeframe} harian (\textit{daily}). Prosedur awal melibatkan pembersihan data dari nilai kosong (\textit{missing values}) serta sinkronisasi deret waktu antar aset guna memastikan konsistensi dalam perhitungan korelasi silang.
+Data yang digunakan dalam penelitian ini merupakan data sekunder berupa harga penutupan (\textit{closing price}) historis dari empat instrumen saham dengan sektor yang berbeda untuk menjamin diversifikasi portofolio. Akuisisi data dilakukan secara otomatis melalui \textit{Application Programming Interface} (API) Yahoo Finance dengan rentang waktu observasi selama lima tahun menggunakan \textit{timeframe} harian (\textit{daily}). Data yang didapat harus dilakukan pembersihan terlebih dahulu dari nilai kosong (\textit{missing values}) serta memastikan sinkronisasi \textit{time-seres} antar aset.
 
 Tahap digitalisasi finansial dilakukan dengan mentransformasi harga mentah $P_t$ menjadi nilai \textit{log return} kontinu melalui persamaan $R_t = \ln(P_t / P_{t-1})$. Penggunaan \textit{log return} dipilih karena sifatnya yang aditif dan kemampuannya untuk menormalkan distribusi data finansial yang umumnya bersifat \textit{heavy-tailed}. Selanjutnya, dilakukan diskretisasi status menjadi variabel biner $s_i \in \{+1, -1\}$, di mana kenaikan harga ($R_t > 0$) dipetakan ke dalam \textit{state} naik ($+1$) yang setara dengan basis $|0\rangle$, sedangkan penurunan ($R_t \leq 0$) dipetakan ke \textit{state} turun ($-1$) atau basis $|1\rangle$.
 
 \section{Konstruksi Model Permainan (Mapping Pipeline)}
-Penentuan parameter risiko dalam model ini menggunakan pendekatan endogen yang adaptif terhadap volatilitas pasar melalui variabel $\lambda$. Nilai $\lambda$ dihitung berdasarkan rasio rata-rata imbal hasil tahunan ($\mu_{avg}$) terhadap volatilitas tahunan ($\sigma_{avg}$) menggunakan fungsi \textit{sigmoid} untuk membatasi rentang nilai antara 0 dan 1. Parameter ini merepresentasikan sensitivitas sistem terhadap risiko, di mana nilai $\lambda$ yang tinggi menunjukkan dominasi pinalti volatilitas dalam fungsi utilitas agen.
+Pemetaan dinamika pasar ke dalam formalisme teori permainan dilakukan dengan menghitung distribusi probabilitas gabungan $P(s_i, s_j)$ dari frekuensi kemunculan konfigurasi biner historis. Probabilitas ini berfungsi sebagai bobot strategis yang merepresentasikan probabilitas \textit{mixed strategy} dari setiap pasangan aset dalam mencapai keseimbangan pasar. Probabilitas gabungan tersebut digunakan supaya interaksi antar aset juga dapat diukur dari struktur ketergantungan informasi yang lebih kompleks dalam ruang keadaan biner. 
 
-Interaksi strategis antar aset dimodelkan melalui matriks imbalan (\textit{payoff matrix}) $2 \times 2$ yang dibangun dari fungsi utilitas pinalti $u = (1-\lambda)R - \lambda|R|$. Dari matriks ini, nilai \textit{bias} lokal ($h_i$) diekstraksi dari margin \textit{payoff} yang mencerminkan kecenderungan arah individu suatu aset. Sementara itu, parameter interaksi atau kopling ($J_{ij}$) diderivasi menggunakan kerangka \textit{Quantum Mutual Information} (QMI) yang dihitung dari matriks densitas \textit{mixed state}. Integrasi kedua parameter ini memungkinkan klasifikasi rezim permainan pasar, apakah cenderung bersifat koordinatif atau kompetitif.
+Interaksi strategis antar aset dimodelkan melalui matriks imbalan (\textit{payoff matrix}) $2 \times 2$ yang berisi nilai imbal hasil (\textit{return}) dari data historis. Dari matriks tersebut, nilai \textit{bias} lokal ($h_i$) bisa diperoleh melalui selisih nilai harapan imbalan (\textit{expected payoff}) yang mana menrepresentasikan kecenderungan arah individu suatu aset untuk memaksimalkan utilitasnya. Sementara itu, parameter interaksi atau kopling ($J_{ij}$) diderivasi menggunakan kerangka \textit{Quantum Mutual Information} (QMI) untuk menangkap korelasi non-linear antar aset secara lebih presisi.
 
 \section{Implementasi Kuantum \& Optimasi VQE}
-Pemetaan masalah alokasi aset ke dalam arsitektur kuantum dilakukan dengan membangun operator Hamiltonian Ising total yang terdiri dari komponen biaya ($H_{cost}$) dan komponen pinalti ($H_{penalty}$). Hamiltonian biaya merepresentasikan fungsi objektif investasi yang disusun dari parameter $h_i$ dan $J_{ij}$, sedangkan Hamiltonian pinalti berfungsi sebagai batasan keras (\textit{hard constraint}) untuk menjaga kardinalitas portofolio pada target $K$ aset. Struktur energi ini memastikan bahwa solusi optimal yang ditemukan tidak hanya meminimalkan risiko, tetapi juga mematuhi batasan operasional investasi.
+Pemetaan masalah alokasi aset ke dalam arsitektur kuantum dilakukan dengan membangun operator Hamiltonian Ising yang terdiri dari komponen biaya ($H_{cost}$) dan komponen pinalti ($H_{penalty}$). Operator Hamiltonian tersebut merepresentasikan fungsi objektif investasi yang disusun dari parameter $h_i$ dan $J_{ij}$, sedangkan Hamiltonian pinalti berfungsi sebagai batasan untuk menjaga jumlah pemilihan aset pada portofolio pada target $K$ aset.
 
-Proses pencarian nilai energi terendah dilakukan menggunakan algoritma \textit{Variational Quantum Eigensolver} (VQE) dengan \textit{ansatz} \textit{EfficientSU(2)}. Optimasi parameter sudut $\theta$ pada sirkuit kuantum dijalankan menggunakan metode \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) karena ketahanannya terhadap gangguan \textit{noise} pada simulator. Penentuan jumlah lapisan (\textit{layers}) dilakukan melalui analisis sensitivitas energi, di mana sistem akan terus menambah kedalaman sirkuit selama terjadi penurunan energi signifikan, guna menghindari fenomena \textit{over-parameterization} atau \textit{barren plateaus}.
+Proses pencarian nilai energi terendah dilakukan menggunakan algoritma \textit{Variational Quantum Eigensolver} (VQE) dengan \textit{ansatz} \textit{EfficientSU(2)}. Optimasi parameter sudut $\theta$ pada sirkuit kuantum dijalankan menggunakan metode \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) karena ketahanannya terhadap gangguan \textit{noise} pada simulator. Penentuan jumlah lapisan (\textit{layers}) dilakukan melalui analisis sensitivitas energi, di mana sistem akan terus menambah kedalaman sirkuit selama terjadi penurunan energi signifikan agar dapat terhindar dari fenomena \textit{over-parameterization} atau \textit{barren plateaus}.
 
 \section{Evaluasi dan Analisis Kinerja}
-Validasi efektivitas model dilakukan melalui simulasi \textit{backtesting} dengan mekanisme \textit{rolling window} bulanan selama periode lima tahun. Pada setiap titik \textit{rebalancing}, model melakukan observasi data historis tiga bulan ke belakang untuk memperbarui parameter Hamiltonian dan menjalankan ulang optimasi VQE. Protokol ini secara eksplisit memperhitungkan biaya transaksi dan dampak harga (\textit{slippage}) untuk mencerminkan kondisi perdagangan riil di bursa saham.
+Efektivitas dari model yang telah diimplementasikan dapat di validasi melalui simulasi \textit{backtesting} lewat mekanisme \textit{rolling window} bulanan selama periode lima tahun. Pada setiap titik \textit{rebalancing}, model melakukan observasi data historis tiga bulan ke belakang untuk memperbarui parameter Hamiltonian dan menjalankan ulang optimasi VQE. Skema \textit{rebalancing} ini dilakukan supaya model dapat dapat tetap berjalan prima walaupaun terdapat biaya transaksi dan dampak harga (\textit{slippage}) sebagaimana kondisi perdagangan riil di bursa saham.
 
-Kinerja portofolio kuantum dievaluasi secara komprehensif menggunakan metrik finansial standar seperti \textit{Sharpe Ratio}, \textit{Maximum Drawdown} (MDD), dan total imbal hasil akumulatif. Analisis difokuskan pada kemampuan algoritma dalam menjaga stabilitas konvergensi energi serta efisiensi pemilihan aset dibandingkan dengan strategi \textit{benchmark} klasik. Interpretasi akhir dilakukan untuk mengidentifikasi apakah model berbasis \textit{Quantum Game Theory} mampu memberikan perlindungan nilai yang lebih baik selama periode volatilitas pasar yang ekstrem.
+Kinerja portofolio kuantum dievaluasi secara komprehensif menggunakan metrik finansial standar seperti \textit{Sharpe Ratio}, \textit{Maximum Drawdown} (MDD), dan total imbal hasil akumulatif. Analisis difokuskan pada kemampuan algoritma dalam menjaga stabilitas konvergensi energi serta efisiensi pemilihan aset dibandingkan dengan indeks pasar yang berlaku seperti IHSG atau S\&P500 tergantung pada pemilihan aset. Interpretasi akhir dilakukan untuk mengidentifikasi apakah model berbasis \textit{Quantum Game Theory} mampu memberikan perlindungan nilai (\textit{hedging value}) yang lebih baik selama periode volatilitas pasar yang ekstrem.
 
 \newpage
 \thispagestyle{empty}

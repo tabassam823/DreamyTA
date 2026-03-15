@@ -2,9 +2,42 @@
 
 \subsection{Matriks \textit{Payoff}}
 
-Teori permainan dalam sistem finansial menyatakan bahwa pergerakan harga merupakan hasil dari interaksi strategis antar agen rasional yang berusaha memaksimalkan utilitasnya. Dalam kerangka \textit{non zero-sum game}, interaksi ini dimodelkan melalui ruang konfigurasi biner yang merepresentasikan empat status kemungkinan antara pasangan saham $i$ dan $j$ pada setiap waktu $t$. Konsep \textit{Mixed Strategy Nash Equilibrium} (MSNE) diaplikasikan dengan menggunakan probabilitas historis sebagai proksi strategi pelaku pasar untuk mencapai titik keseimbangan \cite{menezes_ex_2025}. Pendekatan ini digunakan supaya sistem dapat menangkap dinamika asimetris yang seringkali terabaikan dalam model statistik konvensional yang hanya menggunakan identifikasi konfigurasi Naik-Naik ($UU$), Naik-Turun ($UD$), Turun-Naik ($DU$), dan Turun-Turun ($DD$). Penentuan orientasi $+1$ dan $-1$ berfungsi sebagai variabel biner yang mendasari seluruh formalisme optimasi pada tahap selanjutnya.
+Teori permainan dalam sistem finansial menyatakan bahwa pergerakan harga merupakan hasil dari interaksi strategis antar agen rasional yang berusaha memaksimalkan utilitasnya \cite{john_von_neumann_theory_1953}. Dalam \textit{non zero-sum game}, interaksi ini dimodelkan melalui ruang konfigurasi biner yang merepresentasikan empat status kemungkinan antara pasangan saham $i$ dan $j$ pada setiap waktu $t$. Konsep tersebut kemudian dikembangkan hingga muncul konsep baru bernama \textit{Mixed Strategy Nash Equilibrium} (MSNE) yang menyatakan bahwa setiap entitas mendistribusikan preferensi strateginya melalui distribusi probabilitas atas sekumpulan aksi biner untuk mencapai kondisi optimal di mana tidak ada insentif bagi agen untuk mengubah strateginya secara unilateral. MSNE diaplikasikan dengan menggunakan probabilitas historis sebagai strategi pelaku pasar untuk mencapai titik keseimbangan \cite{menezes_ex_2025}. Pendekatan ini digunakan supaya sistem dapat menangkap dinamika asimetris.
 
-Matriks imbalan (\textit{payoff matrix}) $V_i$ merepresentasikan insentif strategis bagi Saham $i$ terhadap respon pergerakan Saham $j$ sebagai pengukuran potensi keuntungan relatif. Setiap elemen $R_{xy}$ dalam matriks tersebut merepresentasikan imbal hasil historis yang diperoleh ketika Saham $i$ berada pada kondisi $x$ dan pasangannya pada kondisi $y$. Visualisasi matriks $2 \times 2$ pada Gambar \ref{fig:payoff_matrix} memberikan gambaran mengenai struktur ketergantungan antar aset secara individual dalam ruang keadaan biner $s \in \{+1, -1\}$. Representasi ini digunakan  untuk memisahkan kontribusi imbal hasil murni dari faktor risiko sistemik lainnya yang memengaruhi portofolio. Dengan menetapkan matriks $V_i$, operasionalisasi strategi campuran dapat dilakukan secara matematis melalui distribusi probabilitas gabungan fungsional.
+Matriks imbalan (\textit{payoff matrix}) $V_i$ merepresentasikan insentif strategis bagi agen $i$ terhadap respon pergerakan agen $j$ sebagai pengukuran potensi keuntungan relatif. Setiap elemen $R_{xy}$ dalam matriks tersebut merepresentasikan imbal hasil historis yang diperoleh ketika agen $i$ berada pada kondisi $x \in \{U, D\}$ dan agen $j$ pada kondisi $y \in \{U, D\}$. Untuk kasus kedua agen naik pada waktu $t$, 
+\begin{equation}
+R_{UU} = \frac{1}{n_{UU}} \sum_{t \in T_{UU}} r_{i,t}
+\label{eq:R_UU}
+\end{equation}
+Untuk kasus agen $i$ naik dan agen $j$ turun pada waktu $t$,
+\begin{equation}
+R_{UD} = \frac{1}{n_{UD}} \sum_{t \in T_{UD}} r_{i,t}
+\label{eq:R_UD}
+\end{equation}
+Untuk kasus agen $i$ turun dan agen $j$ naik pada waktu $t$,
+\begin{equation}
+R_{DU} = \frac{1}{n_{DU}} \sum_{t \in T_{DU}} r_{i,t}
+\label{eq:R_DU}
+\end{equation}
+Dan untuk kasus kedua agen turun pada waktu $t$,
+\begin{equation}
+R_{DD} = \frac{1}{n_{DD}} \sum_{t \in T_{DD}} r_{i,t}
+\label{eq:R_DD}
+\end{equation}
+di mana $T_{xy}$ merupakan himpunan waktu $t$ yang memenuhi konfigurasi $(s_{i,t}, s_{j,t})$ tertentu dengan $s \in \{U(+1), D(-1)\}$, sedangkan $n_{xy}$ melambangkan jumlah total observasi pada himpunan tersebut. Secara operasional, nilai imbalan bagi aset $i$ disusun ke dalam matriks $V_i$ sebagai berikut:
+\begin{equation}
+V_i = \begin{pmatrix} R_{UU} & R_{UD} \\ R_{DU} & R_{DD} \end{pmatrix}
+\label{eq:payoff_matrix_def}
+\end{equation}
+Pemetaan dari elemen diskret matriks tersebut ke dalam fungsi utilitas yang kontinu terhadap variabel \textit{spin} $s_i, s_j \in \{+1, -1\}$ didefinisikan melalui ekspansi biner sebagaimana persamaan (\ref{eq:v_function_expansion}).
+\begin{equation}
+\begin{split}
+V_i(s_i, s_j) =& \frac{1+s_i}{2} \left[ \frac{1+s_j}{2} R_{UU} + \frac{1-s_j}{2} R_{UD} \right] \\
+&+ \frac{1-s_i}{2} \left[ \frac{1+s_j}{2} R_{DU} + \frac{1-s_j}{2} R_{DD} \right]
+\end{split}
+\label{eq:v_function_expansion}
+\end{equation}
+Sehingga dapat divisualisasikan ke dalam bentuk matriks $2 \times 2$ pada Gambar \ref{fig:payoff_matrix} yang menggambarkan struktur ketergantungan antar agen.
 \begin{figure}[h!]
 \centering
 \begin{tabular}{|c|c|c|}
@@ -17,12 +50,12 @@ $i \setminus j$ & Naik ($+1$) & Turun ($-1$) \\ \hline
 \label{fig:payoff_matrix}
 \end{figure}
 
-Representasi matematis tersebut didefinisikan sebagai operator linear yang memetakan status interaksi pasangan aset. Selanjutnya, frekuensi kejadian historis dan nilai harapan imbalan dibangun melalui normalisasi distribusi data pada rentetan waktu $t = 1, \dots, N$. Probabilitas gabungan $P(s_i, s_j)$ dihitung dengan membagi frekuensi kemunculan konfigurasi $n(s_i, s_j)$ terhadap total agregat observasi $N$ sebagaimana dirumuskan dalam ekuasi berikut:
+Selanjutnya, frekuensi kejadian historis dan nilai harapan imbalan dibangun melalui normalisasi distribusi data pada rentetan waktu $t = 1, \dots, N$. Probabilitas gabungan $P(s_i, s_j)$ dihitung dengan membagi frekuensi kemunculan konfigurasi $n(s_i, s_j)$ terhadap total agregat observasi $N$ sebagaimana dirumuskan dalam ekuasi berikut:
 \begin{equation}
 P(s_i, s_j) = \frac{n(s_i, s_j)}{N}
 \label{eq:joint_probability}
 \end{equation}
-Distribusi $P(s_i, s_j)$ tersebut menghasilkan informasi yang bersifat ortogonal terhadap sistem, di mana ekspektasi linear akan menjadi parameter $h_i$ sementara ketergantungan informasinya dipetakan menjadi parameter $J_{ij}$ \cite{wang_achieving_2025}. Perhitungan nilai harapan imbalan (\textit{expected payoff}) dilakukan dengan menjumlahkan hasil perkalian antara probabilitas tersebut dengan nilai imbalan yang sesuai pada seluruh spektrum kemungkinan logis sebagaimana persamaan berikut.
+Distribusi $P(s_i, s_j)$ tersebut menghasilkan informasi yang bersifat ortogonal terhadap sistem, di mana ekspektasi linear akan menjadi parameter $h_i$ sementara ketergantungan informasinya dipetakan menjadi parameter $J_{ij}$ yang akan dibahas pada bab 2.5. Perhitungan nilai harapan imbalan (\textit{expected payoff}) dilakukan dengan menjumlahkan hasil perkalian antara probabilitas tersebut dengan nilai imbalan yang sesuai pada masing-masing kemungkinan logis sebagaimana persamaan berikut.
 \begin{equation}
 E[i|s_i] = \sum_{s_j \in \{+1, -1\}} P(s_j) \cdot V(s_i, s_j)
 \label{eq:expected_payoff}

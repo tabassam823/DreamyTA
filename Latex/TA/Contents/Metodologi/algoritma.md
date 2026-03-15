@@ -13,13 +13,13 @@ Algorithm 1: Portfolio Optimization via HE-VQE
 3 Hitung Log Return R_t = ln(P_t / P_{t-1});
 4 Diskretisasi status biner: |0⟩ jika R_t > 0, |1⟩ jika R_t ≤ 0;
 5 for each rebalance period do
-6 |   Hitung λ = σ_avg / (μ_avg + σ_avg) dari data window;
+6 |   Hitung Probabilitas Gabungan P(s_i, s_j) dari data window;
 7 |   for each asset pair (i, j) do
-8 |   |   Hitung Matriks Payoff 2x2 menggunakan utilitas u = (1-λ)R - λ|R|;
+8 |   |   Hitung Matriks Payoff 2x2 dari return historis rata-rata;
 9 |   |   Klasifikasi tipe permainan (Coordination/Anti-Coordination/Mixed);
 10|   |   Hitung interaksi J_ij melalui Quantum Mutual Information (QMI);
 11|   end
-12|   Hitung bias h_i dari selisih payoff marginal;
+12|   Hitung bias h_i dari selisih expected payoff marginal;
 13|   Konstruksi Hamiltonian Ising H = H_cost + H_penalty;
 14|   Inisialisasi Hardware-Efficient Ansatz dengan parameter θ;
 15|   while not converged or iter < maxiter do
@@ -45,8 +45,8 @@ graph TD
 
     subgraph "B. Analisis Ekonofisika & Game Theory"
         A3 --> B1[Sliding Window 126 Hari]
-        B1 --> B2[Hitung Lambda Endogen]
-        B2 --> B3[Matriks Payoff 2x2]
+        B1 --> B2[Hitung Probabilitas Gabungan P_ij]
+        B2 --> B3[Matriks Payoff 2x2 (Return Historis)]
         B3 --> B4[Hitung Bias h_i & Klasifikasi Game]
         B1 --> B5[Hitung J_ij via Quantum Mutual Information]
     end

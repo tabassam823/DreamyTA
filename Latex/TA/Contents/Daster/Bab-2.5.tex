@@ -26,7 +26,7 @@ I(X; Y) = H(X) + H(Y) - H(X, Y)
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.36\textwidth]{Images/Mutual_Information.png}
-\caption{Diagram Venn representasi \textit{Mutual Information} yang mengilustrasikan hubungan antara entropi individual, entropi bersama, dan informasi yang dibagikan antar sub-sistem \cite{yang_abnormal_2024}.}
+\caption[Diagram Venn representasi \textit{Mutual Information}.]{Diagram Venn representasi \textit{Mutual Information} yang mengilustrasikan hubungan antara entropi individual, entropi bersama, dan informasi yang dibagikan antar sub-sistem \protect\cite{yang_abnormal_2024}.}
 \label{fig:mutual_info}
 \end{figure}
 
@@ -64,7 +64,7 @@ S(\rho_i) &= -P(i=0) \ln P(i=0) - P(i=1) \ln P(i=1) \label{eq:marginal_entropy_c
 S(\rho_j) &= -P(j=0) \ln P(j=0) - P(j=1) \ln P(j=1) \label{eq:marginal_entropy_calc_j}
 \end{align}
 
-\subsection{Formulasi Akhir Quantum Mutual Information sebagai Kopling $J_{ij}$}
+\subsection{Formulasi Akhir Quantum Mutual Information sebagai Kopling \texorpdfstring{$J_{ij}$}{J\_ij}}
 
 \textit{Quantum Mutual Information} (QMI) merupakan parameter utama yang digunakan untuk mengukur total korelasi sistemik di dalam jayringan aset finansial \cite{nielsen_quantum_2010}. Dalam analisis portofolio, nilai QMI yang tinggi menandakan adanya hubungan informasi yang signifikan, sementara nilai nol menunjukkan bahwa kedua aset tersebut bergerak secara independen. Formulasi ini berfungsi  sebagai transformasi data \textit{time-series} yang bersifat deskriptif menjadi parameter interaksi fungsional dalam Hamiltonian sistem \cite{gong_quantum_2025}. Nilai dari parameter QMI dihitung menggunakan persamaan \ref{eq:qmi}.
 \begin{equation}

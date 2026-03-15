@@ -8,20 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "55e2b249d4b770ab",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/MD_File/bab1.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "bab1"
-            }
-          },
-          {
             "id": "0885a494f37c5be2",
             "type": "leaf",
             "state": {
@@ -111,16 +97,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/contoh_hitung.md",
+                "file": "Latex/TA/MD_File/Density_operator_II_reduced_density_operator.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "contoh_hitung"
+              "title": "Density_operator_II_reduced_density_operator"
+            }
+          },
+          {
+            "id": "5422074f1ee07a40",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/SPSA.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SPSA"
+            }
+          },
+          {
+            "id": "3b61e6ecc2a0615c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/Parameter_Shift_Rule.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Parameter_Shift_Rule"
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -152,7 +166,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "qmi.m",
+                "query": "parameter_shif",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -186,13 +200,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/contoh_hitung.md",
+                "file": "Latex/TA/MD_File/Lagrange_Multiplier.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of contoh_hitung"
+              "title": "Outline of Lagrange_Multiplier"
             }
           }
         ]
@@ -318,21 +332,34 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "3054ad31b31294ef",
+  "active": "c763a820eeb32620",
   "lastOpenFiles": [
+    "Latex/TA/main.blg",
+    "Latex/TA/main.synctex(busy)",
+    "Latex/TA/pdflatex54147.fls",
+    "Latex/TA/pdflatex54134.fls",
+    "Latex/TA/pdflatex54121.fls",
+    "Latex/TA/pdflatex54107.fls",
+    "Latex/TA/pdflatex54092.fls",
     "Latex/TA/main.fdb_latexmk",
+    "Latex/TA/pdflatex54071.fls",
     "Latex/TA/main.lof",
     "Latex/TA/main.toc",
-    "Latex/TA/main.out",
-    "Latex/TA/main.aux",
-    "Latex/TA/main.synctex(busy)",
-    "Latex/TA/main.log",
-    "Latex/TA/main.fls",
-    "Latex/TA/pdflatex14437.fls",
-    "Latex/TA/pdflatex14408.fls",
-    "Latex/TA/pdflatex14365.fls",
-    "Latex/TA/MD_File/QMI.md",
+    "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
+    "Latex/TA/Images/Chart.png",
+    "Latex/TA/Images/Screenshot from 2026-03-15 13-29-37.png",
+    "Latex/TA/Images/foto_3x4.jpg",
+    "Latex/TA/Images/Foto_3x4.jpg",
+    "Latex/TA/MD_File/Density_operator_II_reduced_density_operator.md",
+    "Latex/TA/MD_File/SPSA.md",
+    "Latex/TA/MD_File/Parameter_Shift_Rule.md",
+    "Latex/TA/MD_File/Lagrange_Multiplier.md",
+    "notes/Hybrid_H/Pure_Markowitz_QUBO.md",
+    "Latex/TA/Images/bloch_sphere.png",
+    "Latex/TA/Images/bloch_sphare.png",
+    "Latex/TA/MD_File/Dekomposisi_Hamiltonian.md",
     "Latex/TA/contoh_hitung.md",
+    "Latex/TA/MD_File/QMI.md",
     "Latex/TA/MD_File/risk_aversion_endogen.md",
     "Latex/TA/Filtered_Paper/Abnormal_Detection_and_Fault_Diagnosis_of_Adjustme.md",
     "Latex/TA/Images/Mutual_Information.png",
@@ -344,28 +371,15 @@
     "Latex/TA/Filtered_Paper/Lucas.md",
     "Latex/TA/Images/Price_log.png",
     "Latex/TA/Images/OHLC_fixed.png",
-    "Latex/TA/Images/OHLC.png",
-    "Latex/TA/Images/Efficient_Frontier.png",
     "Latex/PakHeru_Presentasi2/mermaid_graph.md",
     "Latex/TA/Filtered_Paper/Menezes.md",
     "Latex/TA/Filtered_Paper/Mitarai.md",
     "Latex/TA/Filtered_Paper/Preskill.md",
     "Latex/TA/Filtered_Paper/Yamamoto.md",
-    "Latex/TA/MD_File/Parameter_Shift_Rule.md",
     "Latex/TA/MD_File/GT_to_h.md",
-    "notes/Hybrid_H/Pure_Markowitz_QUBO.md",
     "notes/PakHeru/Markowitz_QUBO.md",
-    "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
     "Latex/TA/MD_File/Von_Neumann_Entropy.md",
     "Latex/TA/MD_File/Variational_Principle.md",
-    "notes/TwoLocal_to_EfficientSU2.md",
-    "Latex/TA/MD_File/Teorema_Reyleigh_Ritz.md",
-    "Latex/TA/MD_File/jenis_ansatz.md",
-    "Latex/TA/MD_File/jenis_optimasi_vqe.md",
-    "Latex/TA/Images/bid_ask.png",
-    "Latex/PakGagus_Presentasi3/presentasi_analisis/backtest_vqe_portfolio.png",
-    "Latex/PakGagus_Presentasi4/backtest_vqe_portfolio.png",
-    "Latex/TA/Images/Candle1.png",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

@@ -29,6 +29,31 @@ SPSA tidak menghitung turunan per komponen $\frac{\partial L}{\partial \theta_i}
 $$ y_k^{(+)} = y(\theta_k + c_k \Delta_k) \quad \text{dan} \quad y_k^{(-)} = y(\theta_k - c_k \Delta_k) \qquad (3) $$
 Di mana $\Delta_k$ adalah vektor perturbasi acak.
 
+**Pengukuran Positif ($y^{(+)}$):**
+
+$$y(\theta_k + c_k \Delta_k) = y(\theta_k) + c_k \Delta_k^T \nabla y(\theta_k) + \frac{1}{2} c_k^2 \Delta_k^T \nabla^2 y(\theta_k) \Delta_k + O(c_k^3)$$
+
+**Pengukuran Negatif ($y^{(-)}$):**
+
+$$y(\theta_k - c_k \Delta_k) = y(\theta_k) - c_k \Delta_k^T \nabla y(\theta_k) + \frac{1}{2} c_k^2 \Delta_k^T \nabla^2 y(\theta_k) \Delta_k - O(c_k^3)$$
+
+Ketika kita mengurangkan kedua persamaan tersebut ($y^{(+)} - y^{(-)}$):
+
+1. $y(\theta_k) - y(\theta_k) = 0$ (Suku konstan hilang).
+    
+2. $\frac{1}{2} c_k^2 \dots - \frac{1}{2} c_k^2 \dots = 0$ (Suku orde dua/Hessian hilang).
+    
+3. $c_k \Delta_k^T \nabla y(\theta_k) - (-c_k \Delta_k^T \nabla y(\theta_k)) = 2 c_k \Delta_k^T \nabla y(\theta_k)$.
+    
+
+Hasil pengurangannya adalah:
+
+$$y^{(+)} - y^{(-)} = 2 c_k \Delta_k^T \nabla y(\theta_k) + O(c_k^3)$$
+
+Jika kita urai isi dari $\Delta_k^T \nabla y(\theta_k)$, ia adalah skalar:
+
+$$y^{(+)} - y^{(-)} \approx 2 c_k \left( \Delta_{k1} \frac{\partial y}{\partial \theta_1} + \Delta_{k2} \frac{\partial y}{\partial \theta_2} + \dots + \Delta_{kp} \frac{\partial y}{\partial \theta_p} \right)$$
+
 ### C. Komponen Gradien SPSA
 Komponen ke-$i$ dari estimasi gradien pada iterasi ke-$k$ diberikan oleh:
 $$ \hat{g}_{ki}(\theta_k) = \frac{y_k^{(+)} - y_k^{(-)}}{2 c_k \Delta_{ki}} \qquad (4) $$
@@ -68,15 +93,3 @@ Ada 5 parameter krusial dalam SPSA yang mengatur "perilaku belajar" sistem:
 | **Jumlah Pengukuran** | $2 \times p$ per iterasi. | **Selalu 2 per iterasi.** |
 | **Ketahanan Noise** | Rendah (butuh nilai presisi). | **Tinggi (noise dianggap bagian dari statistik).** |
 | **Konvergensi** | Cepat di ruang mulus. | Lebih lambat, tapi sangat tangguh di ruang kasar/berisik. |
-
----
-
-## 7. Analogi "Physical Insight": Berjalan di Tengah Badai
-Bayangkan Anda ingin mencari dasar lembah (minimum energi) saat terjadi badai besar (*noise*).
-- **Gradient Descent** adalah seperti mencoba menggunakan laser untuk mengukur kemiringan tanah. Badai membuat laser Anda bergetar dan tidak berguna.
-- **SPSA** adalah seperti Anda melempar dua batu ke arah acak, satu ke depan-kanan-atas, satu ke belakang-kiri-bawah. Anda hanya mendengarkan suara jatuhnya batu. Jika suara batu pertama terdengar lebih "rendah" dari batu kedua, Anda melompat ke arah itu. Meskipun satu lompatan mungkin salah karena tiupan angin, setelah 100 kali lompatan, Anda pasti sampai di dasar lembah.
-
----
-
-## 8. Kesimpulan
-SPSA adalah algoritma **pencari jalan stokastik**. Dengan mengorbankan ketepatan langkah individual, SPSA mendapatkan efisiensi luar biasa dalam dimensi tinggi. Dalam VQE portofolio, SPSA memungkinkan kita mengoptimalkan ratusan parameter aset tanpa harus menguras kuota *runtime* hardware kuantum.

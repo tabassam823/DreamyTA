@@ -1,28 +1,24 @@
 \section{Algoritma \textit{Variational Quantum Eigensolver} (VQE)}
 
-Algoritma \textit{Variational Quantum Eigensolver} (VQE) merupakan kerangka kerja hibrida \textit{quantum-classical} yang dirancang untuk mengekstraksi energi keadaan dasar (\textit{ground state}) dari suatu Hamiltonian sistem kompleks. Dalam konteks optimasi portofolio, VQE memetakan ruang solusi diskrit yang bersifat \textit{NP-hard} ke dalam lanskap energi yang dapat ditelusuri melalui optimasi parameter sirkuit kuantum \cite{wang_achieving_2025}. Sinergi antara unit pemrosesan klasik dan kuantum memungkinkan penyelesaian masalah optimasi pada era \textit{Noisy Intermediate-Scale Quantum} (NISQ) dengan kedalaman sirkuit yang efisien. Implementasi ini menjadi krusial karena metode klasik murni sering kali gagal memberikan solusi optimal dalam waktu polinomial untuk sistem dengan derajat kebebasan eksponensial.
+\subsection{Prinsip Variasi}
 
-Secara operasional, VQE memanfaatkan \textit{Quantum Processing Unit} (QPU) untuk preparasi \textit{state} dan estimasi nilai ekspektasi energi, sementara \textit{Central Processing Unit} (CPU) menjalankan algoritma optimasi untuk memperbarui parameter $\theta$. Mekanisme ini memastikan bahwa setiap iterasi membawa sistem lebih dekat ke titik ekuilibrium energi terendah yang merepresentasikan konfigurasi aset paling optimal. Ketangguhan heuristik algoritma ini terhadap \textit{noise} pada perangkat keras menjadikannya standar dalam simulasi fisika kuantum dan optimasi kombinatorial \cite{fedorov_vqe_2022}. Melalui pembagian tugas yang efisien, VQE mampu menyeimbangkan keterbatasan koherensi qubit dengan kebutuhan presisi kalkulasi matematis yang tinggi.
-
-\subsection{Fondasi Teoritis: Prinsip Variasi}
-
-Secara fundamental, algoritma VQE beroperasi di atas landasan Prinsip Variasi atau Teorema Rayleigh-Ritz yang mempostulatkan bahwa nilai ekspektasi energi dari sembarang fungsi gelombang percobaan (\textit{trial state}) $|\psi\rangle$ akan selalu merupakan batas atas bagi energi keadaan dasar sejati ($E_0$) sistem \cite{wang_achieving_2025}. Fungsional energi $E[\psi]$ dipetakan sebagai rasio antara nilai ekspektasi Hamiltonian terhadap norma dari \textit{state} tersebut:
+Pada dasarnya, algoritma VQE berjalan atas dasar Prinsip Variasi atau Teorema Rayleigh-Ritz yang menyatakan bahwa nilai ekspektasi energi dari sembarang fungsi gelombang percobaan (\textit{trial state}) $|\psi\rangle$ akan selalu menjadi batas atas bagi energi keadaan dasar sejati ($E_0$) dari suatu sistem \cite{wang_achieving_2025}. Sebagaimana persamaan (\ref{eq:energy_functional}), energi $E[\psi]$ dirumuskan sebagai rasio antara nilai ekspektasi Hamiltonian terhadap normalisasi keadaan sistem tersebut.
 \begin{equation}
 E[\psi] = \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle}
 \label{eq:energy_functional}
 \end{equation}
-Dalam kerangka kerja formalisme mekanika kuantum, pencarian nilai ekstrem dari fungsional ini dilakukan dengan menyertakan kendala normalisasi ($\langle \psi | \psi \rangle = 1$) menggunakan teknik pengali Lagrange (\textit{Lagrange Multiplier}). Metode ini menyusun sebuah fungsional Lagrangian $\mathcal{L}$ yang menggabungkan energi sistem dengan parameter bantuan $\lambda$ sebagai instrumen penyeimbang antara minimisasi energi dan kepatuhan terhadap kendala:
+Dalam formalisme mekanika kuantum, pencarian nilai ekstrem ini dilakukan dengan memasukkan batasan normalisasi ($\langle \psi | \psi \rangle = 1$) lewat metode \textit{lagrangian multiplier} yang menyatakan bahwa total probabilitas sistem yang berada pada ruang Hilbert adalah satu. Persamaan tersebut selanjutnya diturunkan dari fungsi Lagrangian $\mathcal{L}$ pada persamaan (\ref{eq:lagrangian_quantum}) yang menggabungkan energi sistem dengan parameter bantuan $\lambda$ agar minimisasi energi dan kesesuaian terhadap batasan tetap seimbang.
 \begin{equation}
 \mathcal{L}(|\psi\rangle, \lambda) = \langle \psi | \hat{H} | \psi \rangle - \lambda (\langle \psi | \psi \rangle - 1)
 \label{eq:lagrangian_quantum}
 \end{equation}
 
-Penerapan kalkulus variasi terhadap fungsional Lagrangian di atas, melalui kondisi stasioner $\delta \mathcal{L} = 0$, mendeduksi bahwa turunan terhadap $\langle \psi |$ harus bernilai nol guna mencapai titik ekstremum. Jembatan matematis ini secara langsung menurunkan persamaan nilai eigen Schrödinger independen waktu, di mana pengali Lagrange $\lambda$ secara fisik terbukti identik dengan energi sistem $E$:
+Identifikasi kondisi ekstrem pada sistem ini dilakukan dengan prinsip stasioneritas menggunakan variasi fungsi $\delta \mathcal{L} = 0$ terhadap keadaan sistem. Perlakuan tersebut mentransformasikan fungsi Lagrangian secara langsung menjadi persamaan nilai eigen Schrodinger tak bergantung waktu, di mana pengali Lagrange $\lambda$ merepresentasikan tingkat energi sistem $E$ sebagaimana dinyatakan dalam persamaan (\ref{eq:schrodinger_derivation})
 \begin{equation}
 \frac{\delta \mathcal{L}}{\delta \langle \psi |} = \hat{H} |\psi\rangle - \lambda |\psi\rangle = 0 \implies \hat{H} |\psi\rangle = E |\psi\rangle
 \label{eq:schrodinger_derivation}
 \end{equation}
-Untuk membuktikan secara rigor bahwa $E[\psi] \ge E_0$, kita mengekspansikan sembarang \textit{trial state} $|\psi\rangle$ ke dalam kombinasi linier dari basis \textit{eigenstate} ortonormal $\{|n\rangle\}$ yang dimiliki oleh Hamiltonian $\hat{H}$, di mana $\hat{H}|n\rangle = E_n|n\rangle$. Ekspansi tersebut diformulasikan sebagai $|\psi\rangle = \sum_n c_n |n\rangle$, dengan koefisien kompleks $c_n$ yang memenuhi syarat normalisasi $\sum_n |c_n|^2 = 1$.
+Untuk membuktikan bahwa $E[\psi] \ge E_0$, dapat dilakukan ekspansi sembarang \textit{trial state} $|\psi\rangle$ ke dalam kombinasi linier dari basis keadaan eigen yang ortonormal $\{|n\rangle\}$ dari Hamiltonian $\hat{H}$, di mana $\hat{H}|n\rangle = E_n|n\rangle$. Ekspansi tersebut dirumuskan sebagai $|\psi\rangle = \sum_n c_n |n\rangle$, dengan koefisien kompleks $c_n$ yang tetap memenuhi syarat normalisasi $\sum_n |c_n|^2 = 1$.
 
 Substitusi ekspansi basis tersebut ke dalam pembilang Persamaan \eqref{eq:energy_functional} memungkinkan dekomposisi nilai ekspektasi energi menjadi jumlahan diskrit dari nilai eigen energi $E_n$ yang terbobot:
 \begin{equation}
@@ -40,90 +36,123 @@ E[\psi] \ge E_0
 \label{eq:variational_principle_final}
 \end{equation}
 
-Meskipun pengali Lagrange $\lambda$ efektif dalam derivasi analitik, implementasi pada algoritma \textit{unconstrained optimization} seperti VQE menuntut transformasi batasan linear menjadi suku penalti kuadratik \cite{wang_achieving_2025}. Penggunaan suku linear $\lambda(g(x)-K)$ pada perangkat keras kuantum sangat berisiko memicu instabilitas energi, di mana sistem dapat memanipulasi variabel $g(x)$ menuju $-\infty$ untuk meminimalkan energi total tanpa mencapai titik stasioner yang valid. Sebagai solusi, batasan kaku Lagrange dikonversi menjadi "sumur potensial" parabolik menggunakan parameter penalti $A$ yang menghukum setiap deviasi—baik positif maupun negatif—secara simetris melalui bentuk L2-norm:
+\subsection{Optimasi Parameter SPSA}
+
+Algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) diimplementasikan dengan membutuhkan dua pengukuran fungsi biaya per iterasi lewat pemberian perturbasi bersamaan $\Delta_k$ terhadap seluruh elemen parameter. Estimasi gradien dilakukan melalui evaluasi pada dua titik $y_k^{(+)} = y(\theta_k + c_k \Delta_k)$ and $y_k^{(-)} = y(\theta_k - c_k \Delta_k)$, yang jika diekspansi secara Taylor di sekitar $\theta_k$ menghasilkan persamaan (\ref{eq:spsa_taylor_expansion_plus}) dan (\ref{eq:spsa_taylor_expansion_minus}).
 \begin{equation}
-E_{penalty} = A \cdot (g(x) - K)^2
-\label{eq:penalty_transformation}
+y(\theta_k + c_k \Delta_k) = y(\theta_k) + c_k \Delta_k^T \nabla y(\theta_k) + \frac{1}{2} c_k^2 \Delta_k^T \nabla^2 y(\theta_k) \Delta_k + O(c_k^3)
+\label{eq:spsa_taylor_expansion_plus}
 \end{equation}
-Parameter $A$ dalam hal ini merepresentasikan kekakuan (\textit{stiffness}) kendala, di mana nilai $A$ yang cukup besar memastikan bahwa status ekuilibrium sistem (\textit{ground state}) tepat berada pada konfigurasi yang memenuhi batasan jumlah aset $K$. Transformasi ini memungkinkan integrasi kendala bisnis langsung ke dalam fungsi biaya Hamiltonian tanpa memerlukan derajat kebebasan tambahan untuk pengali Lagrange selama proses iterasi QPU.
-
-\subsection{Alur Kerja dan Optimasi Parameter SPSA}
-
-Implementasi algoritma VQE pada sistem multi-aset menuntut dekomposisi operator Hamiltonian $\hat{H}$ ke dalam basis lokal yang dapat diukur oleh perangkat keras kuantum secara efisien. Mengingat ruang Hilbert sistem $n$-qubit tumbuh secara eksponensial ($2^n \times 2^n$), pengukuran matriks global menjadi tidak praktis untuk diselesaikan secara langsung \cite{wang_achieving_2025}. Oleh karena itu, Hamiltonian didekomposisi menjadi jumlahan linear dari \textit{Pauli strings} $\hat{P}_k \in \{I, X, Y, Z\}^{\otimes n}$ yang merepresentasikan interaksi lokal antar aset. Transformasi ini secara matematis dinyatakan sebagai:
 \begin{equation}
-\hat{H} = \sum_{k=1}^K c_k \hat{P}_k
-\label{eq:hamiltonian_decomposition_detailed}
+y(\theta_k - c_k \Delta_k) = y(\theta_k) - c_k \Delta_k^T \nabla y(\theta_k) + \frac{1}{2} c_k^2 \Delta_k^T \nabla^2 y(\theta_k) \Delta_k - O(c_k^3)
+\label{eq:spsa_taylor_expansion_minus}
 \end{equation}
-Di mana koefisien riil $c_k$ diekstraksi melalui proyeksi \textit{Trace} ($\text{Tr}$) sebagai $c_k = \frac{1}{2^n} \text{Tr}(\hat{P}_k \hat{H})$, yang memastikan bahwa informasi energi sistem dipetakan secara presisi ke dalam komponen-komponen yang dapat diobservasi pada basis komputasi \cite{fedorov_vqe_2022}.
-
-Pemanfaatan dekomposisi tersebut memungkinkan unit pemrosesan kuantum untuk menghitung nilai ekspektasi energi total melalui prinsip linearitas operator. QPU mengestimasi nilai harapan dari setiap suku Pauli $\langle \hat{P}_k \rangle$ secara paralel atau sekuensial melalui preparasi \textit{state} $|\psi(\theta)\rangle$ yang berulang. Akumulasi dari pengukuran lokal ini disintesis kembali oleh CPU untuk memperoleh estimasi energi Hamiltonian total sesuai dengan rumusan:
+sehingga jika kedua persamaan tersebut dikurangi maka akan diperoleh
 \begin{equation}
-\langle \hat{H} \rangle_{\theta} = \sum_k c_k \langle \psi(\theta) | \hat{P}_k | \psi(\theta) \rangle
-\label{eq:expectation_summation}
+y^{(+)} - y^{(-)} = 2 c_k \Delta_k^T \nabla y(\theta_k) + O(c_k^3)
+\label{eq:selisih_y}
 \end{equation}
-Proses ini mengubah beban komputasi dari operasi matriks raksasa menjadi jumlahan polinomial dari pengukuran-pengukuran sederhana, yang merupakan syarat mutlak bagi operasional algoritma variasional di era NISQ \cite{wang_achieving_2025}. Efisiensi fase pengukuran ini sangat krusial karena akurasi estimasi energi sangat bergantung pada jumlah sampel (\textit{shots}) yang diambil untuk memitigasi \textit{statistical error} dan \textit{shot-noise}.
-
-Namun, fase optimasi parameter $\theta$ dalam lingkungan kuantum berisik menghadapi tantangan skalabilitas yang signifikan apabila menggunakan metode gradien konvensional. Pendekatan standar seperti \textit{Gradient Descent} (GD) yang dipadukan dengan \textit{Parameter Shift Rule} memerlukan setidaknya $2p$ pengukuran untuk setiap iterasi, di mana $p$ adalah jumlah parameter dalam sirkuit \textit{ansatz} \cite{dao_exploring_2025}. Untuk portofolio dengan puluhan aset, kebutuhan sumber daya ini menjadi sangat membebani dan rentan terhadap fluktuasi \textit{shot-noise} yang dapat menyebabkan instabilitas pada estimasi gradien analitik. Kegagalan GD dalam mencapai konvergensi sering kali disebabkan oleh fenomena \textit{barren plateaus} atau terjebak dalam minimum lokal akibat lanskap energi yang terdistorsi oleh gangguan lingkungan \cite{wang_achieving_2025}.
-
-Sebagai substitusi yang lebih tangguh, algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) diimplementasikan untuk melakukan pembaruan parameter dengan efisiensi tinggi. SPSA beroperasi dengan memberikan perturbasi acak secara simultan terhadap seluruh elemen dalam vektor parameter $\theta$, sehingga hanya membutuhkan dua pengukuran fungsi biaya per iterasi tanpa mempedulikan dimensi parameter \cite{wang_achieving_2025}. Estimasi gradien stokastik $\hat{g}_k(\theta_k)$ diperoleh dengan mengukur selisih energi pada dua titik yang digeser oleh vektor perturbasi $\Delta_k$, yang elemennya dipilih dari distribusi Bernoulli ($\pm 1$):
+Dengan mengasumsikan $\Delta_k$ dipilih dari distribusi Bernoulli ($\pm 1$), maka komponen ke-$i$ dari estimasi gradien stokastik $\hat{g}_k(\theta_k)$ dirumuskan sebagai:
 \begin{equation}
-\hat{g}_k(\theta_k) = \frac{y(\theta_k + c_k \Delta_k) - y(\theta_k - c_k \Delta_k)}{2 c_k} \begin{pmatrix} 1/\Delta_{k1} \\ 1/\Delta_{k2} \\ \vdots \\ 1/\Delta_{kp} \end{pmatrix}
-\label{eq:spsa_gradient_detailed}
+\hat{g}_{ki}(\theta_k) = \frac{y_k^{(+)} - y_k^{(-)}}{2 c_k \Delta_{ki}}
+\label{eq:spsa_gradient_component}
 \end{equation}
-Di mana $y(\theta)$ merepresentasikan nilai ekspektasi energi berisik yang terbaca dari QPU. Penggunaan pembilang yang sama untuk seluruh komponen gradien merupakan kunci efisiensi SPSA dalam menangani masalah optimasi berdimensi tinggi dalam sektor finansial.
-
-Keberhasilan konvergensi SPSA sangat ditentukan oleh pengaturan sekuensial dari parameter \textit{learning rate} ($a_k$) dan \textit{perturbation size} ($c_k$) yang harus mengecil seiring bertambahnya iterasi $k$. Parameter pembaruan $\theta$ mengikuti aturan iteratif $\theta_{k+1} = \theta_k - a_k \hat{g}_k(\theta_k)$, di mana stabilitas langkah diatur oleh konstanta $A$ dan eksponen peluruhan $\alpha$ serta $\gamma$. Secara formal, jadwal peluruhan parameter tersebut didefinisikan sebagai:
+Adapun pembaruan parameter dilakukan mengikuti aturan iteratif $\theta_{k+1} = \theta_k - a_k \hat{g}_k(\theta_k)$, dengan parameter \textit{learning rate} ($a_k$) dan \textit{perturbation size} ($c_k$) yang meluruh secara sekuensial berdasarkan iterasi $k$:
 \begin{equation}
 a_k = \frac{a}{(k+1+A)^\alpha}, \quad c_k = \frac{c}{(k+1)^\gamma}
-\label{eq:spsa_parameters}
+\label{eq:spsa_parameters_decay}
 \end{equation}
-Sifat stokastik dari SPSA memberikan keuntungan intrinsik berupa kemampuan untuk "melompati" minimum lokal yang dangkal akibat \textit{noise}, menjadikannya jauh lebih \textit{robust} dibandingkan metode deterministik dalam simulasi portofolio kuantum \cite{wang_achieving_2025}. Penutupan logis dari subbab ini menegaskan bahwa kombinasi dekomposisi Hamiltonian yang efisien dan optimasi SPSA yang tangguh memungkinkan VQE untuk menemukan solusi \textit{ground state} yang representatif terhadap ekuilibrium pasar yang kompleks.
+Dimana $\alpha$ merepresentasikan eksponen peluruhan \textit{learning rate} untuk menjamin konvergensi menuju titik optimum, sedangkan $\gamma$ merupakan eksponen peluruhan perturbasi yang mengatur reduksi sensitivitas estimasi gradien terhadap fluktuasi \textit{noise} pada sistem. Pada umumnya, nilai $\alpha = 0,602$ dan $\gamma = 0,101$ sering digunakan sebagai standar untuk memberikan keseimbangan optimal antara kecepatan konvergensi dan ketahanan terhadap gangguan statistik pada perangkat keras kuantum.
 
-\subsection{Arsitektur Ansatz \textit{EfficientSU2} dan Efek \textit{Entanglement}}
+\subsection{Ansatz \textit{EfficientSU2}}
 
-Arsitektur sirkuit kuantum terparameterisasi atau yang dikenal sebagai \textit{ansatz} merupakan instrumen krusial dalam algoritma VQE untuk merepresentasikan fungsi gelombang percobaan $|\psi(\theta)\rangle$ dalam ruang Hilbert yang relevan. Secara teoretis, \textit{ansatz} yang digunakan dalam penelitian ini diturunkan dari kerangka kerja \textit{TwoLocal}, yakni sebuah templat sirkuit parameterisasi umum yang menyusun urutan operator uniter melalui alterasi antara lapisan rotasi lokal satu-qubit ($L$) dan lapisan keterbelitan dua-qubit ($W$). Secara matematis, sirkuit \textit{TwoLocal} dengan kedalaman $d$ repetisi didefinisikan sebagai produk operator uniter berikut:
+Representasi status kuantum satu qubit dipetakan secara geometris melalui koordinat bola Bloch guna memudahkan interpretasi fisik bagi sistem dua tingkat. Secara matematis, vektor status $|\psi\rangle$ dinyatakan sebagai superposisi linear antara basis $|0\rangle$ dan $|1\rangle$ dengan parameter sudut polar $\theta$ dan fase azimuthal $\phi$ sebagaimana dirumuskan dalam persamaan (\ref{eq:bloch_vector}):
+\begin{equation}
+|\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle
+\label{eq:bloch_vector}
+\end{equation}
+Visualisasi geometris pada Figure \ref{fig:bloch_sphere} mengilustrasikan posisi vektor status dalam ruang Hilbert yang dapat dimanipulasi melalui rotasi uniter. Hal ini menjadi landasan bagi operasional algoritma VQE dalam mencari konfigurasi status dengan energi terendah.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Images/bloch_sphere.png}
+    \caption{Representasi geometris status satu qubit pada permukaan bola Bloch yang menunjukkan parameterisasi sudut polar ($\theta$) dan azimuthal ($\phi$).}
+    \label{fig:bloch_sphere}
+\end{figure}
+
+Transformasi status pada bola Bloch dilakukan menggunakan operator uniter rotasi $R_y(\theta)$ dan $R_z(\phi)$ yang merepresentasikan elemen grup uniter spesial $SU(2)$. Definisi matriks dari operator rotasi dan gerbang keterbelitan \textit{Controlled-NOT} ($CX$) dinyatakan secara presisi sebagai berikut:
+\begin{equation}
+R_y(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{pmatrix}, \quad R_z(\phi) = \begin{pmatrix} e^{-i\phi/2} & 0 \\ 0 & e^{i\phi/2} \end{pmatrix}, \quad CX = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+\label{eq:quantum_gates_matrices}
+\end{equation}
+Operator rotasi berfungsi untuk mengubah orientasi vektor status, sementara gerbang $CX$ berperan dalam membangun korelasi non-lokal atau keterbelitan (\textit{entanglement}) antar qubit. Kombinasi sistematis dari gerbang-gerbang ini membentuk arsitektur sirkuit kuantum yang mampu merepresentasikan fungsi gelombang percobaan yang kompleks.
+
+Kerangka kerja \textit{TwoLocal} mengintegrasikan komponen tersebut ke dalam templat sirkuit parameterisasi umum yang menyusun operator melalui alterasi lapisan rotasi ($L$) dan keterbelitan ($W$). Secara matematis, sirkuit \textit{TwoLocal} dengan kedalaman $d$ repetisi didefinisikan sebagai produk operator uniter berikut:
 \begin{equation}
 U(\theta) = L_d(\theta_d) \prod_{i=0}^{d-1} [W_i L_i(\theta_i)]
 \label{eq:twolocal_general}
 \end{equation}
-Fleksibilitas dari templat ini memungkinkan peneliti untuk menentukan jenis gerbang rotasi dan strategi keterbelitan yang paling sesuai dengan topologi Hamiltonian sistem. Namun, untuk aplikasi praktis pada perangkat keras NISQ, diperlukan spesialisasi lebih lanjut guna menekan jumlah gerbang dan kedalaman sirkuit tanpa mengorbankan universalitas operasional \cite{dao_exploring_2025}.
+Dalam formalisme ini, $L_i$ merepresentasikan jumlahan produk tensor gerbang rotasi lokal, $W_i$ adalah operator keterbelitan yang menghubungkan antar qubit, dan $d$ menunjukkan jumlah repetisi blok sirkuit. Struktur repetitif ini dirancang untuk memaksimalkan cakupan ruang Hilbert sistem dengan beban komputasi yang efisien.
 
-\textit{Ansatz} \texttt{EfficientSU2} merepresentasikan instansiasi optimal dari kerangka kerja \textit{TwoLocal} melalui pembatasan blok rotasi $L_i$ pada grup uniter spesial derajat dua atau $SU(2)$. Pemilihan grup ini didasarkan pada kemampuan fungsionalnya untuk mencakup seluruh permukaan bola Bloch dengan jumlah parameter yang minimum, yang secara fisik ekuivalen dengan rotasi sembarang pada satu qubit. Dalam implementasi teknisnya, setiap blok rotasi untuk qubit $j$ pada lapisan $l$ dijabarkan sebagai produk dari gerbang $R_z$ dan $R_y$ yang didefinisikan secara presisi sebagai:
+Spesialisasi menjadi \textit{ansatz} \texttt{EfficientSU2} dilakukan melalui substitusi operator rotasi lokal $L_i$ dengan kombinasi gerbang $R_z$ dan $R_y$. Setiap qubit $j$ pada lapisan $i$ menerima transformasi rotasi $\text{Rot}_{SU(2)}$ yang didefinisikan sebagai produk operasional kedua gerbang tersebut:
 \begin{equation}
-R_y(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{pmatrix}, \quad R_z(\phi) = \begin{pmatrix} e^{-i\phi/2} & 0 \\ 0 & e^{i\phi/2} \end{pmatrix}
-\label{eq:rotation_matrices}
+\text{Rot}_{SU(2)}(\theta_{i,j}) = R_z(\theta_{i,j,2}) \cdot R_y(\theta_{i,j,1})
+\label{eq:rot_su2_definition}
 \end{equation}
-Jembatan matematis melalui kombinasi $\text{Rot}_{SU(2)}(\theta_{l,j}) = R_z(\theta_{l,j,2}) R_y(\theta_{l,j,1})$ memastikan bahwa setiap qubit memiliki derajat kebebasan yang cukup untuk mengeksplorasi superposisi amplitudo dan fase relatif secara efisien.
+Pemilihan urutan rotasi ini menjamin bahwa setiap qubit memiliki derajat kebebasan yang cukup untuk menjangkau seluruh permukaan bola Bloch secara universal. Sinergi ini meminimalkan jumlah parameter yang diperlukan tanpa mengurangi ekspresivitas status kuantum yang dihasilkan.
 
-Selain spesialisasi pada lapisan rotasi, \texttt{EfficientSU2} juga menetapkan standar pada lapisan keterbelitan $W_i$ dengan menggunakan gerbang \textit{Controlled-NOT} ($CX$) yang bersifat non-parameterisasi. Penggunaan gerbang $CX$ dipilih karena efisiensi implementasinya pada tingkat \textit{hardware} serta kemampuannya yang mumpuni dalam membangun korelasi non-lokal antar variabel keputusan investasi \cite{wang_achieving_2025}. Gerbang $CX$ beroperasi sebagai operator uniter $4 \times 4$ yang membalikkan status qubit target jika dan hanya jika qubit kontrol berada pada status $|1\rangle$, dengan bentuk matriks sebagai berikut:
+Tahap akhir melibatkan substitusi operator keterbelitan $W_i$ dengan urutan gerbang $CX$ mengikuti pola konektivitas \textit{linear}. Pada pola ini, gerbang $CX$ menghubungkan qubit bertetangga guna membangun interaksi variabel portofolio secara berurutan sebagaimana dirumuskan:
 \begin{equation}
-CX = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
-\label{eq:cnot_matrix}
+W = \prod_{j=0}^{n-2} CX_{j, j+1}
+\label{eq:linear_w_definition}
 \end{equation}
-Dengan mensubstitusikan kedua komponen spesifik tersebut ke dalam persamaan umum \textit{TwoLocal}, diperoleh bentuk eksplanatori dari fungsi gelombang percobaan $|\psi(\theta)\rangle$ sebagai berikut:
+Dengan mensubstitusikan seluruh komponen tersebut ke dalam persamaan (\ref{eq:twolocal_general}), diperoleh formulasi eksplisit dari fungsi gelombang percobaan $|\psi(\theta) \rangle$ pada \textit{ansatz} \texttt{EfficientSU2} sebagai berikut:
 \begin{equation}
-|\psi(\theta) \rangle = \left[ \bigotimes_{j=0}^{n-1} R_z(\theta_{d,j,2}) R_y(\theta_{d,j,1}) \right] \prod_{i=0}^{d-1} \left[ W_{CX} \bigotimes_{j=0}^{n-1} R_z(\theta_{i,j,2}) R_y(\theta_{i,j,1}) \right] |0 \rangle^{\otimes n}
-\label{eq:efficientsu2_explicit}
+|\psi(\theta) \rangle = \underbrace{\left[ \bigotimes_{j=0}^{n-1} R_z(\theta_{d,j,2}) R_y(\theta_{d,j,1}) \right]}_{\text{Final Rotation Layer}} \prod_{i=0}^{d-1} \left[ \underbrace{W_{CX}}_{\text{Entanglement}} \underbrace{\bigotimes_{j=0}^{n-1} R_z(\theta_{i,j,2}) R_y(\theta_{i,j,1})}_{\text{Rotation Layer } i} \right] |0 \rangle^{\otimes n}
+\label{eq:efficientsu2_final_explicit}
 \end{equation}
+Persamaan tersebut menggambarkan bahwa keadaan awal yang masuk dalam bentuk status vakum $|0\rangle^{\otimes n}$ akan diproses secara sekuensial melalui lapisan rotasi parameterisasi $R_y$ dan $R_z$, diikuti oleh interaksi keterbelitan berantai melalui gerbang $CX$ dalam $d$ jumlah repetisi, hingga diakhiri dengan lapisan rotasi final untuk menghasilkan fungsi gelombang percobaan $|\psi(\theta)\rangle$ yang siap diukur. Sehingga jika divisualisasikan ke dalam bentuk sirkuit kuantum, alur komputasi yang merepresentasikan pergerakan keadaan dari kiri ke kanan digambarkan pada Gambar \ref{fig:efficientsu2_circuit}.
 
-Analisis skalabilitas dari spesialisasi ini menunjukkan keunggulan signifikan dalam jumlah parameter yang perlu dioptimasi dibandingkan dengan model generik. Pada \texttt{EfficientSU2}, jumlah total parameter $\theta$ ditentukan secara deterministik oleh jumlah qubit $n$ dan kedalaman repetisi $d$ melalui rumusan $N_{params} = n \times 2 \times (d + 1)$. Pengurangan jumlah parameter ini secara drastis mempercepat konvergensi algoritma optimasi stokastik seperti SPSA, sekaligus meminimalkan akumulasi galat sistematis pada sirkuit yang dangkal \cite{dao_exploring_2025}. Penutupan logis dari derivasi ini menegaskan bahwa \texttt{EfficientSU2} merupakan bentuk optimasi struktural dari \textit{TwoLocal} yang memaksimalkan ekspresivitas dengan beban komputasi yang minimal untuk memetakan dinamika portofolio Markowitz.
-
-\subsection{Implementasi dan Penentuan Solusi Portofolio}
-
-Integrasi antara optimasi parameter melalui algoritma SPSA dan arsitektur sirkuit \textit{EfficientSU2} berujung pada fase ekstraksi solusi portofolio dari \textit{Quantum Processing Unit} (QPU). Setelah proses optimasi mencapai konvergensi pada vektor parameter optimal $\theta^*$, sistem kuantum dipersiapkan untuk melakukan \textit{sampling} akhir terhadap fungsi gelombang $|\psi(\theta^*)\rangle$ guna memperoleh distribusi probabilitas status dasar. Secara teknis, probabilitas $P(x)$ untuk mendapatkan konfigurasi aset biner $x \in \{0, 1\}^N$ dihitung melalui proyeksi \textit{state} optimal terhadap basis komputasi $|x\rangle$ sebagaimana dirumuskan:
-\begin{equation}
-P(x) = |\langle x | \psi(\theta^*) \rangle|^2
-\label{eq:probability_sampling}
-\end{equation}
-Dalam eksperimen pada perangkat keras NISQ, nilai probabilitas ini diestimasi melalui akumulasi frekuensi relatif dari $M$ jumlah pengukuran (\textit{shots}), di mana presisi statistik sangat bergantung pada kedalaman pengambilan sampel untuk mengatasi interferensi \textit{readout error}.
-
-Interpretasi terhadap hasil \textit{sampling} statistik ini dilakukan dengan mengidentifikasi konfigurasi biner dengan probabilitas kemunculan tertinggi sebagai solusi kandidat utama. Solusi portofolio optimal $x_{opt}$ ditentukan secara deterministik melalui fungsi \textit{argmax} terhadap estimasi probabilitas $\hat{P}(x)$, yang secara fisis merepresentasikan titik energi minimum dalam lanskap biaya QUBO \cite{wei_solving_2025}:
-\begin{equation}
-x_{opt} = \arg\max_x \hat{P}(x) 
-\label{eq:optimal_solution_extraction}
-\end{equation}
-Penentuan solusi ini menunjukkan ekuilibrium pasar yang paling stabil berdasarkan kriteria risiko dan imbal hasil yang telah dipetakan ke dalam Hamiltonian. Visualisasi ini krusial untuk memverifikasi apakah algoritma berhasil memusatkan amplitudo probabilitas pada \textit{ground state} tunggal atau terjebak dalam keadaan superposisi yang menandakan degenerasi energi.
-
-Sebagai tahap final, protokol \textit{post-selection} diimplementasikan untuk menjamin bahwa solusi yang dihasilkan mematuhi konstrain operasional, khususnya batasan jumlah aset $K$. Apabila konfigurasi $x_{opt}$ melanggar syarat $\sum x_i = K$ akibat fluktuasi statistik atau efek \textit{noise} perangkat keras, sistem secara otomatis akan menyeleksi kandidat bitstring valid berikutnya dengan probabilitas tertinggi di bawah nilai maksimum absolut \cite{wang_achieving_2025}. Mekanisme ini memastikan integritas solusi finansial tetap terjaga tanpa harus melakukan komputasi ulang yang memakan sumber daya besar pada QPU. Dengan demikian, algoritma VQE tidak hanya berfungsi sebagai mesin pencari energi minimum, tetapi juga sebagai kerangka kerja pengambilan keputusan yang adaptif terhadap batasan riil di pasar modal.
-
-Secara keseluruhan, pemanfaatan algoritma VQE dengan optimasi SPSA dan \textit{ansatz EfficientSU2} menawarkan metodologi hibrida yang tangguh dalam menghadapi kompleksitas optimasi portofolio non-linear. Landasan teoretis dari prinsip variasional memberikan jaminan konvergensi matematis, sementara fleksibilitas sirkuit kuantum memungkinkan pemetaan interaksi aset yang melampaui limitasi kovarians klasik. Keunggulan operasional ini memposisikan VQE sebagai instrumen komputasi masa depan yang mampu menjembatani kebutuhan akan presisi finansial dengan keterbatasan teknologi kuantum di era NISQ.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.9, transform shape, 
+        gate/.style={draw, fill=white, minimum width=0.8cm, minimum height=0.6cm, font=\small},
+        cnot/.style={draw, circle, fill=white, inner sep=0pt, minimum size=0.3cm}]
+        
+        % Qubit lines
+        \foreach \i in {0,1,2} {
+            \draw (0,\i) node[left] {$|0\rangle$} -- (9,\i);
+        }
+        
+        % Repetition d Box (Dashed)
+        \draw[dashed, thick, gray] (0.5,-0.5) rectangle (5.5,2.5);
+        \node[below, gray] at (3,-0.5) {Repetisi $d$};
+        
+        % Rotation Layer i
+        \foreach \i in {0,1,2} {
+            \node[gate] at (1.2,\i) {$R_y$};
+            \node[gate] at (2.2,\i) {$R_z$};
+        }
+        
+        % Entanglement Layer (Linear CX)
+        \filldraw (3.5,2) circle (2pt);
+        \draw (3.5,2) -- (3.5,1.15);
+        \node[cnot] at (3.5,1) {}; \draw (3.5,0.85) -- (3.5,1.15); \draw (3.35,1) -- (3.65,1);
+        
+        \filldraw (4.5,1) circle (2pt);
+        \draw (4.5,1) -- (4.5,0.15);
+        \node[cnot] at (4.5,0) {}; \draw (4.5,-0.15) -- (4.5,0.15); \draw (4.35,0) -- (4.65,0);
+        
+        % Ellipsis
+        \node at (6.2,1) {\large $\dots$};
+        
+        % Final Rotation Layer
+        \foreach \i in {0,1,2} {
+            \node[gate] at (7.3,\i) {$R_y$};
+            \node[gate] at (8.3,\i) {$R_z$};
+        }
+        
+    \end{tikzpicture}
+    \caption{Visualisasi arsitektur sirkuit kuantum \textit{EfficientSU2} dengan lapisan rotasi parameterisasi dan keterbelitan berantai (\textit{linear connectivity}).}
+    \label{fig:efficientsu2_circuit}
+\end{figure}
