@@ -1,0 +1,96 @@
+\section{Pemetaan QUBO ke Hamiltonian Ising}
+
+\subsection{Transformasi Affine}
+Variabel biner $x_i \in \{0, 1\}$ dipetakan ke variabel spin $\sigma_i^z \in \{-1, +1\}$ melalui transformasi:
+\begin{equation}
+x_i = \frac{1 - \sigma_i^z}{2}
+\label{eq:affine_transform_appendix}
+\end{equation}
+Substitusi ini ke dalam bentuk QUBO murni menghasilkan Hamiltonian portofolio murni $H_{pure}$:
+\begin{equation}
+\begin{aligned}
+H_{pure} &= \sum Q_{ii} x_i + \sum_{i<j} 2Q_{ij} x_i x_j \\
+&= \sum_{i=1}^N Q_{ii} \left(\frac{1 - \sigma_i^z}{2}\right) + \sum_{i<j}^N 2Q_{ij} \left(\frac{1 - \sigma_i^z}{2}\right)\left(\frac{1 - \sigma_j^z}{2}\right)
+\end{aligned}
+\label{eq:ising_pure_derivation}
+\end{equation}
+
+\subsection{Ekspansi Suku-suku Ising Murni}
+Penjabaran dari persamaan (\ref{eq:ising_pure_derivation}) memisahkan kontribusi linear dan kuadratik:
+\begin{equation}
+\begin{aligned}
+H_{pure} &= \sum \frac{Q_{ii}}{2} - \sum \frac{Q_{ii}}{2} \sigma_i^z + \sum_{i<j} \frac{Q_{ij}}{2} (1 - \sigma_i^z - \sigma_j^z + \sigma_i^z \sigma_j^z) \\
+&= \sum_{i<j} \frac{Q_{ij}}{2} \sigma_i^z \sigma_j^z + \sum_i \left( -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{2} \right) \sigma_i^z + C_{pure}
+\end{aligned}
+\end{equation}
+di mana parameter kopling murni adalah 
+\begin{equation}
+J_{ij}^{pure} = \frac{Q_{ij}}{2}
+\end{equation}
+dan bias lokal murni adalah
+\begin{equation}
+h_i^{pure} = -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{2}
+\end{equation}
+
+\subsection{Derivasi Hamiltonian Penalti dan Variabel Bantu K'}
+Suku penalti pada persamaan (\ref{eq:pen_qubo_derivation}) dikonversi melalui substitusi jumlahan variabel biner ke dalam operator spin:
+\begin{equation}
+\sum_{i=1}^N x_i = \sum_{i=1}^N \frac{1-\sigma_i^z}{2} = \frac{N}{2} - \frac{1}{2}\sum_{i=1}^N \sigma_i^z
+\end{equation}
+Substitusi ke dalam fungsi penalti menghasilkan:
+\begin{equation}
+\begin{aligned}
+P(\sigma) &= A\left( \frac{N}{2} - \frac{1}{2}\sum \sigma_i^z - K \right)^2 \\
+&= A\left( \left(\frac{N}{2} - K\right) - \frac{1}{2}\sum \sigma_i^z \right)^2
+\end{aligned}
+\end{equation}
+Untuk mempermudah penjabaran polinomial, digunakan variabel bantu 
+\begin{equation}
+K' = \frac{N}{2} - K
+\end{equation}
+yang merepresentasikan pergeseran target jumlah aset dalam ruang spin. Sehingga:
+\begin{equation}
+\begin{aligned}
+H_{pen} &= A \left( K' - \frac{1}{2} \sum \sigma_i^z \right)^2 \\
+&= A \left( K'^2 - K' \sum \sigma_i^z + \frac{1}{4} \left(\sum \sigma_i^z\right)^2 \right)
+\end{aligned}
+\end{equation}
+Menggunakan identitas 
+\begin{equation}
+\left(\sum \sigma_i^z\right)^2 = N + 2 \sum_{i<j} \sigma_i^z \sigma_j^z
+\end{equation}
+maka:
+\begin{equation}
+H_{pen} = \sum_{i<j} \frac{A}{2} \sigma_i^z \sigma_j^z - \sum_i (A K') \sigma_i^z + A\left(K'^2 + \frac{N}{4}\right)
+\label{eq:h_pen_final_appendix}
+\end{equation}
+
+\subsection{Hamiltonian Total dan Formulasi Parameter Akhir}
+Hamiltonian total $\hat{H}_{final}$ merupakan jumlahan dari kontribusi murni dan penalti:
+\begin{equation}
+\begin{split}
+\hat{H}_{final} &= \sum_{i<j} \left( \frac{Q_{ij} + A}{2} \right) \hat{Z}_i \hat{Z}_j \\
+&\quad + \sum_i \left( -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{2} - A K' \right) \hat{Z}_i \\
+&\quad + \left( \sum_i \frac{Q_{ii}}{2} + \sum_{i<j} \frac{Q_{ij}}{2} + A\left(K'^2 + \frac{N}{4}\right) \right) \hat{I}
+\end{split}
+\label{eq:ising_full_substitution_appendix}
+\end{equation}
+Bentuk standar operator Hamiltonian kuantum dinyatakan sebagai:
+\begin{equation}
+\hat{H}_{final} = \sum_{i<j} J_{ij}^{total} \hat{Z}_i \hat{Z}_j + \sum_i h_i^{total} \hat{Z}_i + C_{total} \cdot \hat{I}
+\end{equation}
+dengan parameterisasi interaksi (\textit{coupling}) total:
+\begin{equation}
+\begin{aligned}
+J_{ij}^{total} &= J_{ij}^{pure} + \frac{A}{2} \\
+&= \frac{Q_{ij}}{2} + \frac{A}{2}
+\end{aligned}
+\end{equation}
+dan medan lokal (\textit{local fields}) total:
+\begin{equation}
+\begin{aligned}
+h_i^{total} &= h_i^{pure} - A K' \\
+&= -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{2} - A K'
+\end{aligned}
+\end{equation}
+Penyesuaian ini memastikan bahwa konfigurasi energi terendah pada perangkat keras kuantum selaras dengan solusi optimal pemilihan aset pada batasan $K$.

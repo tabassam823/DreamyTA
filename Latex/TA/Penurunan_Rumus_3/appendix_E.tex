@@ -1,0 +1,14 @@
+\section{Normalisasi Probabilitas Bersama}
+Probabilitas bersama $P(s_i, s_j)$ dihitung dari frekuensi kemunculan konfigurasi $(s_i, s_j)$ dalam data historis $T$.
+Total observasi adalah $N_{total} = \sum_{a \in \{0, 1\}} \sum_{b \in \{0, 1\}} n(a, b)$.
+Probabilitas gabungan ternormalisasi:
+\begin{equation}
+P(a, b) = \frac{n(a, b)}{N_{total}}
+\label{eq:joint_prob_norm}
+\end{equation}
+Probabilitas marginal diturunkan melalui penjumlahan parsial:
+\begin{equation}
+P(a) = \sum_{b} P(a, b), \quad P(b) = \sum_{a} P(a, b)
+\label{eq:marginal_prob_norm}
+\end{equation}
+Sifat normalisasi menjamin bahwa $\sum_{a,b} P(a,b) = 1$, yang merupakan syarat mutlak bagi eksistensi matriks densitas.

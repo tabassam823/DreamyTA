@@ -96,7 +96,7 @@ h_i^{pure} = -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{2}
 
 Konstruksi Hamiltonian penalti $H_{pen}$ tetap diturunkan secara bertahap agar tetap memenuhi batasan jumlah aset ($K$) dalam sistem \textit{spin}. Suku penalti 
 \begin{equation}
-    P(x) = A (\sum x_i - K)^2
+    P(x) = A \left(\sum x_i - K\right)^2
 \end{equation}
 dikonversi melalui substitusi variabel biner 
 \begin{equation}
@@ -142,8 +142,8 @@ Persamaan (\ref{eq:ising_full_substitution}) menunjukkan dekomposisi energi tota
 Dimana matriks nilai parameterisasi \textit{Ising coupling} disusun melalui 
 \begin{equation}
 \begin{split}
-    J_{ij}^{total} &= J_{ij}^{pure} + A/2 \\
-    &= Q_{ij}/2 + A/2 
+    J_{ij}^{total} &= J_{ij}^{pure} + \frac{A}{2} \\
+    &= Q_{ij}/2 + \frac{A}{2} 
 \end{split}
 \end{equation}
 dan medan lokal 

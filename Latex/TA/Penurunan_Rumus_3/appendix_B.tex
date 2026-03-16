@@ -1,0 +1,25 @@
+\section{Perkalian Matriks 2-aset Markowitz}
+Untuk sistem 2 aset, fungsi energi Markowitz adalah:
+\begin{equation}
+\mathcal{L} = \begin{pmatrix} x_1 & x_2 \end{pmatrix} \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} - \lambda \begin{pmatrix} \mu_1 & \mu_2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+\end{equation}
+Langkah 1 (Baris $\times$ Matriks):
+\begin{equation}
+\begin{pmatrix} x_1 \sigma_1^2 + x_2 \sigma_{21} & x_1 \sigma_{12} + x_2 \sigma_2^2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+\end{equation}
+Langkah 2 (Skalar):
+\begin{equation}
+(x_1^2 \sigma_1^2 + x_1 x_2 \sigma_{21}) + (x_1 x_2 \sigma_{12} + x_2^2 \sigma_2^2) = \sigma_1^2 x_1^2 + \sigma_2^2 x_2^2 + (\sigma_{12} + \sigma_{21}) x_1 x_2
+\end{equation}
+Karena matriks kovarians simetris ($\sigma_{12} = \sigma_{21}$), diperoleh:
+\begin{equation}
+\sigma_1^2 x_1^2 + \sigma_2^2 x_2^2 + 2\sigma_{12} x_1 x_2
+\end{equation}
+Ditambah suku linear imbal hasil:
+\begin{equation}
+-\lambda(\mu_1 x_1 + \mu_2 x_2)
+\end{equation}
+Sehingga bentuk akhirnya adalah:
+\begin{equation}
+\mathcal{L} = \sigma_1^2 x_1^2 + \sigma_2^2 x_2^2 + 2\sigma_{12}x_1 x_2 - \lambda(\mu_1 x_1 + \mu_2 x_2)
+\end{equation}

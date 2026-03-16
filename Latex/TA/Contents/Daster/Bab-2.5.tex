@@ -1,23 +1,28 @@
 \section{Quantum Mutual Information}
-\subsection{Konvensi Dasar dalam Basis Kuantum}
+\subsection{Konvensi Dasar Basis Kuantum}
 
-Mekanika kuantum menyatakan bahwa status sistem fisik terkecil direpresentasikan oleh vektor dalam ruang Hilbert kompleks dua dimensi $\mathbb{C}^2$ \cite{nielsen_quantum_2010}. Dalam domain \textit{Econophysics}, instrumen finansial tunggal dipetakan ke dalam basis komputasi ortonormal $|0\rangle$ and $|1\rangle$ yang masing-masing merepresentasikan status \textit{Ground State} dan \textit{Excited State}. Representasi ini berfungsi sebagai metode \textit{Embedding} data keuangan ke dalam bahasa mekanika kuantum, di mana amplitudo pada basis $|0\rangle$ mengindikasikan probabilitas sistem berada pada kondisi dasar secara pasti. Kesesuaian antara status biner dengan pergerakan harga pasar tersebut dimanfaatkan sebagai operasionalisasi algoritma kuantum guna mengakses alat matematika yang kaya dalam menganalisis data finansial \cite{gong_quantum_2025}.
+Dalam mekanika kuantum, keadaan sistem fisik terkecil direpresentasikan oleh vektor dalam ruang Hilbert kompleks dua dimensi $\mathbb{C}^2$ \cite{nielsen_quantum_2010}. Dalam domain \textit{Econophysics}, instrumen finansial tunggal dipetakan ke dalam basis komputasi ortonormal $|0\rangle$ and $|1\rangle$ yang masing-masing merepresentasikan keadaan \textit{Ground State} dan \textit{Excited State}. Tujuannya adalah sebagai metode \textit{Quantum Embedding} yang merumuskan data keuangan ke dalam bahasa mekanika kuantum. Di mana amplitudo pada basis $|0\rangle$ mengindikasikan probabilitas sistem berada pada kondisi dasar secara pasti, sedangkan amplitudo pada basis $|1\rangle$ mengindikasikan probabilitas sistem berada pada kondisi eksitasi secara pasti. \cite{gong_quantum_2025}. Secara konvensi, keadaan \textit{Ground State} merepresentasikan kondisi \textit{Down} atau \textit{Bearish}, sedangkan keadaan \textit{Excited State} merepresentasikan kondisi \textit{Up} atau \textit{Bullish}. Secara matematis, keadaan \textit{Ground State} dan \textit{Excited State} direpresentasikan sebagai berikut:
 \begin{equation}
 |0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \qquad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
 \label{eq:qubit_basis}
 \end{equation}
 
-Interaksi antara dua aset finansial $i$ dan $j$ dimodelkan melalui konstruksi sistem komposit dalam ruang Hilbert yang diperluas melalui operasi \textit{Tensor Product} ($\otimes$). Operasi ini menghasilkan empat kombinasi basis kemungkinan untuk sistem bipartit ($2^2 = 4$) yaitu $|00\rangle, |01\rangle, |10\rangle$, dan $|11\rangle$ yang merepresentasikan seluruh ruang kemungkinan interaksi aset \cite{nielsen_quantum_2010}. Setiap status umum $|\psi\rangle_{ij}$ diderivasi sebagai superposisi linear dari keempat basis tersebut dengan amplitudo probabilitas kompleks $\alpha_{ab}$ sebagaimana ditunjukkan pada persamaan (\ref{eq:tensor_product}). Normalisasi dari amplitudo-amplitudo ini menjamin bahwa sistem berada dalam ruang Hilbert yang valid dengan total probabilitas satu. Penurunan status komposit ini merupakan langkah fundamental sebelum dilakukan operasi proyeksi untuk mendapatkan matriks densitas sistem bipartit tersebut \cite{nielsen_quantum_2010}.
+Interaksi antara dua aset finansial $i$ dan $j$ dimodelkan melalui konstruksi sistem komposit dalam ruang Hilbert yang diperluas melalui operasi \textit{Tensor Product} ($\otimes$). Operasi ini menghasilkan empat kombinasi basis kemungkinan untuk sistem bipartit ($2^2 = 4$) yaitu $|00\rangle, |01\rangle, |10\rangle$, dan $|11\rangle$ yang merepresentasikan seluruh ruang kemungkinan interaksi aset \cite{nielsen_quantum_2010}. Setiap keadaan umum $|\psi\rangle_{ij}$ merupakan superposisi linear dari keempat basis tersebut dengan amplitudo probabilitas kompleks $\alpha_{ab}$ sebagaimana ditunjukkan pada persamaan (\ref{eq:tensor_product}) \cite{nielsen_quantum_2010}.
 \begin{equation}
 |\psi\rangle_{ij} = \alpha_{00} \begin{pmatrix} 1 \\ 0 \\ 0 \\ 0 \end{pmatrix} + \alpha_{01} \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} + \alpha_{10} \begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \end{pmatrix} + \alpha_{11} \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix} = \begin{pmatrix} \alpha_{00} \\ \alpha_{01} \\ \alpha_{10} \\ \alpha_{11} \end{pmatrix}
 \label{eq:tensor_product}
 \end{equation}
+Di mana jumlah kuadrat dari magnitudo amplitudo probabilitas kompleks tersebut harus sama dengan satu untuk memastikan sistem berada dalam keadaan yang ternormalisasi, sebagaimana dirumuskan dalam persamaan (\ref{eq:normalized_amplitudo}).
+\begin{equation}
+\sum_{a,b \in \{0,1\}} |\alpha_{ab}|^2 = |\alpha_{00}|^2 + |\alpha_{01}|^2 + |\alpha_{10}|^2 + |\alpha_{11}|^2 = 1
+\label{eq:normalized_amplitudo}
+\end{equation}
 
-\subsection{Teori Informasi dan Mutual Information}
+\subsection{Teori Informasi dan \textit{Mutual Information}}
 
-\textit{Mutual Information} (MI) didefinisikan sebagai ukuran kuantitatif dari dependensi statistik antara dua variabel acak yang merepresentasikan sistem fisik atau finansial secara fundamental \cite{yang_abnormal_2024}. Dalam kerangka kerja \textit{Econophysics}, metrik ini mengukur sejauh mana ketidakpastian mengenai perilaku suatu aset berkurang secara signifikan ketika informasi mengenai aset pasangan telah diketahui secara empiris. Parameter ini sangat esensial untuk menangkap interaksi \textit{Non-Linear} yang seringkali tersembunyi di balik fluktuasi harga pasar yang bersifat stokastik dan kompleks. Pemetaan korelasi melalui \textit{Mutual Information} memberikan landasan yang lebih kuat dalam mengidentifikasi struktur jaringan antar aset dibandingkan penggunaan metrik kovarians tradisional yang bersifat linier.
+\textit{Mutual Information} (MI) didefinisikan sebagai ukuran kuantitatif dari dependensi statistik antara dua variabel acak yang merepresentasikan sistem fisik atau finansial secara fundamental \cite{yang_abnormal_2024}. Dalam \textit{Econophysics}, MI mengukur sejauh mana ketidakpastian mengenai perilaku suatu aset berkurang secara signifikan ketika informasi mengenai aset pasangan telah diketahui secara empiris. Parameter ini cukup mampu menangkap interaksi \textit{Non-Linear} yang tersembunyi di balik fluktuasi harga pasar yang kompleks. 
 
-Secara formal, nilai \textit{Mutual Information} diderivasi dari selisih antara jumlahan entropi marginal individual dengan entropi gabungan dari sistem komposit tersebut sebagai jembatan informasi \cite{shannon_mathematical_1948}. Hubungan informasional ini secara visual diilustrasikan melalui diagram Venn yang menunjukkan irisan informasi atau \textit{Redundancy} antara dua entitas sistem sebagaimana ditampilkan pada Figure \ref{fig:mutual_info}. Persamaan (\ref{eq:mi_classical_def}) merangkum formulasi dasar yang menjamin bahwa informasi bersama selalu bernilai non-negatif dan bersifat simetris dalam seluruh ruang observasi. Figure \ref{fig:mutual_info} mengonfirmasi bahwa \textit{Quantum Mutual Information} merupakan generalisasi dari konsep klasik ini dalam ruang Hilbert yang lebih luas untuk menangkap total korelasi sistemik. Sebagai kesimpulan teknis, validitas penggunaan metrik ini didasarkan pada kemampuannya merepresentasikan aliran informasi laten yang menentukan dinamika keseimbangan pasar \cite{yang_abnormal_2024}.
+Secara matematis, nilai \textit{Mutual Information} didapatkan dari selisih antara seluruh entropi marginal individu dengan entropi gabungan dari sistem \cite{shannon_mathematical_1948}. Hubungan tersebut secara visual dapat diilustrasikan melalui diagram Venn yang menunjukkan irisan informasi atau \textit{Redundancy} antara dua entitas sistem sebagaimana ditampilkan pada Gambar \ref{fig:mutual_info}. Ekspresi pada persamaan (\ref{eq:mi_classical_def}) menunjukkan bahwa nilainya selalu bernilai non-negatif dan bersifat simetris dalam seluruh ruang observasi. Dari Gambar \ref{fig:mutual_info} juga, dapat diinterpretasikan bahwa \textit{Quantum Mutual Information} diperoleh lewat generalisasi dari konsep klasik ini dalam ruang Hilbert yang lebih luas untuk menangkap total korelasi yang ada.
 \begin{equation}
 I(X; Y) = H(X) + H(Y) - H(X, Y)
 \label{eq:mi_classical_def}
@@ -32,54 +37,170 @@ I(X; Y) = H(X) + H(Y) - H(X, Y)
 
 \subsection{Formalisme \textit{Pure State}}
 
-Dalam mekanika kuantum, keadaan sistem yang diketahui secara pasti direpresentasikan sebagai \textit{Pure State} yang diderivasi dari vektor keadaan melalui operasi \textit{Outer Product} \cite{nielsen_quantum_2010}. Secara matematis, matriks densitas $\rho_{ij}^{(pure)}$ dikonstruksi sebagai perkalian matriks $(4 \times 1)$ dengan $(1 \times 4)$ yang menghasilkan proyektor \textit{Rank-1} dengan elemen-elemen koherensi $\alpha_{ab}\alpha_{cd}^*$. Representasi ini memberikan gambaran sistem yang memiliki \textit{Coherence} sempurna dan tidak mengandung ambiguitas klasik di dalam struktur internalnya. Namun, penggunaan \textit{Pure State} untuk data keuangan yang bersifat historis menciptakan redundansi informasi yang tidak diinginkan dalam kalkulasi entropi.
+Dalam mekanika kuantum, keadaan sistem yang diketahui secara pasti direpresentasikan sebagai \textit{Pure State} yang diperoleh dari vektor keadaan melalui operasi \textit{Outer Product} \cite{nielsen_quantum_2010}. Secara matematis, matriks densitas $\rho_{ij}^{(pure)}$ dikonstruksi sebagai perkalian matriks $(4 \times 1)$ dengan $(1 \times 4)$ yang menghasilkan proyektor \textit{Rank-1} dengan elemen-elemen koherensi $\alpha_{ab}\alpha_{cd}^*$. 
 \begin{equation}
 \rho_{ij}^{(pure)} = |\psi\rangle\langle\psi| = \begin{pmatrix} \alpha_{00}\alpha_{00}^* & \alpha_{00}\alpha_{01}^* & \alpha_{00}\alpha_{10}^* & \alpha_{00}\alpha_{11}^* \\ \alpha_{01}\alpha_{00}^* & \alpha_{01}\alpha_{01}^* & \alpha_{01}\alpha_{10}^* & \alpha_{01}\alpha_{11}^* \\ \alpha_{10}\alpha_{00}^* & \alpha_{10}\alpha_{01}^* & \alpha_{10}\alpha_{10}^* & \alpha_{10}\alpha_{11}^* \\ \alpha_{11}\alpha_{00}^* & \alpha_{11}\alpha_{01}^* & \alpha_{11}\alpha_{11}^* & \alpha_{11}\alpha_{11}^* \end{pmatrix}
 \label{eq:pure_state_rho}
 \end{equation}
 
-Masalah kritis muncul ketika \textit{Pure State} digunakan pada data \textit{Candlestick} karena entropi sistem gabungan $S(\rho_{ij})$ akan selalu bernilai nol secara \cite{gong_quantum_2025}. Konsekuensinya, nilai QMI hanya akan menjadi jumlahan entropi marginal tanpa kontribusi interdependensi sejati, sehingga korelasi asli (koherensi \textit{Off-Diagonal}) justru hilang dalam proses transformasi tersebut. Hal ini terjadi karena \textit{Pure State} yang dipaksakan dari data klasik tidak mengandung \textit{Entanglement} nyata, melainkan hanya superposisi fiktif yang tidak mewakili realitas data pasar. Sebagai penutup logis, kegagalan \textit{Pure State} dalam menangkap \textit{Market Uncertainty} mengharuskan penggunaan formalisme yang lebih jujur terhadap karakteristik stokastik data \cite{nielsen_quantum_2010}.
+Namun demikian, muncul suatu masalah ketika \textit{Pure State} digunakan pada data \textit{Candlestick} karena entropi sistem gabungan $S(\rho_{ij})$ akan selalu bernilai nol secara matematis \cite{gong_quantum_2025}. Konsekuensinya, nilai QMI hanya akan menjadi jumlahan entropi marginal tanpa kontribusi interdependensi, sehingga korelasi asli (koherensi \textit{Off-Diagonal}) justru hilang dalam proses transformasi tersebut. Oleh karena itu, digunakan formalisme \textit{Mixed State} untuk mengatasi masalah tersebut.
 
 \subsection{Formalisme \textit{Mixed State}}
 
-Sistem yang memiliki ketidakpastian statistik seperti \textit{Ensemble} historis data pasar wajib direpresentasikan melalui \textit{Mixed State} agar informasi dari korelasi tetap terjaga \cite{nielsen_quantum_2010}. Karena data yang digunakan bersifat klasik dan tidak mengandung superposisi fisik, maka digunakan matriks densitas diagonal untuk membangun informasi korelasi. Matriks $\rho_{ij}^{(mixed)}$ dibangun berdasarkan probabilitas gabungan $P(a, b)$ dengan elemen \textit{Off-Diagonal} bernilai nol untuk mencerminkan realitas statistik yang diobservasi. 
+Sistem yang memiliki ketidakpastian statistik (seperti \textit{Ensemble} historis data pasar) wajib direpresentasikan melalui \textit{Mixed State} agar informasi dari korelasi tetap dapat diperhitungkan \cite{nielsen_quantum_2010}. Karena data yang digunakan bersifat klasik dan tidak mengandung superposisi fisik, maka digunakan matriks densitas diagonal untuk membangun informasi korelasi. Matriks $\rho_{ij}^{(mixed)}$ dibangun berdasarkan probabilitas gabungan $P(a, b)$ dengan elemen \textit{Off-Diagonal} bernilai nol untuk mencerminkan realitas statistik yang diobservasi. 
 \begin{equation}
 \rho_{ij}^{(mixed)} = \sum_{a,b} P(a,b) |ab\rangle\langle ab| = \begin{pmatrix} P(00) & 0 & 0 & 0 \\ 0 & P(01) & 0 & 0 \\ 0 & 0 & P(10) & 0 \\ 0 & 0 & 0 & P(11) \end{pmatrix}
 \label{eq:mixed_state}
 \end{equation}
+Dengan syarat, matriks densitas tersebut harus memenuhi sifat \textit{Hermitian} ($\rho = \rho^\dagger$) dan \textit{Trace} bernilai satu agar ternormalisasi \cite{mantegna_introduction_2000}. 
 
-Matriks densitas tersebut harus memenuhi syarat \textit{Hermitian} ($\rho = \rho^\dagger$) dan \textit{Trace} bernilai satu agar normlisasinya bernilai 1 \cite{mantegna_introduction_2000}. Nilai probabilitas $P(a, b)$ diambil melalui normalisasi frekuensi kemunculan setiap konfigurasi biner dalam \textit{time-series}.
+\subsection{Entropi Von Neumann}
 
-\subsection{Formulasi Entropi Von Neumann}
-
-Entropi \textit{Von Neumann} ($S$) secara formal didefinisikan sebagai ukuran ketidakpastian informasi yang diderivasi dari nilai-eigen matriks densitas $\rho_{ij}^{(mixed)}$. Pada sistem yang didasarkan pada data historis klasik, besaran ini setara dengan jumlahan probabilitas gabungan $P(a, b)$ di seluruh ruang kemungkinan status \cite{shannon_mathematical_1948}. Metrik ini berfungsi untuk mengkuantifikasi total derajat keacakan yang terkandung dalam interaksi antara dua entitas finansial yang diobservasi. Penggunaan formulasi logaritmik memastikan bahwa nilai entropi yang dihasilkan mencerminkan densitas informasi yang akurat dalam satuan \textit{nats}. Prosedur perhitungan untuk mendapatkan nilai entropi gabungan tersebut dirumuskan secara sistematis melalui persamaan (\ref{eq:joint_entropy_calc}).
+Entropi \textit{Von Neumann} ($S$) secara formal didefinisikan sebagai ukuran ketidakpastian informasi yang diderivasi dari nilai-eigen matriks densitas $\rho_{ij}^{(mixed)}$. Pada sistem yang didasarkan pada data historis klasik, besaran ini setara dengan jumlahan probabilitas gabungan $P(a, b)$ di seluruh ruang kemungkinan status \cite{shannon_mathematical_1948}. Fungsinya adalah untuk mengkuantifikasi total derajat keacakan yang terkandung dalam interaksi antara dua entitas finansial yang diobservasi. Prosedur perhitungan untuk mendapatkan nilai entropi gabungan tersebut dirumuskan secara sistematis melalui persamaan (\ref{eq:joint_entropy_calc}).
 \begin{equation}
 S(\rho_{ij}) = -\sum_{a \in \{0, 1\}} \sum_{b \in \{0, 1\}} P(a, b) \ln P(a, b)
 \label{eq:joint_entropy_calc}
 \end{equation}
+Penggunaan formulasi logaritmik tersebut menghasilkan nilai entropi yang mencerminkan densitas informasi yang akurat dalam satuan \textit{nats}.
 
-Probabilitas marginal dari masing-masing aset dihitung dengan menjumlahkan peluang gabungan pada seluruh kemungkinan kondisi aset pasangannya. Nilai peluang individu tersebut merepresentasikan profil risiko dari setiap instrumen finansial ketika berdiri sendiri di dalam pasar. Berdasarkan peluang ini, entropi marginal didapatkan untuk mengukur tingkat ketidakpastian informasi yang dimiliki oleh setiap aset secara terpisah. Hal ini digunakan untuk memisahkan antara risiko mandiri dan risiko yang muncul akibat keterkaitan antar aset dalam portofolio. Secara matematis, entropi marginal dihitung dengan persamaan (\ref{eq:marginal_entropy_calc_i}) dan (\ref{eq:marginal_entropy_calc_j}) \cite{nielsen_quantum_2010}.
+Probabilitas marginal dari masing-masing aset dihitung dengan menjumlahkan peluang gabungan pada seluruh kemungkinan kondisi aset pasangannya. Nilai peluang individu tersebut merepresentasikan profil risiko dari setiap instrumen finansial ketika berdiri sendiri di dalam pasar. Berdasarkan peluang ini, entropi marginal didapatkan untuk mengukur tingkat ketidakpastian informasi yang dimiliki oleh setiap aset secara terpisah. Secara matematis, entropi marginal dihitung dengan persamaan (\ref{eq:marginal_entropy_calc_i}) dan (\ref{eq:marginal_entropy_calc_j}) \cite{nielsen_quantum_2010}.
 \begin{align}
-S(\rho_i) &= -P(i=0) \ln P(i=0) - P(i=1) \ln P(i=1) \label{eq:marginal_entropy_calc_i} \\
-S(\rho_j) &= -P(j=0) \ln P(j=0) - P(j=1) \ln P(j=1) \label{eq:marginal_entropy_calc_j}
+S(\rho_i) &= -\sum_{a \in \{0, 1\}} P(a) \ln P(a) \label{eq:marginal_entropy_calc_i} \\
+S(\rho_j) &= -\sum_{b \in \{0, 1\}} P(b) \ln P(b) \label{eq:marginal_entropy_calc_j}
 \end{align}
 
 \subsection{Formulasi Akhir Quantum Mutual Information sebagai Kopling \texorpdfstring{$J_{ij}$}{J\_ij}}
 
-\textit{Quantum Mutual Information} (QMI) merupakan parameter utama yang digunakan untuk mengukur total korelasi sistemik di dalam jayringan aset finansial \cite{nielsen_quantum_2010}. Dalam analisis portofolio, nilai QMI yang tinggi menandakan adanya hubungan informasi yang signifikan, sementara nilai nol menunjukkan bahwa kedua aset tersebut bergerak secara independen. Formulasi ini berfungsi  sebagai transformasi data \textit{time-series} yang bersifat deskriptif menjadi parameter interaksi fungsional dalam Hamiltonian sistem \cite{gong_quantum_2025}. Nilai dari parameter QMI dihitung menggunakan persamaan \ref{eq:qmi}.
+\textit{Quantum Mutual Information} (QMI) merupakan parameter utama yang digunakan untuk mengukur total korelasi di dalam interaksi aset finansial \cite{nielsen_quantum_2010}. Dalam analisis portofolio, nilai QMI yang tinggi menandakan adanya hubungan informasi yang signifikan, sementara nilai nol menunjukkan bahwa kedua aset tersebut bergerak secara independen. Nilai dari parameter QMI dihitung menggunakan persamaan \ref{eq:qmi}.
 \begin{equation}
 I(i:j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}^{(mixed)})
 \label{eq:qmi}
 \end{equation}
-
-Penentuan arah interaksi memerlukan ekstraksi nilai \textit{Pearson Correlation} ($\rho_{ij}^{Pearson}$) dari deret waktu pengembalian historis (\textit{Returns}) $r_i$ dan $r_j$ guna melengkapi sifat positif-definit dari QMI \cite{mantegna_introduction_2000}. Koefisien korelasi dihitung sebagai rasio kovarians terhadap perkalian standar deviasi dari masing-masing pengembalian aset, yang memberikan tanda operasional bagi parameter interaksi. Dengan menerapkan fungsi \textit{Signum} terhadap hasil ini, interaksi diklasifikasikan sebagai \textit{Ferromagnetic} atau \textit{Antiferromagnetic} di dalam lanskap energi portofolio guna membedakan strategi \textit{Co-movement} dan \textit{Hedging}. Persamaan (\ref{eq:pearson_correlation}) merangkum formulasi statistik yang digunakan untuk menentukan orientasi interaksi fungsional antar instrumen.
+Jika persamaan (\ref{eq:marginal_entropy_calc_i}) dan (\ref{eq:marginal_entropy_calc_j}) digabungakan terlebih dahulu, maka akan didapatkan penurunan rumus pada persaamaan (\ref{eq:qmi_ij}).
 \begin{equation}
-\rho_{ij}^{Pearson} = \frac{\sum_{t=1}^{T}(r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j)}{\sqrt{\sum_t(r_{i,t}-\bar{r}_i)^2 \cdot \sum_t(r_{j,t}-\bar{r}_j)^2}}
+\begin{aligned}[b]
+S(p_i) + S(p_j) =& -\left( \sum_{a \in \{0, 1\}} P(a) \ln P(a) + \sum_{b \in \{0, 1\}} P(b) \ln P(b) \right) \\
+=& -\biggl( \sum_{a \in \{0, 1\}} \left( \sum_{b' \in \{0, 1\}} P(a, b') \ln \sum_{b' \in \{0, 1\}} P(a, b') \right) \\ &+ \sum_{b \in \{0, 1\}} \left( \sum_{a' \in \{0, 1\}} P(a', b) \ln \sum_{a' \in \{0, 1\}} P(a', b) \right) \biggr) \\
+=& -\left( \sum_{a, b} P(a, b) \left( \ln \sum_{b'} P(a, b') + \ln \sum_{a'} P(a', b) \right) \right) \\
+=& -\sum_{a, b} P(a, b) \ln P(a) P(b)
+\end{aligned}
+\label{eq:qmi_ij}
+\end{equation}
+Dan jika semua persamaan disubstitusikan, maka nilai QMI dapat dihitung dengan persamaan (\ref{eq:qmi_final}).
+\begin{equation}
+\begin{aligned}[b]
+I(i:j)  =& -\sum_{a, b} P(a, b) \ln P(a) P(b) + \sum_{a \in \{0, 1\}} \sum_{b \in \{0, 1\}} P(a, b) \ln P(a, b) \\
+=& \sum_{a,b} P(a,b)\ln P(a,b) - \sum_{a,b} P(a,b)\ln\big(P(a)P(b)\big) \\
+=& \sum_{a,b} \left[ P(a,b)\ln P(a,b) - P(a,b)\ln\big(P(a)P(b)\big) \right] \\
+=& \sum_{a,b} P(a,b)\left[\ln P(a,b) - \ln\big(P(a)P(b)\big)\right] \\
+=& \sum_{a, b} P(a, b) \ln \frac{P(a, b)}{P(a) P(b)}
+\end{aligned}
+\label{eq:qmi_final}
+\end{equation}
+Di mana $P(a,b)$ adalah probabilitas gabungan dari aset $i$ dan $j$, $P(a)$ adalah probabilitas marginal dari aset $i$, dan $P(b)$ adalah probabilitas marginal dari aset $j$.
+
+Karena nilai QMI yang selalu positif, maka perlu adanya penentuan arah interaksi yang didapat dari ekstraksi nilai \textit{Pearson Correlation} ($\rho_{ij}^{Pearson}$) dari data historis \textit{time-series} yang sama. Koefisien korelasi tersebut dihitung sebagai rasio kovarians terhadap perkalian standar deviasi dari masing-masing pengembalian aset. Interaksi diklasifikasikan sebagai \textit{Ferromagnetic} atau \textit{Antiferromagnetic} di dalam lanskap energi portofolio dengan menerapkan fungsi \textit{Signum} terhadap hasil. Persamaan (\ref{eq:pearson_correlation}) merupakan formulasi statistik yang digunakan untuk menentukan orientasi interaksi fungsional antar instrumen dalam korelasi pearson.
+\begin{equation}
+\begin{aligned}[b]
+\rho_{ij}^{Pearson} =& \frac{\text{Cov}(r_i, r_j)}{\sqrt{\text{Var}(r_i) \cdot \text{Var}(r_j)}} \\
+=& \frac{\frac{1}{T}\sum_{t=1}^{T}(r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j)}{\sqrt{\frac{1}{T}\sum_t(r_{i,t}-\bar{r}_i)^2 \cdot \frac{1}{T}\sum_t(r_{j,t}-\bar{r}_j)^2}} \\
+=& \frac{\sum_{t=1}^{T}(r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j)}{\sqrt{\sum_t(r_{i,t}-\bar{r}_i)^2 \cdot \sum_t(r_{j,t}-\bar{r}_j)^2}}
 \label{eq:pearson_correlation}
+\end{aligned}
 \end{equation}
 
-Magnitudo absolut dari kopling diperhalus melalui koefisien penskalaan $\kappa$ yang berfungsi sebagai faktor kalibrasi antara satuan informasi (\textit{nats}) dengan dimensi energi risiko \cite{menezes_ex_2025}. Nilai $\kappa$ ini diderivasi dari konsep 'Suhu Pasar' (\textit{Market Temperature}) $T$ yang sebanding dengan volatilitas rata-rata historis $\sigma_{avg}$ melalui relasi $\kappa \approx \sqrt{2} k_B T$. Kalibrasi $\kappa$ yang tepat sangat vital untuk menjamin bahwa energi interaksi seimbang terhadap penalti batasan dalam Hamiltonian guna mencegah distorsi selama proses optimasi berlangsung. Sebagai penutup logis, integrasi $\kappa$ dan fungsi tanda ke dalam parameter interaksi final $J_{ij}$ melengkapi pemetaan dependensi pasar ke dalam lanskap kuantum yang siap dioperasikan \cite{reifenstein_coherent_2021}.
+Magnitudo absolut dari kopling diperhalus melalui koefisien penskalaan $\alpha$ yang berfungsi sebagai faktor kalibrasi antara satuan informasi (\textit{nats}) dengan dimensi energi risiko \cite{menezes_ex_2025}. Konsep ini dimulai dari distribusi Boltzmann
 \begin{equation}
-J_{ij} = \kappa \cdot \text{sgn}(\rho_{ij}^{Pearson}) \sqrt{I(i:j)} 
+P(s)=\frac{1}{Z}\exp(-\beta s)
+\label{eq:boltzmann_distribution}
+\end{equation}
+dengan $\beta = \frac{1}{k_B T}$. Jika didefinisikan parameter skala energi $\alpha = \frac{1}{\beta}$ maka diperoleh $\alpha = k_B T$. Dengan demikian distribusi Boltzmann dapat dituliskan ulang sebagai
+
+\begin{equation}
+P(s)=\frac{1}{Z}\exp(-s/\alpha)
+\label{eq:boltzmann_distribution_alpha}
+\end{equation}
+Dalam pendekatan \textit{econophysics}, sistem pasar diasumsikan berada pada keadaan kesetimbangan statistik sehingga distribusi energi mengikuti bentuk Boltzmann
+
+\begin{equation}
+P(E) \propto \exp(-E/\alpha)
+\label{eq:market_energy_distribution}
+\end{equation}
+Pada kerangka portofolio berbasis \textit{mean--variance}, energi efektif sistem dapat diasosiasikan dengan fungsi kuadrat return
+
+\begin{equation}
+E \sim \frac{R^2}{2}
+\end{equation}
+Bentuk kuadrat ini analog dengan energi kinetik dalam mekanika klasik
+
+\begin{equation}
+E = \frac{p^2}{2m}
+\end{equation}
+Dengan mensubstitusikan relasi energi tersebut ke dalam distribusi Boltzmann diperoleh distribusi return
+
+\begin{equation}
+P(R) \propto e^{-R^2/(2\alpha)}
+\label{eq:market_energy_distribution_alpha}
+\end{equation}
+yang merupakan bentuk distribusi Gaussian
+
+\begin{equation}
+P(R) = \frac{1}{\sqrt{2\pi\alpha}}e^{-R^2/(2\alpha)}
+\label{eq:gaussian_distribution}
+\end{equation}
+Dari sifat distribusi Gaussian diketahui bahwa varians return diberikan oleh
+
+\begin{equation}
+\begin{aligned}
+\text{Var}(R) &= \alpha \\
+\sigma_{avg}^2 &= \alpha
+\end{aligned}
+\label{eq:variance_alpha}
+\end{equation}
+Karena $\alpha = k_B T$, maka diperoleh hubungan
+
+\begin{equation}
+\sigma_{avg}^2 = k_B T
+\end{equation}
+sehingga temperatur pasar efektif berbanding lurus dengan kuadrat volatilitas rata-rata
+
+\begin{equation}
+T \propto \sigma_{avg}^2
+\end{equation}
+Hubungan ini menunjukkan bahwa volatilitas pasar dapat diinterpretasikan sebagai temperatur dalam kerangka fisika statistik \cite{reifenstein_coherent_2021}. 
+
+Secara matematis, QMI ekuivalen dengan divergensi Kullback--Leibler antara distribusi bersama dan distribusi independen dari dua variabel. Dalam kerangka statistik informasi hubungan ini dapat ditulis sebagai
+
+\begin{equation}
+I(i:j)=D_{KL}\big(P(i,j),|,P(i)P(j)\big)
+\end{equation}
+Dalam rezim interaksi lemah pada model Ising $(J_{ij}\ll1)$, distribusi sistem dapat dipandang sebagai perturbasi dari distribusi independen. Ekspansi orde kedua dari deret Taylor terhadap fungsi logaritma divergensi Kullback--Leibler terhadap parameter kopling menghasilkan hubungan aproksimasi
+
+\begin{equation}
+\begin{aligned}[b]
+    I(i:j) &\approx I(0) + \frac{\partial I}{\partial J_{ij}} \bigg|_{J_{ij}=0} J_{ij} + \frac{1}{2!} \frac{\partial^2 I}{\partial J_{ij}^2} \bigg|_{J_{ij}=0} J_{ij}^2 + \frac{1}{3!} \frac{\partial^3 I}{\partial J_{ij}^3} \bigg|_{J_{ij}=0} J_{ij}^3 \\
+    I(i:j) &\approx 0 + 0 + \frac{J_{ij}^2}{2} + 0 + \mathcal{O}(J_{ij}^4) \\
+    I(i:j) &\approx \frac{J_{ij}^2}{2}
+\label{eq:mutual_information_aproximation}
+\end{aligned}
+\end{equation}
+
+Hasil ini menunjukkan bahwa mutual information berbanding kuadrat dengan amplitudo interaksi yang menghasilkan korelasi antar variabel.
+
+Untuk menentukan hubungan antara ukuran dependensi informasi dan kekuatan interaksi pada Hamiltonian Ising, digunakan pendekatan ekspansi pada interaksi lemah. Distribusi probabilitas sistem Ising dapat ditulis sebagai
+
+\begin{equation}
+P(\mathbf{s})=\frac{1}{Z}\exp\left(\sum_i h_i s_i + \sum_{i<j} J_{ij}s_is_j \right)
+\end{equation}
+dari penurunan rumus yang didapat pada persamaan (\ref{eq:mutual_information_aproximation}), nilai kopling dapat diperoleh dengan mengambil akar kuadrat dari mutual information
+
+\begin{equation}
+|J_{ij}| \propto \sqrt{I(i:j)}
+\end{equation}
+Sehingga dengan mengimplementasikan fungsi signum dari korelasi Pearson yang telah dijabarkan pada persamaan (\ref{eq:pearson_correlation}), parameter kopling interaksi antar aset dapat dinyatakan sebagai
+
+\begin{equation}
+J_{ij} = \alpha \cdot \text{sgn}(\rho_{ij}^{Pearson}) \sqrt{I(i:j)}
 \label{eq:j_ij_final}
 \end{equation}
+Persamaan ini memetakan kekuatan dependensi informasi antar aset, yang diukur melalui \textit{quantum mutual information}, ke dalam parameter interaksi pada Hamiltonian Ising yang telah terbentuk.

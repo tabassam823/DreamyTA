@@ -1,41 +1,34 @@
-Kita menggunakan rasio _Risk-Adjusted Return_ (mirip _Sharpe Ratio_ tanpa _risk-free rate_) yaitu $Z = \frac{\mu_{avg}}{\sigma_{avg}}$, lalu memasukkannya ke fungsi Sigmoid:
+Untuk menurunkan ekspansi orde ke-1 hingga ke-3 dari divergensi Kullback--Leibler ($D_{KL}$) terhadap parameter kopling $J_{ij}$, kita dapat meninjau sistem Ising pada rezim interaksi lemah.
 
-$$\lambda = \frac{1}{1 + e^{Z}} = \frac{1}{1 + \exp\left(\frac{\mu_{avg}}{\sigma_{avg}}\right)}$$
+Secara konseptual, $D_{KL}$ atau _Mutual Information_ mengukur seberapa jauh distribusi probabilitas gabungan $P(s_i, s_j)$ menyimpang dari distribusi produk independen $P(s_i)P(s_j)$ akibat adanya parameter interaksi $J_{ij}$.
 
-**Bagaimana ini menyelesaikan masalah?**
+### Penurunan Ekspansi Taylor
 
-1. **Pasar Positif ($\mu > 0$):** Misal $\mu = 0.10, \sigma = 0.05 \rightarrow Z = 2$.
-    
-    $\lambda = \frac{1}{1 + e^2} \approx \frac{1}{1 + 7.38} \approx 0.12$.
-    
-    _(Investor menjadi agresif / risk-seeking karena pasar sedang menguntungkan)._
-    
-2. **Pasar Negatif ($\mu < 0$):** Misal $\mu = -0.10, \sigma = 0.05 \rightarrow Z = -2$.
-    
-    $\lambda = \frac{1}{1 + e^{-2}} \approx \frac{1}{1 + 0.135} \approx 0.88$.
-    
-    _(Investor menjadi sangat defensif / risk-averse karena pasar sedang rugi, namun nilai tetap di bawah 1)._
-    
-3. **Pasar Stagnan ($\mu = 0$):** $\lambda = \frac{1}{1 + 1} = 0.50$.
-    
-    _(Kondisi netral seimbang sempurna)._
-    
+Jika kita mengasumsikan energi interaksi kecil, kita dapat melakukan ekspansi Taylor pada fungsi $D_{KL}(J_{ij})$ di sekitar $J_{ij} = 0$:
 
-### Solusi 2: Metode _Clipping_ (Asumsi Penghindaran Risiko Absolut)
+$$I(i:j) \approx I(0) + \frac{\partial I}{\partial J_{ij}} \bigg|_{J_{ij}=0} J_{ij} + \frac{1}{2!} \frac{\partial^2 I}{\partial J_{ij}^2} \bigg|_{J_{ij}=0} J_{ij}^2 + \frac{1}{3!} \frac{\partial^3 I}{\partial J_{ij}^3} \bigg|_{J_{ij}=0} J_{ij}^3$$
 
-Jika Anda ingin model yang lebih sederhana dan mencerminkan "Kepanikan Pasar" (_Market Panic_), kita bisa menggunakan fungsi `Max` untuk mencegah pembagi menjadi lebih kecil dari $\sigma$.
+Berikut adalah karakteristik dari masing-masing orde:
 
-$$\lambda = \frac{\sigma_{avg}}{\max(0, \mu_{avg}) + \sigma_{avg}}$$
-
-**Bagaimana ini bekerja?**
-
-- Jika rata-rata return positif ($\mu > 0$), rumusnya beroperasi normal seperti ide awal kita: $\frac{\sigma}{\mu + \sigma}$. (Misal $\mu=0.05, \sigma=0.15 \rightarrow \lambda = 0.75$).
+- **Orde Ke-0 ($I(0)$):** Bernilai **0**. Ketika tidak ada interaksi ($J_{ij}=0$), variabel bersifat independen, sehingga tidak ada informasi yang dibagikan.
     
-- Jika rata-rata return negatif ($\mu < 0$), fungsi $\max(0, \mu)$ akan mengubah nilai $\mu$ menjadi $0$. Rumusnya menjadi $\frac{\sigma}{0 + \sigma} = 1$.
+- **Orde Ke-1 (Linear):** Bernilai **0**. Dalam sistem setimbang (stasioner), turunan pertama terhadap parameter interaksi pada titik nol biasanya hilang karena sifat simetri atau kondisi ekstremum dari fungsi energi bebas.
     
-- **Implikasi Fisis:** Ini berarti ketika ekspektasi keuntungan pasar bernilai negatif, algoritma mengasumsikan investor beralih ke mode **"Risk Aversion Maksimal" ($\lambda = 1$)**. Dalam matriks payoff, utilitas hanya akan dikalkulasi murni berdasarkan minimasi risiko ($U = -\sigma$), karena tidak ada harapan keuntungan yang bisa diharapkan dari pasar yang sedang anjlok.
+- **Orde Ke-2 (Kuadratik):** Memberikan kontribusi dominan:
+    
+    $$\frac{J_{ij}^2}{2}$$
+    
+    Suku inilah yang digunakan dalam naskah Anda untuk menunjukkan bahwa $I(i:j) \propto J_{ij}^2$.
+    
+- **Orde Ke-3 (Kubik):** Pada banyak model Ising simetris, suku orde ganjil akan bernilai **0** karena sifat paritas dari distribusi probabilitas. Namun, jika terdapat medan eksternal ($h_i$) yang sangat kuat atau asimetri yang signifikan, suku ini mungkin muncul sebagai koreksi kecil, namun biasanya diabaikan dalam pendekatan interaksi lemah ($weak-interaction$) karena nilainya yang jauh lebih kecil ($\ll J_{ij}^2$).
     
 
-**Saran Penerapan:**
+### Ringkasan Bentuk Ekspansi
 
-Untuk tesis atau paper penelitian yang melibatkan komputasi kuantum dan _Game Theory_, **Solusi 1 (Fungsi Sigmoid)** akan terlihat jauh lebih kuat secara analitis. Ia memberikan gradasi _risk aversion_ yang mulus dan menangkap psikologi _loss aversion_ dengan formulasi fisika statistik yang solid.
+Maka, bentuk ekspansi hingga orde ke-3 dapat diringkas sebagai berikut:
+
+$$I(i:j) \approx 0 + 0 + \frac{J_{ij}^2}{2} + 0 + \mathcal{O}(J_{ij}^4)$$
+
+Inilah alasan mengapa secara matematis Anda dapat langsung mengambil aproksimasi $|J_{ij}| [cite_start]\propto \sqrt{I(i:j)}$. Pengambilan akar kuadrat ini secara efektif "membalikkan" ekspansi orde kedua tersebut untuk mendapatkan kembali magnitudo kekuatan interaksinya.
+
+Apakah Anda ingin saya membantu menuliskan pembuktian matematis yang lebih formal untuk menunjukkan mengapa orde ke-1 dan ke-3 bernilai nol dalam konteks mekanika statistik?

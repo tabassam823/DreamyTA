@@ -1,0 +1,33 @@
+\section{Dinamika Portofolio dan Parameter Risk Aversion}
+
+\subsection{Varians Portofolio}
+Risiko portofolio didefinisikan sebagai varians dari imbal hasil portofolio $\sigma_p^2$. Untuk portofolio dengan $N$ aset, variansnya adalah:
+\begin{equation}
+\sigma_p^2 = \text{Var}\left(\sum_{i=1}^N \omega_i r_i\right)
+\end{equation}
+Menggunakan sifat linearitas varians dan kovarians:
+\begin{equation}
+\begin{aligned}
+\sigma_p^2 &= \sum_{i=1}^N \sum_{j=1}^N \text{Cov}(\omega_i r_i, \omega_j r_j) \\
+&= \sum_{i=1}^N \sum_{j=1}^N \omega_i \omega_j \sigma_{ij}
+\end{aligned}
+\end{equation}
+Suku ini dapat dipisahkan menjadi varians individu ($i=j$) dan kovarians antar aset ($i \neq j$):
+\begin{equation}
+\sigma_p^2 = \sum_{i=1}^N \omega_i^2 \sigma_i^2 + \sum_{i=1}^N \sum_{j \neq i}^N \omega_i \omega_j \sigma_{ij}
+\end{equation}
+di mana varians individu aset $i$ dihitung dari data historis:
+\begin{equation}
+\sigma_i^2 = \frac{1}{T-1} \sum_{t=1}^T (r_{i,t} - \bar{r}_i)^2
+\end{equation}
+
+\subsection{Parameter Risk Aversion Endogen}
+Penggunaan fungsi sigmoid untuk parameter $\lambda$ bertujuan memetakan rasio \textit{return-to-risk} ke dalam rentang $[0, 1]$. Fungsi sigmoid didefinisikan sebagai:
+\begin{equation}
+S(x) = \frac{1}{1 + e^{-x}}
+\end{equation}
+Dengan mensubstitusikan rasio performa pasar $x = \mu/\sigma$, diperoleh parameter $\lambda$ endogen:
+\begin{equation}
+\lambda(\mu, \sigma) = \frac{1}{1 + e^{-(\mu/\sigma)}}
+\end{equation}
+Nilai ini bertindak sebagai bobot penyeimbang antara maksimalisasi imbal hasil ($\lambda \to 1$) dan minimisasi risiko ($\lambda \to 0$).

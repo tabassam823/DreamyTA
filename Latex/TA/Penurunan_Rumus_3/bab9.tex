@@ -1,0 +1,81 @@
+\section{Variational Quantum Eigensolver (VQE)}
+
+\subsection{Prinsip Variasi dan Persamaan Schrodinger}
+Algoritma VQE didasarkan pada Teorema Rayleigh-Ritz yang menyatakan bahwa nilai ekspektasi energi $E[\psi]$ dari sembarang fungsi gelombang percobaan $|\psi\rangle$ selalu merupakan batas atas bagi energi keadaan dasar $E_0$:
+\begin{equation}
+E[\psi] = \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle} \ge E_0
+\label{eq:energy_functional_vqe}
+\end{equation}
+Untuk mencari nilai minimum dengan batasan normalisasi $\langle \psi | \psi \rangle = 1$, disusun fungsi Lagrangian:
+\begin{equation}
+\mathcal{L}(|\psi\rangle, \lambda) = \langle \psi | \hat{H} | \psi \rangle - \lambda (\langle \psi | \psi \rangle - 1)
+\end{equation}
+Melalui variasi stasioner $\delta \mathcal{L} = 0$ terhadap $\langle \psi |$:
+\begin{equation}
+\frac{\delta \mathcal{L}}{\delta \langle \psi |} = \hat{H} |\psi\rangle - \lambda |\psi\rangle = 0 \implies \hat{H} |\psi\rangle = E |\psi\rangle
+\end{equation}
+Pembuktian ketidaksamaan (\ref{eq:energy_functional_vqe}) dilakukan dengan mengekspansi $|\psi\rangle$ ke dalam basis eigen Hamiltonian $\{|n\rangle\}$ yang ortonormal:
+\begin{equation}
+|\psi\rangle = \sum_n c_n |n\rangle \implies \langle \psi | \hat{H} | \psi \rangle = \sum_n |c_n|^2 E_n
+\end{equation}
+Karena energi terurut $E_0 \le E_1 \le E_2 \dots$, maka:
+\begin{equation}
+\sum_n |c_n|^2 E_n \ge E_0 \sum_n |c_n|^2 = E_0
+\end{equation}
+
+\subsection{Optimasi Stokastik SPSA}
+Pembaruan parameter $\theta$ dilakukan secara iteratif menggunakan algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA):
+\begin{equation}
+\theta_{k+1} = \theta_k - a_k \hat{g}_k(\theta_k)
+\end{equation}
+Estimasi gradien $\hat{g}_k$ diperoleh dari dua pengukuran fungsi biaya dengan perturbasi $\Delta_k$:
+\begin{equation}
+y_k^{(+)} = y(\theta_k + c_k \Delta_k), \quad y_k^{(-)} = y(\theta_k - c_k \Delta_k)
+\end{equation}
+Ekspansi Taylor di sekitar $\theta_k$ menunjukkan:
+\begin{equation}
+y_k^{(\pm)} = y(\theta_k) \pm c_k \Delta_k^T \nabla y(\theta_k) + \frac{1}{2} c_k^2 \Delta_k^T \nabla^2 y(\theta_k) \Delta_k \pm O(c_k^3)
+\end{equation}
+Selisih evaluasi tersebut membatalkan suku orde genap:
+\begin{equation}
+y_k^{(+)} - y_k^{(-)} = 2 c_k \Delta_k^T \nabla y(\theta_k) + O(c_k^3)
+\end{equation}
+Sehingga komponen gradien ke-$i$ dihitung sebagai:
+\begin{equation}
+\hat{g}_{ki}(\theta_k) = \frac{y_k^{(+)} - y_k^{(-)}}{2 c_k \Delta_{ki}}
+\end{equation}
+Laju pembelajaran $a_k$ dan ukuran perturbasi $c_k$ meluruh sesuai iterasi:
+\begin{equation}
+a_k = \frac{a}{(k+1+A)^\alpha}, \quad c_k = \frac{c}{(k+1)^\gamma}
+\end{equation}
+Parameter kalibrasi standar yang digunakan untuk menjamin konvergensi yang stabil pada perangkat keras NISQ dirangkum dalam tabel berikut:
+\begin{center}
+\begin{tabular}{|c|l|c|}
+\hline
+\textbf{Parameter} & \textbf{Deskripsi} & \textbf{Nilai Standar} \\ \hline
+$a$ & Skala \textit{learning rate} awal & 0,628 \\ \hline
+$c$ & Skala perturbasi awal & 0,1 \\ \hline
+$A$ & Konstanta stabilitas $a_k$ & $0,1 \times N_{iter}$ \\ \hline
+$\alpha$ & Eksponen peluruhan \textit{learning rate} & 0,602 \\ \hline
+$\gamma$ & Eksponen peluruhan perturbasi & 0,101 \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Arsitektur Ansatz EfficientSU2}
+\textit{Ansatz} ini memetakan variabel portofolio ke dalam sirkuit parameterisasi dengan kedalaman $d$. Komponen rotasi lokal satu qubit merepresentasikan elemen grup uniter spesial $SU(2)$:
+\begin{equation}
+\text{Rot}_{SU(2)}(\theta) = R_z(\theta_2) \cdot R_y(\theta_1)
+\end{equation}
+Definisi matriks dari operator rotasi uniter tersebut adalah:
+\begin{equation}
+R_y(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{pmatrix}, \quad R_z(\phi) = \begin{pmatrix} e^{-i\phi/2} & 0 \\ 0 & e^{i\phi/2} \end{pmatrix}
+\end{equation}
+Interaksi antar aset dibangun melalui lapisan keterbelitan linear menggunakan gerbang \textit{Controlled-NOT} (CX) dengan representasi matriks:
+\begin{equation}
+CX = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+\end{equation}
+Formulasi eksplisit fungsi gelombang percobaan $|\psi(\theta) \rangle$ yang dihasilkan melalui $d$ jumlah repetisi blok sirkuit adalah:
+\begin{equation}
+|\psi(\theta) \rangle = \left[ \bigotimes_{j=0}^{n-1} \text{Rot}_{SU(2)}(\theta_{d,j}) \right] \prod_{i=0}^{d-1} \left[ W_{CX} \bigotimes_{j=0}^{n-1} \text{Rot}_{SU(2)}(\theta_{i,j}) \right] |0 \rangle^{\otimes n}
+\end{equation}
+di mana $W_{CX}$ merupakan operator keterbelitan linear yang menghubungkan qubit bertetangga untuk membangun korelasi non-lokal antar variabel portofolio.

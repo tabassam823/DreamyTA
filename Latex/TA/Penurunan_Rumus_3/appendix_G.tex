@@ -1,0 +1,17 @@
+\section{Derivasi Taylor QMI Orde Kedua}
+Untuk model Ising $P(s) = \frac{1}{Z} e^{-H}$, di mana $H = -\sum J_{ij} s_i s_j$.
+Ekspansi Taylor QMI terhadap parameter kopling $J_{ij}$ di sekitar $J_{ij}=0$:
+\begin{equation}
+I(J) = I(0) + I'(0) J + \frac{1}{2} I''(0) J^2 + \dots
+\end{equation}
+Pada interaksi nol ($J=0$), variabel bersifat independen sehingga $I(0) = 0$.
+Suku pertama $I'(0)$ bernilai nol karena simetri sistem Ising.
+Suku kedua dihitung melalui derivatif KL-Divergence:
+\begin{equation}
+\frac{\partial^2 I}{\partial J_{ij}^2} = 1
+\end{equation}
+Sehingga diperoleh hubungan aproksimasi:
+\begin{equation}
+I(i:j) \approx \frac{1}{2} J_{ij}^2 \implies |J_{ij}| \approx \sqrt{2 I(i:j)}
+\end{equation}
+Dalam praktik ekonofisika, faktor 2 sering diserap ke dalam parameter kalibrasi $\alpha$.

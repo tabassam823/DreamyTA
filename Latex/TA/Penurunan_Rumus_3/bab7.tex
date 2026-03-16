@@ -1,0 +1,28 @@
+\section{Penurunan Rumus Quantum Mutual Information}
+
+\subsection{Penggabungan Entropi Marginal}
+Entropi marginal gabungan dapat dinyatakan kembali dalam probabilitas gabungan:
+\begin{equation}
+\begin{aligned}
+S(\rho_i) + S(\rho_j) &= -\left( \sum_{a} P(a) \ln P(a) + \sum_{b} P(b) \ln P(b) \right) \\
+&= -\biggl( \sum_{a} \left( \sum_{b'} P(a, b') \ln \sum_{b'} P(a, b') \right) \\ &\quad + \sum_{b} \left( \sum_{a'} P(a', b) \ln \sum_{a'} P(a', b) \right) \biggr) \\
+&= -\sum_{a, b} P(a, b) \left( \ln P(a) + \ln P(b) \right) \\
+&= -\sum_{a, b} P(a, b) \ln \left( P(a) P(b) \right)
+\end{aligned}
+\end{equation}
+
+\subsection{Bentuk Akhir QMI}
+Substitusi entropi marginal dan entropi gabungan ke dalam definisi QMI:
+\begin{equation}
+\begin{aligned}
+I(i:j) &= S(\rho_i) + S(\rho_j) - S(\rho_{ij}) \\
+&= -\sum_{a, b} P(a, b) \ln \left( P(a) P(b) \right) - \left( -\sum_{a, b} P(a, b) \ln P(a, b) \right) \\
+&= \sum_{a, b} P(a, b) \ln P(a, b) - \sum_{a, b} P(a, b) \ln \left( P(a) P(b) \right) \\
+&= \sum_{a, b} P(a, b) \left[ \ln P(a, b) - \ln \left( P(a) P(b) \right) \right]
+\end{aligned}
+\end{equation}
+Menggunakan sifat logaritma:
+\begin{equation}
+I(i:j) = \sum_{a, b} P(a, b) \ln \frac{P(a, b)}{P(a) P(b)}
+\end{equation}
+Bentuk ini secara formal setara dengan divergensi Kullback-Leibler $D_{KL}(P(a,b) || P(a)P(b))$, yang mengukur deviasi korelasi sistem dari keadaan independen.

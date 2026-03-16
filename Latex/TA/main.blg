@@ -1,48 +1,78 @@
 This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-I found no \citation commands---while reading file main.aux
-I found no \bibdata command---while reading file main.aux
-I found no \bibstyle command---while reading file main.aux
-You've used 0 entries,
-            0 wiz_defined-function locations,
-            83 strings with 482 characters,
-and the built_in function-call counts, 0 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 0
-:= -- 0
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+A level-1 auxiliary file: Contents/BagianDepan/Cover_Dalam.aux
+A level-1 auxiliary file: Contents/BagianDepan/Lembar_Pengesahan.aux
+A level-1 auxiliary file: Contents/Abstrak/Abstrak.aux
+A level-1 auxiliary file: Contents/Abstrak/Abstract.aux
+A level-1 auxiliary file: Contents/BagianDepan/Kata_Pengantar.aux
+A level-1 auxiliary file: Contents/Pendahuluan/Bab-1.aux
+A level-1 auxiliary file: Contents/Daster/Bab-2.aux
+A level-1 auxiliary file: Contents/Metodologi/Bab-3.aux
+The style file: apacite.bst
+A level-1 auxiliary file: Contents/BagianBelakang/Biodata_Penulis.aux
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: Filtered_Paper.bib
+Warning--I'm ignoring gong_quantum_2025's extra "annote" field
+--line 219 of file Filtered_Paper.bib
+Warning--I'm ignoring hidalgo_quantum_2006's extra "annote" field
+--line 234 of file Filtered_Paper.bib
+Warning--I didn't find a database entry for "cerezo_variational_2021"
+apacite.bst [2013/07/21 v6.03 APA bibliography style]
+Warning--No journal in hidalgo_quantum_2006
+ptr=1, stack=
+
+---the literal stack isn't empty for entry hidalgo_quantum_2006
+while executing---line 5079 of file apacite.bst
+Warning--No journal in padilla_quantum_2025
+Warning--No journal in spall_implementation_1998
+You've used 23 entries,
+            6951 wiz_defined-function locations,
+            1450 strings with 17053 characters,
+and the built_in function-call counts, 46920 in all, are:
+= -- 5514
+> -- 375
+< -- 2459
++ -- 2449
+- -- 50
+* -- 3320
+:= -- 9088
+add.period$ -- 93
+call.type$ -- 23
+change.case$ -- 427
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 0
-format.name$ -- 0
-if$ -- 0
+cite$ -- 49
+duplicate$ -- 1214
+empty$ -- 1855
+format.name$ -- 645
+if$ -- 8558
 int.to.chr$ -- 0
-int.to.str$ -- 0
+int.to.str$ -- 69
 missing$ -- 0
-newline$ -- 0
-num.names$ -- 0
-pop$ -- 0
-preamble$ -- 0
-purify$ -- 0
+newline$ -- 647
+num.names$ -- 184
+pop$ -- 731
+preamble$ -- 1
+purify$ -- 128
 quote$ -- 0
-skip$ -- 0
+skip$ -- 2746
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 2604
+swap$ -- 722
+text.length$ -- 84
 text.prefix$ -- 0
-top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 0
+top$ -- 1
+type$ -- 1840
+warning$ -- 3
+while$ -- 250
 width$ -- 0
-write$ -- 0
-(There were 3 error messages)
+write$ -- 791
+(There was 1 error message)

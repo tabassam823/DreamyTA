@@ -1,0 +1,69 @@
+\section{Contoh Perhitungan: AAPL dan TSLA}
+
+\subsection{Parameter Pasar dan Statistik Historis}
+Sebagai contoh kasus, kita menggunakan data historis 100 hari untuk dua aset teknologi besar, yaitu Apple Inc. (AAPL) dan Tesla Inc. (TSLA). Berdasarkan observasi, diperoleh statistik rata-rata imbal hasil ($\mu$) dan varians ($\sigma^2$) sebagai berikut:
+\begin{align}
+\mu_{AAPL} &= 0,0012, \quad \sigma_{AAPL}^2 = 0,0004 \\
+\mu_{TSLA} &= 0,0025, \quad \sigma_{TSLA}^2 = 0,0016 \\
+\sigma_{AAPL,TSLA} &= 0,0003 \quad (\rho = 0,375)
+\end{align}
+
+\subsection{Konstruksi Parameter Penalti}
+Tujuannya adalah memilih $K=1$ aset dari $N=2$ pilihan. Digunakan pengali Lagrange $A=0,1$. Dari derivasi sebelumnya, parameter penalti untuk Ising Hamiltonian adalah:
+\begin{enumerate}
+    \item \textbf{Kopling Penalti ($J_{12}^{pen}$):}
+    \begin{equation}
+    J_{12}^{pen} = \frac{A}{2} = \frac{0,1}{2} = 0,05
+    \end{equation}
+    \item \textbf{Medan Lokal Penalti ($h_i^{pen}$):}
+    Dengan variabel bantu $K' = \frac{N}{2} - K = \frac{2}{2} - 1 = 0$:
+    \begin{equation}
+    h_i^{pen} = -A K' = -0,1 \times 0 = 0
+    \end{equation}
+\end{enumerate}
+
+\subsection{Pencarian Bias Lokal melalui Game Theory}
+Dalam model ini, bias lokal murni Markowitz digantikan sepenuhnya oleh bias \textit{Game Theory} ($h_i^{GT}$) untuk menangkap dinamika utilitas strategis. Berdasarkan matriks imbalan $V_i$ dan probabilitas marginal strategi lawan, diperoleh:
+\begin{align}
+h_1^{GT} &= \frac{E[AAPL|+] - E[AAPL|-]}{2} = 0,00104 \\
+h_2^{GT} &= \frac{E[TSLA|+] - E[TSLA|-]}{2} = 0,00211
+\end{align}
+
+\subsection{Kopling Informasi melalui Quantum Mutual Information}
+Kopling kovarians murni digantikan oleh kopling informasional ($J_{12}^{QMI}$) yang diderivasi dari QMI ($I \approx 0,0420$ nats). Sesuai konvensi ekonofisika, digunakan konstanta Boltzmann $k_B = 1$ dengan temperatur pasar $T_{market} = \sigma_{avg}^2 = 0,0010$:
+\begin{enumerate}
+    \item \textbf{Parameter Skala Energi ($\alpha$):}
+    \begin{equation}
+    \alpha = k_B \cdot T_{market} = 1 \cdot 0,0010 = 0,0010
+    \end{equation}
+    \item \textbf{Kopling Informasional ($J_{12}^{QMI}$):}
+    \begin{equation}
+    \begin{aligned}
+    J_{12}^{QMI} &= \alpha \cdot \text{sgn}(\rho) \sqrt{I} \\
+    &= 0,0010 \cdot (+1) \cdot \sqrt{0,0420} \approx 0,000205
+    \end{aligned}
+    \end{equation}
+\end{enumerate}
+
+\subsection{Sintesis Hamiltonian Akhir}
+Hamiltonian total $\hat{H}_{final}$ disusun dengan mengoperasikan parameter strategi (GT dan QMI) bersama dengan parameter batasan (Penalti):
+
+\begin{enumerate}
+    \item \textbf{Parameter Kopling Total ($J_{12}^{total}$):}
+    \begin{equation}
+    J_{12}^{total} = J_{12}^{QMI} + J_{12}^{pen} = 0,000205 + 0,05 = 0,050205
+    \end{equation}
+    \item \textbf{Parameter Medan Lokal Total ($h_i^{total}$):}
+    \begin{align}
+    h_1^{total} &= h_1^{GT} + h_1^{pen} = 0,00104 + 0 = 0,00104 \\
+    h_2^{total} &= h_2^{GT} + h_2^{pen} = 0,00211 + 0 = 0,00211
+    \end{align}
+\end{enumerate}
+
+Sehingga, operator Hamiltonian lengkapnya adalah:
+\begin{equation}
+\hat{H}_{final} = 0,050205 \hat{Z}_1 \hat{Z}_2 + 0,00104 \hat{Z}_1 + 0,00211 \hat{Z}_2 + C \cdot \hat{I}
+\end{equation}
+
+\subsection{Analisis dan Interpretasi}
+Dengan konvensi $k_B=1$, kopling informasional ($J_{12}^{QMI}$) kini memberikan kontribusi koreksi sebesar 0,4\% terhadap penalti batasan. Meskipun penalti $K=1$ tetap mendominasi struktur energi untuk mencegah pemilihan aset ganda ($|11\rangle$), koreksi QMI memperkuat penghalang energi tersebut berdasarkan ketergantungan statistik riil antara AAPL dan TSLA. Nilai bias lokal $h_i^{total} > 0$ mengindikasikan bahwa secara strategis, sistem akan lebih stabil jika qubit berada pada status eigen $+1$ dari operator $\hat{Z}$ (yang berkorespondensi dengan status biner $0$ atau Down dalam transformasi affine $x = (1-\sigma)/2$). Hal ini menunjukkan bahwa dalam kondisi pasar ini, meskipun ada insentif untuk naik, batasan optimasi dan interaksi korelasi memaksa pemilihan aset yang paling konservatif.
