@@ -122,14 +122,19 @@ Dua solusi potensial patut dipertimbangkan sebagai ekstensi model. Pertama, peng
 
 ## 8. Verifikasi & Parameter: Dampak Payoff
 
-| Kondisi Payoff   | Makna Strategis | Nilai $h_i$ | Efek Fisik pada Qubit |
-| :-------------- | :-------------- | :---------- | :-------------------- |
-| $E[i+] > E[i-]$ | Strategis naik. | $h_i > 0$   | Tarikan ke *state* $|1\rangle$ (*Buy*). |
-| $E[i+] < E[i-]$ | Strategis turun.| $h_i < 0$   | Tolakan ke *state* $|0\rangle$ (*Avoid*).|
-| $E[i+] = E[i-]$ | Netral.         | $h_i = 0$   | Tidak ada tekanan lokal. |
+| Kondisi Payoff  | Makna Strategis  | Nilai $h_i$ | Efek Fisik pada Qubit    |                      |
+| :-------------- | :--------------- | :---------- | :----------------------- | -------------------- |
+| $E[i+] > E[i-]$ | Strategis naik.  | $h_i > 0$   | Tarikan ke *state* $     | 1\rangle$ (*Buy*).   |
+| $E[i+] < E[i-]$ | Strategis turun. | $h_i < 0$   | Tolakan ke *state* $     | 0\rangle$ (*Avoid*). |
+| $E[i+] = E[i-]$ | Netral.          | $h_i = 0$   | Tidak ada tekanan lokal. |                      |
 
 ---
 
+| Kondisi Payoff  | Makna Strategis  | Nilai $h_i$ | Efek Fisik pada Qubit    |                      |     |
+| :-------------- | :--------------- | :---------- | :----------------------- | -------------------- | --- |
+| $E[i+] > E[i-]$ | Strategis naik.  | $h_i > 0$   | Tarikan ke *state* $     | 1\rangle$ (*Buy*).   |     |
+| $E[i+] < E[i-]$ | Strategis turun. | $h_i < 0$   | Tolakan ke *state* $     | 0\rangle$ (*Avoid*). |     |
+| $E[i+] = E[i-]$ | Netral.          | $h_i = 0$   | Tidak ada tekanan lokal. |                      |     |
 ## 9. Kesimpulan Matematis
 - **Faktor Normalisasi (1/2):** Muncul karena variabel $s_i$ memiliki rentang 2 unit (dari $-1$ ke $+1$). Pembagian dengan 2 memastikan $h_i$ merepresentasikan *slope* energi per unit pergerakan *state*.
 - **Validitas Transformasi:** Ini adalah transformasi *affine* murni. Selama matriks *payoff* berisi bilangan real, $h_i$ dipastikan skalar real, menjamin operator *Hamiltonian* bersifat *Hermitian* (syarat mutlak mekanika kuantum).

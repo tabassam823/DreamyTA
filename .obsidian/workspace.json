@@ -4,151 +4,81 @@
     "type": "split",
     "children": [
       {
-        "id": "86067914ce5dde18",
+        "id": "b5ea69f464ab29c7",
         "type": "tabs",
         "children": [
           {
-            "id": "0885a494f37c5be2",
+            "id": "d3abce2b5db03939",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Hybrid_H/Pure_Markowitz_QUBO.md",
+                "file": "notes/GT_to_Ising/GT_to_Ising.1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Pure_Markowitz_QUBO"
+              "title": "GT_to_Ising.1"
             }
           },
           {
-            "id": "e438991ec4398ed2",
+            "id": "c62c7bea002ffcef",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/PakGagus_Presentasi4/jenis_ansatz.md",
+                "file": "notes/GT_to_Ising/new_GT_to_Ising.1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "jenis_ansatz"
+              "title": "new_GT_to_Ising.1"
             }
           },
           {
-            "id": "7a28ce74bf32d29c",
+            "id": "6efb49887764d90e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/PakHeru/Born_Rule.md",
+                "file": "notes/GT_to_Ising/New_Commented.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Born_Rule"
+              "title": "New_Commented"
             }
           },
           {
-            "id": "c763a820eeb32620",
+            "id": "8cee5a0b9e62a9fd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/MD_File/Lagrange_Multiplier.md",
+                "file": "notes/GT_to_Ising/new_GT_to_Ising.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Lagrange_Multiplier"
+              "title": "new_GT_to_Ising"
             }
           },
           {
-            "id": "4165b98916c017b0",
+            "id": "008ab33a61b32f6b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/MD_File/SPSA.md",
+                "file": "notes/GT_to_Ising/GT_to_Ising.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SPSA"
-            }
-          },
-          {
-            "id": "9fd71902eb89ed43",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "TwoLocal_to_EfficientSU2"
-            }
-          },
-          {
-            "id": "3054ad31b31294ef",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/MD_File/Density_operator_II_reduced_density_operator.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Density_operator_II_reduced_density_operator"
-            }
-          },
-          {
-            "id": "5422074f1ee07a40",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/MD_File/SPSA.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "SPSA"
-            }
-          },
-          {
-            "id": "3b61e6ecc2a0615c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/MD_File/Parameter_Shift_Rule.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Parameter_Shift_Rule"
-            }
-          },
-          {
-            "id": "0c3d2ecb85bef1d1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Traveling Salesman Problem.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Traveling Salesman Problem"
+              "title": "GT_to_Ising"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -180,7 +110,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "parameter_shif",
+                "query": "lucas",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -213,13 +143,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
+                "file": "notes/GT_to_Ising/new_GT_to_Ising.1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of TwoLocal_to_EfficientSU2"
+              "title": "Outline of new_GT_to_Ising.1"
             }
           }
         ]
@@ -345,28 +275,41 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "9fd71902eb89ed43",
+  "active": "c62c7bea002ffcef",
   "lastOpenFiles": [
-    "Latex/TA/MD_File/Lagrange_Multiplier.md",
-    "Latex/TA/MD_File/SPSA.md",
-    "Latex/TA/MD_File/Parameter_Shift_Rule.md",
+    "notes/GT_to_Ising/new_GT_to_Ising.1.1.md",
+    "notes/GT_to_Ising/new_GT_to_Ising.1.md",
+    "notes/GT_to_Ising/main.pdf",
+    "notes/GT_to_Ising/new_GT_to_Ising.2.md",
+    "notes/GT_to_Ising/GT_to_Ising.1.md",
+    "notes/GT_to_Ising/new_GT_to_Ising.md",
+    "notes/GT_to_Ising/New_Commented.md",
+    "notes/GT_to_Ising/GT_to_Ising.md",
     "Traveling Salesman Problem.md",
-    "Latex/TA/Contents/BagianDepan/Kata_Pengantar.aux",
-    "Latex/TA/main.blg",
-    "Latex/TA/main.synctex(busy)",
-    "Latex/TA/pdflatex54147.fls",
-    "Latex/TA/pdflatex54134.fls",
-    "Latex/TA/pdflatex54121.fls",
-    "Latex/TA/pdflatex54107.fls",
-    "Latex/TA/pdflatex54092.fls",
-    "Latex/TA/main.fdb_latexmk",
-    "Latex/TA/pdflatex54071.fls",
+    "Pasted image 20260319094244.png",
+    "Pasted image 20260319094159.png",
+    "notes/GT_to_Ising/notes/GT_to_Ising/GT_to_Ising.md",
+    "notes/GT_to_Ising/notes/GT_to_Ising",
+    "notes/GT_to_Ising/notes",
+    "Latex/TA/MD_File/GT_to_h.md",
+    "Latex/TA/Filtered_Paper/Lucas.md",
+    "notes/GT_to_Ising/GEMINI_GT_to_Ising.pdf",
+    "notes/GT_to_Ising/GT_to_Ising.pdf",
+    "Latex/PakGagus_Presentasi3/GT_to_Ising.pdf",
+    "Latex/PakGagus_Presentasi4/All_HG.1.ipynb",
+    "Latex/PakGagus_Presentasi4/All_HG.1.py",
+    "Latex/PakGagus_Presentasi5/All_HG_5/__init__.py",
+    "Latex/PakGagus_Presentasi5/All_HG_5/main.py",
+    "notes/GT_to_Ising.md",
+    "Latex/TA/MD_File/Parameter_Shift_Rule.md",
+    "Latex/TA/MD_File/SPSA.md",
+    "Latex/TA/MD_File/Density_operator_II_reduced_density_operator.md",
     "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
+    "Latex/TA/MD_File/Lagrange_Multiplier.md",
     "Latex/TA/Images/Chart.png",
     "Latex/TA/Images/Screenshot from 2026-03-15 13-29-37.png",
     "Latex/TA/Images/foto_3x4.jpg",
     "Latex/TA/Images/Foto_3x4.jpg",
-    "Latex/TA/MD_File/Density_operator_II_reduced_density_operator.md",
     "notes/Hybrid_H/Pure_Markowitz_QUBO.md",
     "Latex/TA/Images/bloch_sphere.png",
     "Latex/TA/Images/bloch_sphare.png",
@@ -380,19 +323,6 @@
     "Latex/KajianAwal/Bab2/dasar_teori.md",
     "Replication/Paper_Hardware_efficient.md",
     "Latex/PakGagus_Presentasi2/Hardware_efficient/Paper_Hardware_efficient.md",
-    "Latex/PakGagus_Presentasi2/Hardware_efficient/PRD_Replication.md",
-    "Latex/TA/Filtered_Paper/Lucas.md",
-    "Latex/TA/Images/Price_log.png",
-    "Latex/TA/Images/OHLC_fixed.png",
-    "Latex/PakHeru_Presentasi2/mermaid_graph.md",
-    "Latex/TA/Filtered_Paper/Menezes.md",
-    "Latex/TA/Filtered_Paper/Mitarai.md",
-    "Latex/TA/Filtered_Paper/Preskill.md",
-    "Latex/TA/Filtered_Paper/Yamamoto.md",
-    "Latex/TA/MD_File/GT_to_h.md",
-    "notes/PakHeru/Markowitz_QUBO.md",
-    "Latex/TA/MD_File/Von_Neumann_Entropy.md",
-    "Latex/TA/MD_File/Variational_Principle.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
