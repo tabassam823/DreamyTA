@@ -43,7 +43,7 @@ Tujuan dari sistem ini biasanya adalah menemukan konfigurasi $\mathbf{s} = \{s_1
 ## 4. Penggunaan dan Aplikasi Detail
 
 ### A. Optimasi Kombinatorial (QUBO)
-Banyak masalah sulit dalam matematika (seperti *[[Traveling Salesman Problem]]* atau *Graph Partitioning*) dapat dipetakan ke dalam Ising Hamiltonian. Model ini dikenal sebagai **QUBO** (*Quadratic Unconstrained Binary Optimization*) jika variabelnya diubah dari $s \in \{1, -1\}$ menjadi $x \in \{0, 1\}$.
+Banyak masalah sulit dalam matematika (seperti *Travelling Salesman Problem* atau *Graph Partitioning*) dapat dipetakan ke dalam Ising Hamiltonian. Model ini dikenal sebagai **QUBO** (*Quadratic Unconstrained Binary Optimization*) jika variabelnya diubah dari $s \in \{1, -1\}$ menjadi $x \in \{0, 1\}$.
 *   Mencari solusi terbaik = Mencari konfigurasi spin dengan energi terendah.
 
 ### B. Quantum Annealing & Komputasi Kuantum

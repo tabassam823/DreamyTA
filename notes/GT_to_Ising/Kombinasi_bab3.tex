@@ -1,0 +1,44 @@
+\section{Formalisme \textit{Exact Potential Game}}
+
+\subsection{Konstruksi Utilitas Individual}
+Dalam kerangka kerja teori permainan non-kooperatif, utilitas pemain $i$ saat memilih strategi biner $x_i \in \{0, 1\}$ didefinisikan dengan mengintegrasikan parameter imbal hasil strategis $\tilde{\mu}_i$ dan matriks kovariansi yang telah dimodifikasi oleh CMI $\tilde{\sigma}_{ij}$. Formulasi utilitas individual ini mencakup ekspektasi keuntungan personal, risiko varians individual, serta dampak interaksi strategis antar-aset dalam portofolio:
+\begin{equation} \label{eq:payoff}
+    u_i(x_i, \mathbf{x}_{-i}) = x_i \left( \tilde{\mu}_i - \frac{\gamma}{2} \sigma_{ii} - \gamma \sum_{j \neq i} \tilde{\sigma}_{ij} x_j \right)
+\end{equation}
+di mana $\gamma$ merupakan koefisien penghindaran risiko (\textit{risk aversion}) yang mengatur bobot relatif antara imbal hasil dan risiko. Persamaan \eqref{eq:payoff} menunjukkan bahwa keputusan seorang investor untuk memasukkan suatu aset ke dalam portofolio sangat dipengaruhi oleh redundansi informasi dan korelasi mikro-struktural dengan aset lain yang telah dipilih sebelumnya.
+
+\subsection{Ilustrasi Matriks Payoff: Kasus Dua Aset ($N=2$)}
+Untuk memahami dinamika aljabar dari integrasi parameter strategis tersebut, kita tinjau interaksi antara dua aset yang direpresentasikan sebagai Pemain 1 dan Pemain 2 dalam \textit{normal-form game}. Struktur payoff dalam kondisi ini mencerminkan bagaimana korelasi informasional $\tilde{\sigma}_{12}$ secara langsung mereduksi utilitas individual saat kedua aset dipilih secara simultan.
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Pemain 1 \textbackslash Pemain 2} & \textbf{Keluar ($x_2=0$)} & \textbf{Masuk ($x_2=1$)} \\ \hline
+\textbf{Keluar ($x_1=0$)} & $(0, 0)$ & $(0, \tilde{\mu}_2 - \frac{\gamma}{2}\sigma_{22})$ \\ \hline
+\textbf{Masuk ($x_1=1$)} & $(\tilde{\mu}_1 - \frac{\gamma}{2}\sigma_{11}, 0)$ & $(P_{11}, P_{22})$ \\ \hline
+\end{tabular}
+\caption{Matriks Payoff $(u_1, u_2)$ untuk Sistem Dua Aset dengan Integrasi CMI}
+\end{table}
+
+Pada kondisi di mana kedua pemain memutuskan untuk masuk ke dalam portofolio ($x_1=1, x_2=1$), payoff untuk Pemain 1 secara spesifik didefinisikan sebagai $P_{11} = \tilde{\mu}_1 - \frac{\gamma}{2}\sigma_{11} - \gamma\tilde{\sigma}_{12}$. Hal ini menunjukkan bahwa integrasi CMI melalui $\tilde{\sigma}_{12}$ memberikan penalti tambahan pada utilitas jika kedua aset memiliki redundansi informasi yang tinggi.
+
+\subsection{Derivasi Aljabar Suku-Suku Fungsi Potensial}
+Sistem pemilihan aset ini diklasifikasikan sebagai \textit{Exact Potential Game} jika terdapat fungsi potensial global $\Phi(\mathbf{x})$ sedemikian sehingga perubahan utilitas marginal setiap pemain selaras dengan perubahan nilai potensial tersebut. Kita mendefinisikan fungsi potensial berdasarkan modifikasi fungsi objektif Markowitz sebagai berikut:
+\begin{equation} \label{eq:potential}
+    \Phi(\mathbf{x}) = \sum_{k=1}^N \tilde{\mu}_k x_k - \frac{\gamma}{2} \left( \sum_{k=1}^N \sigma_{kk} x_k^2 + \sum_{k=1}^N \sum_{l \neq k} \tilde{\sigma}_{kl} x_k x_l \right)
+\end{equation}
+Untuk membuktikan keselarasan ini, kita jabarkan perubahan $\Phi(\mathbf{x})$ terhadap variabel tunggal $x_i$ dengan mengekstraksi suku-suku yang mengandung indeks $i$ dari jumlahan tersebut:
+\begin{equation}
+\begin{aligned}
+    \Phi(\mathbf{x}) &= \tilde{\mu}_i x_i + \sum_{k \neq i} \tilde{\mu}_k x_k - \frac{\gamma}{2} \left( \sigma_{ii} x_i^2 + \sum_{l \neq i} \tilde{\sigma}_{il} x_i x_l + \sum_{k \neq i} \tilde{\sigma}_{ki} x_k x_i + \sum_{k \neq i} \sum_{l \neq i, k} \tilde{\sigma}_{kl} x_k x_l \right)
+\end{aligned}
+\end{equation}
+Dengan memanfaatkan sifat simetri matriks kovariansi $\tilde{\sigma}_{il} = \tilde{\sigma}_{li}$ dan karakteristik variabel biner $x_i^2 = x_i$, formulasi tersebut dapat disederhanakan menjadi:
+\begin{equation}
+\begin{aligned}
+    \Phi(\mathbf{x}) &= x_i \left( \tilde{\mu}_i - \frac{\gamma}{2} \sigma_{ii} - \gamma \sum_{j \neq i} \tilde{\sigma}_{ij} x_j \right) + \Phi(0, \mathbf{x}_{-i})
+\end{aligned}
+\end{equation}
+Melalui derivasi ini, terbukti bahwa perubahan potensial marginal $\Delta \Phi_i = \Phi(1, \mathbf{x}_{-i}) - \Phi(0, \mathbf{x}_{-i})$ identik dengan utilitas individual $u_i(1, \mathbf{x}_{-i})$ sebagaimana didefinisikan pada Persamaan \eqref{eq:payoff}, sehingga mengonfirmasi eksistensi \textit{Exact Potential Game} dalam sistem ini.
