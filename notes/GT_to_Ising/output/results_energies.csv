@@ -1,0 +1,4 @@
+Metode,E_min,Bitstring,Aset_Terpilih
+Brute Force,-5.0025939186930355,0101,"MSFT, TSLA"
+Nash Equilibrium,-5.0025939186930355,0101,"MSFT, TSLA"
+VQE (Depth 1),-4.996800276715447,1100,"DUK, MSFT"

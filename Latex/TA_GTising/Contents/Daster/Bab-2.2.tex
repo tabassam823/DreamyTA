@@ -1,0 +1,48 @@
+\section{Representasi Data Finansial}
+
+\subsection{Pra-pemrosesan Data Harga: Ekstraksi Parameter Dasar dan Binerisasi Keadaan}
+
+Pengolahan data finansial dalam kerangka ekonofisika dimulai dengan transformasi deret harga mentah menjadi metrik imbal hasil yang bersifat stasioner. Data harga penutupan aset $i$ pada waktu $t$, yang dinotasikan sebagai $P_{i,t}$, dikonversi menjadi imbal hasil logaritmik (\textit{log return}) $r_{i,t}$ untuk menghilangkan efek skala dan memastikan sifat aditif dari waktu ke waktu \cite{mantegna_introduction_1999}:
+\begin{equation}
+r_{i,t} = \ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right)
+\label{eq:log_return}
+\end{equation}
+Penggunaan logaritma pada persamaan (\ref{eq:log_return}) memberikan kemudahan dalam pemodelan stokastik karena distribusi imbal hasil cenderung mendekati distribusi normal pada interval waktu yang panjang, meskipun seringkali menunjukkan fenomena \textit{fat-tails} pada interval pendek.
+
+Berdasarkan deret waktu $r_{i,t}$ yang diperoleh, parameter statistik konvensional berupa nilai harapan imbal hasil (\textit{expected return}) $\mu_i$ dan varians $\sigma_i^2$ dihitung untuk mengkuantifikasi performa dan risiko aset tunggal. Nilai rata-rata imbal hasil selama periode $T$ didefinisikan sebagai:
+\begin{equation}
+\mu_i = \frac{1}{T} \sum_{t=1}^{T} r_{i,t}
+\label{eq:expected_return_calc}
+\end{equation}
+Sedangkan volatilitas aset yang direpresentasikan melalui varians sampel dihitung dengan rumus:
+\begin{equation}
+\sigma_i^2 = \frac{1}{T-1} \sum_{t=1}^{T} (r_{i,t} - \mu_i)^2
+\label{eq:variance_calc}
+\end{equation}
+Parameter $\mu_i$ dan $\sigma_i^2$ pada persamaan (\ref{eq:expected_return_calc}) dan (\ref{eq:variance_calc}) merupakan fondasi input bagi model optimasi portofolio standar sebelum nantinya dikembangkan menjadi parameter strategis ($\tilde{\mu}_i$ dan $\tilde{\sigma}_{ij}$) dalam formalisme teori permainan.
+
+Untuk memetakan dinamika pasar yang kontinu ini ke dalam arsitektur komputasi kuantum, diperlukan proses diskretisasi data melalui mekanisme binerisasi keadaan. Mengingat perangkat kuantum bekerja dengan sistem dua tingkat (\textit{two-level system}) atau qubit, nilai imbal hasil $r_{i,t}$ dipetakan ke dalam dua status diskret biner $\{U, D\}$ yang merepresentasikan arah pergerakan harga. Status $U$ (\textit{Up}) ditetapkan jika $r_{i,t} > 0$, dan status $D$ (\textit{Down}) ditetapkan jika $r_{i,t} \le 0$. Transformasi ini memungkinkan pergerakan harga dianalisis sebagai transisi keadaan magnetik dalam model Ising, di mana setiap perubahan harga mencerminkan eksitasi atau relaksasi energi dalam ruang \textit{Hilbert} sistem \cite{lucas_ising_2014}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.75\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Chart.png}
+        \caption{Grafik pergerakan harga aset dalam grafik \textit{time-series}}
+        \label{fig:price_time_series}
+    \end{subfigure}
+    \\ \vspace{0.5cm}
+    \begin{subfigure}[b]{0.75\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/OHLC.png}
+        \caption{Representasi transisi keadaan harga ($U$ dan $D$) melalui binerisasi log return \protect\cite{ibrahim_bitcoin_2020}}
+        \label{fig:price_transitions}
+    \end{subfigure}
+    \caption{Visualisasi representasi data finansial: (a) grafik pergerakan harga dalam deret waktu dan (b) visualisasi transisi keadaan harga melalui pemetaan biner.}
+    \label{fig:financial_data_rep}
+\end{figure}
+
+Hasil dari pra-pemrosesan ini memberikan struktur data yang kompatibel dengan algoritma berbasis energi. Dengan mereduksi kompleksitas pergerakan harga menjadi representasi biner, sistem dapat mengeksplorasi ruang solusi konfigurasi portofolio secara efisien melalui pencarian status energi terendah (\textit{ground state}). Penyelarasan antara metrik finansial klasik dan binerisasi kuantum ini merupakan langkah krusial dalam menjembatani data pasar riil dengan formalisme Hamiltonian Ising yang akan dibahas pada bagian selanjutnya.
+
+\subsection{Parameter \textit{Risk Aversion} Endogen melalui Fungsi Aktivasi Sigmoid}
+\textit{Risk aversion} merupakan parameter yang merepresentasikan tingkat keengganan investor terhadap ketidakpastian dalam upaya menjaga stabilitas utilitas ekspektasian dari portofolio investasi. Secara konvensional, variabel ini seringkali dipandang sebagai parameter statis yang hanya ditentukan oleh karakteristik demografis individu, seperti faktor usia dan horison investasi. Investor berusia muda umumnya memiliki \textit{risk aversion} yang rendah karena kapasitas penanggungan risiko yang lebih luas, sedangkan investor lanjut usia cenderung meningkatkan \textit{risk aversion} demi menjaga stabilitas aset \cite{abdul_hali_markowitz_2020}. Namun demikian, pendekatan statis ini tidak bisa menyesuaikan angkanya terhadap anomali pasar yang bersifat fluktuatif dan tidak terduga. Oleh karena itu, diperlukan sebuah mekanisme penentuan parameter yang bersifat endogen dan mampu melakukan penyesuaian diri (\textit{self-adjusting risk aversion}) secara \textit{real-time} terhadap dinamika pasar yang terekstraksi dari data finansial aktual.

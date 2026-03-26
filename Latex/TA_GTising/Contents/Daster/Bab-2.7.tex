@@ -1,0 +1,179 @@
+\section{Algoritma \textit{Variational Quantum Eigensolver} (VQE)}
+
+\subsection{Prinsip Variasi}
+
+Pada dasarnya, algoritma VQE berjalan atas dasar Prinsip Variasi atau Teorema Rayleigh-Ritz yang menyatakan bahwa nilai ekspektasi energi dari sembarang fungsi gelombang percobaan (\textit{trial state}) $|\psi\rangle$ akan selalu menjadi batas atas bagi energi keadaan dasar sejati ($E_0$) dari suatu sistem \cite{wang_achieving_2025}. Sebagaimana persamaan (\ref{eq:energy_functional}), energi $E[\psi]$ dirumuskan sebagai rasio antara nilai ekspektasi Hamiltonian terhadap normalisasi keadaan sistem tersebut.
+\begin{equation}
+E[\psi] = \frac{\langle \psi | \hat{H} | \psi \rangle}{\langle \psi | \psi \rangle}
+\label{eq:energy_functional}
+\end{equation}
+Pencarian nilai ekstrem ini dilakukan dengan tetap mempertahankan batasan normalisasi ($\langle \psi | \psi \rangle = 1$). Persamaan tersebut selanjutnya diturunkan dari fungsi Lagrangian $\mathcal{L}$ pada persamaan (\ref{eq:lagrangian_quantum}) yang menggabungkan energi sistem dengan parameter bantuan $\lambda$ agar minimisasi energi dan kesesuaian terhadap batasan tetap seimbang.
+\begin{equation}
+\mathcal{L}(|\psi\rangle, \lambda) = \langle \psi | \hat{H} | \psi \rangle - \lambda (\langle \psi | \psi \rangle - 1)
+\label{eq:lagrangian_quantum}
+\end{equation}
+
+Identifikasi kondisi ekstrem pada sistem ini dilakukan dengan prinsip stasioneritas menggunakan variasi fungsi $\delta \mathcal{L} = 0$ terhadap keadaan sistem. Perlakuan tersebut mentransformasikan fungsi Lagrangian menjadi persamaan nilai eigen Schrodinger tak bergantung waktu, di mana pengali Lagrange $\lambda$ merepresentasikan tingkat energi sistem $E$ sebagaimana dinyatakan dalam persamaan (\ref{eq:schrodinger_derivation})
+\begin{equation}
+\frac{\delta \mathcal{L}}{\delta \langle \psi |} = \hat{H} |\psi\rangle - \lambda |\psi\rangle = 0 \implies \hat{H} |\psi\rangle = E |\psi\rangle
+\label{eq:schrodinger_derivation}
+\end{equation}
+Untuk membuktikan bahwa $E[\psi] \ge E_0$, dapat dilakukan ekspansi sembarang \textit{trial state} $|\psi\rangle$ ke dalam kombinasi linier dari basis keadaan eigen yang ortonormal $\{|n\rangle\}$ dari Hamiltonian $\hat{H}$, di mana 
+\begin{equation}
+\hat{H}|n\rangle = E_n|n\rangle
+\end{equation}
+Ekspansi tersebut dirumuskan sebagai 
+\begin{equation}
+|\psi\rangle = \sum_n c_n |n\rangle
+\label{eq:trial_state_expansion}
+\end{equation}
+dengan koefisien kompleks $c_n$ yang tetap memenuhi syarat normalisasi $\sum_n |c_n|^2 = 1$.
+
+Ekspansi basis tersebut disubstitusikan ke dalam pembilang Persamaan \eqref{eq:energy_functional} sehingga diperoleh dekomposisi nilai ekspektasi energi menjadi jumlahan diskrit dari nilai eigen energi $E_n$ yang terbobot sebagaimana persamaan (\ref{eq:energy_expansion}).
+\begin{equation}
+\langle \psi | \hat{H} | \psi \rangle = \sum_m \sum_n c_m^* c_n \langle m | \hat{H} | n \rangle = \sum_n |c_n|^2 E_n
+\label{eq:energy_expansion}
+\end{equation}
+Karena energi terurut sedemikian rupa sehingga $E_0 \le E_1 \le E_2 \le \dots$, maka setiap suku $E_n$ dalam jumlah energi tersebut dapat digantikan dengan batas bawah absolutnya, yaitu $E_0$. Melalui substitusi ini, diperoleh ketidaksamaan yang menunjukkan bahwa nilai ekspektasi tidak akan pernah melampaui ke bawah batas ambang \textit{ground state}.
+\begin{equation}
+\sum_n |c_n|^2 E_n \ge E_0 \sum_n |c_n|^2 = E_0
+\label{eq:variational_inequality}
+\end{equation}
+Sehingga, bentuk akhir dari Prinsip Variasi yang menjadi basis operasional algoritma VQE secara presisi dinyatakan sebagai:
+\begin{equation}
+E[\psi] \ge E_0
+\label{eq:variational_principle_final}
+\end{equation}
+
+\subsection{Optimasi Parameter SPSA}
+
+Algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) diimplementasikan dengan membutuhkan dua pengukuran fungsi biaya per iterasi lewat pemberian perturbasi bersamaan $\Delta_k \in \{-1, 1\}^n$ terhadap seluruh elemen parameter. Estimasi gradien dilakukan melalui evaluasi pada dua titik 
+\begin{equation}
+y_k^{(+)} = y(\theta_k + c_k \Delta_k)
+\end{equation}
+dan
+\begin{equation}
+y_k^{(-)} = y(\theta_k - c_k \Delta_k)
+\end{equation}
+Jika diekspansi secara Taylor di sekitar $\theta_k$, maka akan diperoleh persamaan (\ref{eq:spsa_taylor_expansion_plus}) dan (\ref{eq:spsa_taylor_expansion_minus}).
+\begin{equation}
+y(\theta_k + c_k \Delta_k) = y(\theta_k) + c_k \Delta_k^T \nabla y(\theta_k) + \frac{1}{2} c_k^2 \Delta_k^T \nabla^2 y(\theta_k) \Delta_k + O(c_k^3)
+\label{eq:spsa_taylor_expansion_plus}
+\end{equation}
+\begin{equation}
+y(\theta_k - c_k \Delta_k) = y(\theta_k) - c_k \Delta_k^T \nabla y(\theta_k) + \frac{1}{2} c_k^2 \Delta_k^T \nabla^2 y(\theta_k) \Delta_k - O(c_k^3)
+\label{eq:spsa_taylor_expansion_minus}
+\end{equation}
+sehingga selisihnya akan diperoleh sebagaimana persamaan (\ref{eq:selisih_y}).
+\begin{equation}
+y^{(+)} - y^{(-)} = 2 c_k \Delta_k^T \nabla y(\theta_k) + O(c_k^3)
+\label{eq:selisih_y}
+\end{equation}
+Dengan mengasumsikan $\Delta_k$ dipilih dari distribusi Bernoulli ($\pm 1$), maka komponen ke-$i$ dari estimasi gradien stokastik $\hat{g}_k(\theta_k)$ dirumuskan sebagai:
+\begin{equation}
+\hat{g}_{ki}(\theta_k) = \frac{y_k^{(+)} - y_k^{(-)}}{2 c_k \Delta_{ki}}
+\label{eq:spsa_gradient_component}
+\end{equation}
+
+Pembaruan parameter dilakukan mengikuti aturan iteratif 
+\begin{equation}
+\theta_{k+1} = \theta_k - a_k \hat{g}_k(\theta_k)
+\label{eq:spsa_parameters_update}
+\end{equation}
+dengan parameter \textit{learning rate} ($a_k$) dan \textit{perturbation size} ($c_k$) yang meluruh secara sekuensial berdasarkan iterasi $k$:
+\begin{equation}
+a_k = \frac{a}{(k+1+A)^\alpha}, \quad c_k = \frac{c}{(k+1)^\gamma}
+\label{eq:spsa_parameters_decay}
+\end{equation}
+Dimana $\alpha$ merepresentasikan eksponen peluruhan \textit{learning rate} untuk menjamin konvergensi menuju titik optimum, sedangkan $\gamma$ merupakan eksponen peluruhan perturbasi yang mengatur reduksi sensitivitas estimasi gradien terhadap fluktuasi \textit{noise} pada sistem. Pada umumnya, nilai $\alpha = 0,602$ dan $\gamma = 0,101$ sering digunakan sebagai standar untuk memberikan keseimbangan optimal antara kecepatan konvergensi dan ketahanan terhadap gangguan statistik pada perangkat keras kuantum.
+
+\subsection{Ansatz \textit{EfficientSU2}}
+
+Representasi keadaan kuantum satu qubit dapat digambarkan secara geometris melalui koordinat bola Bloch sebagai interpretasi fisik bagi sistem dua tingkat. Secara matematis, vektor keadaan $|\psi\rangle$ dinyatakan sebagai superposisi linear antara basis $|0\rangle$ dan $|1\rangle$ dengan parameter sudut polar $\theta$ dan fase azimuthal $\phi$ sebagaimana dirumuskan dalam persamaan (\ref{eq:bloch_vector}):
+\begin{equation}
+|\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle
+\label{eq:bloch_vector}
+\end{equation}
+Visualisasi geometris pada Figure \ref{fig:bloch_sphere} mengilustrasikan posisi vektor keadaan dalam ruang Hilbert yang dapat dimanipulasi melalui rotasi uniter.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Images/bloch_sphere.png}
+    \caption{Representasi geometris keadaan satu qubit pada permukaan bola Bloch yang menunjukkan parameterisasi sudut polar ($\theta$) dan azimuthal ($\phi$).}
+    \label{fig:bloch_sphere}
+\end{figure}
+
+Transformasi keadaan pada bola Bloch dilakukan menggunakan operator uniter rotasi $R_y(\theta)$ dan $R_z(\phi)$ yang merepresentasikan elemen grup uniter spesial $SU(2)$. Definisi matriks dari operator rotasi dan gerbang keterbelitan \textit{Controlled-NOT} ($CX$) dinyatakan secara presisi sebagai berikut:
+\begin{equation}
+R_y(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{pmatrix}, \quad R_z(\phi) = \begin{pmatrix} e^{-i\phi/2} & 0 \\ 0 & e^{i\phi/2} \end{pmatrix}, \quad CX = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+\label{eq:quantum_gates_matrices}
+\end{equation}
+Operator rotasi berfungsi untuk mengubah orientasi vektor keadaan, sementara gerbang $CX$ berperan dalam membangun korelasi non-lokal atau keterbelitan (\textit{entanglement}) antar qubit. Kombinasi sistematis dari gerbang-gerbang ini membentuk arsitektur sirkuit kuantum yang mampu merepresentasikan fungsi gelombang percobaan yang kompleks \cite{nakahara_quantum_2008}.
+
+\textit{Ansatz TwoLocal} mengintegrasikan komponen tersebut ke dalam format sirkuit parameterisasi umum yang menyusun operator melalui perubahan lapisan rotasi ($L$) dan keterbelitan ($W$). Secara matematis, sirkuit \textit{TwoLocal} dengan kedalaman $d$ repetisi didefinisikan sebagai produk operator uniter berikut:
+\begin{equation}
+U(\theta) = L_d(\theta_d) \prod_{i=0}^{d-1} [W_i L_i(\theta_i)]
+\label{eq:twolocal_general}
+\end{equation}
+Di mana $L_i$ merepresentasikan jumlahan produk tensor gerbang rotasi lokal, $W_i$ adalah operator keterbelitan yang menghubungkan antar qubit, dan $d$ menunjukkan jumlah repetisi blok sirkuit \cite{cerezo_variational_2021}.
+
+\textit{Ansatz TwoLocal} dispesialisasi menjadi \texttt{EfficientSU2} melalui substitusi operator rotasi lokal $L_i$ dengan kombinasi gerbang $R_z$ dan $R_y$. Setiap qubit $j$ pada lapisan $i$ menerima transformasi rotasi $\text{Rot}_{SU(2)}$ yang didefinisikan sebagai produk operasional kedua gerbang tersebut.
+\begin{equation}
+\text{Rot}_{SU(2)}(\theta_{i,j}) = R_z(\theta_{i,j,2}) \cdot R_y(\theta_{i,j,1})
+\label{eq:rot_su2_definition}
+\end{equation}
+Kemudian, dilakukan substitusi operator keterbelitan $W_i$ terhadap urutan gerbang $CX$ mengikuti pola konektivitas \textit{linear}. Pada pola ini, gerbang $CX$ menghubungkan qubit bertetangga untuk membangun interaksi variabel portofolio secara berurutan sebagaimana pada persamaan (\ref{eq:linear_w_definition}).
+\begin{equation}
+W = \prod_{j=0}^{n-2} CX_{j, j+1}
+\label{eq:linear_w_definition}
+\end{equation}
+Dengan mensubstitusikan seluruh komponen tersebut ke dalam persamaan (\ref{eq:twolocal_general}), diperoleh formulasi eksplisit dari fungsi gelombang percobaan $|\psi(\theta) \rangle$ pada \textit{ansatz} \texttt{EfficientSU2} sebagaimana pada persamaan (\ref{eq:efficientsu2_final_explicit})
+\begin{equation}
+|\psi(\theta) \rangle = \underbrace{\left[ \bigotimes_{j=0}^{n-1} R_z(\theta_{d,j,2}) R_y(\theta_{d,j,1}) \right]}_{\text{Final Rotation Layer}} \prod_{i=0}^{d-1} \left[ \underbrace{W_{CX}}_{\text{Entanglement}} \underbrace{\bigotimes_{j=0}^{n-1} R_z(\theta_{i,j,2}) R_y(\theta_{i,j,1})}_{\text{Rotation Layer } i} \right] |0 \rangle^{\otimes n}
+\label{eq:efficientsu2_final_explicit}
+\end{equation}
+Persamaan tersebut menggambarkan bahwa keadaan awal yang masuk dalam bentuk keadaan vakum $|0\rangle^{\otimes n}$ akan diproses secara berurutan melalui lapisan rotasi parameterisasi $R_y$ dan $R_z$, diikuti oleh interaksi keterbelitan berantai melalui gerbang $CX$ dalam $d$ jumlah repetisi, hingga diakhiri dengan lapisan rotasi final untuk menghasilkan fungsi gelombang percobaan $|\psi(\theta)\rangle$ yang siap diukur. Sehingga jika divisualisasikan ke dalam bentuk sirkuit kuantum, alur komputasi yang merepresentasikan pergerakan keadaan dari kiri ke kanan digambarkan pada Gambar \ref{fig:efficientsu2_circuit}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=0.9, transform shape, 
+        gate/.style={draw, fill=white, minimum width=0.8cm, minimum height=0.6cm, font=\small},
+        cnot/.style={draw, circle, fill=white, inner sep=0pt, minimum size=0.3cm}]
+        
+        % Qubit lines
+        \foreach \i in {0,1,2} {
+            \draw (0,\i) node[left] {$|0\rangle$} -- (9,\i);
+        }
+        
+        % Repetition d Box (Dashed)
+        \draw[dashed, thick, gray] (0.5,-0.5) rectangle (5.5,2.5);
+        \node[below, gray] at (3,-0.5) {Repetisi $d$};
+        
+        % Rotation Layer i
+        \foreach \i in {0,1,2} {
+            \node[gate] at (1.2,\i) {$R_y$};
+            \node[gate] at (2.2,\i) {$R_z$};
+        }
+        
+        % Entanglement Layer (Linear CX)
+        \filldraw (3.5,2) circle (2pt);
+        \draw (3.5,2) -- (3.5,1.15);
+        \node[cnot] at (3.5,1) {}; \draw (3.5,0.85) -- (3.5,1.15); \draw (3.35,1) -- (3.65,1);
+        
+        \filldraw (4.5,1) circle (2pt);
+        \draw (4.5,1) -- (4.5,0.15);
+        \node[cnot] at (4.5,0) {}; \draw (4.5,-0.15) -- (4.5,0.15); \draw (4.35,0) -- (4.65,0);
+        
+        % Ellipsis
+        \node at (6.2,1) {\large $\dots$};
+        
+        % Final Rotation Layer
+        \foreach \i in {0,1,2} {
+            \node[gate] at (7.3,\i) {$R_y$};
+            \node[gate] at (8.3,\i) {$R_z$};
+        }
+        
+    \end{tikzpicture}
+    \caption{Visualisasi arsitektur sirkuit kuantum \textit{EfficientSU2} dengan lapisan rotasi parameterisasi dan keterbelitan berantai (\textit{linear connectivity}).}
+    \label{fig:efficientsu2_circuit}
+\end{figure}

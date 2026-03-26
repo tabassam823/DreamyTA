@@ -1,0 +1,39 @@
+\section{Redefinisi Imbal Hasil Strategis dan Integrasi Parameter Medan Lokal}
+
+Setelah kerangka dasar \textit{Quadratic Unconstrained Binary Optimization} (QUBO) dan transformasi Hamiltonian Ising terbentuk pada Subbab 2.3, algoritma kuantum memerlukan ekstraksi parameter fisis yang presisi untuk merepresentasikan dinamika pasar ke dalam ruang \textit{Hilbert} sistem. Arsitektur model ini secara fundamental bergantung pada dua parameter utama: medan lokal ($h_i$) yang merepresentasikan bias energi individual dan koefisien kopling ($J_{ij}$) yang merepresentasikan interaksi antar-qubit. Subbab 2.5 ini didedikasikan khusus sebagai "dapur ekstraksi" untuk menghitung parameter $h_i$ melalui redefinisi imbal hasil strategis $\tilde{\mu}_i$ yang menangkap karakteristik perilaku mikro setiap aset. Sementara itu, prosedur penghitungan parameter $J_{ij}$ yang mengekstrak korelasi sistemik non-linear melalui \textit{Quantum Mutual Information} akan dibahas secara mendalam pada Subbab 2.6.
+
+\subsection{Digitalisasi \textit{Microstate} Finansial}
+
+Prosedur redefinisi imbal hasil dimulai dengan diskritisasi deret waktu imbal hasil (\textit{return}) untuk mengidentifikasi status biner $s \in \{u, d\}$ pada setiap aset dalam semesta investasi. Imbal hasil harian aset $i$ dihitung melalui \textit{log-return} $R_{i,t} = \ln(P_{i,t}/P_{i,t-1})$ yang kemudian dipetakan ke dalam status $u$ (\textit{up}) jika $R_{i,t} > 0$, atau status $d$ (\textit{down}) untuk kondisi sebaliknya. Pada sistem dengan $N=4$ aset, interaksi pasar direpresentasikan melalui ruang konfigurasi $\mathcal{S} = \{u, d\}^N$ yang memuat 16 kemungkinan \textit{microstate} gabungan $\mathbf{s} = (s_1, s_2, s_3, s_4)$. Transformasi ini memungkinkan pemetaan dinamika kontinu pasar ke dalam variabel diskret yang kompatibel dengan operator komputasi kuantum \cite{gong_quantum_2025}.
+
+Eksistensi struktur ketergantungan antar-aset dikuantifikasi melalui distribusi frekuensi gabungan dari seluruh \textit{microstate} yang muncul selama periode observasi $T$. Probabilitas gabungan $P(\mathbf{s})$ didefinisikan sebagai rasio frekuensi kemunculan konfigurasi spesifik $n(\mathbf{s})$ terhadap total sampel waktu:
+\begin{equation}
+P(s_1, s_2, s_3, s_4) = \frac{n(s_1, s_2, s_3, s_4)}{T}
+\label{eq:joint_prob_microstate}
+\end{equation}
+Informasi probabilitas pada persamaan (\ref{eq:joint_prob_microstate}) menjadi landasan dalam menyusun strategi investasi yang adaptif, karena menangkap korelasi mikro-struktural yang seringkali terabaikan dalam analisis statistik univariat konvensional \cite{menezes_ex_2025}.
+
+\subsection{Kalkulasi Imbal Hasil Strategis ($\tilde{\mu}_i$)}
+
+Tahap selanjutnya melibatkan kalkulasi ekspektasi imbal hasil bersyarat (\textit{conditional expected return}) guna mengekstraksi respon individual aset terhadap kondisi kolektif pasar. Parameter $\bar{R}_i(\mathbf{s})$ didefinisikan sebagai nilai rata-rata imbal hasil aset $i$ yang dikondisikan secara eksklusif pada kemunculan \textit{microstate} $\mathbf{s}$ dalam himpunan waktu $\mathcal{T}_{\mathbf{s}}$:
+\begin{equation}
+\bar{R}_i(s_1, s_2, s_3, s_4) = \frac{1}{n(s_1, s_2, s_3, s_4)} \sum_{t \in \mathcal{T}_{s_1, s_2, s_3, s_4}} R_{i,t}
+\label{eq:conditional_return}
+\end{equation}
+Formulasi pada (\ref{eq:conditional_return}) mencerminkan imbal hasil yang diharapkan dari suatu aset ketika pasar berada dalam konfigurasi strategis tertentu.
+
+Integrasi seluruh kemungkinan respon strategis menghasilkan parameter imbal hasil strategis $\tilde{\mu}_i$ sebagai jumlahan terbobot terhadap distribusi probabilitas gabungan. Pendekatan holistik ini merangkum pengaruh interdependensi sistemik ke dalam satu metrik tunggal melalui persamaan berikut:
+\begin{equation}
+\tilde{\mu}_i = \sum_{\mathbf{s} \in \{u,d\}^N} P(\mathbf{s}) \times \bar{R}_i(\mathbf{s})
+\label{eq:strategic_return_mu}
+\end{equation}
+Penggunaan $\tilde{\mu}_i$ menjamin bahwa ekspektasi keuntungan yang diumpankan ke dalam model optimasi telah memperhitungkan bias perilaku kolektif. Hal ini esensial dalam kerangka \textit{Exact Potential Game} untuk memastikan bahwa utilitas individu selaras dengan pencapaian ekuilibrium sistemik pada portofolio \cite{sikalo_efficient_2022}.
+
+\subsection{Ekuivalensi ke Parameter Medan Lokal ($h_i$)}
+
+Integrasi $\tilde{\mu}_i$ ke dalam Hamiltonian Ising dilakukan melalui parameter medan lokal atau bias ($h_i$) yang menentukan kecenderungan orientasi \textit{spin}. Berdasarkan derivasi matriks QUBO sebelumnya, imbal hasil strategis ini berkontribusi secara langsung pada elemen diagonal $Q_{ii}$ yang merepresentasikan biaya neto inklusi aset. Hubungan analitis antara parameter ekonomi dan parameter fisis Hamiltonian dinyatakan melalui transformasi \textit{affine} berikut:
+\begin{equation}
+h_i = -\frac{1}{2} \left[ \left( \frac{\gamma}{2} \sigma_{ii} - \tilde{\mu}_i \right) + \lambda_{pen}(1-2K) \right] - \sum_{j \neq i} \frac{Q_{ij}}{4}
+\label{eq:h_i_final_redefined}
+\end{equation}
+Persamaan (\ref{eq:h_i_final_redefined}) menunjukkan bahwa bias medan lokal merupakan resultan dari ekspektasi keuntungan strategis, risiko varians, dan penalti kardinalitas. Penentuan $h_i$ yang akurat menjadi prasyarat mutlak dalam mengatasi kompleksitas pemilihan aset pada rezim pasar yang sangat volatil.

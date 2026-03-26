@@ -1,0 +1,54 @@
+\chapter{Pendahuluan}
+
+\section{Latar Belakang}
+Stabilitas pasar keuangan modern seringkali terdistorsi oleh fenomena korelasi ekstrem antar aset yang meningkat drastis selama periode krisis ekonomi. Model \textit{Mean-Variance} (MV) yang diusulkan oleh \cite{markowitz_portfolio_1952} telah menjadi fondasi utama dalam \textit{Modern Portfolio Theory}, namun model ini memiliki keterbatasan krusial dalam mengasumsikan distribusi return yang normal dan stasioner \cite{abdul_hali_markowitz_2020}. Ketidakmampuan model MV untuk menangkap anomali pasar dan ketergantungan non-linear menyebabkan estimasi risiko menjadi tidak akurat, terutama ketika data historis tidak lagi mencerminkan dinamika pasar secara tepat sehingga sulit diprediksi walaupun menggunakan komputer kuantum yang lebih canggih \cite{sikalo_efficient_2022}. Oleh karena itu, diperlukan transformasi fungsi objektif portofolio ke dalam kerangka \textit{Quadratic Unconstrained Binary Optimization} (QUBO) agar kompleksitas tersebut dapat dipetakan secara matematis ke dalam arsitektur komputasi kuantum \cite{wang_achieving_2025}.
+
+Model \textit{Ising} pada umumnya dimanfaatkan dalam ranah ekonofisika untuk memetakan fungsi biaya portofolio ke dalam struktur Hamiltonian agar dapat diproses menggunakan model komputasi kuantum \cite{lucas_ising_2014}. Pendekatan ini digunakan karena kemampuan model tersebut dalam merepresentasikan perilaku kolektif sistem yang multi-agen lewat interaksi antar variabel diskrit \cite{mantegna_introduction_2000}. Agen ekonomi direpresentasikan sebagai \textit{spins} yang saling berinteraksi, di mana sinkronisasi keputusan investor atau fenomena \textit{herding} yang terjadi di pasar dicerminkan melalui keselarasan orientasi \textit{spin} dalam sistem \cite{hidalgo_quantum_2006}. Kompleksitas pasar keuangan kemudian diabstraksikan menjadi sistem energi melalui kerangka mekanika statistik, sehingga deteksi transisi fase dari kondisi pasar stabil menuju periode volatilitas ekstrem dapat dimungkinkan melalui pengamatan konfigurasi energi.
+
+Setiap keputusan alokasi aset pada portofolio akan dikonversi menjadi variabel biner pada sistem. Parameter medan lokal ($h_i$) dalam Hamiltonian digunakan untuk menyerap informasi terkait ekspektasi imbal hasil dan preferensi risiko individual, sementara koefisien kopling ($J_{ij}$) menangkap dinamika korelasi antar aset \cite{sikalo_efficient_2022}. Dengan menyusun interaksi tersebut ke dalam bentuk fungsi ising hamiltonian, masalah optimasi portofolio bertransformasi menjadi pencarian konfigurasi energi terendah atau \textit{ground state} \cite{wei_solving_2025}. 
+
+interaksi strategis antar partisipan pasar dapat dideteksi menggunakan konsep \textit{Game Theory} lewat pendekatan yang lebih dinamis daripada sekadar ekstrapolasi statistik yang biasa digunakan pada analisis \textit{time-series}. Integrasi tersebut ke dalam model \textit{Ising} bertujuan untuk menggantikan parameter medan lokal ($h_i$) konvensional dengan nilai \textit{marginal payoff} yang diturunkan dari utilitas strategis partisipan \cite{la_torre_multi-agent_2026}. Sehingga pendekatan teori permainan ini bisa dimanfaatkan sebagai pendeteksi bias aset secara lebih presisi, di mana setiap aset dipandang sebagai pemain yang bereaksi terhadap kondisi pasar yang diasumsikan cenderung selalu mencapai ekuilibrium \cite{sikalo_efficient_2022}. 
+
+Selain bias individu, \textit{Quantum Mutual Information} (QMI) digunakan sebagai pemodelan korelasi antar aset yang dapat mengatasi limitasi koefisien kovarians linear yang sering menyesatkan pada kondisi \textit{bear market}. QMI diimplementasikan sebagai instrumen untuk menyusun koefisien kopling ($J_{ij}$) dalam sistem Hamiltonian agar dapat menangkap seluruh spektrum korelasi probabilistik, baik yang bersifat linear maupun non-linear \cite{wang_achieving_2025}. Sinergi antara \textit{Game Theory} dan QMI ini menjadi langkah utama dalam pencarian optimasi portofolio sebagai \textit{upgrade} agar tidak lagi hanya bergantung pada metrik statistik murni, tetapi juga melalui informasi kuantum dan interaksi strategis terhadap realitas kompleksitas finansial.
+
+Implementasi algoritma \textit{Variational Quantum Eigensolver} (VQE) merupakan suatu terobosan signifikan di dunia yang mengadaptasi prinsip simulasi sistem kuantum untuk penyelesaian masalah optimasi diskrit di sektor finansial. Pada awalnya, VQE dikembangkan untuk mengestimasi \textit{ground state} pada sistem molekuler melalui minimisasi nilai ekspektasi Hamiltonian kimia yang bersifat \textit{non-commuting} \cite{fedorov_vqe_2022}. Namun, transformasi fungsi objektif portofolio ke dalam model \textit{Ising} ternyata bisa mendorong VQE agar dapat digunakan untuk memetakan rezim pasar yang optimal melalui pencarian konfigurasi energi terendah dalam ruang pencarian QUBO \cite{wang_achieving_2025}. Algoritma ini digunakan karena fleksibilitasnya dalam menangani perangkat \textit{Noisy Intermediate-Scale Quantum} (NISQ) sehingga lebih unggul dibandingkan algoritma kuantum murni lainnya\cite{wang_achieving_2025}.
+
+Pada umumnya, metode optimasi iteratif dalam kerangka kerja VQE menggunakan algoritma \textit{Gradient Descent} (GD) yang memperbarui parameter secara bertahap menuju arah negatif gradien fungsi biaya \cite{wang_achieving_2025}. Optimasi GD merupakan standar industri dalam pembelajaran mesin klasik. Namun implementasinya pada perangkat keras kuantum menghadapi hambatan \textit{sampling overhead} yang sangat besar karena memerlukan evaluasi gradien untuk setiap dimensi parameter \cite{dao_exploring_2025}. Maka dari itu, sebagai pengganti, algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) lebih sering dipilih dalam lingkungan \textit{Noisy Intermediate-Scale Quantum} (NISQ) karena kemampuannya melakukan efisiensi estimasi gradien hanya dengan dua pengukuran per iterasi terlepas dari jumlah dimensi parameter yang ada \cite{wang_achieving_2025}. Selain efisiensi jumlah \textit{shot}, SPSA juga memiliki ketangguhan terhadap fluktuasi statistik dan \textit{noise} pengukuran yang biasanya menjadi penyebab ketidakstabilan pada algoritma berbasis gradien \cite{spall_implementation_1998}.
+
+Dalam algoritma VQE, uga dibutuhkan pemilihan \textit{ansatz} yang optimal. \textit{TwoLocal} merupakan \textit{ansatz} yang sering dipakai sebagai fondasi dalam membangun sirkuit rotasi dan \textit{entanglement} yang dilakukan secara repetitif \cite{dao_exploring_2025}. Meskipun \textit{TwoLocal} memberikan fleksibilitas cukup tinggi melalui kombinasi gerbang rotasi generik dan pola konektivitas yang luas, penggunaan \textit{ansatz} ini dapat menghasilkan jumlah gerbang dua-qubit yang berlebihan yang menyulitkan konvergensi jika tidak dikombinasi dengan optimasi yang spesifik \cite{wang_achieving_2025}. Oleh karena itu, \textit{Ansatz EfficientSU(2)} diperkenalkan sebagai spesialisasi dari \textit{TwoLocal} yang bertugas mengoptimalkan struktur gerbang $SU(2)$—seperti rotasi $RY$ dan $RZ$—serta gerbang \textit{CNOT} dalam pola yang lebih ringkas dan sesuai dengan perangkat yang digunakan \cite{dao_exploring_2025}. \textit{EfficientSU(2)} lebih unggul dibandingkan \textit{TwoLocal} karena mampu mereduksi kedalaman sirkuit secara signifikan tanpa mengorbankan tingkat kejelasan yang dibutuhkan untuk memetakan dinamika portofolio finansial \cite{dao_exploring_2025}.
+
+\section{Rumusan Masalah}
+Berdasarkan latar belakang tersebut, permasalahan yang akan dibahas dalam tugas akhir ini adalah:
+\begin{enumerate}
+    \item Bagaimana efek perumusan bias aset sebagai parameter medan lokal ($h_i$) dalam model Hamiltonian \textit{Ising} melalui pendekatan utilitas \textit{Game Theory} pada kinerja algoritma?
+    \item Bagaimana mengonstruksi koefisien kopling ($J_{ij}$) antar aset menggunakan \textit{Quantum Mutual Information} (QMI) untuk menangkap interaksi non-linear?
+    \item Bagaimana efektivitas algoritma \textit{Variational Quantum Eigensolver} (VQE) dengan optimasi spsa dan \textit{Ansatz EfficientSU(2)}  dalam mencari solusi keadaan dasar (\textit{ground state}) untuk menentukan keputusan alokasi aset yang optimal?
+\end{enumerate}
+
+\section{Tujuan Penelitian}
+Dari rumusan masalah yang diberikan, tujuan dari pembuatan tugas akhir ini antara lain:
+\begin{enumerate}
+    \item Menganalisis formulasi bias aset sebagai parameter medan lokal ($h_i$) dalam model Hamiltonian \textit{Ising} berbasis kerangka kerja \textit{Game Theory} terhadap kinerja algoritma.
+    \item Mengonstruksi koefisien kopling ($J_{ij}$) antar aset melalui pemanfaatan \textit{Quantum Mutual Information} (QMI) sebagai representasi interaksi non-linear.
+    \item Mengevaluasi performa dan efektivitas algoritma \textit{Variational Quantum Eigensolver} (VQE) dengan optimasi spsa dan \textit{Ansatz EfficientSU(2)} dalam menemukan solusi optimal pada model portofolio kuantum yang telah dibangun.
+\end{enumerate}
+
+\section{Batasan Masalah}
+Agar penelitian ini lebih terfokus, maka pengerjaan tugas akhir ini diberikan batasan-batasan sebagai berikut:
+\begin{enumerate}
+    \item Portofolio yang dianalisis dibatasi pada pemilihan 2 aset dari 4 pilihan aset dengan sektor yang berbeda.
+    \item Model permainan yang digunakan adalah skema \textit{non zero-sum game}.
+    \item Simulasi dan implementasi algoritma dilakukan menggunakan simulator \textit{Pennylane}.
+\end{enumerate}
+
+\section{Manfaat Penelitian}
+Hasil dari tugas akhir ini diharapkan dapat memberikan alternatif metode optimasi portofolio yang lebih tangguh terhadap dinamika korelasi pasar serta memberikan kontribusi akademis dalam penerapan komputasi kuantum pada bidang finansial.
+
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+    \begin{center}
+	Halaman ini sengaja dikosongkan
+    \end{center}
+\vspace*{\fill}
+\pagebreak

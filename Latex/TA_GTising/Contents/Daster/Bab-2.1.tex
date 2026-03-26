@@ -1,0 +1,51 @@
+\section{Dinamika Pasar Finansial}
+
+\subsection{Mekanisme Penggerak Harga}
+Dalam pasar finansial, harga merupakan manifestasi dari proses pencarian nilai yang efisien atau \textit{price discovery}. Interaksi antara penawaran (\textit{bid}) dan permintaan (\textit{ask}) dalam \textit{order book} menciptakan fluktuasi harga yang merepresentasikan informasi oleh para partisipan pasar. Variabel makroekonomi seperti tingkat inflasi dan kebijakan moneter bank sentral bertindak sebagai gangguan eksternal yang mempengaruhi likuiditas secara global. Pergeseran suku bunga (\textit{interest rate}) juga dapat mengubah biaya modal (\textit{cost of capital}) yang selanjutnya berdampak pada perubahan rezim pasar (\textit{market regimes}). Fenomena finansial tersebut menunjukkan bahwa pergerakan harga sebenarnya sangat terikat pada siklus ekonomi yang lebih luas \cite{abdul_hali_markowitz_2020}.
+
+Dalam perspektif ekonofisika, interaksi mikroskopis antar pelaku pasar membentuk struktur makroskopis yang dikenal sebagai tren atau kecenderungan arah harga. Ketidakseimbangan volume beli dan jual akan memicu terjadinya \textit{price slippage} sehingga memaksa sistem menuju titik kesetimbangan baru secara dinamis dan berkala. Peristiwa makroekonomi yang signifikan seringkali menjadi katalis bagi transisi fase antara keadaan ketika harga cenderung naik (\textit{bullish}) dan ketika harga cenderung turun (\textit{bearish}) dari rezim pasar \cite{dao_exploring_2025}. Oleh karena itu, identifikasi rezim pasar sebelum melakukan analisis mendalam untuk menciptakan model predikis menjadi sangat penting untuk memahami karakteristik volatilitas pada setiap periode waktu. 
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=4cm,
+        block/.style={rectangle, draw, fill=gray!5, text width=3.2cm, text centered, minimum height=1.2cm, font=\small\sffamily, thick},
+        arrow/.style={-stealth, thick}
+    ]
+        % Nodes
+        \node (monetary) [block] {Kebijakan Moneter \\ \& Suku Bunga};
+        \node (liquidity) [block, right of=monetary] {Likuiditas \& \\ \textit{Cost of Capital}};
+        \node (orderbook) [block, right of=liquidity] {Interaksi \textit{Order Book} (\textit{Bid-Ask})};
+        \node (discovery) [block, right of=orderbook] {\textit{Price Discovery} \& Kesetimbangan};
+
+        % Connections with labels
+        \draw [arrow] (monetary) -- node[anchor=south, font=\scriptsize\itshape] {} (liquidity);
+        \draw [arrow] (liquidity) -- node[anchor=south, font=\scriptsize\itshape] {} (orderbook);
+        \draw [arrow] (orderbook) -- node[anchor=south, font=\scriptsize\itshape] {} (discovery);
+
+    \end{tikzpicture}
+    \caption{Skema interaksi \textit{order book} dan pengaruh kebijakan moneter terhadap likuiditas pasar.}
+    \label{fig:order_book_macro}
+\end{figure}
+
+\subsection{Diversifikasi pada Teori Portofolio Modern}
+Dalam \textit{Modern Portfolio Theory} (MPT), prinsip diversifikasi merupakan pilar fundamental yang bertujuan untuk mereduksi risiko spesifik tanpa mengurangi \textit{expected returns} secara signifikan. Teknik ini menggunakan penggabungan aset-aset dengan korelasi rendah, sehingga fluktuasi negatif pada satu instrumen dapat dikompensasi oleh pergerakan positif pada instrumen lainnya. Namun, risiko yang berkaitan dengan kegagalan pasar secara keseluruhan tetap tidak dapat dihindari sepenuhnya melalui strategi ini. Keberhasilan diversifikasi sangat bergantung pada stabilitas matriks kovarians antar aset dalam berbagai kondisi pasar \cite{abdul_hali_markowitz_2020}. Oleh karena itu, diperlukkan pemilihan bobot aset sebagai optimasi matematis untuk mencapai efisiensi alokasi modal.
+
+Secara matematis, risiko portofolio dinyatakan melalui varians portofolio $\sigma_p^2$ yang merupakan fungsi dari vektor bobot $w \in \mathbb{R}^N$ dan matriks kovarians $\Sigma \in \mathbb{R}^{N \times N}$. Persamaan berikut mendefinisikan hubungan kuadratik tersebut dalam ruang vektor:
+\begin{equation}
+\sigma_p^2 = \sum_{i=1}^{N}\omega_i^2 \sigma_i^2 + \sum_{j=1}^{N} \sum_{j\neq i}^{N}\omega_i\omega_j\sigma_{ij}
+\label{eq:portfolio_variance_simple}
+\end{equation}
+Dimana
+\begin{equation}
+\sigma_i^2 = \frac{1}{T-1} \sum_{t=1}^T (r_{i,t} - \bar{r}_i)^2
+\label{eq:variance}
+\end{equation}
+dengan $r_{i,t}$ adalah return aset $i$ pada periode $t$, dan $\bar{r}_i$ adalah rata-rata return aset $i$ selama periode $T$. Minimisasi pada Persamaan (\ref{eq:portfolio_variance_simple}) di bawah batasan tertentu akan menghasilkan titik-titik optimal pada \textit{efficient frontier} sebagaimana pada gambar \ref{fig:efficient_frontier_simple}. Interaksi antar variabel tersebut juga harus dianalisis untuk memastikan bahwa struktur portofolio tetap berada dalam batas toleransi risiko yang ditetapkan. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/Efficient_Frontier.png}
+    \caption{Representasi kurva \textit{Efficient Frontier} dalam ruang risiko dan imbal hasil.}
+    \label{fig:efficient_frontier_simple}
+\end{figure}

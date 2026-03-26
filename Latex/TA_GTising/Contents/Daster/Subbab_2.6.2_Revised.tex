@@ -1,0 +1,12 @@
+\subsection{Bukti Reduksi Orde melalui Kendala Kardinalitas $K=2$}
+
+Meskipun teori informasi secara alami mengizinkan adanya interaksi orde tinggi (seperti interaksi orde-3 dan orde-4 pada $N=4$ aset), penerapan kendala kardinalitas $K=2$ menyederhanakan struktur sistem secara definitif. Dalam skenario ini, sistem dipaksa untuk memilih tepat dua aset dari semesta empat aset yang tersedia, yang secara matematis dinyatakan melalui kendala $\sum_{i=1}^4 x_i = 2$. Batasan ini bertindak sebagai filter ruang konfigurasi yang mengakibatkan keruntuhan nilai (\textit{order collapse}) pada seluruh suku interaksi tingkat tinggi.
+
+Mengingat variabel keputusan bersifat biner $x_i \in \{0, 1\}$, syarat $\sum_{i=1}^4 x_i = 2$ secara otomatis membatasi jumlah maksimum variabel yang aktif (bernilai satu) dalam satu waktu hanya sebanyak dua buah. Oleh karena itu, dalam setiap kombinasi tiga atau empat aset, setidaknya satu atau dua variabel di dalamnya wajib bernilai nol untuk memenuhi kendala tersebut. Konsekuensi matematis langsung dari pembatasan ini adalah lenyapnya seluruh hasil kali interaksi orde-3 dan orde-4:
+\begin{equation}
+\forall (i, j, k) \in \{1, \dots, 4\} \implies x_i x_j x_k = 0
+\label{eq:proof_order_3}
+\end{equation}
+Persamaan (\ref{eq:proof_order_3}) menunjukkan bahwa mustahil bagi tiga atau lebih aset untuk aktif secara simultan di bawah kendala $K=2$, sehingga kontribusi informasional dari suku-suku tersebut selalu bernilai nol.
+
+Keruntuhan orde ini secara otomatis mereduksi kompleksitas \textit{Mutual Information} dalam fungsi objektif, sehingga hanya menyisakan interaksi biner ($x_i x_j$). Hal ini membuat model optimasi portofolio tersebut kompatibel secara sempurna dengan struktur Hamiltonian Ising yang hanya menerima interaksi dua-tubuh (\textit{two-body interactions}). Dengan demikian, penyelesaian masalah melalui perangkat kuantum dapat dilakukan tanpa memerlukan dekomposisi tambahan, karena lanskap energi sistem telah tereduksi secara alami menjadi bentuk kuadratik yang efisien untuk diproses oleh algoritma berbasis \textit{Ising solver} \cite{menezes_ex_2025}.
