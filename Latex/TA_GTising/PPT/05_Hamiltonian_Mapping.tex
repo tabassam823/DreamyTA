@@ -1,0 +1,46 @@
+\section{Pencarian Nash Equilibrium}
+
+\begin{frame}
+\centering
+\highlight{\Huge Bagian 5: Pencarian Nash Equilibrium}
+\end{frame}
+
+\subsection{Metodologi Pencarian NE}
+\begin{frame}{5.1 Metodologi Pencarian Nash Equilibrium}
+Pencarian \textit{Nash Equilibrium} (NE) dilakukan secara klasik untuk menemukan titik optimal pada fungsi potensial $\Phi(x)$ sebelum sistem ditransformasikan ke ranah kuantum.
+
+\textbf{Algoritma Umum vs SBR:}
+\begin{itemize}
+    \item \textbf{Lemke-Howson:} Eksponensial dan sulit untuk $N$ pemain.
+    \item \textbf{Fisher-Yates:} Heuristik tanpa jaminan konvergensi.
+    \item \textbf{Sequential Best Response (SBR):} Mengeksploitasi properti \textit{Exact Potential Game}. Karena setiap $\Delta u_i = \Delta \Phi$, maka pencarian ekuilibrium murni setara dengan minimisasi energi potensial secara lokal dan sekuensial.
+\end{itemize}
+
+\begin{table}[]
+\resizebox{0.8\textwidth}{!}{
+\begin{tabular}{lccc}
+\toprule
+Fitur & Lemke-Howson & Fisher-Yates & \textbf{SBR} \\
+\midrule
+Skala ($N$) & Terbatas & Tinggi & \textbf{Sangat Tinggi} \\
+Konvergensi & Mixed NE & Tidak Ada & \textbf{Pure NE} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\subsection{Alur Algoritma SBR}
+\begin{frame}{5.2 Alur Algoritma SBR: Simulasi Iterasi}
+SBR menemukan konfigurasi aset $x^*$ yang meminimalkan $-\Phi(x)$ melalui mekanisme \textit{best response swap}.
+
+\textbf{Simulasi Pencarian Konvergensi:}
+\begin{enumerate}
+    \item \textbf{Iterasi 1:} Konfigurasi $\{1, 2\}$, $E_0 = -4,8500$. Dilakukan \textit{swap} aset yang menurunkan energi.
+    \item \textbf{Iterasi 2:} Konfigurasi $\{0, 1\}$, $E_1 = -4,9500$. Ditemukan perbaikan lebih lanjut.
+    \item \textbf{Iterasi 3:} Konfigurasi $\{0, 3\}$, $E_2 = \mathbf{-5,0024}$. (Titik Konvergen).
+    \item \textbf{Iterasi 4:} Evaluasi ulang menunjukkan tidak ada lagi \textit{swap} yang menurunkan energi.
+\end{enumerate}
+
+\textbf{Hasil:} Konfigurasi bitstring $0011$ dinyatakan sebagai \textit{Nash Equilibrium} murni yang akan menjadi basis bagi formulasi QUBO.
+\end{frame}

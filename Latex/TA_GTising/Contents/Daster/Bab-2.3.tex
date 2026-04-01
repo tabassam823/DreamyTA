@@ -18,11 +18,11 @@ Untuk menyederhanakan struktur fungsi tujuan ke dalam bentuk maksimisasi imbal h
 \end{aligned}
 \label{eq:global_potential_function}
 \end{equation}
-Bentuk akhir pada persamaan (\ref{eq:global_potential_function}) memberikan struktur fungsional yang lebih sederhana untuk dipetakan ke dalam format optimasi tanpa kendala (\textit{unconstrained optimization}). Transformasi ini memastikan bahwa parameter risiko dan imbal hasil terintegrasi secara koheren dalam satu lanskap energi yang akan menjadi basis bagi konstruksi Hamiltonian sistem.
+Bentuk akhir pada persamaan (\ref{eq:global_potential_function}) memberikan struktur fungsional yang lebih sederhana untuk dipetakan ke dalam format optimasi tanpa kendala (\textit{unconstrained optimization}).
 
 \subsection{Konstruksi QUBO dengan Penalti Kardinalitas}
 
-Pemetaan masalah alokasi ke dalam format \textit{Quadratic Unconstrained Binary Optimization} (QUBO) memerlukan penambahan penalti kuadratik $P(\mathbf{x})$ untuk menegakkan kendala pemilihan tepat $K$ aset. Hamiltonian biaya murni didefinisikan sebagai $H_{pure}(\mathbf{x}) = -\Phi(\mathbf{x})$, sementara fungsi penalti dikonstruksi menggunakan pengali penalti $\lambda_{pen} \in \mathbb{R}^+$ melalui ekspansi polinomial berikut:
+[tambahkan definisi dari QUBO terlebih dahulu] Pemetaan masalah alokasi ke dalam format \textit{Quadratic Unconstrained Binary Optimization} (QUBO) memerlukan penambahan penalti kuadratik $P(\mathbf{x})$ untuk mengatur kendala pemilihan menjadi tepat $K$ aset. Hamiltonian biaya murni didefinisikan sebagai $H_{pure}(\mathbf{x}) = -\Phi(\mathbf{x})$, sementara fungsi penalti dikonstruksi menggunakan pengali penalti $\lambda_{pen} \in \mathbb{R}^+$ melalui ekspansi polinomial berikut:
 \begin{equation}
 \begin{aligned}
 P(\mathbf{x}) &= \lambda_{pen} \left( \sum_{i=1}^N x_i - K \right)^2 \\

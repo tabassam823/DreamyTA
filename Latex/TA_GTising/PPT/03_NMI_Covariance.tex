@@ -1,0 +1,82 @@
+\section{Korelasi Informasi \& Matriks Risiko}
+
+\begin{frame}
+\centering
+\highlight{\Huge Bagian 3: Korelasi Informasi \& Matriks Risiko}
+\end{frame}
+
+\subsection{Entropi Shannon}
+\begin{frame}{3.1 Entropi Shannon (\textit{Information Content})}
+Langkah pertama dalam kuantifikasi informasi adalah menghitung entropi Shannon ($H$) dari setiap aset berdasarkan distribusi probabilitas biner ($\leq 0 \rightarrow 1, > 0 \rightarrow 0$).
+
+\textbf{Rumus Entropi:}
+\begin{equation}
+H(X_i) = - \sum_{x \in \{0,1\}} P(x) \log_2 P(x)
+\end{equation}
+
+\textbf{Contoh Kalkulasi (Data Sampel):}
+\begin{itemize}
+    \item \textbf{ADRO} (States: [1, 0]): $P(1)=0.5, P(0)=0.5 \Rightarrow H(ADRO) = \mathbf{1.0}$
+    \item \textbf{BBCA} (States: [0, 0]): $P(1)=0.0, P(0)=1.0 \Rightarrow H(BBCA) = \mathbf{0.0}$
+    \item \textbf{ICBP} (States: [1, 0]): $P(1)=0.5, P(0)=0.5 \Rightarrow H(ICBP) = \mathbf{1.0}$
+\end{itemize}
+\end{frame}
+
+\subsection{Mutual Information}
+\begin{frame}{3.2 Classical Mutual Information (MI)}
+MI mengukur seberapa banyak informasi yang dibagikan antara dua aset, menangkap korelasi non-linier yang tidak terdeteksi oleh statistik kovariansi standar.
+
+\textbf{Rumus Mutual Information:}
+\begin{equation}
+I(X_i; X_j) = \sum_{x,y \in \{0,1\}} P(x,y) \log_2 \left( \frac{P(x,y)}{P(x)P(y)} \right)
+\end{equation}
+
+\textbf{Ilustrasi (ADRO vs ICBP):}
+\begin{itemize}
+    \item Kedua aset memiliki state identik [1, 0] pada sampel 2 hari.
+    \item $P(1,1)=0.5, P(0,0)=0.5$ (Probabilitas Bersama).
+    \item Hasil: $I(ADRO; ICBP) = 1.0$ (Korelasi informasi sempurna).
+\end{itemize}
+\end{frame}
+
+\subsection{Normalized Mutual Information}
+\begin{frame}{3.3 Normalized Mutual Information (NMI)}
+NMI menormalisasi nilai MI ke dalam rentang $[0, 1]$ menggunakan batas atas teoretis (*Upper Bound Theorem*) agar dapat digunakan sebagai pengali matriks risiko.
+
+\textbf{Rumus NMI:}
+\begin{equation}
+\text{NMI}_{ij} = \frac{I(X_i; X_j)}{\sqrt{H(X_i)H(X_j)}}
+\end{equation}
+
+\textbf{Matriks NMI (\textit{Full Window Result}):}
+\begin{equation}
+\text{NMI} = 
+\begin{bmatrix} 
+1.00 & 0.12 & 0.35 & 0.08 \\
+0.12 & 1.00 & 0.15 & 0.22 \\
+0.35 & 0.15 & 1.00 & 0.10 \\
+0.08 & 0.22 & 0.10 & 1.00
+\end{bmatrix}
+\end{equation}
+\end{frame}
+
+\subsection{Modifikasi Matriks Risiko}
+\begin{frame}{3.4 Modifikasi Matriks Kovariansi ($\tilde{\sigma}$)}
+Matriks kovariansi empiris ($\sigma$) dimodifikasi dengan NMI untuk memperkuat penalti risiko pada aset yang memiliki redundansi informasi tinggi.
+
+\textbf{Formulasi Modifikasi:}
+\begin{equation}
+\tilde{\sigma}_{ij} = \sigma_{ij} \times (1 + \text{NMI}_{ij})
+\end{equation}
+
+\textbf{Hasil Akhir Matriks $\tilde{\sigma}$:}
+\begin{equation}
+\tilde{\sigma} = 
+\begin{bmatrix} 
+0.000350 & 0.000009 & 0.000076 & 0.000101 \\
+0.000009 & 0.000188 & -0.000047 & 0.000052 \\
+0.000076 & -0.000047 & 0.000083 & 0.000025 \\
+0.000101 & 0.000052 & 0.000025 & 0.000174
+\end{bmatrix}
+\end{equation}
+\end{frame}
