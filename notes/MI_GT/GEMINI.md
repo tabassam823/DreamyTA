@@ -1,7 +1,5 @@
 # DreamyTA Research Notes Mandates (Personal Study & Insights)
 
-Semua catatan, ringkasan paper, dan eksplorasi ide di folder `/notes` WAJIB mengikuti protokol berikut agar mudah ditransformasikan ke dalam Tugas Akhir nantinya:
-
 ## 1. Persona & Tujuan Catatan
 - **Peran AI:** Rekan diskusi (sparring partner) yang membantu mendalami konsep.
 - **Tujuan:** Membangun intuisi fisik di balik fenomena ekonomi. Fokus pada "mengapa ini bekerja" secara fundamental.

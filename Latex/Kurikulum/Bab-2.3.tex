@@ -1,0 +1,65 @@
+\section{Transformasi Model Markowitz menjadi Hamiltonian Ising}
+
+\subsection{Formulasi Objektif Markowitz pada Portofolio Biner}
+
+Masalah pemilihan portofolio diskret didefinisikan pada semesta aset $N$ dengan keputusan investasi yang direpresentasikan oleh profil strategi biner $\mathbf{x} \in \{0, 1\}^N$. Setiap elemen $x_i = 1$ menunjukkan inklusi aset $i$ dalam portofolio, sementara $x_i = 0$ menunjukkan eksklusi. Tujuan optimasi adalah meminimalkan fungsi Lagrangian Markowitz $\mathcal{L}(\mathbf{x})$ yang merupakan jumlahan dari risiko varians sistemik $\mathbf{x}^T \mathbf{\Sigma} \mathbf{x}$ dan ekspektasi imbal hasil $\boldsymbol{\mu}^T \mathbf{x}$ yang dikontrol oleh pengali Lagrange $\lambda \in \mathbb{R}^+$ \cite{markowitz_portfolio_1952}:
+\begin{equation}
+\min_{\mathbf{x} \in \mathbb{B}^N} \mathcal{L}(\mathbf{x}) = \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j - \lambda \sum_{i=1}^N \mu_i x_i
+\label{eq:markowitz_binary_lagrangian}
+\end{equation}
+Parameter $\lambda$ dalam persamaan (\ref{eq:markowitz_binary_lagrangian}) merepresentasikan \textit{trade-off} antara risiko dan \textit{return}, di mana nilai optimalnya ditentukan oleh toleransi risiko investor pada kurva \textit{efficient frontier}.
+
+Untuk menyederhanakan struktur fungsi tujuan ke dalam bentuk maksimisasi imbal hasil neto, dilakukan penskalaan Lagrangian dengan konstanta penghindaran risiko (\textit{risk aversion}) $-\gamma/2$. Melalui substitusi hubungan analitis $\lambda = 2/\gamma$, fungsi objektif tersebut ditransformasikan ke dalam representasi skalar $\Phi(\mathbf{x})$ sebagai berikut:
+\begin{equation}
+\begin{aligned}
+\Phi(\mathbf{x}) &= -\frac{\gamma}{2} \mathcal{L}(\mathbf{x}) \\
+&= -\frac{\gamma}{2} \left( \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j - \frac{2}{\gamma} \sum_{i=1}^N \mu_i x_i \right) \\
+&= \sum_{i=1}^N \mu_i x_i - \frac{\gamma}{2} \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j \\
+\end{aligned}
+\label{eq:global_potential_function}
+\end{equation}
+Bentuk akhir pada persamaan (\ref{eq:global_potential_function}) memberikan struktur fungsional yang lebih sederhana untuk dipetakan ke dalam format optimasi tanpa kendala (\textit{unconstrained optimization}).
+
+\subsection{Konstruksi QUBO dengan Penalti Kardinalitas}
+
+[tambahkan definisi dari QUBO terlebih dahulu] Pemetaan masalah alokasi ke dalam format \textit{Quadratic Unconstrained Binary Optimization} (QUBO) memerlukan penambahan penalti kuadratik $P(\mathbf{x})$ untuk mengatur kendala pemilihan menjadi tepat $K$ aset. Hamiltonian biaya murni didefinisikan sebagai $H_{pure}(\mathbf{x}) = -\Phi(\mathbf{x})$, sementara fungsi penalti dikonstruksi menggunakan pengali penalti $\lambda_{pen} \in \mathbb{R}^+$ melalui ekspansi polinomial berikut:
+\begin{equation}
+\begin{aligned}
+P(\mathbf{x}) &= \lambda_{pen} \left( \sum_{i=1}^N x_i - K \right)^2 \\
+&= \lambda_{pen} \left( (1-2K) \sum_{i=1}^N x_i + 2 \sum_{i<j} x_i x_j + K^2 \right)
+\end{aligned}
+\label{eq:cardinality_penalty}
+\end{equation}
+Persamaan (\ref{eq:cardinality_penalty}) mengonversi \textit{equality constraint} menjadi bagian dari lanskap energi sistem.
+
+Hamiltonian QUBO total adalah jumlah dari Hamiltonian biaya murni dan fungsi penalti
+\begin{equation}
+H_{total} = H_{pure} + P(\mathbf{x})
+\end{equation}
+disusun kembali ke dalam representasi matriks $\mathbf{Q}$ standar 
+\begin{equation}
+\sum Q_{ii} x_i + \sum Q_{ij} x_i x_j
+\end{equation}
+Dimana Koefisien elemen diagonal dan interaksi (\textit{off-diagonal}) didapatkan melalui jumlahan koefisien biaya dan penalti yang bersesuaian:
+\begin{equation}
+Q_{ii} = \left( \frac{\gamma}{2} \sigma_{ii} - \mu_i \right) + \lambda_{pen}(1-2K) \label{eq:qubo_diagonal}
+\end{equation}
+\begin{equation}
+Q_{ij} = \gamma \sigma_{ij} + 2\lambda_{pen} \label{eq:qubo_off_diagonal}
+\end{equation}
+Struktur QUBO pada (\ref{eq:qubo_diagonal}) dan (\ref{eq:qubo_off_diagonal}) memungkinkan integrasi batasan kardinalitas secara intrinsik ke dalam fungsi tujuan tunggal yang kompatibel dengan algoritma komputasi kuantum \cite{padilla_quantum_2025}.
+
+\subsection{Pemetaan Hamiltonian Ising melalui Operator Pauli-Z}
+
+Transformasi dari ranah keputusan biner $\mathbb{B}^N$ ke ruang \textit{Hilbert} sistem \textit{spin} dilakukan melalui substitusi variabel biner ke operator Pauli-Z $\hat{Z}_i$ menggunakan transformasi \textit{affine} $x_i \mapsto \frac{1-\hat{Z}_i}{2}$. Operasi ini memetakan nilai eigen $\{0, 1\}$ ke set status magnetik $\{+1, -1\}$. Hamiltonian kuantum final dinyatakan sebagai jumlahan interaksi dua-tubuh dan medan magnet lokal:
+\begin{equation}
+\hat{H}_{Ising} = \sum_{i<j} J_{ij} (\hat{Z}_i \otimes \hat{Z}_j) + \sum_{i=1}^N h_i \hat{Z}_i
+\label{eq:final_ising_hamiltonian}
+\end{equation}
+Parameter fisik berupa koefisien kopling $J_{ij}$ dan bias medan lokal $h_i$ diekstraksi dari elemen matriks QUBO melalui derivasi matematis berikut:
+\begin{align}
+J_{ij} &= \frac{Q_{ij}}{4} = \frac{\gamma \sigma_{ij} + 2\lambda_{pen}}{4} \label{eq:ising_coupling_derivation} \\
+h_i &= -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{4} \label{eq:ising_bias_derivation}
+\end{align}
+
+Status \textit{ground state} dari operator $\hat{H}_{Ising}$ pada (\ref{eq:final_ising_hamiltonian}) merepresentasikan konfigurasi magnetik dengan energi minimum yang secara fisik ekuivalen dengan portofolio investasi paling optimal. Penggunaan representasi operator Pauli memungkinkan masalah optimasi ini untuk dieksekusi pada perangkat kuantum variasional melalui estimasi nilai ekspektasi energi $\langle \psi | \hat{H}_{Ising} | \psi \rangle$. Seluruh derivasi ini memberikan landasan teoretis yang rigorus bagi penerapan \textit{Variational Quantum Eigensolver} dalam penyelesaian masalah alokasi aset yang kompleks \cite{lucas_ising_2014}.

@@ -1,0 +1,61 @@
+\section{Integrasi \textit{Normalized Mutual Information} (NMI) dan Formulasi Kopling}
+
+\subsection{Teori Informasi Orde Tinggi dan \textit{Interaction Information}}
+
+Dalam sistem yang melibatkan $N=4$ aset ($X_1, X_2, X_3, X_4$), redundansi informasi total tidak hanya terbatas pada interaksi biner, melainkan juga mencakup dependensi orde tinggi yang diukur melalui \textit{Interaction Information}. Persamaan umum untuk informasi bersama multisistem ini mengikuti prinsip inklusi-eksklusi entropi Shannon sebagai berikut:
+\begin{equation}
+\begin{aligned}
+I(X_1 : X_2 : X_3 : X_4) = &\sum_i H(X_i) - \sum_{i<j} H(X_i, X_j) \\
+&+ \sum_{i<j<k} H(X_i, X_j, X_k) - H(X_1, X_2, X_3, X_4)
+\end{aligned}
+\label{eq:interaction_info_4}
+\end{equation}
+di mana $H(\cdot)$ merupakan entropi Shannon yang mengukur tingkat ketidakpastian informasi dalam satuan \textit{bits} melalui formulasi nilai harapan dari isi informasi (\textit{information content}) dalam sistem:
+\begin{equation}
+H(X_i) = -\sum_{x \in \{u, d\}} p(x) \log_2 p(x)
+\end{equation}
+di mana $p(x)$ merepresentasikan probabilitas marginal kemunculan status $x$ pada aset $i$. Integrasi \textit{Interaction Information} ke dalam fungsi objektif portofolio mencerminkan kompleksitas korelasi mikroskopis antar-aset yang melampaui statistik biner standar \cite{yang_abnormal_2024}.
+
+\subsection{Bukti Reduksi Orde melalui Kendala Kardinalitas $K=2$}
+
+Meskipun teori informasi mengizinkan adanya interaksi orde tinggi, struktur masalah optimasi portofolio di bawah kendala fisis tertentu seringkali memaksa sistem untuk melakukan penyederhanaan secara alami. Fenomena ini muncul ketika kita menerapkan kendala kardinalitas $K=2$, di mana sistem dipaksa untuk memilih tepat dua aset dari total semesta empat aset yang tersedia. Secara matematis, kendala ini dinyatakan sebagai $\sum_{i=1}^4 x_i = 2$, yang mana bertindak sebagai filter terhadap ruang konfigurasi yang diperbolehkan.
+
+Cerita mengenai lenyapnya interaksi orde tinggi ini berawal dari analisis kemungkinan nilai variabel biner $x_i \in \{0, 1\}$. Dalam skenario pemilihan tepat dua aset, hanya ada dua variabel yang diperbolehkan bernilai satu, sementara dua variabel lainnya wajib bernilai nol. Hal ini berimplikasi langsung pada suku-suku interaksi orde-3 dan orde-4. Sebagai ilustrasi, suku interaksi $x_1 x_2 x_3$ merepresentasikan kondisi di mana aset 1, 2, dan 3 dipilih secara bersamaan. Namun, karena kendala $K=2$ membatasi jumlahan maksimum variabel yang aktif menjadi hanya dua, maka mustahil bagi tiga aset untuk aktif secara simultan.
+
+Berdasarkan \textit{Pigeonhole Principle} (Prinsip Sarang Merpati), dalam setiap himpunan bagian yang terdiri dari tiga variabel biner, jika total variabel yang aktif dibatasi hanya dua, maka setidaknya satu variabel di dalam himpunan tersebut haruslah bernilai nol. Konsekuensi langsungnya adalah hasil kali interaksi tiga variabel tersebut akan selalu bernilai nol:
+\begin{equation}
+\forall (i, j, k) \in \{1, \dots, 4\} \implies x_i x_j x_k = 0
+\label{eq:proof_order_3}
+\end{equation}
+Logika yang sama berlaku bagi suku interaksi orde-4 ($x_1 x_2 x_3 x_4$), yang hanya bernilai satu jika seluruh aset dipilih. Dengan demikian, seluruh suku dengan orde lebih tinggi dari dua akan mengalami keruntuhan nilai (\textit{order collapse}) secara definitif, menyisakan hanya interaksi biner yang kompatibel dengan struktur Ising Hamiltonian \cite{menezes_ex_2025}.
+
+\subsection{Skalarisasi NMI dan Penguatan Matriks Kovariansi}
+
+Reduksi orde informasi tersebut memungkinkan integrasi korelasi non-linear ke dalam matriks risiko melalui transformasi \textit{Normalized Mutual Information} (NMI). Prosedur skalarisasi diperlukan untuk menjamin konsistensi dimensional antara satuan informasi (\textit{bits}) dan kovariansi. NMI didefinisikan sebagai rasio terhadap rata-rata geometrik entropi masing-masing variabel berdasarkan \textit{Upper Bound Theorem}:
+\begin{equation}
+NMI(i, j) = \frac{I(X_i : X_j)}{\sqrt{H(X_i)H(X_j)}}
+\label{eq:nmi_definition}
+\end{equation}
+Hasil akhir dari transformasi ini adalah besaran skalar nirdimensi yang berada pada rentang $NMI(i, j) \in [0, 1]$, di mana nilai nol merepresentasikan independensi statistik sempurna dan nilai satu merepresentasikan identitas sempurna antar-aset.
+
+Redefinisi elemen matriks kovariansi akhirnya dirumuskan sebagai penguatan (\textit{amplification}) dari varians tradisional menggunakan skalar NMI tersebut. Formulasi ini menjamin konsistensi matematis saat menggabungkan metrik berbasis informasi dengan metrik berbasis varians-kovarians:
+\begin{equation}
+\tilde{\sigma}_{ij} = \sigma_{ij} [1 + NMI(i, j)]
+\label{eq:amplified_covariance}
+\end{equation}
+Melalui skema ini, kontribusi informasional diintegrasikan secara intrinsik ke dalam struktur risiko ($\tilde{\sigma}_{ij}$), sehingga model tetap \textit{robust} terhadap variasi magnitudo data tanpa memerlukan parameter penskalaan eksternal \cite{shannon_mathematical_1948}.
+
+\subsection{Formulasi Akhir Kopling $J_{ij}$ pada Hamiltonian}
+
+Setelah mendapatkan matriks kovariansi yang diperkuat ($\tilde{\sigma}_{ij}$), parameter interaksi atau kopling ($J_{ij}$) dalam Hamiltonian Ising dapat diekstraksi dari elemen \textit{off-diagonal} matriks QUBO $Q_{ij}$. Berdasarkan struktur penalti kardinalitas yang telah didefinisikan, parameter $Q_{ij}$ mengintegrasikan risiko sistemik $\gamma \tilde{\sigma}_{ij}$ dan kekuatan penalti $2\lambda_{pen}$:
+\begin{equation}
+Q_{ij} = \gamma \tilde{\sigma}_{ij} + 2\lambda_{pen}
+\label{eq:final_qubo_coupling}
+\end{equation}
+Substitusi ke dalam transformasi Ising memberikan formulasi akhir bagi koefisien kopling sebagai berikut:
+\begin{equation}
+J_{ij} = \frac{Q_{ij}}{4} = \frac{\gamma \sigma_{ij} [1 + NMI(i, j)] + 2\lambda_{pen}}{4}
+\label{eq:final_ising_coupling_jij}
+\end{equation}
+
+Penggunaan NMI memastikan bahwa korelasi non-linear yang tidak tertangkap oleh kovariansi standar tetap terakomodasi dalam lanskap energi portofolio. Dengan demikian, konfigurasi \textit{ground state} yang dihasilkan oleh pencarian variasional akan merepresentasikan titik kesetimbangan ekonomi yang lebih stabil terhadap anomali pasar, karena didasarkan pada redundansi informasi yang lebih komprehensif \cite{wang_achieving_2025}.

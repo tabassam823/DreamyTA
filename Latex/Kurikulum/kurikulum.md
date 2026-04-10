@@ -18,19 +18,7 @@
     *   *Risk Aversion* ($\gamma$): Derajat ketakutan investor terhadap risiko.
     *   Estimasi $\gamma$ secara endogen menggunakan fungsi sigmoid/logistik dalam kode.
 
-## [[Modul_2]]: Pemetaan Hamiltonian Ising (Fondasi Fisika Statistik)
-*Tujuan: Memahami bagaimana masalah pemilihan aset diubah menjadi pencarian energi dasar (ground state).*
-
-1.  **Review Model Ising:**
-    *   Definisi Spin ($s_i \in \{-1, 1\}$) dan variabel biner ($x_i \in \{0, 1\}$).
-    *   Hamiltonian Ising: $H = \sum h_i \sigma_i^z + \sum J_{ij} \sigma_i^z \sigma_j^z$.
-2.  **Formulasi Markowitz ke Ising:**
-    *   Ekuivalensi antara minimalisasi fungsi objektif keuangan dengan minimalisasi energi sistem spin.
-    *   Transformasi variabel: $z_i = 1 - 2x_i$.
-3.  **Constraint Handling:**
-    *   Penggunaan *Lagrange Multiplier* ($\lambda$) sebagai penalti untuk batasan jumlah aset (*cardinality constraint* $K$).
-
-## [[Modul_3]]: Teori Informasi & Metrik Non-Linier (NMI)
+## [[Modul_2]]: Teori Informasi & Metrik Non-Linier (NMI)
 *Tujuan: Memahami penggunaan Normalized Mutual Information (NMI) untuk menangkap dependensi pasar.*
 
 1.  **Shannon Entropy & Mutual Information:**
@@ -41,7 +29,7 @@
 3.  **Modifikasi Matriks Kovariansi:**
     *   Menyesuaikan bobot risiko ($\sigma_{ij}$) dengan informasi mutual untuk menangkap *tail risk* atau dependensi yang tersembunyi.
 
-## [[Modul_4]]: Game Theory & Nash Equilibrium (SBR)
+## [[Modul_3]]: Game Theory & Nash Equilibrium (SBR)
 *Tujuan: Memahami pendekatan strategis dalam pemilihan aset sebagai "Exact Potential Game".*
 
 1.  **Konsep Potential Game:**
@@ -50,6 +38,18 @@
 2.  **Sequential Best Response (SBR):**
     *   Algoritma pencarian Nash Equilibrium secara iteratif.
     *   Analisis fungsi `find_nash_sbr`: Bagaimana aset "memutuskan" untuk masuk atau keluar dari portofolio berdasarkan energi sistem.
+
+## [[Modul_4]]: Pemetaan Hamiltonian Ising (Fondasi Fisika Statistik)
+*Tujuan: Memahami bagaimana masalah pemilihan aset diubah menjadi pencarian energi dasar (ground state).*
+
+1.  **Review Model Ising:**
+    *   Definisi Spin ($s_i \in \{-1, 1\}$) dan variabel biner ($x_i \in \{0, 1\}$).
+    *   Hamiltonian Ising: $H = \sum h_i \sigma_i^z + \sum J_{ij} \sigma_i^z \sigma_j^z$.
+2.  **Formulasi Markowitz ke Ising:**
+    *   Ekuivalensi antara minimalisasi fungsi objektif keuangan dengan minimalisasi energi sistem spin.
+    *   Transformasi variabel: $z_i = 1 - 2x_i$.
+3.  **Constraint Handling:**
+    *   Penggunaan *Lagrange Multiplier* ($\lambda$) sebagai penalti untuk batasan jumlah aset (*cardinality constraint* $K$).
 
 ## [[Modul_5]]: Variational Quantum Eigensolver (VQE)
 *Tujuan: Memahami algoritma hibrida klasik-kuantum untuk mencari solusi optimal.*
