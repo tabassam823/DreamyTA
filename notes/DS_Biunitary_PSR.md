@@ -702,12 +702,12 @@ dengan $D$ berasal dari kontribusi subruang $|0\rangle$ yang tidak terpengaruh o
 
 ### **Tahap 5.6: Ringkasan Generalisasi**
 
-| **Generator** | **Biunitary?** | **Bentuk $E(\theta)$** | **Shift Rule** |
-|---------------|----------------|------------------------|----------------|
-| Single Pauli $\sigma$ | ✅ | $A + B\cos\theta + C\sin\theta$ | $\pm \pi/2$, faktor $1/2$ |
-| Pauli String $P$ | ✅ | $A + B\cos\theta + C\sin\theta$ | $\pm \pi/2$, faktor $1/2$ |
-| Controlled-Paul ($CRX$, dll) | ⚠️ Hampir | $A + B\cos\theta + C\sin\theta$ | $\pm \pi/2$, faktor $1/2$ |
-| Generator Umum $H$ | ❌ | Multi-frekuensi | Tidak sederhana |
+| **Generator**                | **Biunitary?** | **Bentuk $E(\theta)$**          | **Shift Rule**            |
+| ---------------------------- | -------------- | ------------------------------- | ------------------------- |
+| Single Pauli $\sigma$        | ✅              | $A + B\cos\theta + C\sin\theta$ | $\pm \pi/2$, faktor $1/2$ |
+| Pauli String $P$             | ✅              | $A + B\cos\theta + C\sin\theta$ | $\pm \pi/2$, faktor $1/2$ |
+| Controlled-Paul ($CRX$, dll) | ⚠️ Hampir      | $A + B\cos\theta + C\sin\theta$ | $\pm \pi/2$, faktor $1/2$ |
+| Generator Umum $H$           | ❌              | Multi-frekuensi                 | Tidak sederhana           |
 
 ---
 

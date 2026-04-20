@@ -26,3 +26,47 @@ E(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta}) | H | \psi(\boldsymbo
 Langkah terakhir dalam implementasi *ansatz* adalah pengukuran nilai ekspektasi energi dari Hamiltonian $H$ yang telah dipetakan dari masalah QUBO. Nilai $E(\boldsymbol{\theta})$ yang diperoleh dari komputer kuantum kemudian dikirimkan kembali ke pengoptimal klasik (seperti SPSA atau GD) untuk memperbarui vektor parameter $\boldsymbol{\theta}$. Proses ini dilakukan secara berulang-ulang hingga nilai energi mencapai titik minimum global yang merepresentasikan alokasi bobot portofolio paling efisien. Vektor parameter optimal $\boldsymbol{\theta}^*$ kemudian didekodekan kembali menjadi bobot portofolio $w_i$ melalui proses diskritisasi biner yang telah dibahas sebelumnya.
 
 Keberhasilan VQE sangat bergantung pada kemampuan *ansatz* untuk meminimalkan *approximation error*. Jika *ansatz* terlalu sederhana, ia mungkin tidak mampu mencapai *ground state* yang sebenarnya, sehingga menghasilkan solusi sub-optimal. Sebaliknya, *ansatz* yang terlalu kompleks akan sulit dilatih oleh pengoptimal klasik akibat lanskap energi yang terlalu bergejolak. Dengan demikian, pengembangan desain *ansatz* yang adaptif dan terinspirasi oleh struktur masalah finansial (*problem-inspired ansatz*) menjadi fokus penelitian utama untuk mencapai *quantum advantage* dalam bidang ekonomi fisik dan keuangan kuantum.
+
+## 5. Penurunan Rumus
+sesuai konvensi yang ada, bentuk matriks dari rotasi ry dan rz adalah
+$$
+R_y(\theta) = \begin{pmatrix} \cos(\theta/2) & -\sin(\theta/2) \\ \sin(\theta/2) & \cos(\theta/2) \end{pmatrix} \quad R_z(\theta) = \begin{pmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{pmatrix}
+$$
+
+untuk gerbang entanglement CNOT adalah
+$$
+CNOT = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+$$
+
+untuk gerbang entanglement CZ adalah
+$$
+CZ = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & -1 \end{pmatrix}
+$$
+
+lalu 
+$$
+\begin{align}
+U_{1q}(\theta) &= R_z(\theta_z) R_y(\theta_y)\\
+&= \begin{pmatrix} e^{-i\theta_z/2} & 0 \\ 0 & e^{i\theta_z/2} \end{pmatrix} \begin{pmatrix} \cos(\theta_y/2) & -\sin(\theta_y/2) \\ \sin(\theta_y/2) & \cos(\theta_y/2) \end{pmatrix}\\
+&= \begin{pmatrix} e^{-i\theta_z/2} \cos(\theta_y/2) & -e^{-i\theta_z/2} \sin(\theta_y/2) \\ e^{i\theta_z/2} \sin(\theta_y/2) & e^{i\theta_z/2} \cos(\theta_y/2) \end{pmatrix}
+\end{align}
+$$
+
+sedangkan untuk entanglement layer 
+$$
+U_{ent} = CNOT_{(N-1,0)} \prod_{q=0}^{N-2} CNOT_{(q,q+1)}
+$$
+
+untuk sistem 2 qubit
+$$
+U_{ent} = CNOT_{(1,0)} \cdot CNOT_{(0,1)}
+$$
+di mana
+$$
+CNOT_{(1,0)} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix} \quad CNOT_{(0,1)} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+$$
+
+sehingga totalnya;
+$$
+U_{ent} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix} \cdot \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 1 & 0 & 0 \end{pmatrix}
+$$

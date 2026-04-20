@@ -8,20 +8,91 @@
         "type": "tabs",
         "children": [
           {
-            "id": "37229b17123e042d",
+            "id": "f4a17b4a5a02a302",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Main/3_Markowitz.md",
+                "file": "notes/Main/2_Risk_Avrsion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3_Markowitz"
+              "title": "2_Risk_Avrsion"
+            }
+          },
+          {
+            "id": "0b41f35329eada3e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Main/4_EPG.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "4_EPG"
+            }
+          },
+          {
+            "id": "af5f6394ebf4ebdb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Main/5_QUBO.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5_QUBO"
+            }
+          },
+          {
+            "id": "5f940bfed36cf064",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Main/6_Gradient_Descent.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "6_Gradient_Descent"
+            }
+          },
+          {
+            "id": "d45d723498d56462",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Main/8_Ansatz.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "8_Ansatz"
+            }
+          },
+          {
+            "id": "20aac20a9125d032",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/DS_HIsing.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "DS_HIsing"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -33,6 +104,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
+        "dimension": 47.87234042553192,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -53,7 +125,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "hessian",
+                "query": "twoloca",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -79,6 +151,7 @@
       {
         "id": "c38e9d58e7528e8a",
         "type": "tabs",
+        "dimension": 52.12765957446809,
         "children": [
           {
             "id": "9e5bcccc9ae69aaf",
@@ -86,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Main/3_Markowitz.md",
+                "file": "notes/DS_HIsing.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3_Markowitz"
+              "title": "Outline of DS_HIsing"
             }
           }
         ]
@@ -217,54 +290,53 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "37229b17123e042d",
+  "active": "20aac20a9125d032",
   "lastOpenFiles": [
-    "notes/Main/3_Risk_Aversion.png",
-    "notes/Main/3_Markowitz.md",
+    "notes/DS_Gate.pdf",
+    "notes/DS_SPSA.md",
+    "notes/DS_SPSA.pdf",
+    "notes/DS_HIsing.md",
+    "notes/DS_HIsing.pdf",
+    "notes/DS_Gate.md",
+    "notes/DS_Biunitary_PSR.md",
+    "notes/DS_Biunitary_PSR.pdf",
+    "notes/DS_Ansatz.md",
+    "notes/DS_Ansatz.pdf",
+    "notes/completeness_relation_derivation.md",
+    "Latex/Kurikulum/MD_File/jenis_ansatz.md",
+    "Temporary.md",
+    "notes/Main/6_Gradient_Descent.md",
     "notes/Main/5_QUBO.md",
+    "notes/Main/8_Ansatz.md",
+    "Replication/QPCA-master/README.md",
+    "Replication/QPCA-master/QPCA_eigenstate.py",
+    "Replication/QPCA-master/QPCA_QPhE.py",
+    "Replication/QPCA-master/QPCA_4x4eigenstate.py",
+    "Replication/QPCA-master/LICENSE",
+    "Replication/QPCA-master",
+    "QPCA-master/README.md",
+    "notes/Main/7_SPSA.md",
     "notes/Main/4_EPG.md",
     "notes/Main/2_Risk_Avrsion.md",
+    "notes/Main/3_Markowitz.md",
     "notes/Main/1_QuantFinance.md",
+    "notes/Main/5_EPG_i.png",
+    "notes/Main/4_Markowitz.png",
+    "notes/Main/3_Risk_Aversion.png",
+    "notes/Main/1_QF_i.png",
+    "notes/Main/1_QF_ii.png",
+    "notes/Main/2_Kovariansi.png",
     "Latex/PakGagus_Presentasi4/jenis_optimasi_vqe.md",
     "notes/MI_GT/Filtered_Paper/VQE/EfficientSU2_SPSA.md",
-    "notes/Main/6_Gradient_Descent.md",
-    "notes/Main/7_SPSA.md",
     "notes/Main/1_QuantFinance_i.md",
-    "notes/Main/8_Ansatz.md",
     "notes/Main/9_Ansatz_ii.png",
     "notes/Main/9_Ansatz_i.png",
     "notes/Main/8_SPSA_ii.png",
     "notes/Main/8_SPSA_i.png",
-    "notes/Main/7_GD_iii.png",
-    "notes/Main/7_GD_ii.png",
-    "notes/Main/7_GD_i.png",
-    "notes/Main/6_QUBO_ii.png",
-    "notes/Main/6_QUBO_i.png",
-    "notes/Main/5_EPG_ii.png",
     "notes/PakHeru/Born_Rule.md",
     "notes/PakHeru/Markowitz_QUBO.md",
     "notes/MI_GT/GEMINI.md",
-    "notes/LM_Generated/Game_Theory_Universal_Strategy_compressed.pdf",
-    "Temporary.md",
     "Latex/Kurikulum/Modul_5.md",
-    "Latex/Kurikulum/Modul_4.md",
-    "Latex/Kurikulum/Modul_3.md",
-    "Latex/Kurikulum/Modul_2.md",
-    "Latex/Kurikulum/MD_File/SPSA.md",
-    "notes/QnA/log_simple_prove.md",
-    "notes/Main",
-    "notes/MI_GT/Filtered_Paper/New_Paper/Potential_Games.md",
-    "notes/MI_GT/Filtered_Paper/VQE/QUBO_QAOA.md",
-    "notes/MI_GT/Filtered_Paper/New_Paper/Evolutionary_potential_games_on_lattices.md",
-    "Latex/KajianAwal/Bab2/dasar_teori.md",
-    "notes/QnA",
-    "Latex/Kurikulum/Bab-2.3.tex",
-    "notes/MI_GT/research-note-writer.skill",
-    "notes/MI_GT/research-note-writer/scripts",
-    "notes/MI_GT/research-note-writer/references",
-    "notes/MI_GT/research-note-writer/assets",
-    "notes/MI_GT/research-note-writer",
-    "notes/MI_GT/skills/research-note-writer.skill",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

@@ -34,3 +34,32 @@ Penggunaan *Equality Penalty Gradient* (EPG) memungkinkan kita untuk mengubah ma
 Efektivitas dari metode EPG dapat diukur melalui *residual error* dari kendala, yaitu $\epsilon = |1 - \sum w_i|$. Selama proses optimasi, gradien penalti akan terus mendorong vektor bobot menuju bidang hiper (*hyperplane*) $\sum w_i = 1$. Pada titik optimal, gradien dari fungsi tujuan dan gradien dari suku penalti akan saling meniadakan dalam arah yang tegak lurus terhadap permukaan kendala.
 
 Hasil akhir dari pendekatan ini adalah vektor bobot $\mathbf{w}^*$ yang tidak hanya meminimalkan risiko portofolio untuk tingkat imbal hasil tertentu, tetapi juga secara otomatis memenuhi batasan anggaran investasi. Integrasi antara formulasi Markowitz dan teknik EPG ini membentuk kerangka kerja yang kuat untuk analisis portofolio modern yang efisien dan adaptif terhadap berbagai jenis arsitektur komputasi.
+
+## 5. Penuruna rumus
+$$\Phi(\vec{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{k} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{k} \frac{x_j}{k}$$
+suku 1:
+$$\sum_{l=1}^N \mu_l \frac{x_l}{k} = \mu_i \frac{x_i}{k} + \sum_{l=1}^N \mu_l \frac{x_l}{k}$$
+suku 2:
+$$\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{k} \frac{x_j}{k} = \sigma_i^2 \frac{x_i^2}{k^2} + \sum_{j\ne i}\sigma_{ij} \frac{x_ix_j}{k^2} + \sum_{l\ne i} \sigma_{li} \frac{x_l x_i}{k^2} + \sum_{l\ne i}\sum_{j\ne i} \sigma_{kj}\frac{x_k x_k}{k^2}$$
+
+indeks l tidak dimasukkan karena tidak dimasukkan ke dalam persamaan sehingga 
+$$\begin{split}
+\Phi(\vec{x}) &= \sum_{l=1}^N \mu_l \frac{x_l}{k} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i x_j}{k^2} \\
+&= \mu_i \frac{x_i}{k} + \frac{\gamma}{2}\left(\sigma_i^2 \frac{x_i^2}{k^2} + \sum_{j\ne i}\sigma_{ij} \frac{x_ix_j}{k^2} + \sum_{l\ne i} \sigma_{li} \frac{x_l x_i}{k^2} \right) \\
+&= \mu_i \frac{x_i}{k} + \frac{\gamma}{2}\left(\sigma_i^2 \frac{x_i^2}{k^2} + 2\sum_{j\lt i}\sigma_{ij}\frac{x_ix_j}{k^2} \right) \\
+&= \mu_i \frac{x_i}{k} + \frac{\gamma}{2}\sigma_i^2 \frac{x_i^2}{k^2} + \gamma \sum_{j\lt i}\sigma_{ij}\frac{x_ix_j}{k^2}
+\end{split}$$
+karena $x_i^2 = x_i$, maka
+$$\begin{split}
+\Phi(\vec{x}) &= \mu_i \frac{x_i}{k} + \frac{\gamma}{2}\sigma_i^2 \frac{x_i}{k^2} + \gamma \sum_{j\lt i}\sigma_{ij}\frac{x_ix_j}{k^2} \\
+&= x_i\left(\frac{\mu_i }{k} + \frac{\gamma}{2}\frac{\sigma_i^2}{k^2} + \gamma \sum_{j\lt i}\sigma_{ij}\frac{x_j}{k^2} \right)
+\end{split}$$
+sehingga
+$$
+\Delta \Phi(\vec{x}) = \Phi(x_i, \vec{x}_{-i}) - \Phi(x_i^{\prime}, \vec{x}_{-i}) 
+$$
+sehingga nash equilibrium akan didapat jika dan hana jika tidak ada satupun aseet yang memiliki $\Delta u_i \gt 0$   
+$$\begin{split}
+\Delta \Phi(\vec{x}) &= \Phi(1, \vec{x}_{-i}) - \Phi(0, \vec{x}_{-i}) \\
+&= \frac{\mu_i }{k} + \frac{\gamma}{2}\frac{\sigma_i^2}{k^2} + \gamma \sum_{j\lt i}\sigma_{ij}\frac{x_j}{k^2}
+\end{split}$$

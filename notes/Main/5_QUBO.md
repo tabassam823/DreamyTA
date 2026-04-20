@@ -29,3 +29,58 @@ Ketika persamaan (3) diekspansi, ia akan menghasilkan suku-suku linear $\propto 
 Representasi QUBO memungkinkan masalah optimasi portofolio diselesaikan menggunakan algoritma hibrida klasik-kuantum. Dengan memetakan masalah ke dalam Hamiltonian sistem kuantum, kita dapat memanfaatkan fenomena *quantum tunneling* untuk melewati barier energi lokal dan menemukan solusi optimal global pada permukaan fungsi biaya yang kompleks.
 
 Namun, terdapat limitasi pada jumlah qubit yang tersedia pada perangkat keras saat ini. Penggunaan presisi $K$ yang tinggi untuk meningkatkan akurasi bobot $w_i$ akan meningkatkan jumlah variabel biner secara eksponensial ($n \times K$ qubit). Oleh karena itu, pemilihan tingkat diskritisasi harus menyeimbangkan antara resolusi bobot yang diinginkan dan sumber daya komputasi kuantum yang tersedia. Integrasi QUBO ini menjadi jembatan utama antara teori keuangan klasik dan implementasi pada era *Noisy Intermediate-Scale Quantum* (NISQ).
+
+## 5. penurunan rumus
+dari maksimasi kembali ke minimasi karena agen cenderung mencari payoff tinggi, sedangkan ising mencari energi terendah
+$$E(\vec{x}) = \Phi(\vec{x})$$
+sehingga
+$$\begin{split}
+E(\vec{x}) &= \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i x_j}{k^2} -\sum_{i=1}^N \mu_i \frac{x_i}{k} \\
+&= \frac{\gamma}{2}\left(\sum_{i=1}^N\sigma_i^2 \frac{x_i^2}{k^2} + \sum_{i\ne j}\sigma_{ij} \frac{x_ix_j}{k^2}\right) -\sum_{i=1}^N \mu_i \frac{x_i}{k} \\
+&= \frac{\gamma}{2}\sum_{i=1}^N\sigma_i^2 \frac{x_i^2}{k^2} + \frac{\gamma}{2}\sum_{i\ne j}\sigma_{ij} \frac{x_ix_j}{k^2} - \sum_{i=1}^N \mu_i \frac{x_i}{k}
+\end{split}$$
+
+masukkan aplikasi penalti agar sistem meloloskan $\sum_i^N x_i=k$ dan memberi penalti untuk jumlahan yang tidak mengikuti aturan
+$$\begin{split}
+P(\vec{x}) &= A\left( \sum_i^N x_i-k \right)^2 \\
+&= \dots \\\
+&= A \left(\sum_i^Nx_i^2+\sum_{i\ne j}x_ix_j - 2k\sum_{i=1}^N x_i +k^2 \right)
+\end{split}$$
+sehingga
+$$\begin{split}
+E_{total}(\vec{x}) &= E(\vec{x}) + P(\vec{x})\\
+&= \frac{\gamma}{2}\sum_{i=1}^N\sigma_i^2 \frac{x_i^2}{k^2} + \frac{\gamma}{2}\sum_{i\ne j}\sigma_{ij} \frac{x_ix_j}{k^2} - \sum_{i=1}^N \mu_i \frac{x_i}{k} + A \left(\sum_i^Nx_i^2+\sum_{i\ne j}x_ix_j - 2k\sum_{i=1}^N x_i +k^2 \right) \\
+&= \dots \\
+&= \sum_{i=1}^N \left(\frac{\gamma\sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A(1-2k) \right)x_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} + A \right) x_ix_j +Ak^2 \\
+\end{split}$$
+
+dimana kita gunakan permisalan
+$$\begin{split}
+Q_{ii} &= \frac{\gamma\sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A(1-2k) \\
+Q_{ij} &= \frac{\gamma \sigma_{ij}}{2k^2} + A 
+\end{split}$$
+sehingga persamaan akan menjadi
+$$\begin{split}
+E_{total}(\vec{x}) &= \sum_{i=1}^N Q_{ii}x_i + \sum_{i\ne j} Q_{ij} x_ix_j +Ak^2 \\
+\end{split}$$
+dengan transformasi affine $x_i = \frac{s_i+1}{2}$ ;
+sehingga persamaan akan menjadi
+$$\begin{split}
+E_{total}(\vec{x}) &= \sum_{i=1}^N Q_{ii} \left(\frac{s_i+1}{2} \right) + \sum_{i\ne j} Q_{ij} \left(\frac{s_i+1}{2}\right)\left(\frac{s_j+1}{2}\right) +Ak^2 \\
+&= \dots \\
+&= \sum_{i=1}^N \frac{Q_{ii}}{2} s_i + \sum_{i\ne j}\frac{Q_{ij}}{2} s_i + \sum_{i\ne j} \frac{Q_{ij}}{4} s_is_j + \sum_{i=1}^N\frac{Q_{ii}}{2} + \sum_{i\ne j}\frac{Q_{ij}}{4} + Ak^2
+\end{split}$$
+dan dapat kita misalkan
+$$\begin{split}
+h_i &= \frac{Q_{ii}}{2} + \sum_{i\ne j}\frac{Q_{ij}}{2} \\
+J_{ij} &= \frac{Q_{ij}}{4} \\
+C &= \sum_{i=1}^N\frac{Q_{ii}}{2} + \sum_{i\ne j}\frac{Q_{ij}}{4} + Ak^2
+\end{split}$$
+maka model hamiltonian ising dapat dikonstruksi menjadi
+$$
+\hat{\mathcal{H}} = \sum_{i=1}^N h_i s_i + \sum_{i\ne j}J_{ij} s_i s_j + C
+$$
+atau jika dibentuk dalam bentuk pauli;
+$$
+\hat{\mathcal{H}} = \sum_{i=1}^N h_i \hat{Z}_i + \sum_{i\ne j}J_{ij} \hat{Z}_i \hat{Z}_j + C
+$$

@@ -44,3 +44,23 @@ $$\begin{equation}
 S = \frac{R_p - R_f}{\sigma_p}
 \end{equation}$$
 Secara grafis, portofolio optimal yang paling efisien berada pada titik singgung (*tangency portfolio*) antara *Efficient Frontier* dan garis alokasi modal (*Capital Allocation Line*). Titik ini mewakili portofolio dengan *Sharpe Ratio* tertinggi, yang merupakan tujuan akhir dari banyak strategi manajemen aset modern.
+
+
+## 6. Penurunan Rumus
+
+$$
+\mathcal{L}(\vec{\omega}) = \vec{\omega}^{T} \Sigma \vec{\omega} - \lambda(\mu^T\vec{\omega})
+$$
+$$\mathcal{L}(\vec{x}) = \frac{\vec{x}^T}{k}\Sigma \frac{\vec{x}^T}{k} - \lambda \left(\mu^T\frac{\vec{x}}{k}\right)$$
+minimasi ke maksimasi
+$$\begin{split}
+U(\vec{x}) &= -\frac{1}{\lambda} \mathcal{L}(\vec{x}) \\
+&= ... \\
+&= \left(\sum_{i=1}^N \mu_i \frac{x_i}{k}\right) - \frac{1}{\lambda}\left(\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j\right)
+\end{split}$$
+risk tolerance berbanding terbalik dengan risk aversion $\frac{1}{\lambda} \propto \frac{\gamma}{2}$ 
+$$
+U(\vec{x}) = \left(\sum_{i=1}^N \mu_i \frac{x_i}{k}\right) - \frac{\gamma}{2}\left(\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j\right)
+$$
+
+fungsi potensial pada EPG

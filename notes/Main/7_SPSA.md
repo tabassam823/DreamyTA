@@ -37,3 +37,52 @@ Parameter $a, c, A, \alpha,$ dan $\gamma$ adalah konstanta non-negatif yang mene
 Dalam konteks riset ini, SPSA digunakan sebagai *classical optimizer* untuk melatih parameter sirkuit ansatz pada VQE. Ketika kita mencoba meminimalkan fungsi biaya Markowitz melalui representasi Hamiltonian, SPSA mampu menavigasi *loss landscape* yang kasar akibat keterbatasan jumlah *shots* pada perangkat kuantum. Sifat SPSA yang toleran terhadap noise memastikan bahwa proses pembaruan bobot portofolio tetap stabil meskipun data input memiliki variabilitas statistik yang tinggi.
 
 Selain itu, karena SPSA hanya membutuhkan dua pengukuran energi per iterasi, ia secara drastis mengurangi total waktu eksekusi pada simulator maupun *Quantum Processing Unit* (QPU) nyata. Hal ini memungkinkan simulasi portofolio dengan jumlah aset yang lebih banyak tanpa terkendala oleh biaya komputasi yang membengkak secara linear terhadap jumlah aset. Dengan demikian, integrasi SPSA dalam kerangka kerja optimasi portofolio kuantum memberikan keseimbangan yang ideal antara akurasi hasil dan efisiensi operasional.
+
+## 5. Penurunan Rumus
+
+memanfaatkan distribusi bernoulli yang memiliki himpunan -1 dan 1 ke dalam persamaan parameter shift rule:
+$$
+\vec{\Delta}_k=(\vec{\Delta}_{k,1}, \vec{\Delta}_{k,2}, \dots, \vec{\Delta}_{k,D})^T
+$$
+
+dengan evaluasi maju
+$$E_+=E(\theta_k + c_k \vec{\Delta}_k) \approx E(\theta_k) + c_k \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^D \vec{\Delta}_j^2 \frac{\partial^2 E}{\partial \theta_j^2} + \dots$$
+
+dan evaluasi mundur
+$$
+E_-=E(\theta_k - c_k \vec{\Delta}_k) \approx E(\theta_k) - c_k \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^D \vec{\Delta}_j^2 \frac{\partial^2 E}{\partial \theta_j^2} - \dots$$
+
+sehingga didapatkan:
+$$
+E_+ - E_-= 2 c_k \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} + O(c_k^3)
+$$
+
+dan dengan estimator sebagai rumus tebakan ($\hat{g}$):
+$$
+\begin{align}
+\hat{g}_i &= \frac{E_+ - E_-}{2 c_i \vec{\Delta}_i}\\
+&= \frac{2c_i\sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j}}{2 c_i\vec{\Delta}_i} \\
+&= \frac{1}{\vec{\Delta}_i} \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} \\
+&= \frac{\Delta_i}{\Delta_i} \frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j} \\
+&= \frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j}\\
+\end{align}
+$$
+
+karena distribusi bernouli $\in \{-1,1\}$ maka $E\left[\frac{\Delta_j}{\Delta_i}\right] = 0$ untuk $i \ne j$ dan $E\left[\frac{\Delta_i}{\Delta_i}\right] = 1$ sehingga:
+$$
+\begin{align}
+E[\hat{g}_i] &= E\left[\frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j}\right] \\
+&= \frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} E\left[\frac{\Delta_j}{\Delta_i}\right] \frac{\partial E}{\partial \theta_j} \\
+&= \frac{\partial E}{\partial \theta_i}
+\end{align}
+$$
+
+Sehingga didapatkan:
+$$
+\begin{align}
+\theta_{k+1} &= \theta_k - a_k \hat{g}_k(\theta_k) \\
+&= \theta_k - a_k \frac{\partial E}{\partial \theta_k}
+\end{align}
+$$
+
+Ini menunjukkan bahwa SPSA adalah algoritma *Gradient Descent* yang menggunakan estimasi gradien stokastik.
