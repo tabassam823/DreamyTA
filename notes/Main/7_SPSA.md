@@ -5,84 +5,70 @@ Dalam optimasi portofolio menggunakan komputer kuantum, salah satu tantangan uta
 
 Keunggulan utama SPSA dibandingkan metode *finite difference* konvensional adalah efisiensi komputasinya. Jika masalah optimasi melibatkan $p$ variabel, metode *finite difference* membutuhkan $2p$ evaluasi fungsi untuk mengestimasi gradien. Sebaliknya, SPSA hanya membutuhkan 2 evaluasi fungsi tanpa memedulikan besarnya dimensi $p$. Hal ini membuat SPSA menjadi pilihan utama dalam algoritma hibrida klasik-kuantum seperti VQE (*Variational Quantum Eigensolver*), di mana evaluasi sirkuit kuantum merupakan proses yang memakan waktu dan sumber daya.
 
-## 2. Estimasi Gradien Stokastik
-Inti dari SPSA adalah teknik perturbasi simultan, di mana seluruh komponen vektor parameter $\theta$ diubah secara bersamaan melalui vektor acak $\Delta$. Estimasi gradien pada iterasi ke-$k$, dilambangkan sebagai $\hat{g}_k(\theta_k)$, dihitung melalui rumus berikut:
-$$\begin{equation}
-\hat{g}_k(\theta_k) = \frac{y(\theta_k + c_k \Delta_k) - y(\theta_k - c_k \Delta_k)}{2 c_k \Delta_k}
-\end{equation}$$
-di mana $y(\cdot)$ adalah nilai fungsi biaya yang terukur (mungkin mengandung noise), $c_k$ adalah skala perturbasi, dan $\Delta_k$ adalah vektor acak yang biasanya mengikuti distribusi Bernoulli ($\pm 1$).
+## 2. Vektor Gangguan dan Distribusi Rademacher
+Inti dari SPSA adalah teknik perturbasi simultan, di mana seluruh komponen vektor parameter $\theta$ diubah secara bersamaan melalui vektor acak $\Delta_k$. Vektor acak ini wajib mengikuti **Distribusi Rademacher** (distribusi Bernoulli simetris $\pm 1$) agar estimasi gradien bersifat tidak bias.
 
-Untuk setiap elemen ke-$i$ dari vektor gradien, formulasinya adalah:
+### 2.1 Sifat Matematis Distribusi Rademacher
+Vektor $\Delta_k = (\Delta_{k,1}, \Delta_{k,2}, \dots, \Delta_{k,p})^T$ harus memenuhi karakteristik berikut:
+1.  **Simetri**: $\mathbb{E}[\Delta_{k,i}] = 0$, artinya peluang munculnya $+1$ dan $-1$ adalah sama (0.5).
+2.  **Independensi**: Setiap komponen $\Delta_{k,i}$ bersifat saling bebas (*independent and identically distributed*).
+3.  **Invers**: Karena $\Delta_{k,i} \in \{+1, -1\}$, maka berlaku $\Delta_{k,i}^{-1} = \Delta_{k,i}$.
+4.  **Perkalian Silang**: $\mathbb{E}[\Delta_{k,i} \Delta_{k,j}] = \delta_{ij}$, di mana nilainya 1 jika $i=j$ dan 0 jika $i \neq j$.
+
+## 3. Estimasi Gradien Stokastik
+Estimasi gradien pada iterasi ke-$k$, dilambangkan sebagai $\hat{g}_k(\theta_k)$, dihitung melalui rumus berikut:
+$$\begin{equation}
+\hat{g}_k(\theta_k) = \frac{y(\theta_k + c_k \Delta_k) - y(\theta_k - c_k \Delta_k)}{2 c_k} \Delta_k^{-1}
+\end{equation}$$
+di mana $y(\cdot)$ adalah nilai fungsi biaya (energi) yang terukur, $c_k$ adalah skala perturbasi, dan $\Delta_k$ adalah vektor Rademacher.
+
+Untuk setiap elemen ke-$i$ dari vektor gradien, karena $\Delta_{ki}^{-1} = \Delta_{ki}$, formulasinya menjadi:
 $$\begin{equation}
 \hat{g}_{ki}(\theta_k) = \frac{y(\theta_k + c_k \Delta_k) - y(\theta_k - c_k \Delta_k)}{2 c_k \Delta_{ki}}
 \end{equation}$$
-Karena pembilang pada persamaan (2) sama untuk seluruh komponen $i=1, 2, \dots, p$, maka efisiensi komputasi yang tinggi dapat tercapai. Secara teoretis, dalam kondisi *noise* yang bersifat *zero-mean*, estimasi gradien stokastik ini akan konvergen ke gradien asli seiring dengan bertambahnya jumlah iterasi.
+Karena pembilang pada persamaan (2) sama untuk seluruh komponen $i=1, 2, \dots, p$, maka efisiensi komputasi yang tinggi dapat tercapai.
 
-## 3. Aturan Pembaruan dan Barisan *Gain*
+## 4. Aturan Pembaruan dan Barisan *Gain*
 SPSA memperbarui vektor parameter menggunakan aturan yang serupa dengan *Gradient Descent*, namun dengan menggunakan estimasi gradien stokastik dan barisan langkah yang meluruh (*decaying step sizes*). Aturan pembaruan parameternya adalah:
 $$\begin{equation}
 \theta_{k+1} = \theta_k - a_k \hat{g}_k(\theta_k)
 \end{equation}$$
-Keberhasilan konvergensi SPSA sangat bergantung pada pemilihan barisan *gain* $a_k$ (untuk langkah pembaruan) dan $c_k$ (untuk skala perturbasi). Barisan ini didefinisikan sebagai berikut:
+Keberhasilan konvergensi SPSA sangat bergantung pada pemilihan barisan *gain* $a_k$ (untuk langkah pembaruan) dan $c_k$ (untuk skala perturbasi):
 $$\begin{equation}
 a_k = \frac{a}{(k + 1 + A)^\alpha}, \quad c_k = \frac{c}{(k + 1)^\gamma}
 \end{equation}$$
+Parameter standar yang sering digunakan adalah $\alpha = 0.602$ dan $\gamma = 0.101$ untuk memastikan konvergensi asimtotik yang optimal.
 
-Parameter $a, c, A, \alpha,$ dan $\gamma$ adalah konstanta non-negatif yang menentukan dinamika optimasi:
-- $A$ adalah konstanta stabilitas yang mencegah langkah terlalu besar pada iterasi awal.
-- $\alpha$ dan $\gamma$ mengontrol kecepatan peluruhan; nilai standar yang sering digunakan adalah $\alpha = 0.602$ dan $\gamma = 0.101$ untuk memastikan konvergensi asimtotik yang optimal.
-- $a$ dan $c$ dipilih berdasarkan magnitudo fungsi biaya dan sensitivitas parameter terhadap perubahan energi.
+## 5. Penurunan Rumus Matematis
+Penurunan ini membuktikan bahwa SPSA adalah estimator tak bias dari gradien sesungguhnya. Misalkan kita melakukan ekspansi Taylor pada evaluasi maju ($E_+$) dan mundur ($E_-$):
 
-## 4. Relevansi dalam Optimasi Portofolio Kuantum
-Dalam konteks riset ini, SPSA digunakan sebagai *classical optimizer* untuk melatih parameter sirkuit ansatz pada VQE. Ketika kita mencoba meminimalkan fungsi biaya Markowitz melalui representasi Hamiltonian, SPSA mampu menavigasi *loss landscape* yang kasar akibat keterbatasan jumlah *shots* pada perangkat kuantum. Sifat SPSA yang toleran terhadap noise memastikan bahwa proses pembaruan bobot portofolio tetap stabil meskipun data input memiliki variabilitas statistik yang tinggi.
+$$E_+ = E(\theta_k + c_k \Delta_k) \approx E(\theta_k) + c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^p \Delta_j^2 \frac{\partial^2 E}{\partial \theta_j^2} + \dots$$
+$$E_- = E(\theta_k - c_k \Delta_k) \approx E(\theta_k) - c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^p \Delta_j^2 \frac{\partial^2 E}{\partial \theta_j^2} - \dots$$
 
-Selain itu, karena SPSA hanya membutuhkan dua pengukuran energi per iterasi, ia secara drastis mengurangi total waktu eksekusi pada simulator maupun *Quantum Processing Unit* (QPU) nyata. Hal ini memungkinkan simulasi portofolio dengan jumlah aset yang lebih banyak tanpa terkendala oleh biaya komputasi yang membengkak secara linear terhadap jumlah aset. Dengan demikian, integrasi SPSA dalam kerangka kerja optimasi portofolio kuantum memberikan keseimbangan yang ideal antara akurasi hasil dan efisiensi operasional.
+Selisih kedua evaluasi tersebut menghilangkan suku orde genap:
+$$E_+ - E_- = 2 c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + O(c_k^3)$$
 
-## 5. Penurunan Rumus
+Substitusi ke dalam rumus estimator $\hat{g}_i$:
+$$\begin{align}
+\hat{g}_i &= \frac{E_+ - E_-}{2 c_k \Delta_i} \approx \frac{2 c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j}}{2 c_k \Delta_i} \\
+&= \frac{1}{\Delta_i} \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} = \frac{\Delta_i}{\Delta_i} \frac{\partial E}{\partial \theta_i} + \sum_{j \neq i} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j}
+\end{align}$$
 
-memanfaatkan distribusi bernoulli yang memiliki himpunan -1 dan 1 ke dalam persamaan parameter shift rule:
-$$
-\vec{\Delta}_k=(\vec{\Delta}_{k,1}, \vec{\Delta}_{k,2}, \dots, \vec{\Delta}_{k,D})^T
-$$
+Mengambil nilai harapan ($\mathbb{E}$) terhadap distribusi Rademacher:
+$$\mathbb{E}[\hat{g}_i] = \frac{\partial E}{\partial \theta_i} + \sum_{j \neq i} \mathbb{E}\left[\frac{\Delta_j}{\Delta_i}\right] \frac{\partial E}{\partial \theta_j}$$
+Karena $\mathbb{E}[\Delta_j/\Delta_i] = 0$ untuk $j \neq i$, maka didapatkan $\mathbb{E}[\hat{g}_i] = \frac{\partial E}{\partial \theta_i}$.
 
-dengan evaluasi maju
-$$E_+=E(\theta_k + c_k \vec{\Delta}_k) \approx E(\theta_k) + c_k \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^D \vec{\Delta}_j^2 \frac{\partial^2 E}{\partial \theta_j^2} + \dots$$
+## 6. Contoh Numerik Implementasi
+Berdasarkan visualisasi riset, misalkan kita memiliki Hamiltonian sederhana $H = 10 \hat{Z}_1 + 5 \hat{Z}_2$ dengan sirkuit ansatz $|\psi(\theta)\rangle = R_y(\theta_1)|0\rangle \otimes R_y(\theta_2)|0\rangle$.
 
-dan evaluasi mundur
-$$
-E_-=E(\theta_k - c_k \vec{\Delta}_k) \approx E(\theta_k) - c_k \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^D \vec{\Delta}_j^2 \frac{\partial^2 E}{\partial \theta_j^2} - \dots$$
-
-sehingga didapatkan:
-$$
-E_+ - E_-= 2 c_k \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} + O(c_k^3)
-$$
-
-dan dengan estimator sebagai rumus tebakan ($\hat{g}$):
-$$
-\begin{align}
-\hat{g}_i &= \frac{E_+ - E_-}{2 c_i \vec{\Delta}_i}\\
-&= \frac{2c_i\sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j}}{2 c_i\vec{\Delta}_i} \\
-&= \frac{1}{\vec{\Delta}_i} \sum_{j=1}^D \vec{\Delta}_j \frac{\partial E}{\partial \theta_j} \\
-&= \frac{\Delta_i}{\Delta_i} \frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j} \\
-&= \frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j}\\
-\end{align}
-$$
-
-karena distribusi bernouli $\in \{-1,1\}$ maka $E\left[\frac{\Delta_j}{\Delta_i}\right] = 0$ untuk $i \ne j$ dan $E\left[\frac{\Delta_i}{\Delta_i}\right] = 1$ sehingga:
-$$
-\begin{align}
-E[\hat{g}_i] &= E\left[\frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j}\right] \\
-&= \frac{\partial E}{\partial \theta_i} + \sum_{i\ne j} E\left[\frac{\Delta_j}{\Delta_i}\right] \frac{\partial E}{\partial \theta_j} \\
-&= \frac{\partial E}{\partial \theta_i}
-\end{align}
-$$
-
-Sehingga didapatkan:
-$$
-\begin{align}
-\theta_{k+1} &= \theta_k - a_k \hat{g}_k(\theta_k) \\
-&= \theta_k - a_k \frac{\partial E}{\partial \theta_k}
-\end{align}
-$$
-
-Ini menunjukkan bahwa SPSA adalah algoritma *Gradient Descent* yang menggunakan estimasi gradien stokastik.
+1.  **Fungsi Energi**: $E(\theta_1, \theta_2) = 10 \cos(\theta_1) + 5 \cos(\theta_2)$.
+2.  **Inisialisasi**: $\theta^{(0)} = (1.571, 1.571)$, $a_0 = 0.1, c_0 = 0.1$. Energi awal $E = 0$.
+3.  **Perturbasi**: Pilih $\Delta_0 = (1, -1)^T$.
+    - $\theta_+ = (1.671, 1.471) \implies E_+ = -0.499$
+    - $\theta_- = (1.471, 1.671) \implies E_- = 0.499$
+4.  **Estimasi Gradien**:
+    - $\hat{g}_1 = \frac{-0.499 - 0.499}{2(0.1)(1)} = -4.99$
+    - $\hat{g}_2 = \frac{-0.499 - 0.499}{2(0.1)(-1)} = 4.99$
+5.  **Pembaruan Parameter**:
+    $$\theta^{(1)} = \begin{pmatrix} 1.571 \\ 1.571 \end{pmatrix} - 0.1 \begin{pmatrix} -4.99 \\ 4.99 \end{pmatrix} = \begin{pmatrix} 2.070 \\ 1.072 \end{pmatrix}$$
+6.  **Hasil**: Energi baru $E(2.070, 1.072) \approx -2.39$. Terbukti terjadi penurunan energi yang signifikan hanya dengan satu iterasi SPSA.

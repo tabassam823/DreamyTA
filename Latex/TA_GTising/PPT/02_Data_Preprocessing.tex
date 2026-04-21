@@ -1,12 +1,4 @@
-\section{Prapemrosesan Data \& Parameter Statistik}
-
-\begin{frame}
-\centering
-\highlight{\Huge Bagian 2: Prapemrosesan Data \& Parameter Statistik}
-\end{frame}
-
-\subsection{Akuisisi \& Log-Return}
-\begin{frame}{2.1 Akuisisi \& Prapemrosesan Data Mentah}
+\begin{frame}{1. Akuisisi \& Prapemrosesan Data Mentah}
 Contoh Dataset (1-3 Nov 2023): ADRO, BBCA, ICBP, TLKM
 \vspace{0.2cm}
 
@@ -25,10 +17,6 @@ Date & ADRO.JK & BBCA.JK & ICBP.JK & TLKM.JK \\
 \end{table}
 
 \textbf{Transformasi Imbal Hasil (\textit{Log-Return}):}
-\begin{equation}
-R_{i,t} = \ln \left( \frac{P_{i,t}}{P_{i,t-1}} \right)
-\end{equation}
-
 \begin{table}[]
 \begin{tabular}{lrrrr}
 \toprule
@@ -41,60 +29,16 @@ Date & ADRO & BBCA & ICBP & TLKM \\
 \end{table}
 \end{frame}
 
-\subsection{Estimasi Parameter Statistik}
-\begin{frame}{2.2 Estimasi Parameter Statistik Empiris}
-Hasil kalkulasi parameter statistik dasar berdasarkan data sampel (2 hari):
+\begin{frame}{2. Binarisasi \& Parameter Strategis ($\tilde{\mu}$)}
+\textbf{Risk-Aversion Endogen ($\gamma$):} Diperoleh $\gamma = 0.031156$.
 
-\begin{table}[]
-\resizebox{\textwidth}{!}{
-\begin{tabular}{lrrrr}
-\toprule
-Parameter & ADRO & BBCA & ICBP & TLKM \\
-\midrule
-$\bar{R}_i$ & 0,0163 & 0,0171 & 0,0036 & -0,0070 \\
-$\text{std}(R_i)$ & 0,0348 & 0,0163 & 0,0085 & 0,0098 \\
-$\mu_{ann,i}$ & 4,1076 & 4,3092 & 0,9072 & -1,7514 \\
-$\sigma_{ann,i}$ & 0,5522 & 0,2582 & 0,1347 & 0,1560 \\
-\bottomrule
-\end{tabular}
-}
-\end{table}
-
-\textbf{Aggregated Sharpe Ratio ($Z$):}
+\vspace{0.3cm}
+\textbf{Return Strategis Bersyarat ($\tilde{\mu}_i$):}
 \begin{itemize}
-    \item Mean $|\mu_{ann}| = \frac{1}{4}(4,11 + 4,31 + 0,91 + 1,75) = 2,7689$
-    \item Mean $\sigma_{ann} = \frac{1}{4}(0,55 + 0,26 + 0,13 + 0,16) = 0,2753$
-    \item $Z = 2,7689 / 0,2753 = \mathbf{10,0585}$
+    \item Diperoleh nilai return ekspektasian berdasarkan \textit{microstates}:
+    \item $\tilde{\mu} = \begin{bmatrix} 0.0041 &  0.0008 &  0.0031 & -0.0037 \end{bmatrix}^T$
 \end{itemize}
-\end{frame}
 
-\subsection{Risk-Aversion Endogen}
-\begin{frame}{2.3 Formulasi Risk-Aversion Endogen ($\gamma$)}
-Parameter $\gamma$ merespons kondisi pasar secara dinamis (*endogenous*) melalui fungsi sigmoid logistik.
-
-\textbf{Rumus Risk-Aversion:}
-\begin{equation}
-\gamma = \frac{1}{1 + e^{Z}}
-\end{equation}
-
-\textbf{Hasil Kalkulasi Sampel:}
-\begin{itemize}
-    \item Dengan $Z = 10,0585$, diperoleh $\gamma \approx 4,28 \times 10^{-5}$.
-    \item \textit{Note:} Pada implementasi \textit{backtesting} (63 hari), karakteristik pasar yang lebih stabil menghasilkan $Z \approx 3,43$ sehingga diperoleh $\gamma = \mathbf{0,031156}$.
-\end{itemize}
-\end{frame}
-
-\subsection{Binarisasi \& Imbal Hasil Strategis}
-\begin{frame}{2.4 Binarisasi \& Imbal Hasil Strategis ($\tilde{\mu}$)}
-Data binarisasi digunakan untuk menangkap \textit{microstates} sistem: $s_{i,t} = 1$ jika $R_{i,t} \leq 0$, dan $s_{i,t} = 0$ jika $R_{i,t} > 0$.
-
-\textbf{Imbal Hasil Strategis Bersyarat ($\tilde{\mu}_i$):}
-\begin{equation}
-\tilde{\mu}_i = \sum_{s \in S} P(s) \bar{R}_i(s)
-\end{equation}
-
-\textbf{Hasil Vektor $\tilde{\mu}$ (Final):}
-\begin{equation}
-\tilde{\mu} = \begin{bmatrix} 0,0041 &  0,0008 &  0,0031 & -0,0037 \end{bmatrix}^T
-\end{equation}
+\vspace{0.3cm}
+Pemaparan di atas menjelaskan bahwa pergerakan log return diubah menjadi state probabilitas biner ($\leq 0 \rightarrow 1$, sebaliknya $0$) untuk memodelkan interaksi kondisional antar aset dalam teori permainan.
 \end{frame}

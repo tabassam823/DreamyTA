@@ -1,69 +1,12 @@
-\section{Formalisme Teori Permainan}
+\begin{frame}{4. Formalisme \textit{Exact Potential Game}}
+Pemilihan portofolio diformulasikan sebagai \textbf{\textit{Exact Potential Game}}, di mana utilitas murni individu (Pemain $i$) mendefinisikan keputusan mengkoleksi saham $x_i \in \{0, 1\}$:
 
-\begin{frame}
-\centering
-\highlight{\Huge Bagian 4: Formalisme Teori Permainan}
-\end{frame}
+$$ u_i(x_i, x_{-i}) = x_i \left( \tilde{\mu}_i - \frac{\gamma}{2}\Sigma_{ii} - \gamma \sum_{j \neq i} \tilde{\Sigma}_{ij} x_j \right) $$
 
-\subsection{Utilitas Individu}
-\begin{frame}{4.1 Utilitas Individu \& Payoff Pemain}
-Dalam model ini, setiap aset $i$ dianggap sebagai pemain yang mencoba memaksimalkan utilitasnya sendiri ($u_i$) berdasarkan keputusan alokasi $x_i \in \{0, 1\}$.
-
-\textbf{Fungsi Utilitas Strategis:}
-\begin{equation}
-u_i(x_i, x_{-i}) = x_i \underbrace{\left( \tilde{\mu}_i - \frac{\gamma}{2}\tilde{\sigma}_{ii} - \gamma \sum_{j \neq i} \tilde{\sigma}_{ij} x_j \right)}_{\text{Marginal Utility}}
-\end{equation}
-
-\textbf{Komponen Payoff:}
+\textbf{Inti Teori Permainan (\textit{Game Theory}):}
+Terdapat interaksi strategis persaingan utilitas antar-saham:
 \begin{itemize}
-    \item $\tilde{\mu}_i$: Imbal hasil strategis (dorongan positif).
-    \item $\frac{\gamma}{2}\tilde{\sigma}_{ii}$: Penalti risiko individu (disinsentif variansi).
-    \item $\gamma \sum_{j \neq i} \tilde{\sigma}_{ij} x_j$: Penalti interaksi (disinsentif korelasi/redundansi dengan aset lain yang dipilih).
+    \item Kenaikan risiko variansi individu ($\Sigma_{ii}$) menurunkan \textit{payoff}.
+    \item Jika dua saham memiliki redundansi/korelasi tinggi ($\tilde{\Sigma}_{ij} > 0$), utilitas akan saling memberikan \textbf{penalti marginal} (hukuman) saat keduanya dipilih secara simultan ($x_i=1, x_j=1$).
 \end{itemize}
-\end{frame}
-
-\subsection{Exact Potential Game}
-\begin{frame}{4.2 Definisi \textit{Exact Potential Game}}
-Sistem ini diklasifikasikan sebagai \textbf{\textit{Exact Potential Game}} karena setiap perubahan utilitas marginal pemain identik dengan perubahan pada sebuah fungsi potensial global ($\Phi$).
-
-\textbf{Syarat Formal:}
-\begin{equation}
-u_i(1, x_{-i}) - u_i(0, x_{-i}) = \Phi(1, x_{-i}) - \Phi(0, x_{-i})
-\end{equation}
-
-\textbf{Signifikan Fisika-Finansial:}
-\begin{itemize}
-    \item Egoisme pemain (maksimalisasi $u_i$) secara otomatis menuntun sistem menuju optimasi global ($\Phi$).
-    \item Titik \textit{Nash Equilibrium} murni dari permainan ini berhimpit dengan titik optimal global (minimum/maksimum) dari fungsi potensial.
-\end{itemize}
-\end{frame}
-
-\subsection{Konstruksi Fungsi Potensial}
-\begin{frame}{4.3 Konstruksi Fungsi Potensial Global ($\Phi$)}
-Fungsi potensial $\Phi$ merangkum seluruh dinamika interaksi antar pemain ke dalam satu skalar tunggal. Ini adalah representasi matematika dari "energi" sistem portofolio.
-
-\textbf{Formulasi Potensial:}
-\begin{equation}
-\Phi(x) = \sum_{i=1}^N x_i \tilde{\mu}_i - \frac{\gamma}{2} \sum_{i=1}^N \sum_{j=1}^N \tilde{\sigma}_{ij} x_i x_j
-\end{equation}
-
-\textbf{Analogi Teoretis:}
-\begin{itemize}
-    \item Suku pertama ($\sum x_i \tilde{\mu}_i$) setara dengan pengaruh medan magnet luar pada spin.
-    \item Suku kedua ($\sum \sum \tilde{\sigma}_{ij} x_i x_j$) setara dengan interaksi antar-spin (kopling) dalam model Ising.
-\end{itemize}
-\end{frame}
-
-\subsection{Interaksi Strategis}
-\begin{frame}{4.4 Interaksi Strategis \& Penalti Marginal}
-Inti dari \textit{Potential Game} adalah adanya hukuman bersama jika terjadi redundansi informasi dalam pemilihan aset.
-
-\textbf{Mekanisme Penalti:}
-\begin{itemize}
-    \item Jika aset $i$ dan $j$ memiliki korelasi informasi tinggi ($\text{NMI}_{ij} \gg 0$), maka $\tilde{\sigma}_{ij}$ akan bernilai besar.
-    \item Saat keduanya dipilih ($x_i=1, x_j=1$), utilitas keduanya berkurang secara signifikan sebesar $\gamma \tilde{\sigma}_{ij}$.
-\end{itemize}
-
-\textbf{Kesimpulan:}
-Sistem secara cerdas akan menghindari aset yang "serupa" (redundant) dan lebih memilih diversifikasi yang memiliki komplementaritas informasi tinggi untuk meminimalkan penalti pada $\Phi(x)$.
 \end{frame}

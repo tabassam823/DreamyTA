@@ -1,65 +1,105 @@
-\section{Transformasi Model Markowitz menjadi Hamiltonian Ising}
+\section{Hamiltonian Ising sebagai Fondasi Masalah Pasar Finansial}
+
+\subsection{Representasi Kualitatif dalam Pasar Finansial}
+% Kerangka teoretis mengenai representasi kualitatif pasar meliputi:
+% \begin{enumerate}
+%     \item Analogi agen ekonomi sebagai spin (Long/Short)
+%     \item Interaksi antar agen (herding behavior)
+%     \item Pengaruh informasi eksternal (external field)
+%     \item Transisi fase dalam dinamika pasar
+% \end{enumerate}
+
+Representasi kualitatif pasar finansial dalam kerangka \textit{Econophysics} sering kali memanfaatkan analogi sistem partikel yang berinteraksi guna memodelkan dinamika keputusan agen secara kolektif. Dalam model \textit{Ising}, setiap agen ekonomi direpresentasikan sebagai sebuah \textit{spin} ($s_i$) yang memiliki dua keadaan diskrit, yaitu $+1$ untuk merepresentasikan posisi beli (\textit{long}) dan $-1$ untuk posisi jual (\textit{short}). Pendekatan ini memungkinkan analisis terhadap bagaimana interaksi lokal antar pedagang dapat memicu munculnya fenomena makroskopis yang kompleks, seperti tren pasar yang persisten atau lonjakan volatilitas yang ekstrem. Menurut \cite{sarkar_quantum_2018}, pemetaan ini memberikan landasan teoretis untuk memahami bagaimana strategi yang dipilih oleh mayoritas populasi dapat mencapai titik kesetimbangan melalui mekanisme kopling dalam batas termodinamika.
+
+Dinamika kolektif dalam pasar finansial dapat dipandang sebagai manifestasi dari \textit{phase transition} (transisi fase) yang terjadi akibat perubahan parameter kontrol dalam sistem sosial-ekonomi. Ketika interaksi antar agen bersifat dominan (\textit{ferromagnetic coupling}), pasar cenderung mengalami \textit{herding behavior} (perilaku kawanan) di mana mayoritas pelaku mengikuti tren yang sama, yang secara matematis setara dengan fase teratur dalam fisika magnetik. Sebaliknya, pengaruh faktor eksternal seperti berita ekonomi, pengumuman kebijakan moneter, atau sentimen pasar global direpresentasikan sebagai \textit{external field} ($h_i$) yang memberikan bias pada probabilitas pemilihan keadaan \textit{spin}. Melalui formalisme \textit{Hamiltonian}, energi total sistem mencerminkan tingkat konflik atau keselarasan dalam pasar, di mana konfigurasi dengan energi minimum sering kali berkorespondensi dengan kondisi \textit{Nash equilibrium} dalam teori permainan \cite{galam_ising_2010}.
+
+\begin{example}
+    Fenomena gelembung spekulatif (\textit{speculative bubbles}) dan kehancuran pasar (\textit{market crash}) dapat diilustrasikan melalui mekanisme penguatan parameter interaksi $J_{ij}$ dalam model \textit{Ising}. Bayangkan sebuah kondisi pasar di mana para investor mulai saling meniru tindakan satu sama lain akibat ketidakpastian informasi, yang secara fisik setara dengan peningkatan kekuatan kopling feromagnetik antar \textit{spin}. Ketika kekuatan interaksi ini melewati ambang batas kritis tertentu, sistem akan mengalami transisi fase dari keadaan yang tidak teratur (\textit{paramagnetic}) menuju keadaan yang sangat teratur (\textit{ferromagnetic}), di mana hampir seluruh agen secara spontan memilih posisi yang sama (\textit{all buy} atau \textit{all sell}).
+
+    Dalam situasi \textit{crash}, perintah jual yang masif memicu efek domino yang memperkuat sentimen negatif secara eksponensial, menciptakan sebuah spiral penurunan harga yang sulit dihentikan tanpa adanya intervensi eksternal. Secara matematis, hal ini direpresentasikan oleh dominasi suku interaksi dalam \textit{Hamiltonian} yang memaksa sistem untuk jatuh ke dalam lembah energi global yang merepresentasikan kepanikan kolektif. Pemahaman mengenai ambang batas kritis ini sangat penting bagi regulator pasar untuk mengidentifikasi tanda-tanda awal ketidakstabilan sistemik sebelum transisi fase yang merusak terjadi. Dengan demikian, model \textit{Ising} bertindak sebagai alat diagnostik kualitatif yang menjembatani perilaku mikro agen dengan stabilitas makro sistem keuangan.
+\end{example}
+
+\subsection{Pengenalan Hamiltonian Ising}
+% Sub-bab ini menguraikan landasan formal model Ising yang meliputi:
+% \begin{enumerate}
+%     \item Definisi Hamiltonian Ising sebagai fungsi energi sistem
+%     \item Parameter interaksi J dan medan eksternal h
+%     \item Signifikansi ground state dalam optimasi
+% \end{enumerate}
+
+Model \textit{Ising} merupakan salah satu kerangka teoretis paling fundamental dalam mekanika statistik yang digunakan untuk mendeskripsikan sistem partikel dengan derajat kebebasan diskrit melalui interaksi magnetik antar \textit{spin}. Secara formal, sistem ini didefinisikan melalui sebuah fungsi energi atau \textit{Hamiltonian} yang mengkuantifikasi total energi dari konfigurasi \textit{spin} tertentu dalam sebuah kisi (\textit{lattice}). Komponen utama dari \textit{Hamiltonian} ini terdiri dari suku interaksi antar tetangga terdekat, yang direpresentasikan oleh konstanta kopling ($J_{ij}$), dan suku pengaruh medan magnet eksternal ($h_i$). Menurut \cite{lucas_ising_2014}, struktur matematika ini memiliki keunggulan dalam memetakan berbagai masalah optimasi kombinasional ke dalam bentuk fungsional energi, di mana variabel biner sistem berkorelasi langsung dengan keputusan logis dalam sebuah masalah.
+
+Secara matematis, bentuk umum dari \textit{Hamiltonian Ising} untuk sistem dengan $N$ buah \textit{spin} dapat dinyatakan sebagai berikut:
+\begin{equation}
+    H(\sigma) = -\sum_{i < j} J_{ij} \sigma_i \sigma_j - \sum_{i=1}^{N} h_i \sigma_i
+\end{equation}
+di mana $\sigma_i \in \{+1, -1\}$ adalah nilai \textit{spin} pada situs ke-$i$. Suku pertama dalam persamaan (1) merepresentasikan energi interaksi antar pasangan \textit{spin}, di mana nilai $J_{ij} > 0$ menunjukkan interaksi feromagnetik (kecenderungan \textit{spin} untuk searah) dan $J_{ij} < 0$ menunjukkan interaksi antiferomagnetik. Sementara itu, suku kedua menggambarkan interaksi individu setiap \textit{spin} dengan medan magnet luar yang berusaha menyearahkan posisi \textit{spin} sesuai dengan arah medan tersebut. Keadaan energi terendah dari sistem ini, yang dikenal sebagai \textit{ground state}, merupakan solusi optimal yang meminimalkan seluruh konflik interaksi dalam sistem, menjadikannya model yang sangat kuat untuk menyelesaikan persoalan minimisasi biaya atau risiko dalam domain finansial.
+
+\begin{example}
+    Untuk memahami mekanisme operasional dari \textit{Hamiltonian Ising}, kita dapat meninjau sistem sederhana yang terdiri dari dua buah \textit{spin} ($\sigma_1, \sigma_2$) dengan interaksi feromagnetik ($J_{12} = 1$) tanpa kehadiran medan eksternal ($h = 0$). Dalam konfigurasi ini, \textit{Hamiltonian} sistem disederhanakan menjadi $H = -J_{12} \sigma_1 \sigma_2$. Jika kedua \textit{spin} berada dalam keadaan yang sama (keduanya $+1$ atau keduanya $-1$), maka hasil kali $\sigma_1 \sigma_2$ adalah $1$, sehingga energi total sistem menjadi $H = -1$ (energi minimum). Sebaliknya, jika kedua \textit{spin} berlawanan arah, energi sistem menjadi $H = +1$, yang menunjukkan keadaan tereksitasi atau tidak stabil secara energi.
+
+    Fenomena ini mengilustrasikan prinsip dasar \textit{energy minimization}, di mana sistem secara alami akan mencari konfigurasi yang memberikan nilai $H$ terkecil. Dalam konteks aplikasi praktis, interaksi feromagnetik ini dapat dianulogikan sebagai konsensus atau kesepakatan antar agen ekonomi, sedangkan pencarian \textit{ground state} setara dengan proses pencarian titik ekuilibrium pasar. Sifat matematis ini memungkinkan masalah-masalah kompleks dalam kelas \textit{NP-hard} untuk dikonversi menjadi pencarian konfigurasi variabel biner yang optimal melalui perangkat komputasi kuantum. Sebagai penutup, fleksibilitas model \textit{Ising} dalam merepresentasikan batasan-batasan (\textit{constraints}) dan fungsi objektif menjadikannya sebagai fondasi utama dalam pengembangan algoritma optimasi modern seperti \textit{Quantum Annealing} dan VQE.
+\end{example}
 
 \subsection{Formulasi Objektif Markowitz pada Portofolio Biner}
+% Sub-bab ini menguraikan transisi dari model Markowitz kontinu ke diskrit:
+% \begin{enumerate}
+%     \item Definisi pemilihan portofolio sebagai masalah biner
+%     \item Fungsi objektif mean-variance dalam domain diskrit
+%     \item Kompleksitas kombinasional (NP-hard)
+% \end{enumerate}
 
-Masalah pemilihan portofolio diskret didefinisikan pada semesta aset $N$ dengan keputusan investasi yang direpresentasikan oleh profil strategi biner $\mathbf{x} \in \{0, 1\}^N$. Setiap elemen $x_i = 1$ menunjukkan inklusi aset $i$ dalam portofolio, sementara $x_i = 0$ menunjukkan eksklusi. Tujuan optimasi adalah meminimalkan fungsi Lagrangian Markowitz $\mathcal{L}(\mathbf{x})$ yang merupakan jumlahan dari risiko varians sistemik $\mathbf{x}^T \mathbf{\Sigma} \mathbf{x}$ dan ekspektasi imbal hasil $\boldsymbol{\mu}^T \mathbf{x}$ yang dikontrol oleh pengali Lagrange $\lambda \in \mathbb{R}^+$ \cite{markowitz_portfolio_1952}:
-\begin{equation}
-\min_{\mathbf{x} \in \mathbb{B}^N} \mathcal{L}(\mathbf{x}) = \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j - \lambda \sum_{i=1}^N \mu_i x_i
-\label{eq:markowitz_binary_lagrangian}
-\end{equation}
-Parameter $\lambda$ dalam persamaan (\ref{eq:markowitz_binary_lagrangian}) merepresentasikan \textit{trade-off} antara risiko dan \textit{return}, di mana nilai optimalnya ditentukan oleh toleransi risiko investor pada kurva \textit{efficient frontier}.
+Formulasi portofolio Markowitz tradisional yang mengandalkan bobot alokasi kontinu sering kali tidak memadai dalam merepresentasikan kendala riil pasar, seperti keputusan biner untuk menyertakan atau mengecualikan suatu aset dalam portofolio. Dalam konteks pemilihan portofolio biner, variabel keputusan direpresentasikan sebagai vektor biner $x \in \{0, 1\}^N$, di mana nilai $1$ menunjukkan kepemilikan aset dan $0$ menunjukkan ketiadaan aset tersebut dalam keranjang investasi. Transisi dari domain kontinu ke diskrit ini mengubah masalah optimasi kuadratik yang bersifat cembung menjadi masalah optimasi kombinasional yang termasuk dalam kelas \textit{NP-hard} \cite{sarkar_quantum_2018}. Menurut \cite{markowitz_portfolio_1952}, inti dari strategi ini adalah mencari titik optimal yang menyeimbangkan antara ekspektasi imbal hasil maksimun dengan risiko volatilitas minimum, namun dalam bentuk biner, ruang pencarian solusi tumbuh secara eksponensial terhadap jumlah aset $N$.
 
-Untuk menyederhanakan struktur fungsi tujuan ke dalam bentuk maksimisasi imbal hasil neto, dilakukan penskalaan Lagrangian dengan konstanta penghindaran risiko (\textit{risk aversion}) $-\gamma/2$. Melalui substitusi hubungan analitis $\lambda = 2/\gamma$, fungsi objektif tersebut ditransformasikan ke dalam representasi skalar $\Phi(\mathbf{x})$ sebagai berikut:
+Secara matematis, fungsi objektif Markowitz untuk portofolio biner dapat dirumuskan sebagai sebuah masalah minimisasi biaya (\textit{cost function}) yang menggabungkan varians dan imbal hasil melalui parameter \textit{risk aversion} ($\lambda$). Persamaan tersebut dinyatakan sebagai berikut:
 \begin{equation}
-\begin{aligned}
-\Phi(\mathbf{x}) &= -\frac{\gamma}{2} \mathcal{L}(\mathbf{x}) \\
-&= -\frac{\gamma}{2} \left( \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j - \frac{2}{\gamma} \sum_{i=1}^N \mu_i x_i \right) \\
-&= \sum_{i=1}^N \mu_i x_i - \frac{\gamma}{2} \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j \\
-\end{aligned}
-\label{eq:global_potential_function}
+    f(x) = \lambda \sum_{i=1}^{N} \sum_{j=1}^{N} \Sigma_{ij} x_i x_j - \sum_{i=1}^{N} \mu_i x_i
 \end{equation}
-Bentuk akhir pada persamaan (\ref{eq:global_potential_function}) memberikan struktur fungsional yang lebih sederhana untuk dipetakan ke dalam format optimasi tanpa kendala (\textit{unconstrained optimization}).
+di mana $\Sigma_{ij}$ merupakan elemen matriks kovarians yang merepresentasikan risiko sistemik antar aset $i$ dan $j$, sedangkan $\mu_i$ adalah ekspektasi imbal hasil dari aset ke-$i$. Parameter $\lambda > 0$ berfungsi sebagai pengontrol toleransi risiko investor, di mana nilai $\lambda$ yang lebih besar menunjukkan preferensi yang lebih tinggi terhadap stabilitas dibandingkan agresivitas imbal hasil. Struktur kuadratik pada suku pertama persamaan (2) mencerminkan interaksi berpasangan antar keputusan investasi, yang secara struktural identik dengan interaksi antar \textit{spin} dalam model \textit{Ising}, sehingga memungkinkan pemetaan langsung masalah finansial ini ke dalam sistem fisik \cite{lucas_ising_2014}.
 
-\subsection{Konstruksi QUBO dengan Penalti Kardinalitas}
+\begin{example}
+    Sebagai ilustrasi operasional, tinjau sebuah skenario pemilihan portofolio yang terdiri dari tiga aset potensial ($A, B, C$) dengan ekspektasi imbal hasil yang sama namun memiliki korelasi risiko yang berbeda. Jika aset $A$ dan $B$ memiliki kovarians positif yang tinggi ($\Sigma_{AB} \gg 0$), maka suku kuadratik dalam persamaan (2) akan memberikan penalti energi yang besar jika investor memilih kedua aset tersebut secara bersamaan ($x_A=1, x_B=1$). Sebaliknya, jika aset $C$ memiliki korelasi negatif atau nol terhadap $A$, maka kombinasi $\{A, C\}$ akan menghasilkan nilai fungsi objektif yang lebih rendah, yang secara ekonomi merepresentasikan strategi diversifikasi untuk mereduksi risiko total.
 
-[tambahkan definisi dari QUBO terlebih dahulu] Pemetaan masalah alokasi ke dalam format \textit{Quadratic Unconstrained Binary Optimization} (QUBO) memerlukan penambahan penalti kuadratik $P(\mathbf{x})$ untuk mengatur kendala pemilihan menjadi tepat $K$ aset. Hamiltonian biaya murni didefinisikan sebagai $H_{pure}(\mathbf{x}) = -\Phi(\mathbf{x})$, sementara fungsi penalti dikonstruksi menggunakan pengali penalti $\lambda_{pen} \in \mathbb{R}^+$ melalui ekspansi polinomial berikut:
-\begin{equation}
-\begin{aligned}
-P(\mathbf{x}) &= \lambda_{pen} \left( \sum_{i=1}^N x_i - K \right)^2 \\
-&= \lambda_{pen} \left( (1-2K) \sum_{i=1}^N x_i + 2 \sum_{i<j} x_i x_j + K^2 \right)
-\end{aligned}
-\label{eq:cardinality_penalty}
-\end{equation}
-Persamaan (\ref{eq:cardinality_penalty}) mengonversi \textit{equality constraint} menjadi bagian dari lanskap energi sistem.
+    Melalui mekanisme ini, fungsi objektif Markowitz bertindak sebagai "filter" yang menyeleksi kombinasi aset paling efisien dari total $2^N$ kemungkinan bitstring. Pada kasus di mana investor memiliki batasan jumlah aset yang ketat (misal harus memilih tepat $K$ aset), suku tambahan berupa penalti \textit{constraint} dapat ditambahkan ke dalam fungsional energi guna memastikan solusi yang dihasilkan tetap berada dalam ruang fisibel. Proses identifikasi bitstring $\{x_1, x_2, \dots, x_N\}$ yang meminimalkan $f(x)$ inilah yang menjadi target utama dalam implementasi algoritma kuantum, di mana keadaan \textit{ground state} dari sistem yang dipetakan akan memberikan konfigurasi portofolio terbaik secara matematis. Dengan demikian, formulasi ini menjembatani teori finansial klasik dengan paradigma komputasi berbasis energi yang efisien.
+\end{example}
 
-Hamiltonian QUBO total adalah jumlah dari Hamiltonian biaya murni dan fungsi penalti
-\begin{equation}
-H_{total} = H_{pure} + P(\mathbf{x})
-\end{equation}
-disusun kembali ke dalam representasi matriks $\mathbf{Q}$ standar 
-\begin{equation}
-\sum Q_{ii} x_i + \sum Q_{ij} x_i x_j
-\end{equation}
-Dimana Koefisien elemen diagonal dan interaksi (\textit{off-diagonal}) didapatkan melalui jumlahan koefisien biaya dan penalti yang bersesuaian:
-\begin{equation}
-Q_{ii} = \left( \frac{\gamma}{2} \sigma_{ii} - \mu_i \right) + \lambda_{pen}(1-2K) \label{eq:qubo_diagonal}
-\end{equation}
-\begin{equation}
-Q_{ij} = \gamma \sigma_{ij} + 2\lambda_{pen} \label{eq:qubo_off_diagonal}
-\end{equation}
-Struktur QUBO pada (\ref{eq:qubo_diagonal}) dan (\ref{eq:qubo_off_diagonal}) memungkinkan integrasi batasan kardinalitas secara intrinsik ke dalam fungsi tujuan tunggal yang kompatibel dengan algoritma komputasi kuantum \cite{padilla_quantum_2025}.
+\subsection{Model Mean-Variance Portfolio Optimization}
+% Sub-bab ini menguraikan landasan optimasi portofolio modern:
+% \begin{enumerate}
+%     \item Pareto Optimum sebagai titik optimal
+%     \item Fungsi Matematis Mean-Variance
+%     \item Mean-Variance sebagai strategi diversifikasi
+%     \item Isomorfisme Model Mean-Variance dengan Magnetic Ising
+% \end{enumerate}
 
-\subsection{Pemetaan Hamiltonian Ising melalui Operator Pauli-Z}
+Model \textit{Mean-Variance Portfolio Optimization} merupakan kerangka kerja yang mendefinisikan pemilihan portofolio sebagai pencarian titik \textit{Pareto Optimum} dalam ruang dimensi dua yang dibentuk oleh imbal hasil dan risiko. Dalam pandangan ini, investor tidak hanya fokus pada satu metrik tunggal, melainkan berupaya mengidentifikasi sekumpulan portofolio yang membentuk \textit{Efficient Frontier} (batas efisien). Menurut \cite{markowitz_portfolio_1952}, sebuah portofolio dikatakan optimal secara Pareto jika tidak ada portofolio lain yang menawarkan imbal hasil lebih tinggi untuk tingkat risiko yang sama, atau risiko yang lebih rendah untuk tingkat imbal hasil yang sama. Oleh karena itu, optimasi \textit{Mean-Variance} berfungsi sebagai instrumen strategis untuk melakukan diversifikasi kapital guna mereduksi volatilitas sistemik melalui analisis korelasi antar aset \cite{onnela_dynamics_2003}.
 
-Transformasi dari ranah keputusan biner $\mathbb{B}^N$ ke ruang \textit{Hilbert} sistem \textit{spin} dilakukan melalui substitusi variabel biner ke operator Pauli-Z $\hat{Z}_i$ menggunakan transformasi \textit{affine} $x_i \mapsto \frac{1-\hat{Z}_i}{2}$. Operasi ini memetakan nilai eigen $\{0, 1\}$ ke set status magnetik $\{+1, -1\}$. Hamiltonian kuantum final dinyatakan sebagai jumlahan interaksi dua-tubuh dan medan magnet lokal:
+Karakteristik unik dari model ini terletak pada isomorfisme strukturalnya dengan sistem \textit{Magnetic Ising} dalam fisika statistik, di mana variabel keputusan finansial memiliki padanan langsung dengan keadaan \textit{spin}. Suku varians dalam model \textit{Mean-Variance}, yang melibatkan matriks kovarians $\Sigma_{ij}$, secara matematis ekuivalen dengan energi interaksi antar \textit{spin} $J_{ij}$ yang merepresentasikan pengaruh kolektif antar agen. Di sisi lain, ekspektasi imbal hasil $\mu_i$ berperan sebagai medan magnet eksternal $h_i$ yang memberikan gaya dorong pada \textit{spin} individu untuk memilih keadaan tertentu. Menurut \cite{lucas_ising_2014}, kesetaraan fungsional ini memungkinkan transformasi masalah alokasi aset yang kompleks menjadi pencarian konfigurasi energi minimum dalam sistem magnetik, yang secara efektif menjembatani hukum ekonomi dengan prinsip termodinamika.
+
+\begin{example}
+    Sebagai ilustrasi, bayangkan seorang investor yang ingin mengalokasikan kapital pada sekelompok aset dengan tingkat korelasi yang bervariasi. Melalui strategi \textit{Mean-Variance}, investor tersebut akan memprioritaskan aset-aset yang memiliki korelasi rendah atau negatif guna meminimalkan kovarians total portofolio, yang dalam bahasa fisika setara dengan menghindari konfigurasi interaksi antiferomagnetik yang tidak stabil. Hasil dari optimasi ini adalah sebuah titik pada kurva \textit{Efficient Frontier} yang mencerminkan utilitas maksimal bagi investor berdasarkan profil risiko mereka. 
+    
+    Isomorfisme ini membuktikan bahwa mekanisme pasar yang efisien secara intrinsik mengikuti pola minimisasi energi global, di mana diversifikasi portofolio berperan sebagai agen penyeimbang dalam mencapai stabilitas sistemik. Secara operasional, keberadaan titik \textit{Pareto Optimum} menjamin bahwa setiap penambahan imbal hasil yang diharapkan harus dibayar dengan peningkatan risiko yang proporsional, sebuah prinsip yang konsisten dengan hukum konservasi dalam sistem fisik. Dengan demikian, pemodelan \textit{Mean-Variance} tidak hanya memberikan solusi finansial, tetapi juga mengungkapkan keteraturan matematis yang mendasari dinamika kompleksitas dalam pasar finansial global.
+\end{example}
+
+\subsection{Pemetaan Hamiltonian Ising}
+% Sub-bab ini menguraikan teknik pemetaan masalah optimasi ke hardware kuantum:
+% \begin{enumerate}
+%     \item Hubungan Magnetic Ising dengan Hamiltonian Ising
+%     \item Pemetaan Hamiltonian Ising menggunakan Operator Pauli-Z
+%     \item Penurunan rumus menggunakan transformasi QUBO
+% \end{enumerate}
+
+Pemetaan masalah optimasi portofolio ke dalam infrastruktur komputasi kuantum memerlukan transformasi variabel keputusan biner menjadi operator mekanika kuantum yang dapat dieksekusi oleh perangkat \textit{Noisy Intermediate-Scale Quantum} (NISQ). Langkah awal dalam proses ini adalah mempromosikan variabel \textit{spin} klasik $\sigma_i$ menjadi operator \textit{Pauli-Z} ($\hat{Z}_i$), di mana nilai eigen dari operator tersebut ($+1$ dan $-1$) berkorespondensi dengan keadaan basis kuantum $|0\rangle$ dan $|1\rangle$. Menurut \cite{lucas_ising_2014}, \textit{Hamiltonian} kuantum dibangun dengan mengganti interaksi skalar dalam model \textit{Ising} menjadi produk tensor antar operator \textit{Pauli}, sehingga energi sistem dapat diukur melalui ekspektasi nilai operator pada sirkuit kuantum.
+
+Penurunan parameter fisik $h_i$ dan $J_{ij}$ dilakukan melalui substitusi variabel biner $x_i \in \{0, 1\}$ dari formulasi QUBO ke dalam variabel \textit{spin} $\sigma_i$ menggunakan transformasi $x_i = (1 - \sigma_i)/2$. Dengan mensubstitusikan hubungan ini ke dalam fungsi objektif Markowitz pada persamaan (2), kita memperoleh hubungan pemetaan sebagai berikut:
 \begin{equation}
-\hat{H}_{Ising} = \sum_{i<j} J_{ij} (\hat{Z}_i \otimes \hat{Z}_j) + \sum_{i=1}^N h_i \hat{Z}_i
-\label{eq:final_ising_hamiltonian}
+    h_i = -\frac{\mu_i}{2} + \frac{\lambda}{2} \sum_{j=1}^{N} \Sigma_{ij}, \quad J_{ij} = \frac{\lambda}{4} \Sigma_{ij}
 \end{equation}
-Parameter fisik berupa koefisien kopling $J_{ij}$ dan bias medan lokal $h_i$ diekstraksi dari elemen matriks QUBO melalui derivasi matematis berikut:
-\begin{align}
-J_{ij} &= \frac{Q_{ij}}{4} = \frac{\gamma \sigma_{ij} + 2\lambda_{pen}}{4} \label{eq:ising_coupling_derivation} \\
-h_i &= -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{4} \label{eq:ising_bias_derivation}
-\end{align}
+Pemetaan ini memastikan bahwa minimisasi biaya dalam domain finansial setara dengan pencarian \textit{ground state} energi dalam \textit{Hamiltonian} $\hat{H} = \sum h_i \hat{Z}_i + \sum J_{ij} \hat{Z}_i \hat{Z}_j$. Melalui operator \textit{Pauli-Z}, interaksi kovarians antar aset diterjemahkan menjadi korelasi fase antar \textit{qubit}, memungkinkan algoritma seperti \textit{Variational Quantum Eigensolver} (VQE) untuk mengeksplorasi ruang solusi melalui prinsip variasi energi.
 
-Status \textit{ground state} dari operator $\hat{H}_{Ising}$ pada (\ref{eq:final_ising_hamiltonian}) merepresentasikan konfigurasi magnetik dengan energi minimum yang secara fisik ekuivalen dengan portofolio investasi paling optimal. Penggunaan representasi operator Pauli memungkinkan masalah optimasi ini untuk dieksekusi pada perangkat kuantum variasional melalui estimasi nilai ekspektasi energi $\langle \psi | \hat{H}_{Ising} | \psi \rangle$. Seluruh derivasi ini memberikan landasan teoretis yang rigorus bagi penerapan \textit{Variational Quantum Eigensolver} dalam penyelesaian masalah alokasi aset yang kompleks \cite{lucas_ising_2014}.
+\begin{example}
+    Sebagai ilustrasi teknis, tinjau transformasi sebuah aset tunggal dengan ekspektasi imbal hasil $\mu_1$ dan risiko $\Sigma_{11}$ ke dalam parameter \textit{Hamiltonian}. Tanpa interaksi dengan aset lain, substitusi $x_1 = (1 - Z_1)/2$ ke dalam fungsi biaya $f(x) = \lambda \Sigma_{11} x_1^2 - \mu_1 x_1$ akan menghasilkan suku linear yang proporsional terhadap operator $Z_1$. Secara fisik, nilai $h_1$ yang positif akan memberikan tekanan pada \textit{qubit} untuk runtuh ke keadaan $|1\rangle$ (yang merepresentasikan keputusan "Beli"), sedangkan nilai negatif akan mendorongnya ke keadaan $|0\rangle$.
+
+    Proses pemetaan ini merupakan jembatan krusial yang mengubah angka-angka statistik abstrak menjadi "gaya" fisik yang mengatur orientasi \textit{qubit} dalam ruang Hilbert. Dengan merepresentasikan kovarians sebagai suku interaksi $J_{ij} \hat{Z}_i \hat{Z}_j$, komputer kuantum dapat memanfaatkan fenomena keterikatan (\textit{entanglement}) untuk menemukan kombinasi aset yang saling menyeimbangkan risiko secara simultan. Keberhasilan pemetaan ini menjamin bahwa setiap solusi yang ditemukan oleh perangkat kuantum memiliki validitas ekonomi yang presisi dan dapat diinterpretasikan kembali ke dalam strategi alokasi portofolio di dunia nyata. Dengan demikian, transformasi QUBO ke \textit{Ising} bukan sekadar prosedur matematis, melainkan manifestasi dari penyatuan antara logika finansial dengan hukum fundamental alam.
+\end{example}

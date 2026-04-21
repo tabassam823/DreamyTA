@@ -1,62 +1,15 @@
-\section{Pemetaan Hamiltonian \& Hasil}
+\begin{frame}{6. Hasil Optimasi \& \textit{Nash Equilibrium}}
+Sistem dinyatakan dalam \textit{Exact Potential Game} karena perbedaan marginal \textit{payoff} pemain identik dengan selisih absolut parameter Potential $\Delta \Phi = \Delta u_i$.
+Oleh sebab itu, titik \textbf{eukilibrium Nash murni (\textit{Pure Nash Equilibrium})} ekuivalen dinilai dari titik minimal absolut (global minimum) eksekusi komputasional.
 
-\begin{frame}
-\centering
-\highlight{\Huge Bagian 6: Pemetaan Hamiltonian \& Hasil}
-\end{frame}
-
-\subsection{Formulasi QUBO}
-\begin{frame}{6.1 Formulasi QUBO berbasis Nash Equilibrium}
-Fungsi potensial $\Phi(x)$ yang telah dianalisis melalui titik ekuilibrium (SBR) dimodifikasi menjadi sistem \textit{Quadratic Unconstrained Binary Optimization} (QUBO) dengan menambahkan penalti kardinalitas ($\lambda=5.0, K=2$).
-
-\textbf{Fungsi Objektif QUBO:}
-\begin{equation}
-H_{QUBO}(x) = -\Phi(x) + \lambda \left( \sum_{i=1}^N x_i - K \right)^2
-\end{equation}
-
-\textbf{Elemen Matriks QUBO ($Q$):}
+Melalui pencarian \textit{grid} serentak (\textit{Brute-force}) pada $\binom{4}{2} = 6$ kombinasi aset:
 \begin{itemize}
-    \item $Q_{ii} = -\tilde{\mu}_i + \frac{\gamma}{2} \tilde{\Sigma}_{ii} + \lambda (1 - 2K)$ (Linear)
-    \item $Q_{ij} = \gamma \tilde{\Sigma}_{ij} + 2\lambda$ (Kuadratik)
-\end{itemize}
-$\Phi(x)$ yang bernilai minimum pada Nash Equilibrium murni kini menjadi target utama dalam sirkuit optimasi kuantum.
-\end{frame}
-
-\subsection{Hamiltonian Ising}
-\begin{frame}{6.2 Parameter Ising & Representasi Matriks}
-Transformasi $x_i \to \frac{I - Z_i}{2}$ memetakan masalah ke dalam Hamiltonian Ising yang terdiri dari kopling $J_{ij}$ dan bias $h_i$.
-
-\textbf{Parameter Amplitudo Ising:}
-\begin{equation}
-J = 
-\begin{bmatrix}
-0.0 & 2.5 & 2.5 & 2.5 \\
-2.5 & 0.0 & 2.5 & 2.5 \\
-2.5 & 2.5 & 0.0 & 2.5 \\
-2.5 & 2.5 & 2.5 & 0.0
-\end{bmatrix}
-, \quad h = 
-\begin{bmatrix}
-0,0020 \\ 0,0003 \\ 0,0015 \\ -0,0018
-\end{bmatrix}
-\end{equation}
-
-\textbf{Strategi Quantum Warm-Start:}
-Sirkuit VQE diinisialisasi menggunakan \textit{Nash Equilibrium} murni dari SBR ($0011$) untuk mempercepat konvergensi energi menuju \textit{ground state}.
-\end{frame}
-
-\subsection{Konvergensi & Hasil}
-\begin{frame}{6.3 Hasil Optimasi & Konvergensi VQE}
-Melalui algoritma SBR sebagai \textit{warm-start}, VQE berhasil menyempurnakan solusi optimasi dengan efisiensi yang lebih baik.
-
-\textbf{Output Hasil:}
-\begin{itemize}
-    \item \textbf{Initial Seed (SBR):} $0011$ (ADRO \& TLKM)
-    \item \textbf{Quantum Convergence:} VQE mengonfirmasi \textit{Ground State} dominan pada basis $|0011\rangle$ dengan energi $\approx -4,9989$.
+    \item \textbf{Bitstring Optimum:} $1010$ (Saham ADRO dan ICBP)
+    \item \textbf{Ground State Energy ($E_{min}$):} $-5.005123$
 \end{itemize}
 
-\vspace{0.2cm}
-\textbf{Signifikansi:} Integrasi pencarian ekuilibrium klasik ke dalam formulasi QUBO memastikan bahwa sistem kuantum memulai proses optimasi pada titik yang sudah mendekati solusi ideal.
+\vspace{0.3cm}
+Optimasi Kuantum mengonfirmasi bahwa aset optimum (\textbf{ADRO} \& \textbf{ICBP}) menghasilkan \textit{reward Exact Potential Game} terkuat, di mana probabilitas state basis $|1010\rangle$ muncul sebagai dominan dalam fungsi gelombang akhir.
 \end{frame}
 
 \begin{frame}

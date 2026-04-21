@@ -51,16 +51,32 @@ Secara grafis, portofolio optimal yang paling efisien berada pada titik singgung
 $$
 \mathcal{L}(\vec{\omega}) = \vec{\omega}^{T} \Sigma \vec{\omega} - \lambda(\mu^T\vec{\omega})
 $$
+$$
+\boxed{\mathcal{L(\vec{\omega)}} = \begin{pmatrix}\omega_1 & \omega_2 & \dots & \omega_n\end{pmatrix} \begin{pmatrix}\sigma_{11} & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & \sigma_{22} & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & \sigma_{nn}\end{pmatrix} \begin{pmatrix}\omega_1 \\ \omega_2 \\ \vdots \\ \omega_n\end{pmatrix} - \lambda \begin{pmatrix}\mu_1 & \mu_2 & \dots & \mu_n\end{pmatrix} \begin{pmatrix}\omega_1 \\ \omega_2 \\ \vdots \\ \omega_n\end{pmatrix}}
+$$
 $$\mathcal{L}(\vec{x}) = \frac{\vec{x}^T}{k}\Sigma \frac{\vec{x}^T}{k} - \lambda \left(\mu^T\frac{\vec{x}}{k}\right)$$
+
+$$
+\boxed{\mathcal{L(\vec{x})} = \frac{1}{k^2}\begin{pmatrix} x_1 & x_2 & \dots & x_n\end{pmatrix} \begin{pmatrix}\sigma_{11} & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & \sigma_{22} & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & \sigma_{nn}\end{pmatrix} \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{pmatrix} - \frac{\lambda}{k} \begin{pmatrix}\mu_1 & \mu_2 & \dots & \mu_n\end{pmatrix} \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{pmatrix}}
+$$
 minimasi ke maksimasi
 $$\begin{split}
 U(\vec{x}) &= -\frac{1}{\lambda} \mathcal{L}(\vec{x}) \\
 &= ... \\
 &= \left(\sum_{i=1}^N \mu_i \frac{x_i}{k}\right) - \frac{1}{\lambda}\left(\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j\right)
 \end{split}$$
+
+$$
+\boxed{U(\vec{x}) =  \frac{1}{k} \begin{pmatrix} \mu_1 & \mu_2 & \dots & \mu_n \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix} - \frac{1}{\lambda k^2} \begin{pmatrix} x_1 & x_2 & \dots & x_n \end{pmatrix} \begin{pmatrix} \sigma_{11} & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & \sigma_{22} & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & \sigma_{nn} \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}}
+$$ 
+
 risk tolerance berbanding terbalik dengan risk aversion $\frac{1}{\lambda} \propto \frac{\gamma}{2}$ 
 $$
 U(\vec{x}) = \left(\sum_{i=1}^N \mu_i \frac{x_i}{k}\right) - \frac{\gamma}{2}\left(\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j\right)
 $$
+
+$$
+\boxed{U(\vec{x}) =  \frac{1}{k} \begin{pmatrix} \mu_1 & \mu_2 & \dots & \mu_n \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix} - \frac{\gamma}{2k^2} \begin{pmatrix} x_1 & x_2 & \dots & x_n \end{pmatrix} \begin{pmatrix} \sigma_{11} & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & \sigma_{22} & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & \sigma_{nn} \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix}}
+$$ 
 
 fungsi potensial pada EPG

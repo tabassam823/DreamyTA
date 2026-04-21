@@ -1,39 +1,120 @@
-\section{Redefinisi Imbal Hasil Strategis dan Integrasi Parameter Medan Lokal}
+\section{Komputer Kuantum}
 
-Setelah kerangka dasar \textit{Quadratic Unconstrained Binary Optimization} (QUBO) dan transformasi Hamiltonian Ising terbentuk pada Subbab 2.3, algoritma kuantum memerlukan ekstraksi parameter fisis yang presisi untuk merepresentasikan dinamika pasar ke dalam ruang \textit{Hilbert} sistem. Arsitektur model ini secara fundamental bergantung pada dua parameter utama: medan lokal ($h_i$) yang merepresentasikan bias energi individual dan koefisien kopling ($J_{ij}$) yang merepresentasikan interaksi antar-qubit. Subbab 2.5 ini didedikasikan khusus sebagai "dapur ekstraksi" untuk menghitung parameter $h_i$ melalui redefinisi imbal hasil strategis $\tilde{\mu}_i$ yang menangkap karakteristik perilaku mikro setiap aset. Sementara itu, prosedur penghitungan parameter $J_{ij}$ yang mengekstrak korelasi sistemik non-linear melalui \textit{Quantum Mutual Information} akan dibahas secara mendalam pada Subbab 2.6.
+\subsection{Representasi Kualitatif dalam Pasar Finansial}
 
-\subsection{Digitalisasi \textit{Microstate} Finansial}
+Representasi kualitatif dalam pasar finansial merupakan proses abstraksi fenomena ekonomi yang kompleks ke dalam kategori-kategori diskret yang mencerminkan sentimen atau rezim pasar tertentu. Secara fundamental, dinamika harga aset tidak hanya dipandang sebagai deret waktu numerik yang kontinu, melainkan sebagai manifestasi dari interaksi kolektif antar agen yang menghasilkan pola-pola kualitatif seperti kondisi \textit{bullish}, \textit{bearish}, atau \textit{sideways}. Menurut \cite{mantegna_1999}, pasar finansial dapat dianalogikan sebagai sistem fisik kompleks di mana setiap perubahan status kualitatif mencerminkan pergeseran dalam korelasi antar aset dan tingkat kepercayaan investor secara sistemik. Abstraksi ini menjadi krusial dalam pemodelan \textit{Econophysics} karena memungkinkan penggunaan alat matematika diskret untuk menganalisis perilaku pasar yang bersifat stokastik dan non-linear.
 
-Prosedur redefinisi imbal hasil dimulai dengan diskritisasi deret waktu imbal hasil (\textit{return}) untuk mengidentifikasi status biner $s \in \{u, d\}$ pada setiap aset dalam semesta investasi. Imbal hasil harian aset $i$ dihitung melalui \textit{log-return} pada persamaan (\ref{eq:log_return}) yang kemudian dipetakan ke dalam status $u$ (\textit{up}) jika $R_{i,t} > 0$, atau status $d$ (\textit{down}) untuk kondisi sebaliknya. Pada sistem dengan $N=4$ aset, interaksi pasar direpresentasikan melalui ruang konfigurasi $\mathcal{S} = \{u, d\}^N$ yang memuat 16 kemungkinan \textit{microstate} gabungan $\mathbf{s} = (s_1, s_2, s_3, s_4)$. Transformasi ini memungkinkan pemetaan dinamika kontinu pasar ke dalam variabel diskret yang kompatibel dengan operator komputasi kuantum \cite{gong_quantum_2025}.
+Dalam perspektif teori informasi, representasi kualitatif berfungsi untuk mereduksi derau (\textit{noise}) pada data pasar dengan fokus pada sinyal-sinyal dominan yang menentukan arah pergerakan kapital. Proses kategorisasi ini sering kali melibatkan penggunaan indikator teknikal atau analisis fundamental untuk mengidentifikasi "keadaan" (\textit{state}) pasar yang paling mungkin terjadi pada jendela waktu tertentu. Sebagaimana dijelaskan dalam teori prospek oleh \cite{kahneman_1979}, keputusan agen ekonomi sangat dipengaruhi oleh persepsi kualitatif terhadap risiko dan keuntungan, bukan sekadar nilai absolut dari imbal hasil. Oleh karena itu, pemetaan kondisi pasar ke dalam bentuk kualitatif memberikan landasan bagi pengembangan model prediktif yang lebih robust, terutama saat diintegrasikan dengan sistem komputasi modern seperti model \textit{Ising} atau algoritma kuantum.
 
-Eksistensi struktur ketergantungan antar-aset dikuantifikasi melalui distribusi frekuensi gabungan dari seluruh \textit{microstate} yang muncul selama periode observasi $T$. Probabilitas gabungan $P(\mathbf{s})$ didefinisikan sebagai rasio frekuensi kemunculan konfigurasi spesifik $n(\mathbf{s})$ terhadap total sampel waktu:
+\begin{example}
+    Sebagai ilustrasi, pertimbangkanlah penggunaan indikator \textit{Relative Strength Index} (RSI) untuk mengategorikan kondisi pasar ke dalam status kualitatif \textit{overbought} atau \textit{oversold}. Ketika nilai RSI melampaui ambang batas 70, pasar secara kualitatif direpresentasikan berada dalam fase jenuh beli, yang memberikan sinyal kepada investor mengenai potensi pembalikan harga ke arah bawah akibat tekanan jual yang mulai mendominasi. Sebaliknya, nilai RSI di bawah 30 menandakan kondisi jenuh jual, di mana aset dipandang telah terdevaluasi secara berlebihan sehingga memicu minat beli kembali. Transformasi dari angka RSI yang bersifat kontinu ke dalam kategori "jenuh" ini menyederhanakan proses pengambilan keputusan bagi manajer portofolio dalam menentukan waktu masuk atau keluar pasar.
+
+    Lebih lanjut, representasi kualitatif ini dapat diperluas ke dalam analisis korelasi antar sektor untuk mengidentifikasi rezim pasar yang stabil atau bergejolak. Dalam kondisi pasar yang tenang, korelasi antar aset cenderung rendah dan beragam, namun pada saat terjadi krisis finansial, korelasi tersebut sering kali melonjak secara signifikan secara simultan, menciptakan fenomena yang dikenal sebagai \textit{market crash}. Dengan merepresentasikan lonjakan korelasi ini sebagai "keadaan darurat" kualitatif, sistem peringatan dini dapat diimplementasikan untuk memitigasi risiko sistemik. Pendekatan ini membuktikan bahwa deskripsi kualitatif bukan sekadar penyederhanaan, melainkan sebuah metode strategis untuk memahami struktur fundamental dan dinamika transisi fase dalam ekosistem pasar finansial global.
+\end{example}
+
+\subsection{Formalisme Qubit}
+
+Formalisme qubit merupakan landasan fundamental dalam komputasi kuantum yang memperluas konsep bit klasik menjadi sistem dua-keadaan (\textit{two-state system}) yang mematuhi prinsip mekanika kuantum. Secara matematis, sebuah qubit didefinisikan sebagai vektor satuan dalam ruang Hilbert kompleks dua-dimensi $\mathbb{C}^2$, yang secara umum dinyatakan sebagai superposisi linear dari basis komputasi $|0\rangle$ dan $|1\rangle$. Postulat dasar mekanika kuantum menyatakan bahwa keadaan qubit $|\psi\rangle$ dapat dituliskan dalam bentuk:
 \begin{equation}
-P(s_1, s_2, s_3, s_4) = \frac{n(s_1, s_2, s_3, s_4)}{T}
-\label{eq:joint_prob_microstate}
+    |\psi\rangle = \alpha|0\rangle + \beta|1\rangle = \cos\left(\frac{\theta}{2}\right)|0\rangle + e^{i\phi}\sin\left(\frac{\theta}{2}\right)|1\rangle
 \end{equation}
-Informasi probabilitas pada persamaan (\ref{eq:joint_prob_microstate}) menjadi landasan dalam menyusun strategi investasi yang adaptif, karena menangkap korelasi mikro-struktural yang seringkali terabaikan dalam analisis statistik univariat konvensional \cite{menezes_ex_2025}.
+di mana $\alpha, \beta \in \mathbb{C}$ adalah amplitudo probabilitas yang memenuhi syarat normalisasi $|\alpha|^2 + |\beta|^2 = 1$. Parameter $\theta$ dan $\phi$ pada representasi bola Bloch memberikan visualisasi geometris dari keadaan qubit, yang memungkinkan representasi informasi finansial—seperti keputusan biner investasi atau status aset—ke dalam ruang parameter kontinu yang dapat dioptimasi.
 
-\subsection{Kalkulasi Imbal Hasil Strategis ($\tilde{\mu}_i$)}
+Keunggulan qubit dibandingkan unit informasi klasik terletak pada kemampuannya untuk mengeksplorasi ruang solusi secara paralel melalui sifat superposisi dan keterikatan (\textit{entanglement}). Dalam konteks optimasi pasar finansial, sebuah sistem dengan $n$ qubit mampu merepresentasikan $2^n$ konfigurasi portofolio secara simultan, yang secara teoritis memberikan keunggulan eksponensial dalam pencarian titik minimum energi pada lanskap biaya yang kompleks. Menurut \cite{preskill_2018}, pemanfaatan qubit dalam algoritma variasi (seperti VQE) memungkinkan pemetaan masalah optimasi kombinatorial, seperti seleksi portofolio Markowitz, ke dalam pencarian \textit{ground state} dari sebuah Hamiltonian biaya. Hal ini mentransformasi masalah optimasi diskret yang sulit secara komputasi klasik menjadi masalah optimasi parameter kontinu yang dapat diselesaikan melalui iterasi pada perangkat keras kuantum masa kini.
 
-Tahap selanjutnya melibatkan kalkulasi ekspektasi imbal hasil bersyarat (\textit{conditional expected return}) guna mengekstraksi respon individual aset terhadap kondisi kolektif pasar. Parameter $\bar{R}_i(\mathbf{s})$ didefinisikan sebagai nilai rata-rata imbal hasil aset $i$ yang dikondisikan secara eksklusif pada kemunculan \textit{microstate} $\mathbf{s}$ dalam himpunan waktu $\mathcal{T}_{\mathbf{s}}$:
+\subsubsection{Derivasi Turunan Ekspektasi Energi}
+
+Dalam algoritma kuantum variasional, tujuan utama adalah meminimalkan nilai ekspektasi energi $E(\theta)$ dari sebuah Hamiltonian $H$ terhadap parameter $\theta$. Nilai ekspektasi tersebut didefinisikan sebagai:
 \begin{equation}
-\bar{R}_i(s_1, s_2, s_3, s_4) = \frac{1}{n(s_1, s_2, s_3, s_4)} \sum_{t \in \mathcal{T}_{s_1, s_2, s_3, s_4}} R_{i,t}
-\label{eq:conditional_return}
+    E(\theta) = \langle \psi(\theta) | H | \psi(\theta) \rangle = \langle \psi | U^\dagger(\theta) H U(\theta) | \psi \rangle
 \end{equation}
-Formulasi pada (\ref{eq:conditional_return}) mencerminkan imbal hasil yang diharapkan dari suatu aset ketika pasar berada dalam konfigurasi strategis tertentu.
-
-Integrasi seluruh kemungkinan respon strategis menghasilkan parameter imbal hasil strategis $\tilde{\mu}_i$ sebagai jumlahan terbobot terhadap distribusi probabilitas gabungan. Pendekatan holistik ini merangkum pengaruh interdependensi sistemik ke dalam satu metrik tunggal melalui persamaan berikut:
+di mana $U(\theta) = e^{-i\frac{\theta}{2}\sigma}$ adalah operator unitari yang dibangkitkan oleh operator Pauli $\sigma$. Untuk melakukan pembaruan parameter menggunakan metode berbasis gradien, diperlukan turunan $\frac{\partial E}{\partial \theta}$. Melalui aturan perkalian (\textit{product rule}), turunan tersebut dapat dinyatakan sebagai:
 \begin{equation}
-\tilde{\mu}_i = \sum_{\mathbf{s} \in \{u,d\}^N} P(\mathbf{s}) \times \bar{R}_i(\mathbf{s})
-\label{eq:strategic_return_mu}
+    \frac{\partial E}{\partial \theta} = \langle \psi | \frac{\partial U^\dagger}{\partial \theta} H U | \psi \rangle + \langle \psi | U^\dagger H \frac{\partial U}{\partial \theta} | \psi \rangle
 \end{equation}
-Penggunaan $\tilde{\mu}_i$ menjamin bahwa ekspektasi keuntungan yang diumpankan ke dalam model optimasi telah memperhitungkan bias perilaku kolektif. Hal ini esensial dalam kerangka \textit{Exact Potential Game} untuk memastikan bahwa utilitas individu selaras dengan pencapaian ekuilibrium sistemik pada portofolio \cite{sikalo_efficient_2022}.
-
-\subsection{Ekuivalensi ke Parameter Medan Lokal ($h_i$)}
-
-Integrasi $\tilde{\mu}_i$ ke dalam Hamiltonian Ising dilakukan melalui parameter medan lokal atau bias ($h_i$) yang menentukan kecenderungan orientasi \textit{spin}. Berdasarkan derivasi matriks QUBO sebelumnya, imbal hasil strategis ini berkontribusi secara langsung pada elemen diagonal $Q_{ii}$ yang merepresentasikan biaya neto inklusi aset. Hubungan analitis antara parameter ekonomi dan parameter fisis Hamiltonian dinyatakan melalui transformasi \textit{affine} berikut:
+Dengan mensubstitusikan $\frac{\partial U}{\partial \theta} = -\frac{i}{2}\sigma U(\theta)$ dan $\frac{\partial U^\dagger}{\partial \theta} = \frac{i}{2} U^\dagger(\theta) \sigma$, maka diperoleh hubungan komutator:
 \begin{equation}
-h_i = -\frac{1}{2} \left[ \left( \frac{\gamma}{2} \sigma_{ii} - \tilde{\mu}_i \right) + \lambda_{pen}(1-2K) \right] - \sum_{j \neq i} \frac{Q_{ij}}{4}
-\label{eq:h_i_final_redefined}
+    \frac{\partial E}{\partial \theta} = \frac{i}{2} \langle \psi(\theta) | [\sigma, H] | \psi(\theta) \rangle
 \end{equation}
-Persamaan (\ref{eq:h_i_final_redefined}) menunjukkan bahwa bias medan lokal merupakan resultan dari ekspektasi keuntungan strategis, risiko varians, dan penalti kardinalitas. Penentuan $h_i$ yang akurat menjadi prasyarat mutlak dalam mengatasi kompleksitas pemilihan aset pada rezim pasar yang sangat volatil.
+
+Jembatan matematis untuk mengestimasi nilai turunan ini pada perangkat keras kuantum tanpa menggunakan metode beda hingga (\textit{finite difference}) adalah melalui \textit{Parameter-Shift Rule}. Dengan menggunakan identitas Euler $U(s) = \cos(s/2)I - i\sin(s/2)\sigma$, nilai ekspektasi pada pergeseran parameter $s$ dapat diekspansi menjadi:
+\begin{equation}
+    E(\theta \pm s) = \cos^2\left(\frac{s}{2}\right)\langle H \rangle + \sin^2\left(\frac{s}{2}\right)\langle \sigma H \sigma \rangle \pm i\cos\left(\frac{s}{2}\right)\sin\left(\frac{s}{2}\right)\langle [\sigma, H] \rangle
+\end{equation}
+Selisih antara kedua nilai ekspektasi tersebut menghasilkan:
+\begin{equation}
+    E(\theta + s) - E(\theta - s) = 2i\cos\left(\frac{s}{2}\right)\sin\left(\frac{s}{2}\right)\langle [\sigma, H] \rangle = i\sin(s)\langle [\sigma, H] \rangle
+\end{equation}
+Jika dipilih pergeseran $s = \pi/2$, maka $\sin(\pi/2) = 1$, sehingga diperoleh bentuk akhir turunan analitik:
+\begin{equation}
+    \frac{\partial E}{\partial \theta} = \frac{1}{2} \left[ E\left(\theta + \frac{\pi}{2}\right) - E\left(\theta - \frac{\pi}{2}\right) \right]
+\end{equation}
+Bentuk ini membuktikan bahwa gradien energi dapat dihitung secara eksak melalui dua kali pengukuran nilai ekspektasi pada titik parameter yang digeser, yang secara praktis diimplementasikan melalui sampling Monte Carlo pada distribusi hasil pengukuran qubit. Keberhasilan derivasi ini memberikan landasan logis bagi penggunaan algoritma optimasi berbasis gradien dalam menyelesaikan masalah finansial pada komputer kuantum dengan ketahanan yang lebih baik terhadap derau (\textit{noise}) sistemik.
+
+
+\subsection{Qubit dan Superposisi}
+
+Prinsip superposisi merupakan postulat fundamental mekanika kuantum yang menyatakan bahwa sebuah sistem kuantum dapat eksis dalam beberapa keadaan basis secara simultan sebelum dilakukan pengukuran. Dalam formalisme ruang vektor, jika $|0\rangle$ dan $|1\rangle$ adalah dua keadaan basis ortonormal yang merepresentasikan kemungkinan status biner aset (misalnya: beli atau jual), maka keadaan umum qubit $|\psi\rangle$ adalah kombinasi linear $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$. Koefisien $\alpha$ dan $\beta$ merupakan amplitudo probabilitas kompleks yang mengandung informasi mengenai fase dan besaran probabilitas dari masing-masing keadaan. Kapasitas untuk berada dalam superposisi ini memungkinkan komputer kuantum untuk menyimpan dan memproses informasi dengan densitas yang jauh lebih tinggi dibandingkan bit klasik, di mana sistem $n$-qubit dapat merepresentasikan $2^n$ konfigurasi secara simultan dalam satu vektor keadaan.
+
+Transisi dari keadaan superposisi menuju keadaan deterministik terjadi melalui proses pengukuran, yang secara matematis dijelaskan oleh Aturan Born. Menurut \cite{preskill_2018}, probabilitas untuk menemukan sistem pada keadaan $|i\rangle$ setelah pengukuran diberikan oleh kuadrat modulus dari amplitudo probabilitasnya, yaitu $P(i) = |\langle i | \psi \rangle|^2$. Sifat probabilistik ini bukan mencerminkan kurangnya informasi mengenai sistem, melainkan merupakan sifat intrinsik dari mekanika kuantum yang memungkinkan eksplorasi ruang solusi secara non-deterministik. Dalam konteks optimasi portofolio, superposisi memungkinkan algoritma untuk menimbang berbagai kombinasi aset dengan bobot probabilitas yang berbeda-beda, sehingga memfasilitasi pencarian global pada lanskap solusi yang sangat luas dan memiliki banyak titik minimum lokal.
+
+\subsubsection{Konservasi Probabilitas dan Normalisasi}
+
+Landasan teoretis dari validitas fisik sebuah keadaan superposisi terletak pada syarat normalisasi yang menjamin konservasi probabilitas dalam sistem tertutup. Untuk sebuah qubit $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$, syarat normalisasi mengharuskan produk dalam (\textit{inner product}) dari vektor keadaan dengan dirinya sendiri bernilai satu, yaitu $\langle \psi | \psi \rangle = 1$. Jembatan matematis untuk membuktikan hubungan ini dimulai dari definisi bra-vector $\langle \psi | = \alpha^*\langle 0 | + \beta^*\langle 1 |$, sehingga:
+\begin{equation}
+    \langle \psi | \psi \rangle = (\alpha^*\langle 0 | + \beta^*\langle 1 |)(\alpha|0\rangle + \beta|1\rangle)
+\end{equation}
+Melalui sifat distributif dan ortonormalitas basis ($\langle i | j \rangle = \delta_{ij}$), persamaan di atas tereduksi menjadi:
+\begin{equation}
+    \langle \psi | \psi \rangle = \alpha^*\alpha\langle 0 | 0 \rangle + \alpha^*\beta\langle 0 | 1 \rangle + \beta^*\alpha\langle 1 | 0 \rangle + \beta^*\beta\langle 1 | 1 \rangle = |\alpha|^2 + |\beta|^2 = 1
+\end{equation}
+Persamaan $|\alpha|^2 + |\beta|^2 = 1$ secara fisik menjamin bahwa jumlah total probabilitas dari semua kemungkinan hasil pengukuran adalah 100\%. Dalam representasi bola Bloch, syarat ini memastikan bahwa ujung vektor keadaan selalu berada pada permukaan bola dengan jari-jari satuan. Kesimpulan teknis dari formalisme ini adalah bahwa setiap operasi unitari yang dilakukan pada qubit akan mempertahankan normalisasi ini, yang berarti evolusi sistem kuantum dalam optimasi pasar finansial akan selalu menghasilkan distribusi probabilitas yang sah dan konsisten secara matematis.
+
+\begin{figure}[h]
+    \centering
+    % \includegraphics[width=0.5\textwidth]{bloch_sphere.png}
+    \caption{Representasi Bola Bloch menunjukkan vektor keadaan $|\psi\rangle$ dalam superposisi. Sudut $\theta$ menentukan distribusi probabilitas antara $|0\rangle$ dan $|1\rangle$, sementara sudut fase $\phi$ merepresentasikan koherensi kuantum yang membedakan qubit dari sistem probabilistik klasik.}
+\end{figure}
+
+
+\subsection{Gerbang Logika Kuantum}
+
+Gerbang logika kuantum merupakan operator unitari yang bertindak sebagai agen transformasi linear pada vektor keadaan di dalam ruang Hilbert. Berbeda dengan gerbang logika klasik yang bersifat ireversibel, setiap gerbang kuantum $U$ harus memenuhi sifat unitaritas $U^\dagger U = I$ guna menjamin pembalikan informasi dan konservasi probabilitas sistem. Menurut \cite{preskill_2018}, gerbang-gerbang ini merepresentasikan evolusi waktu dari sistem kuantum tertutup sesuai dengan persamaan Schrödinger, di mana operator evolusi didefinisikan sebagai $U = \exp(-iHt)$ dengan $H$ sebagai Hamiltonian yang mengatur interaksi. Dalam implementasi perangkat keras, gerbang kuantum diwujudkan melalui pulsa elektromagnetik yang dikontrol secara presisi untuk memutar vektor keadaan pada bola Bloch, yang memungkinkan manipulasi informasi kuantum dalam skala nanodetik sebelum terjadinya dekoherensi.
+
+Klasifikasi gerbang kuantum secara garis besar terbagi menjadi gerbang satu-qubit dan gerbang multi-qubit yang menghasilkan keterikatan (\textit{entanglement}). Gerbang satu-qubit, seperti gerbang Pauli ($X, Y, Z$) dan gerbang Hadamard ($H$), berfungsi untuk melakukan rotasi dan menciptakan superposisi, sedangkan gerbang dua-qubit seperti \textit{Controlled-NOT} (CNOT) berperan dalam menciptakan korelasi non-klasik antar qubit. Sebagaimana dijelaskan dalam \cite{mitarai_2018}, kombinasi dari gerbang-gerbang universal ini memungkinkan pembentukan sirkuit kuantum yang dapat merepresentasikan fungsi biaya finansial yang kompleks dalam bentuk Hamiltonian. Dengan demikian, gerbang logika kuantum bertindak sebagai blok penyusun (\textit{building blocks}) utama dalam merancang \textit{ansatz} sirkuit untuk algoritma optimasi, yang secara kolektif menentukan ruang pencarian solusi pada sistem komputasi kuantum.
+
+\subsubsection{Unitaritas dan Konservasi Integritas Keadaan}
+
+Sifat unitaritas gerbang kuantum merupakan prasyarat matematis yang memastikan bahwa evolusi sistem tidak merusak sifat normalisasi dari vektor keadaan. Misalkan sebuah gerbang $U$ bekerja pada keadaan $|\psi\rangle$ untuk menghasilkan keadaan baru $|\psi'\rangle = U|\psi\rangle$. Jembatan matematis untuk membuktikan bahwa normalisasi terjaga dimulai dari produk dalam keadaan akhir:
+\begin{equation}
+    \langle \psi' | \psi' \rangle = (U|\psi\rangle)^\dagger (U|\psi\rangle) = \langle \psi | U^\dagger U | \psi \rangle
+\end{equation}
+Karena $U^\dagger U = I$, maka persamaan di atas secara langsung tereduksi menjadi:
+\begin{equation}
+    \langle \psi' | \psi' \rangle = \langle \psi | I | \psi \rangle = \langle \psi | \psi \rangle = 1
+\end{equation}
+Bukti ini menunjukkan bahwa setiap transformasi yang dilakukan oleh gerbang kuantum akan mempertahankan panjang unit dari vektor keadaan, yang secara fisik berarti total probabilitas hasil pengukuran selalu konstan.
+
+Dalam aplikasi praktis optimasi portofolio, unitaritas ini menjamin bahwa setiap rotasi parameter $\theta$ pada sirkuit kuantum akan selalu menghasilkan distribusi probabilitas yang valid untuk konfigurasi aset yang berbeda. Namun, tantangan teknis muncul dari adanya derau (\textit{noise}) pada gerbang fisik yang dapat menyebabkan penyimpangan dari sifat unitaritas murni. Menurut \cite{preskill_2018}, fidelitas gerbang kuantum menjadi metrik kritis dalam menentukan akurasi hasil optimasi, di mana akumulasi kesalahan pada gerbang dapat menyebabkan sistem kehilangan koherensi sebelum mencapai solusi optimal. Oleh karena itu, pemahaman mendalam mengenai formalisme gerbang unitari bukan hanya penting secara teoretis, tetapi juga menjadi landasan bagi strategi mitigasi kesalahan dalam komputasi kuantum era \textit{Noisy Intermediate-Scale Quantum} (NISQ).
+
+
+\subsection{Quantum Annealing}
+
+\textit{Quantum annealing} merupakan paradigma komputasi kuantum yang didasarkan pada teorema adiabatik untuk menyelesaikan masalah optimasi kombinatorial melalui evolusi waktu dari sistem kuantum. Secara fundamental, proses ini dimulai dengan mempreparasi sistem pada keadaan dasar (\textit{ground state}) dari sebuah Hamiltonian awal $H_{init}$ yang mudah direalisasikan, kemudian secara perlahan mengubah Hamiltonian tersebut menjadi Hamiltonian masalah $H_{prob}$ yang solusinya merepresentasikan nilai minimum dari fungsi biaya. Menurut \cite{lucas_2014}, efektivitas \textit{quantum annealing} terletak pada kemampuannya untuk memanfaatkan penerowongan kuantum (\textit{quantum tunneling}) guna menembus penghalang energi yang tinggi namun sempit pada lanskap solusi, sebuah mekanisme yang tidak tersedia dalam \textit{simulated annealing} klasik yang hanya mengandalkan aktivasi termal. Dalam konteks finansial, Hamiltonian masalah dikonstruksi melalui pemetaan variabel keputusan portofolio ke dalam model \textit{Ising} atau \textit{Quadratic Unconstrained Binary Optimization} (QUBO), sehingga titik energi terendah yang dicapai pada akhir evolusi adiabatik secara langsung berkorelasi dengan alokasi aset yang paling efisien.
+
+Formalisme matematis dari \textit{quantum annealing} dinyatakan melalui Hamiltonian yang bergantung pada waktu $H(t)$, yang menghubungkan Hamiltonian awal dan Hamiltonian target melalui parameter penjadwalan $s(t)$. Persamaan evolusi sistem didefinisikan sebagai:
+\begin{equation}
+    H(t) = A(t)H_{init} + B(t)H_{prob}
+\end{equation}
+di mana $A(t)$ dan $B(t)$ adalah fungsi amplitudo yang memenuhi kondisi batas $A(0) \gg B(0)$ dan $B(T) \gg A(T)$ pada waktu akhir $T$. Keberhasilan proses ini sangat bergantung pada kecepatan evolusi; jika transisi dilakukan cukup lambat relatif terhadap celah energi (\textit{energy gap}) minimum antara keadaan dasar dan keadaan tereksitasi pertama, maka sistem akan tetap berada pada keadaan dasar sepanjang waktu. Sebagaimana dijelaskan oleh \cite{preskill_2018}, dinamika ini mentransformasi ketidakpastian solusi menjadi masalah kontrol waktu sirkuit, di mana optimasi jadwal \textit{annealing} menjadi kunci untuk memitigasi kesalahan akibat eksitasi diakritik yang dapat mendegradasi kualitas solusi pada perangkat keras kuantum skala menengah.
+
+\subsubsection{Derivasi Kondisi Adiabatik dan Celah Energi}
+
+Landasan logis dari validitas \textit{quantum annealing} berakar pada pemenuhan kondisi adiabatik yang menjamin probabilitas transisi ke keadaan tereksitasi tetap minimal. Misalkan $|\psi_0(t)\rangle$ adalah keadaan dasar instan dari $H(t)$ dengan energi $E_0(t)$, dan $E_1(t)$ adalah energi dari keadaan tereksitasi pertama. Jembatan matematis untuk menentukan laju perubahan parameter $s = t/T$ dimulai dari persyaratan bahwa laju evolusi Hamiltonian harus jauh lebih kecil dibandingkan kuadrat dari celah energi minimum $\Delta_{min} = \min(E_1(t) - E_0(t))$. Secara formal, kondisi adiabatik dapat dinyatakan sebagai:
+\begin{equation}
+    T \gg \frac{|\langle \psi_1(t) | \frac{dH}{dt} | \psi_0(t) \rangle|}{\Delta(t)^2}
+\end{equation}
+Penurunan ini menunjukkan bahwa ketika celah energi $\Delta(t)$ menjadi sangat sempit (titik kritis), waktu yang dibutuhkan untuk mempertahankan sifat adiabatik akan meningkat secara drastis, yang dikenal sebagai fenomena perlambatan kritis (\textit{critical slowing down}).
+
+Dalam aplikasi optimasi portofolio dengan banyak aset, celah energi ini sering kali mengecil secara eksponensial seiring dengan bertambahnya jumlah qubit, yang memberikan batasan praktis pada kecepatan pemrosesan. Namun, penggunaan \textit{quantum annealing} tetap memberikan keunggulan dalam menemukan solusi sub-optimal yang berkualitas tinggi dalam waktu yang lebih singkat dibandingkan algoritma pencarian deterministik klasik. Kesimpulan teknis dari formalisme ini adalah bahwa keberhasilan optimasi pasar finansial melalui \textit{annealing} bukan hanya ditentukan oleh pemetaan QUBO yang akurat, melainkan juga oleh desain lintasan evolusi $A(t)$ dan $B(t)$ yang mampu menjaga sistem sedekat mungkin dengan lintasan adiabatik. Dengan demikian, \textit{quantum annealing} menawarkan pendekatan fisik yang robust untuk menavigasi kompleksitas lanskap finansial melalui prinsip minimisasi energi fundamental.
+

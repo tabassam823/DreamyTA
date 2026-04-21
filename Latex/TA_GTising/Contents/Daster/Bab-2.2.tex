@@ -1,48 +1,81 @@
 \section{Representasi Data Finansial}
 
-\subsection{Pra-pemrosesan Data Harga: Ekstraksi Parameter Dasar dan Binerisasi Keadaan}
+\subsection{Representasi Kualitatif dalam Pasar Finansial}
+% Komponen kualitatif yang menjadi indikator fundamental dalam analisis pasar adalah sebagai berikut:
+% \begin{enumerate}
+%     \item Kapitalisasi Pasar (\textit{Market Capitalization})
+%     \item Volume Perdagangan (\textit{Trading Volume})
+%     \item Penawaran dan Permintaan (\textit{Supply and Demand})
+%     \item Volatilitas (\textit{Volatility})
+%     \item Laporan Keuangan Perusahaan (\textit{Financial Statements})
+%     \item Berita dan Sentimen Pasar (\textit{Market News and Sentiment})
+% \end{enumerate}
 
-Pengolahan data finansial dalam kerangka ekonofisika dimulai dengan transformasi deret harga mentah menjadi metrik imbal hasil yang bersifat stasioner. Data harga penutupan aset $i$ pada waktu $t$, yang dinotasikan sebagai $P_{i,t}$, dikonversi menjadi imbal hasil logaritmik (\textit{log return}) $r_{i,t}$ untuk menghilangkan efek skala dan memastikan sifat aditif dari waktu ke waktu \cite{mantegna_introduction_1999}:
-\begin{equation}
-r_{i,t} = \ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right)
-\label{eq:log_return}
-\end{equation}
-Penggunaan logaritma pada persamaan (\ref{eq:log_return}) memberikan kemudahan dalam pemodelan stokastik karena distribusi imbal hasil cenderung mendekati distribusi normal pada interval waktu yang panjang, meskipun seringkali menunjukkan fenomena \textit{fat-tails} pada interval pendek.
+Representasi kualitatif dalam pasar finansial merupakan abstraksi dari kondisi fundamental dan psikologis yang mendasari dinamika harga aset. Secara teoretis, variabel seperti \textit{market capitalization} dan \textit{trading volume} bukan sekadar angka statistik, melainkan indikator likuiditas dan kepercayaan kolektif agen terhadap nilai intrinsik suatu entitas. Menurut \cite{fama_1970}, efisiensi informasi dalam pasar sangat bergantung pada seberapa cepat data kualitatif ini diserap dan ditransformasikan menjadi sinyal harga oleh para pelaku pasar. Dalam konteks ini, interaksi antara \textit{supply and demand} bertindak sebagai mekanisme penyeimbang yang mencerminkan konsensus pasar terhadap ekspektasi risiko dan imbal hasil di masa depan.
 
-Berdasarkan deret waktu $r_{i,t}$ yang diperoleh, parameter statistik konvensional berupa nilai harapan imbal hasil (\textit{expected return}) $\mu_i$ dan varians $\sigma_i^2$ dihitung untuk mengkuantifikasi performa dan risiko aset tunggal. Nilai rata-rata imbal hasil selama periode $T$ didefinisikan sebagai:
-\begin{equation}
-\mu_i = \frac{1}{T} \sum_{t=1}^{T} r_{i,t}
-\label{eq:expected_return_calc}
-\end{equation}
-Sedangkan volatilitas aset yang direpresentasikan melalui varians sampel dihitung dengan rumus:
-\begin{equation}
-\sigma_i^2 = \frac{1}{T-1} \sum_{t=1}^{T} (r_{i,t} - \mu_i)^2
-\label{eq:variance_calc}
-\end{equation}
-Parameter $\mu_i$ dan $\sigma_i^2$ pada persamaan (\ref{eq:expected_return_calc}) dan (\ref{eq:variance_calc}) merupakan fondasi input bagi model optimasi portofolio standar sebelum nantinya dikembangkan menjadi parameter strategis ($\tilde{\mu}_i$ dan $\tilde{\sigma}_{ij}$) dalam formalisme teori permainan.
+Fluktuasi pasar yang dimanifestasikan melalui \textit{volatility} sering kali dipicu oleh rilis \textit{financial statements} atau perubahan mendadak dalam \textit{market sentiment} akibat berita makroekonomi. Informasi kualitatif ini diproses secara heterogen oleh berbagai tipe agen, mulai dari investor institusional hingga pedagang ritel, yang masing-masing memiliki ambang batas toleransi risiko yang berbeda. Berdasarkan teori informasi yang dikembangkan oleh \cite{shannon_1948}, setiap berita yang muncul di pasar membawa muatan entropi yang dapat mengganggu ekuilibrium harga sementara hingga informasi tersebut sepenuhnya terdiskon ke dalam nilai aset. Oleh karena itu, pemahaman mendalam mengenai aspek kualitatif ini menjadi prasyarat krusial dalam membangun model ekonofisika yang mampu menangkap kompleksitas sistem keuangan global.
 
-Untuk memetakan dinamika pasar yang kontinu ini ke dalam arsitektur komputasi kuantum, diperlukan proses diskretisasi data melalui mekanisme binerisasi keadaan. Mengingat perangkat kuantum bekerja dengan sistem dua tingkat (\textit{two-level system}) atau qubit, nilai imbal hasil $r_{i,t}$ dipetakan ke dalam dua status diskret biner $\{U, D\}$ yang merepresentasikan arah pergerakan harga. Status $U$ (\textit{Up}) ditetapkan jika $r_{i,t} > 0$, dan status $D$ (\textit{Down}) ditetapkan jika $r_{i,t} \le 0$. Transformasi ini memungkinkan pergerakan harga dianalisis sebagai transisi keadaan magnetik dalam model Ising, di mana setiap perubahan harga mencerminkan eksitasi atau relaksasi energi dalam ruang \textit{Hilbert} sistem \cite{lucas_ising_2014}.
+\begin{example}
+    Reaksi pasar terhadap pengumuman laporan keuangan tahunan sebuah perusahaan teknologi besar dapat mengilustrasikan bagaimana data kualitatif dikonversi menjadi pergerakan harga yang signifikan. Ketika perusahaan melaporkan pertumbuhan laba bersih yang melampaui ekspektasi analis (\textit{earnings beat}), volume perdagangan biasanya akan melonjak seketika karena adanya revisi masif terhadap penilaian nilai intrinsik saham tersebut. Fenomena ini menciptakan ketidakseimbangan antara \textit{supply and demand}, di mana tekanan beli yang tinggi mendorong harga saham ke level resistansi baru. Di sisi lain, jika laporan tersebut disertai dengan proyeksi masa depan yang suram (\textit{negative guidance}), sentimen pasar dapat berubah menjadi pesimis, memicu peningkatan \textit{volatility} yang drastis akibat aksi jual panik oleh para investor.
 
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.75\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Images/Chart.png}
-        \caption{Grafik pergerakan harga aset dalam grafik \textit{time-series}}
-        \label{fig:price_time_series}
-    \end{subfigure}
-    \\ \vspace{0.5cm}
-    \begin{subfigure}[b]{0.75\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Images/OHLC.png}
-        \caption{Representasi transisi keadaan harga ($U$ dan $D$) melalui binerisasi log return \protect\cite{ibrahim_bitcoin_2020}}
-        \label{fig:price_transitions}
-    \end{subfigure}
-    \caption{Visualisasi representasi data finansial: (a) grafik pergerakan harga dalam deret waktu dan (b) visualisasi transisi keadaan harga melalui pemetaan biner.}
-    \label{fig:financial_data_rep}
-\end{figure}
+    Dalam skenario tersebut, \textit{market capitalization} perusahaan akan mengalami penyesuaian nilai secara \textit{real-time} yang mencerminkan persepsi risiko kolektif yang baru. Peran berita dan sentimen bertindak sebagai katalisator yang mempercepat transmisi informasi dari domain kualitatif menuju representasi kuantitatif dalam grafik harga. Proses ini menunjukkan bahwa pasar finansial bukan sekadar sistem mekanistik, melainkan ekosistem yang sangat responsif terhadap aliran informasi dan narasi yang berkembang di masyarakat. Dengan menganalisis hubungan antara volume perdagangan dan pergerakan harga selama periode berita, peneliti dapat mengidentifikasi pola anomali pasar yang sering kali tidak tertangkap oleh model linear tradisional.
+\end{example}
 
-Hasil dari pra-pemrosesan ini memberikan struktur data yang kompatibel dengan algoritma berbasis energi. Dengan mereduksi kompleksitas pergerakan harga menjadi representasi biner, sistem dapat mengeksplorasi ruang solusi konfigurasi portofolio secara efisien melalui pencarian status energi terendah (\textit{ground state}). Penyelarasan antara metrik finansial klasik dan binerisasi kuantum ini merupakan langkah krusial dalam menjembatani data pasar riil dengan formalisme Hamiltonian Ising yang akan dibahas pada bagian selanjutnya.
+\subsection{Representasi Data pada Pergerakan Harga}
+% Poin-poin pembahasan mengenai visualisasi dan struktur data pergerakan harga adalah sebagai berikut:
+% \begin{enumerate}
+%     \item Jenis-Jenis Grafik Harga (\textit{Line, Bar, Area,} dan \textit{Candlestick})
+%     \item Dimensi Temporal (\textit{Timeframe}) dan Deret Waktu (\textit{Time Series})
+%     \item Struktur Data \textit{Open-High-Low-Close} (OHLC)
+%     \item Analisis Perubahan Persentase Harga (\textit{Price Change})
+% \end{enumerate}
 
-\subsection{Parameter \textit{Risk Aversion} Endogen melalui Fungsi Aktivasi Sigmoid}
-\textit{Risk aversion} merupakan parameter yang merepresentasikan tingkat keengganan investor terhadap ketidakpastian dalam upaya menjaga stabilitas utilitas ekspektasian dari portofolio investasi. Secara konvensional, variabel ini seringkali dipandang sebagai parameter statis yang hanya ditentukan oleh karakteristik demografis individu, seperti faktor usia dan horison investasi. Investor berusia muda umumnya memiliki \textit{risk aversion} yang rendah karena kapasitas penanggungan risiko yang lebih luas, sedangkan investor lanjut usia cenderung meningkatkan \textit{risk aversion} demi menjaga stabilitas aset \cite{abdul_hali_markowitz_2020}. Namun demikian, pendekatan statis ini tidak bisa menyesuaikan angkanya terhadap anomali pasar yang bersifat fluktuatif dan tidak terduga. Oleh karena itu, diperlukan sebuah mekanisme penentuan parameter yang bersifat endogen dan mampu melakukan penyesuaian diri (\textit{self-adjusting risk aversion}) secara \textit{real-time} terhadap dinamika pasar yang terekstraksi dari data finansial aktual.
+Representasi pergerakan harga merupakan pemetaan stokastik dari aktivitas transaksional ke dalam domain visual untuk memfasilitasi identifikasi pola (\textit{pattern recognition}). Dalam analisis teknis modern, berbagai jenis grafik seperti \textit{line chart}, \textit{bar chart}, \textit{area chart}, dan \textit{candlestick chart} digunakan untuk mereduksi kompleksitas data mentah menjadi bentuk yang lebih intuitif. Figure 1 mengilustrasikan perbandingan antara grafik garis yang bersifat kontinu dengan grafik \textit{candlestick} yang memberikan rincian volatilitas intraday melalui komponen tubuh (\textit{body}) dan sumbu (\textit{wick}). Penggunaan representasi visual ini memungkinkan agen untuk melakukan ekstrapolasi tren berdasarkan data historis, yang menurut \cite{fama_1970} merupakan landasan dari efisiensi pasar bentuk lemah karena harga mencerminkan seluruh memori masa lalu.
+
+Dimensi temporal memainkan peran krusial dalam struktur deret waktu (\textit{time series}) finansial, di mana pemilihan \textit{timeframe} menentukan granulasi informasi yang ditangkap oleh sistem. Setiap titik data pada grafik \textit{candlestick} merangkum empat parameter kritis, yaitu harga pembukaan (\textit{open}), tertinggi (\textit{high}), terendah (\textit{low}), dan penutupan (\textit{close}) dalam interval waktu tertentu. Perbedaan antara periode waktu yang singkat (seperti menit atau jam) dengan periode panjang (seperti harian atau mingguan) menciptakan perspektif yang berbeda terhadap dinamika pasar dan level \textit{support-resistance}. Transformasi data dari harga diskrit menjadi representasi kontinu pada sumbu waktu merupakan langkah awal dalam pemodelan matematis untuk memprediksi probabilitas pergerakan harga di masa depan melalui pendekatan ekonofisika.
+
+\begin{example}
+    Analisis kuantitatif terhadap perubahan harga dapat dilakukan melalui perhitungan persentase kenaikan atau penurunan untuk menentukan momentum pasar. Misalkan sebuah aset memiliki harga pembukaan ($P_{open}$) sebesar 100 dan harga penutupan ($P_{close}$) sebesar 105 dalam satu sesi perdagangan, maka persentase kenaikan harga ($\Delta P\%$) dapat dihitung menggunakan persamaan:
+    $$ \Delta P\% = \frac{P_{close} - P_{open}}{P_{open}} \times 100\% $$ (1)
+    Dalam kasus ini, aset mengalami apresiasi sebesar 5\%, yang pada grafik \textit{candlestick} akan direpresentasikan dengan tubuh berwarna hijau (bullish). Sebaliknya, jika harga turun dari 100 menjadi 95, maka terjadi depresiasi sebesar 5\% ($\Delta P\% = -5\%$) yang ditandai dengan tubuh berwarna merah (bearish), menunjukkan dominasi tekanan jual pada periode tersebut. Variasi antara nilai \textit{high} dan \textit{low} pada sesi tersebut mencerminkan rentang volatilitas, di mana sumbu yang panjang mengindikasikan adanya penolakan harga (\textit{price rejection}) pada level-level ekstrem sebelum akhirnya mencapai konsensus penutupan.
+\end{example}
+
+\subsection{Model Kuantitatif Ekonofisika}
+% Komponen dasar dalam pemodelan kuantitatif data finansial meliputi:
+% \begin{enumerate}
+%     \item Imbal Hasil Sederhana (\textit{Simple Return})
+%     \item Imbal Hasil Logaritmik (\textit{Log Return})
+%     \item Fungsi Aktivasi dan Non-linearitas Pasar
+%     \item Normalisasi dan Transformasi Data
+% \end{enumerate}
+
+Pemodelan kuantitatif dalam ekonofisika dimulai dengan transformasi harga mentah menjadi variabel imbal hasil (\textit{returns}) untuk menghasilkan data yang bersifat stasioner. \textit{Simple return} didefinisikan sebagai perubahan relatif harga terhadap titik referensi sebelumnya, yang secara langsung merepresentasikan keuntungan atau kerugian nominal bagi agen. Namun, dalam analisis deret waktu yang panjang, penggunaan \textit{log return} lebih diutamakan karena sifat aditivitasnya yang memungkinkan agregasi temporal secara linear. Menurut \cite{kolmogorov_1968}, struktur informasi dalam data stokastik dapat dianalisis lebih efisien melalui transformasi logaritmik yang cenderung mendekati distribusi normal pada skala waktu tertentu, meskipun fenomena \textit{fat-tails} tetap menjadi karakteristik inheren dalam pasar finansial.
+
+Selain transformasi imbal hasil, penerapan fungsi aktivasi non-linear menjadi krusial dalam memodelkan perilaku agen yang tidak proporsional terhadap stimulus informasi. Fungsi-fungsi seperti \textit{Sigmoid} atau \textit{Hyperbolic Tangent} ($tanh$) digunakan untuk memetakan input data finansial yang luas ke dalam rentang nilai tertentu, yang merepresentasikan tingkat keputusan atau saturasi sentimen pasar. Pendekatan ini selaras dengan prinsip-prinsip dalam mekanika statistika, di mana respons sistem terhadap gangguan eksternal sering kali mengikuti hukum non-linear yang kompleks. Melalui integrasi antara statistik imbal hasil dan fungsi aktivasi, model ekonofisika dapat menangkap dinamika transisi fase antara kondisi pasar yang stabil dan kondisi pasar yang volatil secara lebih akurat.
+
+\begin{example}
+    Perhitungan perbandingan antara \textit{simple return} dan \textit{log return} dapat diilustrasikan melalui pergerakan harga aset dalam dua periode waktu. Misalkan harga aset pada waktu $t-1$ adalah $P_{t-1} = 100$ dan pada waktu $t$ naik menjadi $P_t = 110$, maka \textit{simple return} ($R_t$) dihitung sebagai berikut:
+    $$ R_t = \frac{110 - 100}{100} = 0.10 \text{ atau } 10\% $$ (2)
+    Sedangkan imbal hasil logaritmik ($r_t$) dihitung menggunakan logaritma natural:
+    $$ r_t = \ln \left( \frac{110}{100} \right) \approx 0.0953 \text{ atau } 9.53\% $$ (3)
+    Perbedaan nilai ini semakin mengecil seiring dengan berkurangnya besaran perubahan harga, sehingga untuk fluktuasi kecil, $r_t \approx R_t$. Penggunaan fungsi aktivasi seperti \textit{Sigmoid} ($\sigma(x) = \frac{1}{1 + e^{-x}}$) dapat diterapkan pada nilai $r_t$ untuk menghasilkan skor kepercayaan (\textit{confidence score}) antara 0 dan 1, yang mengindikasikan probabilitas pergerakan tren di masa depan berdasarkan normalisasi data input.
+\end{example}
+
+\subsection{Pemodelan parameter \textit{Risk Aversion} Endogen}
+Struktur pembahasan mengenai dinamika perilaku agen terhadap risiko adalah sebagai berikut:
+% \begin{enumerate}
+%     \item Definisi Koefisien \textit{Risk Aversion} dalam Utilitas
+%     \item Mekanisme Perubahan Parameter \textit{Risk Aversion} secara Endogen
+%     \item Pengaruh Akumulasi Kekayaan terhadap Toleransi Risiko
+%     \item Dampak Umpan Balik (\textit{Feedback Loop}) pada Stabilitas Pasar
+% \end{enumerate}
+
+\textit{Risk aversion} atau penghindaran risiko merupakan parameter psikologis fundamental yang menentukan kemiringan kurva utilitas seorang agen dalam menghadapi ketidakpastian finansial. Secara klasik, tingkat penghindaran risiko dianggap sebagai konstanta statis bagi setiap individu, namun dalam perspektif keuangan perilaku (\textit{behavioral finance}), parameter ini bersifat dinamis dan dipengaruhi oleh pengalaman masa lalu serta kondisi kekayaan saat ini. Menurut teori prospek yang dikemukakan oleh \cite{kahneman_prospect_1979}, agen cenderung menunjukkan perilaku yang asimetris terhadap keuntungan dan kerugian, di mana rasa sakit akibat kehilangan jauh lebih besar daripada kepuasan yang didapat dari keuntungan yang setara. Hal ini mengimplikasikan bahwa parameter \textit{risk aversion} ($\gamma$) tidak hanya sekadar angka dalam model, melainkan variabel endogen yang berevolusi seiring dengan fluktuasi portofolio agen.
+
+Pemodelan parameter \textit{risk aversion} secara endogen memungkinkan sistem ekonofisika untuk menangkap fenomena "memori pasar" dan perilaku kawanan (\textit{herding behavior}) yang sering kali memicu krisis finansial. Ketika pasar mengalami kontraksi yang tajam, agen-agen secara kolektif cenderung meningkatkan tingkat penghindaran risiko mereka sebagai bentuk mekanisme pertahanan diri, yang kemudian menurunkan permintaan terhadap aset berisiko dan memperdalam penurunan harga. Berdasarkan pendekatan sistem partikel berinteraksi, dinamika $\gamma$ ini dapat dianalogikan dengan perubahan suhu efektif dalam sistem fisik yang memicu transisi fase antara kondisi cair (likuid) menuju kondisi beku (stagnasi). Dengan mengintegrasikan perubahan parameter ini ke dalam fungsi keputusan agen, model dapat mensimulasikan mekanisme \textit{self-organizing criticality} yang mendasari volatilitas ekstrem di pasar finansial global.
+
+\begin{example}
+    Dinamika perubahan parameter \textit{risk aversion} dapat diilustrasikan melalui penyesuaian strategi investasi agen setelah mengalami serangkaian kerugian berturut-turut. Bayangkan seorang agen yang awalnya memiliki parameter $\gamma$ rendah, yang menunjukkan toleransi risiko tinggi untuk mengejar imbal hasil maksimal. Namun, setelah terjadi guncangan pasar (\textit{market shock}) yang menggerus 20\% dari total modalnya, agen tersebut secara endogen menyesuaikan fungsi utilitasnya menjadi lebih konservatif, yang secara matematis direpresentasikan sebagai peningkatan nilai $\gamma$:
+    $$ \gamma_{t+1} = \gamma_t + \eta (L_t - \bar{L}) $$ (4)
+    Di mana $L_t$ adalah kerugian aktual, $\bar{L}$ adalah ambang batas toleransi, dan $\eta$ adalah koefisien sensitivitas psikologis. Peningkatan $\gamma$ ini memaksa agen untuk mereduksi paparan pada aset berisiko dan beralih ke aset yang lebih aman (\textit{safe-haven assets}), meskipun potensi pengembalian di masa depan mungkin sedang meningkat. Fenomena ini menunjukkan bagaimana variabel psikologis endogen menciptakan inersia dalam pengambilan keputusan, yang secara kolektif dapat menghambat pemulihan harga setelah terjadinya resesi.
+\end{example}

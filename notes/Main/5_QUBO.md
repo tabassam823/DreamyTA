@@ -40,42 +40,74 @@ E(\vec{x}) &= \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i x_j
 &= \frac{\gamma}{2}\sum_{i=1}^N\sigma_i^2 \frac{x_i^2}{k^2} + \frac{\gamma}{2}\sum_{i\ne j}\sigma_{ij} \frac{x_ix_j}{k^2} - \sum_{i=1}^N \mu_i \frac{x_i}{k}
 \end{split}$$
 
+$$
+\boxed{E(\vec{x}) = \frac{\gamma}{2k^2}\begin{pmatrix} x_1 & x_2 & \dots & x_n\end{pmatrix} \begin{pmatrix}\sigma_{11} & 0 & \dots & 0 \\ 0 & \sigma_{22} & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & \sigma_{nn} \end{pmatrix} \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{pmatrix} + \frac{\gamma}{2k^2}\begin{pmatrix} x_1 & x_2 & \dots & x_n\end{pmatrix} \begin{pmatrix}0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix} \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{pmatrix} - \frac{1}{k}\begin{pmatrix} \mu_1 & \mu_2 & \dots & \mu_n\end{pmatrix} \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{pmatrix}}
+$$
+
 masukkan aplikasi penalti agar sistem meloloskan $\sum_i^N x_i=k$ dan memberi penalti untuk jumlahan yang tidak mengikuti aturan
 $$\begin{split}
-P(\vec{x}) &= A\left( \sum_i^N x_i-k \right)^2 \\
-&= \dots \\\
-&= A \left(\sum_i^Nx_i^2+\sum_{i\ne j}x_ix_j - 2k\sum_{i=1}^N x_i +k^2 \right)
+P(\vec{x}) &= A\left( \sum_i^N x_i-k \right) \\ 
+P(\vec{x}) &= A \sum_i^N x_i-Ak \\
 \end{split}$$
+$$
+\boxed{P(\vec{x}) = \begin{pmatrix} x_1 & x_2 & \dots & x_n\end{pmatrix} \begin{pmatrix}A \\ A \\ \vdots \\ A \end{pmatrix} - Ak}
+$$
+
 sehingga
 $$\begin{split}
 E_{total}(\vec{x}) &= E(\vec{x}) + P(\vec{x})\\
-&= \frac{\gamma}{2}\sum_{i=1}^N\sigma_i^2 \frac{x_i^2}{k^2} + \frac{\gamma}{2}\sum_{i\ne j}\sigma_{ij} \frac{x_ix_j}{k^2} - \sum_{i=1}^N \mu_i \frac{x_i}{k} + A \left(\sum_i^Nx_i^2+\sum_{i\ne j}x_ix_j - 2k\sum_{i=1}^N x_i +k^2 \right) \\
+&= \frac{\gamma}{2}\sum_{i=1}^N\sigma_i^2 \frac{x_i^2}{k^2} + \frac{\gamma}{2}\sum_{i\ne j}\sigma_{ij} \frac{x_ix_j}{k^2} - \sum_{i=1}^N \mu_i \frac{x_i}{k} + A \sum_i^N x_i-Ak \\
 &= \dots \\
-&= \sum_{i=1}^N \left(\frac{\gamma\sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A(1-2k) \right)x_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} + A \right) x_ix_j +Ak^2 \\
+&= \sum_{i=1}^N \left(\frac{\gamma\sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A\right)x_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} \right) x_ix_j -Ak \\
 \end{split}$$
 
-dimana kita gunakan permisalan
+$$
+\boxed{
+\begin{split}
+E_{total}(\vec{x}) =& \left[ \frac{\gamma}{2k^2}\begin{pmatrix} x_1 & x_2 & \dots & x_n\end{pmatrix} \begin{pmatrix}\sigma_{11} & 0 & \dots & 0 \\ 0 & \sigma_{22} & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & \sigma_{nn} \end{pmatrix}  -\frac{1}{k} \begin{pmatrix} \mu_1 & \mu_2 & \dots & \mu_n \end{pmatrix} + A \right] \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{pmatrix} \\
+&+ \begin{pmatrix} x_1 & x_2 & \dots & x_n \end{pmatrix} \left[ \frac{\gamma}{2k^2}\begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix}  \right] \begin{pmatrix}x_1 \\ x_2 \\ \vdots \\ x_n\end{pmatrix} \\
+&-Ak
+\end{split}
+}$$
+
+dengan melakukan transformasi affine $x_i = \frac{s_i+1}{2}$ ; 
 $$\begin{split}
-Q_{ii} &= \frac{\gamma\sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A(1-2k) \\
-Q_{ij} &= \frac{\gamma \sigma_{ij}}{2k^2} + A 
+E_{total}(\vec{x}) &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A\right)\left(\frac{s_i+1}{2}\right) + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} \right) \left(\frac{s_i+1}{2}\right)\left(\frac{s_j+1}{2}\right) -Ak \\
+&= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) \left(s_is_j + s_i + s_j + 1\right) -Ak \\
+&= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
 \end{split}$$
-sehingga persamaan akan menjadi
-$$\begin{split}
-E_{total}(\vec{x}) &= \sum_{i=1}^N Q_{ii}x_i + \sum_{i\ne j} Q_{ij} x_ix_j +Ak^2 \\
-\end{split}$$
-dengan transformasi affine $x_i = \frac{s_i+1}{2}$ ;
-sehingga persamaan akan menjadi
-$$\begin{split}
-E_{total}(\vec{x}) &= \sum_{i=1}^N Q_{ii} \left(\frac{s_i+1}{2} \right) + \sum_{i\ne j} Q_{ij} \left(\frac{s_i+1}{2}\right)\left(\frac{s_j+1}{2}\right) +Ak^2 \\
-&= \dots \\
-&= \sum_{i=1}^N \frac{Q_{ii}}{2} s_i + \sum_{i\ne j}\frac{Q_{ij}}{2} s_i + \sum_{i\ne j} \frac{Q_{ij}}{4} s_is_j + \sum_{i=1}^N\frac{Q_{ii}}{2} + \sum_{i\ne j}\frac{Q_{ij}}{4} + Ak^2
-\end{split}$$
-dan dapat kita misalkan
-$$\begin{split}
-h_i &= \frac{Q_{ii}}{2} + \sum_{i\ne j}\frac{Q_{ij}}{2} \\
-J_{ij} &= \frac{Q_{ij}}{4} \\
-C &= \sum_{i=1}^N\frac{Q_{ii}}{2} + \sum_{i\ne j}\frac{Q_{ij}}{4} + Ak^2
-\end{split}$$
+
+$$
+\boxed{
+\begin{split}
+E_{total}(\vec{x}) =& \left[ \frac{\gamma}{2k^2}\begin{pmatrix} \frac{s_1+1}{2} & \frac{s_2+1}{2} & \dots & \frac{s_n+1}{2}\end{pmatrix} \begin{pmatrix}\sigma_{11} & 0 & \dots & 0 \\ 0 & \sigma_{22} & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & \sigma_{nn} \end{pmatrix}  -\frac{1}{k} \begin{pmatrix} \mu_1 & \mu_2 & \dots & \mu_n \end{pmatrix} + A \right] \begin{pmatrix}\frac{s_1+1}{2} \\ \frac{s_2+1}{2} \\ \vdots \\ \frac{s_n+1}{2}\end{pmatrix} \\
+&+ \begin{pmatrix} \frac{s_1+1}{2} & \frac{s_2+1}{2} & \dots & \frac{s_n+1}{2} \end{pmatrix} \left[ \frac{\gamma}{2k^2}\begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix}  \right] \begin{pmatrix}\frac{s_1+1}{2} \\ \frac{s_2+1}{2} \\ \vdots \\ \frac{s_n+1}{2}\end{pmatrix} \\
+&-Ak \\
+&= \left[\frac{\gamma}{8k^2}\begin{pmatrix} s_1+1 & s_2+1 & \dots & s_n+1\end{pmatrix} \begin{pmatrix} \sigma_{11} & 0 & \dots & 0 \\ 0 & \sigma_{22} & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & \sigma_{nn} \end{pmatrix} - \frac{1}{2k} \begin{pmatrix} \mu_1 & \mu_2 & \dots \mu_n \end{pmatrix} + \frac{A}{2} \right] \begin{pmatrix} s_1+1 \\ s_2+1 \\ \vdots \\ s_n+1\end{pmatrix} \\ 
+&+ \frac{\gamma}{8k^2}\begin{pmatrix} s_1+1 & s_2+1 & \dots & s_n+1\end{pmatrix} \begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix} \begin{pmatrix} s_1+1 \\ s_2+1 \\ \vdots \\ s_n+1\end{pmatrix} \\
+&- \frac{Ak}{2}\\
+&= \cdots \\
+&= \left[\frac{\gamma}{4k^2} \begin{pmatrix}\sigma_{11} & 0 & \dots & 0 \\ 0 & \sigma_{22} & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & \sigma_{nn}\end{pmatrix} - \frac{1}{2k} \begin{pmatrix}\mu_1 & \mu_2 & \dots & \mu_n\end{pmatrix} \right]\begin{pmatrix} s_1 \\ s_2 \\ \vdots \\ s_n\end{pmatrix} \\
+&+ \frac{\gamma}{8k^2} \begin{pmatrix} s_1 & s_2 & \dots & s_n \end{pmatrix} \begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix} \begin{pmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{pmatrix} \\
+&+ \frac{\gamma}{8k^2} \begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix} \begin{pmatrix} s_1 \\ s_2 \\ \vdots \\ s_n \end{pmatrix} + \frac{\gamma}{8k^2} \begin{pmatrix} s_1 & s_2 & \dots & s_n \end{pmatrix} \begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix} \\
+&+ \frac{\gamma}{8k^2} \begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1n} \\ \sigma_{21} & 0 & \dots & \sigma_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{n1} & \sigma_{n2} & \dots & 0 \end{pmatrix} - Ak
+\end{split} 
+}
+$$
+
+sehingga dapat didefinisikan
+$$
+h_i= \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+A\right)
+$$
+dan
+$$
+J_{ij}= \frac{\gamma \sigma_{ij}}{8k^2} \quad \text{untuk } i \ne j
+$$
+dengan
+$$
+C = \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak
+$$
+
 maka model hamiltonian ising dapat dikonstruksi menjadi
 $$
 \hat{\mathcal{H}} = \sum_{i=1}^N h_i s_i + \sum_{i\ne j}J_{ij} s_i s_j + C

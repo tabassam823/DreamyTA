@@ -1,4 +1,4 @@
-U # Algoritma *Gradient Descent* dalam Optimasi Portofolio
+# Algoritma *Gradient Descent* dalam Optimasi Portofolio
 
 ## 1. Prinsip Dasar *Gradient Descent*
 *Gradient Descent* (GD) merupakan algoritma optimasi orde pertama yang bekerja dengan cara memperbarui variabel secara iteratif ke arah negatif dari gradien fungsi tujuan. Dalam konteks optimasi portofolio, tujuan utamanya adalah menemukan vektor bobot $\mathbf{w}$ yang meminimalkan fungsi biaya Markowitz yang telah dimodifikasi dengan suku penalti (*EPG*). Algoritma ini didasarkan pada asumsi bahwa jika fungsi biaya $L(\mathbf{w})$ didefinisikan dan dideferensialkan dalam lingkungan titik $\mathbf{w}$, maka $L(\mathbf{w})$ akan berkurang paling cepat jika kita melangkah ke arah negatif gradien.
