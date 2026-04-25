@@ -1,0 +1,58 @@
+\begin{equation}
+    E(\vec{x}) = -U(\vec{x})
+\end{equation}
+
+\begin{equation}
+    E(\vec{x}) = -\left( \frac{1}{k} \sum_{i=1}^N \mu_i x_i - \frac{\gamma}{2k^2} \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j \right)
+\end{equation}
+
+\begin{equation}
+    E(\vec{x}) = \frac{\gamma}{2k^2} \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j - \frac{1}{k} \sum_{i=1}^N \mu_i x_i
+\end{equation}
+
+\begin{equation}
+    \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j = \sum_{i=1}^N \sigma_{ii} x_i^2 + \sum_{i \ne j} \sigma_{ij} x_i x_j
+\end{equation}
+
+\begin{equation}
+    x_i^2 = x_i, \quad x_i \in \{0, 1\}
+\end{equation}
+
+\begin{equation}
+    E(\vec{x}) = \sum_{i=1}^N \left( \frac{\gamma \sigma_{ii}}{2k^2} - \frac{\mu_i}{k} \right) x_i + \frac{\gamma}{2k^2} \sum_{i \ne j} \sigma_{ij} x_i x_j
+\end{equation}
+
+\begin{equation}
+    P(\vec{x}) = A \left( \sum_{i=1}^N x_i - k \right)^2
+\end{equation}
+
+\begin{equation}
+    P(\vec{x}) = A \left[ \left( \sum_{i=1}^N x_i \right)^2 - 2k \sum_{i=1}^N x_i + k^2 \right]
+\end{equation}
+
+\begin{equation}
+    \left( \sum_{i=1}^N x_i \right)^2 = \sum_{i=1}^N x_i^2 + \sum_{i \ne j} x_i x_j = \sum_{i=1}^N x_i + \sum_{i \ne j} x_i x_j
+\end{equation}
+
+\begin{equation}
+    P(\vec{x}) = \sum_{i=1}^N A(1 - 2k) x_i + \sum_{i \ne j} A x_i x_j + Ak^2
+\end{equation}
+
+\begin{equation}
+    H(\vec{x}) = E(\vec{x}) + P(\vec{x})
+\end{equation}
+
+\begin{equation}
+    H(\vec{x}) = \sum_{i=1}^N \left[ \frac{\gamma \sigma_{ii}}{2k^2} - \frac{\mu_i}{k} + A(1 - 2k) \right] x_i + \sum_{i \ne j} \left( \frac{\gamma \sigma_{ij}}{2k^2} + A \right) x_i x_j + Ak^2
+\end{equation}
+
+\begin{equation}
+    H(\vec{x}) = \sum_{i=1}^N Q_{ii} x_i + \sum_{i \ne j} Q_{ij} x_i x_j + C
+\end{equation}
+
+\begin{itemize}
+    \item $H(\vec{x})$ : Hamiltonian total (QUBO).
+    \item $Q_{ii} = \frac{\gamma \sigma_{ii}}{2k^2} - \frac{\mu_i}{k} + A(1 - 2k)$ : Koefisien linear.
+    \item $Q_{ij} = \frac{\gamma \sigma_{ij}}{2k^2} + A$ : Koefisien kuadratik.
+    \item $C = Ak^2$ : Konstanta energi.
+\end{itemize}

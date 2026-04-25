@@ -953,6 +953,7 @@ dirujuk
 displayed
 direktori
 ditempatkan
+decay
 Kuantum
 Kendala
 Ketika
@@ -1483,6 +1484,7 @@ kesimpulan
 keberlakuan
 komunikatif
 konsistensi
+konvergensinya
 tertentu
 tujuan
 tadinya
@@ -1693,6 +1695,7 @@ terminologi
 tarik
 technical
 terms
+tiap
 seperti
 sebagai
 skema
@@ -1970,6 +1973,7 @@ saran
 strategis
 serapan
 selingkung
+sejatinya
 Annealing
 Approximate
 Algorithm
@@ -2511,6 +2515,7 @@ mendukung
 memperkenalkan
 menjustifikasi
 mengesampingkan
+meski
 optimasi
 optimal
 orde
@@ -4774,6 +4779,7 @@ jk
 jewel
 juta
 jurnal
+jangka
 Limitasi
 Lagrange
 Lagrangian
@@ -5081,6 +5087,7 @@ grep
 gaya
 gabungan
 gambar
+gradiennya
 Gradient
 GD
 Gradien
@@ -5275,6 +5282,7 @@ wujud
 walks
 wajah
 walk
+wajar
 Walupun
 Wigner
 Waktu

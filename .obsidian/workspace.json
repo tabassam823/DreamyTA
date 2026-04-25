@@ -4,123 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "1a7058477f0a9a62",
+        "id": "e50e27cd87ed15ca",
         "type": "tabs",
         "children": [
           {
-            "id": "f4a17b4a5a02a302",
+            "id": "21976c47f5df9bb2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Main/2_Risk_Avrsion.md",
+                "file": "Latex/PakGagus_Presentasi6/todo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2_Risk_Avrsion"
-            }
-          },
-          {
-            "id": "078f9124a160fa67",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Main/3_Markowitz.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "3_Markowitz"
-            }
-          },
-          {
-            "id": "0b41f35329eada3e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Main/4_EPG.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "4_EPG"
-            }
-          },
-          {
-            "id": "5f940bfed36cf064",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Main/6_Gradient_Descent.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "6_Gradient_Descent"
-            }
-          },
-          {
-            "id": "1fcbc8cdd5965774",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Main/7_SPSA.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "7_SPSA"
-            }
-          },
-          {
-            "id": "554f9c8a7553f638",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/Kurikulum/MD_File/Distribusi.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Distribusi"
-            }
-          },
-          {
-            "id": "698aa889b988b731",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Main/DS/DS_Distribution.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "DS_Distribution"
-            }
-          },
-          {
-            "id": "d45d723498d56462",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Main/8_Ansatz.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "8_Ansatz"
+              "title": "todo"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -187,13 +88,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Main/6_Gradient_Descent.md",
+                "file": "Latex/PakGagus_Presentasi6/todo.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 6_Gradient_Descent"
+              "title": "Outline of todo"
             }
           }
         ]
@@ -318,44 +219,44 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "5f940bfed36cf064",
+  "active": "21976c47f5df9bb2",
   "lastOpenFiles": [
-    "Latex/TA_GTising/research-book-writer/references/theory_notes.md",
-    "Latex/TA_GTising/zivi87W4",
-    "notes/Main/DS/DS_Distribution_SPSA.md",
-    "notes/Main/6_Gradient_Descent.md",
+    "Latex/PakHeru_Presentasi5/main.synctex(busy)",
+    "Latex/PakHeru_Presentasi5/main.log",
+    "Latex/PakHeru_Presentasi5/main.fls",
+    "Latex/PakHeru_Presentasi5/pdflatex6792.fls",
+    "Latex/PakHeru_Presentasi5/pdflatex6682.fls",
+    "Latex/PakGagus_Presentasi6/todo.md",
+    "Temporary.md",
+    "notes/Main/8_Ansatz.md",
     "notes/Main/DS/DS_Distribution.md",
+    "Latex/Kurikulum/MD_File/Distribusi.md",
+    "notes/Main/7_SPSA.md",
+    "notes/Main/6_Gradient_Descent.md",
+    "Latex/PakHeru_Presentasi5/main.synctex.gz",
+    "Latex/PakHeru_Presentasi5/pdflatex11648.fls",
+    "Latex/PakHeru_Presentasi5/pdflatex11556.fls",
+    "Latex/PakHeru_Presentasi5/pdflatex11529.fls",
+    "Latex/PakHeru_Presentasi5/QuantumComputing.tex",
+    "Latex/PakHeru_Presentasi5/Quantum.tex",
+    "notes/Main/3_Markowitz.md",
+    "Latex/PakHeru_Presentasi5/GEMINI_Derivasi.md",
+    "Latex/PakHeru_Presentasi5/GEMINI.md",
+    "Latex/PakHeru_Presentasi5/markowitz2epg.md",
+    "notes/Main/4_EPG.md",
+    "Latex/TA_GTising/research-book-writer/references/theory_notes.md",
+    "notes/Main/DS/DS_Distribution_SPSA.md",
     "Latex/TA_GTising/plan_revisi_skill.md",
     "Latex/TA_GTising/GEMINI.md",
     "Latex/TA_GTising/research-book-writer (2)/references/papers.md",
-    "Latex/TA_GTising/research-book-writer (2)/scripts",
-    "Latex/TA_GTising/research-book-writer (2)/references",
-    "Latex/TA_GTising/research-book-writer (2)/assets",
     "Latex/TA_GTising/research-book-writer (2)/SKILL.md",
-    "Latex/TA_GTising/research-book-writer (2)",
-    "Latex/TA_GTising/research-book-writer.skill",
-    "Latex/TA_GTising/zimvgv5C",
     "Latex/TA_GTising/research-book-writer/references/papers.md",
-    "Latex/TA_GTising/research-book-writer/scripts/example_script.cjs",
     "Latex/TA_GTising/research-book-writer/references/example_reference.md",
-    "Latex/TA_GTising/research-book-writer/assets/example_asset.txt",
-    "Latex/TA_GTising/research-book-writer/scripts",
     "Latex/TA_GTising/research-book-writer/SKILL.md",
     "Latex/TA_GTising/Filtered_Paper/New_Paper/Quantum_Annealing_an_Overview.md",
     "Latex/TA_GTising/Filtered_Paper/New_Paper_pdf/Quantum_Annealing_an_Overview.md",
     "Latex/TA_GTising/Filtered_Paper/VQE/Quantum_Annealing_an_Overview.md",
     "Latex/TA_GTising/plan_revisi.md",
-    "notes/Main/5_QUBO_rev.md",
-    "notes/Main/7_SPSA.md",
-    "Latex/Kurikulum/MD_File/Distribusi.md",
-    "notes/Main/DS/DS_SPSA.md",
-    "notes/Main/DS/DS_HIsing.md",
-    "notes/Main/DS/DS_Gate.md",
-    "notes/Main/DS/DS_Biunitary_PSR.md",
-    "notes/Main/DS/DS_Ansatz.md",
-    "notes/Main/8_Ansatz.md",
-    "notes/Main/5_QUBO.md",
-    "notes/Main/3_Markowitz.md",
     "notes/Main/5_EPG_i.png",
     "notes/Main/4_Markowitz.png",
     "notes/Main/3_Risk_Aversion.png",
