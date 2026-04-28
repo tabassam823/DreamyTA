@@ -1,0 +1,110 @@
+\section{APPENDIX C}
+
+\subsection{Paragraf 1: Eksperimen 2x2}
+\begin{frame}{Prosedur Iteratif}
+    \begin{itemize}
+        \item \textbf{Tahap Awal:} Inisialisasi $\ket{+}$ dan proyeksi ke $\ket{11}$ untuk estimasi 2-bit.
+        \item \textbf{Konvergensi:} Terminasi iterasi pada langkah ke-4 saat tercapai stabilitas vektor.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pertanyaan yang dijawab pada Paragraf 1}
+    \centering
+    \small
+    \begin{tabular}{lp{4.5cm}p{6cm}}
+        \toprule
+        Kalimat ke & Pertanyaan & Jawaban \\
+        \midrule
+        1 & Fokus bagian 1 sirkuit? & Estimasi 2-bit dari nilai eigen tertinggi. \\
+        4 & Kapan iterasi berhenti? & Saat vektor hasil pengukuran sudah stabil (iterasi 4). \\
+        \bottomrule
+    \end{tabular}
+\end{frame}
+
+\subsection{Paragraf 2: Akurasi Fase}
+\begin{frame}{Rotasi Pengukuran}
+    \begin{itemize}
+        \item \textbf{Basis x, y, r:} Rotasi basis pengukuran untuk meningkatkan resolusi data fase.
+        \item \textbf{Tabel IV:} Outcome untuk setiap variasi rotasi basis.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pertanyaan yang dijawab pada Paragraf 2}
+    \centering
+    \small
+    \begin{tabular}{lp{4.5cm}p{6cm}}
+        \toprule
+        Kalimat ke & Pertanyaan & Jawaban \\
+        \midrule
+        1 & Akurasi ditingkatkan? & Via rotasi basis pengukuran sumbu x, y, dan r. \\
+        2 & Sebaran data? & Rincian counts dan persentase pada Tabel IV. \\
+        \bottomrule
+    \end{tabular}
+\end{frame}
+
+\subsection{Paragraf 3: Hasil Akhir Eigen}
+\begin{frame}{Estimasi Akhir}
+    \begin{itemize}
+        \item \textbf{Eigenvector:} Disajikan dalam persamaan (C1) dengan margin galat $\delta$.
+        \item \textbf{Eigenvalue:} Nilai $\Lambda_{max} = 0.11$ dalam representasi biner.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pertanyaan yang dijawab pada Paragraf 3}
+    \centering
+    \small
+    \begin{tabular}{lp{4.5cm}p{6cm}}
+        \toprule
+        Kalimat ke & Pertanyaan & Jawaban \\
+        \midrule
+        1 & Hasil eigenvector? & Dinyatakan via Persamaan (C1) dengan galat $\delta$. \\
+        2 & Nilai eigenvalue biner? & Estimasi $\Lambda_{max} = 0.11$. \\
+        \bottomrule
+    \end{tabular}
+\end{frame}
+
+\subsection{Paragraf 4: Eksperimen QPE 4-Qubit}
+\begin{frame}{Fase Kedua Protokol}
+    \begin{itemize}
+        \item \textbf{Sistem 4-Qubit:} Register register eigenvalue 3-bit dan register eigenvector.
+        \item \textbf{Kehilangan Koherensi:} Dekoherensi total pada hardware riil akibat kedalaman sirkuit.
+        \item \textbf{Fidelitas Simulator:} Hasil simulator hampir ideal dengan fidelitas mencapai 0.965.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pertanyaan yang dijawab pada Paragraf 4}
+    \centering
+    \small
+    \begin{tabular}{lp{4.5cm}p{6cm}}
+        \toprule
+        Kalimat ke & Pertanyaan & Jawaban \\
+        \midrule
+        4 & Masalah utama QPE? & Kehilangan koherensi total pada hardware riil. \\
+        5 & Kualitas simulator? & Hasil hampir ideal dengan fidelitas 0.965. \\
+        6 & Estimasi QPE? & Biner 0.111 yang setara desimal 0.875. \\
+        \bottomrule
+    \end{tabular}
+\end{frame}
+
+\subsection{Paragraf 5: Skalabilitas 4x4}
+\begin{frame}{Uji Sistem Multivariat}
+    \begin{itemize}
+        \item \textbf{Replikasi:} Replikasi prosedur untuk matriks 4x4 guna menguji skalabilitas.
+        \item \textbf{Dekoherensi:} Dampak destruktif dekoherensi pada sistem dimensi tinggi.
+        \item \textbf{Hasil 4x4:} Estimasi eigenvector utama dalam kombinasi linear basis.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pertanyaan yang dijawab pada Paragraf 5}
+    \centering
+    \small
+    \begin{tabular}{lp{4.5cm}p{6cm}}
+        \toprule
+        Kalimat ke & Pertanyaan & Jawaban \\
+        \midrule
+        1 & Pengujian 4x4? & Ikuti langkah kasus $2 \times 2$ secara bertahap. \\
+        5 & Kondisi hardware? & Kedalaman sirkuit cegah perolehan hasil berguna. \\
+        6 & Estimasi akhir? & Kombinasi linear basis $00, 01, 10, 11$. \\
+        \bottomrule
+    \end{tabular}
+\end{frame}

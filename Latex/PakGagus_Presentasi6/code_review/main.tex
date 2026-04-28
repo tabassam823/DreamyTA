@@ -1,0 +1,48 @@
+\documentclass[10pt, aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{caption}
+
+% Theme selection
+\usetheme{metropolis} 
+\usecolortheme{default}
+
+\title{Review Kode dan Interpretasi Simulasi qPCA}
+\subtitle{Analisis Spektral dan Validasi pada Arsitektur IBMQX2}
+\author{Review Project}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Daftar Bahasan}
+    \tableofcontents
+\end{frame}
+
+\section{Formalisme QPhE dan Inisialisasi}
+\input{1_qphe_numerik.tex}
+
+\section{Interpretasi Spektral QPhE}
+\input{2_qphe_interpretasi.tex}
+
+\section{Validasi dengan Eigenstate Murni}
+\input{3_eigenstate_validasi.tex}
+
+\section{Interpretasi Validasi Eigenstate}
+\input{3b_eigenstate_interpretasi.tex}
+
+\section{Skalabilitas: Matriks Kovarians 4x4}
+\input{4_4x4_formalism.tex}
+
+\section{Kompleksitas Sirkuit dan Sekuensial}
+\input{5_4x4_complexity.tex}
+
+\section{Analisis Galat NISQ dan Mitigasi}
+\input{6_error_mitigation.tex}
+
+\end{document}

@@ -1,0 +1,44 @@
+\begin{frame}{3.1 Inisialisasi Register dan State Target}
+    Protokol validasi menggunakan register fase $n=2$ ($q_0, q_1$) dan satu qubit target ($q_2$). Qubit target $| \psi \rangle$ disiapkan dalam \textit{eigenstate} murni $| + \rangle$:
+    \begin{equation}
+        | \psi \rangle = | + \rangle = \frac{1}{\sqrt{2}}(| 0 \rangle + | 1 \rangle) = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix}
+    \end{equation}
+    Penggunaan $|+\rangle$ bertujuan untuk mengisolasi efek dekomposisi uniter dari kompleksitas \textit{state} inisial, memungkinkan pengujian fidelitas mekanisme \textit{phase kickback} secara murni.
+\end{frame}
+
+\begin{frame}{3.2 Konstruksi $|\Phi_0\rangle$ melalui Walsh-Hadamard}
+    Register fase diinisialisasi ke dalam superposisi \textit{uniform} menggunakan $H^{\otimes 2}$ pada $q_0$ dan $q_1$:
+    \begin{equation}
+        H^{\otimes 2}|00\rangle = \frac{1}{2}(|00\rangle + |01\rangle + |10\rangle + |11\rangle)
+    \end{equation}
+    \textit{State} total $|\Phi_0\rangle$ sebelum interaksi uniter:
+    \begin{equation}
+        |\Phi_0\rangle = \frac{1}{2} \sum_{k=0}^{3} |k\rangle \otimes \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) = \frac{1}{\sqrt{8}} \sum_{k=0}^{3} (|k,0\rangle + |k,1\rangle)
+    \end{equation}
+    Hal ini memastikan interferensi kuantum mencakup seluruh ruang parameter register fase 2-bit.
+\end{frame}
+
+\begin{frame}{3.3 Interaksi Controlled-Unitary (CU) 2-Bit}
+    Operator evolusi $U^{2^j}$ diterapkan pada register fase dengan parameter numerik berikut:
+    \begin{itemize}
+        \item $U^{2^0}$ (pada $q_1$): $\theta_0=1.59899, \phi_0=-1.11512, \lambda_0=2.02647$
+        \item $U^{2^1}$ (pada $q_0$): $\theta_1=2.22862, \phi_1=0.513123, \lambda_1=3.65472$
+    \end{itemize}
+    Melalui mekanisme \textit{phase kickback}, koefisien fasa qubit register fase berubah sesuai dengan \textit{eigenvalue} operator uniter $U_j$:
+    \begin{equation}
+        |\Phi_1\rangle = \frac{1}{2} \bigotimes_{j=0}^{1} (|0\rangle + e^{2\pi i 2^j \phi}|1\rangle) \otimes |+\rangle = \frac{1}{2} \sum_{k=0}^{3} e^{2\pi i k \phi} |k\rangle \otimes |+\rangle
+    \end{equation}
+\end{frame}
+
+\begin{frame}{3.4 IQFT 2-bit dan Mekanisme Interferensi}
+    Untuk mengonversi fasa ke basis komputasi, diterapkan $\mathcal{QFT}^\dagger$ 2-bit:
+    \begin{equation}
+        |\Phi_{final}\rangle = \frac{1}{4} \sum_{y=0}^{3} \sum_{k=0}^{3} e^{2\pi i k (\phi - y/4)} |y\rangle \otimes |+\rangle
+    \end{equation}
+    \textbf{Analisis Hasil dan Tomografi:}
+    \begin{itemize}
+        \item \textbf{Puncak Probabilitas:} Muncul pada state $|y\rangle$ di mana $y/4 \approx \phi$.
+        \item \textbf{State City:} Verifikasi kemurnian state $|\Phi_{final}\rangle$ melalui komponen riil dan imajiner matriks densitas.
+        \item \textbf{Bloch Multivector:} Visualisasi orientasi qubit; register fase menunjuk ke arah kutub/ekuator sesuai fasa yang terukur.
+    \end{itemize}
+\end{frame}

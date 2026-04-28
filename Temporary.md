@@ -1,61 +1,90 @@
-## Iterasi 2 (k = 2)
+# I. INTRODUCTION
+factor volatilitas
+$$\bar{\sigma}_i (\tau_j) = \sqrt{\lambda_i} (\vec{v}_i)_j \quad (1)$$
+# II. QUANTUM CIRCUIT
+$$\sigma_N \in \mathbb{R}^N \times \mathbb{R}^N$$
+$$\text{tr}[\sigma_N]=1$$
+$$U = e^{it\sigma_N}$$
+spectral decomposition
+$$\sigma_N = \sum_{j=1}^{N} \lambda_j \ket{u_j} \bra{u_j}$$
+dengan $0 \le \lambda_j \le 1$ dan $\sum_{j=1}^N \lambda_j=1$. bisa dibuat matriks
+$$\rho_r = \sum_{j=1}^{N} \lambda_j \ket{u_j} \bra{u_j}$$
+dengan $r \ll N$ 
 
-### Langkah 1 — Hitung $a_k$ dan $c_k$
+random state
+$$\ket{b} = \sum_{j=1}^N \beta_j \ket{u_j}$$
 
-Karena $k = 2$, step size kini mengecil sesuai decay:
+keadaan kuantum setelah QFT
+$$\ket{\psi_b} = \sum_{j=1}^N \beta_j \ket{\Lambda_j^{(n)}} \otimes \ket{u_j}$$
 
-$$a_k = \frac{a}{k^\alpha} = \frac{0.1}{2^{0.602}} = \frac{0.1}{1.5178} = 0.0659$$
+$$\frac{1}{r} \approx \sum_{k=1}^n y_k 2^{-k}$$
 
-$$c_k = \frac{c}{k^\gamma} = \frac{0.1}{2^{0.101}} = \frac{0.1}{1.0725} = 0.0932$$
+$$\bra{y^{(n)}} \otimes \mathbb{1} \ket{\Psi_b} \approx \ket{u_{max}}$$
 
----
+$$\bra{y^{(n)}} \otimes \mathbb{1} \ket{\Psi_b} \approx \sum_{j=1}^K \bar{\beta}_j \ket{u_j}$$
+di mana $\bar{\beta}$ adalah $\beta$ yang ternormalisasi di dalam subspace
 
-### Langkah 2 — Bangkitkan Vektor Perturbasi $\boldsymbol{\Delta}_2$
+karena ketidaktahuan ap priori apakah $K \gt 1$ atau tidak, maka dapat dimulai dengan random state yang berbeda:
+$$\ket{c} = \sum_{j=1}^K \gamma_i \ket{u_j}$$
+sehingga
+$$\ket{\Psi_c} = \sum_{j=1}^N \gamma_j \ket{\Lambda_J^{(n)}} \otimes \ket{u_j}$$
+setelah proyeksi ke $\ket{y^{(n)}}$, ekspektasi keadaannya menjadi superposisi yang berbeda:
+$$\sum_{j=1}^L \tilde{\gamma}_j \ket{u_j}$$
 
-$$\boldsymbol{\Delta}_2 = [-1,\ -1]$$
+# III RESULTS
 
----
+initial state
+$$\ket{0} \otimes \ket{0} \otimes \ket{b_0}$$
 
-### Langkah 3 — Evaluasi Titik Perturbasi
+untuk mengkodifikasi matriks kovarians ke keadaan kuantum, perlu normalisasi
+$$\rho_n=\frac{\sigma_n}{\text{tr}(\sigma_n)}$$
+dengan dekomposisi spektral $\lambda_n$ dan $\ket{u_2}$ 
+> mengapa matriks kovarians harus dikodifikasi ke keadaan kuantum? dan mengapa harus menggunakan normalisasi dengan trace matriksnya
 
-$$\boldsymbol{\theta}^+ = [1.1384,\ 0.4324] + 0.0932 \cdot [-1,\ -1] = [1.0451,\ 0.3392]$$
+rumus fidelity QPE terhadap nilai max
+$$F=|\langle u_{QPE}| u_{max}\rangle|^2$$
 
-$$\boldsymbol{\theta}^- = [1.1384,\ 0.4324] - 0.0932 \cdot [-1,\ -1] = [1.2316,\ 0.5257]$$
+keadaan awal
+$$\ket{b_0} = (\ket{00} + \ket{01} + \ket{10} + \ket{11})$$ nilai eigen estimasi
+$$\Lambda_{max} = 0.b_1b_2b_3$$ 
+# APPENDIX A
+rumus nilai pasar uang terhadap waktu
+$$B(t) = \exp{\left( -\int_0^t r(s)ds\right)}$$ hubungan short rate dan zero coupon dengan persamaan risk-neutral pricing
+$$\begin{split}P(t,T) &= \mathbb{E}^{\mathbb{Q}_B} \left[\frac{B(t)}{B(T)} \times 1|\mathcal{F}_t \right] \\ &= \mathbb{E}^{\mathbb{Q}_B} \left[e^{-\int_t^T r(s)ds} |\mathcal{F}_t\right]\end{split}$$
+hubungan antara forward rates dan short rate dibangun dari
+$$\begin{split}f(t,T) &=-\frac{\partial}{\partial T} \log{P(t,T)} \\ 
+P(t,T) &= e^{-\int_t^T f(t,s)ds}\\
+-\frac{\partial P(t,T)}{\partial T} &= \mathbb{E}^{\mathbb{Q}_B} \left[\exp{\left(-\int_t^T r(s)ds\right)} r(T)|\mathcal{F}_t\right] \\
+&= \mathbb{E}^{\mathbb{Q}_B} \left[\left.\exp{\left(-\int_t^T r(s)ds\right)} r(T) \frac{P(t,T)}{\exp{\left(-\int_t^T r(s)ds \right)}} \right| \mathcal{F}_t\right] \\
+&= P(t,T) \mathbb{E}^{\mathbb{Q}_T} [r(T) | \mathcal{F}_t]
+\end{split}$$
+sehingga pada model HJM, evolusi risk-neutral zero-coupon harga obligasi didapat dari persamaan
+$$dP(r,T) = P(t,T) \left\{r(t)dt + \sum_{i=1}^N \left(\int_t^T \sigma_i(t,s) dW_i(t) \right) \right\}
+$$
+jika menggunakan fungsi dinamika harga obligasi
+$$df(t,T) = \alpha(t,T)dt + \sum_{i=1}^N \sigma_i(t,T) dW_i(t)
+$$
+dimana
+$$\alpha(t,T) = \sum_{i=1}^N \sigma_i(t,T) \int_t^T \sigma_i(t,s)ds
+$$
 
-$$E(\boldsymbol{\theta}^+) = 10\cos(1.0451) + 5\cos(0.3392) = 5.0179 + 4.7151 = 9.7331$$
+faktor volatilitas
+$$\bar{\sigma_i}(\tau_j) = \sqrt{\lambda_i}(\mathbf{v}_i)_j
+$$
 
-$$E(\boldsymbol{\theta}^-) = 10\cos(1.2316) + 5\cos(0.5257) = 3.3273 + 4.3249 = 7.6522$$
+rumus eror total dari eror per gerbang 2 qubit
+$$\delta= \sum \frac{\text{Fidelity}}{\text{number of two-qubit gates}}
+$$
+dimana eror per gerbang
+$$\delta_{\text{two-qubit gate}} = \frac{\text{Fidelity}}{\text{number of two-qubit gates}}
+$$
 
----
-
-### Langkah 4 — Estimasi Gradien SPSA
-
-$$E^+ - E^- = 9.7331 - 7.6522 = 2.0808$$
-
-$$\hat{g}_1 = \frac{2.0808}{2 \cdot 0.0932 \cdot (-1)} = \frac{2.0808}{-0.1865} = -11.1587$$
-
-$$\hat{g}_2 = \frac{2.0808}{2 \cdot 0.0932 \cdot (-1)} = \frac{2.0808}{-0.1865} = -11.1587$$
-
-> **Catatan:** Karena $\Delta_1 = \Delta_2 = -1$, kedua komponen $\hat{g}$ bernilai sama. Ini menunjukkan efek stokastik SPSA — ketika $\boldsymbol{\Delta}$ seragam, gradien tidak bisa membedakan kontribusi tiap parameter. Gradien analitik sejatinya: $\partial E/\partial\theta_1 = -9.0795$ dan $\partial E/\partial\theta_2 = -2.0954$, sangat berbeda.
-
----
-
-### Langkah 5 — Update Parameter
-
-$$\boldsymbol{\theta}^{(2)} = \boldsymbol{\theta}^{(1)} - a_k \cdot \hat{\boldsymbol{g}}$$
-
-$$= [1.1384,\ 0.4324] - 0.0659 \cdot [-11.1587,\ -11.1587]$$
-
-$$= [1.1384 + 0.7352,\ 0.4324 + 0.7352] = [1.8735,\ 1.1676]$$
-
----
-
-## Ringkasan Konvergensi
-
-|Iterasi|$\theta_1$|$\theta_2$|$E(\boldsymbol{\theta})$|Jarak ke −15|
-|---|---|---|---|---|
-|0|0.7854|0.7854|+10.6066|25.6066|
-|1|1.1384|0.4324|+8.7306|23.7306|
-|**2**|**1.8735**|**1.1676**|**−1.0197**|**13.9803**|
-
-Energi turun cukup signifikan dari +8.73 ke −1.02, meski konvergensinya jauh lebih lambat dibanding parameter shift rule — ini konsekuensi wajar dari sifat stokastik SPSA yang estimasi gradiennya tidak selalu akurat per iterasi, namun unbiased secara rata-rata jangka panjang.
+vektor yang digunakan
+$$\ket{+} = 1/\sqrt{2} (\ket{0} + \ket{1})
+$$
+yang diproyeksikan ke
+$$\ket{y^{(n)}} = \ket{111}
+$$
+arah arbiter 
+$$r = \begin{pmatrix}\cos \alpha &-e^{i\beta} \sin \alpha \\ e^{i\beta} \sin \alpha & e^{i\gamma}\cos\alpha \end{pmatrix}
+$$
