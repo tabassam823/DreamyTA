@@ -133,3 +133,34 @@ $$\begin{align}
 \end{align}
 $$
 
+---
+---
+## 6. dengan depth 4
+
+$$
+\begin{aligned}
+U_{ent} &= CNOT_{0,1} \cdot CNOT_{1,0} \\
+U_{ent} &= \begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{pmatrix}
+= \begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0
+\end{pmatrix}
+\end{aligned}
+$$
+$$
+\ket{\psi (\theta)} = U_{rot}^{(4)} U_{ent} U_{rot}^{(3)} U_{ent} U_{rot}^{(2)} U_{ent} U_{rot}^{(1)} U_{ent} U_{rot}^{(0)} \ket{00} 
+$$

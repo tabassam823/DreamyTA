@@ -6,7 +6,7 @@
 - **Gaya Bahasa:** Formal, objektif, dan teknis. Gunakan struktur kalimat yang lugas (concise), hindari gaya bahasa storytelling atau santai. Prioritaskan penggunaan terminologi saintifik yang tepat dan alur logika yang koheren sesuai standar publikasi internasional.
 
 ## 2. Struktur Penulisan & Konten
-1. **Komposisi Paragraf:** Setiap subbab wajib memiliki minimal **dua (2) paragraf**. Setiap paragraf harus terdiri dari minimal **4-5 kalimat** yang padat informasi dan koheren.
+1. **Komposisi Paragraf:** Setiap subbab wajib memiliki minimal **dua (2) paragraf**. Setiap paragraf harus terdiri dari minimal **4-5 kalimat** yang padat informasi dan koheren, dengan jumlah kata per kalimat berkisar antara **20 sampai 50 kata**.
 2. **Logika Penyajian (Deduktif/Induktif):** 
    - **Paragraf Deduktif (Main Idea -> Details):** Digunakan jika kalimat utama merupakan konsep yang **asing/baru** bagi audiens. Berikan pernyataan kuat di awal, kemudian dukung dengan penjelasan teknis, data, atau derivasi.
    - **Paragraf Induktif (Details -> Main Idea):** Digunakan jika kalimat utama merupakan hal yang **familiar/umum** bagi audiens. Mulailah dengan observasi atau premis pendukung, kemudian tarik kesimpulan pada kalimat utama di akhir paragraf.
@@ -18,6 +18,7 @@
 8. **Technical Synthesis:** Saat membahas sistem kuantum (seperti VQE atau Qubits), gunakan analogi teknis sirkuit (gates, noise, coherence) yang setara dengan representasi hardware.
 9. **Data Representation:** Fokus pada interpretasi hasil melalui deskripsi grafis, konvergensi energi, atau metrik performa yang terukur.
 10. **Visual Integration & Figure Descriptions:** Jika suatu konsep kompleks memerlukan visualisasi, AI wajib memberikan saran gambar (deskripsi elemen visual dan usulan caption). Gambar tersebut harus dirujuk secara eksplisit di dalam paragraf (misal: "Figure 1 mengilustrasikan...") dan dijelaskan fungsinya dalam mendukung argumen teknis.
+11. **Struktur & Arahan Penulisan:** Semua penulisan WAJIB didasarkan pada arahan spesifik yang terdapat dalam file-file Markdown di direktori `/Struktur/` (misal: `2_1.md`, `3_1.md`, dll.). Periksa file yang relevan dengan bab/subbab yang sedang dikerjakan sebelum memulai penulisan guna memastikan konsistensi alur dan konten yang diinginkan.
 
 ## 3. Aturan Teknis
 - **Matematika:** Wajib menggunakan LaTeX yang bersih ($...$ atau $$...$$). Setiap persamaan utama (*displayed equations*) wajib diberikan indeks nomor persamaan di sisi kanan, misalnya: (1), (2), dst.

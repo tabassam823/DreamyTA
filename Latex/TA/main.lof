@@ -1,12 +1,6 @@
 \babel@toc {bahasa}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Skema interaksi \textit {order book} dan pengaruh kebijakan moneter terhadap likuiditas pasar.}}{7}{figure.caption.4}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Representasi kurva \textit {Efficient Frontier} dalam ruang risiko dan imbal hasil.}}{8}{figure.caption.5}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Visualisasi representasi data finansial: (a) grafik pergerakan harga dalam deret waktu dan (b) visualisasi transisi keadaan harga melalui \textit {candlestick}.}}{9}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Matriks \textit {Payoff} Saham $i$ ($V_i$)}}{16}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Diagram Venn representasi \textit {Mutual Information}.}}{19}{figure.caption.8}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Representasi geometris keadaan satu qubit pada permukaan bola Bloch yang menunjukkan parameterisasi sudut polar ($\theta $) dan azimuthal ($\phi $).}}{26}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Visualisasi arsitektur sirkuit kuantum \textit {EfficientSU2} dengan lapisan rotasi parameterisasi dan keterbelitan berantai (\textit {linear connectivity}).}}{27}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Representasi Bola Bloch menunjukkan vektor keadaan $|\psi \rangle $ dalam superposisi. Sudut $\theta $ menentukan distribusi probabilitas antara $|0\rangle $ dan $|1\rangle $, sementara sudut fase $\phi $ merepresentasikan koherensi kuantum yang membedakan qubit dari sistem probabilistik klasik.}}{22}{figure.caption.7}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}}{29}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}}{27}{figure.caption.10}%

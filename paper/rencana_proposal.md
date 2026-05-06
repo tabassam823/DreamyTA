@@ -150,7 +150,7 @@ Penelitian ini dilakukan dengan pendekatan eksperimental simulasi komputasi. Tah
 5.  **Evaluasi & Analisis:** Perbandingan kinerja portofolio kuantum vs klasik.
 > **Pelajari ini:**
 > *   Gambaran besar "Pipeline" sistem yang akan dibangun.
-> *   **Referensi:** [[bab3_metodologi.md]]
+> *   **Referensi:** [[bab3_metodologi]]
 
 ## 3.2 Pengumpulan dan Pra-pemrosesan Data
 *   **Objek:** Dua aset saham ($N=2$) dengan kapitalisasi pasar besar (Blue Chip) yang memiliki korelasi historis tinggi (misalnya: sektor perbankan atau teknologi).

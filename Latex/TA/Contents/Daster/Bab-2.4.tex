@@ -1,102 +1,16 @@
-\section{Game Theory klasik}
+\section{Formalisme Exact Potential Game}
 
-\subsection{Matriks \textit{Payoff}}
+\subsection{Aksioma Permainan Potensial pada Sistem Finansial}
+Teori permainan diimplementasikan dalam sistem finansial untuk memodelkan interaksi strategis antar-agen rasional yang berupaya melakukan maksimisasi utilitas intertemporal di bawah kondisi ketidakpastian pasar yang bersifat stokastik. Dalam kerangka ini, setiap aset investasi dipandang sebagai pemain aktif yang memiliki ruang strategi biner untuk memutuskan apakah akan dilibatkan atau dikeluarkan dari struktur portofolio kolektif. Pendekatan \textit{Exact Potential Game} (EPG) dipilih sebagai metodologi utama karena kemampuannya dalam menyelaraskan setiap perubahan utilitas marginal individu pemain dengan gradien fungsi potensial global secara eksak. Karakteristik penyelarasan ini memberikan jaminan matematis bahwa proses pencarian ekuilibrium Nash di dalam dinamika pasar finansial dapat diselesaikan secara efisien melalui mekanisme minimisasi energi pada \textit{Hamiltonian Ising}.
 
-Teori permainan dalam sistem finansial menyatakan bahwa pergerakan harga merupakan hasil dari interaksi strategis antar agen rasional yang berusaha memaksimalkan utilitasnya \cite{john_von_neumann_theory_1953}. Dalam \textit{non zero-sum game}, interaksi ini dimodelkan melalui ruang konfigurasi biner yang merepresentasikan empat status kemungkinan antara pasangan saham $i$ dan $j$ pada setiap waktu $t$. Konsep tersebut kemudian dikembangkan hingga muncul konsep baru bernama \textit{Mixed Strategy Nash Equilibrium} (MSNE) yang menyatakan bahwa setiap entitas mendistribusikan preferensi strateginya melalui distribusi probabilitas atas sekumpulan aksi biner untuk mencapai kondisi optimal di mana tidak ada insentif bagi agen untuk mengubah strateginya secara unilateral. MSNE diaplikasikan dengan menggunakan probabilitas historis sebagai strategi pelaku pasar untuk mencapai titik keseimbangan \cite{menezes_ex_2025}. Pendekatan ini digunakan supaya sistem dapat menangkap dinamika asimetris.
+Pembuktian formal mengenai model Markowitz sebagai bagian dari kelas EPG dilakukan melalui teknik dekomposisi fungsi potensial guna mengisolasi variabel keputusan dari setiap pemain secara spesifik. Dengan memanfaatkan sifat simetri yang inheren pada matriks kovariansi, interaksi risiko lokal pada satu aset tertentu dapat dipisahkan secara analitis dari pengaruh komponen sistem lainnya yang tidak relevan. Penggunaan properti variabel biner $x_i^2 = x_i$ memungkinkan dilakukannya faktorisasi variabel keputusan ke dalam relasi utilitas individual yang bersifat eksplisit dan mudah diinterpretasikan secara ekonomi \cite{monderer_potential_1996}. Identitas keselarasan antara selisih nilai fungsi potensial dengan selisih utilitas marginal akhirnya mengonfirmasi eksistensi fungsi potensial eksak yang mendasari seluruh teori seleksi portofolio biner ini.
 
-Matriks imbalan (\textit{payoff matrix}) $V_i$ merepresentasikan insentif strategis bagi agen $i$ terhadap respon pergerakan agen $j$ sebagai pengukuran potensi keuntungan relatif. Setiap elemen $R_{xy}$ dalam matriks tersebut merepresentasikan imbal hasil historis yang diperoleh ketika agen $i$ berada pada kondisi $x \in \{U, D\}$ dan agen $j$ pada kondisi $y \in \{U, D\}$. Untuk kasus kedua agen naik pada waktu $t$, 
-\begin{equation}
-R_{UU} = \frac{1}{n_{UU}} \sum_{t \in T_{UU}} r_{i,t}
-\label{eq:R_UU}
-\end{equation}
-Untuk kasus agen $i$ naik dan agen $j$ turun pada waktu $t$,
-\begin{equation}
-R_{UD} = \frac{1}{n_{UD}} \sum_{t \in T_{UD}} r_{i,t}
-\label{eq:R_UD}
-\end{equation}
-Untuk kasus agen $i$ turun dan agen $j$ naik pada waktu $t$,
-\begin{equation}
-R_{DU} = \frac{1}{n_{DU}} \sum_{t \in T_{DU}} r_{i,t}
-\label{eq:R_DU}
-\end{equation}
-Dan untuk kasus kedua agen turun pada waktu $t$,
-\begin{equation}
-R_{DD} = \frac{1}{n_{DD}} \sum_{t \in T_{DD}} r_{i,t}
-\label{eq:R_DD}
-\end{equation}
-di mana $T_{xy}$ merupakan himpunan waktu $t$ yang memenuhi konfigurasi $(s_{i,t}, s_{j,t})$ tertentu dengan $s \in \{U(+1), D(-1)\}$, sedangkan $n_{xy}$ melambangkan jumlah total observasi pada himpunan tersebut. Sehingga nilai imbalan bagi aset $i$ disusun ke dalam matriks $V_i$ sebagaimana persamaan (\ref{eq:payoff_matrix_def}).
-\begin{equation}
-V_i = \begin{pmatrix} R_{UU} & R_{UD} \\ R_{DU} & R_{DD} \end{pmatrix}
-\label{eq:payoff_matrix_def}
-\end{equation}
-Pemetaan dari elemen diskret matriks tersebut ke dalam fungsi utilitas yang kontinu terhadap variabel \textit{spin} $s_i, s_j \in \{+1, -1\}$ didefinisikan melalui ekspansi biner sebagaimana persamaan (\ref{eq:v_function_expansion}).
-\begin{equation}
-\begin{split}
-V_i(s_i, s_j) =& \frac{1+s_i}{2} \left[ \frac{1+s_j}{2} R_{UU} + \frac{1-s_j}{2} R_{UD} \right] \\
-&+ \frac{1-s_i}{2} \left[ \frac{1+s_j}{2} R_{DU} + \frac{1-s_j}{2} R_{DD} \right]
-\end{split}
-\label{eq:v_function_expansion}
-\end{equation}
-Sehingga dapat divisualisasikan ke dalam bentuk matriks $2 \times 2$ pada Gambar \ref{fig:payoff_matrix} yang menggambarkan struktur ketergantungan antar agen.
-\begin{figure}[h!]
-\centering
-\begin{tabular}{|c|c|c|}
-\hline
-$i \setminus j$ & Naik ($+1$) & Turun ($-1$) \\ \hline
-\textbf{Naik ($+1$)} & $R_{UU}$ & $R_{UD}$ \\ \hline
-\textbf{Turun ($-1$)} & $R_{DU}$ & $R_{DD}$ \\ \hline
-\end{tabular}
-\caption{Matriks \textit{Payoff} Saham $i$ ($V_i$)}
-\label{fig:payoff_matrix}
-\end{figure}
+\subsection{Konstruksi Utilitas Individual dan Matriks \textit{Payoff}}
+Utilitas individual dari setiap pemain di dalam sistem EPG didefinisikan dengan mengintegrasikan komponen keuntungan strategis marginal dengan total risiko interaksi yang dirasakan oleh agen tersebut. Formulasi utilitas ini mencakup ekspektasi keuntungan personal yang kemudian dikurangi secara sistematis oleh faktor risiko varians individual serta penalti tambahan akibat adanya redundansi informasi dengan aset lainnya. Parameter $\gamma$ yang merepresentasikan tingkat \textit{risk aversion} bertindak sebagai instrumen pengontrol untuk mengatur bobot relatif antara agresivitas pencapaian keuntungan dengan stabilitas nilai aset yang diharapkan. Melalui struktur utilitas yang terdefinisi dengan jelas, setiap agen ekonomi mampu mengevaluasi kontribusi marginalnya terhadap kesejahteraan portofolio kolektif secara otonom tanpa memerlukan koordinasi terpusat yang kompleks.
 
-Selanjutnya, frekuensi kejadian historis dan nilai harapan imbalan dibangun melalui normalisasi distribusi data pada rentetan waktu $t = 1, \dots, N$. Probabilitas gabungan $P(s_i, s_j)$ dihitung dengan membagi frekuensi kemunculan konfigurasi $n(s_i, s_j)$ terhadap total agregat observasi $N$ sebagaimana dirumuskan dalam ekuasi berikut:
-\begin{equation}
-P(s_i, s_j) = \frac{n(s_i, s_j)}{N}
-\label{eq:joint_probability}
-\end{equation}
-Distribusi $P(s_i, s_j)$ tersebut menghasilkan informasi yang bersifat ortogonal terhadap sistem, di mana ekspektasi linear akan menjadi parameter $h_i$ sementara ketergantungan informasinya dipetakan menjadi parameter $J_{ij}$ yang akan dibahas pada bab 2.5. Perhitungan nilai harapan imbalan (\textit{expected payoff}) didapatkan dari kombinasi linear dari hasil perkalian antara probabilitas tersebut dengan nilai imbalan yang sesuai pada masing-masing kemungkinan logis sebagaimana persamaan berikut.
-\begin{equation}
-E[i|s_i] = \sum_{s_j \in \{+1, -1\}} P(s_j) \cdot V(s_i, s_j)
-\label{eq:expected_payoff}
-\end{equation}
+Dinamika interaksi strategis antar aset yang kompetitif dapat diilustrasikan secara konkret melalui representasi matriks \textit{payoff} di dalam sistem yang melibatkan dua pemain atau aset investasi. Tabel \ref{tab:payoff_matrix_game} menyajikan visualisasi mengenai bagaimana korelasi informasional yang tinggi akan memberikan penalti sistemik yang mereduksi tingkat utilitas individual saat kedua aset dipilih secara simultan dalam satu jendela waktu. Mekanisme pemberian penalti terhadap redundansi informasi ini merupakan fitur kunci dalam formalisme EPG yang secara alami akan mendorong terbentuknya diversifikasi aset yang optimal bagi investor. Dengan adanya insentif individual yang selaras dengan stabilitas sistemik, agen-agen akan cenderung menjauhi kombinasi aset yang memiliki risiko tumpang tindih guna mencapai titik ekuilibrium yang lebih efisien.
 
-Bentuk akhir dari \textit{expected payoff} yang didapatkan akan menunjukkan akumulasi sentimen pasar secara terkuantifikasi bagi setiap aset yang dianalisis. nilai $E[i|s_i]$ juga mampu mendefinisikan gradien keuntungan strategis bagi setiap aset dalam fase \textit{euphoria} maupun \textit{panic}. 
-\begin{align}
-E[i|+] &= P(+1)V(+1,+1) + P(-1)V(+1,-1) \label{eq:payoff_positive} \\
-E[i|-] &= P(+1)V(-1,+1) + P(-1)V(-1,-1) \label{eq:payoff_negative}
-\end{align}
+\subsection{Ekuivalensi Ekuilibrium Nash dan \textit{Ground State}}
+Keunggulan utama dari penggunaan formalisme \textit{Exact Potential Game} adalah adanya jaminan konvergensi matematis menuju titik ekuilibrium Nash melalui proses maksimisasi atau minimisasi fungsi potensial global. Dalam representasi mekanika statistik, titik kesetimbangan strategis yang dicapai oleh para agen ini bersesuaian secara tepat dengan status \textit{ground state} pada sistem \textit{Hamiltonian Ising} yang digunakan. Penyelarasan antara teori permainan dengan fisika energi ini memberikan landasan teoretis yang sangat kokoh bagi implementasi algoritma kuantum untuk menemukan solusi portofolio yang stabil secara simultan \cite{menezes_ex_2025}. Keberadaan fungsi potensial memastikan bahwa setiap langkah optimasi yang dilakukan oleh sistem akan membawa seluruh partisipan pasar menuju kondisi ekuilibrium yang bersifat optimal dan tahan terhadap gangguan.
 
-\subsection{Ekuivalensi ke Parameter Hamilton Bias ($h_i$)}
-
-Matriks imbalan pada teori permaian dapat dihubungkan dengan mekanika statistik dari aksioma pemetaan energi terhadap utilitas dalam sistem kompleks \cite{saslow_economic_1999}. Dalam model Hamiltonian Ising, parameter medan lokal atau bias ($h_i$) bertanggung jawab atas kecenderungan orientasi \textit{spin} individu dalam sistem yang mana dapat merepresentasikan keputusan beli atau jual \cite{lucas_ising_2014}. Postulat utama menyatakan bahwa nilai energi Hamiltonian berbanding terbalik dengan nilai utilitas atau \textit{payoff} ekonomi melalui prinsip kesetaraan $H \equiv -E$. Landasan teoretis ini diperkuat oleh hukum \textit{Boltzmann-Gibbs} yang memetakan probabilitas konfigurasi sistem mencapai nilai maksimum pada tingkat energi terendah, sehingga status \textit{ground state} Hamiltonian secara formal merepresentasikan titik kesetimbangan ekonomi dengan utilitas maksimal \cite{hidalgo_quantum_2006}. Konfigurasi persamaan mekanika partikel untuk entitas tunggal dengan ekspektasi medan lokal didefinisikan  melalui hubungan pada persamaan (\ref{eq:h_local}).
-\begin{equation}
-H_{lokal}(s_i) = -h_i s_i
-\label{eq:h_local}
-\end{equation}
-
-Jika variabel \textit{spin} berada pada status $+1$, maka kontribusi energinya adalah $-h_i$, yang harus selaras dengan nilai utilitas negatif $-E[i|+]$ berdasarkan aksioma sebelumnya. Sebaliknya, pada status $-1$, kontribusi energi sistem menjadi $+h_i$ yang disesuaikan secara identitas dengan nilai $-E[i|-]$ sebagai representasi energi potensial. Proses matematis ini dilakukan untuk mencari selisih energi ($\Delta H$) yang diperlukan dalam pemetaan parameter bias tunggal secara konsisten:
-\begin{align}
-H_{lokal}(+1) &= -h_i(1) = -h_i \equiv -E[i|+] \label{eq:equiv_positive} \\
-H_{lokal}(-1) &= -h_i(-1) = +h_i \equiv -E[i|-] \label{eq:equiv_negative}
-\end{align}
-Langkah selanjutnya ialah melibatkan evaluasi selisih energi antara kedua status orientasi untuk menghasilkan pemetaan identitas linear. Kedua status energi yang ada dilakukan operasi pengurangan sehingga diperoleh hubungan $2h_i$ yang merepresentasikan total fluktuasi medan lokal sistem:
-\begin{equation}
-\begin{split}
-\Delta H &= H_{lokal}(-1) - H_{lokal}(+1) \\
-&= (+h_i) - (-h_i) \\
-&= 2h_i
-\end{split}
-\label{eq:delta_h}
-\end{equation}
-
-Dengan mensubstitusikan hubungan $-E[i|-] - (-E[i|+])$ ke dalam persamaan selisih energi, maka diperoleh hubungan antara medan magnet sintetis dan ekspektasi keuntungan:
-\begin{equation}
-2h_i = E[i|+] - E[i|-]
-\end{equation}
-Sehingga didapatkan persamaan bentuk $h_i$:
-\begin{equation}
-h_i = \frac{E[i|+] - E[i|-]}{2}
-\label{eq:h_i_final}
-\end{equation}
-Faktor normalisasi $1/2$ muncul karena variabel \textit{spin} memiliki rentang jarak sebesar dua unit dari status minimum ke status maksimum \cite{reifenstein_coherent_2021}. 
+Setiap penurunan tingkat energi di dalam sistem \textit{Hamiltonian Ising} secara langsung mencerminkan adanya peningkatan utilitas kolektif dari para agen menuju titik optimal yang stabil secara ekonomi. Dengan memetakan masalah persaingan utilitas ke dalam lanskap energi fisik, kompleksitas pencarian solusi pada masalah \textit{NP-hard} dapat dikurangi melalui pemanfaatan prinsip-prinsip termodinamika dan mekanika kuantum. Fenomena transisi fase dalam sistem magnetik sintetis ini menyediakan analogi yang kuat untuk memahami bagaimana sinkronisasi keputusan investor dapat terbentuk di tengah fluktuasi informasi yang bersifat acak. Oleh karena itu, ekuivalensi antara ekuilibrium Nash dan status energi terendah bukan sekadar kesamaan formal, melainkan sebuah jembatan operasional untuk menyelesaikan tantangan optimasi finansial di masa depan.
