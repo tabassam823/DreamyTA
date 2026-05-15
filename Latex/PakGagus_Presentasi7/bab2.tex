@@ -1,0 +1,26 @@
+\section{Inovasi Validator \& Diagnostik Kuantum}
+
+\begin{frame}{Von Neumann Entropy sebagai Validator Entanglement}
+    \begin{itemize}
+        \item \textbf{Definisi:} Mengukur derajat kemurnian (purity) dari reduced density matrix sirkuit kuantum.
+        \begin{equation}
+            S(\rho) = -\text{Tr}(\rho \ln \rho)
+        \end{equation}
+        \item \textbf{Fungsi:} Memastikan adanya interaksi non-klasik antar qubit yang merepresentasikan korelasi aset.
+        \item \textbf{Fenomena Probabilitas Terbagi:} Saat entropi tinggi, state kuantum berada dalam superposisi yang \textit{highly entangled}. Hal ini menyebabkan distribusi probabilitas bitstring terbagi secara luas karena sistem belum mengonvergensi ke satu solusi dominan (ground state).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Diagnostik Barren Plateau}
+    \begin{itemize}
+        \item \textbf{Varians Gradien:} Digunakan sebagai indikator numerik untuk mendeteksi hilangnya lanskap optimasi.
+        \begin{equation}
+            \text{Var}[\partial_{\theta} E(\theta)] \approx 0
+        \end{equation}
+        \item \textbf{Penyebab Barren Plateau:}        \begin{itemize}
+            \item \textbf{Entanglement Berlebih:} Hubungan antar aset yang terlalu kompleks dapat meratakan gradien.
+            \item \textbf{Kedalaman Sirkuit:} Semakin dalam sirkuit, varians gradien menurun secara eksponensial.
+        \end{itemize}
+        \item \textbf{Mitigasi:} Penggunaan metrik ini memungkinkan sistem untuk melakukan penyesuaian \textit{learning rate} atau \textit{depth} secara adaptif sebelum terjebak dalam plateau.
+    \end{itemize}
+\end{frame}

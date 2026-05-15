@@ -1,0 +1,435 @@
+LAPORAN STRATEGI GAME THEORY DAN VQE
+Urutan Ticker: ['BBCA.JK', 'TLKM.JK']
+=============================================
+1. METRIK STRATEGI NASH EQUILIBRIUM (KLASIK):
+   Return: 51.34% | Sharpe: 0.7357 | Beta: 0.8901 | MDD: 15.91%
+---------------------------------------------
+2. METRIK STRATEGI QUANTUM VQE:
+   Return: 51.34% | Sharpe: 0.7357 | Beta: 0.8901 | MDD: 15.91%
+---------------------------------------------
+3. METRIK STRATEGI EQUAL WEIGHT:
+   Return: 37.29% | Sharpe: 0.6848 | Beta: 0.9323 | MDD: 14.62%
+---------------------------------------------
+4. METRIK INDEKS PASAR (^JKSE):
+   Return: 19.13% | Sharpe: 0.5557 | Beta: 1.0000 | MDD: 10.48%
+
+[2021-01-04]
+  - Nash Eq: 10 | Utility: 0.187392
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.111021
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.162712
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.181050
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.173908
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.184992
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.182735
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.184992
+----------------------------------------
+[2021-02-02]
+  - Nash Eq: 10 | Utility: 0.110825
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.073384
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.096535
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.101542
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.098001
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.104251
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.102675
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.104251
+----------------------------------------
+[2021-03-04]
+  - Nash Eq: 01 | Utility: 0.166258
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.074531
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.165431
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.112806
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.153017
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.163414
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.162981
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.165431
+----------------------------------------
+[2021-04-06]
+  - Nash Eq: 01 | Utility: 0.256316
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.107348
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.255841
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.244748
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.245448
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.255618
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.255340
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.255841
+----------------------------------------
+[2021-05-05]
+  - Nash Eq: 01 | Utility: 0.216782
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.124706
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.215771
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.189935
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.202117
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.214302
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.213685
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.215771
+----------------------------------------
+[2021-06-10]
+  - Nash Eq: 10 | Utility: 0.047536
+  - LR: 0.0518
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.044484
+    [Depth 2] Konvergen dalam 470 iterasi | E = 4.111193
+    [Depth 3] Konvergen dalam 430 iterasi | E = -0.047536
+    [Depth 4] Konvergen dalam 430 iterasi | E = -0.044485
+    [Depth 5] Konvergen dalam 600 iterasi | E = 4.108627
+    [Depth 6] Konvergen dalam 500 iterasi | E = -0.047535
+  - Terpilih: ['BBCA.JK'] | Depth: 3 | E_min: -0.047536
+----------------------------------------
+[2021-07-09]
+  - Nash Eq: 01 | Utility: -0.085503
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.106425
+    [Depth 2] Konvergen dalam 600 iterasi | E = 0.094598
+    [Depth 3] Konvergen dalam 600 iterasi | E = 0.085658
+    [Depth 4] Konvergen dalam 600 iterasi | E = 0.092958
+    [Depth 5] Konvergen dalam 600 iterasi | E = 0.093741
+    [Depth 6] Konvergen dalam 600 iterasi | E = 0.086001
+  - Terpilih: ['TLKM.JK'] | Depth: 3 | E_min: 0.085658
+----------------------------------------
+[2021-08-10]
+  - Nash Eq: 01 | Utility: 0.054593
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.054839
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.053884
+    [Depth 3] Konvergen dalam 490 iterasi | E = -0.054467
+    [Depth 4] Konvergen dalam 450 iterasi | E = -0.054570
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.054556
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.054525
+  - Terpilih: ['TLKM.JK'] | Depth: 4 | E_min: -0.054570
+----------------------------------------
+[2021-09-10]
+  - Nash Eq: 01 | Utility: 0.067280
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.002833
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.066479
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.000902
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.054133
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.060518
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.059399
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.066479
+----------------------------------------
+[2021-10-11]
+  - Nash Eq: 10 | Utility: 0.192746
+  - LR: 0.0518
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.182754
+    [Depth 2] Konvergen dalam 470 iterasi | E = 3.824273
+    [Depth 3] Konvergen dalam 430 iterasi | E = -0.192745
+    [Depth 4] Konvergen dalam 430 iterasi | E = -0.182754
+    [Depth 5] Konvergen dalam 600 iterasi | E = 3.822884
+    [Depth 6] Konvergen dalam 430 iterasi | E = -0.192743
+  - Terpilih: ['BBCA.JK'] | Depth: 3 | E_min: -0.192745
+----------------------------------------
+[2021-11-10]
+  - Nash Eq: 01 | Utility: 0.211398
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.188296
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.209666
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.205908
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.200856
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.205004
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.204171
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.209666
+----------------------------------------
+[2021-12-09]
+  - Nash Eq: 01 | Utility: 0.176383
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.127816
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.174831
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.162405
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.159771
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.170279
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.169259
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.174831
+----------------------------------------
+[2022-01-10]
+  - Nash Eq: 01 | Utility: 0.294777
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.255418
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.292571
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.284700
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.280674
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.287765
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.286694
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.292571
+----------------------------------------
+[2022-02-09]
+  - Nash Eq: 01 | Utility: 0.286318
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.218322
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.284631
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.273265
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.269245
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.281356
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.280008
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.284631
+----------------------------------------
+[2022-03-14]
+  - Nash Eq: 01 | Utility: 0.339800
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.213882
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.338925
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.334817
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.324899
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.337371
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.337322
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.338925
+----------------------------------------
+[2022-04-12]
+  - Nash Eq: 01 | Utility: 0.200818
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.088826
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.200111
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.160715
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.189182
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.199374
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.199061
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.200111
+----------------------------------------
+[2022-05-23]
+  - Nash Eq: 01 | Utility: 0.132850
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.006900
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.132451
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.010992
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.125448
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.131488
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.131666
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.132451
+----------------------------------------
+[2022-06-23]
+  - Nash Eq: 10 | Utility: 0.043420
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.019881
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.034239
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.035296
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.033934
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.036683
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.036085
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.036683
+----------------------------------------
+[2022-07-22]
+  - Nash Eq: 01 | Utility: 0.083403
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.002733
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.082736
+    [Depth 3] Konvergen dalam 600 iterasi | E = 0.001747
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.072813
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.077777
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.076163
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.082736
+----------------------------------------
+[2022-08-23]
+  - Nash Eq: 01 | Utility: 0.129419
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.030342
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.128770
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.042331
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.118409
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.126045
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.124587
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.128770
+----------------------------------------
+[2022-09-21]
+  - Nash Eq: 10 | Utility: 0.081244
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.021818
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.060658
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.073312
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.066081
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.077285
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.075214
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.077285
+----------------------------------------
+[2022-10-20]
+  - Nash Eq: 10 | Utility: 0.068292
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = 0.053920
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.036853
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.066608
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.063090
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.067918
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.067890
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.067918
+----------------------------------------
+[2022-11-18]
+  - Nash Eq: 10 | Utility: 0.177122
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 440 iterasi | E = -0.027272
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.135673
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.175899
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.176860
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.176762
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.176954
+  - Terpilih: ['BBCA.JK'] | Depth: 6 | E_min: -0.176954
+----------------------------------------
+[2022-12-19]
+  - Nash Eq: 10 | Utility: 0.146458
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.112775
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.108637
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.146398
+    [Depth 4] Konvergen dalam 520 iterasi | E = -0.146445
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.146420
+    [Depth 6] Konvergen dalam 430 iterasi | E = -0.146452
+  - Terpilih: ['BBCA.JK'] | Depth: 6 | E_min: -0.146452
+----------------------------------------
+[2023-01-17]
+  - Nash Eq: 10 | Utility: 0.118425
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.084457
+    [Depth 2] Konvergen dalam 600 iterasi | E = 0.028980
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.118281
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.118247
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.118301
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.118364
+  - Terpilih: ['BBCA.JK'] | Depth: 6 | E_min: -0.118364
+----------------------------------------
+[2023-02-16]
+  - Nash Eq: 10 | Utility: 0.129961
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.196178
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.126165
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.129914
+    [Depth 4] Konvergen dalam 530 iterasi | E = -0.129948
+    [Depth 5] Konvergen dalam 570 iterasi | E = -0.129954
+    [Depth 6] Konvergen dalam 440 iterasi | E = -0.129925
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.129954
+----------------------------------------
+[2023-03-17]
+  - Nash Eq: 10 | Utility: -0.010604
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = 0.081872
+    [Depth 2] Konvergen dalam 600 iterasi | E = 0.035935
+    [Depth 3] Konvergen dalam 600 iterasi | E = 0.016040
+    [Depth 4] Konvergen dalam 600 iterasi | E = 0.026023
+    [Depth 5] Konvergen dalam 600 iterasi | E = 0.013132
+    [Depth 6] Konvergen dalam 600 iterasi | E = 0.014422
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: 0.013132
+----------------------------------------
+[2023-04-27]
+  - Nash Eq: 10 | Utility: 0.110428
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.020186
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.084233
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.105763
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.098287
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.109087
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.107854
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.109087
+----------------------------------------
+[2023-05-30]
+  - Nash Eq: 10 | Utility: 0.066457
+  - LR: 0.0518
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.055022
+    [Depth 2] Konvergen dalam 470 iterasi | E = 4.078375
+    [Depth 3] Konvergen dalam 430 iterasi | E = -0.066456
+    [Depth 4] Konvergen dalam 430 iterasi | E = -0.055023
+    [Depth 5] Konvergen dalam 600 iterasi | E = 4.075975
+    [Depth 6] Konvergen dalam 430 iterasi | E = -0.066453
+  - Terpilih: ['BBCA.JK'] | Depth: 3 | E_min: -0.066456
+----------------------------------------
+[2023-07-05]
+  - Nash Eq: 01 | Utility: 0.114106
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = -0.071055
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.112763
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.097745
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.097732
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.107643
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.106988
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: -0.112763
+----------------------------------------
+[2023-08-04]
+  - Nash Eq: 10 | Utility: 0.130950
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 440 iterasi | E = 0.012669
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.096017
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.129717
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.130643
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.130183
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.130653
+  - Terpilih: ['BBCA.JK'] | Depth: 6 | E_min: -0.130653
+----------------------------------------
+[2023-09-05]
+  - Nash Eq: 10 | Utility: 0.082715
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = -0.036442
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.065819
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.073592
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.068452
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.077071
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.075184
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: -0.077071
+----------------------------------------
+[2023-10-05]
+  - Nash Eq: 10 | Utility: 0.118319
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 440 iterasi | E = 0.022335
+    [Depth 2] Konvergen dalam 600 iterasi | E = -0.083882
+    [Depth 3] Konvergen dalam 600 iterasi | E = -0.116841
+    [Depth 4] Konvergen dalam 600 iterasi | E = -0.115801
+    [Depth 5] Konvergen dalam 600 iterasi | E = -0.116947
+    [Depth 6] Konvergen dalam 600 iterasi | E = -0.118081
+  - Terpilih: ['BBCA.JK'] | Depth: 6 | E_min: -0.118081
+----------------------------------------
+[2023-11-03]
+  - Nash Eq: 10 | Utility: -0.029675
+  - LR: 1.0000
+  - Detail:
+    [Depth 1] Konvergen dalam 430 iterasi | E = 0.130211
+    [Depth 2] Konvergen dalam 600 iterasi | E = 0.063298
+    [Depth 3] Konvergen dalam 600 iterasi | E = 0.032079
+    [Depth 4] Konvergen dalam 600 iterasi | E = 0.038125
+    [Depth 5] Konvergen dalam 600 iterasi | E = 0.030417
+    [Depth 6] Konvergen dalam 600 iterasi | E = 0.030704
+  - Terpilih: ['BBCA.JK'] | Depth: 5 | E_min: 0.030417
+----------------------------------------
+[2023-12-04]
+  - Nash Eq: 01 | Utility: -0.026741
+  - LR: 0.3728
+  - Detail:
+    [Depth 1] Konvergen dalam 600 iterasi | E = 0.030035
+    [Depth 2] Konvergen dalam 600 iterasi | E = 0.027636
+    [Depth 3] Konvergen dalam 600 iterasi | E = 0.027755
+    [Depth 4] Konvergen dalam 600 iterasi | E = 0.028313
+    [Depth 5] Konvergen dalam 600 iterasi | E = 0.028285
+    [Depth 6] Konvergen dalam 600 iterasi | E = 0.028285
+  - Terpilih: ['TLKM.JK'] | Depth: 2 | E_min: 0.027636
+----------------------------------------
