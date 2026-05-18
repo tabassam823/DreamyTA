@@ -1,0 +1,70 @@
+\section{Alur Penelitian}
+Penelitian ini secara strategis mengintegrasikan tiga pilar utama yang meliputi analisis data ekonofisika, teori permainan strategis, dan komputasi kuantum variasional guna mengoptimalkan konfigurasi portofolio biner di pasar modal. Alur penelitian dimulai dari tahap pengumpulan data historis saham yang terdaftar dalam indeks LQ45, yang kemudian diproses menjadi variabel imbal hasil logaritmik (\textit{log returns}) untuk mendeteksi korelasi stokastik antar aset. Setelah data siap, dilakukan pemetaan interaksi antar aset melalui parameter \textit{Exact Potential Game} (EPG) guna mengidentifikasi struktur kestabilan strategis yang akan menjadi input utama bagi Hamiltonian Ising. Keseluruhan proses optimasi ini kemudian dieksekusi menggunakan algoritma \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE) untuk menemukan kombinasi aset dengan tingkat risiko yang paling minimal. Evaluasi akhir dilakukan melalui simulasi \textit{backtesting} yang komprehensif untuk menguji performa model terhadap data pasar nyata dengan menggunakan metrik terukur seperti \textit{Sharpe Ratio} dan \textit{Maximum Drawdown}.
+
+Secara operasional, penelitian ini dibagi menjadi empat modul utama yang dirancang untuk berinteraksi secara sekuensial guna menjamin integritas data serta akurasi solusi akhir yang dihasilkan oleh sistem. Modul pertama berfokus pada akuisisi dan pra-pemrosesan data mentah, sementara modul kedua melakukan ekstraksi parameter interaksi strategis melalui pendekatan gabungan antara teori informasi kuantum dan ekonofisika. Modul ketiga merupakan inti dari proses optimasi yang melibatkan konstruksi Hamiltonian Ising serta pelatihan parameter sirkuit kuantum menggunakan metode optimasi SPSA yang bersifat hibrida antara perangkat keras kuantum dan algoritma klasik. Terakhir, modul keempat bertanggung jawab atas eksekusi strategi investasi secara virtual dan perhitungan performa portofolio untuk memberikan gambaran riil mengenai tingkat profitabilitas serta keamanan model tersebut. Keempat modul ini membentuk sebuah alur kerja yang sistematis dan terukur, memastikan bahwa setiap tahapan penelitian memiliki landasan teoretis yang kuat dan dapat divalidasi secara ilmiah.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=1.3cm, every node/.style={fill=white, font=\footnotesize}, align=center]
+        % Styles
+        \tikzstyle{startstop} = [ellipse, minimum width=2.5cm, minimum height=0.6cm, text centered, draw=black, fill=gray!10]
+        \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=0.8cm, text centered, draw=black, fill=blue!5]
+        \tikzstyle{decision} = [diamond, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=red!5, aspect=2]
+        \tikzstyle{connector} = [circle, draw=black, minimum size=0.5cm, text centered, inner sep=2pt]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+        
+        % KOLOM 1: Pra-pemrosesan & Pemetaan
+        \node (start) [startstop] {Mulai};
+        \node (data) [process, below of=start, yshift=-0.5cm] {Akuisisi Data \& \\ \textit{Log Return}};
+        \node (biner) [process, below of=data, yshift=-0.5cm] {Digitalisasi Finansial \\ (\textit{Binerisasi State})};
+        \node (param) [process, below of=biner, yshift=-0.5cm] {Hitung Probabilitas,\\ $\lambda$, \textit{Payoff}, Bias \\($h_i$) \& QMI ($J_{ij}$)};
+        \node (hamil) [process, below of=param, yshift=-0.5cm] {Konstruksi \\ Hamiltonian $H$};
+        \node (c1a) [connector, below of=hamil, yshift=-0.5cm] {1};
+        \node (c3b) [connector, left of=param, xshift=-1cm] {3};
+        
+        % KOLOM 2: Optimasi Kuantum (VQE)
+        \node (c1b) [connector, right of=start, xshift=3.5cm] {1};
+        \node (vqe_init) [process, below of=c1b] {Inisialisasi \\ Parameter $\theta$};
+        \node (spsa) [process, below of=vqe_init] {Update $\theta$ \\ via SPSA};
+        \node (conv) [decision, below of=spsa, yshift=-0.5cm] {Konvergen?};
+        \node (layer_eval) [process, below of=conv, yshift=-0.8cm] {Evaluasi Energi \\ pada \textit{Layer} $L$};
+        \node (layer_dec) [decision, below of=layer_eval, yshift=-0.5cm] {$E_L < E_{L-1}$?};
+        \node (c2a) [connector, below of=layer_dec, yshift=-0.8cm] {2};
+        
+        % KOLOM 3: Evaluasi & Backtesting
+        \node (c2b) [connector, right of=c1b, xshift=3.5cm] {2};
+        \node (rebal) [process, below of=c2b] {Eksekusi \textit{Rebalancing} \\ \& Biaya Transaksi};
+        \node (end_dec) [decision, below of=rebal, yshift=-0.5cm] {Akhir \\ Periode?};
+        \node (eval) [process, below of=end_dec, yshift=-0.8cm] {Kalkulasi Metrik \\ Performa Akhir};
+        \node (stop) [startstop, below of=eval] {Selesai};
+        \node (c3a) [connector, right of=eval, xshift=1.2cm] {3};
+
+        % Alur Kolom 1
+        \draw [arrow] (start) -- (data);
+        \draw [arrow] (data) -- (biner);
+        \draw [arrow] (biner) -- (param);
+        \draw [arrow] (param) -- (hamil);
+        \draw [arrow] (hamil) -- (c1a);
+        \draw [arrow] (c3b) -- (param);
+
+        % Alur Kolom 2
+        \draw [arrow] (c1b) -- (vqe_init);
+        \draw [arrow] (vqe_init) -- (spsa);
+        \draw [arrow] (spsa) -- (conv);
+        \draw [arrow] (conv) -- node[anchor=east] {Ya} (layer_eval);
+        \draw [arrow] (conv.west) -- ++(-0.5,0) |- (spsa.west) node[pos=0.25, fill=white] {Tidak};
+        \draw [arrow] (layer_eval) -- (layer_dec);
+        \draw [arrow] (layer_dec) -- node[anchor=east] {Ya} (c2a);
+        \draw [arrow] (layer_dec.east) -- ++(0.6,0) |- (layer_eval.east) node[pos=0.25, anchor=west] {Tambah \\ \textit{Layer}};
+
+        % Alur Kolom 3
+        \draw [arrow] (c2b) -- (rebal);
+        \draw [arrow] (rebal) -- (end_dec);
+        \draw [arrow] (end_dec) -- node[anchor=east] {Ya} (eval);
+        \draw [arrow] (eval) -- (stop);
+        \draw [arrow] (end_dec.east) -| (c3a.north) node[pos=0.75, fill=white] {Tidak};
+
+    \end{tikzpicture}
+    \caption{Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}
+    \label{fig:flowchart}
+\end{figure}

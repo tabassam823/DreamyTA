@@ -1,0 +1,83 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: Contents/BagianDepan/Cover_Dalam.aux
+A level-1 auxiliary file: Contents/BagianDepan/Lembar_Pengesahan.aux
+A level-1 auxiliary file: Contents/Abstrak/Abstrak.aux
+A level-1 auxiliary file: Contents/Abstrak/Abstract.aux
+A level-1 auxiliary file: Contents/BagianDepan/Kata_Pengantar.aux
+A level-1 auxiliary file: Contents/Pendahuluan/Bab-1.aux
+A level-1 auxiliary file: Contents/Daster/Bab-2.aux
+A level-1 auxiliary file: Contents/Metodologi/Bab-3.aux
+A level-1 auxiliary file: Contents/Pembahasan/Bab-4.aux
+A level-1 auxiliary file: Contents/Penutup/Bab-5.aux
+The style file: apacite.bst
+A level-1 auxiliary file: Contents/BagianBelakang/Biodata_Penulis.aux
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: Referensi.bib
+Warning--I didn't find a database entry for "engle_1982"
+Warning--I didn't find a database entry for "fama_1970"
+Warning--I didn't find a database entry for "karaman_2024"
+Warning--I didn't find a database entry for "ising_1925"
+Warning--I didn't find a database entry for "wierichs_2022"
+Warning--I didn't find a database entry for "spall_1992"
+Warning--I didn't find a database entry for "nielsen_chuang_2010"
+Warning--I didn't find a database entry for "peruzzo_2014"
+Warning--I didn't find a database entry for "mcclean_2018"
+apacite.bst [2013/07/21 v6.03 APA bibliography style]
+Warning--No journal in hidalgo_quantum_2006
+ptr=1, stack=
+
+---the literal stack isn't empty for entry hidalgo_quantum_2006
+while executing---line 5079 of file apacite.bst
+Warning--No journal in spall_implementation_1998
+You've used 15 entries,
+            6951 wiz_defined-function locations,
+            1409 strings with 15078 characters,
+and the built_in function-call counts, 28858 in all, are:
+= -- 3405
+> -- 231
+< -- 1402
++ -- 1404
+- -- 30
+* -- 2039
+:= -- 5398
+add.period$ -- 60
+call.type$ -- 15
+change.case$ -- 281
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 769
+empty$ -- 1212
+format.name$ -- 393
+if$ -- 5365
+int.to.chr$ -- 0
+int.to.str$ -- 45
+missing$ -- 0
+newline$ -- 431
+num.names$ -- 120
+pop$ -- 415
+preamble$ -- 1
+purify$ -- 86
+quote$ -- 0
+skip$ -- 1799
+stack$ -- 0
+substring$ -- 1512
+swap$ -- 479
+text.length$ -- 56
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 1200
+warning$ -- 2
+while$ -- 157
+width$ -- 0
+write$ -- 518
+(There was 1 error message)
