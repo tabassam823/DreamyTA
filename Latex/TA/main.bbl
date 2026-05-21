@@ -35,6 +35,108 @@ Abdul~Hali, N.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Benedetti%
+, Lloyd%
+, Sack%
+\BCBL {}\ \BBA {} Fiorentini%
+}{%
+Benedetti%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+benedetti_parameterized_2019}
+\APACinsertmetastar {%
+benedetti_parameterized_2019}%
+\begin{APACrefauthors}%
+Benedetti, M.%
+, Lloyd, E.%
+, Sack, S.%
+\BCBL {}\ \BBA {} Fiorentini, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{{\APACmonth{11}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Parameterized quantum circuits as machine learning
+  models} {Parameterized quantum circuits as machine learning models}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Quantum Science and Technology}{4}{4}{043001}.
+\newblock
+\begin{APACrefURL}
+  [{2026-05-20}]\url{https://iopscience.iop.org/article/10.1088/2058-9565/ab4eb5}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1088/2058-9565/ab4eb5} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Chamberlin%
+\ \BBA {} Lindsay%
+}{%
+Chamberlin%
+\ \BBA {} Lindsay%
+}{%
+{\protect \APACyear {2024}}%
+}]{%
+chamberlin_nanothermodynamics_2024}
+\APACinsertmetastar {%
+chamberlin_nanothermodynamics_2024}%
+\begin{APACrefauthors}%
+Chamberlin, R\BPBI V.%
+\BCBT {}\ \BBA {} Lindsay, S\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2024}{{\APACmonth{11}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Nanothermodynamics: {There}’s {Plenty} of {Room} on
+  the {Inside}} {Nanothermodynamics: {There}’s {Plenty} of {Room} on the
+  {Inside}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Nanomaterials}{14}{22}{1828}.
+\newblock
+\begin{APACrefURL}
+  [{2026-05-20}]\url{https://www.mdpi.com/2079-4991/14/22/1828}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.3390/nano14221828} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Coyle%
+\ \protect \BOthers {.}}{%
+Coyle%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2021}}%
+}]{%
+coyle_quantum_2021}
+\APACinsertmetastar {%
+coyle_quantum_2021}%
+\begin{APACrefauthors}%
+Coyle, B.%
+, Henderson, M.%
+, Chan Jin~Le, J.%
+, Kumar, N.%
+, Paini, M.%
+\BCBL {}\ \BBA {} Kashefi, E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{{\APACmonth{04}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum versus classical generative modelling in
+  finance} {Quantum versus classical generative modelling in finance}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Quantum Science and Technology}{6}{2}{024013}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-26}]\url{https://iopscience.iop.org/article/10.1088/2058-9565/abd3db}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1088/2058-9565/abd3db} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Dao%
 }{%
 Dao%
@@ -62,6 +164,41 @@ Dao, H\BPBI L.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1140/epjc/s10052-025-14322-7} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+DeMiguel%
+, Garlappi%
+\BCBL {}\ \BBA {} Uppal%
+}{%
+DeMiguel%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+demiguel_optimal_2009}
+\APACinsertmetastar {%
+demiguel_optimal_2009}%
+\begin{APACrefauthors}%
+DeMiguel, V.%
+, Garlappi, L.%
+\BCBL {}\ \BBA {} Uppal, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{{\APACmonth{05}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Optimal {Versus} {Naive} {Diversification}: {How}
+  {Inefficient} is the 1/ \textit{{N}} {Portfolio} {Strategy}?} {Optimal
+  {Versus} {Naive} {Diversification}: {How} {Inefficient} is the 1/
+  \textit{{N}} {Portfolio} {Strategy}?}{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Review of Financial Studies}{22}{5}{1915--1953}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-26}]\url{https://academic.oup.com/rfs/article-lookup/doi/10.1093/rfs/hhm075}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1093/rfs/hhm075} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -100,6 +237,109 @@ Fedorov, D\BPBI A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Freitas%
+, Pinto%
+\BCBL {}\ \BBA {} Felgueiras%
+}{%
+Freitas%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2024}}%
+}]{%
+freitas_game_2024}
+\APACinsertmetastar {%
+freitas_game_2024}%
+\begin{APACrefauthors}%
+Freitas, J\BPBI C.%
+, Pinto, A\BPBI A.%
+\BCBL {}\ \BBA {} Felgueiras, �.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2024}{{\APACmonth{08}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Game {Theory} for {Predicting} {Stocks}’ {Closing}
+  {Prices}} {Game {Theory} for {Predicting} {Stocks}’ {Closing}
+  {Prices}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Mathematics}{12}{17}{2676}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://www.mdpi.com/2227-7390/12/17/2676}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.3390/math12172676} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Galam%
+\ \BBA {} Walliser%
+}{%
+Galam%
+\ \BBA {} Walliser%
+}{%
+{\protect \APACyear {2010}}%
+}]{%
+galam_ising_2010}
+\APACinsertmetastar {%
+galam_ising_2010}%
+\begin{APACrefauthors}%
+Galam, S.%
+\BCBT {}\ \BBA {} Walliser, B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2010}{{\APACmonth{02}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Ising model versus normal form game} {Ising model versus
+  normal form game}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Physica A: Statistical Mechanics and its
+  Applications}{389}{3}{481--489}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://linkinghub.elsevier.com/retrieve/pii/S0378437109007821}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.physa.2009.09.029} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Gong%
+, Sedai%
+\BCBL {}\ \BBA {} Medda%
+}{%
+Gong%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2025}}%
+}]{%
+gong_quantum_2025}
+\APACinsertmetastar {%
+gong_quantum_2025}%
+\begin{APACrefauthors}%
+Gong, H.%
+, Sedai, A.%
+\BCBL {}\ \BBA {} Medda, F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{}{}.
+\newblock
+\APACrefbtitle {The {Quantum} {Network} of {Assets}: {A} {Non}-{Classical}
+  {Framework} for {Market} {Correlation} and {Structural} {Risk}.} {The
+  {Quantum} {Network} of {Assets}: {A} {Non}-{Classical} {Framework} for
+  {Market} {Correlation} and {Structural} {Risk}.}
+\newblock
+\APACaddressPublisher{}{arXiv}.
+\newblock
+\begin{APACrefURL} [{2026-03-11}]\url{https://arxiv.org/abs/2511.21515}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Version Number: 2}
+\newblock
+\begin{APACrefDOI} \doi{10.48550/ARXIV.2511.21515} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Hidalgo%
 }{%
 Hidalgo%
@@ -124,6 +364,32 @@ Hidalgo, E\BPBI G.%
 \APACrefnote{Version Number: 3}
 \newblock
 \begin{APACrefDOI} \doi{10.48550/ARXIV.PHYSICS/0609245} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+{John Von Neumann}%
+\ \BBA {} {Oskar Morgenster}%
+}{%
+{John Von Neumann}%
+\ \BBA {} {Oskar Morgenster}%
+}{%
+{\protect \APACyear {1953}}%
+}]{%
+john_von_neumann_theory_1953}
+\APACinsertmetastar {%
+john_von_neumann_theory_1953}%
+\begin{APACrefauthors}%
+{John Von Neumann}%
+\BCBT {}\ \BBA {} {Oskar Morgenster}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{1953}.
+\newblock
+\APACrefbtitle {Theory of {Game} and {Economic} {Behavior}} {Theory of {Game}
+  and {Economic} {Behavior}}\ (\PrintOrdinal{3rd}\ \BEd).
+\newblock
+\APACaddressPublisher{}{Princeton University Press}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -224,6 +490,39 @@ La~Torre, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Levy%
+\ \BBA {} Levy%
+}{%
+Levy%
+\ \BBA {} Levy%
+}{%
+{\protect \APACyear {1991}}%
+}]{%
+levy_arrow-pratt_1991}
+\APACinsertmetastar {%
+levy_arrow-pratt_1991}%
+\begin{APACrefauthors}%
+Levy, H.%
+\BCBT {}\ \BBA {} Levy, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1991}{{\APACmonth{11}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Arrow-{Pratt} {Measures} of {Risk} {Aversion}: {The}
+  {Multivariate} {Case}} {Arrow-{Pratt} {Measures} of {Risk} {Aversion}: {The}
+  {Multivariate} {Case}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{International Economic Review}{32}{4}{891}.
+\newblock
+\begin{APACrefURL}
+  [{2026-04-20}]\url{https://www.jstor.org/stable/2527041?origin=crossref}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.2307/2527041} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Lucas%
 }{%
 Lucas%
@@ -316,6 +615,79 @@ Markowitz, H.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+McClean%
+, Boixo%
+, Smelyanskiy%
+, Babbush%
+\BCBL {}\ \BBA {} Neven%
+}{%
+McClean%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+mcclean_barren_2018}
+\APACinsertmetastar {%
+mcclean_barren_2018}%
+\begin{APACrefauthors}%
+McClean, J\BPBI R.%
+, Boixo, S.%
+, Smelyanskiy, V\BPBI N.%
+, Babbush, R.%
+\BCBL {}\ \BBA {} Neven, H.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{{\APACmonth{11}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Barren plateaus in quantum neural network training
+  landscapes} {Barren plateaus in quantum neural network training
+  landscapes}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Nature Communications}{9}{1}{4812}.
+\newblock
+\begin{APACrefURL}
+  [{2026-05-08}]\url{https://www.nature.com/articles/s41467-018-07090-4}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1038/s41467-018-07090-4} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Mitarai%
+, Negoro%
+, Kitagawa%
+\BCBL {}\ \BBA {} Fujii%
+}{%
+Mitarai%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+mitarai_quantum_2018}
+\APACinsertmetastar {%
+mitarai_quantum_2018}%
+\begin{APACrefauthors}%
+Mitarai, K.%
+, Negoro, M.%
+, Kitagawa, M.%
+\BCBL {}\ \BBA {} Fujii, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{{\APACmonth{09}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum circuit learning} {Quantum circuit
+  learning}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Physical Review A}{98}{3}{032309}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-12}]\url{https://link.aps.org/doi/10.1103/PhysRevA.98.032309}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1103/PhysRevA.98.032309} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Monderer%
 \ \BBA {} Shapley%
 }{%
@@ -344,6 +716,318 @@ Monderer, D.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1006/game.1996.0044} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Navarrete%
+\ \BBA {} Davis%
+}{%
+Navarrete%
+\ \BBA {} Davis%
+}{%
+{\protect \APACyear {2022}}%
+}]{%
+navarrete_quantum_2022}
+\APACinsertmetastar {%
+navarrete_quantum_2022}%
+\begin{APACrefauthors}%
+Navarrete, Y.%
+\BCBT {}\ \BBA {} Davis, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{{\APACmonth{11}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum {Mutual} {Information}, {Fragile} {Systems} and
+  {Emergence}} {Quantum {Mutual} {Information}, {Fragile} {Systems} and
+  {Emergence}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Entropy}{24}{11}{1676}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-26}]\url{https://www.mdpi.com/1099-4300/24/11/1676}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.3390/e24111676} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Nielsen%
+\ \BBA {} Chuan%
+}{%
+Nielsen%
+\ \BBA {} Chuan%
+}{%
+{\protect \APACyear {2010}}%
+}]{%
+nielsen_quantum_2010}
+\APACinsertmetastar {%
+nielsen_quantum_2010}%
+\begin{APACrefauthors}%
+Nielsen, M\BPBI A.%
+\BCBT {}\ \BBA {} Chuan, I\BPBI L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2010}.
+\newblock
+\APACrefbtitle {Quantum {Computation} and {Quantum} {Information}} {Quantum
+  {Computation} and {Quantum} {Information}}.
+\newblock
+\APACaddressPublisher{}{Cambridge University Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Niss%
+}{%
+Niss%
+}{%
+{\protect \APACyear {2005}}%
+}]{%
+niss_history_2005}
+\APACinsertmetastar {%
+niss_history_2005}%
+\begin{APACrefauthors}%
+Niss, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{{\APACmonth{03}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {History of the {Lenz}-{Ising} {Model} 1920?1950: {From}
+  {Ferromagnetic} to {Cooperative} {Phenomena}} {History of the {Lenz}-{Ising}
+  {Model} 1920?1950: {From} {Ferromagnetic} to {Cooperative}
+  {Phenomena}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Archive for History of Exact
+  Sciences}{59}{3}{267--318}.
+\newblock
+\begin{APACrefURL}
+  [{2026-05-20}]\url{http://link.springer.com/10.1007/s00407-004-0088-3}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s00407-004-0088-3} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Padilla%
+}{%
+Padilla%
+}{%
+{\protect \APACyear {2025}}%
+}]{%
+padilla_quantum_2025}
+\APACinsertmetastar {%
+padilla_quantum_2025}%
+\begin{APACrefauthors}%
+Padilla, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{09}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum {Approximate} {Optimization} {Algorithm} for
+  {Portfolio} {Selection}: {A} {Comparative} {Study} with {Classical}
+  {Markowitz} {Optimization}} {Quantum {Approximate} {Optimization} {Algorithm}
+  for {Portfolio} {Selection}: {A} {Comparative} {Study} with {Classical}
+  {Markowitz} {Optimization}}.{\BBCQ}
+\newblock
+
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Peruzzo%
+\ \protect \BOthers {.}}{%
+Peruzzo%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2014}}%
+}]{%
+peruzzo_variational_2014}
+\APACinsertmetastar {%
+peruzzo_variational_2014}%
+\begin{APACrefauthors}%
+Peruzzo, A.%
+, McClean, J.%
+, Shadbolt, P.%
+, Yung, M\BHBI H.%
+, Zhou, X\BHBI Q.%
+, Love, P\BPBI J.%
+\BDBL {}O’Brien, J\BPBI L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{{\APACmonth{07}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A variational eigenvalue solver on a photonic quantum
+  processor} {A variational eigenvalue solver on a photonic quantum
+  processor}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Nature Communications}{5}{1}{4213}.
+\newblock
+\begin{APACrefURL}
+  [{2026-05-20}]\url{https://www.nature.com/articles/ncomms5213}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1038/ncomms5213} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Preskill%
+}{%
+Preskill%
+}{%
+{\protect \APACyear {2018}}%
+}]{%
+preskill_quantum_2018}
+\APACinsertmetastar {%
+preskill_quantum_2018}%
+\begin{APACrefauthors}%
+Preskill, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{{\APACmonth{08}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum {Computing} in the {NISQ} era and beyond}
+  {Quantum {Computing} in the {NISQ} era and beyond}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Quantum}{2}{}{79}.
+\newblock
+\begin{APACrefURL} [{2026-03-12}]\url{http://arxiv.org/abs/1801.00862}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{arXiv:1801.00862 [quant-ph]}
+\newblock
+\begin{APACrefDOI} \doi{10.22331/q-2018-08-06-79} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Sarkar%
+\ \BBA {} Benjamin%
+}{%
+Sarkar%
+\ \BBA {} Benjamin%
+}{%
+{\protect \APACyear {2018}}%
+}]{%
+sarkar_quantum_2018}
+\APACinsertmetastar {%
+sarkar_quantum_2018}%
+\begin{APACrefauthors}%
+Sarkar, S.%
+\BCBT {}\ \BBA {} Benjamin, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum {Nash} equilibrium in the thermodynamic limit}
+  {Quantum {Nash} equilibrium in the thermodynamic limit}.{\BBCQ}
+\newblock
+\begin{APACrefURL} [{2026-03-11}]\url{https://arxiv.org/abs/1806.07343}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Version Number: 3}
+\newblock
+\begin{APACrefDOI} \doi{10.48550/ARXIV.1806.07343} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Saslow%
+}{%
+Saslow%
+}{%
+{\protect \APACyear {1999}}%
+}]{%
+saslow_economic_1999}
+\APACinsertmetastar {%
+saslow_economic_1999}%
+\begin{APACrefauthors}%
+Saslow, W\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1999}{{\APACmonth{12}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An economic analogy to thermodynamics} {An economic
+  analogy to thermodynamics}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{American Journal of Physics}{67}{12}{1239--1247}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-13}]\url{https://pubs.aip.org/ajp/article/67/12/1239/1044925/An-economic-analogy-to-thermodynamics}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1119/1.19110} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Schwert%
+}{%
+Schwert%
+}{%
+{\protect \APACyear {2003}}%
+}]{%
+schwert_chapter_2003}
+\APACinsertmetastar {%
+schwert_chapter_2003}%
+\begin{APACrefauthors}%
+Schwert, G\BPBI W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2003}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Chapter 15 {Anomalies} and market efficiency} {Chapter
+  15 {Anomalies} and market efficiency}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Handbook of the {Economics} of {Finance}} {Handbook of
+  the {Economics} of {Finance}}\ (\BVOL~1, \BPGS\ 939--974).
+\newblock
+\APACaddressPublisher{}{Elsevier}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://linkinghub.elsevier.com/retrieve/pii/S1574010203010240}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1016/S1574-0102(03)01024-0} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Scursulim%
+, Langeloh%
+, Beltran%
+\BCBL {}\ \BBA {} Brito%
+}{%
+Scursulim%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2026}}%
+}]{%
+scursulim_multiclass_2026}
+\APACinsertmetastar {%
+scursulim_multiclass_2026}%
+\begin{APACrefauthors}%
+Scursulim, J\BPBI V\BPBI S.%
+, Langeloh, G\BPBI M.%
+, Beltran, V\BPBI L.%
+\BCBL {}\ \BBA {} Brito, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2026}{{\APACmonth{02}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Multiclass portfolio optimization via variational
+  quantum {Eigensolver} with {Dicke} state ansatz} {Multiclass portfolio
+  optimization via variational quantum {Eigensolver} with {Dicke} state
+  ansatz}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Scientific Reports}{16}{1}{6208}.
+\newblock
+\begin{APACrefURL}
+  [{2026-04-20}]\url{https://www.nature.com/articles/s41598-026-36333-4}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1038/s41598-026-36333-4} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -406,13 +1090,45 @@ Spall, J\BPBI C.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Wang%
+Szabó%
+\ \BBA {} Borsos%
+}{%
+Szabó%
+\ \BBA {} Borsos%
+}{%
+{\protect \APACyear {2016}}%
+}]{%
+szabo_evolutionary_2016}
+\APACinsertmetastar {%
+szabo_evolutionary_2016}%
+\begin{APACrefauthors}%
+Szabó, G.%
+\BCBT {}\ \BBA {} Borsos, I.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{{\APACmonth{04}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Evolutionary potential games on lattices} {Evolutionary
+  potential games on lattices}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Physics Reports}{624}{}{1--60}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-26}]\url{https://linkinghub.elsevier.com/retrieve/pii/S0370157316000843}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.physrep.2016.02.006} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+A.~Wang%
 , Lv%
 , Ma%
 , Cai%
 \BCBL {}\ \BBA {} Zhang%
 }{%
-Wang%
+A.~Wang%
 \ \protect \BOthers {.}}{%
 {\protect \APACyear {2025}}%
 }]{%
@@ -442,6 +1158,43 @@ Wang, A.%
 \APACrefnote{arXiv:2508.18625 [quant-ph]}
 \newblock
 \begin{APACrefDOI} \doi{10.48550/arXiv.2508.18625} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+S.~Wang%
+\ \protect \BOthers {.}}{%
+S.~Wang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2025}}%
+}]{%
+wang_variational_2025}
+\APACinsertmetastar {%
+wang_variational_2025}%
+\begin{APACrefauthors}%
+Wang, S.%
+, Wang, P.%
+, Li, G.%
+, Zhao, S.%
+, Zhao, D.%
+, Wang, J.%
+\BDBL {}Guo, G\BHBI P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{08}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Variational quantum eigensolver with linear depth
+  problem-inspired ansatz for solving portfolio optimization in finance}
+  {Variational quantum eigensolver with linear depth problem-inspired ansatz
+  for solving portfolio optimization in finance}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Science China Information Sciences}{68}{8}{180504}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-11}]\url{https://link.springer.com/10.1007/s11432-024-4185-1}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s11432-024-4185-1} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -479,6 +1232,83 @@ Wei, H.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1007/s10614-025-11061-5} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Wierichs%
+, Izaac%
+, Wang%
+\BCBL {}\ \BBA {} Lin%
+}{%
+Wierichs%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+wierichs_general_2022}
+\APACinsertmetastar {%
+wierichs_general_2022}%
+\begin{APACrefauthors}%
+Wierichs, D.%
+, Izaac, J.%
+, Wang, C.%
+\BCBL {}\ \BBA {} Lin, C\BPBI Y\BHBI Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{{\APACmonth{03}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {General parameter-shift rules for quantum gradients}
+  {General parameter-shift rules for quantum gradients}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Quantum}{6}{}{677}.
+\newblock
+\begin{APACrefURL}
+  [{2026-05-20}]\url{https://quantum-journal.org/papers/q-2022-03-30-677/}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.22331/q-2022-03-30-677} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Yang%
+, Rubio%
+, Scutari%
+\BCBL {}\ \BBA {} Palomar%
+}{%
+Yang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2012}}%
+}]{%
+jain_multi-portfolio_2012}
+\APACinsertmetastar {%
+jain_multi-portfolio_2012}%
+\begin{APACrefauthors}%
+Yang, Y.%
+, Rubio, F.%
+, Scutari, G.%
+\BCBL {}\ \BBA {} Palomar, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Multi-portfolio {Optimization}: {A} {Potential} {Game}
+  {Approach}} {Multi-portfolio {Optimization}: {A} {Potential} {Game}
+  {Approach}}.{\BBCQ}
+\newblock
+\BIn{} R.~Jain\ \BBA {} R.~Kannan\ (\BEDS), \APACrefbtitle {Game {Theory} for
+  {Networks}} {Game {Theory} for {Networks}}\ (\BVOL~75, \BPGS\ 182--189).
+\newblock
+\APACaddressPublisher{Berlin, Heidelberg}{Springer Berlin Heidelberg}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-26}]\url{http://link.springer.com/10.1007/978-3-642-30373-9_13}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Series Title: Lecture Notes of the Institute for Computer
+  Sciences, Social Informatics and Telecommunications Engineering}
+\newblock
+\begin{APACrefDOI} \doi{10.1007/978-3-642-30373-9_13} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}

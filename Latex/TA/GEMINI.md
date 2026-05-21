@@ -21,13 +21,24 @@
 11. **Struktur & Arahan Penulisan:** Semua penulisan WAJIB didasarkan pada arahan spesifik yang terdapat dalam file-file Markdown di direktori `/Struktur/` (misal: `2_1.md`, `3_1.md`, dll.). Periksa file yang relevan dengan bab/subbab yang sedang dikerjakan sebelum memulai penulisan guna memastikan konsistensi alur dan konten yang diinginkan.
 
 ## 3. Aturan Teknis
-- **Matematika:** Wajib menggunakan LaTeX yang bersih ($...$ atau $$...$$). Setiap persamaan utama (*displayed equations*) wajib diberikan indeks nomor persamaan di sisi kanan, misalnya: (1), (2), dst.
+- **Matematika:** Wajib menggunakan LaTeX yang bersih ($...$ atau $$...$$). Setiap persamaan utama (*displayed equations*) wajib diberikan indeks nomor persamaan di sisi kanan, misalnya: (1), (2), dst. Utamakan penggunaan notasi matematis berindeks (*displayed equations*) untuk setiap variabel atau transformasi kritis guna meningkatkan rigoritas teknis dibandingkan deskripsi bahasa verbal.
 - **Referensi & Sitasi:** Prioritaskan pencarian sumber dari file Markdown di direktori `/Filtered_Paper/`. Sitasi wajib ditempatkan secara strategis pada tiga titik krusial:
     1. **Awal Subbab:** Saat memperkenalkan aksioma atau postulat dasar.
     2. **Jembatan Matematis:** Sebagai landasan teoretis saat melakukan operasi atau transisi antar persamaan.
     3. **Penutup Subbab:** Saat menjustifikasi validitas dan keberlakuan bentuk akhir yang diperoleh.
     4. **Menggunakan Format Harvard**
 - **Bahasa & Tipografi:** Bahasa Indonesia yang komunikatif, namun tetap menggunakan istilah teknis Fisika/Kuantum dalam Bahasa Inggris jika lebih akurat secara saintifik. Gunakan format *italic* untuk setiap istilah teknis (*technical terms*) atau bahasa serapan asing guna menjaga konsistensi gaya selingkung jurnal ilmiah.
-
 ---
 *Mandat ini bersifat absolut dan mengesampingkan instruksi umum jika terjadi kontradiksi.*
+
+## 4. Protokol Pelengkapan & Revisi Paragraf
+Untuk memastikan setiap paragraf memenuhi standar publikasi internasional, AI wajib mengikuti alur kerja berikut saat melengkapi atau merevisi teks:
+1. **Analisis Konteks & Gap:** Identifikasi bagian rumpang atau narasi yang membutuhkan penguatan argumen dalam file `.tex`.
+2. **Ekstraksi Data Teknis:** Wajib mencari dan membaca dokumen pendukung pada direktori `/Filtered_Paper/` (prioritaskan file `.md`) untuk mendapatkan substansi ilmiah yang akurat.
+3. **Integrasi Referensi:** Gunakan file `Referensi.bib` sebagai sumber tunggal kunci sitasi (`\cite{...}`). Pastikan setiap klaim ilmiah didukung oleh sitasi yang relevan dari bibtex tersebut.
+4. **Kontrol Struktur & Panjang:**
+   - **Kalimat:** Wajib menjaga panjang setiap kalimat antara **20 sampai 50 kata** untuk menjamin kepadatan informasi.
+   - **Paragraf:** Wajib terdiri dari minimal **4 sampai 5 kalimat** yang saling koheren.
+   - **Alur:** Terapkan logika deduktif (umum ke khusus) untuk pengenalan konsep dan induktif (detail ke kesimpulan) untuk argumentasi data.
+5. **Finalisasi Stilistik:** Gunakan format *italic* untuk istilah asing/teknis dan pastikan nada bicara tetap formal, objektif, serta bebas dari filler percakapan.
+---

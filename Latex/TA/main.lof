@@ -1,7 +1,17 @@
 \babel@toc {bahasa}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh ikhtisar laporan posisi keuangan konsolidasian yang merepresentasikan struktur aset dan kesehatan fiskal entitas.}}{11}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Ilustrasi \textit {bid-ask spread} sebagai representasi friksi transaksi dan likuiditas dalam buku pesanan.}}{12}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Struktur anatomi \textit {bullish} dan \textit {bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}}{12}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Representasi visual level \textit {support} dan \textit {resistance} sebagai batas memori sosial dalam dinamika harga aset.}}{13}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Kurva \textit {Efficient Frontier} dan \textit {Capital Market Line} sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{15}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Matriks imbal hasil pada model permainan klasik: (a) \textit {Stag Hunt}, (b) \textit {Prisoner's Dilemma}, dan (c) \textit {Battle of the Sexes} yang merepresentasikan variasi struktur ekuilibrium.}}{17}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Representasi visual model Ising satu dimensi (1D) yang menunjukkan dinamika orientasi \textit {spin} dan klasifikasi energi interaksi ($\bullet $, $\mathbf {X}$, \textcolor {blue}{$\circ $}) di bawah pengaruh fluktuasi termal \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{22}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Visualisasi Bola Bloch sebagai representasi geometris dari status \textit {qubit} dalam ruang parameter kontinu.}}{25}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Representasi alur kerja sirkuit kuantum berparameter yang mengintegrasikan fase pra-pemrosesan, eksekusi unitari variasional, dan pasca-pemrosesan data \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{27}{figure.caption.12}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}}{28}{figure.caption.4}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}}{40}{figure.caption.13}%
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
