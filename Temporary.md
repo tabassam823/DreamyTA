@@ -1,7 +1,9 @@
-Berbeda dengan bit klasik yang hanya memiliki dua status diskrit yang saling eksklusif (0 atau 1), qubit didefinisikan secara matematis melalui vektor kolom di ruang Hilbert kompleks $\mathbb{C}^2$. Karena sistem fisik harus memenuhi syarat kekekalan probabilitas, panjang vektor ini harus selalu bernilai satu, yang secara formal dinyatakan melalui syarat normalisasi $|\alpha|^2 + |\beta|^2 = 1$. Batasan matematis ini menjadi pilar utama yang memungkinkan representasi informasi biner ke dalam ruang vektor kontinu, di mana status qubit tidak lagi terbatas pada nilai biner kaku, melainkan pada distribusi koefisien kompleks yang memenuhi identitas energi sistem.
-
-Adanya syarat normalisasi memungkinkan kita mereduksi derajat kebebasan variabel kompleks menjadi dua parameter sudut nyata, yaitu sudut polar $\theta$ dan fase relatif $\phi$. Melalui pemetaan ini, setiap status unik qubit dapat dipetakan secara presisi ke koordinat pada permukaan bola tiga dimensi yang dikenal sebagai Bola Bloch. Dalam representasi geometris ini, faktor fase global diabaikan karena tidak mengubah posisi relatif vektor pada permukaan bola maupun hasil pengukuran fisik, sehingga memungkinkan identifikasi identitas keadaan qubit secara tunggal dan visual bagi setiap konfigurasi parameter yang diberikan.
-
-Amplitudo $\alpha$ dan $\beta$ tidak sekadar berfungsi sebagai koefisien skalar, melainkan berperan sebagai pembawa informasi fase kompleks yang menentukan interaksi antar-keadaan basis. Keberadaan informasi fase ini memungkinkan sistem untuk mengodekan hubungan korelasi yang jauh lebih padat di dalam ruang Hilbert yang dimensinya tumbuh secara eksponensial terhadap jumlah qubit sebagai $2^n$. Hal ini menciptakan densitas informasi yang sangat tinggi, di mana seluruh kemungkinan konfigurasi strategi aset portofolio dapat dipetakan ke dalam satu vektor keadaan superposisi tunggal sebelum proses ekstraksi data dilakukan.
-
-Namun, informasi yang tersimpan di dalam status superposisi tersebut tidak dapat diakses secara langsung tanpa melalui mekanisme interaksi pengukuran. Aturan Born menetapkan bahwa kita hanya dapat mengekstraksi data dari sistem melalui probabilitas yang didefinisikan oleh kuadrat modulus amplitudo, yaitu $|\alpha|^2$ untuk status $|0\rangle$ dan $|\beta|^2$ untuk status $|1\rangle$. Proses pengukuran ini secara fundamental memaksa sistem yang semula berada dalam status kontinu untuk bertransformasi kembali menjadi representasi biner yang diskrit melalui fenomena kolaps fungsi gelombang, yang menjadi jembatan antara logika data kuantum dengan keputusan strategis di dunia nyata.
+1. gambar masih terlalu berjarak jauh
+2. pada "Metrik Finansial dan Parameter Risiko" tidak perlu ada perbandingan GT dan NoGT. 
+3. tidak perlu ada angka di belakang koma untuk analisis konvergensi
+4. mungkin analisis konvergensi bisa dibuat perbandingan GT dan NoGT
+5. pada subbab 3.6 terdapat offside kata pada backtest_runner.py
+6. penurunan rumus pada pembahasan
+7. penurunan rumus entropi pada lampiran A
+8. appendices yang masih ghaib
+9. entropi von neumann pada bab 2 dimulai dari entropi shannon saja

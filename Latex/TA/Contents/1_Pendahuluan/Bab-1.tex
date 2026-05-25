@@ -1,0 +1,46 @@
+\chapter{Pendahuluan}
+
+\section{Latar Belakang}
+Fenomena korelasi ekstrem antar aset seringkali mendistorsi stabilitas pasar keuangan modern secara signifikan selama periode krisis ekonomi global yang tidak terduga. Meskipun model \textit{Mean-Variance} (MV) dari \cite{markowitz_portfolio_1952} menjadi fondasi utama \textit{Modern Portfolio Theory}, asumsi distribusi \textit{return} yang normal dan stasioner membatasi reliabilitas model tersebut \cite{abdul_hali_markowitz_2020}. Ketidakmampuan model MV dalam menangkap anomali pasar serta ketergantungan non-linear menyebabkan estimasi risiko menjadi tidak akurat dan sulit diprediksi melalui komputasi klasik \cite{sikalo_efficient_2022}. Oleh karena itu, penelitian ini mentransformasikan fungsi objektif portofolio ke dalam kerangka \textit{Quadratic Unconstrained Binary Optimization} (QUBO) agar sistem komputasi kuantum dapat memproses kompleksitas finansial tersebut \cite{wang_achieving_2025}.
+
+Para peneliti ekonofisika mengadopsi model \textit{Ising} untuk memetakan fungsi biaya portofolio ke dalam struktur Hamiltonian guna mendukung implementasi pada perangkat keras kuantum \cite{lucas_ising_2014}. Pendekatan ini merepresentasikan perilaku kolektif sistem multi-agen melalui interaksi antar variabel diskrit yang menggambarkan dinamika pasar secara lebih representatif \cite{mantegna_introduction_2000}. Representasi agen ekonomi sebagai \textit{spins} yang berinteraksi memungkinkan sistem untuk mencerminkan fenomena \textit{herding} atau sinkronisasi keputusan investor melalui keselarasan orientasi \textit{spin} \cite{hidalgo_quantum_2006}. Kerangka mekanika statistik mengabstraksikan kompleksitas pasar menjadi sistem energi, sehingga pengamatan konfigurasi energi memfasilitasi deteksi transisi fase dari kondisi stabil menuju volatilitas ekstrem.
+
+Sistem mengonversi setiap keputusan alokasi aset portofolio menjadi variabel biner yang merepresentasikan keadaan fisik dalam model komputasi kuantum yang dibangun. Parameter medan lokal ($h_i$) menyerap informasi terkait ekspektasi imbal hasil dan preferensi risiko individual, sementara koefisien kopling ($J_{ij}$) menangkap dinamika korelasi antar aset \cite{sikalo_efficient_2022}. Penyusunan interaksi tersebut ke dalam fungsi Hamiltonian \textit{Ising} mentransformasi masalah optimasi portofolio menjadi pencarian konfigurasi energi terendah atau \textit{ground state} secara sistematis \cite{wei_solving_2025}. Logika ini memastikan bahwa solusi optimal yang dihasilkan mencerminkan titik keseimbangan energi minimum yang setara dengan efisiensi alokasi modal maksimum.
+
+Kerangka \textit{Exact Potential Game} (EPG) mengidentifikasi interaksi strategis antar partisipan pasar dengan menawarkan pendekatan yang lebih dinamis dibandingkan ekstrapolasi statistik pada analisis deret waktu. Integrasi EPG ke dalam model \textit{Ising} memodifikasi parameter medan lokal ($h_i$) melalui perumusan fungsi potensial $\Phi$ yang diturunkan dari utilitas marginal partisipan \cite{la_torre_multi-agent_2026}. Melalui pendekatan teori permainan ini, sistem mendeteksi bias aset secara presisi dengan memodelkan setiap instrumen investasi sebagai pemain yang berinteraksi dalam pencarian titik \textit{Nash Equilibrium}. Pemanfaatan fungsi potensial menjamin bahwa setiap peningkatan utilitas individual berkontribusi langsung pada penurunan energi Hamiltonian total, sehingga menciptakan konsistensi matematis yang kokoh.
+
+Strategi \textit{warm-start} mengatasi fenomena \textit{Barren Plateaus} yang seringkali menghambat efektivitas pembaruan parameter sirkuit variasional pada ruang pencarian yang sangat luas. Penelitian ini memanfaatkan konfigurasi biner dari \textit{Nash Equilibrium} yang dihasilkan oleh algoritma \textit{Sequential Best Response} (SBR) sebagai titik awal inisialisasi parameter VQE. Pendekatan hibrida ini memposisikan sirkuit kuantum pada wilayah probabilitas tinggi sejak iterasi pertama, sehingga mempercepat proses minimisasi energi menuju \textit{ground state}. Integrasi logika teori permainan ke dalam algoritma kuantum menjembatani dinamika strategis agen ekonomi dengan presisi komputasi kuantum dalam mengidentifikasi konfigurasi portofolio yang paling stabil.
+
+Implementasi algoritma \textit{Variational Quantum Eigensolver} (VQE) mengadaptasi prinsip simulasi sistem kuantum untuk menyelesaikan masalah optimasi diskrit pada sektor keuangan modern. Awalnya, VQE mengestimasi \textit{ground state} pada sistem molekuler melalui minimisasi nilai ekspektasi Hamiltonian kimia yang bersifat \textit{non-commuting} secara iteratif \cite{fedorov_vqe_2022}. Transformasi fungsi objektif portofolio ke dalam model \textit{Ising} memampukan VQE untuk memetakan rezim pasar optimal melalui pencarian konfigurasi energi terendah dalam ruang QUBO \cite{wang_achieving_2025}. Algoritma ini menawarkan fleksibilitas tinggi dalam menangani keterbatasan perangkat \textit{Noisy Intermediate-Scale Quantum} (NISQ) dibandingkan dengan algoritma kuantum murni lainnya.
+
+Kerangka kerja VQE umumnya menggunakan metode optimasi iteratif berbasis \textit{Gradient Descent} (GD) untuk memperbarui parameter menuju arah negatif gradien fungsi biaya. Meskipun GD menjadi standar dalam pembelajaran mesin klasik, implementasi pada perangkat keras kuantum menghadapi kendala \textit{sampling overhead} yang sangat besar \cite{dao_exploring_2025}. Sebagai alternatif, algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) melakukan estimasi gradien secara efisien hanya dengan dua pengukuran per iterasi terlepas dari dimensi parameter \cite{wang_achieving_2025}. SPSA menunjukkan ketangguhan yang lebih tinggi terhadap fluktuasi statistik dan \textit{noise} pengukuran yang seringkali menyebabkan ketidakstabilan pada algoritma berbasis gradien konvensional \cite{spall_implementation_1998}.
+
+Pemilihan \textit{ansatz} yang optimal menentukan keberhasilan pencarian solusi dalam algoritma VQE secara keseluruhan pada sistem kuantum yang terbatas. \textit{Ansatz EfficientSU(2)} mengoptimalkan struktur gerbang $SU(2)$—seperti rotasi $RY$ dan $RZ$—serta gerbang \textit{CNOT} dalam pola yang sangat ringkas dan efisien \cite{dao_exploring_2025}. Dibandingkan dengan \textit{TwoLocal} yang generik, \textit{EfficientSU(2)} mereduksi kedalaman sirkuit secara signifikan tanpa mengorbankan tingkat ekspresivitas yang dibutuhkan untuk memetakan dinamika portofolio. Penggunaan \textit{ansatz} yang ringkas meminimalkan akumulasi \textit{gate noise} pada perangkat NISQ, sehingga meningkatkan akurasi estimasi energi pada setiap iterasi optimasi.
+
+\section{Rumusan Masalah}
+Berdasarkan latar belakang tersebut, permasalahan yang akan dibahas dalam tugas akhir ini adalah:
+\begin{enumerate}
+    \item Bagaimana perumusan bias aset sebagai parameter medan lokal ($h_i$) dan interaksi antar aset sebagai koefisien kopling ($J_{ij}$) menggunakan fungsi potensial dalam kerangka \textit{Exact Potential Game} (EPG) memengaruhi akurasi pemetaan Hamiltonian?
+    \item Bagaimana efektivitas penerapan \textit{Nash Equilibrium} sebagai strategi \textit{warm-start} dalam mempercepat konvergensi dan mengatasi kendala inisialisasi pada algoritma \textit{Variational Quantum Eigensolver} (VQE)?
+    \item Bagaimana performa algoritma VQE dengan optimasi \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) dan \textit{Ansatz EfficientSU(2)} dalam menemukan solusi \textit{ground state} pada model portofolio hibrida?
+\end{enumerate}
+
+\section{Tujuan Penelitian}
+Dari rumusan masalah yang diberikan, tujuan dari pembuatan tugas akhir ini antara lain:
+\begin{enumerate}
+    \item Menganalisis formulasi bias aset sebagai parameter medan lokal ($h_i$) dan interaksi antar aset sebagai koefisien kopling ($J_{ij}$) melalui pendekatan fungsi potensial dalam sistem Hamiltonian berbasis \textit{Exact Potential Game} (EPG).
+    \item Mengevaluasi kontribusi strategi \textit{warm-start} berbasis \textit{Nash Equilibrium} dalam meningkatkan efisiensi pencarian solusi optimal pada algoritma VQE.
+    \item Menguji kapabilitas algoritma VQE yang menggunakan optimasi SPSA dan \textit{Ansatz EfficientSU(2)} untuk menghasilkan keputusan alokasi aset yang optimal dalam kondisi pasar yang kompleks.
+\end{enumerate}
+
+\section{Batasan Masalah}
+Agar penelitian ini lebih terfokus, maka pengerjaan tugas akhir ini diberikan batasan-batasan sebagai berikut:
+\begin{enumerate}
+    \item Portofolio yang dianalisis dibatasi pada pemilihan 1 aset dari 2 pilihan aset dengan sektor yang berbeda.
+    \item Model permainan yang digunakan adalah skema \textit{non zero-sum game} dalam kerangka \textit{Exact Potential Game}.
+    \item Pencarian ekuilibrium dilakukan menggunakan algoritma \textit{Sequential Best Response} (SBR).
+    \item Simulasi dan implementasi algoritma dilakukan menggunakan simulator \textit{Pennylane}.
+\end{enumerate}
+
+\section{Manfaat Penelitian}
+Hasil dari tugas akhir ini diharapkan dapat memberikan alternatif metode optimasi portofolio yang lebih tangguh terhadap dinamika korelasi pasar serta memberikan kontribusi akademis dalam penerapan komputasi kuantum pada bidang finansial.

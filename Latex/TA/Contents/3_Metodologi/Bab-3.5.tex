@@ -1,0 +1,32 @@
+\section{Optimasi Variasional HE-VQE Adaptif}
+
+Proses optimasi portofolio diimplementasikan melalui skema \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE) hibrida yang mengombinasikan kekuatan komputasi kuantum dengan efisiensi pembaruan parameter klasik. Arsitektur sirkuit \textit{EfficientSU2} diadopsi sebagai ansatz utama yang terdiri dari lapisan gerbang rotasi qubit $R_y$ dan $R_z$ yang dapat diparameterisasi serta lapisan gerbang keterbelitan CNOT untuk memodelkan korelasi antar aset finansial. Strategi \textit{Adaptive Depth} diterapkan di dalam modul optimasi kuantum adaptif di mana kedalaman sirkuit ditingkatkan secara bertahap untuk mencari keseimbangan optimal antara ekspresivitas sirkuit dengan kerentanan terhadap akumulasi derau perangkat keras. Setiap penambahan lapisan baru dipastikan dilakukan melalui mekanisme \textit{warm-start} parameter agar energi sistem tetap stabil dan terhindar dari fenomena dataran tandus yang sering menghambat efisiensi pelatihan pada sistem kuantum.
+
+Pembaruan parameter sirkuit dilakukan secara iteratif menggunakan optimizer \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) yang memiliki ketangguhan tinggi dalam menghadapi lanskap energi yang bersifat stokastik dan berderau. Strategi \textit{Penalty Annealing} diintegrasikan di mana koefisien pinalti $\lambda$ ditingkatkan secara moderat sepanjang proses iterasi guna memastikan bahwa sistem kuantum secara bertahap dipandu menuju ruang solusi yang memenuhi kendala kardinalitas aset. Inisialisasi awal parameter rotasi sirkuit dilakukan menggunakan bitstring yang diperoleh dari titik ekuilibrium Nash (\textit{NE-VQE}) untuk memberikan landasan kestabilan awal yang memiliki makna finansial yang kuat bagi sistem. Prosedur kalibrasi otomatis juga diterapkan untuk mencari \textit{learning rate} yang paling optimal menggunakan modul kalibrasi hyperparameter sebelum memulai fase optimasi utama guna menjamin kecepatan konvergensi yang maksimal.
+
+Pengambilan sampel terhadap distribusi probabilitas status qubit (\textit{bitstrings}) dilakukan setelah proses optimasi mencapai titik konvergensi yang stabil untuk mengekstraksi konfigurasi portofolio terbaik yang dihasilkan oleh sistem. Pemilihan bitstring dengan nilai probabilitas tertinggi yang memenuhi batasan jumlah aset $K$ diprioritaskan sebagai solusi final yang diimplementasikan pada setiap jendela waktu investasi yang sedang dianalisis secara mendalam. Seluruh siklus optimasi hibrida ini dirancang agar bersifat robust terhadap fluktuasi data pasar sekaligus efisien dalam penggunaan sumber daya qubit yang terbatas pada perangkat keras kuantum era NISQ. Alur kerja sistematis dari algoritma VQE adaptif yang mencakup inisialisasi hangat, pinalti dinamis, hingga optimasi parameter menggunakan SPSA dirangkum secara formal pada Algoritma \ref{alg:vqe_adaptive}.
+
+\begin{algorithm}[ht]
+\caption{Adaptive HE-VQE dengan Penalty Annealing dan Nash Warm-Start}
+\label{alg:vqe_adaptive}
+\begin{algorithmic}[1]
+\Procedure{AdaptiveVQE}{$H_{obj}, H_{pen}, x_{NE}, D_{max}, \lambda_{target}$}
+    \State $\theta \gets \text{InitialParameters}(x_{NE})$ \Comment{Inisialisasi NE-VQE}
+    \For{$d = 1$ to $D_{max}$}
+        \State $a, c \gets \text{CalibrateSPSA}(H_{obj}, H_{pen}, \lambda_{target})$ \Comment{Kalibrasi \textit{Learning Rate}}
+        \For{$k = 1$ to $N_{iter}$}
+            \State $\lambda_k \gets \lambda_{target} \cdot (0.1 + 0.9 \cdot \frac{k}{0.7 N_{iter}})$ \Comment{Penalty Annealing}
+            \State $\mathcal{L}(\theta) \gets \langle \psi(\theta) | H_{obj} + \lambda_k H_{pen} | \psi(\theta) \rangle$
+            \State $g_k \gets \text{SPSA\_Gradient}(\mathcal{L}, \theta, c_k)$
+            \State $\theta \gets \theta - a_k g_k$ \Comment{Update Parameter}
+        \EndFor
+        \State $\theta \gets \text{LayerExpansion}(\theta)$ \Comment{Tambah \textit{Depth} (Adaptif)}
+        \If{$\text{Converged}(\theta)$} \textbf{break} \EndIf
+    \EndFor
+    \State $probs \gets |\langle x | \psi(\theta_{final}) \rangle|^2$ \Comment{Pengukuran Probabilitas}
+    \State $x^* \gets \text{Argmax}(probs) \text{ s.t. } \sum x_i = K$
+    \State \Return $x^*$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+thm}

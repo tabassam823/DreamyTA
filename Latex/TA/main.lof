@@ -1,17 +1,54 @@
 \babel@toc {bahasa}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh ikhtisar laporan posisi keuangan konsolidasian yang merepresentasikan struktur aset dan kesehatan fiskal entitas.}}{11}{figure.caption.4}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Ilustrasi \textit {bid-ask spread} sebagai representasi friksi transaksi dan likuiditas dalam buku pesanan.}}{12}{figure.caption.5}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Struktur anatomi \textit {bullish} dan \textit {bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}}{12}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Representasi visual level \textit {support} dan \textit {resistance} sebagai batas memori sosial dalam dinamika harga aset.}}{13}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Kurva \textit {Efficient Frontier} dan \textit {Capital Market Line} sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{15}{figure.caption.8}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Matriks imbal hasil pada model permainan klasik: (a) \textit {Stag Hunt}, (b) \textit {Prisoner's Dilemma}, dan (c) \textit {Battle of the Sexes} yang merepresentasikan variasi struktur ekuilibrium.}}{17}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Representasi visual model Ising satu dimensi (1D) yang menunjukkan dinamika orientasi \textit {spin} dan klasifikasi energi interaksi ($\bullet $, $\mathbf {X}$, \textcolor {blue}{$\circ $}) di bawah pengaruh fluktuasi termal \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{22}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Visualisasi Bola Bloch sebagai representasi geometris dari status \textit {qubit} dalam ruang parameter kontinu.}}{25}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Representasi alur kerja sirkuit kuantum berparameter yang mengintegrasikan fase pra-pemrosesan, eksekusi unitari variasional, dan pasca-pemrosesan data \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{27}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh ikhtisar laporan posisi keuangan konsolidasian yang merepresentasikan struktur aset dan kesehatan fiskal entitas.}}{9}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Ilustrasi \textit {bid-ask spread} sebagai representasi friksi transaksi dan likuiditas dalam buku pesanan.}}{10}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Struktur anatomi \textit {bullish} dan \textit {bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}}{10}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Representasi visual level \textit {support} dan \textit {resistance} sebagai batas memori sosial dalam dinamika harga aset.}}{11}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Kurva \textit {Efficient Frontier} dan \textit {Capital Market Line} sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{13}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Matriks imbal hasil pada model permainan klasik: (a) \textit {Stag Hunt}, (b) \textit {Prisoner's Dilemma}, dan (c) \textit {Battle of the Sexes} yang merepresentasikan variasi struktur ekuilibrium.}}{15}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Representasi visual model Ising satu dimensi (1D) yang menunjukkan dinamika orientasi \textit {spin} dan klasifikasi energi interaksi ($\bullet $, $\mathbf {X}$, \textcolor {blue}{$\circ $}) di bawah pengaruh fluktuasi termal \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{20}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Visualisasi Bola Bloch sebagai representasi geometris dari status \textit {qubit} dalam ruang parameter kontinu.}}{23}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Representasi alur kerja sirkuit kuantum berparameter yang mengintegrasikan fase pra-pemrosesan, eksekusi unitari variasional, dan pasca-pemrosesan data \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{25}{figure.caption.12}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis VQE.}}{40}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{36}{figure.caption.13}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-01-04}}{61}{figure.caption.16}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-02-02}}{62}{figure.caption.17}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-03-04}}{62}{figure.caption.18}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-04-06}}{63}{figure.caption.19}%
+\contentsline {figure}{\numberline {B.5}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-05-05}}{63}{figure.caption.20}%
+\contentsline {figure}{\numberline {B.6}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-06-10}}{64}{figure.caption.21}%
+\contentsline {figure}{\numberline {B.7}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-07-09}}{64}{figure.caption.22}%
+\contentsline {figure}{\numberline {B.8}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-08-10}}{65}{figure.caption.23}%
+\contentsline {figure}{\numberline {B.9}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-09-10}}{65}{figure.caption.24}%
+\contentsline {figure}{\numberline {B.10}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-10-11}}{66}{figure.caption.25}%
+\contentsline {figure}{\numberline {B.11}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-11-10}}{66}{figure.caption.26}%
+\contentsline {figure}{\numberline {B.12}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2021-12-09}}{67}{figure.caption.27}%
+\contentsline {figure}{\numberline {B.13}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-01-10}}{67}{figure.caption.28}%
+\contentsline {figure}{\numberline {B.14}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-02-09}}{68}{figure.caption.29}%
+\contentsline {figure}{\numberline {B.15}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-03-14}}{68}{figure.caption.30}%
+\contentsline {figure}{\numberline {B.16}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-04-12}}{69}{figure.caption.31}%
+\contentsline {figure}{\numberline {B.17}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-05-23}}{69}{figure.caption.32}%
+\contentsline {figure}{\numberline {B.18}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-06-23}}{70}{figure.caption.33}%
+\contentsline {figure}{\numberline {B.19}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-07-22}}{70}{figure.caption.34}%
+\contentsline {figure}{\numberline {B.20}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-08-23}}{71}{figure.caption.35}%
+\contentsline {figure}{\numberline {B.21}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-09-21}}{71}{figure.caption.36}%
+\contentsline {figure}{\numberline {B.22}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-10-20}}{72}{figure.caption.37}%
+\contentsline {figure}{\numberline {B.23}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-11-18}}{72}{figure.caption.38}%
+\contentsline {figure}{\numberline {B.24}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2022-12-19}}{73}{figure.caption.39}%
+\contentsline {figure}{\numberline {B.25}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-01-17}}{73}{figure.caption.40}%
+\contentsline {figure}{\numberline {B.26}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-02-16}}{74}{figure.caption.41}%
+\contentsline {figure}{\numberline {B.27}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-03-17}}{74}{figure.caption.42}%
+\contentsline {figure}{\numberline {B.28}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-04-27}}{75}{figure.caption.43}%
+\contentsline {figure}{\numberline {B.29}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-05-30}}{75}{figure.caption.44}%
+\contentsline {figure}{\numberline {B.30}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-07-05}}{76}{figure.caption.45}%
+\contentsline {figure}{\numberline {B.31}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-08-04}}{76}{figure.caption.46}%
+\contentsline {figure}{\numberline {B.32}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-09-05}}{77}{figure.caption.47}%
+\contentsline {figure}{\numberline {B.33}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-10-05}}{77}{figure.caption.48}%
+\contentsline {figure}{\numberline {B.34}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-11-03}}{78}{figure.caption.49}%
+\contentsline {figure}{\numberline {B.35}{\ignorespaces Perbandingan Alokasi Portofolio Jendela Waktu 2023-12-04}}{78}{figure.caption.50}%
 \addvspace {10\p@ }

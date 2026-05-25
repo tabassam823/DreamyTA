@@ -1,16 +1,16 @@
 This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-A level-1 auxiliary file: Contents/BagianDepan/Cover_Dalam.aux
-A level-1 auxiliary file: Contents/BagianDepan/Lembar_Pengesahan.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Cover_Dalam.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Lembar_Pengesahan.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstrak.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstract.aux
-A level-1 auxiliary file: Contents/BagianDepan/Kata_Pengantar.aux
-A level-1 auxiliary file: Contents/Pendahuluan/Bab-1.aux
-A level-1 auxiliary file: Contents/Daster/Bab-2.aux
-A level-1 auxiliary file: Contents/Metodologi/Bab-3.aux
-A level-1 auxiliary file: Contents/Pembahasan/Bab-4.aux
-A level-1 auxiliary file: Contents/Penutup/Bab-5.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Kata_Pengantar.aux
+A level-1 auxiliary file: Contents/1_Pendahuluan/Bab-1.aux
+A level-1 auxiliary file: Contents/2_Daster/Bab-2.aux
+A level-1 auxiliary file: Contents/3_Metodologi/Bab-3.aux
+A level-1 auxiliary file: Contents/4_Pembahasan/Bab-4.aux
+A level-1 auxiliary file: Contents/5_Penutup/Bab-5.aux
 The style file: apacite.bst
 A level-1 auxiliary file: Contents/BagianBelakang/Biodata_Penulis.aux
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
@@ -38,7 +38,7 @@ while executing---line 5079 of file apacite.bst
 Warning--No journal in spall_implementation_1998
 You've used 40 entries,
             6951 wiz_defined-function locations,
-            1601 strings with 21596 characters,
+            1601 strings with 21612 characters,
 and the built_in function-call counts, 80178 in all, are:
 = -- 9511
 > -- 688

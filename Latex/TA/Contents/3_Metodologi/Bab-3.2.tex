@@ -1,0 +1,26 @@
+\section{Akuisisi dan Pra-pemrosesan Data}
+
+Data primer penelitian ini diperoleh melalui pengunduhan harga penutupan harian (\textit{closing price}) dari seluruh emiten yang terdaftar dalam indeks saham LQ45 menggunakan modul akuisisi data yang terhubung langsung dengan API \textit{Yahoo Finance}. Rentang waktu pengambilan data ditetapkan mencakup periode observasi yang cukup panjang guna memastikan bahwa model mampu menangkap berbagai dinamika pasar mulai dari fase pertumbuhan hingga fase koreksi sistemik yang ekstrem. Data mentah yang telah berhasil diperoleh disimpan ke dalam struktur basis data sementara untuk mempermudah proses sanitasi serta pembersihan dari nilai kosong atau anomali data akibat aksi korporasi yang tidak konsisten. Indeks saham LQ45 dipilih sebagai objek penelitian utama karena memiliki tingkat likuiditas yang sangat tinggi serta kapitalisasi pasar yang besar sehingga hasil optimasi memiliki relevansi praktis yang kuat bagi para investor institusional di Indonesia.
+
+Harga penutupan absolut ditransformasi menjadi variabel imbal hasil logaritmik (\textit{log returns}) menggunakan modul perhitungan imbal hasil guna mencapai kondisi stasioneritas data secara statistik yang sangat diperlukan dalam pemodelan deret waktu finansial. Penggunaan imbal hasil logaritmik diprioritaskan dibandingkan dengan imbal hasil sederhana karena memiliki sifat aditivitas yang memungkinkan dilakukannya agregasi temporal secara linear tanpa mengalami distorsi nilai yang signifikan pada proyeksi jangka panjang. Ekspektasi imbal hasil harian $\mu$ dan matriks kovariansi $\Sigma$ dihitung dari data \textit{log return} tersebut sebagai basis input fundamental yang akan dipetakan ke dalam parameter interaksi fisis pada model Hamiltonian. Perhitungan \textit{volatility drag} diintegrasikan secara eksplisit untuk mengonversi imbal hasil aritmatika menjadi imbal hasil logaritmik yang lebih akurat dalam merepresentasikan laju pertumbuhan modal secara geometris di tengah fluktuasi pasar.
+
+Derajat penghindaran risiko (\textit{risk aversion}) $\gamma$ ditentukan secara endogen menggunakan modul parameterisasi risiko yang secara otomatis menyesuaikan nilai parameter tersebut berdasarkan kondisi volatilitas pasar pada setiap jendela waktu observasi. Nilai $\gamma$ dihitung melalui perbandingan matematis antara rata-rata ekspektasi imbal hasil portofolio dengan total varians aset guna menjamin bahwa profil risiko model tetap adaptif terhadap perubahan rezim ekonomi yang dinamis. Pendekatan parameterisasi endogen ini memastikan bahwa model optimasi tidak bersifat kaku melainkan mampu merespons lonjakan risiko sistemik secara cepat melalui penyesuaian bobot penalti pada fungsi objektif portofolio yang sedang dibangun. Seluruh alur kerja akuisisi data, transformasi statistik, hingga ekstraksi parameter $\gamma$ dirangkum ke dalam sebuah prosedur sistematis yang disajikan secara formal pada Algoritma \ref{alg:data_prep}.
+
+
+\begin{algorithm}[ht]
+\caption{Akuisisi dan Pra-pemrosesan Data Finansial}
+\label{alg:data_prep}
+\begin{algorithmic}[1]
+\Procedure{DataPreprocessing}{tickers, $t_{start}, t_{end}, K$}
+    \State $\mathbf{P} \gets \text{DownloadClosingPrice}(tickers, t_{start}, t_{end})$ \Comment{via \texttt{yfinance}}
+    \State $\mathbf{P}_{clean} \gets \text{DropNaN}(\mathbf{P})$
+    \State $r_{log} \gets \ln(\mathbf{P}_{t} / \mathbf{P}_{t-1})$ \Comment{Kalkulasi \textit{Log Return}}
+    \State $\mu_{simple} \gets \text{Mean}(r_{simple})$
+    \State $\sigma^{2} \gets \text{Variance}(r_{log})$
+    \State $\mu_{log} \gets \mu_{simple} - 0.5 \sigma^{2}$ \Comment{Adjustment \textit{Volatility Drag}}
+    \State $\Sigma \gets \text{Covariance}(r_{log})$
+    \State $\gamma \gets \text{ComputeEndogenousLambda}(\mu_{log}, \Sigma)$ \Comment{Ekstraksi \textit{Risk Aversion} Endogen}
+    \State \Return $\mu_{log}, \Sigma, \gamma$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

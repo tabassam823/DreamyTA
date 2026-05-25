@@ -1,0 +1,29 @@
+\section{Simulasi Backtesting dan Metrik Evaluasi}
+
+Performa model dievaluasi melalui prosedur \textit{sliding window backtesting} yang mensimulasikan keputusan investasi riil secara kronologis menggunakan modul simulasi investasi pada data historis saham LQ45. Setiap jendela waktu observasi dirancang agar terdiri dari fase pelatihan selama 126 hari bursa (\textit{lookback window}) untuk ekstraksi parameter finansial serta fase implementasi portofolio untuk periode investasi berikutnya yang telah ditentukan. Proses ini dijalankan secara berulang dan iteratif dengan menggeser jendela waktu ke depan secara periodik sehingga sirkuit kuantum selalu dilatih ulang menggunakan informasi pasar paling mutakhir guna menangkap pergeseran struktur korelasi antar aset. Variabel biaya transaksi diperhitungkan secara eksplisit pada setiap tahapan penyeimbangan portofolio (\textit{rebalancing}) guna memberikan estimasi imbal hasil bersih yang lebih realistis dan akurat sesuai dengan kondisi perdagangan sebenarnya di bursa saham.
+
+Metrik kinerja utama yang meliputi \textit{Cumulative Return}, \textit{Sharpe Ratio}, serta \textit{Maximum Drawdown} dihitung melalui modul kalkulasi metrik performa untuk mendapatkan gambaran profil risiko dan imbal hasil model secara utuh. Metrik \textit{Sharpe Ratio} dimanfaatkan sebagai indikator efisiensi portofolio dalam menghasilkan imbal hasil tambahan untuk setiap unit risiko yang diambil oleh investor di tengah fluktuasi harga pasar yang bersifat stokastik. Metrik \textit{Maximum Drawdown} digunakan untuk memberikan wawasan mendalam mengenai potensi kerugian terbesar yang mungkin dialami dari titik puncak kekayaan selama periode investasi tertentu sebagai indikator ketahanan utama dari strategi yang diusulkan. Seluruh hasil perhitungan metrik ini dibandingkan secara langsung dengan performa indeks acuan (\textit{benchmark}) pasar untuk memvalidasi secara empiris keunggulan serta nilai tambah dari penggunaan teknologi komputasi kuantum dalam optimasi portofolio.
+
+Seluruh modul metodologi mulai dari akuisisi data, pemodelan Hamiltonian, hingga optimasi kuantum diintegrasikan ke dalam sebuah rangkaian kerja global yang otomatis dan terstruktur secara sistematis. Setiap transisi data antar modul dipastikan memiliki validitas teoretis yang kuat dan didukung oleh hasil simulasi yang dapat direproduksi secara konsisten melalui repositori kode \texttt{GTQuantumInvest}. Seluruh rangkaian simulasi \textit{backtesting} yang mencakup siklus pembaruan portofolio hingga kalkulasi metrik kinerja akhir disusun ke dalam sebuah algoritma komprehensif yang disajikan pada Algoritma \ref{alg:backtesting_global}. Alur kerja ini dirancang untuk memberikan standar evaluasi yang objektif dan transparan bagi pengembangan algoritma finansial berbasis kuantum di masa depan agar memiliki daya saing yang tinggi pada lingkungan pasar modal yang dinamis.
+
+
+\begin{algorithm}[ht]
+\caption{Prosedur Backtesting Global Portofolio GT-VQE}
+\label{alg:backtesting_global}
+\begin{algorithmic}[1]
+\Procedure{BacktestLoop}{$Data, K, \text{window}=126$}
+    \State $\text{Timeline} \gets \text{GenerateInvestmentDates}(Data)$
+    \For{$t \in \text{Timeline}$}
+        \State $Data_{train} \gets Data[t-\text{window} : t]$
+        \State $\mu, \Sigma, \gamma \gets \text{DataPreprocessing}(Data_{train}, K)$ \Comment{Algoritma \ref{alg:data_prep}}
+        \State $H_{obj}, H_{pen} \gets \text{BuildHamiltonian}(\mu, \Sigma, \gamma, K, \lambda)$ \Comment{Algoritma \ref{alg:hamiltonian_construction}}
+        \State $x_{NE} \gets \text{NashSBR}(\mu, \Sigma, \gamma, K)$ \Comment{Algoritma \ref{alg:nash_sbr}}
+        \State $x^*_t, \theta_t \gets \text{AdaptiveVQE}(H_{obj}, H_{pen}, x_{NE}, D_{max})$ \Comment{Optimasi VQE Adaptif}
+        \State $R_t \gets \text{ExecuteRebalance}(x^*_t, Data[t : t+1])$ \Comment{Eksekusi \textit{Rebalancing}}
+        \State $\text{LogPortfolioHistory}(x^*_t, R_t, \theta_t)$
+    \EndFor
+    \State $\text{Metrics} \gets \text{ComputePerformance}(\text{History})$ \Comment{Kalkulasi Metrik Performa}
+    \State \Return $\text{EquityCurve, Metrics}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

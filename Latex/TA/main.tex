@@ -5,7 +5,7 @@
 \begin{document}
 
 \begin{titlepage}
-    \input{Contents/BagianDepan/"Cover Luar.tex"}
+    \input{Contents/0_BagianDepan/"Cover Luar.tex"}
 \end{titlepage}
 
 \backgroundsetup{
@@ -16,25 +16,18 @@
     contents = {}
 }
 
-\newpage
-\thispagestyle{empty}
-\vfill
-\begin{center}
-    Halaman ini sengaja dikosongkan
-\end{center}
-\vfill
-\clearpage
+\cleardoublepage
 	
 \pagenumbering{roman}
 
 \addcontentsline{toc}{chapter}{Halaman Judul}
-\include{Contents/BagianDepan/Cover_Dalam}
+\include{Contents/0_BagianDepan/Cover_Dalam}
 
 \addcontentsline{toc}{chapter}{Lembar Pengesahan}
-\include{Contents/BagianDepan/Lembar_Pengesahan}
+\include{Contents/0_BagianDepan/Lembar_Pengesahan}
 
 %\addcontentsline{toc}{chapter}{Lembar Orisinalitas}
-%\include{Contents/BagianDepan/Lembar Orisinalitas 1}
+%\include{Contents/0_BagianDepan/Lembar Orisinalitas 1}
 
 \addcontentsline{toc}{chapter}{Abstrak}
 \include{Contents/Abstrak/Abstrak}
@@ -43,38 +36,29 @@
 \include{Contents/Abstrak/Abstract}
 
 \addcontentsline{toc}{chapter}{Kata Pengantar}
-\include{Contents/BagianDepan/Kata_Pengantar}
+\include{Contents/0_BagianDepan/Kata_Pengantar}
 
 \tableofcontents
 \newpage
 \listoffigures
 
-\newpage
-\thispagestyle{empty}
-\vfill
-\begin{center}
-    Halaman ini sengaja dikosongkan
-\end{center}
-\vfill
-\clearpage
-
-\newpage
+\cleardoublepage
 
 \pagenumbering{arabic}
-\include{Contents/Pendahuluan/Bab-1}
-\include{Contents/Daster/Bab-2}
-\include{Contents/Metodologi/Bab-3}
-\include{Contents/Pembahasan/Bab-4}
-\include{Contents/Penutup/Bab-5}
+\include{Contents/1_Pendahuluan/Bab-1}
+\include{Contents/2_Daster/Bab-2}
+\include{Contents/3_Metodologi/Bab-3}
+\include{Contents/4_Pembahasan/Bab-4}
+\include{Contents/5_Penutup/Bab-5}
 
+\cleardoublepage
 \bibliographystyle{apacite}
 \bibliography{Referensi}
 
+\cleardoublepage
 \input{Contents/Lampiran/Lampiran.tex}
 	
-\newpage
-
-\thispagestyle{empty}
+\cleardoublepage
 \include{Contents/BagianBelakang/Biodata_Penulis}
 
 \end{document}

@@ -1,0 +1,16 @@
+\section{Akuisisi dan Prapemrosesan Data Runtun Waktu Saham}
+\label{sec:4_1_akuisisi_data}
+
+Proses akuisisi data dalam penelitian ini difokuskan pada dua instrumen ekuitas utama dalam indeks LQ45, yakni PT Bank Central Asia Tbk. (BBCA.JK) dan PT Telkom Indonesia (Persero) Tbk. (TLKM.JK). Pemilihan kedua aset ini didasarkan pada strategi diversifikasi sektoral yang matang, di mana sektor perbankan dan telekomunikasi memiliki profil risiko serta karakteristik pertumbuhan yang berbeda, sehingga mampu memberikan stabilitas portofolio yang optimal. Rentang waktu yang dipilih mencakup periode Januari 2021 hingga Desember 2023 dengan \textit{timeframe} harian, yang bertujuan untuk menangkap dinamika volatilitas pasar modal Indonesia pada fase pemulihan pasca-pandemi global. Data harga Penutupan (\textit{adjusted closing price}) diekstraksi dari basis data historis yang kemudian disimpan dalam format \textit{file} \texttt{harga\_harian\_saham\_N2.csv} sebagai input primer bagi algoritma optimasi.
+
+Tahapan prapemrosesan dimulai dengan melakukan transformasi data harga saham mentah menjadi nilai imbal hasil logaritmik (\textit{logarithmic return}) guna memastikan stasioneritas runtun waktu. Secara matematis, \textit{log return} harian ($r_{i,t}$) untuk aset $i$ pada waktu $t$ dihitung menggunakan relasi antara harga Penutupan saat ini ($P_{i,t}$) dengan harga pada hari sebelumnya ($P_{i,t-1}$), yaitu:
+\begin{equation}
+    r_{i,t} = \ln \left( \frac{P_{i,t}}{P_{i,t-1}} \right)
+\end{equation}
+Hasil perhitungan ini kemudian digunakan untuk membentuk matriks kovariansi ($\Sigma$) yang merepresentasikan struktur korelasi risiko antar aset. Matriks kovariansi tersebut memegang peranan vital dalam perumusan fungsi biaya Markowitz karena menangkap ketergantungan statistik yang akan dipetakan ke dalam interaksi antar-qubit pada sistem kuantum.
+
+Meskipun \textit{log return} digunakan untuk perhitungan volatilitas dan korelasi, penentuan ekspektasi imbal hasil aset ($\mu_i$) tetap menggunakan imbal hasil sederhana (\textit{simple return}) guna menjaga linearitas ekspektasi portofolio. Hal ini dilakukan karena ekspektasi imbal hasil portofolio merupakan rata-rata tertimbang linier dari imbal hasil sederhana masing-masing aset, suatu properti matematis yang tidak dimiliki oleh \textit{log return}. Dengan menggunakan \textit{simple return}, validitas formulasi Hamiltonian Markowitz tetap terjaga secara teoretis sesuai dengan relasi:
+\begin{equation}
+    \mu_p = \sum_{i=1}^{n} w_i \mu_i
+\end{equation}
+di mana $w_i$ adalah bobot alokasi pada aset $i$. Selain itu, prapemrosesan ini juga menghasilkan parameter \textit{risk aversion} endogen ($\lambda$) yang nilainya bersifat dinamis dan adaptif terhadap kondisi pasar saham pilihan, yang nantinya akan menentukan dominasi relatif antara maksimisasi \textit{return} dan minimisasi risiko dalam proses optimasi.

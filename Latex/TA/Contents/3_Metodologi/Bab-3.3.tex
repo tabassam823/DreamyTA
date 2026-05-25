@@ -1,0 +1,24 @@
+\section{Pemodelan Hamiltonian Portofolio dan Pemetaan Qubit}
+
+Masalah optimasi portofolio biner dirumuskan ke dalam format \textit{Quadratic Unconstrained Binary Optimization} (QUBO) yang mengintegrasikan fungsi biaya objektif dan fungsi penalti kendala ke dalam satu ekspresi matematis tunggal. Komponen objektif dirancang untuk meminimalkan risiko portofolio yang direpresentasikan oleh matriks kovariansi $\Sigma$ sekaligus memaksimalkan ekspektasi imbal hasil $\mu$ yang telah disesuaikan dengan parameter penghindaran risiko $\gamma$. Komponen penalti diterapkan secara ketat guna menegakkan batasan kardinalitas aset $K$ sehingga sistem hanya akan memberikan solusi valid yang memilih tepat sejumlah aset yang diinginkan dari total $N$ aset yang tersedia. Seluruh koefisien dalam matriks kuadratik $Q$ disusun secara sistematis menggunakan logika yang diimplementasikan pada modul strategi investasi guna menjamin bahwa lanskap energi sistem mencerminkan utilitas finansial yang akurat.
+
+Formulasi QUBO ditransformasikan menjadi model Ising melalui pemetaan variabel biner $x_i \in \{0, 1\}$ ke dalam variabel \textit{spin} fisis $z_i \in \{+1, -1\}$ menggunakan substitusi linear $x_i = (1 - z_i)/2$ pada setiap variabel keputusan. Transformasi ini dilakukan untuk menghasilkan parameter bias individu $h_i$ dan parameter interaksi antar aset $J_{ij}$ yang secara kolektif membentuk lanskap energi total dari sistem Hamiltonian yang akan dioptimalkan. Proses konversi ini dieksekusi secara terpisah untuk komponen objektif dan komponen penalti guna memudahkan proses kalibrasi bobot pinalti $\lambda$ terhadap skala energi imbal hasil dan risiko yang dinamis. Modul konstruksi Hamiltonian digunakan untuk menyusun operator Hamiltonian tersebut ke dalam jumlahan produk operator \textit{Pauli-Z} yang dapat dievaluasi secara langsung oleh sirkuit kuantum pada basis komputasi standar.
+
+Setiap aset tunggal yang terdaftar dalam indeks LQ45 dipetakan secara satu-ke-satu ke dalam sebuah qubit di mana status dasar $|1\rangle$ memberikan interpretasi fisis bahwa aset tersebut terpilih masuk ke dalam keranjang portofolio biner. Nilai ekspektasi energi yang terukur dari sirkuit kuantum dipastikan memiliki korespondensi linear terhadap nilai risiko dan imbal hasil riil dari konfigurasi aset yang sedang dianalisis oleh algoritma. Seluruh arsitektur pemetaan ini diintegrasikan agar model optimasi kuantum siap memasuki fase pencarian solusi melalui algoritma variasional yang memanfaatkan landasan teoretis dari mekanika kuantum statistik. Rincian operasional dari pembentukan matriks QUBO hingga menjadi operator Hamiltonian kuantum yang utuh disajikan pada Algoritma \ref{alg:hamiltonian_construction}.
+
+\begin{algorithm}[ht]
+\caption{Konstruksi Hamiltonian Portofolio Ising}
+\label{alg:hamiltonian_construction}
+\begin{algorithmic}[1]
+\Procedure{BuildHamiltonian}{$\mu, \Sigma, \gamma, K, \lambda$}
+    \State $Q_{ii} \gets \frac{\gamma \Sigma_{ii}}{2K^2} - \frac{\mu_i}{K} + \lambda(1 - 2K)$ \Comment{Diagonal QUBO}
+    \State $Q_{ij} \gets \frac{\gamma \Sigma_{ij}}{2K^2} + \lambda$ \Comment{Off-diagonal QUBO}
+    \State $h_i \gets -\frac{1}{2} (Q_{ii} + \sum_{j \neq i} Q_{ij})$ \Comment{Transformasi ke Bias Ising}
+    \State $J_{ij} \gets \frac{1}{4} Q_{ij}$ \Comment{Transformasi ke Interaksi Ising}
+    \State $C \gets \frac{1}{2} \sum Q_{ii} + \frac{1}{4} \sum Q_{ij} + \lambda K^2$ \Comment{Konstanta Energi}
+    \State $H \gets \sum h_i Z_i + \sum J_{ij} Z_i Z_j + C \cdot I$ \Comment{Konstruksi Matriks Hamiltonian}
+    \State \Return $H$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+}

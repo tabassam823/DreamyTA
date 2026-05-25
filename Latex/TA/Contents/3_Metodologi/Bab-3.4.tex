@@ -1,0 +1,33 @@
+\section{Algoritma Nash Sequential Best Response (SBR)}
+
+Interaksi strategis antar aset finansial dimodelkan sebagai sebuah \textit{Exact Potential Game} (EPG) di mana perubahan utilitas individu dari setiap aset selaras dengan perubahan pada fungsi potensial global $\Phi$. Fungsi potensial ini dirancang sebagai representasi dari gabungan ekspektasi imbal hasil kolektif dan mitigasi risiko sistemik yang memiliki korespondensi matematis langsung terhadap nilai energi negatif pada Hamiltonian Ising. Dalam kerangka kerja EPG, setiap titik maksimum lokal dari fungsi potensial merupakan sebuah titik ekuilibrium Nash (\textit{Nash Equilibrium}) yang memberikan konfigurasi portofolio paling stabil secara strategis bagi seluruh aset yang terlibat. Landasan teoretis ini dimanfaatkan untuk menyederhanakan proses pencarian solusi stabil pada sistem multi-aset yang kompleks menjadi sebuah masalah optimasi fungsi potensial tunggal yang lebih efisien secara komputasi.
+
+Algoritma \textit{Sequential Best Response} (SBR) diimplementasikan melalui modul pencarian ekuilibrium Nash untuk mengekstraksi titik ekuilibrium Nash tersebut secara iteratif melalui eksplorasi ruang solusi portofolio. Algoritma ini dirancang agar bekerja dengan melakukan operasi pertukaran (\textit{swap move}) antara satu aset yang telah terpilih di dalam portofolio dengan satu aset yang berada di luar portofolio yang mampu memberikan peningkatan nilai potensial paling signifikan. Proses iterasi dipastikan terus berlanjut hingga sistem mencapai kondisi \textit{steady-state} di mana tidak ditemukan lagi pertukaran aset tunggal yang dapat meningkatkan utilitas kolektif dari keranjang investasi. Solusi bitstring final yang diperoleh dari tahap pencarian Nash ini digunakan sebagai \textit{warm-start} untuk menginisialisasi sirkuit kuantum pada fase \textit{Variational Quantum Eigensolver} guna mempercepat proses konvergensi energi.
+
+Mekanisme pencarian ini diterapkan secara konsisten pada setiap awal periode investasi guna memberikan titik awal pencarian yang memiliki makna finansial yang kuat bagi sistem kuantum. Jembatan integrasi antara teori permainan dan komputasi kuantum dirancang untuk memitigasi risiko terjebak dalam solusi suboptimal serta mengatasi fenomena dataran tandus yang sering menghambat efisiensi algoritma optimasi berbasis gradien. Setiap transisi variabel dari ranah strategi ekonomi ke ranah optimasi kuantum dipastikan memiliki landasan logis yang dapat dipertanggungjawabkan secara saintifik melalui pendekatan ekonofisika sistemik. Rincian prosedural dari algoritma pencarian ekuilibrium Nash menggunakan metode \textit{Sequential Best Response} tersebut disajikan secara rinci pada Algoritma \ref{alg:nash_sbr}.
+
+
+\begin{algorithm}[ht]
+\caption{Pencarian Nash Equilibrium menggunakan Sequential Best Response (SBR)}
+\label{alg:nash_sbr}
+\begin{algorithmic}[1]
+\Procedure{NashSBR}{$\mu, \Sigma, \gamma, N, K, max\_iter$}
+    \State $x \gets \text{InitialSelection}(K)$ \Comment{Inisialisasi $K$ aset pertama}
+    \State $\Phi \gets \frac{1}{K} \sum \mu_i x_i - \frac{\gamma}{2K^2} \sum \Sigma_{ij} x_i x_j$ \Comment{Fungsi Potensial}
+    \For{$iter = 1$ to $max\_iter$}
+        \State $improved \gets \text{False}$
+        \State $S_{in} \gets \{i \mid x_i = 1\}, S_{out} \gets \{j \mid x_j = 0\}$
+        \For{$i \in S_{in}$ and $j \in S_{out}$}
+            \State $x' \gets \text{Swap}(x, i, j)$
+            \State $\Phi' \gets \text{CalculatePotential}(x', \mu, \Sigma, \gamma)$
+            \If{$\Phi' > \Phi$}
+                \State $x \gets x', \Phi \gets \Phi', improved \gets \text{True}$
+                \State \textbf{break} \Comment{Pembaruan Sekuensial}
+            \EndIf
+        \EndFor
+        \If{not $improved$} \textbf{break} \EndIf
+    \EndFor
+    \State \Return $x$ \Comment{Bitstring Ekuilibrium Nash}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
