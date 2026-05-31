@@ -1,9 +1,15 @@
-1. gambar masih terlalu berjarak jauh
-2. pada "Metrik Finansial dan Parameter Risiko" tidak perlu ada perbandingan GT dan NoGT. 
-3. tidak perlu ada angka di belakang koma untuk analisis konvergensi
-4. mungkin analisis konvergensi bisa dibuat perbandingan GT dan NoGT
-5. pada subbab 3.6 terdapat offside kata pada backtest_runner.py
-6. penurunan rumus pada pembahasan
-7. penurunan rumus entropi pada lampiran A
-8. appendices yang masih ghaib
-9. entropi von neumann pada bab 2 dimulai dari entropi shannon saja
+1. penurunan rumus pada pembahasan
+2. penurunan rumus entropi pada lampiran A
+3. entropi von neumann pada bab 2 dimulai dari entropi shannon saja
+4. bab 2 proofread dari belakang aja
+
+# Lampiran
+1. Bukti bahwa log return tidak bisa digunakna pada expected return
+2. bukti bahwa log return bisa digunakan sebagai standar deviasi matriks kovarians [[1_QuantFinance]]
+3. penurunan rumus [[3_Markowitz]]
+4. Penurunan rumus EPG [[4_EPG]]
+5. Transformasi QUBO dalam bentuk matriks dalam [[5_QUBO]]
+6. Bukti gradient descent memenuhi parameter shift rule egitu pula dengan spsa [[7_SPSA]]
+7. matriks uniter
+8. proses matematis ansatz dalam mencari nilai energi terendah
+9. algoritma brute force oracle

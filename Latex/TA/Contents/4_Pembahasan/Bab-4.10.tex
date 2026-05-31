@@ -1,8 +1,23 @@
 \section{Analisis Performa Portofolio Akhir: Perbandingan GT-VQE vs \textit{Benchmark}}
 \label{sec:4_10_performa_akhir}
 
-Evaluasi akhir terhadap kinerja finansial portofolio dilakukan melalui pengujian \textit{backtesting} yang membandingkan strategi hibrida \textit{Game Theory-Quantum VQE} (GT-VQE) dengan beberapa standar acuan (\textit{benchmark}), yakni strategi \textit{Equal Weight} (EW) dan indeks harga saham gabungan (IHSG) sebagai representasi pasar. Berdasarkan ringkasan data pada \textit{file} \texttt{laporan\_backtest\_N2.txt}, terlihat bahwa strategi GT-VQE memberikan performa yang sangat superior dengan mencatatkan total \textit{cumulative return} sebesar 51,34\% selama periode pengujian 2021--2023. Capaian ini jauh melampaui imbal hasil strategi \textit{Equal Weight} yang hanya sebesar 37,29\% dan performa pasar IHSG yang tertahan di angka 19,13\%.
+Keunggulan strategis dari model hibrida \textit{Game Theory}-VQE dievaluasi melalui pengujian \textit{backtesting} yang merefleksikan kondisi pasar modal Indonesia yang dinamis.
 
-Keunggulan model GT-VQE tidak hanya terlihat pada aspek imbal hasil absolut, tetapi juga pada metrik efisiensi risiko yang direpresentasikan oleh \textit{Sharpe Ratio}. Model yang diusulkan mencatatkan \textit{Sharpe Ratio} sebesar 0,7357, mengungguli strategi \textit{Equal Weight} (0,6848) dan indeks pasar (0,5557). Hal ini mengindikasikan bahwa setiap unit risiko yang diambil oleh algoritma hibrida ini mampu menghasilkan imbal hasil tambahan yang lebih tinggi secara signifikan. Selain itu, stabilitas portofolio juga terkonfirmasi melalui nilai \textit{Maximum Drawdown} (MDD) sebesar 15,91\%, yang menunjukkan ketangguhan strategi dalam memitigasi penurunan nilai aset secara ekstrem saat terjadi volatilitas pasar yang tinggi.
+\subsection{Penurunan Rumus Metrik Finansial: Imbal Hasil dan Risiko}
+\label{subsec:4_10_1_rumus}
 
-Temuan paling menarik dari analisis ini adalah fakta bahwa performa strategi GT-VQE identik dengan solusi \textit{Nash Equilibrium} klasik. Hal ini membuktikan bahwa algoritma kuantum telah berhasil mencapai tingkat konvergensi sempurna dalam menemukan solusi strategis terbaik di setiap periode \textit{rebalancing}. Injeksi kecerdasan \textit{Game Theory} melalui mekanisme \textit{risk aversion} endogen memberikan lapisan perlindungan tambahan yang dinamis, di mana algoritma secara otomatis menyesuaikan bobot portofolio berdasarkan intensitas kompetisi dan profil risiko aset. Dengan demikian, integrasi antara teori permainan klasik dan komputasi kuantum terbukti mampu menghasilkan keputusan investasi yang tidak hanya cerdas secara strategis, tetapi juga optimal secara matematis untuk menghadapi dinamika pasar modal modern.
+Performa portofolio diukur secara kuantitatif menggunakan tiga metrik utama: \textit{Cumulative Return}, \textit{Sharpe Ratio}, dan \textit{Maximum Drawdown} (MDD). Imbal hasil kumulatif $R_c$ dihitung melalui akumulasi pertumbuhan nilai aset dari waktu ke waktu, sementara \textit{Sharpe Ratio} ($S$) diturunkan dari rasio antara ekspektasi imbal hasil portofolio $\mu_p$ terhadap volatilitas portofolio $\sigma_p$, setelah dikurangi tingkat bunga bebas risiko $r_f$:
+\begin{equation}
+    S = \frac{\mu_p - r_f}{\sigma_p}
+\end{equation}
+Metrik MDD mengukur penurunan terbesar dari titik puncak ke titik terendah selama periode investasi, yang menjadi indikator ketangguhan strategi dalam menghadapi fase pasar yang terkontraksi.
+
+\subsection{Analisis Sensitivitas terhadap Variasi Kondisi Pasar}
+\label{subsec:4_10_2_sensitivitas}
+
+Analisis sensitivitas dilakukan untuk mengamati stabilitas performa algoritma dalam berbagai rezim pasar (\textit{bullish}, \textit{bearish}, dan \textit{sideways}). Hasil pengujian menunjukkan bahwa strategi GT-VQE memiliki ketahanan yang lebih baik dibandingkan strategi \textit{Equal Weight} (EW) saat terjadi guncangan pasar. Hal ini disebabkan oleh kemampuan algoritma untuk secara dinamis merestrukturisasi bobot aset berdasarkan perubahan profil risiko-return yang dipetakan ke dalam Hamiltonian. Penyesuaian parameter \textit{risk aversion} endogen memungkinkan portofolio untuk melakukan mitigasi kerugian secara proaktif, sehingga menjaga volatilitas kurva ekuitas tetap berada dalam batas toleransi investasi.
+
+\subsection{Simulasi Pertumbuhan Modal Investasi}
+\label{subsec:4_10_3_numerik}
+
+Simulasi pertumbuhan modal investasi awal disajikan secara visual pada Gambar \ref{fig:backtest_curve_vqe_gt} di Lampiran \ref{appendix:additional_results}. Berdasarkan laporan kinerja pada Tabel \ref{tab:metrics_unified}, strategi GT-VQE mencatatkan total imbal hasil kumulatif sebesar 51,34\%, mengungguli IHSG yang hanya tumbuh sebesar 19,13\% pada periode yang sama. Keunggulan kuantitatif ini membuktikan bahwa integrasi kecerdasan strategis \textit{Game Theory} ke dalam sistem komputasi kuantum memberikan nilai tambah yang signifikan dalam meningkatkan efisiensi alokasi modal dan memaksimalkan \textit{risk-adjusted return} bagi investor profesional.

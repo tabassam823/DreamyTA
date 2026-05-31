@@ -1,12 +1,23 @@
 \section{Pemetaan Hamiltonian: Dari EPG ke Model Ising melalui QUBO}
 \label{sec:4_3_pemetaan_hamiltonian}
 
-Transformasi permasalahan optimasi dari domain klasik \textit{Game Theory} menuju komputasi kuantum memerlukan pemetaan fungsi potensial $\Phi(\vec{x})$ ke dalam bentuk operator Hamiltonian. Tahapan ini diawali dengan mengonversi fungsi potensial Markowitz menjadi formulasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Dalam proses ini, kendala anggaran ($\sum x_i = k$) diintegrasikan langsung ke dalam fungsi biaya melalui penambahan suku penalti kuadratik ($P(\vec{x})$). Fungsi energi total $E_{total}(\vec{x})$ yang dihasilkan merupakan penjumlahan antara fungsi tujuan asli dengan suku penalti, yang memastikan bahwa konfigurasi portofolio yang melanggar kendala anggaran akan memiliki energi yang sangat tinggi, sehingga tidak terpilih sebagai solusi optimal.
+Transformasi permasalahan optimasi dari domain klasik menuju komputasi kuantum memerlukan pemetaan fungsi potensial ke dalam bentuk operator fisis.
 
-Langkah krusial berikutnya adalah melakukan transformasi variabel dari domain biner $x_i \in \{0, 1\}$ menuju representasi spin Ising $z_i \in \{1, -1\}$. Transformasi ini dilakukan melalui substitusi variabel biner menggunakan relasi $x_i = \frac{1 - z_i}{2}$, yang merupakan jembatan matematis antara bit klasik dengan spin Pauli-Z. Ekspansi matematis terhadap fungsi energi total menghasilkan struktur Hamiltonian Ising yang terdiri dari suku linear dan suku kuadratik sebagai berikut:
+\subsection{Konstruksi QUBO dan Transformasi Variabel Ising}
+\label{subsec:4_3_1_rumus}
+
+Tahapan ini diawali dengan mengonversi fungsi potensial Markowitz menjadi formulasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Dalam proses ini, kendala anggaran ($\sum x_i = k$) diintegrasikan melalui penambahan suku penalti kuadratik $P(\vec{x}) = A(\sum x_i - k)^2$. Langkah krusial berikutnya adalah melakukan transformasi variabel dari domain biner $x_i \in \{0, 1\}$ menuju representasi spin Ising $z_i \in \{1, -1\}$ menggunakan relasi $x_i = \frac{1 - z_i}{2}$. Ekspansi matematis terhadap fungsi energi total menghasilkan struktur Hamiltonian Ising:
 \begin{equation}
     \hat{\mathcal{H}} = \sum_{i=1}^N h_i \hat{Z}_i + \sum_{i \neq j} J_{ij} \hat{Z}_i \hat{Z}_j + C
 \end{equation}
-di mana $\hat{Z}_i$ adalah operator Pauli-Z yang bekerja pada qubit ke-$i$, $h_i$ merepresentasikan bias medan magnet lokal, $J_{ij}$ adalah kekuatan interaksi antar spin, dan $C$ merupakan konstanta pergeseran energi (\textit{energy shift}).
+di mana $\hat{Z}_i$ adalah operator Pauli-Z, $h_i$ merepresentasikan bias medan magnet lokal, dan $J_{ij}$ adalah kekuatan interaksi antar spin. Konstanta $C$ merupakan pergeseran energi yang tidak mempengaruhi letak \textit{ground state}.
 
-Berdasarkan ekstraksi data pada \textit{file} \texttt{bias\_h\_total\_N2.csv} dan \texttt{interaksi\_J\_total\_N2.csv}, koefisien Hamiltonian tersebut memiliki interpretasi fisis yang mendalam terkait dinamika aset. Koefisien $h_i$ ditentukan oleh kombinasi antara imbal hasil ekspektasi dan varians individu aset, yang berfungsi sebagai medan eksternal yang cenderung menyearahkan spin qubit ke arah tertentu. Sementara itu, koefisien $J_{ij}$ diturunkan dari matriks kovariansi $\sigma_{ij}$ yang merepresentasikan korelasi risiko antar aset sebagai kekuatan \textit{entanglement} fisis. Melalui pemetaan ini, permasalahan ekonomi telah sepenuhnya diwujudkan sebagai sistem fisik kuantum, di mana solusi portofolio paling optimal secara matematis berkorespondensi dengan konfigurasi spin yang menghasilkan nilai ekspektasi energi terendah (\textit{ground state}).
+\subsection{Analisis Sensitivitas Koefisien Penalti terhadap Tingkat Energi}
+\label{subsec:4_3_2_sensitivitas}
+
+Besarnya koefisien penalti ($A$) sangat menentukan efektivitas pemisahan tingkat energi (\textit{energy gap}) antara solusi valid dan solusi terlarang. Analisis sensitivitas menunjukkan bahwa nilai $A$ yang terlalu kecil akan menyebabkan sistem gagal memenuhi kendala anggaran karena energi dari konfigurasi yang melanggar aturan menjadi terlalu rendah sehingga berpotensi terpilih sebagai solusi semu. Sebaliknya, nilai $A$ yang terlalu besar secara ekstrem dapat menutupi struktur energi dari fungsi objektif Markowitz (imbal hasil dan varians), yang menyebabkan lanskap energi menjadi sangat curam dan menyulitkan proses optimasi SPSA. Oleh karena itu, penetapan nilai $A$ dalam simulasi ini disesuaikan untuk memastikan bahwa \textit{ground state} Hamiltonian benar-benar bersesuaian dengan portofolio yang memenuhi syarat $\sum x_i = k$.
+
+\subsection{Ekstraksi Parameter Fisis Hamiltonian dari Data Pasar}
+\label{subsec:4_3_3_numerik}
+
+Berdasarkan ekstraksi data pada Tabel \ref{tab:bias_h} dan Tabel \ref{tab:interaksi_J} di Lampiran \ref{appendix:numerical_data}, koefisien fisis Hamiltonian dikalkulasi secara dinamis mengikuti fluktuasi pasar. Sebagai contoh pada jendela Januari 2021, koefisien bias untuk BBCA ($h_1$) mencatatkan nilai positif yang signifikan akibat kombinasi imbal hasil yang relatif rendah terhadap variansnya pada periode tersebut, sementara koefisien interaksi $J_{12}$ mencerminkan korelasi risiko antar aset. Integrasi parameter fisis ini secara empiris mewujudkan masalah ekonomi ke dalam sistem fisik kuantum, di mana portofolio optimal berkorespondensi dengan konfigurasi spin yang meminimalkan total energi sistem (lihat Tabel \ref{tab:params} untuk rincian parameter penalti).

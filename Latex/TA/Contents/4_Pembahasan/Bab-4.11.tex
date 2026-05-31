@@ -1,8 +1,23 @@
 \section{Dinamika \textit{Rebalancing} Jendela Waktu Ekstrem (\textit{Window Analysis})}
 \label{sec:4_11_window_analysis}
 
-Analisis mikroskopis terhadap jendela waktu \textit{rebalancing} memberikan pemahaman yang mendalam mengenai kelincahan (\textit{agility}) algoritma GT-VQE dalam merespons anomali pasar. Salah satu fenomena yang paling menarik teramati pada transisi antara jendela waktu Februari 2021 menuju Maret 2021. Berdasarkan visualisasi pada \textit{file} \texttt{2021-02-02\_window.png}, algoritma menetapkan posisi portofolio murni pada aset BBCA.JK (status $|10\rangle$) akibat profil imbal hasil yang lebih stabil dibandingkan TLKM.JK. Namun, seiring dengan masuknya data pasar terbaru pada periode Maret 2021 (\texttt{2021-03-04\_window.png}), terjadi pergeseran drastis pada parameter input yang secara langsung merestrukturisasi lanskap energi Hamiltonian sistem.
+Analisis mikroskopis terhadap jendela waktu \textit{rebalancing} dilakukan untuk memahami mekanisme respon algoritma terhadap anomali pasar.
 
-Perubahan input empiris tersebut memicu transformasi radikal pada medan magnet lokal ($h_i$) dan interaksi keterikatan ($J_{ij}$), yang kemudian direspon oleh sirkuit kuantum melalui rotasi parameter sudut $\theta$ secara signifikan. Dalam waktu singkat, amplitudo probabilitas kuantum mengalami pergeseran dominasi dari status $|10\rangle$ menuju status $|01\rangle$. Secara finansial, ini berarti algoritma mengeksekusi strategi \textit{switching} total dengan mengalihkan seluruh bobot investasi dari sektor perbankan ke sektor telekomunikasi. Kemampuan sirkuit untuk melakukan penyesuaian sudut rotasi secara presisi membuktikan bahwa model hibrida ini memiliki sensitivitas yang tinggi terhadap perubahan sentimen dan risiko pasar yang dinamis.
+\subsection{Relasi Perubahan Hamiltonian terhadap Fluktuasi Pasar}
+\label{subsec:4_11_1_rumus}
 
-Dinamika \textit{rebalancing} ini menunjukkan bahwa integrasi \textit{Game Theory} memberikan lapisan kecerdasan situasional yang sangat adaptif. Setiap keputusan peralihan aset didasari oleh pencarian titik kesetimbangan baru yang merespons perubahan volatilitas secara \textit{real-time}. Penggunaan sirkuit kuantum sebagai mesin inferensi memastikan bahwa transisi portofolio tersebut dilakukan melalui jalur energi paling efisien, yang secara empiris terbukti mampu melindungi nilai portofolio dari potensi kerugian akibat bertahannya aset pada posisi yang sudah tidak lagi optimal. Dengan demikian, analisis jendela waktu ini mempertegas posisi algoritma GT-VQE sebagai solusi manajemen portofolio yang tidak hanya tangguh secara statistik, tetapi juga lincah dalam mengeksekusi keputusan strategis di tengah ketidakpastian pasar modal.
+Setiap perubahan pada runtun waktu harga saham secara langsung merubah profil imbal hasil ekspektasi ($\mu$) dan matriks kovariansi ($\Sigma$) yang masuk ke sistem. Secara matematis, fluktuasi data pasar ini memicu pergeseran gradien pada lanskap energi Hamiltonian:
+\begin{equation}
+    \delta \hat{\mathcal{H}} = \sum_{i} \delta h_i \hat{Z}_i + \sum_{i,j} \delta J_{ij} \hat{Z}_i \hat{Z}_j
+\end{equation}
+Respon sirkuit kuantum terhadap $\delta \hat{\mathcal{H}}$ direpresentasikan melalui pembaruan parameter sudut $\theta$ yang menggeser amplitudo probabilitas dari satu status basis ke status basis lainnya guna meminimalkan energi baru sistem.
+
+\subsection{Analisis Sensitivitas Kecepatan Respon Sirkuit}
+\label{subsec:4_11_2_sensitivitas}
+
+Analisis sensitivitas terhadap kecepatan respon (\textit{agility}) menunjukkan bahwa algoritma GT-VQE mampu melakukan penyesuaian sudut $\theta$ secara radikal dalam waktu iterasi yang singkat saat terjadi lonjakan volatilitas. Kemampuan sirkuit kuantum untuk melakukan rotasi parameter secara presisi memungkinkan portofolio untuk mengeksekusi strategi \textit{switching} total dengan efisien. Tanpa adanya integrasi keterikatan kuantum yang fleksibel, proses penyeimbangan ulang portofolio biner cenderung kaku dan lambat dalam menanggapi pergeseran profil risiko yang terjadi secara mendadak di pasar modal.
+
+\subsection{Analisis Kuantitatif Pergeseran Bobot Jendela Kritis}
+\label{subsec:4_11_3_numerik}
+
+Studi kasus pada jendela kritis Februari--Maret 2021 (merujuk pada Gambar \ref{fig:window_2021_02_02} dan Gambar \ref{fig:window_2021_03_04} di Lampiran \ref{appendix:window_analysis}) menunjukkan dinamika \textit{rebalancing} yang ekstrem. Pada Februari 2021, sirkuit mengalokasikan bobot penuh pada aset BBCA. Namun, masuknya data baru pada Maret 2021 yang menunjukkan lonjakan risiko BBCA relatif terhadap TLKM memicu sirkuit untuk memutar sudut rotasinya sebesar $\approx \pi$ rad. Hal ini mengakibatkan pergeseran probabilitas dominan dari status $|10\rangle$ menuju $|01\rangle$ secara instan. Agilitas ini membuktikan bahwa model hibrida \textit{Game-Quantum} memiliki kecerdasan situasional yang sangat responsif dalam melindungi nilai portofolio dari guncangan pasar.

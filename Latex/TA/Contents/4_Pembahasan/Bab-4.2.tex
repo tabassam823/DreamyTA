@@ -1,16 +1,27 @@
 \section{Formulasi \textit{Exact Potential Game} (EPG) dan Pencarian \textit{Nash Equilibrium}}
 \label{sec:4_2_epg_nash}
 
-Implementasi kerangka kerja \textit{Game Theory} dalam penelitian ini dimulai dengan memetakan permasalahan optimasi Markowitz ke dalam domain \textit{Exact Potential Game} (EPG). Dalam sistem ini, setiap aset dianggap sebagai agen strategis yang berusaha memaksimalkan fungsi utilitas individunya melalui pemilihan status kepemilikan biner $x_i \in \{0, 1\}$. Berdasarkan teori yang dikembangkan oleh Monderer dan Shapley, sebuah permainan dikategorikan sebagai EPG apabila terdapat sebuah fungsi potensial skalar $\Phi(\vec{x})$ sedemikian rupa sehingga selisih utilitas individu $\Delta u_i$ akibat perubahan strategi satu agen secara eksak sama dengan selisih nilai fungsi potensial tersebut. Konstruksi fungsi potensial untuk portofolio Markowitz didefinisikan sebagai berikut:
+Implementasi kerangka kerja \textit{Game Theory} dalam penelitian ini dimulai dengan memetakan permasalahan optimasi Markowitz ke dalam domain \textit{Exact Potential Game} (EPG). Dalam sistem ini, setiap aset dianggap sebagai agen strategis yang berusaha memaksimalkan fungsi utilitas individunya melalui pemilihan status kepemilikan biner $x_i \in \{0, 1\}$.
+
+\subsection{Penurunan Matematis Fungsi Potensial Monderer-Shapley}
+\label{subsec:4_2_1_rumus}
+
+Berdasarkan teori yang dikembangkan oleh Monderer dan Shapley, sebuah permainan dikategorikan sebagai EPG apabila terdapat sebuah fungsi potensial skalar $\Phi(\vec{x})$ sedemikian rupa sehingga selisih utilitas individu $\Delta u_i$ akibat perubahan strategi satu agen secara eksak sama dengan selisih nilai fungsi potensial tersebut. Konstruksi fungsi potensial untuk portofolio Markowitz didefinisikan sebagai berikut:
 \begin{equation}
-    \Phi(\vec{x}) = \sum_{l=1}^N \mu_l x_l - \frac{\lambda}{2} \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j
+    \Phi(\vec{x}) = \sum_{l=1}^N \mu_l x_l - \frac{\gamma}{2} \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j
 \end{equation}
-di mana $\mu_l$ adalah imbal hasil ekspektasi, $\sigma_{ij}$ adalah kovarians antar aset, dan $\lambda$ adalah parameter \textit{risk aversion}.
-
-Eksistensi fungsi potensial $\Phi(\vec{x})$ memberikan jaminan matematis terhadap keberadaan setidaknya satu \textit{Pure Strategy Nash Equilibrium} (PSNE), yang merupakan titik di mana tidak ada agen yang dapat meningkatkan utilitasnya dengan mengubah strateginya secara unilateral. Untuk menemukan titik equilibrium tersebut secara numerik, penelitian ini menggunakan algoritma \textit{Stochastic Best Response} (SBR). Dinamika pencarian equilibrium ini tercatat dalam \textit{file} \texttt{riwayat\_nash\_sbr\_N2.csv}, yang menunjukkan transisi strategi agen dari kondisi awal hingga mencapai konvergensi stabil. Sebagai contoh, pada jendela waktu tertentu, sistem dapat mengalami transisi status dari $|10\rangle$ menuju $|01\rangle$ apabila utilitas marginal yang dihasilkan oleh aset kedua lebih besar daripada aset pertama setelah mempertimbangkan faktor risiko dan korelasi pasar.
-
-Pembuktian ekuivalensi antara selisih utilitas individu dengan selisih fungsi potensial dapat ditunjukkan melalui derivasi perubahan status agen ke-$i$ dari $x_i$ menjadi $x_i^\prime$:
+di mana $\mu_l$ adalah imbal hasil ekspektasi, $\sigma_{ij}$ adalah kovarians antar aset, dan $\gamma$ adalah parameter \textit{risk aversion}. Pembuktian ekuivalensi antara selisih utilitas individu dengan selisih fungsi potensial dapat ditunjukkan melalui derivasi perubahan status agen ke-$i$ dari $x_i$ menjadi $x_i^\prime$:
 \begin{equation}
     \Delta \Phi = \Phi(x_i, \vec{x}_{-i}) - \Phi(x_i^{\prime}, \vec{x}_{-i}) = u_i(x_i, \vec{x}_{-i}) - u_i(x_i^{\prime}, \vec{x}_{-i})
 \end{equation}
-Hubungan pada Persamaan (4.9) memastikan bahwa setiap langkah peningkatan utilitas individu yang dilakukan oleh agen secara otomatis akan menurunkan total energi potensial sistem. Oleh karena itu, pencarian PSNE melalui mekanisme SBR bukan hanya sekadar proses heuristik, melainkan sebuah metode yang konsisten secara matematis untuk menemukan konfigurasi portofolio yang paling stabil secara strategis. Hasil akhir dari tahapan ini memberikan solusi klasik definitif yang akan berperan krusial dalam memandu proses optimasi kuantum pada tahapan selanjutnya.
+Hubungan pada Persamaan (4.15) memastikan bahwa setiap langkah peningkatan utilitas individu yang dilakukan oleh agen secara otomatis akan menurunkan total energi potensial sistem, yang menjamin konvergensi menuju titik ekuilibrium.
+
+\subsection{Analisis Sensitivitas Parameter \textit{Risk Aversion} terhadap Ekuilibrium}
+\label{subsec:4_2_2_sensitivitas}
+
+Parameter \textit{risk aversion} ($\gamma$) memegang peranan vital dalam menentukan letak \textit{Pure Strategy Nash Equilibrium} (PSNE) dalam ruang solusi. Analisis sensitivitas menunjukkan bahwa peningkatan nilai $\gamma$ akan memperbesar penalti pada suku interaksi kuadratik ($\sigma_{ij}$), yang secara fisis mendorong agen untuk memilih strategi yang meminimalkan korelasi risiko sistemik. Pada kondisi $\gamma$ rendah, sistem cenderung bersifat agresif dengan memprioritaskan aset berimbal hasil tinggi meskipun memiliki volatilitas besar. Sebaliknya, pada nilai $\gamma$ yang tinggi, titik ekuilibrium bergeser menuju kombinasi aset yang lebih stabil atau diversifikasi yang lebih luas guna menghindari konsentrasi risiko. Dinamika ini membuktikan bahwa stabilitas strategis dalam model EPG sangat bergantung pada preferensi risiko yang ditetapkan oleh investor.
+
+\subsection{Implementasi Numerik Pencarian \textit{Nash Equilibrium} melalui SBR}
+\label{subsec:4_2_3_numerik}
+
+Pencarian titik ekuilibrium dilakukan secara numerik menggunakan algoritma \textit{Stochastic Best Response} (SBR). Dinamika pencarian ini tercatat secara kronologis pada Tabel \ref{tab:nash_history} di Lampiran \ref{appendix:numerical_data}. Sebagai ilustrasi pada jendela waktu Maret 2021, proses diawali dengan status inisial $|10\rangle$ (aset BBCA terpilih). Namun, evaluasi terhadap matriks \textit{payoff} menunjukkan bahwa transisi menuju status $|01\rangle$ (aset TLKM terpilih) memberikan peningkatan utilitas marginal yang lebih besar bagi sistem setelah mempertimbangkan kovariansi pada periode tersebut. Keberhasilan algoritma SBR dalam mencapai konvergensi PSNE ini memberikan solusi klasik definitif yang akan berperan sebagai titik tolak (\textit{warm-start}) bagi sirkuit kuantum pada tahapan berikutnya.

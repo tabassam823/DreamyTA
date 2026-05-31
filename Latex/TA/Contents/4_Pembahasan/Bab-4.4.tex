@@ -1,8 +1,23 @@
 \section{Inisialisasi Kuantum: Arsitektur Ansatz dan Strategi \textit{Warm-Start}}
 \label{sec:4_4_ansatz_warmstart}
 
-Tahapan inisialisasi memegang peranan krusial dalam menentukan efisiensi konvergensi algoritma kuantum variasional, terutama pada lanskap energi yang kompleks. Dalam penelitian ini, strategi \textit{Warm-Start} diterapkan dengan menginjeksikan solusi \textit{Nash Equilibrium} (PSNE) yang telah diperoleh pada tahapan klasik (Subbab 4.2) langsung ke dalam sirkuit kuantum. Secara teknis, bitstring solusi klasik dipetakan menjadi status awal pasti melalui pengaturan sudut rotasi absolut pada gerbang awal, di mana status $|1\rangle$ direpresentasikan oleh sudut $\pi$ dan status $|0\rangle$ oleh sudut $0$. Injeksi kecerdasan strategis ini bertujuan untuk menempatkan sirkuit kuantum pada posisi yang dekat dengan solusi global sebelum proses optimasi dimulai, guna menghindari permasalahan \textit{barren plateaus} yang sering muncul pada inisialisasi acak.
+Efisiensi algoritma kuantum variasional sangat bergantung pada kualitas inisialisasi status awal sebelum proses optimasi dilakukan.
 
-Arsitektur sirkuit yang digunakan berbasis pada \textit{Hardware-Efficient Ansatz} yang dirancang untuk meminimalkan jumlah gerbang kuantum guna menjaga koherensi pada perangkat NISQ. Berdasarkan visualisasi pada gambar \texttt{rangkaian\_kuantum\_depth2\_N2.png}, sirkuit ini tersusun atas gerbang rotasi parameter tunggal ($R_y$ dan $R_z$) yang berfungsi sebagai penyusun superposisi untuk mengeksplorasi ruang probabilitas portofolio secara paralel. Gerbang $R_y(\theta)$ memberikan kebebasan pada sirkuit untuk menggeser amplitudo probabilitas antar aset, sementara gerbang $R_z$ menambahkan fase kuantum yang memperkaya representasi status sirkuit dalam ruang Hilbert.
+\subsection{Representasi Matematis Status Sirkuit dan \textit{Ansatz}}
+\label{subsec:4_4_1_rumus}
 
-Selain gerbang rotasi, integrasi gerbang keterikatan (\textit{entanglement}) seperti $CZ$ atau $CNOT$ menjadi komponen vital dalam menangkap korelasi fitur risiko antar aset. Gerbang-gerbang ini menciptakan jalinan fisis antar qubit yang merepresentasikan interaksi $J_{ij}$ pada Hamiltonian, sehingga sistem kuantum dapat mempertimbangkan dampak pemilihan satu aset terhadap aset lainnya secara simultan. Dengan menggabungkan solusi \textit{Nash Equilibrium} sebagai titik tolak (\textit{starting point}) dan struktur sirkuit yang efisien, Metodologi ini berhasil mensinergikan kekuatan intuisi strategis klasik dengan fleksibilitas eksplorasi kuantum untuk menavigasi ruang pencarian portofolio yang dinamis.
+Arsitektur yang digunakan berbasis pada \textit{Hardware-Efficient Ansatz} yang dirancang untuk meminimalkan \textit{gate depth}. Status kuantum $|\psi(\theta)\rangle$ dibentuk melalui aplikasi gerbang rotasi tunggal $R_y(\theta)$ dan $R_z(\theta)$ yang diikuti oleh gerbang keterikatan (CZ atau CNOT). Secara matematis, status akhir sirkuit didefinisikan sebagai:
+\begin{equation}
+    |\psi(\vec{\theta})\rangle = \prod_{l=1}^L \left( U_{ent} \prod_{i=1}^N R_{y}(\theta_{i,l}) R_{z}(\theta_{i,l}) \right) |0\rangle^{\otimes N}
+\end{equation}
+di mana $L$ adalah jumlah lapisan (\textit{depth}). Gerbang rotasi memberikan fleksibilitas untuk mengeksplorasi seluruh ruang Hilbert, sementara gerbang keterikatan $U_{ent}$ menciptakan dependensi fisis antar qubit yang merepresentasikan korelasi risiko antar aset.
+
+\subsection{Analisis Sensitivitas Inisialisasi: \textit{Random} vs \textit{Warm-Start}}
+\label{subsec:4_4_2_sensitivitas}
+
+Kecepatan konvergensi VQE diuji dengan membandingkan inisialisasi parameter $\theta$ secara acak (\textit{random start}) terhadap strategi \textit{warm-start} menggunakan solusi \textit{Nash Equilibrium}. Analisis sensitivitas menunjukkan bahwa inisialisasi acak seringkali membuat sirkuit terjebak pada daerah \textit{barren plateaus}, di mana gradien fungsi energi mendekati nol. Sebaliknya, penggunaan \textit{warm-start} secara konsisten menempatkan sistem pada lembah energi yang dekat dengan \textit{ground state} sejak iterasi awal. Hal ini terbukti menurunkan jumlah pemanggilan sirkuit (\textit{circuit evaluations}) yang diperlukan untuk mencapai ambang batas konvergensi, sehingga meningkatkan efisiensi komputasi secara keseluruhan.
+
+\subsection{Implementasi Sudut Rotasi Awal dari Solusi PSNE}
+\label{subsec:4_4_3_numerik}
+
+Secara teknis, solusi PSNE yang diperoleh pada Subbab 4.2 diinjeksikan ke dalam sirkuit melalui pengaturan sudut rotasi absolut. Sebagai contoh, jika bitstring PSNE adalah $|10\rangle$, maka qubit pertama diberikan rotasi $\pi$ rad (status $|1\rangle$) dan qubit kedua diberikan rotasi 0 rad (status $|0\rangle$). Struktur sirkuit ini dapat dilihat pada Gambar \ref{fig:circuit_diagram} di Lampiran \ref{appendix:additional_results}. Injeksi bitstring strategis ini memberikan arahan logis bagi sirkuit untuk memulai pencarian solusi optimal dari titik yang sudah stabil secara ekonomi, sebelum kemudian disempurnakan lebih lanjut melalui algoritma variasional.

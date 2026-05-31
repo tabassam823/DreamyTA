@@ -4,137 +4,65 @@
     "type": "split",
     "children": [
       {
-        "id": "82ed0f4243c51cc3",
+        "id": "0c11afe2a2670673",
         "type": "tabs",
         "children": [
           {
-            "id": "c9ca28d8df5545e0",
+            "id": "5e4481282e28d016",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Struktur/2_1_teks.md",
+                "file": "Latex/TA/Struktur/4_Rencana_Revisi.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2_1_teks"
+              "title": "4_Rencana_Revisi"
             }
           },
           {
-            "id": "baaf5f7aed7f9780",
+            "id": "2698cd6016a4a789",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Latex/TA/Struktur/2_2_teks.md",
-                "mode": "source",
-                "source": false
+                "file": "Latex/TA/MD_File/Main/7_GD_iii.png"
               },
-              "icon": "lucide-file",
-              "title": "2_2_teks"
+              "icon": "lucide-image",
+              "title": "7_GD_iii"
             }
           },
           {
-            "id": "a773bbde2c6c6c80",
+            "id": "146806a6d3869904",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Struktur/2_3_teks.md",
+                "file": "Latex/TA/Struktur/lampiran.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2_3_teks"
+              "title": "lampiran"
             }
           },
           {
-            "id": "c0e4eea88e81fcf0",
+            "id": "54cd9095d9fc9a0c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Struktur/2_4_teks.md",
+                "file": "Temporary.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2_4_teks"
-            }
-          },
-          {
-            "id": "9158c1fa66106a25",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/Struktur/2_5_teks.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2_5_teks"
-            }
-          },
-          {
-            "id": "a56013f04260ad22",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/Struktur/2_6_teks.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2_6_teks"
-            }
-          },
-          {
-            "id": "04d6c09c754d76a6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/Struktur/2_7_teks.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2_7_teks"
-            }
-          },
-          {
-            "id": "b355a85c526fa3ba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/Struktur/2_8_teks.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2_8_teks"
-            }
-          },
-          {
-            "id": "4cb197156ed166ff",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/MD_File/Main/3_Markowitz.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "3_Markowitz"
+              "title": "Temporary"
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -167,7 +95,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "penurunan",
+                "query": "dicke",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -201,13 +129,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/MD_File/Main/3_Markowitz.md",
+                "file": "Latex/TA/MD_File/Main/7_GD_iii.png",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 3_Markowitz"
+              "title": "Outline of 7_GD_iii"
             }
           }
         ]
@@ -332,54 +260,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "4cb197156ed166ff",
+  "active": "2698cd6016a4a789",
   "lastOpenFiles": [
-    "Latex/TA/Filtered_Paper/Ising_pdf/Two_Dimensional_Ising_Model_as_a_Soluble_Problem.pdf",
-    "Latex/TA/MD_File/Main/4_EPG.md",
+    "Latex/TA/MD_File/Main/7_GD_ii.png",
+    "Latex/TA/MD_File/Main/7_GD_iii.png",
     "Latex/TA/MD_File/Main/9_Ansatz_i.png",
-    "Latex/TA/MD_File/Main/1_QuantFinance.md",
-    "Latex/TA/Struktur/4_1.md",
-    "notes/Main/1_QuantFinance.md",
-    "Latex/TA/MD_File/Main/DS/DS_Variational_Principle.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_Variational_Principle.md",
-    "Latex/TA/MD_File/Main/DS/DS_SPSA.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_SPSA.md",
-    "Latex/TA/MD_File/Main/DS/DS_Haar.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_Haar.md",
-    "Latex/TA/MD_File/Main/DS/DS_HIsing.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_HIsing.md",
-    "Latex/TA/MD_File/Main/DS/DS_Gate.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_Gate.md",
-    "Latex/TA/MD_File/Main/DS/DS_Distribution_SPSA.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_Distribution_SPSA.md",
-    "Latex/TA/MD_File/Main/DS/DS_Distribution.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_Distribution.md",
-    "Latex/TA/MD_File/Main/DS/DS_DepthGD.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_DepthGD.md",
-    "Latex/TA/MD_File/Main/DS/DS_Dekomposisi.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_Dekomposisi.md",
-    "Latex/TA/MD_File/Main/DS/DS_Biunitary_PSR.pdf",
-    "Latex/TA/MD_File/Main/DS/DS_Biunitary_PSR.md",
-    "Latex/TA/MD_File/Main/DS/DS_BarrenPlateaus.md",
-    "Latex/TA/MD_File/Main/DS/DS_Ansatz.md",
-    "Latex/TA/MD_File/Main/9_Ansatz_ii.png",
     "Latex/TA/MD_File/Main/8_SPSA_ii.png",
     "Latex/TA/MD_File/Main/8_SPSA_i.png",
-    "Latex/TA/MD_File/Main/8_Ansatz.md",
-    "Latex/TA/MD_File/Main/7_SPSA.md",
-    "Latex/TA/MD_File/Main/7_GD_iii.png",
-    "Latex/TA/MD_File/Main/7_GD_ii.png",
-    "Latex/TA/MD_File/Main/7_GD_i.png",
+    "Latex/TA/MD_File/Main/5_EPG_ii.png",
     "Latex/TA/MD_File/Main/6_QUBO_ii.png",
     "Latex/TA/MD_File/Main/6_QUBO_i.png",
-    "Latex/TA/MD_File/Main/6_Gradient_Descent.md",
-    "Latex/TA/MD_File/Main/5_QUBO_rev.md",
     "Latex/TA/MD_File/Main/5_QUBO.md",
-    "Latex/TA/MD_File/Main/5_EPG_ii.png",
+    "Latex/TA/MD_File/Main/9_Entropi.md",
+    "Latex/TA/MD_File/Main/10_BellDickeState.md",
+    "Latex/TA/MD_File/Main/10_Entropi_i.jpg",
+    "Latex/TA/Struktur/4_Rencana_Revisi.md",
+    "Latex/TA/Struktur/lampiran.md",
+    "Temporary.md",
+    "Latex/TA/Struktur/4.md",
+    "Latex/TA/Filtered_Paper/New_Paper/Family_of_quantum_mutual_information_in_multiparty_quantum_systems.md",
+    "Latex/TA/Filtered_Paper/New_Paper/Multiclass_portfolio_optimization_via_variational_quantum_Eigensolver_with_Dicke_state_ansatz.md",
+    "Latex/TA/MD_File/Main/8_Ansatz.md",
+    "Latex/TA/MD_File/Main/10_Entropi_ii.jpg",
+    "Latex/TA/Contents/Lampiran/Lampiran-G.tex",
+    "Latex/TA/Contents/Lampiran/Lampiran-F.tex",
+    "Latex/TA/Contents/Lampiran/Lampiran-E.tex",
+    "Latex/TA/Struktur/3_Rencana_Revisi.md",
+    "Latex/TA/MD_File/Main/5_QUBO_rev.md",
+    "Latex/TA/MD_File/Main/4_EPG.md",
     "Latex/TA/MD_File/Main/3_Markowitz.md",
     "Latex/TA/MD_File/Main/2_Risk_Avrsion.md",
     "Latex/TA/MD_File/Main/1_QuantFinance 1.md",
-    "Latex/TA/Filtered_Paper/VQE/VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance.md",
+    "Latex/TA/MD_File/Main/1_QuantFinance.md",
+    "Latex/TA/Contents/Lampiran/Lampiran-D.tex",
+    "Latex/TA/Contents/Abstrak/Abstrak.tex",
+    "Latex/TA/Contents/Abstrak/Abstrak.aux",
+    "Latex/TA/Contents/Abstrak/Abstract.tex",
+    "Latex/TA/Contents/Abstrak/Abstract.aux",
+    "Latex/TA/Contents/Abstrak",
+    "Latex/TA/Contents/i_Abstrak/Abstrak.tex",
+    "Latex/TA/Contents/3_Metodologi/metodologi.md",
+    "Latex/TA/Contents/3_Metodologi/algoritma.md",
+    "Latex/TA/Struktur/3_1.md",
+    "Latex/TA/MD_File/DS/DS_Variational_Principle.md",
+    "Latex/TA/MD_File/DS/DS_SPSA.md",
+    "Latex/TA/MD_File/DS/DS_Haar.md",
+    "Latex/TA/MD_File/DS/DS_HIsing.md",
+    "Latex/TA/MD_File/DS/DS_Gate.md",
+    "Latex/TA/GTQuantumInvest/Hasil_N4_NoGT/Analisis_Window_N4/2023-12-04_window.png",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

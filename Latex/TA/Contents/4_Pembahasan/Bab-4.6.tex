@@ -1,8 +1,23 @@
 \section{Evolusi Entropi \textit{Von Neumann}: Eksplorasi Kuantum hingga Keruntuhan \textit{State}}
 \label{sec:4_6_entropi_vqe}
 
-Dinamika internal sirkuit kuantum selama proses optimasi dapat dipahami lebih mendalam melalui analisis evolusi entropi \textit{Von Neumann}. Entropi ini merepresentasikan derajat ketidakpastian atau pencampuran informasi dalam sistem kuantum; nilai yang tinggi menunjukkan bahwa sirkuit berada dalam status superposisi atau \textit{entanglement} yang kuat, sementara nilai nol menunjukkan bahwa sirkuit telah mengerucut menjadi status murni (\textit{pure state}). Berdasarkan riwayat entropi yang tercatat dalam log \texttt{best\_ent\_hist}, teramati pola transisi yang konsisten dari nilai entropi yang tinggi di awal iterasi menuju nilai yang rendah atau nol di akhir proses optimasi.
+Dinamika internal sirkuit kuantum dapat ditinjau secara mendalam melalui profil evolusi entropi sistem yang mencerminkan fase transisi informasi.
 
-Fenomena entropi tinggi pada tahap awal iterasi merupakan bukti empiris bahwa sirkuit kuantum sedang bekerja menggunakan keunggulan kuantumnya melalui fase eksplorasi paralel. Pada fase ini, gerbang rotasi dan keterikatan menciptakan superposisi kompleks yang memungkinkan sirkuit untuk mengevaluasi probabilitas berbagai kombinasi portofolio secara simultan. Tingginya entropi mencerminkan kapasitas sistem dalam memetakan seluruh ruang Hilbert guna mencari lembah energi terendah. Keberadaan fase eksplorasi ini sangat krusial agar algoritma tidak terjebak pada solusi lokal yang dangkal dan dapat menemukan konfigurasi portofolio dengan utilitas strategis paling optimal.
+\subsection{Kalkulasi Entropi melalui \textit{Reduced Density Matrix}}
+\label{subsec:4_6_1_rumus}
 
-Seiring berlangsungnya optimasi, sirkuit mengalami proses yang disebut sebagai keruntuhan \textit{state} (\textit{state collapse}) menuju basis komputasi portofolio yang deterministik, yang ditandai dengan meluncur tajamnya nilai entropi menuju nol. Secara fisis, hal ini berarti fungsi gelombang kuantum telah terlokalisasi secara sempurna pada satu konfigurasi spin tertentu (misal $|10\rangle$ atau $|01\rangle$), yang mencerminkan keyakinan mutlak algoritma terhadap solusi yang ditemukan. Namun, pada beberapa jendela waktu, ditemukan kasus di mana entropi tertahan pada kisaran nilai $\approx 0,5$, yang mengindikasikan adanya konvergensi parsial. Kondisi ini biasanya dipicu oleh degenerasi lanskap energi di mana dua aset memiliki profil risiko dan imbal hasil yang nyaris identik, sehingga sirkuit menyisakan sedikit residu probabilitas (\textit{entanglement}) antar aset sebelum akhirnya dipaksa berhenti oleh kriteria konvergensi \textit{optimizer}.
+Entropi \textit{Von Neumann} $S(\rho)$ dikalkulasi untuk mengukur derajat kemurnian status kuantum selama iterasi optimasi. Untuk sistem portofolio dengan status kepadatan $\rho_{AB}$, entropi dari subsistem aset dihitung melalui \textit{reduced density matrix} $\rho_A = \text{Tr}_B(\rho_{AB})$ menggunakan persamaan:
+\begin{equation}
+    S(\rho_A) = -\text{Tr}(\rho_A \log_2 \rho_A) = -\sum_i \lambda_i \log_2 \lambda_i
+\end{equation}
+di mana $\lambda_i$ adalah nilai eigen dari $\rho_A$. Nilai entropi yang tinggi menunjukkan sirkuit berada dalam status superposisi atau keterikatan yang kuat, sementara nilai nol mengindikasikan sistem telah mengerucut menjadi satu status basis portofolio yang pasti.
+
+\subsection{Analisis Sensitivitas Kedalaman Gerbang Keterikatan}
+\label{subsec:4_6_2_sensitivitas}
+
+Laju peluruhan entropi menuju status murni sangat dipengaruhi oleh jumlah gerbang keterikatan dalam sirkuit. Analisis sensitivitas menunjukkan bahwa sirkuit dengan keterikatan yang terlalu masif cenderung mempertahankan nilai entropi tinggi lebih lama, yang mencerminkan fase eksplorasi yang lebih luas namun lebih sulit untuk dikonvergensikan. Sebaliknya, sirkuit dengan keterikatan rendah meluruhkan entropi secara instan menuju status murni namun berisiko gagal mengevaluasi korelasi risiko antar aset secara komprehensif. Keseimbangan antara kapasitas eksplorasi (\textit{high entropy}) dan kecepatan eksploitasi solusi (\textit{low entropy}) merupakan faktor penentu dalam akurasi hasil VQE.
+
+\subsection{Implementasi Numerik: Superposisi vs Status Murni Portofolio}
+\label{subsec:4_6_3_numerik}
+
+Secara numerik, proses ini tercatat dalam riwayat entropi sirkuit. Sebagai contoh, pada awal iterasi saat sistem berada dalam superposisi maksimal (misal $\frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)$), entropi tercatat bernilai $1,0$ bit. Seiring berjalannya optimasi SPSA, nilai entropi teramati meluncur tajam menuju angka $<0,01$ bit pada iterasi akhir. Fenomena keruntuhan \textit{state} ini memberikan validasi empiris bahwa algoritma telah berhasil melakukan kristalisasi probabilitas dari ketidakpastian kuantum menuju satu konfigurasi portofolio deterministik yang memiliki utilitas strategis tertinggi.

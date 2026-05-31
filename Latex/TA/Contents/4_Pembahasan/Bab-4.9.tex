@@ -1,8 +1,23 @@
 \section{Validasi State Probabilitas Kuantum vs \textit{Brute Force} Klasik}
 \label{sec:4_9_bruteforce_validation}
 
-Validasi terhadap keakuratan solusi yang dihasilkan oleh algoritma VQE dilakukan dengan membandingkan distribusi probabilitas kuantum terhadap hasil pencarian eksak melalui metode \textit{brute force} klasik. Berdasarkan data yang tersimpan dalam \textit{file} \texttt{hasil\_brute\_force\_validation\_N2.csv}, setiap kemungkinan konfigurasi portofolio biner ($|00\rangle, |01\rangle, |10\rangle, |11\rangle$) dievaluasi nilai energinya secara deterministik untuk menemukan solusi optimal global sebagai pembanding (\textit{ground truth}). Hasil komparasi menunjukkan tingkat akurasi yang sangat tinggi, di mana \textit{bitstring} dengan amplitudo probabilitas terbesar yang dihasilkan oleh sirkuit kuantum secara konsisten identik dengan solusi berenergi terendah dari hasil perhitungan klasik.
+Keakuratan algoritma kuantum variasional divalidasi dengan membandingkan hasil optimasi terhadap pencarian eksak pada seluruh ruang solusi.
 
-Analisis lebih mendalam terhadap dominasi probabilitas mengungkapkan seberapa efektif sirkuit kuantum dalam memusatkan informasi pada satu titik optimal. Pada sebagian besar jendela waktu simulasi, ditemukan bahwa sirkuit kuantum mampu menghasilkan amplitudo probabilitas solusi optimal yang jauh mengungguli kombinasi portofolio sub-optimal lainnya. Dominasi amplitudo ini memberikan interpretasi ekonomi bahwa algoritma memiliki tingkat kepercayaan yang sangat tinggi dalam memilih aset yang memberikan rasio imbal hasil terhadap risiko terbaik. Keberhasilan ini memvalidasi peran sirkuit kuantum sebagai sebuah "Oracle" yang mampu melakukan navigasi ruang pencarian secara presisi dan konsisten, meskipun dihadapkan pada fluktuasi parameter input yang dinamis di setiap periode \textit{rebalancing}.
+\subsection{Formulasi Norma Kuadrat Amplitudo Probabilitas}
+\label{subsec:4_9_1_rumus}
 
-Selain validasi bitstring, perbandingan nilai energi antara hasil VQE dan \textit{brute force} juga menunjukkan \textit{energy gap} yang sangat minimal. Hal ini membuktikan bahwa konfigurasi parameter $\theta$ yang ditemukan oleh \textit{optimizer} SPSA telah berhasil memutar status kuantum hingga selaras dengan arah vektor eigen yang bersesuaian dengan nilai eigen terendah dari Hamiltonian sistem. Dengan tercapainya kesesuaian antara metode kuantum variasi dengan metode eksak klasik ini, maka integritas matematis dari seluruh kerangka kerja algoritma hibrida \textit{Game-Quantum} yang diusulkan telah teruji secara sah, memberikan landasan yang kuat untuk analisis performa portofolio pada tahap selanjutnya.
+Distribusi probabilitas untuk setiap konfigurasi portofolio biner $x \in \{0, 1\}^N$ diperoleh melalui pengukuran fungsi gelombang kuantum final $|\psi(\vec{\theta}_{final})\rangle$. Secara matematis, probabilitas kemunculan bitstring $x$ didefinisikan melalui norma kuadrat amplitudo kompleks $\alpha_x$:
+\begin{equation}
+    P(x) = |\langle x | \psi(\theta) \rangle|^2
+\end{equation}
+di mana $\sum_x P(x) = 1$. Validitas sirkuit kuantum sebagai pemecah masalah optimasi diukur dari kemampuannya untuk memusatkan amplitudo probabilitas pada bitstring yang bersesuaian dengan energi Hamiltonian terendah.
+
+\subsection{Analisis Sensitivitas Dominasi Amplitudo terhadap \textit{Noise} Parameter}
+\label{subsec:4_9_2_sensitivitas}
+
+Analisis sensitivitas menunjukkan bahwa stabilitas dominasi amplitudo solusi sangat bergantung pada tingkat kepresisian parameter sudut $\theta$. Adanya deviasi kecil pada sudut rotasi (akibat \textit{noise} atau penghentian dini \textit{optimizer}) dapat menurunkan nilai $P(x_{opt})$ dan meningkatkan probabilitas pada status sub-optimal. Namun, pengujian empiris membuktikan bahwa sirkuit kuantum tetap mampu mempertahankan bitstring optimal sebagai solusi dengan probabilitas tertinggi meskipun terdapat fluktuasi kecil pada lanskap energi. Hal ini mengonfirmasi ketangguhan algoritma hibrida dalam menavigasi ketidakpastian guna menemukan solusi global secara konsisten.
+
+\subsection{Tabel Komparasi Output VQE terhadap \textit{Ground Truth} Klasik}
+\label{subsec:4_9_3_numerik}
+
+Hasil validasi eksak disajikan secara komprehensif pada Tabel \ref{tab:brute_force} di Lampiran \ref{appendix:numerical_data}. Sebagai contoh pada jendela Desember 2023, sirkuit kuantum menghasilkan amplitudo tertinggi pada status $|01\rangle$ dengan tingkat kepercayaan $>99\%$. Perbandingan dengan perhitungan \textit{brute force} klasik mengonfirmasi bahwa status $|01\rangle$ memang memiliki energi terendah ($\approx 0,027$) di antara seluruh kemungkinan kombinasi lainnya. Keberhasilan validasi "Oracle" ini memberikan jaminan matematis bahwa integrasi komputasi kuantum dalam manajemen portofolio memberikan solusi yang akurat dan dapat diandalkan secara absolut.

@@ -1,8 +1,23 @@
 \section{Konvergensi Energi dan Optimasi SPSA di Lanskap Kuantum}
 \label{sec:4_5_optimasi_spsa}
 
-Proses pencarian solusi portofolio paling optimal dalam sistem kuantum dilakukan melalui mekanisme minimisasi nilai ekspektasi energi $\langle H \rangle$ menggunakan \textit{optimizer} klasik \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA). SPSA dipilih karena efisiensinya yang sangat tinggi dalam menangani fungsi objektif yang mengandung \textit{noise}, di mana estimasi gradien dilakukan hanya dengan menggunakan dua evaluasi fungsi per iterasi terlepas dari jumlah parameter yang dioptimalkan. Berdasarkan data pada \textit{file} \texttt{riwayat\_iterasi\_vqe\_N2.csv}, terlihat bahwa algoritma ini mampu menavigasi lanskap energi Hamiltonian yang kompleks dengan stabilitas yang terjaga selama ratusan iterasi.
+Proses minimisasi nilai ekspektasi energi $\langle H \rangle$ dilakukan melalui iterasi parameter sirkuit hingga mencapai titik kestabilan global.
 
-Stabilitas konvergensi dalam penelitian ini juga didukung oleh penggunaan \textit{LR Finder} untuk menentukan \textit{learning rate} ($\eta$) yang optimal secara otomatis sebelum proses backtest dimulai. Pemilihan $\eta$ yang tepat sangat krusial; jika terlalu besar, sirkuit akan mengalami osilasi energi yang tidak terkendali, sedangkan jika terlalu kecil, sirkuit akan terjebak pada minimum lokal dan gagal mencapai \textit{ground state}. Dinamika konvergensi energi menunjukkan pola yang menarik di mana pada iterasi awal terjadi fluktuasi energi yang signifikan sebagai manifestasi dari fase eksplorasi sirkuit. Seiring bertambahnya iterasi, fluktuasi tersebut mulai meredam dan nilai energi meluncur secara asimtotik menuju titik konvergensi stabil yang merepresentasikan solusi portofolio terbaik.
+\subsection{Mekanisme Estimasi Gradien Stokastik (SPSA)}
+\label{subsec:4_5_1_rumus}
 
-Analisis terhadap data iterasi juga mengungkap adanya interaksi antara fungsi tujuan Markowitz dengan suku penalti anggaran. Selama proses optimasi, terlihat bahwa nilai energi total sempat mengalami kenaikan seiring dengan peningkatan \textit{penalty scale} sebelum akhirnya menurun tajam saat sirkuit berhasil menemukan status yang memenuhi kendala anggaran. Fase akhir optimasi ini ditandai dengan tercapainya kondisi \textit{steady state} pada nilai energi terendah, yang membuktikan bahwa \textit{optimizer} SPSA berhasil "menuntun" sirkuit kuantum menuju konfigurasi spin yang merepresentasikan ekuilibrium antara imbal hasil maksimal dan risiko minimal. Keberhasilan konvergensi ini memberikan validasi empiris atas ketangguhan algoritma hibrida ini dalam menyelesaikan permasalahan optimasi portofolio di dunia nyata.
+Algoritma SPSA digunakan untuk memperbarui parameter $\theta$ dengan mengestimasi gradien fungsi biaya menggunakan perturbasi acak $\Delta$ pada seluruh komponen parameter secara simultan. Secara matematis, estimasi gradien pada iterasi ke-$k$ didefinisikan sebagai:
+\begin{equation}
+    \hat{g}_k(\hat{\theta}_k) = \frac{y(\hat{\theta}_k + c_k \Delta_k) - y(\hat{\theta}_k - c_k \Delta_k)}{2 c_k} \Delta_k^{-1}
+\end{equation}
+di mana $y(\cdot)$ adalah hasil evaluasi energi dari sirkuit kuantum dan $c_k$ adalah besarnya perturbasi. Keunggulan utama metode ini adalah efisiensinya yang hanya memerlukan dua evaluasi fungsi per iterasi, sangat cocok untuk sistem kuantum yang memiliki ketidakpastian (\textit{statistical noise}) pada hasil pengukuran.
+
+\subsection{Analisis Sensitivitas \textit{Hyperparameters} terhadap Stabilitas}
+\label{subsec:4_5_2_sensitivitas}
+
+Stabilitas konvergensi sangat dipengaruhi oleh pemilihan \textit{hyperparameters} SPSA, terutama faktor penguatan $a$ dan $c$ yang mengatur besarnya langkah pembaruan. Analisis sensitivitas menunjukkan bahwa nilai $a$ yang terlalu besar mengakibatkan osilasi energi yang ekstrem, yang menghalangi sirkuit untuk mencapai titik minimum yang presisi. Di sisi lain, nilai $c$ yang terlalu kecil membuat estimasi gradien menjadi sangat sensitif terhadap \textit{noise} pengukuran, yang menyebabkan algoritma mudah terjebak pada minimum lokal semu. Melalui pengujian pra-simulasi, parameter diatur sedemikian rupa guna memastikan peluruhan (\textit{decaying}) langkah optimasi yang optimal seiring bertambahnya iterasi.
+
+\subsection{Simulasi Satu Langkah Pembaruan Parameter Sudut}
+\label{subsec:4_5_3_numerik}
+
+Sebagai ilustrasi numerik, Tabel \ref{tab:vqe_comparison} di Lampiran \ref{appendix:numerical_data} menyajikan riwayat konvergensi energi lintas jendela waktu. Pada iterasi awal, sirkuit mengalami fluktuasi energi yang tinggi sebagai representasi fase eksplorasi parameter. Sebagai contoh, pada jendela waktu tertentu, SPSA berhasil menurunkan nilai energi dari $\langle H \rangle = 0,5$ menjadi $-0,18$ dalam 400 iterasi pertama melalui pembaruan sudut rotasi secara bertahap. Penurunan asimtotik ini membuktikan bahwa \textit{optimizer} berhasil menuntun sistem menuju konfigurasi portofolio dengan imbal hasil maksimal dan risiko minimal sesuai dengan target fisis Hamiltonian.
