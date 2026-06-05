@@ -35,7 +35,7 @@ jika dimisalkan
 $$
 \begin{split}
 \psi(\theta) &= \hat{U}_B \hat{U}(\theta) \hat{U}_A \ket{\phi} 
-\quad \text{di mana} \quad \hat{U}{\theta} = e^{-i\frac{\theta}{2}\sigma} \\
+\quad \text{di mana} \quad \hat{U}({\theta}) = e^{-i\frac{\theta}{2}\sigma} \\
 \end{split}
 $$
 maka
@@ -54,7 +54,7 @@ $$\begin{split}
 
 \frac{\partial \langle E(\theta)\rangle}{\partial \theta}&= \bra{\phi} \frac{\partial U^{\dagger}(\theta)}{\partial \theta} M U(\theta) \ket{\phi} + \bra{\phi} U^{\dagger}(\theta) M \frac{\partial U(\theta)}{\partial \theta} \ket{\phi}
 \end{split}$$
-karena $U(\theta) = e^{-i\frac{\theta}{2}\sigma}$ , sehingga
+karena turunan dari uniter 
 $$
 \frac{\partial U (\theta)}{\partial \theta}=-\frac{i}{2}\sigma U(\theta) \quad; \frac{\partial U^{\dagger}(\theta)}{\partial \theta} = \frac{i}{2}\sigma U^{\dagger}(\theta)
 $$

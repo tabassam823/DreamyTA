@@ -1,9 +1,30 @@
-\appendix
+\renewcommand{\appendixname}{Lampiran}
+\begin{appendices}
+\renewcommand{\setthesection}{\thechapter.\arabic{section}}
 
+% --- BAGIAN 1: PENURUNAN RUMUS (DERIVATIONS) ---
 \input{Contents/Lampiran/Lampiran-A.tex}
 \input{Contents/Lampiran/Lampiran-B.tex}
 \input{Contents/Lampiran/Lampiran-C.tex}
+
+\clearpage
+% Tambahan
+\input{Contents/Lampiran/Lampiran-J.tex}
+
+\clearpage
+
+% --- BAGIAN 2: DATA DAN HASIL (DATA AND RESULTS) ---
+
+% Hasil N=2
 \input{Contents/Lampiran/Lampiran-D.tex}
 \input{Contents/Lampiran/Lampiran-E.tex}
 \input{Contents/Lampiran/Lampiran-F.tex}
+
+\clearpage
+
+% Hasil N=4
 \input{Contents/Lampiran/Lampiran-G.tex}
+\input{Contents/Lampiran/Lampiran-H.tex}
+\input{Contents/Lampiran/Lampiran-I.tex}
+
+\end{appendices}

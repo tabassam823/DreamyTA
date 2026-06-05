@@ -1,23 +1,115 @@
-\section{Konvergensi Energi dan Optimasi SPSA di Lanskap Kuantum}
-\label{sec:4_5_optimasi_spsa}
+\section{Optimasi Berbasis Gradien dengan Metode \textit{Parameter Shift Rule}}
+\label{sec:4_5_gradien_vqe}
 
-Proses minimisasi nilai ekspektasi energi $\langle H \rangle$ dilakukan melalui iterasi parameter sirkuit hingga mencapai titik kestabilan global.
-
-\subsection{Mekanisme Estimasi Gradien Stokastik (SPSA)}
-\label{subsec:4_5_1_rumus}
-
-Algoritma SPSA digunakan untuk memperbarui parameter $\theta$ dengan mengestimasi gradien fungsi biaya menggunakan perturbasi acak $\Delta$ pada seluruh komponen parameter secara simultan. Secara matematis, estimasi gradien pada iterasi ke-$k$ didefinisikan sebagai:
+Untuk mendapatkan nilai parameter $\boldsymbol{\theta}$ yang optimal, diperlukan proses optimasi untuk meminimalkan nilai energi. Proses ini dilakukan dengan algoritma \textit{Parameter Shift Rule} pada arsitektur \textit{ansatz} yang telah dibuat. Hamiltonian portofolio ($\hat{\mathcal{H}}$) yang telah didapatkan pada \S 4.3 dioperasikan dengan fungsi gelombang variasional $|\psi(\boldsymbol{\theta})\rangle$ sesuai dengan sirkuit yang berlaku, dalam hal ini arsitektur HEA. Proses pencarian nilai energi minimum dalam algoritma VQE dilakukan dengan mengoperasikan operator Hamiltonian dengan fungsi gelombang variasional $|\psi(\boldsymbol{\theta})\rangle$ sesuai dengan prinsip variasi Rayleigh-Ritz pada persamaan (\ref{eq:prinsip_variasi}). Pada umumnya, metode optimasi pembaruan parameter menggunakan mekanisme gradien energi pada perubahan parameter $\theta$ untuk menavigasi lanskap fungsi biaya. Secara sederhana, di dalam banyak penelitian, optimasi menggunakan algoritma \textit{Gradient Descent} (GD) konvensional menggunakan aturan pembaruan
 \begin{equation}
-    \hat{g}_k(\hat{\theta}_k) = \frac{y(\hat{\theta}_k + c_k \Delta_k) - y(\hat{\theta}_k - c_k \Delta_k)}{2 c_k} \Delta_k^{-1}
+    \theta^{(t+1)} = \theta^{(t)} - \eta \nabla E(\theta^{(t)})
 \end{equation}
-di mana $y(\cdot)$ adalah hasil evaluasi energi dari sirkuit kuantum dan $c_k$ adalah besarnya perturbasi. Keunggulan utama metode ini adalah efisiensinya yang hanya memerlukan dua evaluasi fungsi per iterasi, sangat cocok untuk sistem kuantum yang memiliki ketidakpastian (\textit{statistical noise}) pada hasil pengukuran.
+sering digunakan sebagai acuan dasar dalam melakukan optimasi.
 
-\subsection{Analisis Sensitivitas \textit{Hyperparameters} terhadap Stabilitas}
-\label{subsec:4_5_2_sensitivitas}
+Mekanisme yang berlaku pada optimasi gradient descent dimulai dari turunan parsial energi terhadap perubahan \theta
+\begin{equation}
+    \begin{split}
+    \frac{\partial E(\theta)}{\partial \theta_{l,q,\sigma}} = &\frac{partial}{\partial\theta_j} \langle \psi(\theta) | \hat{\mathcal{H}} | \psi(\theta) \rangle \\
+    & = \langle \frac{\partial \psi(\theta)}{\partial \theta_j} | \hat{\mathcal{H}} | \psi(\theta) \rangle + \langle \psi(\theta) | \hat{\mathcal{H}} | \frac{\partial \psi(\theta)}{\partial \theta_j} \rangle.
+    \end{split}
+\end{equation}
+Karena mekanisme GD ini berlaku secara sekuensial, maka terdapat uniter yang sudah dioptimasi yang dinotasikan dengan $U_{A}$ dan ada uniter yang belum dioptimasi $U_{B}$. Sedangkan uniter yang sedang dioptimasi dapat dinotasikan sebagai $U_{\theta}$. Jika ditinjau perhitungan gradien terhadap parameter rotasi sumbu-Z pada qubit pertama ($\theta_{0,0,z}$), maka arsitektur \textit{ansatz} pada \S 4.4, fungsi gelombang sirkuit dapat dinyatakan sebagai 
+\begin{equation}
+    |\psi(\theta)\rangle = \hat{U}_{B} \hat{U}(\theta_{0,0,z}) \hat{U}_{A} |00\rangle \quad \text{di mana} \quad \hat{U}(\theta_{0,0,z}) = e^{-i\frac{\theta_{0,0,z}}{2}\sigma_z}.
+\end{equation}
+maka energi yang diukur dari Hamiltonian $\hat{\mathcal{H}}$ adalah memiliki bentuk
+\begin{equation}
+    \begin{split}
+    \langle \psi(\theta) | \hat{\mathcal{H}} | \psi(\theta) \rangle &= \bra{00} \hat{U}_{A}^\dagger \hat{U}(\theta)^\dagger \hat{U}_{B}^\dagger \hat{\mathcal{H}} \hat{U}_{B} \hat{U}(\theta) \hat{U}_{A} \ket{00} \\
+    & = \bra{\phi} \hat{U}_{B}^\dagger \hat{\mathcal{H}} \hat{U}_{B} \hat{U}(\theta) \ket{\phi} \\
+    & = \bra{\phi} \hat{U}^\dagger (\theta) \hat{M} \hat{U} (\theta) \ket{\phi}
+    \end{split}
+    \label{eq:parameter_theta_vqe}
+\end{equation}
+dengan $\hat{M} = \hat{U}_B^\dagger \hat{\mathcal{H}} \hat{U}_B$. ekspektasi energi adalah ekspektasi dari hamiltonian  sebagai matriks $M$
+\begin{equation}
+\begin{split}
+\frac{\partial \langle E(\theta)\rangle}{\partial \theta} &= \bra{\phi} \frac{\partial U^{\dagger}(\theta)}{\partial \theta} M U(\theta) \ket{\phi} + \bra{\phi} U^{\dagger}(\theta) M \frac{\partial U(\theta)}{\partial \theta} \ket{\phi}
+\end{split}
+\end{equation}
+karena turunan dari uniter 
+\begin{equation*}
+\frac{\partial U (\theta)}{\partial \theta}=-\frac{i}{2}\sigma U(\theta) \quad; \frac{\partial U^{\dagger}(\theta)}{\partial \theta} = \frac{i}{2}\sigma U^{\dagger}(\theta),
+\end{equation*}
+maka dengan mensubstitusikan hasil turunan dari uniter, akan diperoleh
+\begin{equation*}
+\begin{split}
+\frac{\partial \langle E(\theta)\rangle}{\partial \theta}
+&= \bra{\phi} \left(\frac{i}{2}\sigma U^{\dagger}(\theta)\right) M U(\theta) \ket{\phi} + \bra{\phi} U^{\dagger}(\theta) M \left(-\frac{i}{2}\sigma U(\theta)\right) \ket{\phi} \\
+&= \frac{i}{2} \bra{\psi(\theta)} \sigma M \ket{\psi(\theta)} - \frac{i}{2} \bra{\psi(\theta)} M \sigma \ket{\psi(\theta)} \\
+&= \frac{i}{2} \bra{\psi(\theta)} \sigma M - M \sigma \ket{\psi(\theta)}
+\end{split}
+\end{equation*}
+\begin{equation}
+    \therefore \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{i}{2} \bra{\psi(\theta)} [\sigma, M] \ket{\psi(\theta)}
+    \label{eq:relasi_komutator_parameter_theta_vqe}
+\end{equation}
+Dengan demikian, turunan parsial terhadap parameter $\theta$ pada gerbang menghasilkan relasi komutator.
 
-Stabilitas konvergensi sangat dipengaruhi oleh pemilihan \textit{hyperparameters} SPSA, terutama faktor penguatan $a$ dan $c$ yang mengatur besarnya langkah pembaruan. Analisis sensitivitas menunjukkan bahwa nilai $a$ yang terlalu besar mengakibatkan osilasi energi yang ekstrem, yang menghalangi sirkuit untuk mencapai titik minimum yang presisi. Di sisi lain, nilai $c$ yang terlalu kecil membuat estimasi gradien menjadi sangat sensitif terhadap \textit{noise} pengukuran, yang menyebabkan algoritma mudah terjebak pada minimum lokal semu. Melalui pengujian pra-simulasi, parameter diatur sedemikian rupa guna memastikan peluruhan (\textit{decaying}) langkah optimasi yang optimal seiring bertambahnya iterasi.
-
-\subsection{Simulasi Satu Langkah Pembaruan Parameter Sudut}
-\label{subsec:4_5_3_numerik}
-
-Sebagai ilustrasi numerik, Tabel \ref{tab:vqe_comparison} di Lampiran \ref{appendix:numerical_data} menyajikan riwayat konvergensi energi lintas jendela waktu. Pada iterasi awal, sirkuit mengalami fluktuasi energi yang tinggi sebagai representasi fase eksplorasi parameter. Sebagai contoh, pada jendela waktu tertentu, SPSA berhasil menurunkan nilai energi dari $\langle H \rangle = 0,5$ menjadi $-0,18$ dalam 400 iterasi pertama melalui pembaruan sudut rotasi secara bertahap. Penurunan asimtotik ini membuktikan bahwa \textit{optimizer} berhasil menuntun sistem menuju konfigurasi portofolio dengan imbal hasil maksimal dan risiko minimal sesuai dengan target fisis Hamiltonian.
+Walaupun algoritma \textit{Gradient Descent} konvensional dapat digunakan untuk optimasi, implementasi langsung pada perangkat keras kuantum menghadapi kendala karena evaluasi komutator $[\sigma, \hat{M}]$ tidak dapat dilakukan sebagai pengukuran observabel tunggal. Untuk mengatasi kendala tersebut, digunakan metode \textit{Parameter Shift Rule} untuk mengekspansi turunan energi melalui selisih energi pada titik-titik parameter yang digeser. Prosesnya dimulai dengan memberikan nilai pergeseran parameter $\theta$ sebesar $s$. Sehingga operator uniter yang tergeser, $\hat{U}(\theta \pm s)$ dapat dinyatakan sebagai perkalian dua uniter yang terpisah melalui sifat eksponensial matriks
+\begin{equation}
+    \begin{split}
+    \hat{U}(\theta \pm s) &= \exp\left(-i\frac{\theta \pm s}{2}\sigma\right) \\
+    &= \exp\left(-i\frac{\theta}{2}\sigma\right) \exp\left(\mp i\frac{s}{2}\sigma\right) \\
+    &= \hat{U}(\theta) \hat{U}(\pm s).
+    \end{split}
+\end{equation}
+Dengan menggunakan bentuk uniter yang tergeser tersebut, nilai ekspektasi energi pada titik $\theta+s$ dapat diformulasikan kembali dengan menyisipkan identitas uniter ke dalam basis keadaan yang telah berevolusi, sehingga diperoleh ekspresi
+\begin{equation}
+    \begin{split}
+    \langle E(\theta+s)\rangle &= \bra{\phi}\hat{U}^{\dagger}(\theta)\hat{U}^{\dagger}(s) \hat{M} \hat{U}(\theta)\hat{U}(s) \ket{\phi} \\
+    &= \bra{\psi(\theta)} \hat{U}^{\dagger}(s) \hat{M} \hat{U}(s) \ket{\psi(\theta)}.
+    \end{split}
+\end{equation}
+Eksplisitasi operator $\hat{U}(s)$ menggunakan formula Euler untuk operator rotasi $\hat{U}(s) = \cos(\frac{s}{2}) \hat{I} - i \sin(\frac{s}{2}) \sigma$ sehingga menjadi
+\begin{equation}
+    \begin{split}
+    \langle E(\theta+s)\rangle = \bra{\psi(\theta)} & \left[ \cos\left(\frac{s}{2}\right) \hat{I} + i \sin\left(\frac{s}{2}\right) \sigma \right] \hat{M} \left[ \cos\left(\frac{s}{2}\right) \hat{I} - i \sin\left(\frac{s}{2}\right) \sigma \right] \ket{\psi(\theta)} \\
+    = \bra{\psi(\theta)} & \left[ \cos^2\left(\frac{s}{2}\right) \hat{M} - i \cos\left(\frac{s}{2}\right) \sin\left(\frac{s}{2}\right) \hat{M} \sigma + \right. \\
+    & \left. i \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \sigma \hat{M} + \sin^2\left(\frac{s}{2}\right) \sigma \hat{M} \sigma \right] \ket{\psi(\theta)}.
+    \end{split}
+    \label{eq:eksplisitasi_parameter_theta_vqe}
+\end{equation}
+Kemudian, suku-suku yang mengandung fungsi trigonometri dikelompokkan dan dengan memanfaatkan definisi komutator, persamaan (\ref{eq:eksplisitasi_parameter_theta_vqe}) disederhanakan menjadi bentuk yang menghubungkan nilai ekspektasi energi
+\begin{equation}
+    \begin{split}
+    \langle E(\theta+s)\rangle &= \cos^2\left(\frac{s}{2}\right) \langle \hat{M} \rangle + \sin^2\left(\frac{s}{2}\right) \langle\sigma \hat{M} \sigma\rangle + i \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle [\sigma, \hat{M}] \rangle.    
+    \end{split}
+    \label{eq:eksplisitasi_parameter_theta_vqe_sederhana}
+\end{equation}
+Dengan prosedur matematis yang sama, nilai ekspektasi energi pada titik pergeseran negatif $\theta-s$ diperoleh dengan mengganti $\sin\left(\frac{s}{2}\right)$ menjadi $-\sin\left(\frac{s}{2}\right)$, sehingga
+\begin{equation}
+    \begin{split}
+    \langle E(\theta-s)\rangle &= \cos^2\left(\frac{s}{2}\right) \langle \hat{M} \rangle + \sin^2\left(\frac{s}{2}\right) \langle\sigma \hat{M} \sigma\rangle - \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle [\sigma, \hat{M}] \rangle.   
+    \end{split}
+    \label{eq:eksplisitasi_parameter_theta_vqe_sederhana_negatif}
+\end{equation}
+Kemudian selisih antara persamaan (\ref{eq:eksplisitasi_parameter_theta_vqe_sederhana}) dan persamaan (\ref{eq:eksplisitasi_parameter_theta_vqe_sederhana_negatif}) diperoleh dengan menghitung
+\begin{equation}
+    \begin{split}
+    \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle &= 2 i \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle [\sigma, \hat{M}] \rangle \\
+    &= i \sin(s) \langle [\sigma, \hat{M}] \rangle.
+    \end{split}
+\end{equation}
+Apabila nilai pergeseran ditetapkan sebesar $s = \pi/2$, maka nilai $\sin(s) = 1$, sehingga diperoleh hubungan langsung antara gradien energi terhadap parameter $\theta$ pada persamaan (\ref{eq:relasi_komutator_parameter_theta_vqe}) dengan selisih evaluasi energi pada perangkat keras kuantum
+\begin{equation*}
+    \begin{split}
+    2 \frac{\partial \langle E(\theta)\rangle}{\partial \theta} &= i \langle [\sigma, M]\rangle \\
+    2 \frac{\partial \langle E(\theta)\rangle}{\partial \theta} &= \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle \\
+    \end{split}
+\end{equation*}
+\begin{equation}
+    \therefore \frac{\partial \langle E(\theta)\rangle}{\partial \theta} &= \frac{1}{2} \left[ \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle \right]
+    \label{eq:parameter_shift_rule}
+\end{equation}
+Metode \textit{parameter-shift rule} memungkinkan perhitungan gradien yang eksak tanpa memerlukan estimasi numerik atau sirkuit tambahan untuk menghitung komutator secara langsung. Sebagai ilustrasi operasional untuk iterasi awal, jika sistem diinisialisasi pada $\theta_{l,0,z} = 0,5$ dan hasil pengukuran energi pada titik pergeseran adalah $E(\theta+s) = 0,15$ serta $E(\theta-s) = -0,25$, maka gradien analitisnya adalah:
+\begin{equation*}
+    \frac{\partial E}{\partial \theta} = \frac{0,15 - (-0,25)}{2} = 0,20
+\end{equation*}
+Dengan menggunakan \textit{learning rate} $\eta = 0,1$, parameter diperbarui menjadi $\theta^{(1)} = 0,5 - (0,1 \cdot 0,2) = 0,48$. Penurunan nilai parameter tersebut menggeser fasa qubit yang berpengaruh pada probabilitas transisi \textit{Ising}. Meskipun memberikan hasil yang akurat, optimasi ini membutuhkan dua kali evaluasi untuk setiap parameternya, yaitu evaluasi maju dan mundur. Hal tersebut menyebabkan algoritma ini kurang efisien pada sistem berdimensi tinggi.

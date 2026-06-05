@@ -51,6 +51,7 @@ Strategi diversifikasi fundamental berdasarkan model Markowitz bertujuan untuk m
 
 Fungsi biaya dalam model Markowitz menggabungkan komponen matriks kovarians dan ekspektasi imbal hasil melalui penggunaan parameter penghindaran risiko yang secara formal disimbolkan dengan variabel $\lambda$ \cite{abdul_hali_markowitz_2020}. Matriks kovarians merepresentasikan interaksi risiko sistemik antar aset yang menentukan derajat volatilitas kolektif, di mana elemen tersebut merupakan inti dari perhitungan risiko dalam manajemen aset modern \cite{markowitz_portfolio_1952}. Struktur fungsi ini memiliki karakteristik kuadratik di mana setiap interaksi antar pasangan aset dihitung berdasarkan korelasi pergerakan harga historis yang telah dinormalisasi secara tepat guna mencapai konvergensi solusi. Formulasi Lagrangian untuk fungsi biaya pada portofolio dapat dinyatakan dalam bentuk persamaan yang mengintegrasikan seluruh parameter tersebut ke dalam satu fungsi objektif yang koheren sebagai berikut:
 \begin{equation}
+\label{eq:lagrangian_markowitz}
 \mathcal{L}(\mathbf{\omega}) = \frac{\lambda}{2} \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \sum_i \mu_i \omega_i
 \end{equation}
 di mana $\omega_i$ merepresentasikan bobot atau proporsi dana untuk setiap aset $i$, $\sigma_{ij}$ adalah elemen matriks kovarians, dan $\mu_i$ merupakan ekspektasi imbal hasil aset. Pencarian portofolio yang optimal secara teknis setara dengan upaya sistematis untuk menemukan konfigurasi bobot aset yang mampu meminimalkan risiko total pada target tingkat imbal hasil tertentu.

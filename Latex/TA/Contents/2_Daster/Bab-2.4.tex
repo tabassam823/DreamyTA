@@ -23,6 +23,7 @@ Perilaku kolektif yang terjadi di pasar finansial, seperti fenomena korelasi har
 \subsection{Pemetaan Kuantum: QUBO ke \textit{Pauli-Z}}
 Transisi operasional dari domain optimasi biner klasik menuju arsitektur komputasi kuantum mensyaratkan transformasi variabel keputusan $x_i$ menjadi operator mekanika kuantum yang dapat diproses oleh \textit{qubit} di dalam sirkuit terpadu \cite{lucas_ising_2014}. Variabel biner tersebut secara eksplisit dipetakan ke dalam operator \textit{Pauli-Z} ($\hat{Z}_i$) melalui transformasi linear guna menjaga integritas logika masalah yang nilai eigennya merepresentasikan status basis komputasi $|0\rangle$ dan $|1\rangle$. Penurunan parameter fisik dilakukan melalui substitusi variabel $x_i = (1 - \sigma_i)/2$ yang menghasilkan rumusan medan lokal ($h_i$) serta kekuatan interaksi ($J_{ij}$) guna mengakomodasi prinsip minimisasi energi pada perangkat keras kuantum \cite{fedorov_vqe_2022}. Pemetaan ini menjamin bahwa setiap interaksi kovarians antar aset dapat diterjemahkan menjadi korelasi fase antar \textit{qubit} yang saling terikat secara kuantum di dalam lanskap energi sirkuit optimasi. Secara formal, Hamiltonian Ising yang merepresentasikan risiko portofolio tersebut dinyatakan melalui rumusan negatif pada kedua sukunya guna menyelaraskan antara maksimisasi utilitas finansial dengan minimisasi energi fisik sebagai berikut:
 \begin{equation}
+\label{eq:hamiltonian_ising}
 \hat{H} = - \sum_{i} h_i \hat{Z}_i - \sum_{i < j} J_{ij} \hat{Z}_i \hat{Z}_j
 \end{equation}
 

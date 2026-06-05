@@ -1,23 +1,80 @@
-\section{Pemetaan Hamiltonian: Dari EPG ke Model Ising melalui QUBO}
+\section{Pemetaan Hamiltonian Ising}
 \label{sec:4_3_pemetaan_hamiltonian}
 
-Transformasi permasalahan optimasi dari domain klasik menuju komputasi kuantum memerlukan pemetaan fungsi potensial ke dalam bentuk operator fisis.
-
-\subsection{Konstruksi QUBO dan Transformasi Variabel Ising}
-\label{subsec:4_3_1_rumus}
-
-Tahapan ini diawali dengan mengonversi fungsi potensial Markowitz menjadi formulasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Dalam proses ini, kendala anggaran ($\sum x_i = k$) diintegrasikan melalui penambahan suku penalti kuadratik $P(\vec{x}) = A(\sum x_i - k)^2$. Langkah krusial berikutnya adalah melakukan transformasi variabel dari domain biner $x_i \in \{0, 1\}$ menuju representasi spin Ising $z_i \in \{1, -1\}$ menggunakan relasi $x_i = \frac{1 - z_i}{2}$. Ekspansi matematis terhadap fungsi energi total menghasilkan struktur Hamiltonian Ising:
+Perubahan permasalahan dari domain klasik menuju komputasi kuantum memerlukan alat transformasi yang menghubungkan utilitas ekonomi dengan energi kuantum, yakni melalui formulasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Proses transformasi ini diawali dengan mengonversi fungsi potensial $\Phi(\vec{x})$ menjadi fungsi energi minimisasi $E(\vec{x}) = -\Phi(\vec{x})$ guna menyesuaikan dengan prinsip variasi algoritma VQE
 \begin{equation}
-    \hat{\mathcal{H}} = \sum_{i=1}^N h_i \hat{Z}_i + \sum_{i \neq j} J_{ij} \hat{Z}_i \hat{Z}_j + C
+    \begin{split}
+    E(\vec{x}) &= -\Phi(\vec{x}) \\
+    &= -\left( \frac{1}{k} \vec{\mu}^T \vec{x} - \frac{\gamma}{2k^2} \vec{x}^T \Sigma \vec{x} \right).
+    \label{eq:energy_function}
+    \end{split}
 \end{equation}
-di mana $\hat{Z}_i$ adalah operator Pauli-Z, $h_i$ merepresentasikan bias medan magnet lokal, dan $J_{ij}$ adalah kekuatan interaksi antar spin. Konstanta $C$ merupakan pergeseran energi yang tidak mempengaruhi letak \textit{ground state}.
 
-\subsection{Analisis Sensitivitas Koefisien Penalti terhadap Tingkat Energi}
-\label{subsec:4_3_2_sensitivitas}
+\subsection{Penurunan Matriks Fungsi Energi dan Suku Penalti}
 
-Besarnya koefisien penalti ($A$) sangat menentukan efektivitas pemisahan tingkat energi (\textit{energy gap}) antara solusi valid dan solusi terlarang. Analisis sensitivitas menunjukkan bahwa nilai $A$ yang terlalu kecil akan menyebabkan sistem gagal memenuhi kendala anggaran karena energi dari konfigurasi yang melanggar aturan menjadi terlalu rendah sehingga berpotensi terpilih sebagai solusi semu. Sebaliknya, nilai $A$ yang terlalu besar secara ekstrem dapat menutupi struktur energi dari fungsi objektif Markowitz (imbal hasil dan varians), yang menyebabkan lanskap energi menjadi sangat curam dan menyulitkan proses optimasi SPSA. Oleh karena itu, penetapan nilai $A$ dalam simulasi ini disesuaikan untuk memastikan bahwa \textit{ground state} Hamiltonian benar-benar bersesuaian dengan portofolio yang memenuhi syarat $\sum x_i = k$.
+Setelah mengubah fungsi potensial $\Phi(\vec{x})$ menjadi fungsi energi $E(\vec{x})$ sebagaimana pada persamaan (\ref{eq:energy_function}), langkah selanjutnya adalah mengubah persamaan ke dalam representasi matriks. Dalam representasi matriks, fungsi energi $E(\vec{x})$ dapat dinyatakan sebagai
+\begin{equation}
+    E(\vec{x}) = \frac{\gamma}{2k^2} \vec{x}^T \Sigma_{diag} \vec{x} + \frac{\gamma}{2k^2} \vec{x}^T \Sigma_{off} \vec{x} - \frac{1}{k} \vec{\mu}^T \vec{x}
+\end{equation}
+di mana $\Sigma_{diag}$ adalah matriks diagonal varians dan $\Sigma_{off}$ adalah matriks kovariansi antar-aset dengan diagonal nol. Untuk menjamin solusi mematuhi kendala anggaran $\sum x_i = k$, maka ditambahkan suku penalti kuadratik $P(\vec{x}) = A(\sum x_i - k)^2$. Dalam bentuk vektor, suku penalti ini berbentuk
+\begin{equation}
+    P(\vec{x}) = \vec{x}^T \mathbf{A} \vec{x} - Ak
+\end{equation}
+di mana $\mathbf{A}$ adalah matriks yang seluruh elemennya bernilai $A$. Dengan menggabungkan kedua komponen tersebut, fungsi energi total $E_{tot} = E(\vec{x}) + P(\vec{x})$ dalam representasi matriks lengkap menjadi
+\begin{equation}
+    \begin{split}
+    E_{tot}(\vec{x}) =& \left[ \frac{\gamma}{2k^2}\begin{pmatrix}\sigma_{11} & 0 & \dots & \sigma_{1N} \\ 0 & \sigma_{22} & \dots & \sigma_{2N} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{N1} & \sigma_{N2} & \dots & \sigma_{NN} \end{pmatrix} - \frac{1}{k} \begin{pmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_N \end{pmatrix} + A \right] \vec{x} \\
+    &+ \vec{x}^T \left[ \frac{\gamma}{2k^2}\begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1N} \\ \sigma_{21} & 0 & \dots & \sigma_{2N} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{N1} & \sigma_{N2} & \dots & \sigma_{NN} \end{pmatrix} \right] \vec{x} - Ak
+    \end{split}
+\end{equation}
 
-\subsection{Ekstraksi Parameter Fisis Hamiltonian dari Data Pasar}
-\label{subsec:4_3_3_numerik}
+Langkah selanjutnya adalah memetakan variabel biner $x_i \in \{0, 1\}$ ke spin Ising $s_i \in \{1, -1\}$ melalui transformasi affine $x_i = (1 - s_i)/2$. 
+\begin{equation}
+\begin{split}
+    E_{total}(\vec{x}) &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A\right)\left(\frac{s_i+1}{2}\right) + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} \right) \left(\frac{s_i+1}{2}\right)\left(\frac{s_j+1}{2}\right) -Ak \\
+    &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) \left(s_is_j + s_i + s_j + 1\right) -Ak \\
+    &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
+    &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
+\end{split}
+\end{equation}
+Substitusi ini menghasilkan operator Hamiltonian sistem ($\hat{\mathcal{H}}$) yang dinyatakan dalam gerbang Pauli-Z ($\hat{Z}$). sehingga dapat didefinisikan
+\begin{equation}
+    h_i= \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+A\right)
+\end{equation}
+dan
+\begin{equation}
+    J_{ij}= \frac{\gamma \sigma_{ij}}{8k^2} \quad \text{untuk } i \ne j
+\end{equation}
+dengan
+\begin{equation}
+    C = \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak
+\end{equation}
+yang selanjutnya dihimpun menjadi 
+\begin{equation}
+    \hat{\mathcal{H}} = \sum_{i=1}^N h_i \hat{Z}_i + \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C
+\end{equation}
+sebagai bentuk hamiltonian Ising untuk optimasi portofolio. 
 
-Berdasarkan ekstraksi data pada Tabel \ref{tab:bias_h} dan Tabel \ref{tab:interaksi_J} di Lampiran \ref{appendix:numerical_data}, koefisien fisis Hamiltonian dikalkulasi secara dinamis mengikuti fluktuasi pasar. Sebagai contoh pada jendela Januari 2021, koefisien bias untuk BBCA ($h_1$) mencatatkan nilai positif yang signifikan akibat kombinasi imbal hasil yang relatif rendah terhadap variansnya pada periode tersebut, sementara koefisien interaksi $J_{12}$ mencerminkan korelasi risiko antar aset. Integrasi parameter fisis ini secara empiris mewujudkan masalah ekonomi ke dalam sistem fisik kuantum, di mana portofolio optimal berkorespondensi dengan konfigurasi spin yang meminimalkan total energi sistem (lihat Tabel \ref{tab:params} untuk rincian parameter penalti).
+\subsection{Implementasi Numerik Hamiltonian Ising}
+
+Struktur Hamiltonian lengkap untuk sistem $N=2$ ($k=1$) tanpa notasi jumlahan adalah:
+\begin{equation}
+    \hat{\mathcal{H}}_{N2} = h_1 \hat{Z}_1 + h_2 \hat{Z}_2 + J_{12} \hat{Z}_1 \hat{Z}_2 + C
+\end{equation}
+Sedangkan untuk sistem $N=4$ ($k=2$), interaksi antar-spin menjadi lebih kompleks sebagai berikut:
+\begin{equation}
+    \hat{\mathcal{H}}_{N4} = h_1 \hat{Z}_1 + h_2 \hat{Z}_2 + h_3 \hat{Z}_3 + h_4 \hat{Z}_4 + J_{12} \hat{Z}_1 \hat{Z}_2 + J_{13} \hat{Z}_1 \hat{Z}_3 + J_{14} \hat{Z}_1 \hat{Z}_4 + J_{23} \hat{Z}_2 \hat{Z}_3 + J_{24} \hat{Z}_2 \hat{Z}_4 + J_{34} \hat{Z}_3 \hat{Z}_4 + C
+\end{equation}
+
+Sebagai ilustrasi numerik pada jendela Januari 2021, bentuk Hamiltonian dari sampel data $N=2$ adalah:
+\begin{equation*}
+    \hat{\mathcal{H}}_{N2} \approx 0,0915 \hat{Z}_1 + 0,0533 \hat{Z}_2 + 0,5022 \hat{Z}_1 \hat{Z}_2 - 0,1470
+\end{equation*}
+Untuk sistem $N=4$ pada jendela yang sama, diperoleh Hamiltonian numerik sebagai berikut:
+\begin{equation*}
+    \begin{split}
+    \hat{\mathcal{H}}_{N4} \approx & 0,0462 \hat{Z}_1 + 0,0575 \hat{Z}_2 + 0,0750 \hat{Z}_3 + 0,0277 \hat{Z}_4 + 0,5007 \hat{Z}_1 \hat{Z}_2 + 0,5004 \hat{Z}_1 \hat{Z}_3 \\
+    & + 0,5005 \hat{Z}_1 \hat{Z}_4 + 0,5005 \hat{Z}_2 \hat{Z}_3 + 0,5006 \hat{Z}_2 \hat{Z}_4 + 0,5005 \hat{Z}_3 \hat{Z}_4 + 1,2450
+    \end{split}
+\end{equation*}
+Nilai koefisien interaksi $J_{ij} \approx 0,5$ didominasi oleh parameter penalti $A$, yang mana akan menciptakan barier energi tinggi bagi setiap status yang melanggar kendala anggaran. Hal ini memastikan bahwa sirkuit kuantum akan tetap beroperasi pada ruang solusi yang valid sesuai dengan kardinalitas yang berlaku.

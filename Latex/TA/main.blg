@@ -12,7 +12,6 @@ A level-1 auxiliary file: Contents/3_Metodologi/Bab-3.aux
 A level-1 auxiliary file: Contents/4_Pembahasan/Bab-4.aux
 A level-1 auxiliary file: Contents/5_Penutup/Bab-5.aux
 The style file: apacite.bst
-A level-1 auxiliary file: Contents/BagianBelakang/Biodata_Penulis.aux
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
@@ -36,45 +35,45 @@ ptr=1, stack=
 ---the literal stack isn't empty for entry sarkar_quantum_2018
 while executing---line 5079 of file apacite.bst
 Warning--No journal in spall_implementation_1998
-You've used 40 entries,
+You've used 42 entries,
             6951 wiz_defined-function locations,
-            1601 strings with 21612 characters,
-and the built_in function-call counts, 80178 in all, are:
-= -- 9511
-> -- 688
-< -- 3863
-+ -- 3913
-- -- 84
-* -- 5586
-:= -- 14644
-add.period$ -- 163
-call.type$ -- 40
-change.case$ -- 746
+            1615 strings with 22191 characters,
+and the built_in function-call counts, 85027 in all, are:
+= -- 10072
+> -- 730
+< -- 4142
++ -- 4196
+- -- 88
+* -- 5954
+:= -- 15613
+add.period$ -- 171
+call.type$ -- 42
+change.case$ -- 784
 chr.to.int$ -- 0
-cite$ -- 84
-duplicate$ -- 2299
-empty$ -- 3325
-format.name$ -- 1190
-if$ -- 15001
+cite$ -- 88
+duplicate$ -- 2428
+empty$ -- 3497
+format.name$ -- 1263
+if$ -- 15854
 int.to.chr$ -- 0
-int.to.str$ -- 120
+int.to.str$ -- 126
 missing$ -- 0
-newline$ -- 1170
-num.names$ -- 322
-pop$ -- 1144
+newline$ -- 1232
+num.names$ -- 338
+pop$ -- 1198
 preamble$ -- 1
-purify$ -- 224
+purify$ -- 236
 quote$ -- 0
-skip$ -- 5009
+skip$ -- 5267
 stack$ -- 0
-substring$ -- 4259
-swap$ -- 1387
-text.length$ -- 163
+substring$ -- 4557
+swap$ -- 1465
+text.length$ -- 171
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 3328
+type$ -- 3488
 warning$ -- 4
-while$ -- 469
+while$ -- 499
 width$ -- 0
-write$ -- 1440
+write$ -- 1522
 (There were 2 error messages)

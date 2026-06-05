@@ -1,23 +1,53 @@
-\section{Validasi State Probabilitas Kuantum vs \textit{Brute Force} Klasik}
-\label{sec:4_9_bruteforce_validation}
+\section{Metode Validasi dan \textit{Benchmark} Klasik}
+\label{sec:4_9_validasi_benchmark}
 
-Keakuratan algoritma kuantum variasional divalidasi dengan membandingkan hasil optimasi terhadap pencarian eksak pada seluruh ruang solusi.
+Algoritma VQE yang diimplementasikan pada penelitian ini merupakan sebuah \textit{proof of concept} yang memerlukan prosedur validasi ketat guna memastikan bahwa solusi portofolio yang dihasilkan selaras dengan pencarian solusi eksak. Prosedur validasi tersebut melibatkan metode \textit{brute force} yang mengevaluasi seluruh ruang keadaan kombinatorial secara deterministik. Selain itu, digunakan pula algoritma \textit{Sequential Least Squares Programming} (SLSQP) sebagai \textit{benchmark} performa industri untuk membandingkan efektivitas optimasi kontinu klasik terhadap pendekatan kuantum hibrida.
 
-\subsection{Formulasi Norma Kuadrat Amplitudo Probabilitas}
-\label{subsec:4_9_1_rumus}
+\subsection{Validasi Eksak melalui Algoritma \textit{Brute Force}}
 
-Distribusi probabilitas untuk setiap konfigurasi portofolio biner $x \in \{0, 1\}^N$ diperoleh melalui pengukuran fungsi gelombang kuantum final $|\psi(\vec{\theta}_{final})\rangle$. Secara matematis, probabilitas kemunculan bitstring $x$ didefinisikan melalui norma kuadrat amplitudo kompleks $\alpha_x$:
+Metode \textit{brute force} klasik bekerja dengan mengevaluasi nilai ekspektasi energi dari Hamiltonian total $\hat{\mathcal{H}}$ untuk setiap kemungkinan kombinasi portofolio biner dalam ruang Hilbert. Sebagai ilustrasi fisis, dilakukan evaluasi energi pada sampel data jendela Januari 2021 untuk sistem $N=2$ (BBCA dan TLKM) dengan parameter penalti $A = 4,1972$. Fungsi energi objektif $E(\vec{x})$ dihitung pada seluruh $2^N = 4$ keadaan basis sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Keadaan $|00\rangle$ (Tanpa Aset):} 
+    $E = \text{Obj}(0,0) + A(0+0-1)^2 = 0 + 4,1972(1) = 4,1972$.
+    \item \textbf{Keadaan $|01\rangle$ (Hanya TLKM):} 
+    $E = \text{Obj}(0,1) + A(0+1-1)^2 = -0,1183 + 0 = -0,1183$.
+    \item \textbf{Keadaan $|10\rangle$ (Hanya BBCA):} 
+    $E = \text{Obj}(1,0) + A(1+0-1)^2 = -0,1909 + 0 = -0,1909$.
+    \item \textbf{Keadaan $|11\rangle$ (Kedua Aset):} 
+    $E = \text{Obj}(1,1) + A(1+1-1)^2 \approx -0,29 + 4,1972 = 3,9072$.
+\end{enumerate}
+Hasil evaluasi tersebut menunjukkan bahwa keadaan $|10\rangle$ memiliki tingkat energi paling rendah, yang mana mengonfirmasi ketepatan sirkuit VQE dalam memusatkan amplitudo probabilitas pada konfigurasi aset yang paling optimal secara teoretis.
+
+\subsection{Optimasi Kontinu melalui Algoritma SLSQP}
+
+Algoritma \textit{Sequential Least Squares Programming} (SLSQP) merupakan metode optimasi numerik berbasis \textit{Sequential Quadratic Programming} (SQP) yang dirancang untuk menyelesaikan masalah minimisasi non-linear dengan batasan kesamaan (\textit{equality}) maupun ketidaksamaan (\textit{inequality}). Dalam konteks manajemen portofolio, SLSQP digunakan untuk menyelesaikan model Markowitz kontinu dengan formulasi fungsi biaya sebagai berikut:
 \begin{equation}
-    P(x) = |\langle x | \psi(\theta) \rangle|^2
+    \min_{w} f(w) = \left[ \frac{\gamma}{2} w^T \Sigma w - \mu^T w \right]
 \end{equation}
-di mana $\sum_x P(x) = 1$. Validitas sirkuit kuantum sebagai pemecah masalah optimasi diukur dari kemampuannya untuk memusatkan amplitudo probabilitas pada bitstring yang bersesuaian dengan energi Hamiltonian terendah.
+dengan batasan $\sum w_i = 1$ (anggaran penuh) dan $0 \leq w_i \leq 1$ (\textit{no short-selling}).
 
-\subsection{Analisis Sensitivitas Dominasi Amplitudo terhadap \textit{Noise} Parameter}
-\label{subsec:4_9_2_sensitivitas}
+Secara teknis, SLSQP beroperasi dengan melakukan linierisasi pada batasan dan menerapkan aproksimasi kuadratik pada fungsi objektif melalui ekspansi deret Taylor orde kedua. Pada setiap iterasi $k$, algoritma menyusun sub-masalah \textit{Quadratic Programming} (QP) untuk menentukan arah pencarian optimal $d_k$ dengan bentuk:
+\begin{equation}
+    \min_{d} \nabla f(w_k)^T d + \frac{1}{2} d^T B_k d
+\end{equation}
+di mana $B_k$ merupakan aproksimasi matriks Hessian dari fungsi Lagrangian yang diperbarui menggunakan skema \textit{Broyden-Fletcher-Goldfarb-Shanno} (BFGS). Setelah arah $d_k$ diperoleh, algoritma melakukan pembaruan bobot $w_{k+1} = w_k + \alpha_k d_k$, dengan $\alpha_k$ sebagai ukuran langkah yang ditentukan melalui prosedur \textit{line search}.
 
-Analisis sensitivitas menunjukkan bahwa stabilitas dominasi amplitudo solusi sangat bergantung pada tingkat kepresisian parameter sudut $\theta$. Adanya deviasi kecil pada sudut rotasi (akibat \textit{noise} atau penghentian dini \textit{optimizer}) dapat menurunkan nilai $P(x_{opt})$ dan meningkatkan probabilitas pada status sub-optimal. Namun, pengujian empiris membuktikan bahwa sirkuit kuantum tetap mampu mempertahankan bitstring optimal sebagai solusi dengan probabilitas tertinggi meskipun terdapat fluktuasi kecil pada lanskap energi. Hal ini mengonfirmasi ketangguhan algoritma hibrida dalam menavigasi ketidakpastian guna menemukan solusi global secara konsisten.
+\begin{algorithm}[H]
+\caption{Optimasi Portofolio Klasik SLSQP}
+\begin{algorithmic}[1]
+\State \textbf{Input:} Matriks Kovariansi $\Sigma$, Imbal Hasil $\mu$, Parameter Risiko $\gamma$
+\State \textbf{Inisialisasi:} Bobot awal $w_0$ (seragam), Matriks Hessian $B_0 = \mathbf{I}$
+\While{tidak konvergen (\textit{tol} $< 10^{-6}$)}
+    \State Hitung Gradien $\nabla f(w_k) = \gamma \Sigma w_k - \mu$
+    \State Susun sub-masalah QP dengan batasan linear $A w = b$
+    \State Selesaikan QP untuk mendapatkan arah pencarian $d_k$
+    \State Tentukan ukuran langkah $\alpha_k$ melalui \textit{line search}
+    \State Perbarui bobot: $w_{k+1} \leftarrow w_k + \alpha_k d_k$
+    \State Perbarui aproksimasi Hessian $B_{k+1}$ menggunakan formula BFGS
+\EndWhile
+\State \textbf{Output:} Bobot optimal kontinu $w^*$
+\State \textbf{Diskritisasi:} Pilih $K$ aset dengan $w^*$ tertinggi (\textit{Top-K Selection})
+\end{algorithmic}
+\end{algorithm}
 
-\subsection{Tabel Komparasi Output VQE terhadap \textit{Ground Truth} Klasik}
-\label{subsec:4_9_3_numerik}
-
-Hasil validasi eksak disajikan secara komprehensif pada Tabel \ref{tab:brute_force} di Lampiran \ref{appendix:numerical_data}. Sebagai contoh pada jendela Desember 2023, sirkuit kuantum menghasilkan amplitudo tertinggi pada status $|01\rangle$ dengan tingkat kepercayaan $>99\%$. Perbandingan dengan perhitungan \textit{brute force} klasik mengonfirmasi bahwa status $|01\rangle$ memang memiliki energi terendah ($\approx 0,027$) di antara seluruh kemungkinan kombinasi lainnya. Keberhasilan validasi "Oracle" ini memberikan jaminan matematis bahwa integrasi komputasi kuantum dalam manajemen portofolio memberikan solusi yang akurat dan dapat diandalkan secara absolut.
+Prosedur diskritisasi melalui \textit{Top-K Selection} diperlukan karena sirkuit VQE beroperasi pada domain biner, sementara SLSQP menghasilkan bobot dalam spektrum kontinu $[0,1]$. Dengan memilih $K$ aset yang memiliki alokasi bobot tertinggi, perbandingan antara metode klasik dan kuantum dapat dilakukan pada parameter batasan yang identik (\textit{fair comparison}). Hasil akhir dari algoritma ini berfungsi sebagai tolok ukur efisiensi alokasi modal yang akan dibandingkan dengan performa portofolio hasil optimasi VQE pada bab berikutnya.

@@ -367,6 +367,42 @@ Hidalgo, E\BPBI G.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Holmes%
+, Sharma%
+, Cerezo%
+\BCBL {}\ \BBA {} Coles%
+}{%
+Holmes%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+holmes_connecting_2022}
+\APACinsertmetastar {%
+holmes_connecting_2022}%
+\begin{APACrefauthors}%
+Holmes, Z.%
+, Sharma, K.%
+, Cerezo, M.%
+\BCBL {}\ \BBA {} Coles, P\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{{\APACmonth{01}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Connecting {Ansatz} {Expressibility} to {Gradient}
+  {Magnitudes} and {Barren} {Plateaus}} {Connecting {Ansatz} {Expressibility}
+  to {Gradient} {Magnitudes} and {Barren} {Plateaus}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{PRX Quantum}{3}{1}{010313}.
+\newblock
+\begin{APACrefURL}
+  [{2026-06-04}]\url{https://link.aps.org/doi/10.1103/PRXQuantum.3.010313}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1103/PRXQuantum.3.010313} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 {John Von Neumann}%
 \ \BBA {} {Oskar Morgenster}%
 }{%
@@ -1062,6 +1098,42 @@ Sikalo, M.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.3390/ijfs10010020} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Sim%
+, Johnson%
+\BCBL {}\ \BBA {} Aspuru‐Guzik%
+}{%
+Sim%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+sim_expressibility_2019}
+\APACinsertmetastar {%
+sim_expressibility_2019}%
+\begin{APACrefauthors}%
+Sim, S.%
+, Johnson, P\BPBI D.%
+\BCBL {}\ \BBA {} Aspuru‐Guzik, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{{\APACmonth{12}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Expressibility and {Entangling} {Capability} of
+  {Parameterized} {Quantum} {Circuits} for {Hybrid} {Quantum}‐{Classical}
+  {Algorithms}} {Expressibility and {Entangling} {Capability} of
+  {Parameterized} {Quantum} {Circuits} for {Hybrid} {Quantum}‐{Classical}
+  {Algorithms}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Advanced Quantum Technologies}{2}{12}{1900070}.
+\newblock
+\begin{APACrefURL}
+  [{2026-06-04}]\url{https://advanced.onlinelibrary.wiley.com/doi/10.1002/qute.201900070}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1002/qute.201900070} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

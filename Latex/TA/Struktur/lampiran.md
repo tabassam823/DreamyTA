@@ -11,3 +11,9 @@ tambah lampiran untuk data N=4
 8. proses matematis ansatz dalam mencari nilai energi terendah
 9. penurunan rumus entropi von neumann dari entropi shannon
 10. algoritma brute force oracle
+
+# Catatan revisi pak heru
+1. ada 3 grafik: brute force, tanpa gt, dan dengan gt
+2. apa itu brute force (Menyatakan bahwa brute force hanyalah sebagai validasi untuk N yang kecil Sebagai validator apakah algoritma sudah sesuai dengan apa yang kita inginkan. hal ini menyatakan sebagai proof of concept expressibility yang mana brute force tidak akan bisa berhasil untuk N sama dengan 500 seperti SNP500)
+3. perubahan yang dialami oleh keadaan di dalam sirkuit
+4. 

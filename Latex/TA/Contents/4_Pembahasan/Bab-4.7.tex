@@ -1,23 +1,29 @@
-\section{Analisis Stabilitas \textit{Warm-Start} Klasik pada Dinamika Entropi}
-\label{sec:4_7_stabilitas_warmstart}
+\section{Evolusi Entropi \textit{Von Neumann} dan Distribusi Probabilitas}
+\label{sec:4_7_entropi_vqe}
 
-Inisialisasi berbasis solusi klasik (\textit{warm-start}) memberikan karakteristik khusus pada awal proses pelatihan sirkuit kuantum.
-
-\subsection{Laju Perubahan Entropi Awal akibat Perturbasi SPSA}
-\label{subsec:4_7_1_rumus}
-
-Status awal sirkuit yang diatur pada basis PSNE (misal sudut $\pi$ atau 0) menghasilkan nilai entropi sistem sebesar 0 pada iterasi ke-0, yang mencerminkan kondisi klasik murni. Namun, aplikasi pembaruan parameter oleh SPSA pada langkah pertama memperkenalkan perturbasi $\pm c_k \Delta_k$ yang memicu perubahan entropi:
+Konsep entropi secara fundamental merepresentasikan ukuran derajat ketidakpastian atau keacakan informasi yang terkandung di dalam suatu sistem stokastik melalui kuantifikasi matematis yang presisi. Secara teoretis, keacakan ini dikonversi menjadi satuan informasi digital berupa \textit{bit} melalui penggunaan logaritma berbasis dua dalam formulasi entropi \textit{Shannon}. Satuan \textit{bit} tersebut mencerminkan jumlah minimum pertanyaan biner yang diperlukan untuk mengidentifikasi suatu keadaan sistem dari distribusi probabilitas yang diberikan secara objektif. Formulasi matematis entropi \textit{Shannon} ($H$) didefinisikan sebagai 
 \begin{equation}
-    \frac{\partial S}{\partial \theta} \approx \frac{S(\theta + c \Delta) - S(\theta - c \Delta)}{2c}
+H = -\sum_{i} p_i \log_2 p_i
 \end{equation}
-Persamaan (4.21) menggambarkan fase transisi di mana sirkuit "meronta" keluar dari kekakuan inisialisasi klasik untuk mencari solusi yang lebih baik melalui pembentukan superposisi kuantum.
+dengan nilai $-\log_2 p_i$ merepresentasikan kandungan informasi atau kejutan dari setiap kejadian individu. Dengan demikian, nilai entropi total merupakan nilai harapan dari kandungan informasi tersebut, yang secara fisis menunjukkan batas teoretis kompresi data dalam sistem informasi digital.
 
-\subsection{Analisis Sensitivitas Intensitas Perturbasi terhadap \textit{Entanglement Trap}}
-\label{subsec:4_7_2_sensitivitas}
+Dalam sistem kuantum, konsep ketidakpastian tersebut diperluas oleh John von Neumann menjadi entropi \textit{Von Neumann} untuk mengakomodasi sifat dualitas dan superposisi yang melekat pada operator densitas sistem. Entropi \textit{Von Neumann} ($S$) didefinisikan melalui \textit{trace} dari perkalian matriks densitas ($\rho$) dengan logaritma dari matriks tersebut yang mana merupakan representasi derajat kemurnian suatu keadaan kuantum dalam ruang Hilbert. Jika matriks densitas didiagonalisasi menjadi kumpulan nilai eigen ($\lambda_i$), maka formulasi entropi ini bertransformasi menjadi bentuk yang analog dengan entropi \textit{Shannon} namun bekerja pada spektrum \textit{eigenstate} kuantum
+\begin{equation}
+    S(\rho) = -\text{Tr}(\rho \log \rho) = -\sum_i \lambda_i \log \lambda_i
+    \label{eq:4_7_entropy}
+\end{equation}
+dengan proses derivasi pada lampiran \ref{appendix:entropy_derivation}.
 
-Analisis sensitivitas terhadap besarnya intensitas perturbasi awal menunjukkan adanya risiko \textit{entanglement trap}. Jika langkah awal SPSA terlalu agresif, sirkuit dapat terlempar ke wilayah ruang Hilbert dengan keterikatan maksimal (entropi $\approx 1,0$). Pada kondisi ini, sirkuit kehilangan arah navigasi gradien dan seringkali gagal untuk meruntuhkan kembali entropinya menuju status murni portofolio. Sebaliknya, perturbasi yang terkontrol memungkinkan sistem untuk melakukan eksplorasi kuantum yang sehat tanpa kehilangan jejak keuntungan strategis dari inisialisasi \textit{warm-start}.
+Dalam kasus optimasi portofolio keuangan menggunakan algoritma VQE, probabilitas keputusan yang didapatkan mengalami perubahan setiap iterasi evaluasi. Pada tahap awal iterasi, sirkuit kuantum biasanya menghasilkan distribusi probabilitas yang merata pada seluruh kemungkinan kombinasi basis keadaan, yang menandakan algoritma berada dalam keadaan superposisi maksimal dengan nilai entropi yang tinggi. Namun, seiring dengan pembaruan parameter oleh \textit{optimizer}, sistem mengalami keruntuhan fungsi gelombang menuju satu status basis tertentu hingga pada akhir iterasi didapatkan satu status optimal sebagai keputusan akhir portofolio. Untuk mendeteksi perubahan tersebut secara visual, dilakukan evaluasi distribusi probabilitas untuk seluruh iterasi yang dilakukan oleh \textit{optimizer} dan selanjutnya dilakukan perhitungan nilai entropinya sesuai dengan persamaan (\ref{eq:4_7_entropy}) pada lampiran \ref{appendix:window_analysis_n2} dan \ref{appendix:window_analysis_n4}. Indikator ini dapat merepresentasikan penurunan tingkat ketidakpastian sistem yang ditandai dengan peluruhan nilai entropi secara tajam menuju titik minimum dalam sistem yang ideal.
 
-\subsection{Komparasi Numerik: Status \textit{Pure Classical} vs \textit{Quantum Exploration}}
-\label{subsec:4_7_3_numerik}
+Integrasi \textit{Game Theory} (GT) sebagai inisialisasi (\textit{warm-start}) untuk algoritma VQE secara empiris mampu mempercepat proses peluruhan entropi dibandingkan dengan skenario tanpa teori permainan (\textit{NoGT}). Sebagai ilustrasi, pada skenario \textit{NoGT} pada Gambar \ref{fig:window_2022_06_23} sering kali menghasilkan distribusi probabilitas yang cenderung tersebar pada beberapa status kompetitor sehingga menghasilkan nilai entropi yang relatif tinggi dalam durasi yang lebih lama. Sebaliknya, mekanisme \textit{warm-start} berbasis ekuilibrium Nash memandu sirkuit untuk langsung mengeksplorasi wilayah ruang Hilbert yang memiliki probabilitas keberhasilan tinggi sehingga memicu pemusatan probabilitas mendekati 100 persen pada status optimal. Hal tersebut menunjukkan bahwa informasi strategis dari teori permainan adalah seusai yang efektif dalam mereduksi ketidakpastian informasi bahkan pada sistem dengan dimensi ruang solusi yang besar.
 
-Data simulasi mengungkap pola lonjakan (\textit{spike}) entropi yang konsisten pada sepuluh iterasi pertama. Pada iterasi ke-1, entropi tercatat meroket dari $0,0$ menjadi $0,98$ bit, yang menandakan sirkuit secara instan memasuki fase eksplorasi paralel yang masif. Keberhasilan optimasi ditandai dengan kemampuan sistem untuk menurunkan kembali nilai tersebut seiring dengan peningkatan iterasi. Analisis komparatif ini membuktikan bahwa strategi \textit{warm-start} tidak bersifat kaku, melainkan berfungsi sebagai sauh strategis yang tetap memberikan ruang bagi sistem kuantum untuk menyempurnakan solusi klasik melalui interferensi probabilitas.
+Secara kuantitatif, proses perhitungan entropi \textit{Von Neumann} pada setiap akhir iterasi dilakukan dengan mengevaluasi matriks densitas tereduksi dari status final sirkuit. Berdasarkan hasil optimasi sistem $N=2$ untuk sampel Januari 2021, probabilitas status $|10\rangle$ tercatat mencapai $P = 0,98$, dengan probabilitas sisa sebesar $0,02$ terdistribusi pada status lainnya. Dengan menetapkan nilai eigen dari matriks kepadatan tereduksi sebagai $\lambda_1 = 0,98$ dan $\lambda_2 = 0,02$, maka nilai entropi dihitung melalui prosedur berikut:
+\begin{equation*}
+    S(N=2) = -(0,98 \log_2 0,98 + 0,02 \log_2 0,02) \approx 0,1414 \text{ bit}.
+\end{equation*}
+Fenomena konvergensi yang serupa juga teramati pada sistem dengan $N=4$ aset meskipun ruang solusi membesar secara eksponensial menjadi $2^4 = 16$ status. Berdasarkan evaluasi numerik jendela pertama $N=4$, diperoleh probabilitas status optimal sebesar $P \approx 0,94$, yang kemudian digunakan untuk menghitung nilai entropi sebagai berikut:
+\begin{equation*}
+    S(N=4) = -(0,94 \log_2 0,94 + 0,06 \log_2 0,06) \approx 0,3274 \text{ bit}.
+\end{equation*}
+Nilai entropi akhir yang mendekati nol untuk skenario-skenario pada sistem $N=2$ dan $N=4$ mengindikasikan bahwa algoritma telah berhasil mengekstraksi status optimal dari lingkungan yang awalnya penuh dengan fluktuasi probabilitas. Meskipun demikian, perbedaan nilai entropi kedua sistem tersebut mencerminkan kompleksitas keterikatan pada ruang Hilbert yang lebih luas, namun tetap berada jauh di bawah ambang batas entropi maksimum sistem. 

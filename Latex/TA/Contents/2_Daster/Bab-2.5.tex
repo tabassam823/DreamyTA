@@ -6,6 +6,7 @@ Implementasi pemodelan Hamiltonian Ising pada sistem fisik nyata memerlukan arsi
 
 Representasi matematis dari basis komputasi ortogonal $|0\rangle$ dan $|1\rangle$ secara teknis dinyatakan melalui vektor kolom ortonormal yang mendefinisikan orientasi dasar dalam ruang Hilbert kompleks. Keadaan $|0\rangle$ dan $|1\rangle$ tersebut masing-masing mewakili nilai eigen $+1$ dan $-1$ dari operator observabel \textit{Pauli-Z}, yang menjadi referensi utama dalam proses pengukuran kuantum. Secara formal, bentuk matriks dari kedua basis keadaan tersebut di dalam representasi standar sirkuit kuantum didefinisikan melalui format persamaan berikut:
 \begin{equation}
+\label{eq:basis_keadaan}
 |0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
 \end{equation}
 Penyelarasan antara representasi vektor ini dengan sistem biner klasik memastikan bahwa setiap transformasi uniter yang bekerja pada \textit{qubit} tetap mempertahankan koherensi informasi selama fase evolusi sistem. Integrasi bentuk matriks ini mempermudah perhitungan numerik dalam simulasi Hamiltonian Ising yang memetakan korelasi aset ke dalam interaksi antar-basis keadaan tersebut secara presisi.
@@ -21,15 +22,18 @@ Adanya syarat normalisasi memungkinkan reduksi derajat kebebasan variabel komple
 
 Informasi yang tersimpan di dalam status superposisi tidak dapat diekstraksi secara langsung tanpa melalui mekanisme interaksi pengukuran yang memicu kolaps fungsi gelombang menjadi keadaan diskrit \cite{nielsen_quantum_2010}. Berdasarkan rumusan matematis Aturan Born, peluang untuk memperoleh hasil observasi tertentu dihitung secara presisi melalui kuadrat modulus dari amplitudo probabilitas untuk setiap basis keadaan sebagai berikut:
 \begin{equation}
+\label{eq:aturan_born}
 P(|0\rangle) = |\alpha|^2, \quad P(|1\rangle) = |\beta|^2
 \end{equation}
 Proses pengukuran ini secara fundamental memaksa sistem yang semula berada dalam ruang vektor kontinu untuk bertransformasi kembali menjadi representasi biner klasik yang dapat diproses lebih lanjut. Sifat probabilistik intrinsik dari pengukuran kuantum ini memungkinkan algoritma heuristik untuk melakukan eksplorasi ruang solusi secara non-deterministik guna menghindari jebakan nilai minimum lokal (\textit{local minima}) \cite{fedorov_vqe_2022}. Dengan memanfaatkan mekanisme kolaps tersebut, komputer kuantum dapat mengevaluasi kandidat portofolio secara efisien dan bertahap mengarahkan parameter sistem menuju titik optimasi global yang diinginkan \cite{wang_variational_2025}.
 
 Manipulasi informasi di dalam komputer kuantum dilakukan melalui penerapan gerbang-gerbang logika kuantum yang secara matematis direpresentasikan sebagai operator uniter yang bekerja pada ruang Hilbert kompleks \cite{nielsen_quantum_2010}. Setiap operator uniter $U$ wajib memenuhi syarat formal $U^\dagger U = I$ guna menjamin reversibilitas informasi serta konservasi total probabilitas sistem setelah setiap tahapan evolusi dijalankan secara fisik. Gerbang rotasi $R_x, R_y,$ dan $R_z$ merupakan instrumen esensial yang dibangun dari eksponensial operator Pauli guna memutar vektor keadaan pada sumbu koordinat Bola Bloch dengan parameter sudut $\theta$. Secara formal, representasi matriks uniter untuk ketiga gerbang rotasi dasar tersebut didefinisikan secara eksplisit untuk memfasilitasi kontrol parameter yang presisi di dalam sirkuit kuantum melalui persamaan berikut:
 \begin{equation}
+\label{eq:gerbang_rotasi_umum}
 R_{\sigma}(\theta) = \exp\left(-i\frac{\theta}{2}\sigma\right) = \cos \frac{\theta}{2} I - i \sin \frac{\theta}{2} \sigma
 \end{equation}
 \begin{equation}
+\label{eq:gerbang_rotasi_spesifik}
 R_x(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} & -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{pmatrix}, \quad R_y(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{pmatrix}, \quad R_z(\theta) = \begin{pmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{pmatrix}
 \end{equation}
 Pemetaan matriks uniter ini memungkinkan transformasi status \textit{qubit} dilakukan dengan tingkat fidelitas tinggi sehingga integrasi data finansial ke dalam domain kuantum tetap menjaga integritas struktural informasi yang diproses \cite{fedorov_vqe_2022}. Ketersediaan parameter sudut rotasi $\theta$ ini menjadi landasan utama bagi algoritma optimasi untuk mencari konfigurasi energi terendah pada lanskap Hamiltonian Ising yang kompleks.
@@ -37,9 +41,11 @@ Pemetaan matriks uniter ini memungkinkan transformasi status \textit{qubit} dila
 \subsection{Keterbelitan Kuantum (\textit{Entanglement})}
 Keterbelitan kuantum atau \textit{entanglement} merupakan fenomena non-lokal yang unik di mana keadaan satu \textit{qubit} tidak dapat didefinisikan secara independen dari keadaan \textit{qubit} lainnya di dalam sistem yang sama. Kondisi \textit{entanglement} ini secara teknis dipicu melalui penerapan gerbang multi-\textit{qubit} seperti CNOT (\textit{Controlled-NOT}) yang melakukan operasi pembalikan fasa pada \textit{qubit} target berdasarkan status \textit{qubit} kontrol secara uniter \cite{nielsen_quantum_2010}. Konstruksi matematis dari gerbang CNOT pada sistem dua-\textit{qubit} dibangun melalui kombinasi operator proyeksi basis keadaan dan operator \textit{Pauli-X} guna menjamin jalinan korelasi yang stabil antar-partikel fisik tersebut. Secara formal, representasi matriks untuk gerbang CNOT dengan kontrol pada \textit{qubit} 0 ($\text{CNOT}_{01}$) serta kontrol pada \textit{qubit} 1 ($\text{CNOT}_{10}$) didefinisikan melalui format persamaan berindeks sebagai berikut:
 \begin{equation}
+\label{eq:cnot01}
 \text{CNOT}_{01} = |0\rangle\langle 0| \otimes I + |1\rangle\langle 1| \otimes X = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
 \end{equation}
 \begin{equation}
+\label{eq:cnot10}
 \text{CNOT}_{10} = I \otimes |0\rangle\langle 0| + X \otimes |1\rangle\langle 1| = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix}
 \end{equation}
 Pemetaan matriks uniter ini memungkinkan komputer kuantum untuk merepresentasikan interdependensi korelasi silang antar-aset finansial secara lebih efisien dan akurat melalui pembentukan Keadaan Bell yang memiliki derajat keterbelitan maksimal.

@@ -1,23 +1,99 @@
-\section{Evolusi Entropi \textit{Von Neumann}: Eksplorasi Kuantum hingga Keruntuhan \textit{State}}
-\label{sec:4_6_entropi_vqe}
+\section{Optimasi \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA)}
+\label{sec:4_6_optimasi_spsa}
 
-Dinamika internal sirkuit kuantum dapat ditinjau secara mendalam melalui profil evolusi entropi sistem yang mencerminkan fase transisi informasi.
+Untuk mengatasi masalah efisiensi pada algoritma GD, digunakan algoritma SPSA sebagai optimasi navigasi pada fungsi biaya yang telah diterjemahkan ke dalam perangkat keras kuantum. Prinsip utama SPSA adalah melakukan estimasi seluruh komponen gradien hanya berdasarkan dua kali evaluasi fungsi biaya pada setiap iterasi. Oleh karena itu, SPSA lebih efisien dibandingkan GD karena hanya memerlukan sedikit evaluasi fungsi biaya pada setiap iterasi serta relatif kebal terhadap \textit{noise} pengukuran meskipun bekerja pada parameter berdimensi tinggi.
 
-\subsection{Kalkulasi Entropi melalui \textit{Reduced Density Matrix}}
+\subsection{Derivasi Estimator}
 \label{subsec:4_6_1_rumus}
 
-Entropi \textit{Von Neumann} $S(\rho)$ dikalkulasi untuk mengukur derajat kemurnian status kuantum selama iterasi optimasi. Untuk sistem portofolio dengan status kepadatan $\rho_{AB}$, entropi dari subsistem aset dihitung melalui \textit{reduced density matrix} $\rho_A = \text{Tr}_B(\rho_{AB})$ menggunakan persamaan:
+SPSA merupakan algoritma yang didasarkan pada nilai ekpektasi estimator gradien stokastik ($\hat{g}$) yang mana tetap setara dengan gradien energi sesungguhnya. Hal ini didapatkan dengan ekspansi deret Taylor pada evaluasi energi pada titik parameter $\theta$ dengan pergeseran maju ($E_+$) dan mundur ($E_-$) dengan vektor gangguan $\Delta_k$ dengan bentuk
 \begin{equation}
-    S(\rho_A) = -\text{Tr}(\rho_A \log_2 \rho_A) = -\sum_i \lambda_i \log_2 \lambda_i
+    \begin{split}
+    E_{+} &= E(\theta_k + c_k \Delta_k) \\ 
+    &\approx E(\theta_k) + c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^p \Delta_j^2 \frac{\partial^2 E}{\partial \theta_j^2} + \dots
+    \end{split}
+    \label{eq:derivation_spsa_plus}
 \end{equation}
-di mana $\lambda_i$ adalah nilai eigen dari $\rho_A$. Nilai entropi yang tinggi menunjukkan sirkuit berada dalam status superposisi atau keterikatan yang kuat, sementara nilai nol mengindikasikan sistem telah mengerucut menjadi satu status basis portofolio yang pasti.
+\begin{equation}
+    \begin{split}
+    E_{-} &= E(\theta_k - c_k \Delta_k) \\ 
+    &\approx E(\theta_k) - c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^p \Delta_j^2 \frac{\partial^2 E}{\partial \theta_j^2} - \dots
+    \end{split}
+    \label{eq:derivation_spsa_minus}
+\end{equation}
+Selisih kedua evaluasi tersebut menghilangkan suku orde genap ($c_k^2, c_k^4, \dots$):
+\begin{equation}
+    E_+ - E_- = 2 c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + O(c_k^3)
+    \label{eq:derivation_spsa_diff}
+\end{equation}
+Estimator gradien untuk komponen ke-$i$ didefinisikan sebagai
+\begin{equation}
+\hat{g}_i = \frac{E_+ - E_-}{2 c_k \Delta_i}.
+\label{eq:estimator_spsa}
+\end{equation}
+Dengan mensubstitusi Persamaan (\ref{eq:derivation_spsa_diff}) dan (\ref{eq:estimator_spsa}), maka diperoleh bentuk estimator gradien
+\begin{equation}
+    \begin{split}
+        \hat{g}_i &= \frac{1}{2c_k\Delta_i} 2 c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j}
+        &= \frac{1}{\Delta_i} \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} \\
+        &= \frac{\Delta_i}{\Delta_i} \frac{\partial E}{\partial \theta_i} + \sum_{j \neq i} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j}
+    \end{split}
+    \label{eq:estimator_spsa_subst}
+\end{equation}
+Vektor $\Delta_k$ dipilih mengikuti distribusi Rademacher dengan nilai $\pm 1$ sehingga nilai harapan ($\mathbb{E}$) terhadap distribusi tersebut
+\begin{equation}
+    \mathbb{E}[\hat{g}_i] = \frac{\partial E}{\partial \theta_i} + \sum_{j \neq i} \mathbb{E}\left[ \frac{\Delta_j}{\Delta_i} \right] \frac{\partial E}{\partial \theta_j}
+\end{equation}
+Karena $\mathbb{E}[\Delta_j / \Delta_i] = 0$ untuk $j \neq i$ akibat sifat independensi dan simetri distribusi, maka 
+\begin{equation}
+    \therefore \mathbb{E}[\hat{g}_i] = \frac{\partial E}{\partial \theta_i}.
+\end{equation}
 
-\subsection{Analisis Sensitivitas Kedalaman Gerbang Keterikatan}
-\label{subsec:4_6_2_sensitivitas}
+\subsection{Implementasi Numerik dan Konvergensi Energi Optimal}
+\label{subsec:4_6_2_numerik_fisis}
 
-Laju peluruhan entropi menuju status murni sangat dipengaruhi oleh jumlah gerbang keterikatan dalam sirkuit. Analisis sensitivitas menunjukkan bahwa sirkuit dengan keterikatan yang terlalu masif cenderung mempertahankan nilai entropi tinggi lebih lama, yang mencerminkan fase eksplorasi yang lebih luas namun lebih sulit untuk dikonvergensikan. Sebaliknya, sirkuit dengan keterikatan rendah meluruhkan entropi secara instan menuju status murni namun berisiko gagal mengevaluasi korelasi risiko antar aset secara komprehensif. Keseimbangan antara kapasitas eksplorasi (\textit{high entropy}) dan kecepatan eksploitasi solusi (\textit{low entropy}) merupakan faktor penentu dalam akurasi hasil VQE.
+Guna memberikan pemahaman operasional yang mendalam bagi pembaca, bagian ini menjabarkan satu siklus iterasi SPSA secara manual menggunakan bentuk Hamiltonian Ising $N=2$ yang telah diturunkan pada \S \ref{sec:4_3_pemetaan_hamiltonian}:
+\begin{equation}
+    \hat{\mathcal{H}} \approx 0,0915 \hat{Z}_1 + 0,0533 \hat{Z}_2 + 0,5022 \hat{Z}_1 \hat{Z}_2 - 0,1470
+\end{equation}
+Langkah-langkah perhitungan sistematis adalah sebagai berikut:
 
-\subsection{Implementasi Numerik: Superposisi vs Status Murni Portofolio}
-\label{subsec:4_6_3_numerik}
+\begin{enumerate}
+    \item \textbf{Inisialisasi Parameter dan Gangguan:}
+    Misalkan posisi parameter awal adalah $\theta^{(0)} = [\pi/2, \pi/2]^T \approx [1,5708, 1,5708]^T$. Dipilih koefisien gangguan $c_k = 0,1$ dan vektor gangguan Rademacher $\Delta_k = [1, -1]^T$. Maka, titik evaluasi parameter adalah:
+    \begin{equation*}
+        \theta_+ = \theta^{(0)} + c_k \Delta_k = [1,6708, 1,4708]^T, \quad \theta_- = \theta^{(0)} - c_k \Delta_k = [1,4708, 1,6708]^T
+    \end{equation*}
 
-Secara numerik, proses ini tercatat dalam riwayat entropi sirkuit. Sebagai contoh, pada awal iterasi saat sistem berada dalam superposisi maksimal (misal $\frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)$), entropi tercatat bernilai $1,0$ bit. Seiring berjalannya optimasi SPSA, nilai entropi teramati meluncur tajam menuju angka $<0,01$ bit pada iterasi akhir. Fenomena keruntuhan \textit{state} ini memberikan validasi empiris bahwa algoritma telah berhasil melakukan kristalisasi probabilitas dari ketidakpastian kuantum menuju satu konfigurasi portofolio deterministik yang memiliki utilitas strategis tertinggi.
+    \item \textbf{Estimasi Nilai Ekspektasi Energi ($E_{\pm}$):}
+    Guna menyederhanakan ilustrasi, kita asumsikan \textit{ansatz} sederhana di mana $\langle \hat{Z}_i \rangle = \cos(\theta_i)$. Maka fungsi biaya energinya menjadi:
+    \begin{equation*}
+        E(\theta) = 0,0915 \cos(\theta_1) + 0,0533 \cos(\theta_2) + 0,5022 \cos(\theta_1)\cos(\theta_2) - 0,1470
+    \end{equation*}
+    Substitusi nilai $\theta_+$ dan $\theta_-$ menghasilkan:
+    \begin{itemize}
+        \item $E_+ \approx 0,0915 \cos(1,6708) + 0,0533 \cos(1,4708) + 0,5022 \cos(1,6708)\cos(1,4708) - 0,1470 \approx -0,1557$.
+        \item $E_- \approx 0,0915 \cos(1,4708) + 0,0533 \cos(1,6708) + 0,5022 \cos(1,4708)\cos(1,6708) - 0,1470 \approx -0,1481$.
+    \end{itemize}
+
+    \item \textbf{Kalkulasi Estimator Gradien ($\hat{g}$):}
+    Selisih energi $\Delta E = E_+ - E_- = -0,1557 - (-0,1481) = -0,0076$. Estimator gradien dihitung sebagai:
+    \begin{equation*}
+        \hat{g} = \frac{\Delta E}{2 c_k \Delta_k} = \begin{pmatrix} -0,0076 / (2 \cdot 0,1 \cdot 1) \\ -0,0076 / (2 \cdot 0,1 \cdot -1) \end{pmatrix} = \begin{pmatrix} -0,038 \\ 0,038 \end{pmatrix}
+    \end{equation*}
+
+    \item \textbf{Pembaruan Parameter ($\theta^{(1)}$):}
+    Dengan menggunakan \textit{learning rate} $\eta = 0,1$, parameter diperbarui menjadi:
+    \begin{equation*}
+        \theta^{(1)} = \theta^{(0)} - \eta \hat{g} = \begin{pmatrix} 1,5708 \\ 1,5708 \end{pmatrix} - 0,1 \begin{pmatrix} -0,038 \\ 0,038 \end{pmatrix} = \begin{pmatrix} 1,5746 \\ 1,5670 \end{pmatrix}
+    \end{equation*}
+\end{enumerate}
+
+Dengan metode iterasi tersebut, hasil pengujian proses optimasi SPSA pada jendela kuantum Januari 2021 berhasil menemukan keadaan optimal sistem dengan distribusi energi untuk setiap kemungkinan konfigurasi bitstring sebagai berikut:
+\begin{itemize}
+    \item Keadaan $|00\rangle$: $E \approx 4,197$ (Keadaan terlarang / Penalti tinggi)
+    \item Keadaan $|01\rangle$: $E \approx -0,111$ (Sub-optimal)
+    \item Keadaan $|10\rangle$: $E \approx -0,187$ (\textit{Ground State} / Optimal Global)
+    \item Keadaan $|11\rangle$: $E \approx 3,907$ (Keadaan terlarang / Penalti tinggi)
+\end{itemize}
+

@@ -64,15 +64,18 @@ Efisiensi desentralisasi ini memungkinkan sistem untuk terus melakukan sinkronis
 \subsection{Konvergensi Markowitz dan Strategi Inisialisasi}
 Implementasi kerangka kerja \textit{Exact Potential Game} dalam pemilihan aset strategis dimulai dengan melakukan transformasi sistematis terhadap fungsi objektif \textit{Mean-Variance} Markowitz dari domain kontinu menuju representasi biner yang diskrit \cite{markowitz_portfolio_1952}. Proses binerisasi ini dilakukan dengan memetakan bobot portofolio ($\omega_i$) menjadi variabel keputusan $x_i \in \{0, 1\}$ melalui relasi $\omega_i = x_i / K$, di mana konstanta $K$ menyatakan jumlah total instrumen yang dipilih. Perubahan representasi ini memungkinkan masalah alokasi modal ditransformasikan menjadi pencarian konfigurasi sistem partikel yang saling berinteraksi guna meminimalkan total konflik atau risiko di dalam portofolio investasi \cite{abdul_hali_markowitz_2020}. Formulasi fungsi biaya yang semula dinyatakan dalam bentuk Lagrangian ($\mathcal{L}$) kemudian dikonversi menjadi fungsi utilitas ($U$) yang harus dimaksimalkan oleh para agen di pasar melalui persamaan berikut:
 \begin{equation}
+\label{eq:lagrangian_biner}
 \mathcal{L}(\mathbf{x}) = \frac{1}{K^2} \sum_{i,j} \sigma_{ij} x_i x_j - \frac{\lambda}{K} \sum_i \mu_i x_i
 \end{equation}
 \begin{equation}
+\label{eq:utilitas_biner}
 U(\mathbf{x}) = - \frac{1}{\lambda} \mathcal{L}(\mathbf{x}) = \sum_i \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j
 \end{equation}
 di mana $\gamma$ merepresentasikan parameter penghindaran risiko yang berbanding terbalik dengan toleransi risiko investor.
 
 Pembuktian model Markowitz sebagai sistem EPG yang koheren sangat bergantung pada sifat simetri dari matriks kovarians ($\sigma_{ij} = \sigma_{ji}$) yang memfasilitasi isolasi interaksi antar aset secara konsisten tanpa kehilangan informasi korelasi. Fungsi potensial global ($\Phi$) didefinisikan secara identik dengan fungsi utilitas sistem, di mana suku-suku interaksi kuadratik dapat didekomposisi guna mengidentifikasi kontribusi marginal dari setiap variabel keputusan individual agen. Dengan memanfaatkan properti biner $x_i^2 = x_i$, total energi potensial sistem dapat dipisahkan menjadi komponen utilitas lokal dan insentif marginal ($\Delta \Phi$) yang eksplisit bagi setiap pemain yang terlibat \cite{monderer_potential_1996}. Penurunan matematis ini membuktikan bahwa setiap insentif bagi agen untuk meningkatkan utilitas individualnya akan secara paralel meningkatkan nilai fungsi potensial global yang mencerminkan stabilitas portofolio melalui relasi berikut:
 \begin{equation}
+\label{eq:insentif_marginal}
 \Delta \Phi = \Phi(1, \mathbf{x}_{-i}) - \Phi(0, \mathbf{x}_{-i}) = \frac{\mu_i}{K} - \frac{\gamma \sigma_{ii}}{2K^2} - \frac{\gamma}{K^2} \sum_{j \neq i} \sigma_{ij} x_j
 \end{equation}
 Ekuilibrium Nash akan tercapai secara sistemik ketika tidak ada satu pun agen yang memiliki insentif positif ($\Delta \Phi > 0$) untuk mengubah status keputusannya secara sepihak di dalam ekosistem pasar modal.

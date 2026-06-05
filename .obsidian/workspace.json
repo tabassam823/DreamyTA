@@ -8,57 +8,43 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5e4481282e28d016",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Latex/TA/Struktur/4_Rencana_Revisi.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "4_Rencana_Revisi"
-            }
-          },
-          {
-            "id": "2698cd6016a4a789",
+            "id": "146806a6d3869904",
             "type": "leaf",
             "state": {
               "type": "image",
               "state": {
-                "file": "Latex/TA/MD_File/Main/7_GD_iii.png"
+                "file": "Latex/TA/MD_File/Main/1_QF_ii.png"
               },
               "icon": "lucide-image",
-              "title": "7_GD_iii"
+              "title": "1_QF_ii"
             }
           },
           {
-            "id": "146806a6d3869904",
+            "id": "afa990038ba6084b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Struktur/lampiran.md",
+                "file": "Latex/TA/Filtered_Paper/VQE/VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "lampiran"
+              "title": "VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance"
             }
           },
           {
-            "id": "54cd9095d9fc9a0c",
+            "id": "e0a45905d983dc7d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Temporary.md",
+                "file": "Latex/TA/Contents/4_Pembahasan/list_revisi_3jun.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Temporary"
+              "title": "list_revisi_3jun"
             }
           }
         ],
@@ -95,7 +81,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "dicke",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -116,7 +102,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "c38e9d58e7528e8a",
@@ -129,13 +116,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/MD_File/Main/7_GD_iii.png",
+                "file": "Latex/TA/Filtered_Paper/VQE/VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 7_GD_iii"
+              "title": "Outline of VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance"
             }
           }
         ]
@@ -260,54 +247,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "2698cd6016a4a789",
+  "active": "38d750c91b0c3cd4",
   "lastOpenFiles": [
-    "Latex/TA/MD_File/Main/7_GD_ii.png",
-    "Latex/TA/MD_File/Main/7_GD_iii.png",
-    "Latex/TA/MD_File/Main/9_Ansatz_i.png",
-    "Latex/TA/MD_File/Main/8_SPSA_ii.png",
-    "Latex/TA/MD_File/Main/8_SPSA_i.png",
-    "Latex/TA/MD_File/Main/5_EPG_ii.png",
-    "Latex/TA/MD_File/Main/6_QUBO_ii.png",
-    "Latex/TA/MD_File/Main/6_QUBO_i.png",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit/Expressibility_and_entangling_capability_of_parameterized_quantum_circuits_for_hybrid.md",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit_pdf/Expressibility_and_entangling_capability_of_parameterized_quantum_circuits_for_hybrid.md",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit_pdf/Expressibility_and_entangling_capability_of_parameterized_quantum_circuits_for_hybrid.pdf",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit_pdf/Connecting_Ansatz_Expressibility_to_Gradient_Magnitudes_and_Barren_Plateaus.pdf",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit/Connecting_Ansatz_Expressibility_to_Gradient_Magnitudes_and_Barren_Plateaus.md",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit/Connecting_Ansatz_Expressibility_to_Gradient_Magnitudes_and_Barren_Plateaus.pdf",
+    "Latex/TA/Filtered_Paper/General_parameter_shift_rules_for_quantum_gradients.md",
+    "Latex/TA/MD_File/Main/7_SPSA.md",
+    "Latex/TA/MD_File/Main/6_Gradient_Descent.md",
     "Latex/TA/MD_File/Main/5_QUBO.md",
+    "Latex/TA/MD_File/Main/1_QuantFinance.md",
+    "Latex/TA/MD_File/Main/1_QF_ii.png",
+    "Latex/TA/Contents/4_Pembahasan/list_revisi_3jun.md",
+    "Latex/TA/MD_File/Main/1_QF_i.png",
+    "Latex/TA/MD_File/Main/1_QuantFinance 1.md",
+    "Latex/TA/Contents/Lampiran/list_revisi_3jun.md",
+    "Latex/TA/consolidate_d.py",
+    "Latex/TA/consolidate_g.py",
+    "Latex/TA/fix_missing_j.py",
+    "Latex/TA/refactor_g.py",
+    "Latex/TA/refactor_d.py",
+    "Latex/TA/Contents/4_Pembahasan/list_revisi_2jun.md",
+    "Latex/TA/format_j2.py",
+    "Latex/TA/clean_tables.tex",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N8.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N6.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N4.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N2.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N12.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N10.png",
+    "Temporary.md",
+    "Latex/TA/Struktur/lampiran.md",
+    "home/asus/Documents/DreamyTA/Latex/TA/GTQuantumInvest/Hasil_N*_**GT/laporan_backtest_N2.txt.md",
+    "Latex/TA/MD_File/Main/3_Markowitz.md",
+    "Latex/TA/Struktur/3_7.md",
+    "Latex/TA/MD_File/Main/2_Risk_Avrsion.md",
     "Latex/TA/MD_File/Main/9_Entropi.md",
     "Latex/TA/MD_File/Main/10_BellDickeState.md",
-    "Latex/TA/MD_File/Main/10_Entropi_i.jpg",
+    "Latex/TA/MD_File/Main/7_GD_iii.png",
     "Latex/TA/Struktur/4_Rencana_Revisi.md",
-    "Latex/TA/Struktur/lampiran.md",
-    "Temporary.md",
+    "Latex/TA/MD_File/Main/7_GD_ii.png",
     "Latex/TA/Struktur/4.md",
     "Latex/TA/Filtered_Paper/New_Paper/Family_of_quantum_mutual_information_in_multiparty_quantum_systems.md",
     "Latex/TA/Filtered_Paper/New_Paper/Multiclass_portfolio_optimization_via_variational_quantum_Eigensolver_with_Dicke_state_ansatz.md",
     "Latex/TA/MD_File/Main/8_Ansatz.md",
-    "Latex/TA/MD_File/Main/10_Entropi_ii.jpg",
-    "Latex/TA/Contents/Lampiran/Lampiran-G.tex",
-    "Latex/TA/Contents/Lampiran/Lampiran-F.tex",
-    "Latex/TA/Contents/Lampiran/Lampiran-E.tex",
     "Latex/TA/Struktur/3_Rencana_Revisi.md",
-    "Latex/TA/MD_File/Main/5_QUBO_rev.md",
-    "Latex/TA/MD_File/Main/4_EPG.md",
-    "Latex/TA/MD_File/Main/3_Markowitz.md",
-    "Latex/TA/MD_File/Main/2_Risk_Avrsion.md",
-    "Latex/TA/MD_File/Main/1_QuantFinance 1.md",
-    "Latex/TA/MD_File/Main/1_QuantFinance.md",
-    "Latex/TA/Contents/Lampiran/Lampiran-D.tex",
-    "Latex/TA/Contents/Abstrak/Abstrak.tex",
-    "Latex/TA/Contents/Abstrak/Abstrak.aux",
-    "Latex/TA/Contents/Abstrak/Abstract.tex",
-    "Latex/TA/Contents/Abstrak/Abstract.aux",
-    "Latex/TA/Contents/Abstrak",
-    "Latex/TA/Contents/i_Abstrak/Abstrak.tex",
-    "Latex/TA/Contents/3_Metodologi/metodologi.md",
-    "Latex/TA/Contents/3_Metodologi/algoritma.md",
-    "Latex/TA/Struktur/3_1.md",
-    "Latex/TA/MD_File/DS/DS_Variational_Principle.md",
-    "Latex/TA/MD_File/DS/DS_SPSA.md",
-    "Latex/TA/MD_File/DS/DS_Haar.md",
-    "Latex/TA/MD_File/DS/DS_HIsing.md",
-    "Latex/TA/MD_File/DS/DS_Gate.md",
-    "Latex/TA/GTQuantumInvest/Hasil_N4_NoGT/Analisis_Window_N4/2023-12-04_window.png",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

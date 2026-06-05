@@ -1,27 +1,37 @@
 \section{Formulasi \textit{Exact Potential Game} (EPG) dan Pencarian \textit{Nash Equilibrium}}
 \label{sec:4_2_epg_nash}
 
-Implementasi kerangka kerja \textit{Game Theory} dalam penelitian ini dimulai dengan memetakan permasalahan optimasi Markowitz ke dalam domain \textit{Exact Potential Game} (EPG). Dalam sistem ini, setiap aset dianggap sebagai agen strategis yang berusaha memaksimalkan fungsi utilitas individunya melalui pemilihan status kepemilikan biner $x_i \in \{0, 1\}$.
+Formulasi \textit{Game Theory} dimulai dengan memetakan permasalahan optimasi Markowitz ke dalam domain \textit{Exact Potential Game} (EPG). Formulasi dasar yang digunakan merujuk pada model \textit{Mean-Variance} biner yang telah dijabarkan pada Persamaan (\ref{eq:utilitas_biner}). Dalam sistem permainan ini, setiap aset dianggap sebagai agen strategis yang berusaha memaksimalkan utilitasnya. Untuk memenuhi kendala anggaran secara fisis, digunakan aturan pemilihan aset sebanyak setengah dari total opsi instrumen yang tersedia ($k = N/2$). Dengan demikian, total bobot portofolio memenuhi syarat $\sum \omega_i = \sum \frac{x_i}{k} = 1$, yang konsisten dengan batasan kapital investasi.
 
-\subsection{Penurunan Matematis Fungsi Potensial Monderer-Shapley}
-\label{subsec:4_2_1_rumus}
-
-Berdasarkan teori yang dikembangkan oleh Monderer dan Shapley, sebuah permainan dikategorikan sebagai EPG apabila terdapat sebuah fungsi potensial skalar $\Phi(\vec{x})$ sedemikian rupa sehingga selisih utilitas individu $\Delta u_i$ akibat perubahan strategi satu agen secara eksak sama dengan selisih nilai fungsi potensial tersebut. Konstruksi fungsi potensial untuk portofolio Markowitz didefinisikan sebagai berikut:
+\subsection{Formulasi EPG}
+Berdasarkan teorema Monderer dan Shapley, sebuah permainan dikategorikan sebagai EPG apabila terdapat sebuah fungsi potensial skalar $\Phi(\vec{x})$ sedemikian rupa sehingga selisih utilitas individu $\Delta u_i$ akibat perubahan strategi satu agen secara eksak sama dengan selisih nilai fungsi potensial tersebut. Fungsi potensial diperoleh dari ekspansi fungsi biaya portofolio
 \begin{equation}
-    \Phi(\vec{x}) = \sum_{l=1}^N \mu_l x_l - \frac{\gamma}{2} \sum_{i=1}^N \sum_{j=1}^N \sigma_{ij} x_i x_j
+    \Phi(\vec{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{k} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{k} \frac{x_j}{k}.
 \end{equation}
-di mana $\mu_l$ adalah imbal hasil ekspektasi, $\sigma_{ij}$ adalah kovarians antar aset, dan $\gamma$ adalah parameter \textit{risk aversion}. Pembuktian ekuivalensi antara selisih utilitas individu dengan selisih fungsi potensial dapat ditunjukkan melalui derivasi perubahan status agen ke-$i$ dari $x_i$ menjadi $x_i^\prime$:
+Untuk mengidentifikasi kontribusi marginal agen ke-$i$, dilakukan dekomposisi jumlahan tersebut dengan memisahkan suku-suku yang mengandung variabel $x_i$ dan memanfaatkan properti variabel biner $x_i^2 = x_i$:
 \begin{equation}
-    \Delta \Phi = \Phi(x_i, \vec{x}_{-i}) - \Phi(x_i^{\prime}, \vec{x}_{-i}) = u_i(x_i, \vec{x}_{-i}) - u_i(x_i^{\prime}, \vec{x}_{-i})
+    \Phi(\vec{x}) = \frac{\mu_i}{k}x_i - \frac{\gamma}{2} \left( \frac{\sigma_i^2}{k^2}x_i + \frac{2}{k^2}x_i \sum_{j < i} \sigma_{ij}x_j \right) + \sum_{l \neq i} \frac{\mu_l}{k}x_l - \frac{\gamma}{2} \sum_{l \neq i} \sum_{m \neq i} \frac{\sigma_{lm}}{k^2}x_l x_m
+    \label{eq:potential_function}
 \end{equation}
-Hubungan pada Persamaan (4.15) memastikan bahwa setiap langkah peningkatan utilitas individu yang dilakukan oleh agen secara otomatis akan menurunkan total energi potensial sistem, yang menjamin konvergensi menuju titik ekuilibrium.
+Derivasi pada Persamaan (\ref{eq:potential_function}) menghasilkan selisih fungsi potensial $\Delta \Phi$ sebagai insentif marginal saat agen $i$ mengubah status dari 0 menjadi 1:
+\begin{equation}
+    \Delta \Phi(\vec{x}) = \Phi(1, \vec{x}_{-i}) - \Phi(0, \vec{x}_{-i}) = \frac{\mu_i}{k} - \frac{\gamma \sigma_i^2}{2k^2} - \gamma \sum_{j < i} \sigma_{ij} \frac{x_j}{k^2}
+    \label{eq:delta_phi}
+\end{equation}
+Hubungan matematis pada Persamaan (\ref{eq:delta_phi}) menyatakan bahwa setiap langkah peningkatan utilitas lokal agen akan secara otomatis meningkatkan stabilitas potensial global sistem menuju titik kesetimbangan.
 
-\subsection{Analisis Sensitivitas Parameter \textit{Risk Aversion} terhadap Ekuilibrium}
-\label{subsec:4_2_2_sensitivitas}
-
-Parameter \textit{risk aversion} ($\gamma$) memegang peranan vital dalam menentukan letak \textit{Pure Strategy Nash Equilibrium} (PSNE) dalam ruang solusi. Analisis sensitivitas menunjukkan bahwa peningkatan nilai $\gamma$ akan memperbesar penalti pada suku interaksi kuadratik ($\sigma_{ij}$), yang secara fisis mendorong agen untuk memilih strategi yang meminimalkan korelasi risiko sistemik. Pada kondisi $\gamma$ rendah, sistem cenderung bersifat agresif dengan memprioritaskan aset berimbal hasil tinggi meskipun memiliki volatilitas besar. Sebaliknya, pada nilai $\gamma$ yang tinggi, titik ekuilibrium bergeser menuju kombinasi aset yang lebih stabil atau diversifikasi yang lebih luas guna menghindari konsentrasi risiko. Dinamika ini membuktikan bahwa stabilitas strategis dalam model EPG sangat bergantung pada preferensi risiko yang ditetapkan oleh investor.
-
-\subsection{Implementasi Numerik Pencarian \textit{Nash Equilibrium} melalui SBR}
-\label{subsec:4_2_3_numerik}
-
-Pencarian titik ekuilibrium dilakukan secara numerik menggunakan algoritma \textit{Stochastic Best Response} (SBR). Dinamika pencarian ini tercatat secara kronologis pada Tabel \ref{tab:nash_history} di Lampiran \ref{appendix:numerical_data}. Sebagai ilustrasi pada jendela waktu Maret 2021, proses diawali dengan status inisial $|10\rangle$ (aset BBCA terpilih). Namun, evaluasi terhadap matriks \textit{payoff} menunjukkan bahwa transisi menuju status $|01\rangle$ (aset TLKM terpilih) memberikan peningkatan utilitas marginal yang lebih besar bagi sistem setelah mempertimbangkan kovariansi pada periode tersebut. Keberhasilan algoritma SBR dalam mencapai konvergensi PSNE ini memberikan solusi klasik definitif yang akan berperan sebagai titik tolak (\textit{warm-start}) bagi sirkuit kuantum pada tahapan berikutnya.
+\subsection{Pencarian \textit{Nash Equilibrium}}
+Pencarian \textit{Nash Equilibrium} dilakukan secara numerik pada sistem permainan $N=2$ dan $N=4$ menggunakan algoritma \textit{Stochastic Best Response} (SBR). Untuk kasus $N=2$ menggunakan data Januari 2021, matriks \textit{payoff} ($u_{BBCA}, u_{TLKM}$) disusun guna mengevaluasi interaksi strategis sebagai berikut:
+\begin{table}[H]
+    \centering
+    \caption{Matriks \textit{Payoff} Strategis Sistem N=2 (Januari 2021).}
+    \label{tab:payoff_n2}
+    \begin{tabular}{cc|c|c|}
+    \cline{3-4}
+    & & \multicolumn{2}{c|}{Aset TLKM ($x_2$)} \\ \cline{3-4}
+    & & Status 0 & Status 1 \\ \hline
+    \multicolumn{1}{|c|}{\multirow{2}{*}{Aset BBCA ($x_1$)}} & Status 0 & (0, 0) & (0, 0,1183) \\ \cline{2-4} 
+    \multicolumn{1}{|c|}{} & Status 1 & (0,1909, 0) & (0,1901, 0,1175) \\ \hline
+    \end{tabular}
+\end{table}
+Berdasarkan Tabel \ref{tab:payoff_n2}, status $|10\rangle$ (BBCA terpilih) memberikan utilitas marginal tertinggi bagi sistem. Pada kasus $N=4$ dengan $k=2$, matriks \textit{payoff} menjadi tensor multidimensi yang lebih kompleks di mana interaksi risiko antar empat sektor dipertimbangkan secara simultan. Pencarian equilibrium pada sistem $N=4$ dilakukan melalui iterasi SBR yang mengevaluasi transisi status dari $|1100\rangle$ menuju status dengan kombinasi utilitas marginal tertimbang yang lebih besar (misal $|0110\rangle$), sebagaimana tercatat secara terurut pada Tabel \ref{tab:nash_history_n4} di Lampiran \ref{appendix:numerical_data_n4}. Hasil akhir ini memberikan inisialisasi kepada algoritma utama VQE, sehingga memungkinkan VQE melompati hambatan lokal pada lanskap energi kuantum.

@@ -1,23 +1,61 @@
-\section{Dinamika \textit{Rebalancing} Jendela Waktu Ekstrem (\textit{Window Analysis})}
+\section{Dinamika \textit{Rebalancing} Jendela Waktu Ekstrem}
 \label{sec:4_11_window_analysis}
 
-Analisis mikroskopis terhadap jendela waktu \textit{rebalancing} dilakukan untuk memahami mekanisme respon algoritma terhadap anomali pasar.
+Analisis mikroskopis terhadap mekanisme \textit{rebalancing} dilakukan guna membedah bagaimana algoritma hibrida merespons guncangan pasar secara situasional.
 
-\subsection{Relasi Perubahan Hamiltonian terhadap Fluktuasi Pasar}
-\label{subsec:4_11_1_rumus}
+Proses penyeimbangan ulang portofolio biner dalam penelitian ini bekerja melalui siklus pembaruan Hamiltonian yang dipicu oleh masuknya data runtun waktu terbaru di setiap jendela (\textit{window}) simulasi. Algoritma \textit{rebalancing} diawali dengan mengekstraksi matriks korelasi dan imbal hasil ekspektasian terkini, yang kemudian dikonversi menjadi parameter bias lokal ($h_i$) dan interaksi kopling ($J_{ij}$) pada operator Hamiltonian sistem. Perubahan nilai parameter fisis ini secara otomatis merubah lanskap energi, di mana titik minimum (\textit{ground state}) dapat bergeser secara radikal dari satu konfigurasi spin ke konfigurasi lainnya.
 
-Setiap perubahan pada runtun waktu harga saham secara langsung merubah profil imbal hasil ekspektasi ($\mu$) dan matriks kovariansi ($\Sigma$) yang masuk ke sistem. Secara matematis, fluktuasi data pasar ini memicu pergeseran gradien pada lanskap energi Hamiltonian:
-\begin{equation}
-    \delta \hat{\mathcal{H}} = \sum_{i} \delta h_i \hat{Z}_i + \sum_{i,j} \delta J_{ij} \hat{Z}_i \hat{Z}_j
-\end{equation}
-Respon sirkuit kuantum terhadap $\delta \hat{\mathcal{H}}$ direpresentasikan melalui pembaruan parameter sudut $\theta$ yang menggeser amplitudo probabilitas dari satu status basis ke status basis lainnya guna meminimalkan energi baru sistem.
+Dinamika ini teramati secara jelas pada transisi jendela kritis Februari--Maret 2021 (merujuk pada Gambar \ref{fig:window_2021_02_02} dan Gambar \ref{fig:window_2021_03_04} di Lampiran \ref{appendix:window_analysis}). Pada periode tersebut, terjadi lonjakan risiko pada aset sektor perbankan (BBCA) yang direpresentasikan oleh peningkatan koefisien interaksi risiko pada Hamiltonian. Merespons pergeseran energi ini, sirkuit kuantum melakukan rotasi parameter sudut $\theta$ secara instan guna memindahkan amplitudo probabilitas dari status $|10\rangle$ menuju status $|01\rangle$. Mekanisme ini membuktikan bahwa strategi hibrida memiliki agilitas yang sangat tinggi dalam mengeksplorasi jalur energi paling efisien tanpa melalui hambatan komputasi klasik yang kaku. Dampak yang paling signifikan dari stabilitas \textit{warm-start} ini terlihat pada pemilihan kedalaman sirkuit (\textit{depth}) yang optimal secara dinamis. Berdasarkan laporan kinerja, ditemukan bahwa dengan dukungan EPG, sistem secara konsisten memilih \textit{depth} yang rendah (mayoritas pada Depth 2) sebagai konfigurasi terbaik untuk meminimalkan energi Hamiltonian. Temuan ini membuktikan bahwa penggunaan \textit{warm-start} tidak hanya meningkatkan akurasi, tetapi juga mengefisiensikan daya komputasi secara signifikan.
 
-\subsection{Analisis Sensitivitas Kecepatan Respon Sirkuit}
-\label{subsec:4_11_2_sensitivitas}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_GT/hasil_backtest_nash_N2.png}
+        \caption{Strategi \textit{Nash} (Klasik)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_NoGT/hasil_backtest_vqe_N2.png}
+        \caption{VQE (Tanpa \textit{Game Theory})}
+    \end{subfigure}
+    \caption{Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=2.}
+    \label{fig:comp_n2_base}
+\end{figure}
 
-Analisis sensitivitas terhadap kecepatan respon (\textit{agility}) menunjukkan bahwa algoritma GT-VQE mampu melakukan penyesuaian sudut $\theta$ secara radikal dalam waktu iterasi yang singkat saat terjadi lonjakan volatilitas. Kemampuan sirkuit kuantum untuk melakukan rotasi parameter secara presisi memungkinkan portofolio untuk mengeksekusi strategi \textit{switching} total dengan efisien. Tanpa adanya integrasi keterikatan kuantum yang fleksibel, proses penyeimbangan ulang portofolio biner cenderung kaku dan lambat dalam menanggapi pergeseran profil risiko yang terjadi secara mendadak di pasar modal.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_GT/hasil_backtest_nash_N4.png}
+        \caption{Strategi \textit{Nash} (Klasik)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_NoGT/hasil_backtest_vqe_N4.png}
+        \caption{VQE (Tanpa \textit{Game Theory})}
+    \end{subfigure}
+    \caption{Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=4.}
+    \label{fig:comp_n4_base}
+\end{figure}
 
-\subsection{Analisis Kuantitatif Pergeseran Bobot Jendela Kritis}
-\label{subsec:4_11_3_numerik}
+Efektivitas dari mekanisme \textit{rebalancing} hibrida ini secara kumulatif menghasilkan kurva pertumbuhan modal yang stabil dan superior. Perbandingan pada Gambar \ref{fig:comp_n2_base} dan \ref{fig:comp_n4_base} menunjukkan bahwa tanpa integrasi kecerdasan strategis, performa VQE murni cenderung tertahan atau bahkan mengalami degradasi saat dimensi sistem membesar. Namun, dengan integrasi \textit{Game Theory} (GT) sebagai pemandu, sirkuit mampu mempertahankan integritas solusinya. Hal ini terbukti pada visualisasi Gambar \ref{fig:rebalancing_impact} yang menunjukkan pertumbuhan modal yang konsisten pada kedua konfigurasi sistem. Dengan demikian, algoritma ini mampu melindungi nilai portofolio dari potensi kerugian (\textit{drawdown}) melalui deteksi dini pergeseran ekuilibrium pasar yang dimanifestasikan ke dalam dinamika fisis sirkuit kuantum.
 
-Studi kasus pada jendela kritis Februari--Maret 2021 (merujuk pada Gambar \ref{fig:window_2021_02_02} dan Gambar \ref{fig:window_2021_03_04} di Lampiran \ref{appendix:window_analysis}) menunjukkan dinamika \textit{rebalancing} yang ekstrem. Pada Februari 2021, sirkuit mengalokasikan bobot penuh pada aset BBCA. Namun, masuknya data baru pada Maret 2021 yang menunjukkan lonjakan risiko BBCA relatif terhadap TLKM memicu sirkuit untuk memutar sudut rotasinya sebesar $\approx \pi$ rad. Hal ini mengakibatkan pergeseran probabilitas dominan dari status $|10\rangle$ menuju $|01\rangle$ secara instan. Agilitas ini membuktikan bahwa model hibrida \textit{Game-Quantum} memiliki kecerdasan situasional yang sangat responsif dalam melindungi nilai portofolio dari guncangan pasar.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_GT/hasil_backtest_vqe_N2.png}
+        \caption{Performa GT-VQE ($N=2$)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_GT/hasil_backtest_vqe_N4.png}
+        \caption{Performa GT-VQE ($N=4$)}
+    \end{subfigure}
+    \caption{Perbandingan Visual Pertumbuhan Modal pada Sistem N=2 dan N=4 sebagai Hasil dari Algoritma \textit{Rebalancing} Strategis.}
+    \label{fig:rebalancing_impact}
+\end{figure}
