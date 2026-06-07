@@ -28,52 +28,51 @@ ptr=1, stack=
 
 ---the literal stack isn't empty for entry hidalgo_quantum_2006
 while executing---line 5079 of file apacite.bst
-Warning--No journal in padilla_quantum_2025
 Warning--No journal in sarkar_quantum_2018
 ptr=1, stack=
 
 ---the literal stack isn't empty for entry sarkar_quantum_2018
 while executing---line 5079 of file apacite.bst
 Warning--No journal in spall_implementation_1998
-You've used 42 entries,
+You've used 41 entries,
             6951 wiz_defined-function locations,
-            1615 strings with 22191 characters,
-and the built_in function-call counts, 85027 in all, are:
-= -- 10072
-> -- 730
-< -- 4142
-+ -- 4196
-- -- 88
-* -- 5954
-:= -- 15613
-add.period$ -- 171
-call.type$ -- 42
-change.case$ -- 784
+            1612 strings with 22008 characters,
+and the built_in function-call counts, 82827 in all, are:
+= -- 9807
+> -- 720
+< -- 3992
++ -- 4056
+- -- 86
+* -- 5794
+:= -- 15104
+add.period$ -- 167
+call.type$ -- 41
+change.case$ -- 765
 chr.to.int$ -- 0
-cite$ -- 88
-duplicate$ -- 2428
-empty$ -- 3497
-format.name$ -- 1263
-if$ -- 15854
+cite$ -- 85
+duplicate$ -- 2400
+empty$ -- 3435
+format.name$ -- 1249
+if$ -- 15484
 int.to.chr$ -- 0
-int.to.str$ -- 126
+int.to.str$ -- 123
 missing$ -- 0
-newline$ -- 1232
-num.names$ -- 338
-pop$ -- 1198
+newline$ -- 1210
+num.names$ -- 330
+pop$ -- 1180
 preamble$ -- 1
-purify$ -- 236
+purify$ -- 230
 quote$ -- 0
-skip$ -- 5267
+skip$ -- 5140
 stack$ -- 0
-substring$ -- 4557
-swap$ -- 1465
-text.length$ -- 171
+substring$ -- 4412
+swap$ -- 1447
+text.length$ -- 167
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 3488
-warning$ -- 4
-while$ -- 499
+type$ -- 3408
+warning$ -- 3
+while$ -- 492
 width$ -- 0
-write$ -- 1522
+write$ -- 1498
 (There were 2 error messages)

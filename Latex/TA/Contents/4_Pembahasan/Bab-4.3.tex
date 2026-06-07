@@ -10,7 +10,7 @@ Perubahan permasalahan dari domain klasik menuju komputasi kuantum memerlukan al
     \end{split}
 \end{equation}
 
-\subsection{Penurunan Matriks Fungsi Energi dan Suku Penalti}
+\subsection{Matriks Fungsi Energi dan Suku Penalti}
 
 Setelah mengubah fungsi potensial $\Phi(\vec{x})$ menjadi fungsi energi $E(\vec{x})$ sebagaimana pada persamaan (\ref{eq:energy_function}), langkah selanjutnya adalah mengubah persamaan ke dalam representasi matriks. Dalam representasi matriks, fungsi energi $E(\vec{x})$ dapat dinyatakan sebagai
 \begin{equation}
@@ -31,10 +31,12 @@ di mana $\mathbf{A}$ adalah matriks yang seluruh elemennya bernilai $A$. Dengan 
 Langkah selanjutnya adalah memetakan variabel biner $x_i \in \{0, 1\}$ ke spin Ising $s_i \in \{1, -1\}$ melalui transformasi affine $x_i = (1 - s_i)/2$. 
 \begin{equation}
 \begin{split}
-    E_{total}(\vec{x}) &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A\right)\left(\frac{s_i+1}{2}\right) + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} \right) \left(\frac{s_i+1}{2}\right)\left(\frac{s_j+1}{2}\right) -Ak \\
-    &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) \left(s_is_j + s_i + s_j + 1\right) -Ak \\
-    &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
-    &= \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
+    E_{total}(\vec{x}) =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A\right)\left(\frac{s_i+1}{2}\right) + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} \right) \left(\frac{s_i+1}{2}\right)\left(\frac{s_j+1}{2}\right) -Ak \\
+    =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) \left(s_is_j + s_i + s_j + 1\right) -Ak \\
+    =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j \\
+    &+ \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
+    =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i \\
+    &+ \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
 \end{split}
 \end{equation}
 Substitusi ini menghasilkan operator Hamiltonian sistem ($\hat{\mathcal{H}}$) yang dinyatakan dalam gerbang Pauli-Z ($\hat{Z}$). sehingga dapat didefinisikan

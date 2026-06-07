@@ -1,4 +1,5 @@
 \section{Hamiltonian Ising sebagai Representasi Sistem Kuantum}
+\label{sec:hamiltonian_ising}
 Setiap sistem fisik yang perilakunya didorong oleh prinsip minimisasi energi dapat direpresentasikan ke dalam Hamiltonian operator secara universal, tidak terkecuali pada konfigurasi seleksi aset finansial yang memiliki kompleksitas variabel yang sangat tinggi. Dalam kerangka ekonofisika, proses pengambilan keputusan untuk alokasi portofolio strategis dipetakan ke dalam lanskap energi di mana solusi optimal secara teknis setara dengan konfigurasi energi terendah atau \textit{ground state} dari sistem tersebut \cite{lucas_ising_2014}. Pemetaan ini menganggap setiap instrumen investasi sebagai partikel \textit{spin} yang saling berinteraksi, di mana derajat korelasi antar pergerakan harga dimodelkan sebagai koefisien kopling di dalam sebuah kisi kristal yang terstruktur \cite{galam_ising_2010}. Representasi Hamiltonian Ising tersebut menyediakan jembatan teoretis antara optimasi kombinatorial klasik dengan perangkat keras kuantum yang memungkinkan penggunaan algoritma variasi untuk menavigasi ruang solusi berdimensi tinggi secara efisien \cite{hidalgo_quantum_2006}. Oleh karena itu, pemodelan sistem finansial sebagai sistem fisik memungkinkan analisis yang lebih ketat terhadap stabilitas pasar dan fenomena transisi fase melalui kacamata mekanika statistik yang telah mapan.
 
 \subsection{Sejarah dan Evolusi Model Ising}
@@ -8,7 +9,7 @@ Meskipun memiliki landasan yang kuat, studi orisinal oleh Ernst Ising pada siste
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/1D_Model_atT.png}
-    \caption{Representasi visual model Ising satu dimensi (1D) yang menunjukkan dinamika orientasi \textit{spin} dan klasifikasi energi interaksi ($\bullet$, $\mathbf{X}$, \textcolor{blue}{$\circ$}) di bawah pengaruh fluktuasi termal \cite{chamberlin_nanothermodynamics_2024}.}
+    \caption[Representasi visual model Ising satu dimensi (1D)]{Representasi visual model Ising satu dimensi (1D) yang menunjukkan dinamika orientasi \textit{spin} dan klasifikasi energi interaksi ($\bullet$, $\mathbf{X}$, \textcolor{blue}{$\circ$}) di bawah pengaruh fluktuasi termal \cite{chamberlin_nanothermodynamics_2024}.}
     \label{fig:1D_Ising}
 \end{figure}
 Kekakuan hasil matematis pada dimensi tunggal ini sempat memicu skeptisisme terhadap relevansi fisik model Ising, sebelum akhirnya paradigma tersebut berubah total setelah Lars Onsager merumuskan solusi eksak untuk kasus dua dimensi yang sangat kompleks.

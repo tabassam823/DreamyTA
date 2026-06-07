@@ -1,18 +1,17 @@
 \chapter{Analisis Perbandingan Imbal Hasil Sederhana dan Logaritmik}
 \label{appendix:returns_comparison}
 
-Imbal hasil sederhana ($R_t$) didefinisikan sebagai perubahan persentase harga relatif:
+Imbal hasil sederhana ($R_t$) didefinisikan sebagai perubahan persentase harga relatif
 \begin{equation}
-    R_t = \frac{P_t}{P_{t-1}} - 1
+    R_t = \frac{P_t}{P_{t-1}} - 1.
 \end{equation}
-Imbal hasil logaritmik ($r_t$) didefinisikan menggunakan logaritma natural:
+Sedangkan imbal hasil logaritmik ($r_t$) didefinisikan menggunakan logaritma natural
 \begin{equation}
-    r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(1 + R_t)
+    r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(1 + R_t).
 \end{equation}
-
-Melalui ekspansi deret Taylor orde kedua untuk fungsi $\ln(1+x) \approx x - \frac{x^2}{2}$, kita dapat melihat hubungan antara ekspektasi kedua jenis imbal hasil tersebut:
+Melalui ekspansi deret Taylor orde kedua untuk fungsi $\ln(1+x) \approx x - \frac{x^2}{2}$, maka hubungan antara ekspektasi kedua jenis imbal hasil tersebut dapat dilihat melalui
 \begin{equation}
-    E[r_t] = E[\ln(1 + R_t)] \approx E\left[ R_t - \frac{R_t^2}{2} \right] = E[R_t] - \frac{1}{2} E[R_t^2]
+    E[r_t] = E[\ln(1 + R_t)] \approx E\left[ R_t - \frac{R_t^2}{2} \right] = E[R_t] - \frac{1}{2} E[R_t^2].
 \end{equation}
 Dengan asumsi imbal hasil harian kecil, maka $E[R_t^2] \approx Var(R_t)$, sehingga:
 \begin{equation}
@@ -22,14 +21,14 @@ Persamaan di atas membuktikan bahwa ekspektasi \textit{log return} selalu lebih 
 
 Meskipun ekspektasinya berbeda, kovariansi antar aset menunjukkan sifat invariansi pada kondisi volatilitas rendah. Misalkan $r_i \approx R_i + \epsilon$, maka deviasi dari rata-ratanya adalah:
 \begin{equation}
-    r_i - E[r_i] \approx (R_i + \epsilon) - (E[R_i] + \epsilon) = R_i - E[R_i]
+    r_i - E[r_i] \approx (R_i + \epsilon) - (E[R_i] + \epsilon) = R_i - E[R_i].
 \end{equation}
-Sehingga kovariansi antara aset $A$ dan $B$ memenuhi:
+Sehingga kovariansi antara aset $A$ dan $B$ memenuhi hubungan
 \begin{equation}
-    Cov(r_A, r_B) \approx Cov(R_A, R_B)
+    Cov(r_A, r_B) \approx Cov(R_A, R_B).
 \end{equation}
-Secara lebih rinci, melalui ekspansi Taylor bilinear:
+Secara lebih rinci, melalui ekspansi Taylor bilinear hubungan keduanya dapat dilihat melalui
 \begin{equation}
-    Cov(r_A, r_B) \approx Cov(R_A, R_B) - \frac{1}{2} Cov(R_A, R_B^2) - \frac{1}{2} Cov(R_A^2, R_B) + \frac{1}{4} Cov(R_A^2, R_B^2)
+    Cov(r_A, r_B) \approx Cov(R_A, R_B) - \frac{1}{2} Cov(R_A, R_B^2) - \frac{1}{2} Cov(R_A^2, R_B) + \frac{1}{4} Cov(R_A^2, R_B^2).
 \end{equation}
 Hal tersebut menunjukkan jika $R \sim 10^{-2}$, maka $Cov(R_A, R_B) \sim 10^{-4}$, sedangkan suku-suku berikutnya berada pada orde $10^{-6}$ atau lebih rendah, sehingga secara praktis dapat diabaikan.

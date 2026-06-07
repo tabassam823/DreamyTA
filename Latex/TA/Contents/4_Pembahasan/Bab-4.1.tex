@@ -3,7 +3,7 @@
 
 Proses akuisisi data difokuskan pada instrumen ekuitas unggulan dalam indeks LQ45 yang disusun ke dalam dua konfigurasi sistem, yakni sistem dengan $N=2$ aset yang terdiri dari pilihan saham BBCA dan TLKM serta sistem dengan $N=4$ aset yang terdiri dari pilihan saham BBCA, BMRI, SMGR, dan TLKM. Pemilihan aset-aset ini didasarkan pada strategi diversifikasi dari segi sektoral yang mana mencakup sektor perbankan, infrastruktur telekomunikasi, dan industri dasar. Tujuan dari diversifikasi ini adalah memberikan profil risiko serta karakteristik pertumbuhan yang heterogen dalam portofolio sehingga dapat menekan risiko kerugian yang signifikan dari masing-masing aset saham. Rentang waktu yang dipilih berada pada periode Januari 2021 hingga Desember 2023 dengan \textit{timeframe} harga penutupan harian. Periode ini dipilih dengan tujuan untuk menangkap dinamika volatilitas pasar modal Indonesia pada fase pemulihan pasca-pandemi global. Data harga penutupan tersebut diekstraksi dari basis data historis dan telah tersaji secara mendetail pada Lampiran \ref{appendix:daily_prices} sebagai input primer bagi algoritma optimasi.
 
-\subsection{Penurunan Matematis Imbal Hasil dan Kovariansi}
+\subsection{Imbal Hasil dan Kovariansi}
 \label{subsec:4_1_1_rumus}
 
 Tahapan prapemrosesan dimulai dengan melakukan transformasi data harga saham mentah menjadi nilai imbal hasil sederhana (\textit{simple return}) dan logaritmik (\textit{logarithmic return}). Imbal hasil sederhana harian ($R_{i,t}$) dihitung sebagai rasio perubahan harga terhadap hargal awal
@@ -90,7 +90,7 @@ jika imbal hasil $R$ berada pada orde $10^{-2}$, maka $Cov(R_A, R_B)$ berada pad
     \text{Cov}(r_A, r_B) \approx \text{Cov}(R_A, R_B).
 \end{equation}
 
-\subsection{Implementasi Numerik dan Analisis Fisis Parameter}
+\subsection{Implementasi Numerik pada Sampel Data}
 \label{subsec:4_1_2_numerik_fisis}
 
 Sebagai ilustrasi, dilakukan perhitungan numerik pada data pertama BBCA. Berdasarkan Tabel \ref{tab:daily_prices_merged}, harga meningkat dari 4515,50 menjadi 4869,32, sehingga diperoleh:
@@ -140,4 +140,4 @@ Dengan menerapkan nilai $Z$ tersebut ke dalam fungsi aktivasi, maka diperoleh ni
 \begin{equation}
     \gamma = \frac{1}{1 + e^{0,5988}} \approx 0,3547.
 \end{equation}
-Nilai $\gamma$ yang relatif rendah ini mengindikasikan bahwa pada kondisi pasar dengan rasio imbal hasil terhadap risiko yang positif, algoritma akan memberikan bobot penalti risiko yang lebih ringan agar dapat memaksimalkan peluang pertumbuhan aset. Tabel \ref{tab:metrics_unified} menyajikan riwayat parameter harian).
+Nilai $\gamma$ yang relatif rendah ini mengindikasikan bahwa pada kondisi pasar dengan rasio imbal hasil terhadap risiko yang positif, algoritma akan memberikan bobot penalti risiko yang lebih ringan agar dapat memaksimalkan peluang pertumbuhan aset (Tabel \ref{tab:unified_n2} dan Tabel \ref{tab:unified_n4} menyajikan riwayat parameter tersebut).

@@ -1,0 +1,104 @@
+\section{Algoritma VQE}
+
+% Slide 10.1: Bab 2.7.1 - Prinsip Variasi (Rayleigh-Ritz)
+\begin{frame}{Bab 2.7.1 - Prinsip Variasi (Rayleigh-Ritz)}
+    \begin{itemize}
+        \item \textbf{Teorema Fundamental:} Nilai ekspektasi energi dari fungsi gelombang percobaan $|\psi(\theta)\rangle$ tidak akan pernah lebih rendah dari energi ground state sejati ($E_0$).
+        \item \textbf{Formulasi Matematis:}
+    \end{itemize}
+    \begin{equation}
+        E(\theta) = \frac{\langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle}{\langle\psi(\theta)|\psi(\theta)\rangle} \ge E_0
+    \end{equation}
+    \begin{itemize}
+        \item \textbf{Implikasi:} Optimasi portofolio diubah menjadi masalah pencarian parameter $\theta$ yang meminimalkan nilai ekspektasi Hamiltonian.
+    \end{itemize}
+\end{frame}
+
+% Slide 10.2: Bab 2.7.2 - Fondasi Ansatz: UCC
+\begin{frame}{Bab 2.7.2 - Fondasi Ansatz: UCC}
+    \begin{itemize}
+        \item \textbf{Unitary Coupled Cluster (UCC):} Standarisasi fungsi gelombang dalam kimia kuantum.
+        \item \textbf{Operator Klaster:} Menggunakan eksponensial uniter untuk menyisipkan informasi korelasi.
+    \end{itemize}
+    \begin{equation}
+        U(\theta) = e^{T(\theta) - T^\dagger(\theta)}
+    \end{equation}
+    \begin{itemize}
+        \item \textbf{Limitasi NISQ:} UCC menghasilkan sirkuit yang sangat dalam, melampaui kapasitas koherensi perangkat keras saat ini.
+    \end{itemize}
+\end{frame}
+
+% Slide 10.3: Bab 2.7.3 - Arsitektur EfficientSU2
+\begin{frame}{Bab 2.7.3 - Arsitektur EfficientSU2}
+    \begin{itemize}
+        \item \textbf{Hardware-Efficient Ansatz (HEA):} Dirancang untuk efisiensi maksimal pada perangkat NISQ.
+        \item \textbf{Struktur Sirkuit:}
+        \begin{itemize}
+            \item \textbf{Lapisan Rotasi:} Gerbang $R_y$ dan $R_z$ untuk eksplorasi grup $SU(2)$.
+            \item \textbf{Lapisan Entanglement:} Gerbang CNOT dengan konektivitas linear.
+        \end{itemize}
+        \item \textbf{Trade-off:} Kedalaman ($d$) meningkatkan ekspresivitas tetapi juga akumulasi gate noise.
+    \end{itemize}
+\end{frame}
+
+% Slide 10.4: Bab 2.7.4 - Siklus Hibrida Quantum-Klasik
+\begin{frame}{Bab 2.7.4 - Siklus Hibrida Quantum-Klasik}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Tugas QPU (Quantum):}
+            \begin{itemize}
+                \item Preparasi status $|\psi(\theta)\rangle$.
+                \item Pengukuran nilai ekspektasi $\langle \hat{H} \rangle$.
+            \end{itemize}
+            \medskip
+            \textbf{Tugas CPU (Klasik):}
+            \begin{itemize}
+                \item Pembaruan parameter $\theta$ via optimizer (SPSA).
+                \item Penentuan kriteria konvergensi.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{PQC.png} \\
+                \footnotesize \textit{Loop umpan balik berkelanjutan antara hardware kuantum dan klasik.}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 11.1: Bab 2.8.1 - Tantangan Barren Plateau
+\begin{frame}{Bab 2.8.1 - Tantangan Barren Plateau}
+    \begin{itemize}
+        \item \textbf{Definisi:} Kondisi patologis di mana lanskap energi menjadi datar secara eksponensial seiring bertambahnya jumlah qubit ($n$).
+        \item \textbf{Indikasi:} Hilangnya sinyal gradien ($Var[\partial_{\theta} E] \approx \mathcal{O}(2^{-n})$).
+        \item \textbf{Penyebab:} Inisialisasi parameter acak pada sirkuit dengan derajat keterbelitan tinggi.
+        \item \textbf{Dampak:} Sinyal gradien terkubur sepenuhnya oleh derau perangkat keras (noise).
+    \end{itemize}
+\end{frame}
+
+% Slide 11.2: Bab 2.8.2 - Diagnostik: Entropi Von Neumann
+\begin{frame}{Bab 2.8.2 - Diagnostik: Entropi Von Neumann}
+    \begin{itemize}
+        \item \textbf{Metrik Keacakan:} Mengukur derajat keterbelitan (entanglement) dalam sistem kuantum multi-qubit.
+        \item \textbf{Formulasi:}
+    \end{itemize}
+    \begin{equation}
+        S(\rho) = -\text{Tr}(\rho \log \rho)
+    \end{equation}
+    \begin{itemize}
+        \item \textbf{Interpretasi:}
+        \begin{itemize}
+            \item \textbf{$S \rightarrow S_{max}$:} Informasi tersebar merata, gradien lenyap (Barren Plateau).
+            \item \textbf{$S \rightarrow 0$:} Transisi sistem menuju status deterministik (Separable State/Konvergensi).
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 11.3: Bab 2.8.3 - Mitigasi melalui EPG Warm-start
+\begin{frame}{Bab 2.8.3 - Mitigasi melalui EPG Warm-start}
+    \begin{itemize}
+        \item \textbf{Solusi Proposisi:} Mengganti inisialisasi parameter acak dengan konfigurasi \textbf{Nash Equilibrium} dari EPG.
+        \item \textbf{Strategi:} Memposisikan sirkuit pada lembah energi yang potensial sejak iterasi nol.
+        \item \textbf{Hasil yang Diharapkan:} Sinyal gradien tetap berada pada level yang terdeteksi, memandu optimasi keluar dari zona tandus.
+    \end{itemize}
+\end{frame}

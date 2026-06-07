@@ -1,4 +1,4 @@
-\section{Metode Validasi dan \textit{Benchmark} Klasik}
+\section{Validasi dan \textit{Benchmarking}}
 \label{sec:4_9_validasi_benchmark}
 
 Algoritma VQE yang diimplementasikan pada penelitian ini merupakan sebuah \textit{proof of concept} yang memerlukan prosedur validasi ketat guna memastikan bahwa solusi portofolio yang dihasilkan selaras dengan pencarian solusi eksak. Prosedur validasi tersebut melibatkan metode \textit{brute force} yang mengevaluasi seluruh ruang keadaan kombinatorial secara deterministik. Selain itu, digunakan pula algoritma \textit{Sequential Least Squares Programming} (SLSQP) sebagai \textit{benchmark} performa industri untuk membandingkan efektivitas optimasi kontinu klasik terhadap pendekatan kuantum hibrida.
@@ -18,36 +18,71 @@ Metode \textit{brute force} klasik bekerja dengan mengevaluasi nilai ekspektasi 
 \end{enumerate}
 Hasil evaluasi tersebut menunjukkan bahwa keadaan $|10\rangle$ memiliki tingkat energi paling rendah, yang mana mengonfirmasi ketepatan sirkuit VQE dalam memusatkan amplitudo probabilitas pada konfigurasi aset yang paling optimal secara teoretis.
 
-\subsection{Optimasi Kontinu melalui Algoritma SLSQP}
+\subsection{Optimasi Kontinu menggunakan Algoritma SLSQP}
 
-Algoritma \textit{Sequential Least Squares Programming} (SLSQP) merupakan metode optimasi numerik berbasis \textit{Sequential Quadratic Programming} (SQP) yang dirancang untuk menyelesaikan masalah minimisasi non-linear dengan batasan kesamaan (\textit{equality}) maupun ketidaksamaan (\textit{inequality}). Dalam konteks manajemen portofolio, SLSQP digunakan untuk menyelesaikan model Markowitz kontinu dengan formulasi fungsi biaya sebagai berikut:
+Algoritma \textit{Sequential Least Squares Programming} (SLSQP) merupakan metode optimasi numerik berbasis \textit{Sequential Quadratic Programming} (SQP) yang pada dasarnya dirancang untuk menyelesaikan masalah minimisasi non-linear dengan batasan tertentu. Dalam implementasi manajemen portofolio, SLSQP digunakan untuk menyelesaikan model Markowitz kontinu dengan formulasi fungsi biaya sebagai dengan bentuk
 \begin{equation}
     \min_{w} f(w) = \left[ \frac{\gamma}{2} w^T \Sigma w - \mu^T w \right]
 \end{equation}
-dengan batasan $\sum w_i = 1$ (anggaran penuh) dan $0 \leq w_i \leq 1$ (\textit{no short-selling}).
+menggunakan batasan $\sum w_i = 1$ dan $0 \leq w_i \leq 1$ yang berarti membeli suatu aset dengan komposisi nol sampai 100\% dari total modal yang dialokasikan.
 
-Secara teknis, SLSQP beroperasi dengan melakukan linierisasi pada batasan dan menerapkan aproksimasi kuadratik pada fungsi objektif melalui ekspansi deret Taylor orde kedua. Pada setiap iterasi $k$, algoritma menyusun sub-masalah \textit{Quadratic Programming} (QP) untuk menentukan arah pencarian optimal $d_k$ dengan bentuk:
-\begin{equation}
-    \min_{d} \nabla f(w_k)^T d + \frac{1}{2} d^T B_k d
-\end{equation}
-di mana $B_k$ merupakan aproksimasi matriks Hessian dari fungsi Lagrangian yang diperbarui menggunakan skema \textit{Broyden-Fletcher-Goldfarb-Shanno} (BFGS). Setelah arah $d_k$ diperoleh, algoritma melakukan pembaruan bobot $w_{k+1} = w_k + \alpha_k d_k$, dengan $\alpha_k$ sebagai ukuran langkah yang ditentukan melalui prosedur \textit{line search}.
+SLSQP beroperasi dengan melakukan linierisasi pada batasan dan menerapkan aproksimasi kuadratik pada fungsi objektif melalui ekspansi deret Taylor orde kedua. Guna memberikan pemahaman operasional yang konkret, dilakukan bedah tuntas untuk \textit{Iterasi 1} menggunakan data riil jendela Januari 2021 untuk sistem $N=2$ (BBCA dan TLKM) dengan parameter optimasi $\mu = [0,1939, 0,1223]^T$ dan $\gamma = 0,3547$. Langkah awal optimasi dimulai dengan menetapkan alokasi modal secara seragam (\textit{uniform}) sebagai titik awal $w_0 = [0,5, 0,5]^T$ serta menginisialisasi matriks Hessian sebagai matriks identitas $B_0 = \mathbf{I}$. Kemudian, proses dilanjutkan dengan menghitung nilai gradien dari fungsi objektif pada titik $w_0$ melalui relasi $\nabla f(w_0) = \gamma \Sigma w_0 - \mu$. Berdasarkan matriks kovariansi $\Sigma$ yang diperoleh pada \S \ref{subsec:4_1_2_numerik_fisis}, hasil perkalian matriks terhadap bobot awal memberikan kontribusi risiko sebesar:
+\begin{equation*}
+    \Sigma w_0 = \begin{pmatrix} 0,0171 & 0,0022 \\ 0,0022 & 0,0225 \end{pmatrix} \begin{pmatrix} 0,5 \\ 0,5 \end{pmatrix} = \begin{pmatrix} 0,00965 \\ 0,01235 \end{pmatrix}.
+\end{equation*}
+Substitusi hasil tersebut ke dalam persamaan gradien dengan menyertakan faktor \textit{risk aversion} dan imbal hasil ekspektasian menghasilkan vektor gradien 
+\begin{equation*}
+    \begin{split}
+    \nabla f(w_0) &= \gamma \Sigma w_0 - \mu \\
+    &= 0,3547 \begin{pmatrix} 0,00965 \\ 0,01235 \end{pmatrix} - \begin{pmatrix} 0,1939 \\ 0,1223 \end{pmatrix} \\
+    &= \begin{pmatrix} 0,00342 \\ 0,00438 \end{pmatrix} - \begin{pmatrix} 0,1939 \\ 0,1223 \end{pmatrix} \\
+    &= \begin{pmatrix} -0,19048 \\ -0,11792 \end{pmatrix}
+\end{split}
+\end{equation*}
+yang secara fisis merepresentasikan kemiringan atau arah penurunan fungsi pada konfigurasi portofolio awal.
 
-\begin{algorithm}[H]
+Setelah gradien diperoleh, algoritma menyusun sub-masalah \textit{Quadratic Programming} (QP) untuk mencari arah langkah optimal $d$ yang meminimalkan fungsi pendekatan 
+\begin{equation*}
+    \min_{d} \quad \nabla f^T d + \frac{1}{2} d^T B_0 d.
+\end{equation*}
+Karena titik awal sudah memenuhi batasan linearitas anggaran $\sum w_i = 1$, maka setiap pergeseran bobot harus memenuhi syarat $d_1 + d_2 = 0$ atau $d_2 = -d_1$. Dengan mensubstitusi batasan tersebut ke dalam fungsi pendekatan, diperoleh fungsi satu variabel $g(d_1)$ dengan bentuk
+\begin{equation*}
+    \begin{split}
+    g(d_1) &= -0,1905 d_1 - 0,1179(-d_1) + d_1^2 \\
+    &= -0,0726 d_1 + d_1^2.
+\end{split}
+\end{equation*}
+Kondisi stasioner untuk meminimalkan fungsi tersebut dicapai ketika turunan pertamanya bernilai nol, yaitu 
+\begin{equation*}
+    g'(d_1) = -0,0726 + 2d_1 = 0,
+\end{equation*}
+sehingga diperoleh komponen arah optimal 
+\begin{equation*}
+    d_1 = 0,0363 \quad \text{dan} \quad d_2 = -0,0363.
+\end{equation*}
+
+Tahap akhir dari iterasi pertama ini adalah melakukan pembaruan terhadap bobot kontinu sistem. Dengan mengasumsikan ukuran langkah $\alpha = 1$ berdasarkan hasil \textit{line search}, maka vektor bobot baru $w_1$ dihitung melalui penjumlahan titik awal dengan arah langkah optimal:
+\begin{equation*}
+    w_1 = w_0 + d = \begin{pmatrix} 0,5 \\ 0,5 \end{pmatrix} + \begin{pmatrix} 0,0363 \\ -0,0363 \end{pmatrix} = \begin{pmatrix} 0,5363 \\ 0,4637 \end{pmatrix}.
+\end{equation*}
+Hasil pergeseran modal menuju aset BBCA (Aset 1) ini menunjukkan bahwa algoritma merespons dominasi imbal hasil terhadap risiko korelasi pada aset tersebut. Proses iteratif ini akan terus berlanjut hingga mencapai konvergensi sebelum akhirnya dilakukan prosedur diskritisasi $x_i \in \{0,1\}$ untuk mendapatkan keputusan portofolio final. Secara keseluruhan, algoritma SLSQP ini dapat ditinjau pada algoritma \ref{alg:slsqp_optimization}.
+
+\begin{algorithm}[!htbp]
 \caption{Optimasi Portofolio Klasik SLSQP}
+\label{alg:slsqp_optimization}
 \begin{algorithmic}[1]
-\State \textbf{Input:} Matriks Kovariansi $\Sigma$, Imbal Hasil $\mu$, Parameter Risiko $\gamma$
-\State \textbf{Inisialisasi:} Bobot awal $w_0$ (seragam), Matriks Hessian $B_0 = \mathbf{I}$
-\While{tidak konvergen (\textit{tol} $< 10^{-6}$)}
-    \State Hitung Gradien $\nabla f(w_k) = \gamma \Sigma w_k - \mu$
-    \State Susun sub-masalah QP dengan batasan linear $A w = b$
-    \State Selesaikan QP untuk mendapatkan arah pencarian $d_k$
-    \State Tentukan ukuran langkah $\alpha_k$ melalui \textit{line search}
-    \State Perbarui bobot: $w_{k+1} \leftarrow w_k + \alpha_k d_k$
-    \State Perbarui aproksimasi Hessian $B_{k+1}$ menggunakan formula BFGS
-\EndWhile
-\State \textbf{Output:} Bobot optimal kontinu $w^*$
-\State \textbf{Diskritisasi:} Pilih $K$ aset dengan $w^*$ tertinggi (\textit{Top-K Selection})
+\Procedure{MarkowitzSLSQP}{$\Sigma, \mu, \gamma, K, tol$}
+    \State $w \gets \text{InitialWeights}(\text{Uniform})$ \Comment{Inisialisasi alokasi seragam}
+    \State $B \gets \mathbf{I}$ \Comment{Inisialisasi aproksimasi Hessian}
+    \While{not $\text{Converged}(\nabla f, tol)$}
+        \State $\nabla f \gets \gamma \Sigma w - \mu$ \Comment{Kalkulasi Gradien Markowitz}
+        \State $d \gets \text{SolveQuadraticSubproblem}(\nabla f, B, w)$ \Comment{Penentuan arah pencarian QP}
+        \State $\alpha \gets \text{LineSearch}(f, w, d)$ \Comment{Optimasi ukuran langkah (\textit{step size})}
+        \State $w \gets w + \alpha d$ \Comment{Pembaruan bobot kontinu $[0,1]$}
+        \State $B \gets \text{UpdateHessianBFGS}(B, w, \nabla f)$ \Comment{Pembaruan matriks Hessian (BFGS)}
+    \EndWhile
+    \State $x \gets \text{TopKSelection}(w, K)$ \Comment{Diskritisasi menjadi status biner}
+    \State \Return $x, w$ \Comment{Keputusan portofolio dan alokasi optimal}
+\EndProcedure
 \end{algorithmic}
 \end{algorithm}
-
-Prosedur diskritisasi melalui \textit{Top-K Selection} diperlukan karena sirkuit VQE beroperasi pada domain biner, sementara SLSQP menghasilkan bobot dalam spektrum kontinu $[0,1]$. Dengan memilih $K$ aset yang memiliki alokasi bobot tertinggi, perbandingan antara metode klasik dan kuantum dapat dilakukan pada parameter batasan yang identik (\textit{fair comparison}). Hasil akhir dari algoritma ini berfungsi sebagai tolok ukur efisiensi alokasi modal yang akan dibandingkan dengan performa portofolio hasil optimasi VQE pada bab berikutnya.

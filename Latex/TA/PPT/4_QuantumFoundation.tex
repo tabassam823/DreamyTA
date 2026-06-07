@@ -1,0 +1,80 @@
+\section{Komputer Kuantum}
+
+% Slide 8.1: Bab 2.5.1 - Dari Bit Klasik ke Qubit Kuantum
+\begin{frame}{Bab 2.5.1 - Dari Bit Klasik ke Qubit Kuantum}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Bit Klasik:}
+            \begin{itemize}
+                \item Unit informasi fundamental komputer konvensional.
+                \item Bersifat deterministik: hanya bernilai 0 atau 1.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Qubit Kuantum:}
+            \begin{itemize}
+                \item Unit informasi fundamental komputer kuantum.
+                \item Memanfaatkan prinsip Superposisi: 0, 1, atau keduanya.
+                \item $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 8.2: Bab 2.5.2 - Representasi Qubit
+\begin{frame}{Bab 2.5.2 - Representasi Qubit}
+    \begin{itemize}
+        \item Status qubit didefinisikan sebagai vektor kolom di ruang Hilbert kompleks.
+        \item Basis Komputasi: ket-0 dan ket-1.
+        \item Syarat Normalisasi: Total probabilitas harus bernilai 1 ($|\alpha|^2 + |\beta|^2 = 1$).
+    \end{itemize}
+\end{frame}
+
+% Slide 8.3: Bab 2.5.3 - Geometri Qubit: Bola Bloch
+\begin{frame}{Bab 2.5.3 - Geometri Qubit: Bola Bloch}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
+                \item Visualisasi status kuantum pada permukaan bola satuan 3D.
+                \item Parameter: Sudut polar $\theta$ dan fase azimuthal $\phi$.
+                \item Kutub Utara merepresentasikan $|0\rangle$.
+                \item Kutub Selatan merepresentasikan $|1\rangle$.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{center}
+                \includegraphics[width=0.8\textwidth]{bloch_sphere.png}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 8.4: Bab 2.5.4 - Gerbang Rotasi Kuantum
+\begin{frame}{Bab 2.5.4 - Gerbang Rotasi Kuantum}
+    \begin{itemize}
+        \item Manipulasi status qubit melalui operator uniter.
+        \item Gerbang rotasi ($R_x, R_y, R_z$) memutar vektor status pada sumbu Bola Bloch.
+        \item Parameter sudut inilah yang dioptimasi secara klasik dalam algoritma VQE.
+    \end{itemize}
+\end{frame}
+
+% Slide 8.5: Bab 2.5.5 - Keterbelitan (Entanglement)
+\begin{frame}{Bab 2.5.5 - Keterbelitan (Entanglement)}
+    \begin{itemize}
+        \item Fenomena non-lokal di mana status satu qubit bergantung pada status qubit lainnya.
+        \item Gerbang CNOT: Pembalikan fasa qubit target berdasarkan qubit kontrol.
+        \item Digunakan untuk merepresentasikan korelasi silang antar aset finansial.
+    \end{itemize}
+\end{frame}
+
+% Slide 8.6: Bab 2.5.6 - Parameterized Quantum Circuit (PQC)
+\begin{frame}{Bab 2.5.6 - Parameterized Quantum Circuit (PQC)}
+    \begin{itemize}
+        \item Arsitektur sirkuit yang mengintegrasikan gerbang logika dengan parameter variabel.
+        \item Berfungsi sebagai Ansatz untuk mencari solusi optimal.
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{PQC.png} \\
+        \footnotesize \textit{Alur kerja PQC: Encoding data, sirkuit variasional, dan pengukuran.}
+    \end{center}
+\end{frame}

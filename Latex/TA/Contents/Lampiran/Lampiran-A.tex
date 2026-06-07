@@ -20,7 +20,7 @@ Dalam format matriks eksplisit, persamaan di atas menjadi:
     \begin{pmatrix}\omega_1 \\ \vdots \\ \omega_n\end{pmatrix}
 \end{equation}
 
-Untuk mengonversi permasalahan kontinu ini ke dalam kerangka Teori Permainan (komputasi biner), kita mendefinisikan variabel keputusan diskrit $x_i \in \{0, 1\}$. Jika total aset yang diperbolehkan untuk dipilih adalah $k$, maka bobot diasumsikan sama rata, yaitu $\omega_i = \frac{x_i}{k}$. Substitusi ini mengubah fungsi Lagrangian menjadi:
+Untuk mengonversi permasalahan kontinu ini ke dalam kerangka Teori Permainan, maka didefinisikan variabel keputusan diskrit $x_i \in \{0, 1\}$. Jika total aset yang diperbolehkan untuk dipilih adalah $k$, maka bobot diasumsikan sama rata, yaitu $\omega_i = \frac{x_i}{k}$. Substitusi ini mengubah fungsi Lagrangian menjadi:
 \begin{equation}
     \mathcal{L}(\vec{x}) = \frac{\vec{x}^T}{k}\Sigma \frac{\vec{x}^T}{k} - \lambda \left(\mu^T\frac{\vec{x}}{k}\right)
 \end{equation}
@@ -39,7 +39,7 @@ Fungsi di atas merupakan fungsi minimalisasi risiko (biaya). Untuk mengubahnya m
     &= \left(\sum_{i=1}^N \mu_i \frac{x_i}{k}\right) - \frac{1}{\lambda k^2}\left(\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j\right)
 \end{split}
 \end{equation}
-Mengingat bahwa toleransi risiko berbanding terbalik dengan penghindaran risiko, kita dapat mendefinisikan parameter $\gamma$ sedemikian rupa sehingga $\frac{1}{\lambda} \propto \frac{\gamma}{2}$. Dengan demikian, fungsi utilitas menjadi:
+Mengingat bahwa toleransi risiko berbanding terbalik dengan penghindaran risiko, maka parameter $\gamma$ dapat didefinisikan dengan perbandingan  $\frac{1}{\lambda} \propto \frac{\gamma}{2}$. Dengan demikian, fungsi utilitas menjadi:
 \begin{equation}
     U(\vec{x}) = \left(\sum_{i=1}^N \mu_i \frac{x_i}{k}\right) - \frac{\gamma}{2}\left(\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i x_j}{k^2}\right)
 \end{equation}
@@ -49,7 +49,7 @@ Untuk membuktikan bahwa sistem ini merupakan \textit{Exact Potential Game}, fung
     \Phi(\vec{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{k} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i x_j}{k^2}
 \end{equation}
 
-Kita perlu mengekstraksi pengaruh satu agen (aset ke-$i$) terhadap fungsi potensial. Kita pisahkan indeks $i$ dari jumlahan linier (suku pertama) dan jumlahan kuadratik (suku kedua):
+Ekstraksi pengaruh satu agen (aset ke-$i$) terhadap fungsi potensial dilakukan dengan memisahkan indeks $i$ dari jumlahan linier (suku pertama) dan jumlahan kuadratik (suku kedua):
 \begin{equation}
     \sum_{l=1}^N \mu_l \frac{x_l}{k} = \mu_i \frac{x_i}{k} + \sum_{l \neq i}^N \mu_l \frac{x_l}{k}
 \end{equation}
@@ -66,12 +66,11 @@ Substitusi kembali ke persamaan $\Phi(\vec{x})$ dan dengan mempertimbangkan bahw
 \end{split}
 \end{equation}
 
-Definisi \textit{Exact Potential Game} menuntut bahwa perubahan fungsi potensial global akibat perubahan strategi satu agen harus sama persis dengan perubahan utilitas marginal agen tersebut. Kita evaluasi selisih $\Phi$ saat agen $i$ mengubah statusnya dari 1 (terpilih) menjadi 0 (tidak terpilih), dengan mengasumsikan strategi agen lain ($\vec{x}_{-i}$) tetap:
+Definisi \textit{Exact Potential Game} mengharuskan perubahan fungsi potensial global akibat perubahan strategi satu agen sama dengan perubahan utilitas marginal agen tersebut. Kita evaluasi selisih $\Phi$ saat agen $i$ mengubah statusnya dari 1 (terpilih) menjadi 0 (tidak terpilih), dengan mengasumsikan strategi agen lain ($\vec{x}_{-i}$) tetap berbentuk
 \begin{equation}
 \begin{split}
     \Delta \Phi(\vec{x}) &= \Phi(1, \vec{x}_{-i}) - \Phi(0, \vec{x}_{-i}) \\
     &= 1 \cdot \left( \frac{\mu_i}{k} - \frac{\gamma}{2}\frac{\sigma_i^2}{k^2} - \gamma \sum_{j \neq i}\sigma_{ij}\frac{x_j}{k^2} \right) - 0 \\
-    &= \frac{\mu_i}{k} - \frac{\gamma}{2}\frac{\sigma_i^2}{k^2} - \gamma \sum_{j \neq i}\sigma_{ij}\frac{x_j}{k^2}
+    &= \frac{\mu_i}{k} - \frac{\gamma}{2}\frac{\sigma_i^2}{k^2} - \gamma \sum_{j \neq i}\sigma_{ij}\frac{x_j}{k^2}.
 \end{split}
 \end{equation}
-Dengan demikian, terbukti bahwa optimasi portofolio biner dapat direpresentasikan sebagai sebuah \textit{Exact Potential Game}. Titik \textit{Nash Equilibrium} (kestabilan sistem) akan tercapai jika dan hanya jika tidak ada satupun agen (aset) yang dapat meningkatkan utilitasnya secara sepihak, yakni ketika $\Delta \Phi \leq 0$ untuk semua kemungkinan peralihan state agen tunggal.

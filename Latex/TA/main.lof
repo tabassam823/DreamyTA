@@ -1,104 +1,173 @@
 \babel@toc {bahasa}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh ikhtisar laporan posisi keuangan konsolidasian yang merepresentasikan struktur aset dan kesehatan fiskal entitas.}}{9}{figure.caption.4}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Ilustrasi \textit {bid-ask spread} sebagai representasi friksi transaksi dan likuiditas dalam buku pesanan.}}{10}{figure.caption.5}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Struktur anatomi \textit {bullish} dan \textit {bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}}{10}{figure.caption.6}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Representasi visual level \textit {support} dan \textit {resistance} sebagai batas memori sosial dalam dinamika harga aset.}}{11}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Kurva \textit {Efficient Frontier} dan \textit {Capital Market Line} sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{13}{figure.caption.8}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Matriks imbal hasil pada model permainan klasik: (a) \textit {Stag Hunt}, (b) \textit {Prisoner's Dilemma}, dan (c) \textit {Battle of the Sexes} yang merepresentasikan variasi struktur ekuilibrium.}}{15}{figure.caption.9}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Representasi visual model Ising satu dimensi (1D) yang menunjukkan dinamika orientasi \textit {spin} dan klasifikasi energi interaksi ($\bullet $, $\mathbf {X}$, \textcolor {blue}{$\circ $}) di bawah pengaruh fluktuasi termal \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{20}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Visualisasi Bola Bloch sebagai representasi geometris dari status \textit {qubit} dalam ruang parameter kontinu.}}{23}{figure.caption.11}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Representasi alur kerja sirkuit kuantum berparameter yang mengintegrasikan fase pra-pemrosesan, eksekusi unitari variasional, dan pasca-pemrosesan data \def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def \BCA {####}{1}2####3{\BCA {####1}{####2}}\def ({(}\def ){)}\let \reserved@d =<\def \par }}{25}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh ikhtisar laporan posisi keuangan konsolidasian yang merepresentasikan struktur aset dan kesehatan fiskal entitas.}}{8}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Ilustrasi \textit {bid-ask spread} sebagai representasi friksi transaksi dan likuiditas dalam buku pesanan.}}{9}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Struktur anatomi \textit {bullish} dan \textit {bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}}{10}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Representasi visual level \textit {support} dan \textit {resistance} sebagai batas memori sosial dalam dinamika harga aset.}}{10}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Kurva \textit {Efficient Frontier} dan \textit {Capital Market Line} sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{12}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Matriks imbal hasil pada model permainan klasik: (a) \textit {Stag Hunt}, (b) \textit {Prisoner's Dilemma}, dan (c) \textit {Battle of the Sexes} yang merepresentasikan variasi struktur ekuilibrium.}}{14}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Representasi visual model Ising satu dimensi (1D)}}{17}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Visualisasi Bola Bloch sebagai representasi geometris dari status \textit {qubit} dalam ruang parameter kontinu.}}{20}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Representasi alur kerja sirkuit kuantum berparameter}}{22}{figure.caption.18}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{34}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{32}{figure.caption.19}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum \textit {Hardware-Efficient Ansatz} dengan Kedalaman ($L$) = 1.}}{52}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Visualisasi Perbandingan Pertumbuhan Modal antara Optimasi VQE Hibrida dan Metode Klasik SLSQP.}}{64}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (\textit {Depth}) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}}{65}{figure.caption.18}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Visualisasi Dampak Integrasi \textit {Game Theory} terhadap Stabilitas dan Pertumbuhan Modal Portofolio pada Berbagai Dimensi Sistem.}}{66}{figure.caption.19}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum \textit {Hardware-Efficient Ansatz} dengan Kedalaman ($L$) = 1.}}{50}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Visualisasi Perbandingan Pertumbuhan Modal antara Optimasi VQE Hibrida dan Metode Klasik SLSQP.}}{63}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (\textit {Depth}) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}}{64}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Visualisasi Dampak Integrasi \textit {Game Theory} terhadap Stabilitas dan Pertumbuhan Modal Portofolio pada Berbagai Dimensi Sistem.}}{64}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=2.}}{65}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=4.}}{66}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Perbandingan Visual Pertumbuhan Modal pada Sistem N=2 dan N=4 sebagai Hasil dari Algoritma \textit {Rebalancing} Strategis.}}{66}{figure.caption.28}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {F.1}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-01-04}}{131}{figure.caption.21}%
-\contentsline {figure}{\numberline {F.2}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-02-02}}{132}{figure.caption.22}%
-\contentsline {figure}{\numberline {F.3}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-03-04}}{132}{figure.caption.23}%
-\contentsline {figure}{\numberline {F.4}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-04-06}}{133}{figure.caption.24}%
-\contentsline {figure}{\numberline {F.5}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-05-05}}{133}{figure.caption.25}%
-\contentsline {figure}{\numberline {F.6}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-06-10}}{134}{figure.caption.26}%
-\contentsline {figure}{\numberline {F.7}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-07-09}}{134}{figure.caption.27}%
-\contentsline {figure}{\numberline {F.8}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-08-10}}{135}{figure.caption.28}%
-\contentsline {figure}{\numberline {F.9}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-09-10}}{135}{figure.caption.29}%
-\contentsline {figure}{\numberline {F.10}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-10-11}}{136}{figure.caption.30}%
-\contentsline {figure}{\numberline {F.11}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-11-10}}{136}{figure.caption.31}%
-\contentsline {figure}{\numberline {F.12}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-12-09}}{137}{figure.caption.32}%
-\contentsline {figure}{\numberline {F.13}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-01-10}}{137}{figure.caption.33}%
-\contentsline {figure}{\numberline {F.14}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-02-09}}{138}{figure.caption.34}%
-\contentsline {figure}{\numberline {F.15}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-03-14}}{138}{figure.caption.35}%
-\contentsline {figure}{\numberline {F.16}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-04-12}}{139}{figure.caption.36}%
-\contentsline {figure}{\numberline {F.17}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-05-23}}{139}{figure.caption.37}%
-\contentsline {figure}{\numberline {F.18}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-06-23}}{140}{figure.caption.38}%
-\contentsline {figure}{\numberline {F.19}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-07-22}}{140}{figure.caption.39}%
-\contentsline {figure}{\numberline {F.20}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-08-23}}{141}{figure.caption.40}%
-\contentsline {figure}{\numberline {F.21}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-09-21}}{141}{figure.caption.41}%
-\contentsline {figure}{\numberline {F.22}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-10-20}}{142}{figure.caption.42}%
-\contentsline {figure}{\numberline {F.23}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-11-18}}{142}{figure.caption.43}%
-\contentsline {figure}{\numberline {F.24}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-12-19}}{143}{figure.caption.44}%
-\contentsline {figure}{\numberline {F.25}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-01-17}}{143}{figure.caption.45}%
-\contentsline {figure}{\numberline {F.26}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-02-16}}{144}{figure.caption.46}%
-\contentsline {figure}{\numberline {F.27}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-03-17}}{144}{figure.caption.47}%
-\contentsline {figure}{\numberline {F.28}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-04-27}}{145}{figure.caption.48}%
-\contentsline {figure}{\numberline {F.29}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-05-30}}{145}{figure.caption.49}%
-\contentsline {figure}{\numberline {F.30}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-07-05}}{146}{figure.caption.50}%
-\contentsline {figure}{\numberline {F.31}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-08-04}}{146}{figure.caption.51}%
-\contentsline {figure}{\numberline {F.32}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-09-05}}{147}{figure.caption.52}%
-\contentsline {figure}{\numberline {F.33}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-10-05}}{147}{figure.caption.53}%
-\contentsline {figure}{\numberline {F.34}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-11-03}}{148}{figure.caption.54}%
-\contentsline {figure}{\numberline {F.35}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-12-04}}{148}{figure.caption.55}%
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {G.1}{\ignorespaces Rangkaian Sirkuit Kuantum N=2 dengan Kedalaman (\textit {Depth}) 2}}{149}{figure.caption.56}%
-\contentsline {figure}{\numberline {G.2}{\ignorespaces Grafik Performa Energi Hamiltonian N=2 terhadap Variasi \textit {Depth}}}{150}{figure.caption.57}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {I.1}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-01-04}}{171}{figure.caption.58}%
-\contentsline {figure}{\numberline {I.2}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-02-02}}{172}{figure.caption.59}%
-\contentsline {figure}{\numberline {I.3}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-03-04}}{172}{figure.caption.60}%
-\contentsline {figure}{\numberline {I.4}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-04-06}}{173}{figure.caption.61}%
-\contentsline {figure}{\numberline {I.5}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-05-05}}{173}{figure.caption.62}%
-\contentsline {figure}{\numberline {I.6}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-06-10}}{174}{figure.caption.63}%
-\contentsline {figure}{\numberline {I.7}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-07-09}}{174}{figure.caption.64}%
-\contentsline {figure}{\numberline {I.8}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-08-10}}{175}{figure.caption.65}%
-\contentsline {figure}{\numberline {I.9}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-09-10}}{175}{figure.caption.66}%
-\contentsline {figure}{\numberline {I.10}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-10-11}}{176}{figure.caption.67}%
-\contentsline {figure}{\numberline {I.11}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-11-10}}{176}{figure.caption.68}%
-\contentsline {figure}{\numberline {I.12}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-12-09}}{177}{figure.caption.69}%
-\contentsline {figure}{\numberline {I.13}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-01-10}}{177}{figure.caption.70}%
-\contentsline {figure}{\numberline {I.14}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-02-09}}{178}{figure.caption.71}%
-\contentsline {figure}{\numberline {I.15}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-03-14}}{178}{figure.caption.72}%
-\contentsline {figure}{\numberline {I.16}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-04-12}}{179}{figure.caption.73}%
-\contentsline {figure}{\numberline {I.17}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-05-23}}{179}{figure.caption.74}%
-\contentsline {figure}{\numberline {I.18}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-06-23}}{180}{figure.caption.75}%
-\contentsline {figure}{\numberline {I.19}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-07-22}}{180}{figure.caption.76}%
-\contentsline {figure}{\numberline {I.20}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-08-23}}{181}{figure.caption.77}%
-\contentsline {figure}{\numberline {I.21}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-09-21}}{181}{figure.caption.78}%
-\contentsline {figure}{\numberline {I.22}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-10-20}}{182}{figure.caption.79}%
-\contentsline {figure}{\numberline {I.23}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-11-18}}{182}{figure.caption.80}%
-\contentsline {figure}{\numberline {I.24}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-12-19}}{183}{figure.caption.81}%
-\contentsline {figure}{\numberline {I.25}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-01-17}}{183}{figure.caption.82}%
-\contentsline {figure}{\numberline {I.26}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-02-16}}{184}{figure.caption.83}%
-\contentsline {figure}{\numberline {I.27}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-03-17}}{184}{figure.caption.84}%
-\contentsline {figure}{\numberline {I.28}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-04-27}}{185}{figure.caption.85}%
-\contentsline {figure}{\numberline {I.29}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-05-30}}{185}{figure.caption.86}%
-\contentsline {figure}{\numberline {I.30}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-07-05}}{186}{figure.caption.87}%
-\contentsline {figure}{\numberline {I.31}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-08-04}}{186}{figure.caption.88}%
-\contentsline {figure}{\numberline {I.32}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-09-05}}{187}{figure.caption.89}%
-\contentsline {figure}{\numberline {I.33}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-10-05}}{187}{figure.caption.90}%
-\contentsline {figure}{\numberline {I.34}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-11-03}}{188}{figure.caption.91}%
-\contentsline {figure}{\numberline {I.35}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-12-04}}{188}{figure.caption.92}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {J.1}{\ignorespaces Rangkaian Sirkuit Kuantum N=4 dengan Kedalaman (\textit {Depth}) 3}}{189}{figure.caption.93}%
-\contentsline {figure}{\numberline {J.2}{\ignorespaces Grafik Performa Energi Hamiltonian N=4 terhadap Variasi \textit {Depth}}}{190}{figure.caption.94}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {F.1}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-01-04}}{127}{figure.caption.30}%
+\contentsline {figure}{\numberline {F.2}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-02-02}}{128}{figure.caption.31}%
+\contentsline {figure}{\numberline {F.3}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-03-04}}{128}{figure.caption.32}%
+\contentsline {figure}{\numberline {F.4}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-04-06}}{129}{figure.caption.33}%
+\contentsline {figure}{\numberline {F.5}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-05-05}}{129}{figure.caption.34}%
+\contentsline {figure}{\numberline {F.6}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-06-10}}{130}{figure.caption.35}%
+\contentsline {figure}{\numberline {F.7}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-07-09}}{130}{figure.caption.36}%
+\contentsline {figure}{\numberline {F.8}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-08-10}}{131}{figure.caption.37}%
+\contentsline {figure}{\numberline {F.9}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-09-10}}{131}{figure.caption.38}%
+\contentsline {figure}{\numberline {F.10}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-10-11}}{132}{figure.caption.39}%
+\contentsline {figure}{\numberline {F.11}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-11-10}}{132}{figure.caption.40}%
+\contentsline {figure}{\numberline {F.12}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-12-09}}{133}{figure.caption.41}%
+\contentsline {figure}{\numberline {F.13}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-01-10}}{133}{figure.caption.42}%
+\contentsline {figure}{\numberline {F.14}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-02-09}}{134}{figure.caption.43}%
+\contentsline {figure}{\numberline {F.15}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-03-14}}{134}{figure.caption.44}%
+\contentsline {figure}{\numberline {F.16}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-04-12}}{135}{figure.caption.45}%
+\contentsline {figure}{\numberline {F.17}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-05-23}}{135}{figure.caption.46}%
+\contentsline {figure}{\numberline {F.18}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-06-23}}{136}{figure.caption.47}%
+\contentsline {figure}{\numberline {F.19}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-07-22}}{136}{figure.caption.48}%
+\contentsline {figure}{\numberline {F.20}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-08-23}}{137}{figure.caption.49}%
+\contentsline {figure}{\numberline {F.21}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-09-21}}{137}{figure.caption.50}%
+\contentsline {figure}{\numberline {F.22}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-10-20}}{138}{figure.caption.51}%
+\contentsline {figure}{\numberline {F.23}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-11-18}}{138}{figure.caption.52}%
+\contentsline {figure}{\numberline {F.24}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-12-19}}{139}{figure.caption.53}%
+\contentsline {figure}{\numberline {F.25}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-01-17}}{139}{figure.caption.54}%
+\contentsline {figure}{\numberline {F.26}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-02-16}}{140}{figure.caption.55}%
+\contentsline {figure}{\numberline {F.27}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-03-17}}{140}{figure.caption.56}%
+\contentsline {figure}{\numberline {F.28}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-04-27}}{141}{figure.caption.57}%
+\contentsline {figure}{\numberline {F.29}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-05-30}}{141}{figure.caption.58}%
+\contentsline {figure}{\numberline {F.30}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-07-05}}{142}{figure.caption.59}%
+\contentsline {figure}{\numberline {F.31}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-08-04}}{142}{figure.caption.60}%
+\contentsline {figure}{\numberline {F.32}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-09-05}}{143}{figure.caption.61}%
+\contentsline {figure}{\numberline {F.33}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-10-05}}{143}{figure.caption.62}%
+\contentsline {figure}{\numberline {F.34}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-11-03}}{144}{figure.caption.63}%
+\contentsline {figure}{\numberline {F.35}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-12-04}}{144}{figure.caption.64}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {G.1}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-01-04}}{145}{figure.caption.65}%
+\contentsline {figure}{\numberline {G.2}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-02-02}}{145}{figure.caption.66}%
+\contentsline {figure}{\numberline {G.3}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-03-04}}{146}{figure.caption.67}%
+\contentsline {figure}{\numberline {G.4}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-04-06}}{146}{figure.caption.68}%
+\contentsline {figure}{\numberline {G.5}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-05-05}}{146}{figure.caption.69}%
+\contentsline {figure}{\numberline {G.6}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-06-10}}{146}{figure.caption.70}%
+\contentsline {figure}{\numberline {G.7}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-07-09}}{147}{figure.caption.71}%
+\contentsline {figure}{\numberline {G.8}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-08-10}}{147}{figure.caption.72}%
+\contentsline {figure}{\numberline {G.9}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-09-10}}{147}{figure.caption.73}%
+\contentsline {figure}{\numberline {G.10}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-10-11}}{147}{figure.caption.74}%
+\contentsline {figure}{\numberline {G.11}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-11-10}}{148}{figure.caption.75}%
+\contentsline {figure}{\numberline {G.12}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2021-12-09}}{148}{figure.caption.76}%
+\contentsline {figure}{\numberline {G.13}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-01-10}}{148}{figure.caption.77}%
+\contentsline {figure}{\numberline {G.14}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-02-09}}{148}{figure.caption.78}%
+\contentsline {figure}{\numberline {G.15}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-03-14}}{148}{figure.caption.79}%
+\contentsline {figure}{\numberline {G.16}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-04-12}}{149}{figure.caption.80}%
+\contentsline {figure}{\numberline {G.17}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-05-23}}{149}{figure.caption.81}%
+\contentsline {figure}{\numberline {G.18}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-06-23}}{149}{figure.caption.82}%
+\contentsline {figure}{\numberline {G.19}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-07-22}}{149}{figure.caption.83}%
+\contentsline {figure}{\numberline {G.20}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-08-23}}{150}{figure.caption.84}%
+\contentsline {figure}{\numberline {G.21}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-09-21}}{150}{figure.caption.85}%
+\contentsline {figure}{\numberline {G.22}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-10-20}}{150}{figure.caption.86}%
+\contentsline {figure}{\numberline {G.23}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-11-18}}{150}{figure.caption.87}%
+\contentsline {figure}{\numberline {G.24}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2022-12-19}}{151}{figure.caption.88}%
+\contentsline {figure}{\numberline {G.25}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-01-17}}{151}{figure.caption.89}%
+\contentsline {figure}{\numberline {G.26}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-02-16}}{151}{figure.caption.90}%
+\contentsline {figure}{\numberline {G.27}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-03-17}}{151}{figure.caption.91}%
+\contentsline {figure}{\numberline {G.28}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-04-27}}{152}{figure.caption.92}%
+\contentsline {figure}{\numberline {G.29}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-05-30}}{152}{figure.caption.93}%
+\contentsline {figure}{\numberline {G.30}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-07-05}}{152}{figure.caption.94}%
+\contentsline {figure}{\numberline {G.31}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-08-04}}{152}{figure.caption.95}%
+\contentsline {figure}{\numberline {G.32}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-09-05}}{153}{figure.caption.96}%
+\contentsline {figure}{\numberline {G.33}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-10-05}}{153}{figure.caption.97}%
+\contentsline {figure}{\numberline {G.34}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-11-03}}{153}{figure.caption.98}%
+\contentsline {figure}{\numberline {G.35}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=2 Jendela Waktu 2023-12-04}}{153}{figure.caption.99}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {I.1}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-01-04}}{175}{figure.caption.100}%
+\contentsline {figure}{\numberline {I.2}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-02-02}}{176}{figure.caption.101}%
+\contentsline {figure}{\numberline {I.3}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-03-04}}{176}{figure.caption.102}%
+\contentsline {figure}{\numberline {I.4}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-04-06}}{177}{figure.caption.103}%
+\contentsline {figure}{\numberline {I.5}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-05-05}}{177}{figure.caption.104}%
+\contentsline {figure}{\numberline {I.6}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-06-10}}{178}{figure.caption.105}%
+\contentsline {figure}{\numberline {I.7}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-07-09}}{178}{figure.caption.106}%
+\contentsline {figure}{\numberline {I.8}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-08-10}}{179}{figure.caption.107}%
+\contentsline {figure}{\numberline {I.9}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-09-10}}{179}{figure.caption.108}%
+\contentsline {figure}{\numberline {I.10}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-10-11}}{180}{figure.caption.109}%
+\contentsline {figure}{\numberline {I.11}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-11-10}}{180}{figure.caption.110}%
+\contentsline {figure}{\numberline {I.12}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-12-09}}{181}{figure.caption.111}%
+\contentsline {figure}{\numberline {I.13}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-01-10}}{181}{figure.caption.112}%
+\contentsline {figure}{\numberline {I.14}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-02-09}}{182}{figure.caption.113}%
+\contentsline {figure}{\numberline {I.15}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-03-14}}{182}{figure.caption.114}%
+\contentsline {figure}{\numberline {I.16}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-04-12}}{183}{figure.caption.115}%
+\contentsline {figure}{\numberline {I.17}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-05-23}}{183}{figure.caption.116}%
+\contentsline {figure}{\numberline {I.18}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-06-23}}{184}{figure.caption.117}%
+\contentsline {figure}{\numberline {I.19}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-07-22}}{184}{figure.caption.118}%
+\contentsline {figure}{\numberline {I.20}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-08-23}}{185}{figure.caption.119}%
+\contentsline {figure}{\numberline {I.21}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-09-21}}{185}{figure.caption.120}%
+\contentsline {figure}{\numberline {I.22}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-10-20}}{186}{figure.caption.121}%
+\contentsline {figure}{\numberline {I.23}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-11-18}}{186}{figure.caption.122}%
+\contentsline {figure}{\numberline {I.24}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-12-19}}{187}{figure.caption.123}%
+\contentsline {figure}{\numberline {I.25}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-01-17}}{187}{figure.caption.124}%
+\contentsline {figure}{\numberline {I.26}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-02-16}}{188}{figure.caption.125}%
+\contentsline {figure}{\numberline {I.27}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-03-17}}{188}{figure.caption.126}%
+\contentsline {figure}{\numberline {I.28}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-04-27}}{189}{figure.caption.127}%
+\contentsline {figure}{\numberline {I.29}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-05-30}}{189}{figure.caption.128}%
+\contentsline {figure}{\numberline {I.30}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-07-05}}{190}{figure.caption.129}%
+\contentsline {figure}{\numberline {I.31}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-08-04}}{190}{figure.caption.130}%
+\contentsline {figure}{\numberline {I.32}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-09-05}}{191}{figure.caption.131}%
+\contentsline {figure}{\numberline {I.33}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-10-05}}{191}{figure.caption.132}%
+\contentsline {figure}{\numberline {I.34}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-11-03}}{192}{figure.caption.133}%
+\contentsline {figure}{\numberline {I.35}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-12-04}}{192}{figure.caption.134}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {J.1}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-01-04}}{193}{figure.caption.135}%
+\contentsline {figure}{\numberline {J.2}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-02-02}}{194}{figure.caption.136}%
+\contentsline {figure}{\numberline {J.3}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-03-04}}{194}{figure.caption.137}%
+\contentsline {figure}{\numberline {J.4}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-04-06}}{195}{figure.caption.138}%
+\contentsline {figure}{\numberline {J.5}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-05-05}}{195}{figure.caption.139}%
+\contentsline {figure}{\numberline {J.6}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-06-10}}{196}{figure.caption.140}%
+\contentsline {figure}{\numberline {J.7}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-07-09}}{196}{figure.caption.141}%
+\contentsline {figure}{\numberline {J.8}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-08-10}}{197}{figure.caption.142}%
+\contentsline {figure}{\numberline {J.9}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-09-10}}{197}{figure.caption.143}%
+\contentsline {figure}{\numberline {J.10}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-10-11}}{198}{figure.caption.144}%
+\contentsline {figure}{\numberline {J.11}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-11-10}}{198}{figure.caption.145}%
+\contentsline {figure}{\numberline {J.12}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2021-12-09}}{199}{figure.caption.146}%
+\contentsline {figure}{\numberline {J.13}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-01-10}}{199}{figure.caption.147}%
+\contentsline {figure}{\numberline {J.14}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-02-09}}{200}{figure.caption.148}%
+\contentsline {figure}{\numberline {J.15}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-03-14}}{200}{figure.caption.149}%
+\contentsline {figure}{\numberline {J.16}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-04-12}}{201}{figure.caption.150}%
+\contentsline {figure}{\numberline {J.17}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-05-23}}{201}{figure.caption.151}%
+\contentsline {figure}{\numberline {J.18}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-06-23}}{202}{figure.caption.152}%
+\contentsline {figure}{\numberline {J.19}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-07-22}}{202}{figure.caption.153}%
+\contentsline {figure}{\numberline {J.20}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-08-23}}{203}{figure.caption.154}%
+\contentsline {figure}{\numberline {J.21}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-09-21}}{203}{figure.caption.155}%
+\contentsline {figure}{\numberline {J.22}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-10-20}}{204}{figure.caption.156}%
+\contentsline {figure}{\numberline {J.23}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-11-18}}{204}{figure.caption.157}%
+\contentsline {figure}{\numberline {J.24}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2022-12-19}}{205}{figure.caption.158}%
+\contentsline {figure}{\numberline {J.25}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-01-17}}{205}{figure.caption.159}%
+\contentsline {figure}{\numberline {J.26}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-02-16}}{206}{figure.caption.160}%
+\contentsline {figure}{\numberline {J.27}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-03-17}}{206}{figure.caption.161}%
+\contentsline {figure}{\numberline {J.28}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-04-27}}{207}{figure.caption.162}%
+\contentsline {figure}{\numberline {J.29}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-05-30}}{207}{figure.caption.163}%
+\contentsline {figure}{\numberline {J.30}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-07-05}}{208}{figure.caption.164}%
+\contentsline {figure}{\numberline {J.31}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-08-04}}{208}{figure.caption.165}%
+\contentsline {figure}{\numberline {J.32}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-09-05}}{209}{figure.caption.166}%
+\contentsline {figure}{\numberline {J.33}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-10-05}}{209}{figure.caption.167}%
+\contentsline {figure}{\numberline {J.34}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-11-03}}{210}{figure.caption.168}%
+\contentsline {figure}{\numberline {J.35}{\ignorespaces Perbandingan Kinerja Sirkuit Kuantum N=4 Jendela Waktu 2023-12-04}}{210}{figure.caption.169}%

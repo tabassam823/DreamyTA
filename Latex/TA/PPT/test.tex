@@ -1,0 +1,321 @@
+\documentclass[aspectratio=169]{beamer}
+
+% --- Theme and Style ---
+\usetheme{Madrid}
+\usecolortheme{whale}
+\usefonttheme{professionalfonts}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% --- Metadata ---
+\title[Integrasi EPG  dan   VQE]{Integrasi Exact Potential Game dan  Variational Quantum Eigensolver untuk Optimasi Portofolio Hibrida}
+\subtitle{Tugas Akhir - Econophysics  dan   Quantum Finance}
+\author[Nama Anda]{Nama Anda} % Silakan ganti dengan nama lengkap
+\institute[Institusi]{Pembimbing: Nama Pembimbing \\ \medskip Departemen Fisika \\ Universitas ...}
+\date{\today}
+
+\graphicspath{{../Images/}}
+
+% --- Custom Colors (Optional) ---
+\definecolor{primaryblue}{RGB}{0, 31, 63}
+\setbeamercolor{palette primary}{bg=primaryblue, fg=white}
+\setbeamercolor{titlelike}{parent=palette primary}
+
+% --- Logo ---
+%\logo{\includegraphics[height=1cm]{Images/logo_universitas.png}}
+
+\begin{document}
+
+% Slide 1: Judul
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Daftar Isi
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+% --- Konten Modular ---
+\section{Pendahuluan}
+
+% Slide 2: Latar Belakang  dan   Motivasi
+\begin{frame}{Latar Belakang  dan   Motivasi}
+
+    \begin{itemize}
+        \item \textbf{Limitasi Model Klasik (Markowitz):}
+        \begin{itemize}
+            \item Asumsi distribusi normal dan  stasioneritas seringkali tidak terpenuhi.
+            \item Kesulitan menangkap korelasi non-linear selama krisis pasar.
+        \end{itemize}
+        \item \textbf{Komputasi Kuantum:}
+        \begin{itemize}
+            \item Transformasi masalah optimasi ke dalam model \textit{Ising} / QUBO.
+            \item Eksplorasi ruang solusi besar secara paralel pada perangkat NISQ.
+        \end{itemize}
+        \item \textbf{Game Theory (EPG):}
+        \begin{itemize}
+            \item Pemodelan interaksi strategis multi-agen di pasar finansial.
+            \item Penyederhanaan optimasi melalui fungsi potensial global.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 3: Rumusan Masalah  dan   Batasan
+\begin{frame}{Rumusan Masalah  dan   Batasan}
+    \begin{block}{Rumusan Masalah}
+        \begin{enumerate}
+            \item Bagaimana pengaruh formulasi EPG terhadap akurasi pemetaan Hamiltonian?
+            \item Seberapa efektif strategi \textit{warm-start} (Nash) dalam mengatasi \textit{Barren Plateaus}?
+            \item Bagaimana performa VQE dengan SPSA dan  \textit{Ansatz EfficientSU(2)}?
+        \end{enumerate}
+    \end{block}
+    \begin{block}{Batasan Masalah}
+        \begin{itemize}
+            \item Portofolio: $N=2$ (BBCA, TLKM)  dan   $N=4$ aset.
+            \item Framework: \textit{Pennylane} simulator.
+            \item Algoritma Ekuilibrium: \textit{Sequential Best Response} (SBR).
+        </itemize>
+    \end{block}
+\end{frame}
+\section{Landasan Konsep Finansial}
+
+% Slide 4: Bab 2.1 - Dinamika Pasar Finansial
+\begin{frame}{Bab 2.1 - Dinamika Pasar Finansial}
+    \begin{itemize}
+        \item \textbf{Evolusi Uang:} Transformasi dari kebutuhan biologis (barter) $\rightarrow$ komoditas $\rightarrow$ uang \textit{fiat} $\rightarrow$ entitas data digital.
+        \item \textbf{Inflasi:} Fenomena sistemik peningkatan entropi ekonomi; degradasi daya beli yang memaksa realokasi modal strategis.
+        \item \textbf{Investasi:} Pengorbanan konsumsi jangka pendek untuk imbal hasil masa depan (\textit{Risk-Return Trade-off}).
+        \item \textbf{Risk Aversion:} Parameter endogen yang dipengaruhi oleh Teori Prospek (respon asimetris terhadap kerugian).
+    \end{itemize}
+\end{frame}
+
+% Slide 5: Bab 2.2 - Representasi Data Finansial
+\begin{frame}{Bab 2.2 - Representasi Data Finansial}
+    \begin{itemize}
+        \item \textbf{Analisis Kualitatif (Fundamental):} Evaluasi kesehatan industri, laporan keuangan (\textit{Cashflow}), dan  sentimen pasar.
+        \item \textbf{Analisis Teknikal (Visual):} Identifikasi pola memori sosial melalui \textit{Candlestick} dan  level \textit{Support/Resistance}.
+        \item \textbf{Analisis Kuantitatif:}
+        \begin{itemize}
+            \item Transformasi \textit{Log-Return} untuk mencapai stasioneritas data.
+            \item Normalisasi rentang nilai menggunakan fungsi aktivasi ($tanh$, $Sigmoid$).
+        \end{itemize}
+        \item \textbf{Model Markowitz:} Formulasi Lagrangian untuk optimasi \textit{Mean-Variance} portofolio.
+    \end{itemize}
+\end{frame}
+\section{Teori Permainan  dan   Model Ising}
+
+% Slide 6: Bab 2.3 - Teori Permainan  dan   EPG
+\begin{frame}{Bab 2.3 - Teori Permainan  dan   EPG}
+    \begin{itemize}
+        \item \textbf{Formalisme Aksiomatik:} Logika strategi di bawah kondisi ketergantungan sistemik (Von Neumann  dan   Morgenstern).
+        \item \textbf{Exact Potential Game (EPG):} Penyelarasan utilitas marginal agen dengan fungsi potensial global $\Phi$.
+        \item \textbf{Ekuilibrium Nash:} Kondisi stabil di mana tidak ada insentif untuk deviasi strategis sepihak.
+        \item \textbf{Markowitz sebagai EPG:} Pembuktian bahwa minimisasi risiko portofolio biner setara dengan maksimisasi utilitas EPG.
+    \end{itemize}
+\end{frame}
+
+% Slide 7: Bab 2.4 - Hamiltonian Ising
+\begin{frame}{Bab 2.4 - Hamiltonian Ising}
+    \begin{itemize}
+        \item \textbf{Sejarah Model Ising:} Investigasi mikroskopis feromagnetisme (Lenz  dan   Ising, 1920-an).
+        \item \textbf{Representasi Aset:} Aset sebagai partikel \textit{spin} ($s_i \in \{-1, +1\}$) dalam kisi kristal terstruktur.
+        \item \textbf{Parameter Fisik:}
+        \begin{itemize}
+            \item Me dan  Lokal ($h_i$): Representasi ekspektasi imbal hasil aset.
+            \item Kopling ($J_{ij}$): Representasi korelasi interaksi risiko antar aset.
+        \end{itemize}
+        \item \textbf{Ground State:} Solusi optimal portofolio setara dengan konfigurasi energi terendah sistem.
+    \end{itemize}
+\end{frame}
+\section{Komputer Kuantum}
+
+% Slide 8: Bab 2.5 - Fondasi Komputer Kuantum
+\begin{frame}{Bab 2.5 - Fondasi Komputer Kuantum}
+    \begin{itemize}
+        \item \textbf{Sistem Qubit:} Perluasan bit klasik menjadi status superposisi $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$ (Bola Bloch).
+        \item \textbf{Evolusi Uniter:} Manipulasi status melalui gerbang rotasi ($R_x, R_y, R_z$) dan  \textit{entanglement} (CNOT).
+        \item \textbf{Pengukuran (Born Rule):} Kolaps fungsi gelombang menjadi probabilitas deterministik $|\alpha|^2$ and $|\beta|^2$.
+        \item \textbf{Parameterized Quantum Circuit (PQC):} Arsitektur sirkuit adaptif untuk optimasi variasional (ansatz).
+    \end{itemize}
+\end{frame}
+\section{Optimasi  dan   VQE}
+
+% Slide 9: Bab 2.6 - Optimasi Parameter Klasik
+\begin{frame}{Bab 2.6 - Optimasi Parameter Klasik}
+    \begin{itemize}
+        \item \textbf{Parameter Shift Rule:} Estimator gradien analitik eksak tanpa bias untuk sirkuit kuantum.
+        \item \textbf{Gradient Descent:} Penurunan parameter menuju minimum global dengan \textit{learning rate} $\eta$.
+        \item \textbf{Optimizer SPSA:}
+        \begin{itemize}
+            \item \textit{Simultaneous Perturbation Stochastic Approximation}.
+            \item Reduksi kompleksitas dari $\mathcal{O}(p)$ menjadi $\mathcal{O}(1)$ (hanya 2 pengukuran per iterasi).
+            \item Tangguh terhadap noise pada perangkat NISQ.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 10: Bab 2.7 - Algoritma VQE
+\begin{frame}{Bab 2.7 - Algoritma VQE}
+    \begin{itemize}
+        \item \textbf{Prinsip Variasional:} Teorema Rayleigh-Ritz untuk estimasi energi \textit{ground state} $E_0$.
+        \item \textbf{Unitary Coupled Cluster (UCC):} Fondasi ansatz kimia kuantum (eksponensial uniter).
+        \item \textbf{EfficientSU2:} Arsitektur \textit{Hardware-Efficient} menggunakan lapisan rotasi dan  keterbelitan linear (CX).
+        \item \textbf{Siklus Hibrida:} Distribusi beban komputasi antara QPU (evaluasi energi) dan  CPU (update parameter).
+    \end{itemize}
+\end{frame}
+
+% Slide 11: Bab 2.8 - Validasi Barren Plateau
+\begin{frame}{Bab 2.8 - Validasi Barren Plateau}
+    \begin{itemize}
+        \item \textbf{Barren Plateau:} Fenomena lenyapnya gradien secara eksponensial seiring bertambahnya jumlah qubit.
+        \item \textbf{Penyebab:} Inisialisasi parameter acak pada sirkuit dengan \textit{entanglement} tinggi.
+        \item \textbf{Entropi Von Neumann:} Metrik untuk mengukur derajat keacakan dan  keterbelitan state kuantum.
+        \item \textbf{Solusi (Proposed):} Inisialisasi EPG/Nash untuk memandu parameter keluar dari zona tandus.
+    \end{itemize}
+\end{frame}
+\section{Metodologi}
+
+% Slide 12: Alur Metodologi Hibrida
+\begin{frame}{Alur Metodologi Hibrida}
+    \begin{center}
+        \begin{tikzpicture}[node distance=2cm, auto, thick]
+            \node [draw, rectangle] (data) {Data Harga};
+            \node [draw, rectangle, right of=data, xshift=1.5cm] (epg) {EPG (Nash)};
+            \node [draw, rectangle, right of=epg, xshift=1.5cm] (ham) {Hamiltonian};
+            \node [draw, rectangle, below of=ham] (vqe) {VQE Optim.};
+            \node [draw, rectangle, left of=vqe, xshift=-1.5cm] (res) {Optimal Portf.};
+            
+            \draw [->] (data) -- (epg);
+            \draw [->] (epg) -- (ham);
+            \draw [->] (ham) -- (vqe);
+            \draw [->] (vqe) -- (res);
+        \end{tikzpicture}
+    \end{center}
+    \begin{itemize}
+        \item Integrasi Teori Permainan sebagai \textbf{Warm-Start} strategis untuk sirkuit kuantum.
+    \end{itemize}
+\end{frame}
+
+% Slide 13: Formulasi Hamiltonian Ising Spesifik
+\begin{frame}{Formulasi Hamiltonian Ising Spesifik}
+    \begin{equation}
+        H = \sum_i h_i \sigma_i^z + \sum_{i<j} J_{ij} \sigma_i^z \sigma_j^z + A(\text{Penalty})
+    \end{equation}
+    \begin{itemize}
+        \item \textbf{Me dan  Lokal ($h_i$):} Menyerap bias imbal hasil and risiko individual.
+        \item \textbf{Kopling ($J_{ij}$):} Menangkap dinamika korelasi (risiko bersama) antar aset.
+        \item \textbf{Suku Penalti ($A$):} Menjamin kepatuhan terhadap batasan anggaran (budget constraint).
+    \end{itemize}
+\end{frame}
+
+% Slide 14: Konfigurasi Sirkuit  dan   Optimizer
+\begin{frame}{Konfigurasi Sirkuit  dan   Optimizer}
+    \begin{itemize}
+        \item \textbf{Framework:} PennyLane dengan simulator \texttt{default.qubit}.
+        \item \textbf{Hiperparameter SPSA:}
+        \begin{itemize}
+            \item $a = 0.01, c = 0.1$ (Laju pembelajaran and perturbasi).
+            \item Iterasi: 200 step per rebalancing.
+        \end{itemize}
+        \item \textbf{Ansatz:} \texttt{EfficientSU2} dengan kedalaman $L=2$.
+    \end{itemize}
+\end{frame}
+\section{Hasil dan  Pembahasan}
+
+% Slide 15: Strategi Warm-Start  dan   Nash Equilibrium
+\begin{frame}{Strategi Warm-Start  dan   Nash Equilibrium}
+    \begin{itemize}
+        \item PSNE (\textit{Pure Strategy Nash Equilibrium}) diinjeksikan sebagai inisialisasi parameter $\theta_0$.
+        \item \textbf{Hasil:} Memandu sirkuit melewati area \textit{Barren Plateaus} sejak iterasi awal.
+        \item Mempercepat konvergensi energi menuju \textit{ground state}.
+    \end{itemize}
+\end{frame}
+
+% Slide 16: Analisis Konvergensi Energi
+\begin{frame}{Analisis Konvergensi Energi}
+    \begin{itemize}
+        \item Laju penurunan energi menunjukkan stabilitas algoritma SPSA.
+        \item Perbandingan iterasi: GT-VQE mencapai konvergensi lebih cepat dibanding inisialisasi random.
+    \end{itemize}
+    % \includegraphics[width=0.6\textwidth]{Convergence_Graph.png}
+\end{frame}
+
+% Slide 17: Dinamika Internal (Entropy Analysis)
+\begin{frame}{Dinamika Internal (Entropy Analysis)}
+    \begin{itemize}
+        \item \textbf{Entropi Von Neumann:} Mengukur derajat \textit{entanglement} and kemurnian state.
+        \item \textbf{Fenomena Collapsing:} Penurunan entropi menuju nol mengindikasikan transisi state menuju probabilitas tunggal (solusi optimal).
+    \end{itemize}
+\end{frame}
+
+% Slide 16: Hasil Backtesting Portofolio (N=2  dan   N=4)
+\begin{frame}{Hasil Backtesting Portofolio (N=2  dan   N=4)}
+    \begin{table}[]
+        \centering
+        \begin{tabular}{@{}lccc@{}}
+        \toprule
+        Metrik dan  Strategi Klasik dan  VQE Murni dan  \textbf{GT-VQE (Proposed)} \\ \midrule
+        Sharpe Ratio (N=4) dan  0.85 dan  0.92 dan  \textbf{1.0107} \\
+        Cumulative Return dan  +12.4\% dan  +14.8\% dan  \textbf{+18.5\%} \\
+        Max Drawdown dan  -5.2\% dan  -4.1\% dan  \textbf{-3.8\%} \\ \bottomrule
+        \end{tabular}
+        \caption{Perbandingan performa portofolio selama periode 2021-2023.}
+    \end{table}
+\end{frame}
+
+% Slide 19: Analisis Jendela Waktu Ekstrem
+\begin{frame}{Analisis Jendela Waktu Ekstrem}
+    \begin{itemize}
+        \item Algoritma diuji pada periode volatilitas tinggi.
+        \item \textbf{Agilitas Rebalancing:} Mekanisme GT-VQE mampu menyesuaikan bobot aset secara responsif terhadap guncangan pasar.
+    \end{itemize}
+\end{frame}
+
+% Slide 20: Perbandingan Efisiensi Kedalaman Sirkuit
+\begin{frame}{Perbandingan Efisiensi Kedalaman Sirkuit}
+    \begin{itemize}
+        \item Kedalaman optimal ditemukan pada $L=2$ hingga $L=3$.
+        \item Penambahan layer lebih lanjut tidak memberikan peningkatan akurasi signifikan namun menambah akumulasi noise.
+    \end{itemize}
+\end{frame}
+\section{Penutup}
+
+% Slide 21: Kesimpulan
+\begin{frame}{Kesimpulan}
+    \begin{enumerate}
+        \item \textbf{Formulasi EPG-Hamiltonian:} Berhasil memetakan utilitas ekonomi ke dalam sistem fisis secara konsisten.
+        \item \textbf{Strategi Warm-Start:} Penggunaan PSNE terbukti efektif memandu konvergensi and mengatasi \textit{Barren Plateaus} pada sirkuit kuantum.
+        \item \textbf{Superioritas Performa:} Model GT-VQE menghasilkan performa finansial yang lebih tangguh dengan \textit{Sharpe Ratio} 1,0107.
+    \end{enumerate}
+\end{frame}
+
+% Slide 22: Saran  dan   Penutup
+\begin{frame}{Saran  dan   Penutup}
+    \begin{block}{Saran Pengembangan}
+        \begin{itemize}
+            \item Pengujian pada infrastruktur perangkat keras kuantum riil (bukan simulator).
+            \item Integrasi model noise (\textit{decoherence, gate fidelity}) yang lebih realistis.
+            \item Perluasan aset pada pasar yang mengalami fenomena \textit{Black Swan}.
+        \end{itemize}
+    \end{block}
+    \vspace{1cm}
+    \begin{center}
+        \huge \textbf{Terima Kasih} \\
+        \medskip
+        \large Ada Pertanyaan?
+    \end{center}
+\end{frame}
+
+\end{document}

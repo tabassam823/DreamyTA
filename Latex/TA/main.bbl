@@ -846,32 +846,6 @@ Niss, M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Padilla%
-}{%
-Padilla%
-}{%
-{\protect \APACyear {2025}}%
-}]{%
-padilla_quantum_2025}
-\APACinsertmetastar {%
-padilla_quantum_2025}%
-\begin{APACrefauthors}%
-Padilla, G.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2025}{{\APACmonth{09}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Quantum {Approximate} {Optimization} {Algorithm} for
-  {Portfolio} {Selection}: {A} {Comparative} {Study} with {Classical}
-  {Markowitz} {Optimization}} {Quantum {Approximate} {Optimization} {Algorithm}
-  for {Portfolio} {Selection}: {A} {Comparative} {Study} with {Classical}
-  {Markowitz} {Optimization}}.{\BBCQ}
-\newblock
-
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 Peruzzo%
 \ \protect \BOthers {.}}{%
 Peruzzo%

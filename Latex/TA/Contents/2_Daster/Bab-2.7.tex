@@ -1,7 +1,8 @@
-\section{Algoritma \textit{Variational Quantum Eigensolver} (VQE)}
+\section{Algoritma VQE (\textit{Variational Quantum Eigensolver})}
+\label{sec:algoritma-vqe}
 Algoritma \textit{Variational Quantum Eigensolver} (VQE) merupakan kerangka kerja komputasi hibrida yang pertama kali diusulkan dengan tujuan mengintegrasikan fleksibilitas unit pemrosesan klasik dengan kapasitas eksplorasi ruang Hilbert \cite{peruzzo_variational_2014}. Meskipun pada awalnya dirancang untuk simulasi kimia kuantum, algoritma ini bertransformasi menjadi instrumen universal untuk menyelesaikan berbagai tantangan optimasi kombinatorial yang tergolong dalam kelas \textit{Non-Deterministic Polynomial time hard (NP-hard)} di sektor finansial \cite{fedorov_vqe_2022}. Kelas \textit{(NP-hard)} didefinisikan sebagai kategori masalah komputasi yang tidak memiliki algoritma penyelesaian secara polinomial, sehingga memerlukan pendekatan lain salah satunya adalah hibrida quantum-klasik untuk mengatasi kendala skalabilitas dan ledakan ruang solusi. Implementasi VQE memanfaatkan prosesor kuantum untuk mempersiapkan keadaan sirkuit dan mengevaluasi fungsi biaya, sementara unit komputasi klasik bertugas melakukan kalibrasi parameter sudut rotasi secara iteratif untuk meminimalkan ekspektasi energi \cite{wang_variational_2025}. Bab ini akan memaparkan secara sistematis mengenai fondasi prinsip variasi, arsitektur \textit{ansatz} yang efisien, serta mekanisme siklus umpan balik hibrida yang mendasari keberhasilan optimasi portofolio investasi modern.
 
-\subsection{Prinsip Variasi (Teorema Rayleigh-Ritz)}
+\subsection{Prinsip Variasi Teorema Rayleigh-Ritz}
 Algoritma (VQE) secara fundamental beroperasi berdasarkan Teorema Rayleigh-Ritz dalam fungsinya mengestimasi nilai eigen terendah atau energi \textit{ground state} dari operator Hamiltonian dari sistem yang ada \cite{fedorov_vqe_2022}. Prinsip variasi tersebut menyatakan bahwa nilai ekspektasi energi dari sembarang fungsi gelombang percobaan $|\psi\rangle$ akan selalu bernilai lebih besar atau setara dengan tingkat energi dasar sejati sistem. Fungsi energi $E[\psi]$ juga dihitung melalui normalisasi nilai ekspektasi Hamiltonian terhadap fungsi gelombang \textit{ansatz} yang diimplementasikan pada sirkuit kuantum dengan bentuk
 \begin{equation}
 \label{eq:prinsip_variasi}
@@ -9,7 +10,7 @@ E[\psi] = \frac{\langle\psi|\hat{H}|\psi\rangle}{\langle\psi|\psi\rangle} \ge E_
 \end{equation}
 dimana penyebut harus bernilai 1 karena \textit{ansatz} yang digunakan merupakan fungsi gelombang yang telah dinormalisasi dan $\hat{H}$ merupakan Hamiltonian yang merepresentasikan kuantitas yang ingin diminimalkan. 
 
-\subsection{Fondasi Ansatz: \textit{Unitary Coupled Cluster} (UCC)}
+\subsection{Ansatz UCC (\textit{Unitary Coupled Cluster})}
 Konsep \textit{ansatz} dalam algoritma hibrida VQE berakar pada metode \textit{Unitary Coupled Cluster} (UCC) yang merupakan standarisasi dalam pembuatan fungsi gelombang percobaan di kimia kuantum \cite{fedorov_vqe_2022}. Metodologi tersebut menggunakan operator klaster eksponensial uniter untuk mentransformasi keadaan referensi menjadi sebuah keadaan baru yang mengandung informasi korelasi antar partikel melalui formulasi matematis
 \begin{equation}
 \label{eq:ucc_ansatz}

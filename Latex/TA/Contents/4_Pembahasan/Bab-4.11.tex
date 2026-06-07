@@ -5,9 +5,9 @@ Analisis mikroskopis terhadap mekanisme \textit{rebalancing} dilakukan guna memb
 
 Proses penyeimbangan ulang portofolio biner dalam penelitian ini bekerja melalui siklus pembaruan Hamiltonian yang dipicu oleh masuknya data runtun waktu terbaru di setiap jendela (\textit{window}) simulasi. Algoritma \textit{rebalancing} diawali dengan mengekstraksi matriks korelasi dan imbal hasil ekspektasian terkini, yang kemudian dikonversi menjadi parameter bias lokal ($h_i$) dan interaksi kopling ($J_{ij}$) pada operator Hamiltonian sistem. Perubahan nilai parameter fisis ini secara otomatis merubah lanskap energi, di mana titik minimum (\textit{ground state}) dapat bergeser secara radikal dari satu konfigurasi spin ke konfigurasi lainnya.
 
-Dinamika ini teramati secara jelas pada transisi jendela kritis Februari--Maret 2021 (merujuk pada Gambar \ref{fig:window_2021_02_02} dan Gambar \ref{fig:window_2021_03_04} di Lampiran \ref{appendix:window_analysis}). Pada periode tersebut, terjadi lonjakan risiko pada aset sektor perbankan (BBCA) yang direpresentasikan oleh peningkatan koefisien interaksi risiko pada Hamiltonian. Merespons pergeseran energi ini, sirkuit kuantum melakukan rotasi parameter sudut $\theta$ secara instan guna memindahkan amplitudo probabilitas dari status $|10\rangle$ menuju status $|01\rangle$. Mekanisme ini membuktikan bahwa strategi hibrida memiliki agilitas yang sangat tinggi dalam mengeksplorasi jalur energi paling efisien tanpa melalui hambatan komputasi klasik yang kaku. Dampak yang paling signifikan dari stabilitas \textit{warm-start} ini terlihat pada pemilihan kedalaman sirkuit (\textit{depth}) yang optimal secara dinamis. Berdasarkan laporan kinerja, ditemukan bahwa dengan dukungan EPG, sistem secara konsisten memilih \textit{depth} yang rendah (mayoritas pada Depth 2) sebagai konfigurasi terbaik untuk meminimalkan energi Hamiltonian. Temuan ini membuktikan bahwa penggunaan \textit{warm-start} tidak hanya meningkatkan akurasi, tetapi juga mengefisiensikan daya komputasi secara signifikan.
+Dinamika ini teramati secara jelas pada transisi jendela kritis Februari--Maret 2021 (merujuk pada Gambar \ref{fig:window_2021_02_02} dan Gambar \ref{fig:window_2021_03_04} di Lampiran \ref{appendix:window_analysis_n2}). Pada periode tersebut, terjadi lonjakan risiko pada aset sektor perbankan (BBCA) yang direpresentasikan oleh peningkatan koefisien interaksi risiko pada Hamiltonian. Merespons pergeseran energi ini, sirkuit kuantum melakukan rotasi parameter sudut $\theta$ secara instan guna memindahkan amplitudo probabilitas dari status $|10\rangle$ menuju status $|01\rangle$. Mekanisme ini membuktikan bahwa strategi hibrida memiliki agilitas yang sangat tinggi dalam mengeksplorasi jalur energi paling efisien tanpa melalui hambatan komputasi klasik yang kaku. Dampak yang paling signifikan dari stabilitas \textit{warm-start} ini terlihat pada pemilihan kedalaman sirkuit (\textit{depth}) yang optimal secara dinamis. Berdasarkan laporan kinerja, ditemukan bahwa dengan dukungan EPG, sistem secara konsisten memilih \textit{depth} yang rendah (mayoritas pada Depth 2) sebagai konfigurasi terbaik untuk meminimalkan energi Hamiltonian. Temuan ini membuktikan bahwa penggunaan \textit{warm-start} tidak hanya meningkatkan akurasi, tetapi juga mengefisiensikan daya komputasi secara signifikan.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
@@ -24,7 +24,7 @@ Dinamika ini teramati secara jelas pada transisi jendela kritis Februari--Maret 
     \label{fig:comp_n2_base}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
@@ -43,7 +43,7 @@ Dinamika ini teramati secara jelas pada transisi jendela kritis Februari--Maret 
 
 Efektivitas dari mekanisme \textit{rebalancing} hibrida ini secara kumulatif menghasilkan kurva pertumbuhan modal yang stabil dan superior. Perbandingan pada Gambar \ref{fig:comp_n2_base} dan \ref{fig:comp_n4_base} menunjukkan bahwa tanpa integrasi kecerdasan strategis, performa VQE murni cenderung tertahan atau bahkan mengalami degradasi saat dimensi sistem membesar. Namun, dengan integrasi \textit{Game Theory} (GT) sebagai pemandu, sirkuit mampu mempertahankan integritas solusinya. Hal ini terbukti pada visualisasi Gambar \ref{fig:rebalancing_impact} yang menunjukkan pertumbuhan modal yang konsisten pada kedua konfigurasi sistem. Dengan demikian, algoritma ini mampu melindungi nilai portofolio dari potensi kerugian (\textit{drawdown}) melalui deteksi dini pergeseran ekuilibrium pasar yang dimanifestasikan ke dalam dinamika fisis sirkuit kuantum.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
