@@ -21,12 +21,16 @@
     \end{columns}
 \end{frame}
 
-% Slide 8.2: Bab 2.5.2 - Representasi Qubit
-\begin{frame}{Bab 2.5.2 - Representasi Qubit}
+% Slide 8.2: Bab 2.5.2 - Representasi Matriks Qubit
+\begin{frame}{Bab 2.5.2 - Representasi Matriks Qubit}
     \begin{itemize}
         \item Status qubit didefinisikan sebagai vektor kolom di ruang Hilbert kompleks.
-        \item Basis Komputasi: ket-0 dan ket-1.
-        \item Syarat Normalisasi: Total probabilitas harus bernilai 1 ($|\alpha|^2 + |\beta|^2 = 1$).
+        \item \textbf{Basis Komputasi:}
+        \begin{equation*}
+            |0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+        \end{equation*}
+        \item \textbf{Aturan Born (Born Rule):} Probabilitas menemukan sistem pada status $i$ adalah $P(i) = |\langle i | \psi \rangle|^2$.
+        \item \textbf{Normalisasi:} Total probabilitas harus bernilai 1 ($|\alpha|^2 + |\beta|^2 = 1$).
     \end{itemize}
 \end{frame}
 
@@ -36,14 +40,18 @@
         \begin{column}{0.6\textwidth}
             \begin{itemize}
                 \item Visualisasi status kuantum pada permukaan bola satuan 3D.
-                \item Parameter: Sudut polar $\theta$ dan fase azimuthal $\phi$.
-                \item Kutub Utara merepresentasikan $|0\rangle$.
-                \item Kutub Selatan merepresentasikan $|1\rangle$.
+                \item \textbf{Parameter Sudut:}
+                \begin{itemize}
+                    \item $\theta$ (Polar): Menentukan probabilitas $|0\rangle$ vs $|1\rangle$.
+                    \item $\phi$ (Azimuthal): Menentukan fase kuantum.
+                \end{itemize}
+                \item \textbf{Representasi:} $|\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle$.
             \end{itemize}
         \end{column}
         \begin{column}{0.4\textwidth}
             \begin{center}
-                \includegraphics[width=0.8\textwidth]{bloch_sphere.png}
+                \includegraphics[width=0.8\textwidth]{bloch_sphere.png} \\
+                \footnotesize \textit{Sumber: Qiskit Documentation}
             \end{center}
         \end{column}
     \end{columns}
@@ -52,29 +60,37 @@
 % Slide 8.4: Bab 2.5.4 - Gerbang Rotasi Kuantum
 \begin{frame}{Bab 2.5.4 - Gerbang Rotasi Kuantum}
     \begin{itemize}
-        \item Manipulasi status qubit melalui operator uniter.
-        \item Gerbang rotasi ($R_x, R_y, R_z$) memutar vektor status pada sumbu Bola Bloch.
-        \item Parameter sudut inilah yang dioptimasi secara klasik dalam algoritma VQE.
+        \item \textbf{Operator Unitari:} Manipulasi status qubit tanpa kehilangan informasi fisis.
+        \item \textbf{Gerbang Rotasi:} Memutar vektor status pada sumbu Bola Bloch.
+    \end{itemize}
+    \begin{equation*}
+        R_y(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} & \cos\frac{\theta}{2} \end{pmatrix}, \quad R_z(\phi) = \begin{pmatrix} e^{-i\phi/2} & 0 \\ 0 & e^{i\phi/2} \end{pmatrix}
+    \end{equation*}
+    \begin{itemize}
+        \item Sudut rotasi ini merupakan parameter yang dilatih dalam VQE.
     \end{itemize}
 \end{frame}
 
-% Slide 8.5: Bab 2.5.5 - Keterbelitan (Entanglement)
-\begin{frame}{Bab 2.5.5 - Keterbelitan (Entanglement)}
+% Slide 8.5: Bab 2.5.5 - Gerbang Keterbelitan (Entanglement)
+\begin{frame}{Bab 2.5.5 - Gerbang Keterbelitan (Entanglement)}
     \begin{itemize}
-        \item Fenomena non-lokal di mana status satu qubit bergantung pada status qubit lainnya.
-        \item Gerbang CNOT: Pembalikan fasa qubit target berdasarkan qubit kontrol.
-        \item Digunakan untuk merepresentasikan korelasi silang antar aset finansial.
+        \item \textbf{Interaksi Non-Lokal:} Status satu qubit menjadi bergantung pada qubit lainnya.
+        \item \textbf{Gerbang CNOT:} Membalik fasa qubit target jika qubit kontrol bernilai 1.
+        \begin{equation*}
+            \text{CNOT} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+        \end{equation*}
+        \item \textbf{Fungsi:} Merepresentasikan korelasi kovariansi antar aset secara hibrida.
     \end{itemize}
 \end{frame}
 
 % Slide 8.6: Bab 2.5.6 - Parameterized Quantum Circuit (PQC)
 \begin{frame}{Bab 2.5.6 - Parameterized Quantum Circuit (PQC)}
     \begin{itemize}
-        \item Arsitektur sirkuit yang mengintegrasikan gerbang logika dengan parameter variabel.
-        \item Berfungsi sebagai Ansatz untuk mencari solusi optimal.
+        \item \textbf{Definisi:} Rangkaian gerbang kuantum yang nilai parameternya ($\boldsymbol{\theta}$) dapat disesuaikan.
+        \item \textbf{Arsitektur:} Terdiri dari \textit{Data Encoding}, \textit{Variational Layers}, dan \textit{Measurement}.
     \end{itemize}
     \begin{center}
         \includegraphics[width=0.7\textwidth]{PQC.png} \\
-        \footnotesize \textit{Alur kerja PQC: Encoding data, sirkuit variasional, dan pengukuran.}
+        \footnotesize \textit{Siklus VQE: Dari superposisi awal hingga ekstraksi solusi optimal. (Sumber: Laporan TA)}
     \end{center}
 \end{frame}

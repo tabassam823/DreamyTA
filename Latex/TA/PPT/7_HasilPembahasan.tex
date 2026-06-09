@@ -1,24 +1,46 @@
 \section{Hasil dan Pembahasan}
 
-% Slide 19: Bab 4.1 - Akuisisi dan Prapemrosesan Data
-\begin{frame}{Bab 4.1 - Akuisisi dan Prapemrosesan Data}
+% Slide 19: Bab 4.1.1 - Akuisisi dan Transformasi Data Numerik
+\begin{frame}{Bab 4.1.1 - Akuisisi dan Transformasi Data Numerik}
     \begin{itemize}
-        \item \textbf{Objek:} Indeks LQ45 (Sektor Perbankan, Infrastruktur, Industri Dasar).
-        \item \textbf{Konfigurasi:} $N=2$ (BBCA, TLKM) dan $N=4$ (BBCA, BMRI, SMGR, TLKM).
-        \item \textbf{Transformasi Matematis:}
+        \item \textbf{Data Sampel (BBCA):} Kenaikan harga dari 4515,50 ke 4869,32 (Jan 2021).
+        \item \textbf{Kalkulasi Imbal Hasil:}
         \begin{itemize}
-            \item \textbf{Simple Return ($R$):} Untuk estimasi ekspektasi imbal hasil ($\mu$) karena sifat aditif linear.
-            \item \textbf{Log Return ($r$):} Untuk matriks kovariansi ($\Sigma$) guna menjamin stasioneritas statistik.
+            \item \textbf{Simple Return ($R$):} $\frac{4869,32 - 4515,50}{4515,50} \approx 0,0783$
+            \item \textbf{Log Return ($r$):} $\ln(1 + 0,0783) \approx 0,0754$
         \end{itemize}
-        \item \textbf{Risk Aversion Endogen ($\gamma$):} Dihitung via fungsi sigmoid terhadap rasio Sharpe agregat ($Z$).
+        \item \textbf{Justifikasi Pemilihan:}
+        \begin{itemize}
+            \item $R$ digunakan untuk $\mu$ guna menjaga linearitas portofolio ($r_{true} \approx \hat{r}_p + \frac{1}{2}\text{Var}(R)$).
+            \item $r$ digunakan untuk $\Sigma$ guna menjamin stasioneritas runtun waktu.
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
-% Slide 20: Bab 4.2 - Formulasi EPG dan Nash Equilibrium
-\begin{frame}{Bab 4.2 - Formulasi EPG dan Nash Equilibrium}
+% Slide 19b: Bab 4.1.2 - Matriks Kovariansi dan Risk Aversion
+\begin{frame}{Bab 4.1.2 - Matriks Kovariansi dan Risk Aversion}
     \begin{itemize}
-        \item \textbf{Exact Potential Game (EPG):} Menjamin selisih utilitas marginal pemain ($\Delta u_i$) sama dengan selisih fungsi potensial global ($\Delta \Phi$).
-        \item \textbf{Hasil Pencarian (Januari 2021):}
+        \item \textbf{Matriks Kovariansi ($N=2$):}
+        \begin{equation*}
+            \Sigma_{N2} = \begin{pmatrix} 0,0171 & 0,0022 \\ 0,0022 & 0,0225 \end{pmatrix}
+        \end{equation*}
+        \item \textbf{Parameter Risk Aversion Endogen ($\gamma$):}
+        \begin{itemize}
+            \item Rasio Sharpe Agregat ($Z$): $\bar{\mu}_l / \bar{\sigma}_l = 0,1330 / 0,2221 \approx 0,5988$.
+            \item Fungsi Sigmoid: $\gamma = 1 / (1 + e^Z) \approx \mathbf{0,3547}$.
+        \end{itemize}
+        \item \textbf{Interpretasi:} Nilai $\gamma$ rendah mencerminkan optimisme pasar pada jendela awal, memicu alokasi kapital yang lebih berani.
+    \end{itemize}
+\end{frame}
+
+% Slide 20: Bab 4.2 - Formulasi EPG dan Hasil Nash
+\begin{frame}{Bab 4.2 - Formulasi EPG dan Hasil Nash}
+    \begin{itemize}
+        \item \textbf{Insentif Marginal ($\Delta \Phi$):}
+        \begin{equation*}
+            \Delta \Phi(\vec{x}) = \frac{\mu_i}{k} - \frac{\gamma \sigma_i^2}{2k^2} - \gamma \sum_{j < i} \sigma_{ij} \frac{x_j}{k^2}
+        \end{equation*}
+        \item \textbf{Hasil Pencarian Nash Equilibrium ($N=2$):}
     \end{itemize}
     \begin{table}
         \footnotesize
@@ -27,121 +49,127 @@
         \cline{3-4}
         & & \multicolumn{2}{c|}{Aset TLKM ($x_2$)} \\ \cline{3-4}
         & & Status 0 & Status 1 \\ \hline
-        \multicolumn{1}{|c|}{Aset BBCA ($x_1$)} & Status 1 & (0,1909, 0) & \textbf{(0,1901, 0,1175)} \\ \hline
+        \multicolumn{1}{|c|}{\multirow{2}{*}{Aset BBCA ($x_1$)}} & Status 0 & (0, 0) & (0, 0,1183) \\ \cline{2-4} 
+        \multicolumn{1}{|c|}{} & Status 1 & \textbf{(0,1909, 0)} & (0,1901, 0,1175) \\ \hline
         \end{tabular}
-        \caption{Contoh Matriks Payoff Strategis $N=2$ (BBCA terpilih sebagai strategi stabil).}
+        \caption{Nash Equilibrium tercapai pada $|10\rangle$ (Hanya BBCA terpilih).}
     \end{table}
+\end{frame}
+
+% Slide 21: Bab 4.3 - Derivasi EPG ke Hamiltonian Ising
+\begin{frame}{Bab 4.3 - Derivasi EPG ke Hamiltonian Ising}
     \begin{itemize}
-        \item \textbf{Warm-Start:} Solusi Nash digunakan sebagai inisialisasi parameter $\theta$ pada VQE.
+        \item \textbf{Langkah Transformasi:}
+        \begin{enumerate}
+            \item Definisikan fungsi energi: $E(\vec{x}) = -\Phi(\vec{x})$.
+            \item Substitusi variabel biner ke spin: $x_i = (1 - s_i)/2$.
+            \item Ekstraksi koefisien Pauli-Z ($\hat{Z}$).
+        \end{enumerate}
+        \item \textbf{Hasil Hamiltonian Numerik (Jan 2021):}
+        \begin{equation*}
+            \hat{\mathcal{H}}_{N2} \approx 0,0915 \hat{Z}_1 + 0,0533 \hat{Z}_2 + 0,5022 \hat{Z}_1 \hat{Z}_2 - 0,1470
+        \end{equation*}
+        \item \textbf{Analisis:} Koefisien interaksi didominasi oleh pinalti anggaran $A \approx 0,5$, menjamin validitas solusi kardinalitas.
     \end{itemize}
 \end{frame}
 
-% Slide 21: Bab 4.3 - Pemetaan Hamiltonian Ising
-\begin{frame}{Bab 4.3 - Pemetaan Hamiltonian Ising}
-    \begin{itemize}
-        \item \textbf{Transformasi QUBO ke Ising:} Melalui substitusi $x_i = (1-s_i)/2$.
-    \end{itemize}
-    \begin{equation}
-        \hat{\mathcal{H}} = \sum_{i=1}^N h_i \hat{Z}_i + \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C
-    \end{equation}
-    \begin{itemize}
-        \item \textbf{Parameter Fisis:}
-        \begin{itemize}
-            \item \textbf{Medan Lokal ($h_i$):} Menyerap bias imbal hasil individual.
-            \item \textbf{Kopling ($J_{ij}$):} Menangkap korelasi risiko antar aset.
-        \end{itemize}
-        \item \textbf{Penalty ($A$):} Koefisien $J_{ij} \approx 0,5$ didominasi oleh pinalti anggaran guna menjaga validitas solusi.
-    \end{itemize}
-\end{frame}
-
-% Slide 22: Bab 4.4 - Arsitektur Ansatz dalam VQE
-\begin{frame}{Bab 4.4 - Arsitektur Ansatz dalam VQE}
+% Slide 22: Bab 4.4 - Sirkuit Kuantum dan Gradien Energi
+\begin{frame}{Bab 4.4 - Sirkuit Kuantum dan Gradien Energi}
     \begin{columns}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.55\textwidth}
             \begin{itemize}
-                \item \textbf{Hardware-Efficient Ansatz (HEA):}
-                \begin{itemize}
-                    \item \textbf{Layer Rotasi:} Gerbang $R_y(\theta)$ dan $R_z(\theta)$.
-                    \item \textbf{Layer Entanglement:} Gerbang CNOT dua arah.
-                \end{itemize}
-                \item \textbf{Fungsi Gelombang:}
+                \item \textbf{Konstruksi State:} $\ket{\psi(\boldsymbol{\theta})} = \hat{U}_{ent} \hat{U}_{rot}(\boldsymbol{\theta}) \ket{0\dots0}$.
+                \item \textbf{Gradien Energi:} Dicari untuk meminimalkan $\langle \hat{\mathcal{H}} \rangle$:
                 \begin{equation*}
-                    \ket{\psi(\boldsymbol{\theta})} = \hat{U}_{ent} \hat{U}_{rot} \ket{0\dots0}
+                    \nabla_{\theta} E = \frac{\partial}{\partial \theta} \langle \psi(\theta) | \hat{H} | \psi(\theta) \rangle
                 \end{equation*}
+                \item \textbf{Sinergi:} Kombinasi gerbang rotasi $R_y, R_z$ dan keterbelitan CNOT membentuk lanskap energi yang dapat dilatih.
             \end{itemize}
         \end{column}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.45\textwidth}
             \begin{figure}
                 \centering
                 \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-05-05_circuit.png}
-                \caption{Contoh sirkuit HEA pada simulator.}
+                \caption{Arsitektur HEA sistem N=2.}
             \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
 
-% Slide 23: Bab 4.5 - Optimasi Berbasis Gradien (PSR)
-\begin{frame}{Bab 4.5 - Optimasi Berbasis Gradien (PSR)}
+% Slide 23: Bab 4.5 - Penurunan Parameter Shift Rule (PSR)
+\begin{frame}{Bab 4.5 - Penurunan Parameter Shift Rule (PSR)}
     \begin{itemize}
-        \item \textbf{Parameter Shift Rule (Analitik):} Memberikan gradien eksak tanpa bias melalui pergeseran fase sirkuit.
+        \item \textbf{Aksioma:} Generator gerbang kuantum seringkali memiliki dua nilai eigen unik ($\pm r$).
+        \item \textbf{Derivasi:} Ekspansi uniter gerbang rotasi $U(\theta) = e^{-i\theta G}$.
     \end{itemize}
     \begin{equation*}
         \frac{\partial E}{\partial \theta} = \frac{1}{2} \left[ E\left(\theta + \frac{\pi}{2}\right) - E\left(\theta - \frac{\pi}{2}\right) \right]
     \end{equation*}
     \begin{itemize}
-        \item \textbf{Mekanisme:} Parameter $\theta$ diperbarui menggunakan arah negatif gradien untuk mencari lembah energi terendah.
-        \item \textbf{Limitasi:} Membutuhkan $2p$ evaluasi sirkuit, kurang efisien untuk jumlah aset ($N$) yang besar.
+        \item \textbf{Signifikansi:} Memberikan nilai gradien yang identik dengan turunan analitik tanpa limit $\epsilon \to 0$.
     \end{itemize}
 \end{frame}
 
-% Slide 24: Bab 4.6 - Optimasi SPSA
-\begin{frame}{Bab 4.6 - Optimasi SPSA}
+% Slide 24: Bab 4.6 - Derivasi dan Iterasi Numerik SPSA
+\begin{frame}{Bab 4.6 - Derivasi dan Iterasi Numerik SPSA}
     \begin{itemize}
-        \item \textbf{Simultaneous Perturbation:} Mengestimasi gradien seluruh parameter secara simultan menggunakan vektor perturbasi stokastik.
-        \item \textbf{Efisiensi Tinggi:} Hanya membutuhkan \textbf{2 evaluasi sirkuit} per iterasi ($\mathcal{O}(1)$).
-        \item \textbf{Hasil Numerik (N=2):} Berhasil mengonvergensi sirkuit menuju \textit{Ground State} $|10\rangle$ dengan akurasi tinggi.
+        \item \textbf{Ekspansi Taylor Orde-2:} SPSA membatalkan suku orde genap melalui selisih evaluasi maju-mundur ($E_+ - E_-$).
+        \item \textbf{Estimator Gradien:} $\hat{g}_i = (E_+ - E_-) / (2 c_k \Delta_i)$.
+        \item \textbf{Contoh Satu Langkah Iterasi:}
+        \begin{itemize}
+            \item \textbf{Input:} $\theta^{(0)} = [\pi/2, \pi/2]$, $\Delta_k = [1, -1]$.
+            \item \textbf{Output:} $\Delta E = -0,0076 \rightarrow \hat{g} = [-0,038, 0,038]^T$.
+            \item \textbf{Update:} $\theta^{(1)} = \theta^{(0)} - 0,1\hat{g} = [1,5746, 1,5670]^T$.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 25: Bab 4.7 - Evolusi Entropi: Shannon ke Von Neumann
+\begin{frame}{Bab 4.7 - Evolusi Entropi: Shannon ke Von Neumann}
+    \begin{itemize}
+        \item \textbf{Shannon ($H$):} Ketidakpastian informasi klasik $-\sum p_i \log_2 p_i$.
+        \item \textbf{Von Neumann ($S$):} Perluasan ke operator densitas kuantum $\rho$:
+    \end{itemize}
+    \begin{equation*}
+        S(\rho) = -\text{Tr}(\rho \log \rho) = -\sum_i \lambda_i \log \lambda_i
+    \end{equation*}
+    \begin{itemize}
+        \item \textbf{Studi Kasus Jendela 1:}
+        \begin{itemize}
+            \item \textbf{N=2:} Probabilitas status optimal 0,98 $\rightarrow S = 0,1414$ bit.
+            \item \textbf{N=4:} Probabilitas status optimal 0,94 $\rightarrow S = 0,3274$ bit.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 26: Bab 4.8 - Analisis Barren Plateau dan Warm-Start
+\begin{frame}{Bab 4.8 - Analisis Barren Plateau dan Warm-Start}
+    \begin{itemize}
+        \item \textbf{Jebakan Gradien:} Variansi gradien menyusut drastis pada sistem $N=4$ saat kedalaman $L > 5$.
+        \item \textbf{Expressibility vs Trainability:} Peningkatan kapasitas sirkuit seringkali mengorbankan kemudahan optimasi.
     \end{itemize}
     \begin{center}
-        \textit{"SPSA memungkinkan optimasi portofolio skala besar tetap layak secara komputasi pada simulator maupun perangkat keras."}
+        \includegraphics[width=0.7\textwidth]{Hasil_N4_GT/grafik_depth_per_window_N4.png} \\
+        \footnotesize \textit{Visualisasi pemilihan depth optimal menggunakan inisialisasi Nash.}
     \end{center}
-\end{frame}
-
-% Slide 25: Bab 4.7 - Evolusi Entropi Von Neumann
-\begin{frame}{Bab 4.7 - Evolusi Entropi Von Neumann}
     \begin{itemize}
-        \item \textbf{Diagnostik:} Mengukur tingkat ketidakpastian sirkuit selama optimasi.
-        \item \textbf{Fenomena Collapsing:}
-        \begin{itemize}
-            \item \textbf{Awal:} Entropi tinggi (Superposisi merata).
-            \item \textbf{Akhir:} Entropi meluruh menuju nol (Wavefunction collapse ke status optimal).
-        \end{itemize}
-        \item \textbf{Dampak Warm-Start:} Mempercepat peluruhan entropi karena inisialisasi Nash sudah berada di wilayah probabilitas tinggi.
+        \item \textbf{Observasi:} Inisialisasi EPG memandu sirkuit ke sub-ruang Hilbert yang bermakna, menjaga gradien tetap terdeteksi.
     \end{itemize}
 \end{frame}
 
-% Slide 26: Bab 4.8 - Analisis Kedalaman Sirkuit (Barren Plateaus)
-\begin{frame}{Bab 4.8 - Analisis Kedalaman Sirkuit (Barren Plateaus)}
+% Slide 27: Bab 4.9 - Validasi Brute Force dan Benchmark SLSQP
+\begin{frame}{Bab 4.9 - Validasi Brute Force dan Benchmark SLSQP}
     \begin{itemize}
-        \item \textbf{Barren Plateau:} Variansi gradien menyusut secara eksponensial terhadap jumlah qubit dan layer.
-        \item \textbf{Observasi:}
+        \item \textbf{Brute Force (N=2):}
         \begin{itemize}
-            \item Sistem $N=2$ stabil pada kedalaman hingga $L=10$.
-            \item Sistem $N=4$ menunjukkan degradasi variansi gradien yang tajam saat layer ditingkatkan.
+            \item $E(|10\rangle) = -0,1909$ (Global Minimum).
+            \item $E(|00\rangle) = 4,1972$ (Forbidden State).
         \end{itemize}
-        \item \textbf{Solusi:} Inisialisasi EPG memandu parameter sirkuit tetap berada pada lanskap yang dapat dilatih (\textit{trainable region}).
+        \item \textbf{SLSQP:} Algoritma optimasi kontinu dengan diskritisasi \textit{Top-K}.
     \end{itemize}
-\end{frame}
-
-% Slide 27: Bab 4.9 - Validasi dan Benchmark Klasik
-\begin{frame}{Bab 4.9 - Validasi dan Benchmark Klasik}
-    \begin{itemize}
-        \item \textbf{Validasi Eksak (Brute Force):} Mengonfirmasi bahwa status dengan energi Hamiltonian terendah adalah solusi finansial yang benar.
-        \item \textbf{Benchmark SLSQP:}
-        \begin{itemize}
-            \item Optimasi kontinu klasik dengan diskritisasi \textit{Top-K}.
-            \item Digunakan untuk membandingkan efisiensi alokasi modal hibrida terhadap standar industri.
-        \end{itemize}
-    \end{itemize}
+    \begin{exampleblock}{Fair Comparison}
+        Kedua metode diuji pada parameter batasan yang identik guna membandingkan efisiensi alokasi modal hibrida secara objektif.
+    \end{exampleblock}
 \end{frame}
 
 % Slide 28: Bab 4.10 - Analisis Performa Portofolio (Hasil Utama)
@@ -158,40 +186,28 @@
         SLSQP (Klasik) & 51,34\% & 0,6736 & 15,91\% & 12,91\% & 0,2810 & 21,12\% \\ \hline
         Equal Weight & 37,29\% & 0,6848 & 14,62\% & 35,57\% & 0,6790 & 18,42\% \\ \hline
         \end{tabular}
-        \caption{Perbandingan performa GT-VQE menunjukkan keunggulan signifikan pada sistem $N=4$.}
+        \caption{GT-VQE mendominasi seluruh metrik pada dimensi sistem yang lebih besar (N=4).}
     \end{table}
-    \begin{itemize}
-        \item \textbf{Sharpe Ratio 1,0107:} Menunjukkan efisiensi manajemen risiko yang sangat tinggi dibanding metode klasik (0,2810).
-    \end{itemize}
 \end{frame}
 
-% Slide 29: Bab 4.10 - Dampak Game Theory (Visual)
-\begin{frame}{Bab 4.10 - Dampak Game Theory (Visual)}
+% Slide 30: Bab 4.11 - Dinamika Rebalancing Jendela Ekstrem
+\begin{frame}{Bab 4.11 - Dinamika Rebalancing Jendela Ekstrem}
+    \begin{itemize}
+        \item \textbf{Agilitas Portofolio:} Transisi status $|10\rangle \to |01\rangle$ secara instan merespons lonjakan risiko BBCA (Feb-Mar 2021).
+    \end{itemize}
     \begin{figure}
         \centering
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N4.png}
-            \caption{VQE vs Klasik ($N=4$)}
+            \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-02-02_window.png}
+            \caption{Jan-Feb 2021 (Aset BBCA)}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.45\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{Hasil_N4_GT/hasil_backtest_vqe_N4.png}
-            \caption{Kurva Ekuitas GT-VQE}
+            \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-03-04_window.png}
+            \caption{Mar-Apr 2021 (Aset TLKM)}
         \end{subfigure}
-        \caption{Pertumbuhan modal yang stabil dan superior melalui integrasi kecerdasan strategis Nash.}
+        \caption{Quantum rebalancing mendeteksi pergeseran energi Hamiltonian pasar.}
     \end{figure}
-\end{frame}
-
-% Slide 30: Bab 4.11 - Dinamika Rebalancing Jendela Waktu Ekstrem
-\begin{frame}{Bab 4.11 - Dinamika Rebalancing Jendela Waktu Ekstrem}
-    \begin{itemize}
-        \item \textbf{Agilitas Pasar:} Algoritma mampu mendeteksi lonjakan risiko sistemik (Februari--Maret 2021).
-        \item \textbf{Respons Sirkuit:} Rotasi instan parameter $\theta$ untuk memindahkan aset dari sektor berisiko ke sektor stabil.
-        \item \textbf{Efisiensi Komputasi:} Dengan dukungan EPG, sistem secara konsisten beroperasi pada kedalaman sirkuit rendah (\textit{Depth 2}).
-    \end{itemize}
-    \begin{center}
-        \textit{"Quantum Rebalancing mendeteksi pergeseran ekuilibrium pasar lebih cepat melalui dinamika fisik Hamiltonian."}
-    \end{center}
 \end{frame}

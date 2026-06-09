@@ -26,6 +26,26 @@ Algoritma \textit{Sequential Least Squares Programming} (SLSQP) merupakan metode
 \end{equation}
 menggunakan batasan $\sum w_i = 1$ dan $0 \leq w_i \leq 1$ yang berarti membeli suatu aset dengan komposisi nol sampai 100\% dari total modal yang dialokasikan.
 
+\begin{algorithm}[!htbp]
+\caption{Optimasi Portofolio Klasik SLSQP}
+\label{alg:slsqp_optimization}
+\begin{algorithmic}[1]
+\Procedure{MarkowitzSLSQP}{$\Sigma, \mu, \gamma, K, tol$}
+    \State $w \gets \text{InitialWeights}(\text{Uniform})$ \Comment{Inisialisasi alokasi seragam}
+    \State $B \gets \mathbf{I}$ \Comment{Inisialisasi aproksimasi Hessian}
+    \While{not $\text{Converged}(\nabla f, tol)$}
+        \State $\nabla f \gets \gamma \Sigma w - \mu$ \Comment{Kalkulasi Gradien Markowitz}
+        \State $d \gets \text{SolveQuadraticSubproblem}(\nabla f, B, w)$ \Comment{Penentuan arah pencarian QP}
+        \State $\alpha \gets \text{LineSearch}(f, w, d)$ \Comment{Optimasi ukuran langkah (\textit{step size})}
+        \State $w \gets w + \alpha d$ \Comment{Pembaruan bobot kontinu $[0,1]$}
+        \State $B \gets \text{UpdateHessianBFGS}(B, w, \nabla f)$ \Comment{Pembaruan matriks Hessian (BFGS)}
+    \EndWhile
+    \State $x \gets \text{TopKSelection}(w, K)$ \Comment{Diskritisasi menjadi status biner}
+    \State \Return $x, w$ \Comment{Keputusan portofolio dan alokasi optimal}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
 SLSQP beroperasi dengan melakukan linierisasi pada batasan dan menerapkan aproksimasi kuadratik pada fungsi objektif melalui ekspansi deret Taylor orde kedua. Guna memberikan pemahaman operasional yang konkret, dilakukan bedah tuntas untuk \textit{Iterasi 1} menggunakan data riil jendela Januari 2021 untuk sistem $N=2$ (BBCA dan TLKM) dengan parameter optimasi $\mu = [0,1939, 0,1223]^T$ dan $\gamma = 0,3547$. Langkah awal optimasi dimulai dengan menetapkan alokasi modal secara seragam (\textit{uniform}) sebagai titik awal $w_0 = [0,5, 0,5]^T$ serta menginisialisasi matriks Hessian sebagai matriks identitas $B_0 = \mathbf{I}$. Kemudian, proses dilanjutkan dengan menghitung nilai gradien dari fungsi objektif pada titik $w_0$ melalui relasi $\nabla f(w_0) = \gamma \Sigma w_0 - \mu$. Berdasarkan matriks kovariansi $\Sigma$ yang diperoleh pada \S \ref{subsec:4_1_2_numerik_fisis}, hasil perkalian matriks terhadap bobot awal memberikan kontribusi risiko sebesar:
 \begin{equation*}
     \Sigma w_0 = \begin{pmatrix} 0,0171 & 0,0022 \\ 0,0022 & 0,0225 \end{pmatrix} \begin{pmatrix} 0,5 \\ 0,5 \end{pmatrix} = \begin{pmatrix} 0,00965 \\ 0,01235 \end{pmatrix}.
@@ -67,22 +87,3 @@ Tahap akhir dari iterasi pertama ini adalah melakukan pembaruan terhadap bobot k
 \end{equation*}
 Hasil pergeseran modal menuju aset BBCA (Aset 1) ini menunjukkan bahwa algoritma merespons dominasi imbal hasil terhadap risiko korelasi pada aset tersebut. Proses iteratif ini akan terus berlanjut hingga mencapai konvergensi sebelum akhirnya dilakukan prosedur diskritisasi $x_i \in \{0,1\}$ untuk mendapatkan keputusan portofolio final. Secara keseluruhan, algoritma SLSQP ini dapat ditinjau pada algoritma \ref{alg:slsqp_optimization}.
 
-\begin{algorithm}[!htbp]
-\caption{Optimasi Portofolio Klasik SLSQP}
-\label{alg:slsqp_optimization}
-\begin{algorithmic}[1]
-\Procedure{MarkowitzSLSQP}{$\Sigma, \mu, \gamma, K, tol$}
-    \State $w \gets \text{InitialWeights}(\text{Uniform})$ \Comment{Inisialisasi alokasi seragam}
-    \State $B \gets \mathbf{I}$ \Comment{Inisialisasi aproksimasi Hessian}
-    \While{not $\text{Converged}(\nabla f, tol)$}
-        \State $\nabla f \gets \gamma \Sigma w - \mu$ \Comment{Kalkulasi Gradien Markowitz}
-        \State $d \gets \text{SolveQuadraticSubproblem}(\nabla f, B, w)$ \Comment{Penentuan arah pencarian QP}
-        \State $\alpha \gets \text{LineSearch}(f, w, d)$ \Comment{Optimasi ukuran langkah (\textit{step size})}
-        \State $w \gets w + \alpha d$ \Comment{Pembaruan bobot kontinu $[0,1]$}
-        \State $B \gets \text{UpdateHessianBFGS}(B, w, \nabla f)$ \Comment{Pembaruan matriks Hessian (BFGS)}
-    \EndWhile
-    \State $x \gets \text{TopKSelection}(w, K)$ \Comment{Diskritisasi menjadi status biner}
-    \State \Return $x, w$ \Comment{Keputusan portofolio dan alokasi optimal}
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}

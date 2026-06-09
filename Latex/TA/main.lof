@@ -14,12 +14,12 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{32}{figure.caption.19}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum \textit {Hardware-Efficient Ansatz} dengan Kedalaman ($L$) = 1.}}{50}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Visualisasi Perbandingan Pertumbuhan Modal antara Optimasi VQE Hibrida dan Metode Klasik SLSQP.}}{63}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (\textit {Depth}) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}}{64}{figure.caption.24}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Visualisasi Dampak Integrasi \textit {Game Theory} terhadap Stabilitas dan Pertumbuhan Modal Portofolio pada Berbagai Dimensi Sistem.}}{64}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=2.}}{65}{figure.caption.26}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=4.}}{66}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Perbandingan Visual Pertumbuhan Modal pada Sistem N=2 dan N=4 sebagai Hasil dari Algoritma \textit {Rebalancing} Strategis.}}{66}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=2.}}{62}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Performa Portofolio Klasik vs Kuantum Murni pada Sistem N=4.}}{63}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Perbandingan Visual Pertumbuhan Modal pada Sistem N=2 dan N=4 sebagai Hasil dari Algoritma \textit {Rebalancing} Strategis.}}{63}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Visualisasi Perbandingan Pertumbuhan Modal antara Optimasi VQE Hibrida dan Metode Klasik SLSQP.}}{64}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (\textit {Depth}) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}}{65}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Visualisasi Dampak Integrasi \textit {Game Theory} terhadap Stabilitas dan Pertumbuhan Modal Portofolio pada Berbagai Dimensi Sistem.}}{66}{figure.caption.28}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

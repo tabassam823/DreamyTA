@@ -3,8 +3,13 @@
 % Slide 6.1: Bab 2.3.1 - Pengantar Teori Permainan dan Ekuilibrium Nash
 \begin{frame}{Bab 2.3.1 - Pengantar Teori Permainan dan Ekuilibrium Nash}
     \begin{itemize}
-        \item \textbf{Interaksi Strategis:} Pemodelan keputusan agen rasional di bawah ketergantungan sistemik.
-        \item \textbf{Nash Equilibrium:} Kondisi di mana tidak ada agen yang dapat meningkatkan utilitasnya dengan mengubah strategi secara sepihak.
+        \item \textbf{Interaksi Strategis:} Keputusan agen rasional di bawah ketergantungan sistemik (Game Theory).
+        \item \textbf{Ekuilibrium Nash:} Kondisi stabil di mana tidak ada insentif untuk deviasi sepihak.
+        \item \textbf{Contoh Game:}
+        \begin{itemize}
+            \item \textbf{Stag Hunt:} Koordinasi untuk hasil kolektif maksimal.
+            \item \textbf{Prisoner's Dilemma:} Konflik kepentingan individu vs kelompok.
+        \end{itemize}
     \end{itemize}
     \begin{figure}
         \centering
@@ -25,87 +30,75 @@
             \includegraphics[width=\textwidth]{232_payoff_BoS.png}
             \caption{\textit{Battle of the Sexes}}
         \end{subfigure}
-        \caption{Matriks \textit{payoff} pada berbagai skema interaksi strategis klasik.}
+        \caption{Matriks \textit{payoff} klasik (Sumber: Referensi Teori Permainan).}
     \end{figure}
 \end{frame}
 
 % Slide 6.2: Bab 2.3.2 - Exact Potential Game (EPG)
 \begin{frame}{Bab 2.3.2 - Exact Potential Game (EPG)}
     \begin{itemize}
-        \item \textbf{Definisi:} Perubahan utilitas marginal pemain selaras dengan variasi fungsi potensial global $\Phi$.
-        \item \textbf{Properti Utama:} Setiap peningkatan utilitas lokal berkontribusi pada penurunan energi (atau peningkatan potensial) sistem secara keseluruhan.
+        \item \textbf{Fungsi Potensial ($\Phi$):} Skalar yang merangkum insentif seluruh pemain.
+        \item \textbf{Nash Seeker:} EPG berfungsi sebagai algoritma umum untuk mencari \textit{Nash Equilibrium} melalui maksimisasi fungsi potensial.
+        \item \textbf{Karakteristik:} Perubahan utilitas lokal ($\Delta u_i$) selaras secara eksak dengan perubahan potensial global ($\Delta \Phi$).
     \end{itemize}
     \begin{equation}
-        \Phi(s_i', s_{-i}) - \Phi(s_i, s_{-i}) = u_i(s_i', s_{-i}) - u_i(s_i, s_{-i})
+        \Delta \Phi = \Phi(s_i', s_{-i}) - \Phi(s_i, s_{-i}) = u_i(s_i', s_{-i}) - u_i(s_i, s_{-i})
     \end{equation}
+\end{frame}
+
+% Slide 6.3: Bab 2.3.3 - Penurunan Markowitz ke Kerangka EPG
+\begin{frame}{Bab 2.3.3 - Penurunan Markowitz ke Kerangka EPG}
     \begin{itemize}
-        \item \textbf{Konvergensi:} Menjamin keberadaan \textit{Pure Strategy Nash Equilibrium} (PSNE) dan stabilitas algoritma optimasi.
+        \item \textbf{Lagrangian Awal:}
+        \begin{equation*}
+            \mathcal{L}(\omega_i) = \lambda \sum_i \mu_i \omega_i - \sum_{i,j} \sigma_{ij} \omega_i \omega_j
+        \end{equation*}
+        \item \textbf{Transformasi Biner:} Memetakan bobot $\omega_i$ ke variabel keputusan $x_i \in \{0, 1\}$.
+        \item \textbf{Fungsi Potensial EPG ($\Phi(x)$):}
+        \begin{equation}
+            \Phi(x) = \frac{1}{K} \sum_i \mu_i x_i - \frac{\gamma}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j
+        \end{equation}
+        \item \textbf{Sinergi:} Maksimisasi utilitas agen dalam game setara dengan optimasi risiko-imbal hasil portofolio.
     \end{itemize}
 \end{frame}
 
-% Slide 6.3: Bab 2.3.3 - Markowitz sebagai EPG
-\begin{frame}{Bab 2.3.3 - Markowitz sebagai EPG}
+% Slide 7.1: Bab 2.4.1 - Sejarah dan Evolusi Model Ising
+\begin{frame}{Bab 2.4.1 - Sejarah dan Evolusi Model Ising}
     \begin{itemize}
-        \item \textbf{Pemetaan Utilitas:} Setiap aset dimodelkan sebagai pemain yang berupaya memaksimalkan utilitas (imbal hasil) dan meminimalkan risiko (interaksi kovarians).
-        \item \textbf{Fungsi Potensial Portofolio:}
-    \end{itemize}
-    \begin{equation}
-        \Phi(\omega) = \sum_i \mu_i \omega_i - \frac{\lambda}{2} \sum_{i,j} \sigma_{ij} \omega_i \omega_j
-    \end{equation}
-    \begin{itemize}
-        \item \textbf{Sinergi:} Maksimisasi fungsi potensial $\Phi$ secara matematis ekuivalen dengan mencari konfigurasi portofolio optimal Markowitz.
-    \end{itemize}
-\end{frame}
-
-% Slide 7.1: Bab 2.4.1 - Sejarah dan Evolusi Model Ising (Lenz-Ising)
-\begin{frame}{Bab 2.4.1 - Sejarah dan Evolusi Model Ising (Lenz-Ising)}
-    \begin{itemize}
-        \item \textbf{1920-an (Konseptualisasi):} Wilhelm Lenz mengusulkan model interaksi \textit{spin} diskrit untuk menjelaskan feromagnetisme.
-        \item \textbf{1925 (Solusi Ernst Ising):} Mengembangkan solusi eksak untuk sistem 1 dimensi (1D).
-        \item \textbf{Kesimpulan Pesimistis:} Ising menyimpulkan tidak ada transisi fase pada 1D di atas suhu nol mutlak (fluktuasi termal mendominasi).
+        \item \textbf{Era 1920-an:} Wilhelm Lenz dan Ernst Ising merumuskan model interaksi magnetik diskrit.
+        \item \textbf{Evolusi:} Dari solusi 1D yang sederhana menuju solusi 2D Onsager (1944) yang membuktikan transisi fase.
+        \item \textbf{Kebangkitan Modern:} Kemajuan teknologi komputasi dan \textit{Quantum Annealing} menjadikan Ising bahasa standar optimasi kombinatorial.
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.55\textwidth]{1D_Model_atT.png} \\
-        \footnotesize \textit{Visualisasi Model Ising 1D dengan orientasi spin acak akibat fluktuasi termal.}
+        \includegraphics[width=0.5\textwidth]{1D_Model_atT.png} \\
+        \footnotesize \textit{Model Ising 1D (Sumber: Figure 2.1 Bab 2).}
     \end{center}
 \end{frame}
 
-% Slide 7.2: Bab 2.4.2 - Kebangkitan Model Ising (Onsager)
-\begin{frame}{Bab 2.4.2 - Kebangkitan Model Ising (Onsager)}
+% Slide 7.2: Bab 2.4.2 - Ising dalam Ekonofisika (Mantegna)
+\begin{frame}{Bab 2.4.2 - Ising dalam Ekonofisika (Mantegna)}
     \begin{itemize}
-        \item \textbf{1944 (Solusi Lars Onsager):} Merumuskan solusi eksak untuk kasus 2 dimensi (2D).
-        \item \textbf{Paradigma Baru:} Membuktikan adanya transisi fase sistemik dari interaksi jarak pendek sederhana.
-        \item \textbf{Ising Computing:} Transformasi model Ising menjadi bahasa standar untuk masalah optimasi kombinatorial kompleks di berbagai bidang (Biologi, Kimia, Ekonomi).
-    \end{itemize}
-\end{frame}
-
-% Slide 7.3: Bab 2.4.3 - Kontribusi Mantegna dalam Ekonofisika
-\begin{frame}{Bab 2.4.3 - Kontribusi Mantegna dalam Ekonofisika}
-    \begin{itemize}
-        \item \textbf{Rosario Mantegna (1999/2000):} Mempelopori penggunaan model Ising untuk memetakan korelasi pasar keuangan.
-        \item \textbf{Penurunan Rumus:} Memetakan koefisien kopling ($J_{ij}$) dari matriks korelasi harga aset.
-        \item \textbf{Kolektivitas:} Menggunakan interaksi \textit{spin-spin} untuk menjelaskan fenomena \textit{herding} dan dinamika pasar sebagai sistem partikel yang saling berinteraksi.
+        \item \textbf{Rosario Mantegna:} Mempelopori penerapan model sistem fisis pada korelasi pasar keuangan.
+        \item \textbf{Metodologi:} Menurunkan parameter interaksi sistem dari matriks korelasi aset.
+        \item \textbf{Dinamika Kolektif:} Pasar dipandang sebagai kumpulan \textit{spins} yang perilakunya didorong oleh minimisasi energi sistem.
     \end{itemize}
     \begin{center}
-        \textit{"Pasar finansial adalah sistem fisik di mana keputusan investor adalah orientasi spin yang mencari kestabilan energi."}
+        \textit{"Model Ising menjembatani fenomena herding investor dengan statistik fisika partikel."}
     \end{center}
 \end{frame}
 
-% Slide 7.4: Bab 2.4.4 - Representasi Hamiltonian Ising Modern
-\begin{frame}{Bab 2.4.4 - Representasi Hamiltonian Ising Modern}
+% Slide 7.3: Bab 2.4.3 - Formulasi Hamiltonian dari EPG
+\begin{frame}{Bab 2.4.3 - Formulasi Hamiltonian dari EPG}
     \begin{itemize}
-        \item \textbf{Representasi Aset:} Aset dianalogikan sebagai partikel \textit{spin} ($s_i \in \{-1, +1\}$).
-        \item \textbf{Formulasi Hamiltonian ($\hat{H}$):}
-    \end{itemize}
-    \begin{equation}
-        \hat{H} = - \sum_{i} h_i \hat{Z}_i - \sum_{i < j} J_{ij} \hat{Z}_i \hat{Z}_j
-    \end{equation}
-    \begin{itemize}
-        \item \textbf{Parameter:}
+        \item \textbf{Pemetaan Energi:} Fungsi potensial EPG ($\Phi$) dipetakan menjadi operator Hamiltonian ($\hat{H} = -\Phi$).
+        \item \textbf{Parameter Fisik:}
+        \begin{equation}
+            \hat{H} = \sum_i h_i \hat{Z}_i + \sum_{i<j} J_{ij} \hat{Z}_i \hat{Z}_j + C
+        \end{equation}
+        \item \textbf{Korespondensi:}
         \begin{itemize}
-            \item \textbf{Medan Lokal ($h_i$):} Menyerap bias imbal hasil individual.
-            \item \textbf{Kopling ($J_{ij}$):} Menangkap risiko bersama (korelasi) antar aset.
+            \item \textbf{Medan Lokal ($h_i$):} Turunan dari ekspektasi imbal hasil (utilitas marginal).
+            \item \textbf{Kopling ($J_{ij}$):} Turunan dari interaksi risiko kovariansi antar aset.
         \end{itemize}
-        \item \textbf{Ground State:} Solusi optimal portofolio $\equiv$ Konfigurasi energi terendah.
     \end{itemize}
 \end{frame}

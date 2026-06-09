@@ -22,11 +22,11 @@
 ## Subbab 2.3
 - [ ] Pengenalan tentang game theory dan nash equilibirum beserta contoh jenis game nya
 - [ ] pengenalan tentang algoritma exact potential game sebagai pencari nash equilibrium secara umum
-- [ ] bagaimana penurunan rumus dari markowitz menjadi kerangka EPG
+- [ ] bagaimana penurunan rumus dari markowitz mulai dari $$\mathcal{L}(\omega_i) = \lambda \sum_i \mu_i \omega_i - \sum_{i,j} \sigma_{ij} \omega_i \omega_j $$menjadi kerangka EPG $\Phi(x)$
 ## Subbab 2.4
 - [ ] sejarah sudah benar
-- [ ] kebangkitan
-- [ ] ising ke ekonofisika
+- [ ] kebangkitan model ising karena kemajuan teknologi
+- [ ] ising ke ekonofisika oleh mantegna
 - [ ] formulasi ising hamiltonian dari kerangkan EPG
 ## Subbab 2.5
 - [ ] bit klasik dan qubit
@@ -57,18 +57,38 @@
 # Bab 4
 ## Subbab 4.1
 - [ ] asdf
-- [ ] asdf
+- [ ] ambil contoh numerik data jendela waktu pertama sebagai sampel data
+- [ ] transformasi menjadi simple return dan log return
+- [ ] cari risk aversion endogen
 ## Subbab 4.2
-- [ ] 
+- [ ] memasukkan data numerik transformasi ke dalam kerangka EPG
+- [ ] hasil pencarian nash equilibriumnya masih kurang lengkap
 ## Subbab 4.3
+- [ ] penurunan rumus dari EPG ke Ising
+- [ ] tambahin proses perhitungan numerik
+- [ ] 
 ## Subbab 4.4
+- [ ] penggabungan gerbang rotasi dan gerbang keterbelitan ke dalam satu sirkuit kuantum untuk kemudian diturunkan menjadi gradien energi terhadap $\theta$
 ## Subbab 4.5
+- [ ] penurunan tentang parameter shift rule sebagai dasar dari GD
 ## Subbab 4.6
+- [ ] penurunan rumus dasar algoritma spsa dari ekspansi deret taylor
+- [ ] contoh numerik spsa dalam mengoptimasi parameter $\theta$
 ## Subbab 4.7
+- [ ] proses penurunan entropi shannon menjadi entropi von neumann
+- [ ] contoh proses numerik entropi von neuman
+- [ ] 
 ## Subbab 4.8
+- [ ] pengenalan tentang kebutuhan banyaknya kedalaman untuk mendapatkan ekpresibilitas yang tinggi namun memiliki konsekuensi terjebak di barren plateau
+- [ ] contoh observasi bisa ditambahkan gambar **aku yang nambahin gambar**
+- [ ] observasi warm-start EPG terhadap jebakan barren plateau
 ## Subbab 4.9
+- [ ] algoritma brute force (contoh numerik)
+- [ ] algoritma klasik SLSQP sebagai pembanding jika strategi investasinya hanya markowitz
 ## Subbab 4.10
+- [ ] sudah benar
 ## Subbab 4.11
+- [ ] masukkan gambar sirkuit kuantum yang digunakan pada kasus tersebut
 # Bab 5
 ## Subbab 5.1
 ## Subbab 5.2

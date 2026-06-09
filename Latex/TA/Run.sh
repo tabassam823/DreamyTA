@@ -15,4 +15,7 @@ xelatex -interaction=nonstopmode main.tex
 echo "--- Memulai Kompilasi Tahap 3 (Final XeLaTeX) ---"
 xelatex -interaction=nonstopmode main.tex         
 
+echo "--- Memulai Pemisahan PDF (Color & NoColor) ---"
+python3 split_pdf.py
+
 echo "--- Selesai! File PDF siap diperiksa. ---"

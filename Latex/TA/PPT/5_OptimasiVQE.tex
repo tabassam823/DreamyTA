@@ -1,104 +1,127 @@
-\section{Algoritma VQE}
+\section{Optimasi dan VQE}
 
-% Slide 10.1: Bab 2.7.1 - Prinsip Variasi (Rayleigh-Ritz)
-\begin{frame}{Bab 2.7.1 - Prinsip Variasi (Rayleigh-Ritz)}
+% Slide 9.1: Bab 2.6.1 - Metode Finite Difference
+\begin{frame}{Bab 2.6.1 - Metode Finite Difference}
     \begin{itemize}
-        \item \textbf{Teorema Fundamental:} Nilai ekspektasi energi dari fungsi gelombang percobaan $|\psi(\theta)\rangle$ tidak akan pernah lebih rendah dari energi ground state sejati ($E_0$).
-        \item \textbf{Formulasi Matematis:}
+        \item \textbf{Konsep Dasar:} Estimasi gradien melalui pergeseran parameter infinitesimal ($\epsilon \rightarrow 0$).
+        \item \textbf{Formulasi:}
     \end{itemize}
-    \begin{equation}
-        E(\theta) = \frac{\langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle}{\langle\psi(\theta)|\psi(\theta)\rangle} \ge E_0
-    \end{equation}
+    \begin{equation*}
+        g_i \approx \frac{E(\theta + \epsilon e_i) - E(\theta - \epsilon e_i)}{2\epsilon}
+    \end{equation*}
     \begin{itemize}
-        \item \textbf{Implikasi:} Optimasi portofolio diubah menjadi masalah pencarian parameter $\theta$ yang meminimalkan nilai ekspektasi Hamiltonian.
+        \item \textbf{Kelemahan:} Sangat rentan terhadap \textit{noise} statistik dan memiliki kompleksitas $\mathcal{O}(p)$ yang tinggi untuk sistem multi-aset.
+    \end{itemize}
+\end{frame}
+
+% Slide 9.2: Bab 2.6.2 - Parameter Shift Rule (PSR)
+\begin{frame}{Bab 2.6.2 - Parameter Shift Rule (PSR)}
+    \begin{itemize}
+        \item \textbf{Gradien Analitik:} Memanfaatkan sifat trigonometri sirkuit kuantum untuk mendapatkan gradien eksak tanpa bias.
+    \end{itemize}
+    \begin{equation*}
+        \frac{\partial E}{\partial \theta} = \frac{1}{2} \left[ E\left(\theta + \frac{\pi}{2}\right) - E\left(\theta - \frac{\pi}{2}\right) \right]
+    \end{equation*}
+    \begin{itemize}
+        \item \textbf{Keunggulan:} Stabil terhadap noise pengukuran pada perangkat NISQ.
+    \end{itemize}
+\end{frame}
+
+% Slide 9.3: Bab 2.6.3 - Gradient Descent (GD)
+\begin{frame}{Bab 2.6.3 - Gradient Descent (GD)}
+    \begin{itemize}
+        \item \textbf{Mekanisme:} Parameter $\theta$ diperbarui searah negatif gradien untuk mencapai minimum energi.
+    \end{itemize}
+    \begin{equation*}
+        \theta_{t+1} = \theta_t - \eta \nabla E(\theta_t)
+    \end{equation*}
+    \begin{itemize}
+        \item \textbf{Tantangan:} Kompleksitas evaluasi gradien PSR tumbuh linear terhadap jumlah parameter ($\mathcal{O}(p)$).
+    \end{itemize}
+\end{frame}
+
+% Slide 9.4: Bab 2.6.4 - Optimizer SPSA
+\begin{frame}{Bab 2.6.4 - Optimizer SPSA}
+    \begin{itemize}
+        \item \textbf{Inovasi:} Estimasi gradien seluruh parameter secara simultan menggunakan vektor perturbasi acak ($\pm 1$).
+        \item \textbf{Efisiensi:} Hanya membutuhkan \textbf{2 evaluasi sirkuit} per iterasi, memberikan reduksi kompleksitas menjadi $\mathcal{O}(1)$.
+        \item \textbf{Ketangguhan:} Sangat robust terhadap fluktuasi statistik pasar dan noise hardware.
+    \end{itemize}
+\end{frame}
+
+% Slide 10.1: Bab 2.7.1 - Prinsip Variasi Rayleigh-Ritz
+\begin{frame}{Bab 2.7.1 - Prinsip Variasi Rayleigh-Ritz}
+    \begin{itemize}
+        \item \textbf{Teorema:} Energi dari status percobaan $|\psi(\theta)\rangle$ selalu lebih besar atau sama dengan energi \textit{ground state} sejati ($E_0$).
+    \end{itemize}
+    \begin{equation*}
+        E(\theta) = \frac{\langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle}{\langle\psi(\theta)|\psi(\theta)\rangle} \ge E_0
+    \end{equation*}
+    \begin{itemize}
+        \item \textbf{Fungsi Objektif:} Meminimalkan $E(\theta)$ setara dengan mencari alokasi portofolio optimal.
     \end{itemize}
 \end{frame}
 
 % Slide 10.2: Bab 2.7.2 - Fondasi Ansatz: UCC
 \begin{frame}{Bab 2.7.2 - Fondasi Ansatz: UCC}
     \begin{itemize}
-        \item \textbf{Unitary Coupled Cluster (UCC):} Standarisasi fungsi gelombang dalam kimia kuantum.
-        \item \textbf{Operator Klaster:} Menggunakan eksponensial uniter untuk menyisipkan informasi korelasi.
-    \end{itemize}
-    \begin{equation}
-        U(\theta) = e^{T(\theta) - T^\dagger(\theta)}
-    \end{equation}
-    \begin{itemize}
-        \item \textbf{Limitasi NISQ:} UCC menghasilkan sirkuit yang sangat dalam, melampaui kapasitas koherensi perangkat keras saat ini.
+        \item \textbf{Unitary Coupled Cluster (UCC):} Pendekatan fungsi gelombang berbasis kimia kuantum.
+        \item \textbf{Limitasi:} Menghasilkan sirkuit yang terlalu dalam (\textit{deep circuit}), sulit diimplementasikan pada era NISQ.
     \end{itemize}
 \end{frame}
 
-% Slide 10.3: Bab 2.7.3 - Arsitektur EfficientSU2
-\begin{frame}{Bab 2.7.3 - Arsitektur EfficientSU2}
+% Slide 10.3: Bab 2.7.3 - Arsitektur EfficientSU2 (HEA)
+\begin{frame}{Bab 2.7.3 - Arsitektur EfficientSU2 (HEA)}
     \begin{itemize}
-        \item \textbf{Hardware-Efficient Ansatz (HEA):} Dirancang untuk efisiensi maksimal pada perangkat NISQ.
-        \item \textbf{Struktur Sirkuit:}
-        \begin{itemize}
-            \item \textbf{Lapisan Rotasi:} Gerbang $R_y$ dan $R_z$ untuk eksplorasi grup $SU(2)$.
-            \item \textbf{Lapisan Entanglement:} Gerbang CNOT dengan konektivitas linear.
-        \end{itemize}
-        \item \textbf{Trade-off:} Kedalaman ($d$) meningkatkan ekspresivitas tetapi juga akumulasi gate noise.
+        \item \textbf{Hardware-Efficient:} Dirancang untuk kedalaman sirkuit minimal dengan ekspresivitas tinggi.
+        \item \textbf{Struktur:} Lapisan rotasi ($R_y, R_z$) diikuti oleh lapisan keterbelitan (\textit{entanglement}) menggunakan gerbang CNOT.
     \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{PQC.png} \\
+        \footnotesize \textit{Visualisasi sirkuit PQC yang digunakan sebagai ansatz VQE.}
+    \end{center}
 \end{frame}
 
 % Slide 10.4: Bab 2.7.4 - Siklus Hibrida Quantum-Klasik
 \begin{frame}{Bab 2.7.4 - Siklus Hibrida Quantum-Klasik}
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \textbf{Tugas QPU (Quantum):}
-            \begin{itemize}
-                \item Preparasi status $|\psi(\theta)\rangle$.
-                \item Pengukuran nilai ekspektasi $\langle \hat{H} \rangle$.
-            \end{itemize}
-            \medskip
-            \textbf{Tugas CPU (Klasik):}
-            \begin{itemize}
-                \item Pembaruan parameter $\theta$ via optimizer (SPSA).
-                \item Penentuan kriteria konvergensi.
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{center}
-                \includegraphics[width=\textwidth]{PQC.png} \\
-                \footnotesize \textit{Loop umpan balik berkelanjutan antara hardware kuantum dan klasik.}
-            \end{center}
-        \end{column}
-    \end{columns}
+    \begin{itemize}
+        \item \textbf{Distribusi Beban:}
+        \begin{itemize}
+            \item \textbf{Quantum (QPU):} Estimasi energi pada sirkuit berparameter.
+            \item \textbf{Klasik (CPU):} Optimasi parameter $\theta$ menggunakan SPSA.
+        \end{itemize}
+        \item \textbf{Sinergi:} Memanfaatkan keunggulan paralelisme kuantum dan ketangguhan logika klasik.
+    \end{itemize}
 \end{frame}
 
-% Slide 11.1: Bab 2.8.1 - Tantangan Barren Plateau
-\begin{frame}{Bab 2.8.1 - Tantangan Barren Plateau}
+% Slide 11.1: Bab 2.8.1 - Fenomena Barren Plateau
+\begin{frame}{Bab 2.8.1 - Fenomena Barren Plateau}
     \begin{itemize}
-        \item \textbf{Definisi:} Kondisi patologis di mana lanskap energi menjadi datar secara eksponensial seiring bertambahnya jumlah qubit ($n$).
-        \item \textbf{Indikasi:} Hilangnya sinyal gradien ($Var[\partial_{\theta} E] \approx \mathcal{O}(2^{-n})$).
-        \item \textbf{Penyebab:} Inisialisasi parameter acak pada sirkuit dengan derajat keterbelitan tinggi.
-        \item \textbf{Dampak:} Sinyal gradien terkubur sepenuhnya oleh derau perangkat keras (noise).
+        \item \textbf{Masalah:} Lenyapnya sinyal gradien secara eksponensial seiring bertambahnya kedalaman sirkuit dan jumlah qubit.
+        \item \textbf{Trade-off:} Kedalaman tinggi memberikan \textit{expressibility} besar, namun meningkatkan risiko terjebak di dataran tandus (Barren Plateau).
     \end{itemize}
+    \begin{equation*}
+        \text{Var}[\partial_{\theta} E] \approx \mathcal{O}(2^{-N})
+    \end{equation*}
 \end{frame}
 
 % Slide 11.2: Bab 2.8.2 - Diagnostik: Entropi Von Neumann
 \begin{frame}{Bab 2.8.2 - Diagnostik: Entropi Von Neumann}
     \begin{itemize}
-        \item \textbf{Metrik Keacakan:} Mengukur derajat keterbelitan (entanglement) dalam sistem kuantum multi-qubit.
-        \item \textbf{Formulasi:}
+        \item \textbf{Metrik Keterbelitan:} Mengukur derajat kemurnian state kuantum selama optimasi.
     \end{itemize}
-    \begin{equation}
+    \begin{equation*}
         S(\rho) = -\text{Tr}(\rho \log \rho)
-    \end{equation}
+    \end{equation*}
     \begin{itemize}
-        \item \textbf{Interpretasi:}
-        \begin{itemize}
-            \item \textbf{$S \rightarrow S_{max}$:} Informasi tersebar merata, gradien lenyap (Barren Plateau).
-            \item \textbf{$S \rightarrow 0$:} Transisi sistem menuju status deterministik (Separable State/Konvergensi).
-        \end{itemize}
+        \item \textbf{Analisis:} Penurunan entropi menuju nol mengindikasikan konvergensi sistem menuju solusi deterministik.
     \end{itemize}
 \end{frame}
 
 % Slide 11.3: Bab 2.8.3 - Mitigasi melalui EPG Warm-start
 \begin{frame}{Bab 2.8.3 - Mitigasi melalui EPG Warm-start}
     \begin{itemize}
-        \item \textbf{Solusi Proposisi:} Mengganti inisialisasi parameter acak dengan konfigurasi \textbf{Nash Equilibrium} dari EPG.
-        \item \textbf{Strategi:} Memposisikan sirkuit pada lembah energi yang potensial sejak iterasi nol.
-        \item \textbf{Hasil yang Diharapkan:} Sinyal gradien tetap berada pada level yang terdeteksi, memandu optimasi keluar dari zona tandus.
+        \item \textbf{Proposisi:} Inisialisasi parameter menggunakan konfigurasi \textit{Nash Equilibrium} dari Game Theory.
+        \item \textbf{Strategi:} Memandu sirkuit langsung ke wilayah lembah energi yang potensial, menghindari jebakan \textit{Barren Plateau} sejak iterasi awal.
     \end{itemize}
 \end{frame}
