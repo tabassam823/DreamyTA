@@ -1,0 +1,95 @@
+\subsection{Keterbelitan Kuantum (\textit{Entanglement}) dan Keadaan Bell}
+Keterbelitan kuantum atau \textit{entanglement} merupakan fenomena non-lokal di mana keadaan satu \textit{qubit} tidak dapat didefinisikan secara independen dari keadaan \textit{qubit} lainnya dalam sistem multikomponen. Sebelum memahami keterbelitan pada sistem yang kompleks, perlu dipahami konsep Keadaan Bell (\textit{Bell States}) yang merupakan representasi dari keterbelitan maksimal antara dua \textit{qubit} terisolasi. Terdapat empat jenis Keadaan Bell yang membentuk basis ortonormal bagi ruang Hilbert dua-\textit{qubit} untuk merangkum seluruh probabilitas korelasi sistem fisis:
+\begin{equation}
+\label{eq:bell_states}
+    |\Phi^{\pm}\rangle = \frac{|00\rangle \pm |11\rangle}{\sqrt{2}}, \quad |\Psi^{\pm}\rangle = \frac{|01\rangle \pm |10\rangle}{\sqrt{2}}.
+\end{equation}
+Keadaan Bell menunjukkan korelasi non-klasik yang sangat kuat, di mana tindakan pengukuran pada satu \textit{qubit} akan secara instan menentukan status keadaan \textit{qubit} lainnya meskipun keduanya terpisah secara fisik.
+
+Pembangkitan keadaan Bell tersebut secara teknis dapat direkonstruksi dari basis komputasi dua \textit{qubit} melalui kombinasi linear gerbang Hadamard satu \textit{qubit} dengan gerbang dua \textit{qubit} \textit{Controlled-NOT} (CNOT). Secara matematis, langkah awal dilakukan dengan menerapkan transformasi gerbang Hadamard pada \textit{qubit} pertama yang diikuti dengan operasi identitas pada \textit{qubit} kedua:
+\begin{equation}
+(H\otimes I)|00\rangle = \frac{|00\rangle + |10\rangle}{\sqrt{2}}.
+\end{equation}
+Setelah itu, penerapan \textit{operator} CNOT pada keadaan superposisi tersebut memicu efek keterbelitan maksimal yang menghasilkan keadaan Bell pertama secara presisi:
+\begin{equation}
+\text{CNOT}\left(\frac{|00\rangle + |10\rangle}{\sqrt{2}}\right) = \frac{|00\rangle + |11\rangle}{\sqrt{2}} = |\Phi^+\rangle.
+\end{equation}
+
+Bentuk umum pemetaan dari seluruh basis komputasi dua \textit{qubit} menuju himpunan basis keadaan Bell tersebut dapat dituliskan secara komprehensif melalui relasi persamaan \textit{uniter} berikut:
+\begin{equation}
+\label{eq:bell_transformations}
+\begin{split}
+|\Phi^+\rangle &= \text{CNOT}(H\otimes I)|00\rangle, \quad |\Psi^+\rangle = \text{CNOT}(H\otimes I)|01\rangle, \\
+|\Phi^-\rangle &= \text{CNOT}(H\otimes I)|10\rangle, \quad |\Psi^-\rangle = \text{CNOT}(H\otimes I)|11\rangle.
+\end{split}
+\end{equation}
+Persamaan pemetaan uniter tersebut membuktikan bahwa \textit{operator} transformasi gabungan $U_{\text{Bell}} = \text{CNOT}(H\otimes I)$ secara fisis memetakan basis komputasi menuju basis Bell terbelit secara sempurna. Melalui formulasi perkalian luar (\textit{outer product}), representasi \textit{operator} transformasi basis kuantum tersebut dapat dituliskan secara rinci sebagai jumlahan proyeksi keadaan sebagai berikut:
+\begin{equation}
+\label{eq:u_bell_outer}
+U_{\text{Bell}} = |\Phi^+\rangle\langle 00| + |\Psi^+\rangle\langle 01| + |\Phi^-\rangle\langle 10| + |\Psi^-\rangle\langle 11|.
+\end{equation}
+
+Untuk mendapatkan \textit{operator} CNOT dari representasi basis Bell, persamaan gabungan tersebut dikalikan dengan \textit{operator} invers dari transformasi Hadamard dari arah kanan. Karena \textit{operator} Hadamard bersifat \textit{self-inverse} yang berarti memiliki nilai invers sama dengan \textit{matriks} asalnya, maka \textit{operator} CNOT dapat ditransformasikan secara aljabar:
+\begin{equation}
+\label{eq:cnot_from_bell}
+\text{CNOT} = U_{\text{Bell}}(H\otimes I) = \Big( |\Phi^+\rangle\langle 00| + |\Psi^+\rangle\langle 01| + |\Phi^-\rangle\langle 10| + |\Psi^-\rangle\langle 11| \Big) (H\otimes I).
+\end{equation}
+Persamaan di atas menunjukkan bahwa \textit{operator} CNOT dapat dibangun sepenuhnya dari deskripsi keadaan Bell dan transformasi Hadamard pada sistem kuantum. Dengan memasukkan definisi dari masing-masing keadaan Bell pada persamaan (\ref{eq:bell_states}) ke dalam perkalian luar tersebut, diperoleh representasi \textit{matriks} \textit{operator} \textit{uniter} yang mewakili gerbang tersebut.
+
+Sebagai alternatif konstruksi langsung tanpa melibatkan gerbang Hadamard, \textit{operator} CNOT juga dapat didefinisikan secara langsung melalui aksi pemetaan basis komputasi. Aksi pemetaan tersebut membalikkan status keadaan \textit{qubit} target apabila status keadaan \textit{qubit} kontrol bernilai satu, yang secara aljabar dituliskan sebagai:
+\begin{equation}
+\label{eq:cnot_actions}
+\text{CNOT}|00\rangle = |00\rangle, \quad \text{CNOT}|01\rangle = |01\rangle, \quad \text{CNOT}|10\rangle = |11\rangle, \quad \text{CNOT}|11\rangle = |10\rangle.
+\end{equation}
+Dengan menggunakan aksi pemetaan basis komputasi tersebut, formulasi perkalian luar dari \textit{operator} CNOT dapat didefinisikan secara langsung melalui relasi jumlahan proyeksi keadaan:
+\begin{equation}
+\label{eq:cnot_outer_direct}
+\text{CNOT} = |00\rangle\langle 00| + |01\rangle\langle 01| + |11\rangle\langle 10| + |10\rangle\langle 11|.
+\end{equation}
+Melalui evaluasi bentuk perkalian luar tersebut pada basis komputasi dua \textit{qubit}, \textit{matriks} \textit{uniter} dari gerbang CNOT dapat diturunkan secara eksplisit sesuai dengan arah kontrolnya:
+\begin{equation}
+\label{eq:cnot_matrices}
+\text{CNOT}_{01} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}, \quad \text{CNOT}_{10} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix}.
+\end{equation}
+
+Dalam konteks optimasi portofolio finansial, fenomena \textit{entanglement} dimanfaatkan secara cerdas untuk merepresentasikan hubungan ketergantungan dan \textit{matriks} korelasi silang antar berbagai variabel aset ekonomi secara efisien. Representasi visual dari mekanisme operasional gerbang CNOT diilustrasikan pada Gambar \ref{fig:gerbang_cnot}, yang secara rinci menunjukkan interaksi antara \textit{qubit} kontrol dengan titik hitam ($\bullet$) dan \textit{qubit} target dengan simbol plus dilingkari ($\oplus$).
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.5, >=stealth]
+        \draw (0,1.5) -- (2,1.5) node[pos=0, left] {$q_{control}$};
+        \draw (0,0.5) -- (2,0.5) node[pos=0, left] {$q_{target}$};
+        \filldraw (1,1.5) circle (2.5pt);
+        \draw (1,1.5) -- (1,0.5);
+        \draw (1,0.5) circle (6pt);
+        \draw (1,0.3) -- (1,0.7);
+        \draw (0.8,0.5) -- (1.2,0.5);
+    \end{tikzpicture}
+    \caption{Representasi simbolik gerbang keterbelitan (\textit{Controlled-NOT}) yang mengilustrasikan interaksi non-lokal antar \textit{qubit} dalam sistem sirkuit.}
+    \label{fig:gerbang_cnot}
+\end{figure}
+
+\subsection{Sirkuit Kuantum Berparameter}
+\textit{Quantum Machine Learning} (QML) direpresentasikan sebagai bidang multidisipliner yang mengintegrasikan kerangka kerja komputasi kuantum dengan teknik pemelajaran mesin konvensional secara komprehensif. Salah satu pendekatan arsitektural yang terus dikembangkan di dalam paradigma QML ini adalah \textit{Quantum Deep Learning} (QDL), di mana pemelajaran representasi data kompleks dieksekusi dengan memanfaatkan model fisis kuantum berparameter. Secara operasional, implementasi komputasional utama dari model heuristik tersebut diwujudkan di dalam ruang sirkuit melalui penggunaan \textit{Parameterized Quantum Circuit} (PQC), yaitu sebuah arsitektur kuantum dinamis yang memiliki himpunan parameter gerbang bebas untuk dioptimasi secara iteratif. Arsitektur PQC tersebut kemudian difungsikan sebagai komponen inti di dalam paradigma \textit{Variational Quantum Algorithms} (VQA), yang menaungi berbagai algoritma heuristik tingkat lanjut seperti \textit{Variational Quantum Eigensolver} (VQE), \textit{Quantum Approximate Optimization Algorithm} (QAOA), hingga \textit{Variational Quantum Classifier} (VQC). Untuk mengupas mekanika heuristik pada optimasi portofolio finansial secara logis, fungsionalitas fisis dari arsitektur sirkuit berparameter ini dijabarkan secara terperinci pada tahapan awal sebelum melangkah menuju tinjauan implementasi algoritma VQE.
+
+Sirkuit Kuantum Berparameter (\textit{Parameterized Quantum Circuit} atau PQC) direpresentasikan sebagai arsitektur jaringan pemrosesan kuantum yang mengintegrasikan sekumpulan gerbang logika \textit{uniter} secara berurutan dengan parameter variabel rotasi kontinu $\boldsymbol{\theta}$. Arsitektur sirkuit PQC ini secara fungsional difungsikan sebagai struktur fungsi gelombang percobaan (\textit{ansatz}) yang secara matematis bertugas untuk merepresentasikan seluruh ruang pencarian solusi dari permasalahan optimasi portofolio finansial berskala luas. Alur kerja komprehensif dari sistem arsitektur PQC tersebut divisualisasikan secara struktural pada Gambar \ref{fig:pqc_workflow}, di mana setiap sub-tahapan operasional memiliki peran fungsional spesifik untuk memproses dinamika data secara koheren. Proses komputasi fisis tersebut diawali secara sistematis dengan menyandikan himpunan data klasik harga pasar menuju representasi status kuantum koheren melalui implementasi modul operasi \textit{uniter} penyandian fisis bersimbol $U_{\phi(x)}$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Images/PQC_QNN.png}
+    \caption[Alur kerja sirkuit kuantum berparameter]{Representasi alur kerja sirkuit kuantum berparameter (PQC) yang secara rinci mengilustrasikan fase pengkodean data, operasi sirkuit variasional, dan tahap pengukuran hasil observasi \cite{regadio_exoplanet_2025}.}
+    \label{fig:pqc_workflow}
+\end{figure}
+
+Selanjutnya, arsitektur sirkuit variasional utama bernotasi $U(\boldsymbol{\theta})$ difungsikan untuk memproses secara langsung informasi kuantum tersandi tersebut melalui serangkaian manuver gerbang rotasi berkelanjutan serta operasi keterbelitan berlapis secara terstruktur. Berdasarkan prinsip dinamika evolusi \textit{uniter}, aksi pemetaan fisis dari keadaan kuantum inisial $|\psi_0\rangle$ menuju suatu fungsi gelombang superposisi yang bergantung pada parameter sirkuit direpresentasikan oleh relasi persamaan matematis presisi berikut:
+\begin{equation}
+\label{eq:vqa_state}
+|\psi(\boldsymbol{\theta})\rangle = U(\boldsymbol{\theta})|\psi_0\rangle.
+\end{equation}
+Evaluasi kuantitatif terhadap kualitas fungsi gelombang berparameter tersebut dieksekusi secara probabilistik dengan mengukur nilai ekspektasi dari sebuah \textit{matriks} observabel $\hat{O}$ yang merepresentasikan fungsi biaya pada penyelesaian permasalahan optimasi. Formulasi nilai ekspektasi untuk fungsi biaya $C(\boldsymbol{\theta})$ yang merepresentasikan energi risiko sistem secara komprehensif dirumuskan secara analitik melalui perkalian produk dalam (\textit{inner product}) fisis dari vektor keadaan kuantum teroptimasi:
+\begin{equation}
+\label{eq:vqa_cost}
+C(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta})| \hat{O} |\psi(\boldsymbol{\theta})\rangle.
+\end{equation}
+Sebuah rantai ketergantungan linier di mana arsitektur fungsi keadaan bergantung penuh pada himpunan parameter rotasi $\boldsymbol{\theta}$, dan nilai fisis fungsi biaya sangat ditentukan oleh konfigurasi keadaan tersebut, dideskripsikan secara eksplisit oleh relasi struktur matematis ini. Siklus pemelajaran komputasional ini akhirnya diselesaikan melalui sebuah tahapan transmisi data menuju algoritma optimasi klasik yang bertugas untuk memperbarui konfigurasi parameter $\boldsymbol{\theta}$ guna mendorong konvergensi nilai fisis menuju titik minimum.
+
+Sebagai bentuk kristalisasi komputasional dari kerangka kerja algoritmik tersebut, salah satu bentuk implementasi spesifik yang terbukti paling krusial di dalam famili algoritma VQA dikenal secara formal sebagai \textit{Variational Quantum Eigensolver} (VQE). Di dalam kerangka arsitektur heuristik spesifik ini, sirkuit kuantum PQC difungsikan secara eksklusif sebagai struktur \textit{ansatz} fleksibel yang bertugas untuk membangkitkan fungsi gelombang keadaan percobaan dengan ruang eksplorasi parameter luas. Sementara itu, fungsionalitas fisis dari arsitektur observabel sistem kuantum diinterpretasikan sebagai sebuah matriks fungsi biaya yang didefinisikan secara presisi melalui perhitungan nilai ekspektasi \textit{operator} Hamiltonian portofolio finansial terkait. Rangkaian proses optimasi parameter iteratif berbasis gradien tersebut pada hakikatnya diarahkan untuk memperoleh keadaan fungsi gelombang dengan nilai tingkat energi minimum yang berkonvergensi menuju keadaan dasar (\textit{ground state}) sistem kompleks. Aplikabilitas fisis dari mekanisme evaluasi algoritma berbasis sirkuit berparameter kuantum untuk memecahkan problematika optimasi kombinasional berskala luas dipastikan secara struktural oleh kemunculan transisi alur konseptual pemelajaran fisis menuju ranah penyelesaian heuristik ini.

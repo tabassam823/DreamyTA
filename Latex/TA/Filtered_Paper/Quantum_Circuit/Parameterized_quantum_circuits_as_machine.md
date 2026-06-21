@@ -45,12 +45,7 @@ Department of Computer Science, University College London, WC1 E 6BT London, Uni
 
 An error occurred in the processing of ﬁgure 2 in this article. The ﬁgure should appear as below.
 
-Figure 2. A machine learning model comprised of classical pre/post-processing and parameterized quantum circuit. A data vector is
-sampled from the dataset distribution, x ~ PD. The pre-processing scheme maps it to the vector f (x ) that parameterizes the encoder
-circuit Uf (x ). A variational circuit Uq, parameterized by a vector q, acts on the state prepared by the encoder circuit and possibly on an
-additional register of ancilla qubits, producing the state Uq Uf (x ) ∣ 0ñ. A set of observable quantities {á Mk ñx, q }kK= 1 is estimated from the
-measurements. These estimates are then mapped to the output space through classical post-processing function f. For a supervised
-model, this output is the forecast associated to input x. Generative models can be expressed in this framework with small adaptations.
+Figure 2. A machine learning model comprised of classical pre/post-processing and arameterized quantum circuit. A data vector is sampled from the dataset distribution, **x** ~ PD. The pre-processing scheme maps it to the vector $\phi(x)$ that parameterizes the encoder circuit $U_{\phi(x)}$. A variational circuit $U_{\theta}$, parameterized by a vector **$\theta$**, acts on the state prepared by the encoder circuit and possibly on an additional register of ancilla qubits, producing the state Uq Uf (x ) ∣ 0ñ. A set of observable quantities {á Mk ñx, q }kK= 1 is estimated from the measurements. These estimates are then mapped to the output space through classical post-processing function f. For a supervised model, this output is the forecast associated to input x. Generative models can be expressed in this framework with small adaptations.
 
 ORCID iDs
 Marcello Benedetti https://orcid.org/0000-0003-0231-1729

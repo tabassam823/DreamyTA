@@ -52,7 +52,6 @@
         \multicolumn{1}{|c|}{\multirow{2}{*}{Aset BBCA ($x_1$)}} & Status 0 & (0, 0) & (0, 0,1183) \\ \cline{2-4} 
         \multicolumn{1}{|c|}{} & Status 1 & \textbf{(0,1909, 0)} & (0,1901, 0,1175) \\ \hline
         \end{tabular}
-        \caption{Nash Equilibrium tercapai pada $|10\rangle$ (Hanya BBCA terpilih).}
     \end{table}
 \end{frame}
 
@@ -62,8 +61,7 @@
         \item \textbf{Langkah Transformasi:}
         \begin{enumerate}
             \item Definisikan fungsi energi: $E(\vec{x}) = -\Phi(\vec{x})$.
-            \item Substitusi variabel biner ke spin: $x_i = (1 - s_i)/2$.
-            \item Ekstraksi koefisien Pauli-Z ($\hat{Z}$).
+            \item Substitusi variabel biner ke spin: $x_i = (1 - \hat{Z}_i)/2$.
         \end{enumerate}
         \item \textbf{Hasil Hamiltonian Numerik (Jan 2021):}
         \begin{equation*}
@@ -78,72 +76,86 @@
     \begin{columns}
         \begin{column}{0.55\textwidth}
             \begin{itemize}
-                \item \textbf{Konstruksi State:} $\ket{\psi(\boldsymbol{\theta})} = \hat{U}_{ent} \hat{U}_{rot}(\boldsymbol{\theta}) \ket{0\dots0}$.
-                \item \textbf{Gradien Energi:} Dicari untuk meminimalkan $\langle \hat{\mathcal{H}} \rangle$:
+                \item \textbf{Konstruksi State:} {\scriptsize $\ket{\psi(\boldsymbol{\theta})} = \hat {U}_{rot}^{(l)}(\boldsymbol{\theta}_{l,q,sigma}) \hat{U}_{ent}^{(l)} \hat{U}_{rot}^{(l)}(\boldsymbol{\theta}_{l,q,sigma}) \ket{0\dots0}$}. dengan 
+                {\tiny
+                \begin{equation*}
+                    \begin{split}
+                        \hat{U}_{rot}^{(l)}(\boldsymbol{\theta}_{l,q,\sigma}) &= \bigotimes_{q=1}^{N} \left[ R_z(\theta_{l,q,\sigma_z}) R_y (\theta_{l,q,\sigma_y}) \right] \\
+                        \hat{U}_{ent}^{(l)} &= \mathrm{CNOT}_{N-1,0}
+                    \,
+                    \mathrm{CNOT}_{N-2,N-1}
+                    \cdots
+                    \mathrm{CNOT}_{1,2}
+                    \,
+                    \mathrm{CNOT}_{0,1}.
+                    \end{split}
+                \end{equation*}
+                }
+                \item \textbf{Gradien Energi:}
                 \begin{equation*}
                     \nabla_{\theta} E = \frac{\partial}{\partial \theta} \langle \psi(\theta) | \hat{H} | \psi(\theta) \rangle
                 \end{equation*}
-                \item \textbf{Sinergi:} Kombinasi gerbang rotasi $R_y, R_z$ dan keterbelitan CNOT membentuk lanskap energi yang dapat dilatih.
             \end{itemize}
         \end{column}
         \begin{column}{0.45\textwidth}
             \begin{figure}
                 \centering
                 \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-05-05_circuit.png}
-                \caption{Arsitektur HEA sistem N=2.}
+            \end{figure}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{Hasil_N4_GT/Analisis_Window_N4/2021-05-05_circuit.png}
             \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
 
-% Slide 23: Bab 4.5 - Penurunan Parameter Shift Rule (PSR)
-\begin{frame}{Bab 4.5 - Penurunan Parameter Shift Rule (PSR)}
-    \begin{itemize}
-        \item \textbf{Aksioma:} Generator gerbang kuantum seringkali memiliki dua nilai eigen unik ($\pm r$).
-        \item \textbf{Derivasi:} Ekspansi uniter gerbang rotasi $U(\theta) = e^{-i\theta G}$.
-    \end{itemize}
-    \begin{equation*}
-        \frac{\partial E}{\partial \theta} = \frac{1}{2} \left[ E\left(\theta + \frac{\pi}{2}\right) - E\left(\theta - \frac{\pi}{2}\right) \right]
-    \end{equation*}
-    \begin{itemize}
-        \item \textbf{Signifikansi:} Memberikan nilai gradien yang identik dengan turunan analitik tanpa limit $\epsilon \to 0$.
-    \end{itemize}
+% Slide 24: Bab 4.5 & 4.7 - Iterasi SPSA dan Evolusi Entropi
+\begin{frame}{Bab 4.5 \& 4.6- Iterasi SPSA dan Entropi}
+    \begin{block}{Iterasi Pertama SPSA}
+        \centering
+        \begin{tikzpicture}[node distance=1.2cm, auto, >=stealth, scale=0.85, every node/.style={scale=0.85}]
+            \node (in) [rectangle, draw, rounded corners, fill=blue!10, text width=3.5cm, align=center] {\textbf{Input}\\ $\theta^{(0)} = [\frac{\pi}{2}, \frac{\pi}{2}]$ \\ $\Delta_k = [1, -1]$};
+            \node (grad) [rectangle, draw, rounded corners, fill=orange!10, right=of in, text width=3.5cm, align=center] {\textbf{Estimasi Gradien}\\ $\Delta E = -0,0076$ \\ $\hat{g} = [-0,038, 0,038]^T$};
+            \node (upd) [rectangle, draw, rounded corners, fill=green!10, right=of grad, text width=3.5cm, align=center] {\textbf{Update Parameter}\\ $\theta^{(1)} = \theta^{(0)} - 0,1\hat{g}$ \\ $\theta^{(1)} = [1,5746, 1,5670]^T$};
+            
+            \draw[->, thick] (in) -- (grad);
+            \draw[->, thick] (grad) -- (upd);
+        \end{tikzpicture}
+    \end{block}
+
+    \vspace{0.2cm}
+
+    \begin{columns}[T]
+        \begin{column}{0.48\textwidth}
+            \begin{exampleblock}{Kalkulasi Entropi ($N=2$)}
+                \scriptsize
+                \begin{itemize}
+                    \item $p_{1} = 0,98; \quad p_{rest} = 0,02$
+                    \item $\log_2(0,98) \approx -0,0291$
+                    \item $\log_2(0,02) \approx -5,6438$
+                    \item $S = -(0,98 \cdot -0,0291 + 0,02 \cdot -5,6438)$
+                    \item $\mathbf{S \approx 0,1414 \text{ bit}}$
+                \end{itemize}
+            \end{exampleblock}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{exampleblock}{Kalkulasi Entropi ($N=4$)}
+                \scriptsize
+                \begin{itemize}
+                    \item $p_{1} = 0,94; \quad p_{rest} = 0,06$
+                    \item $\log_2(0,94) \approx -0,0893$
+                    \item $\log_2(0,06) \approx -4,0589$
+                    \item $S = -(0,94 \cdot -0,0893 + 0,06 \cdot -4,0589)$
+                    \item $\mathbf{S \approx 0,3274 \text{ bit}}$
+                \end{itemize}
+            \end{exampleblock}
+        \end{column}
+    \end{columns}
 \end{frame}
 
-% Slide 24: Bab 4.6 - Derivasi dan Iterasi Numerik SPSA
-\begin{frame}{Bab 4.6 - Derivasi dan Iterasi Numerik SPSA}
-    \begin{itemize}
-        \item \textbf{Ekspansi Taylor Orde-2:} SPSA membatalkan suku orde genap melalui selisih evaluasi maju-mundur ($E_+ - E_-$).
-        \item \textbf{Estimator Gradien:} $\hat{g}_i = (E_+ - E_-) / (2 c_k \Delta_i)$.
-        \item \textbf{Contoh Satu Langkah Iterasi:}
-        \begin{itemize}
-            \item \textbf{Input:} $\theta^{(0)} = [\pi/2, \pi/2]$, $\Delta_k = [1, -1]$.
-            \item \textbf{Output:} $\Delta E = -0,0076 \rightarrow \hat{g} = [-0,038, 0,038]^T$.
-            \item \textbf{Update:} $\theta^{(1)} = \theta^{(0)} - 0,1\hat{g} = [1,5746, 1,5670]^T$.
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-% Slide 25: Bab 4.7 - Evolusi Entropi: Shannon ke Von Neumann
-\begin{frame}{Bab 4.7 - Evolusi Entropi: Shannon ke Von Neumann}
-    \begin{itemize}
-        \item \textbf{Shannon ($H$):} Ketidakpastian informasi klasik $-\sum p_i \log_2 p_i$.
-        \item \textbf{Von Neumann ($S$):} Perluasan ke operator densitas kuantum $\rho$:
-    \end{itemize}
-    \begin{equation*}
-        S(\rho) = -\text{Tr}(\rho \log \rho) = -\sum_i \lambda_i \log \lambda_i
-    \end{equation*}
-    \begin{itemize}
-        \item \textbf{Studi Kasus Jendela 1:}
-        \begin{itemize}
-            \item \textbf{N=2:} Probabilitas status optimal 0,98 $\rightarrow S = 0,1414$ bit.
-            \item \textbf{N=4:} Probabilitas status optimal 0,94 $\rightarrow S = 0,3274$ bit.
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-% Slide 26: Bab 4.8 - Analisis Barren Plateau dan Warm-Start
-\begin{frame}{Bab 4.8 - Analisis Barren Plateau dan Warm-Start}
+% Slide 26: Bab 4.7 - Analisis Barren Plateau dan Warm-Start
+\begin{frame}{Bab 4.7 - Analisis Barren Plateau dan Warm-Start}
     \begin{itemize}
         \item \textbf{Jebakan Gradien:} Variansi gradien menyusut drastis pada sistem $N=4$ saat kedalaman $L > 5$.
         \item \textbf{Expressibility vs Trainability:} Peningkatan kapasitas sirkuit seringkali mengorbankan kemudahan optimasi.
@@ -157,57 +169,87 @@
     \end{itemize}
 \end{frame}
 
-% Slide 27: Bab 4.9 - Validasi Brute Force dan Benchmark SLSQP
-\begin{frame}{Bab 4.9 - Validasi Brute Force dan Benchmark SLSQP}
-    \begin{itemize}
-        \item \textbf{Brute Force (N=2):}
-        \begin{itemize}
-            \item $E(|10\rangle) = -0,1909$ (Global Minimum).
-            \item $E(|00\rangle) = 4,1972$ (Forbidden State).
-        \end{itemize}
-        \item \textbf{SLSQP:} Algoritma optimasi kontinu dengan diskritisasi \textit{Top-K}.
-    \end{itemize}
-    \begin{exampleblock}{Fair Comparison}
-        Kedua metode diuji pada parameter batasan yang identik guna membandingkan efisiensi alokasi modal hibrida secara objektif.
+% Slide 27: Bab 4.8 - Validasi Brute Force dan Benchmark SLSQP
+\begin{frame}{Bab 4.8 - Validasi Brute Force dan Benchmark SLSQP}
+    \begin{columns}[T]
+        \begin{column}{0.5\textwidth}
+            \textbf{Energi Brute Force ($N=2$):}
+            \begin{itemize}
+                \item \textbf{Fungsi Energi:} $E(\vec{x}) = -\Phi(\vec{x}) + \lambda (\sum x_i - K)^2$
+                \item \textbf{Status $|01\rangle$ (BBCA):}
+                \begin{itemize}
+                    \item $\Phi = 0,1939 - \frac{0,35 \cdot 0,017}{2} = 0,1909$
+                    \item $E = -0,1909 + 5(1-1)^2 = \mathbf{-0,1909}$
+                \end{itemize}
+                \item \textbf{Status $|00\rangle$ (Forbidden):}
+                \begin{itemize}
+                    \item $E = 0 + \lambda(0-1)^2 + C$
+                    \item $E \approx 4,35 - 0,15 = \mathbf{4,1972}$
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Benchmark SLSQP:}
+            \begin{itemize}
+                \item \textbf{Objektif:} $\min \frac{1}{2}\gamma w^T \Sigma w - \mu^T w$
+                \item \textbf{Iterasi 1 ($w_{eq} = [0,5; 0,5]$):}
+                \begin{itemize}
+                    \item $f(w) \approx -0,1542$
+                    \item $\nabla f \approx [-0,072; -0,064]$
+                \end{itemize}
+                \item \textbf{Hasil Konvergen:} $w^* = [1,0; 0,0]$
+                \item \textbf{Diskritisasi:} \textit{Top-1} $\to$ $\{ \text{BBCA} \}$.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    \vspace{0.2cm}
+    \begin{exampleblock}{Validasi Solusi}
+        Brute force mengonfirmasi bahwa $E(|01\rangle)$ adalah \textit{global minimum}, konsisten dengan hasil diskritisasi SLSQP dan probabilitas tertinggi pada GT-VQE.
     \end{exampleblock}
 \end{frame}
 
-% Slide 28: Bab 4.10 - Analisis Performa Portofolio (Hasil Utama)
-\begin{frame}{Bab 4.10 - Analisis Performa Portofolio (Hasil Utama)}
-    \begin{table}
-        \scriptsize
-        \centering
-        \begin{tabular}{|l|c|c|c|c|c|c|}
-        \hline
-        \multirow{2}{*}{\textbf{Strategi}} & \multicolumn{3}{c|}{\textbf{Sistem N=2}} & \multicolumn{3}{c|}{\textbf{Sistem N=4}} \\ \cline{2-7} 
-         & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} \\ \hline
-        \textbf{GT-VQE (Hibrida)} & \textbf{51,34\%} & \textbf{0,7357} & 15,91\% & \textbf{73,15\%} & \textbf{1,0107} & \textbf{16,68\%} \\ \hline
-        VQE (Tanpa GT) & 43,21\% & 0,6471 & 15,91\% & 16,89\% & 0,3592 & 20,89\% \\ \hline
-        SLSQP (Klasik) & 51,34\% & 0,6736 & 15,91\% & 12,91\% & 0,2810 & 21,12\% \\ \hline
-        Equal Weight & 37,29\% & 0,6848 & 14,62\% & 35,57\% & 0,6790 & 18,42\% \\ \hline
-        \end{tabular}
-        \caption{GT-VQE mendominasi seluruh metrik pada dimensi sistem yang lebih besar (N=4).}
-    \end{table}
+% Slide 28: Bab 4.10 - Analisis Performa Portofolio dan Dinamika Rebalancing
+\begin{frame}{Bab 4.10 - Analisis Performa Portofolio dan Dinamika \textit{Rebalancing}}
+    \begin{columns}[T]
+        \begin{column}{0.53\textwidth}
+            \textbf{Ringkasan Performa Finansial ($N=2, 4$):}
+            \begin{table}
+                \tiny
+                \centering
+                \begin{tabular}{|l|c|c|c|c|c|c|}
+                \hline
+                \multirow{2}{*}{\textbf{Strategi}} & \multicolumn{3}{c|}{\textbf{Sistem N=2}} & \multicolumn{3}{c|}{\textbf{Sistem N=4}} \\ \cline{2-7} 
+                 & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} \\ \hline
+                \textbf{GT-VQE (Hibrida)} & \textbf{51,34\%} & \textbf{0,7357} & 15,91\% & \textbf{73,15\%} & \textbf{1,0107} & \textbf{16,68\%} \\ \hline
+                VQE (Tanpa GT) & 43,21\% & 0,6471 & 15,91\% & 16,89\% & 0,3592 & 20,89\% \\ \hline
+                SLSQP (Klasik) & 51,34\% & 0,6736 & 15,91\% & 12,91\% & 0,2810 & 21,12\% \\ \hline
+                Equal Weight & 37,29\% & 0,6848 & 14,62\% & 35,57\% & 0,6790 & 18,42\% \\ \hline
+                \end{tabular}
+                \caption{GT-VQE mendominasi seluruh metrik pada dimensi sistem $N=4$ berkat \textit{warm-start} dari \textit{Nash Equilibrium}.}
+            \end{table}
+        \end{column}
+        \hfill
+        \begin{column}{0.45\textwidth}
+            \textbf{Dinamika \textit{Rebalancing} Jendela Ekstrem:}
+            \begin{itemize}
+                \item \textbf{Agilitas Portofolio:} Transisi status $|01\rangle \to |10\rangle$ secara instan merespons lonjakan risiko BBCA (Feb--Mar 2021).
+                \item \textbf{Mekanisme Sirkuit:} Deteksi dini pergeseran energi Hamiltonian pasar via rotasi parameter sudut $\theta$.
+            \end{itemize}
+            \begin{figure}
+                \centering
+                \begin{subfigure}[b]{0.47\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-02-02_window.png}
+                    \caption{\tiny Jan--Feb (BBCA)}
+                \end{subfigure}
+                \hfill
+                \begin{subfigure}[b]{0.47\textwidth}
+                    \centering
+                    \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-03-04_window.png}
+                    \caption{\tiny Mar--Apr (TLKM)}
+                \end{subfigure}
+            \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
 
-% Slide 30: Bab 4.11 - Dinamika Rebalancing Jendela Ekstrem
-\begin{frame}{Bab 4.11 - Dinamika Rebalancing Jendela Ekstrem}
-    \begin{itemize}
-        \item \textbf{Agilitas Portofolio:} Transisi status $|10\rangle \to |01\rangle$ secara instan merespons lonjakan risiko BBCA (Feb-Mar 2021).
-    \end{itemize}
-    \begin{figure}
-        \centering
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-02-02_window.png}
-            \caption{Jan-Feb 2021 (Aset BBCA)}
-        \end{subfigure}
-        \hfill
-        \begin{subfigure}[b]{0.45\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Hasil_N2_GT/Analisis_Window_N2/2021-03-04_window.png}
-            \caption{Mar-Apr 2021 (Aset TLKM)}
-        \end{subfigure}
-        \caption{Quantum rebalancing mendeteksi pergeseran energi Hamiltonian pasar.}
-    \end{figure}
-\end{frame}

@@ -1,15 +1,17 @@
 \section{Teori Permainan dan Model Ising}
 
 % Slide 6.1: Bab 2.3.1 - Pengantar Teori Permainan dan Ekuilibrium Nash
-\begin{frame}{Bab 2.3.1 - Pengantar Teori Permainan dan Ekuilibrium Nash}
+\begin{frame}{Bab 2.3.1 - Teori Permainan}
     \begin{itemize}
-        \item \textbf{Interaksi Strategis:} Keputusan agen rasional di bawah ketergantungan sistemik (Game Theory).
-        \item \textbf{Ekuilibrium Nash:} Kondisi stabil di mana tidak ada insentif untuk deviasi sepihak.
+        \item Mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan agen yang lain.
+        \item Terdiri dari beberapa unsur penting yaitu agen, himpunan strategi, dan fungsi utilitas.
+        \item \textbf{\textit{Nash Equilibrium:}} Kondisi stabil di mana jika suatu agen mengubah strateginya maka agen tersebut akan mendapatkan utilitas yang lebih rendah.
         \item \textbf{Contoh Game:}
-        \begin{itemize}
-            \item \textbf{Stag Hunt:} Koordinasi untuk hasil kolektif maksimal.
-            \item \textbf{Prisoner's Dilemma:} Konflik kepentingan individu vs kelompok.
-        \end{itemize}
+        \begin{enumerate}
+            \item Stag Hunt
+            \item Prisoner's Dilemma
+            \item Battle of the Sexes
+        \end{enumerate}
     \end{itemize}
     \begin{figure}
         \centering
@@ -19,7 +21,7 @@
             \caption{\textit{Stag Hunt}}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[b]{0.3\textwidth}
+        \begin{subfigure}[b]{0.15\textwidth}
             \centering
             \includegraphics[width=\textwidth]{232_payoff_PD.png}
             \caption{\textit{Prisoner's Dilemma}}
@@ -37,37 +39,51 @@
 % Slide 6.2: Bab 2.3.2 - Exact Potential Game (EPG)
 \begin{frame}{Bab 2.3.2 - Exact Potential Game (EPG)}
     \begin{itemize}
-        \item \textbf{Fungsi Potensial ($\Phi$):} Skalar yang merangkum insentif seluruh pemain.
-        \item \textbf{Nash Seeker:} EPG berfungsi sebagai algoritma umum untuk mencari \textit{Nash Equilibrium} melalui maksimisasi fungsi potensial.
-        \item \textbf{Karakteristik:} Perubahan utilitas lokal ($\Delta u_i$) selaras secara eksak dengan perubahan potensial global ($\Delta \Phi$).
+        \item Merupakan permaianan yang menganggap utilitasnya sebagai fungsi potensial global $\Phi$.
+        \item Berfungsi sebagai algoritma umum untuk mencari \textit{Nash Equilibrium} melalui maksimisasi fungsi potensial.
+        \item Perubahan utilitas lokal ($\Delta u_i$) merepresentasikan perubahan potensial global ($\Delta \Phi$).
+        \item Jika $\Delta \Phi > 0$, maka agen termotivasi untuk melakukan perubahan. Sebaliknya, jika $\Delta \Phi < 0$, maka agen akan menolak untuk melakukan perubahan sehingga didapatkan titik \textit{Nash Equilibrium}.
     \end{itemize}
     \begin{equation}
         \Delta \Phi = \Phi(s_i', s_{-i}) - \Phi(s_i, s_{-i}) = u_i(s_i', s_{-i}) - u_i(s_i, s_{-i})
     \end{equation}
+    Dimana,
+    \begin{itemize}
+        \item $s_i$: Strategi agen $i$
+        \item $s_{-i}$: Strategi agen selain agen $i$
+        \item $u_i$: Utilitas agen $i$
+        \item $u_i'$: Utilitas agen $i$ setelah melakukan perubahan
+    \end{itemize}
 \end{frame}
 
 % Slide 6.3: Bab 2.3.3 - Penurunan Markowitz ke Kerangka EPG
-\begin{frame}{Bab 2.3.3 - Penurunan Markowitz ke Kerangka EPG}
+\begin{frame}{Bab 2.3.3 - Dari Markowitz ke Kerangka EPG}
     \begin{itemize}
-        \item \textbf{Lagrangian Awal:}
+        \item \textbf{Transformasi Lagrangian Awal Menjadi Fungsi Potensial Global:}
         \begin{equation*}
-            \mathcal{L}(\omega_i) = \lambda \sum_i \mu_i \omega_i - \sum_{i,j} \sigma_{ij} \omega_i \omega_j
+            \begin{split}
+                \Phi(\omega_i) &= -\frac{1}{\lambda} \mathcal{L}(\omega_i) \\
+                &= -\sum_i \mu_i \omega_i + \frac{1}{\lambda} \sum_{i,j} \sigma_{ij} \omega_i \omega_j
+            \end{split}
         \end{equation*}
-        \item \textbf{Transformasi Biner:} Memetakan bobot $\omega_i$ ke variabel keputusan $x_i \in \{0, 1\}$.
-        \item \textbf{Fungsi Potensial EPG ($\Phi(x)$):}
+        Dimana,
+        \begin{itemize}
+            \item $\lambda = \frac{\gamma}{2}$ dimana $\gamma$ merupakan parameter penentu tingkat penghindaran risiko (Risk Aversion) 
+            \item $\sum_{i} \omega_i = 1$ yang mana jika ditransformasi ke variabel keputusan $x_i \in \{0, 1\}$, maka $\sum_{i} \omega_i = \frac{\sum_i x_i}{K} = 1$ dimana $K$ merupakan batas jumlah aset yang akan dipilih karena bobot diasumsikan sama rata.
+        \end{itemize}
+        \item Maka fungsi potensial EPG ($\Phi(x)$) menjadi:
         \begin{equation}
             \Phi(x) = \frac{1}{K} \sum_i \mu_i x_i - \frac{\gamma}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j
         \end{equation}
-        \item \textbf{Sinergi:} Maksimisasi utilitas agen dalam game setara dengan optimasi risiko-imbal hasil portofolio.
     \end{itemize}
 \end{frame}
 
 % Slide 7.1: Bab 2.4.1 - Sejarah dan Evolusi Model Ising
-\begin{frame}{Bab 2.4.1 - Sejarah dan Evolusi Model Ising}
+\begin{frame}{Bab 2.4.1 - Model Ising}
     \begin{itemize}
-        \item \textbf{Era 1920-an:} Wilhelm Lenz dan Ernst Ising merumuskan model interaksi magnetik diskrit.
-        \item \textbf{Evolusi:} Dari solusi 1D yang sederhana menuju solusi 2D Onsager (1944) yang membuktikan transisi fase.
-        \item \textbf{Kebangkitan Modern:} Kemajuan teknologi komputasi dan \textit{Quantum Annealing} menjadikan Ising bahasa standar optimasi kombinatorial.
+        \item \textbf{1920-an:} Wilhelm Lenz dan Ernst Ising merumuskan model interaksi spin diskrit.
+        \item \textbf{1944:} Lars Onsager membuktikan transisi fase pada model Ising 2D.
+        \item \textbf{Kontemporer:} Ising menjadi "bahasa standar" dalam optimasi kombinatorial karena kemajuan komputasi.
     \end{itemize}
     \begin{center}
         \includegraphics[width=0.5\textwidth]{1D_Model_atT.png} \\
@@ -75,30 +91,106 @@
     \end{center}
 \end{frame}
 
-% Slide 7.2: Bab 2.4.2 - Ising dalam Ekonofisika (Mantegna)
-\begin{frame}{Bab 2.4.2 - Ising dalam Ekonofisika (Mantegna)}
+% Slide 7.2: Bab 2.4.2 - Transformasi QUBO
+\begin{frame}{Bab 2.4.2 - Transformasi QUBO}
     \begin{itemize}
-        \item \textbf{Rosario Mantegna:} Mempelopori penerapan model sistem fisis pada korelasi pasar keuangan.
-        \item \textbf{Metodologi:} Menurunkan parameter interaksi sistem dari matriks korelasi aset.
-        \item \textbf{Dinamika Kolektif:} Pasar dipandang sebagai kumpulan \textit{spins} yang perilakunya didorong oleh minimisasi energi sistem.
+        \item Pemetaan fungsi EPG ke operator Hamiltonian: $\hat{H} = -\Phi(x)$
+        \item Penurunan bentuk Hamiltonian objek menggunakan identitas $x_i^2 = x_i$
+        {\tiny
+        \begin{equation}
+            \begin{split}
+            \hat{H}_{obj}(x) &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+            &= \frac{\gamma}{2K^2}\left(\sum_{i=1}^N\sigma_i^2 x_i^2 + \sum_{i\ne j}\sigma_{ij} x_ix_j\right) -\sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+            &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sigma_i^2 x_i^2 + \frac{\gamma}{2K^2}\sum_{i\ne j}\sigma_{ij} x_ix_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+            &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sigma_i^2 x_i + \frac{\gamma}{2K^2}\sum_{i\ne j}\sigma_{ij} x_ix_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+            &= \sum_{i=1}^N\left(\frac{\gamma \sigma_i^2}{2K^2} - \frac{\mu_i}{K}\right)x_i + \sum_{i\ne j}\frac{\gamma \sigma_{ij}}{2K^2} x_ix_j
+            \end{split}
+        \end{equation}
+        }
     \end{itemize}
-    \begin{center}
-        \textit{"Model Ising menjembatani fenomena herding investor dengan statistik fisika partikel."}
-    \end{center}
 \end{frame}
 
-% Slide 7.3: Bab 2.4.3 - Formulasi Hamiltonian dari EPG
-\begin{frame}{Bab 2.4.3 - Formulasi Hamiltonian dari EPG}
+\begin{frame}{Bab 2.4.2 - Transformasi QUBO (Lanjutan)}
     \begin{itemize}
-        \item \textbf{Pemetaan Energi:} Fungsi potensial EPG ($\Phi$) dipetakan menjadi operator Hamiltonian ($\hat{H} = -\Phi$).
-        \item \textbf{Parameter Fisik:}
+        \item Penambahan suku penalti untuk kendala $\sum x_i = K$:
+        {\tiny
         \begin{equation}
-            \hat{H} = \sum_i h_i \hat{Z}_i + \sum_{i<j} J_{ij} \hat{Z}_i \hat{Z}_j + C
+            \begin{split}
+            \hat{H}_{pen}(x) &= A\left(\sum_{i=1}^N x_i - K\right)^2 \\
+            &= A\left(\sum_{i=1}^N x_i^2 + \sum_{i\ne j} x_ix_j - 2K\sum_{i=1}^N x_i + K^2\right) \\
+            &= A\sum_{i=1}^N x_i^2 + A\sum_{i\ne j} x_ix_j - 2AK\sum_{i=1}^N x_i + AK^2
+            \end{split}
         \end{equation}
-        \item \textbf{Korespondensi:}
+        }
+        \item Hamiltonian total diperoleh dengan menggabungkan fungsi Hamiltonian objek dengan fungsi penalti:
+        {\tiny
+        \begin{equation}
+            \begin{split}
+                \hat{H} =& \hat{H}_{obj} (x) + \hat{H}_{pen} (x) \\
+                =& \sum_i \left(\frac{\gamma \sigma_i^2}{2K^2} - \frac{\mu_i}{K}\right)x_i + \sum_{i\ne j}\frac{\gamma \sigma_{ij}}{2K^2} x_ix_j  + A\sum_{i=1}^N x_i^2 + A\sum_{i\ne j} x_ix_j - 2AK\sum_{i=1}^N x_i + AK^2 \\
+                =& \sum_i \left(\frac{\gamma \sigma_i^2}{2K^2} + A - \frac{\mu_i}{K} - 2AK\right)x_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2K^2} + A\right) x_ix_j + AK^2
+            \end{split}
+        \end{equation}
+        }
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bab 2.4.2 - Transformasi QUBO (Lanjutan)}
+    \begin{itemize}
+        \item Jika dimisalkan
+        {\tiny
+        \begin{equation*}
+            Q_{ii} = \frac{\gamma \sigma_i^2}{2K^2} + A - \frac{\mu_i}{K} - 2AK \quad \text{dan} \quad Q_{ij} = \frac{\gamma \sigma_{ij}}{2K^2} + A
+        \end{equation*}
+        }
+        \item Persamaan QUBO dapat disederhanakan menjadi
+        {\tiny
+        \begin{equation}
+            \hat{H} = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2
+        \end{equation}
+        }
+        \item Substitusi variabel keputusan $x_i \in \{0, 1\}$ ke spin $\hat{Z}_i \in \{-1, 1\}$
+        {\tiny
+        \begin{equation}
+            \begin{split}
+                x_i     &= \frac{1 - \hat{Z}_i}{2} \\
+                x_ix_j  &= \frac{1 - \hat{Z}_i - \hat{Z}_j + \hat{Z}_i \hat{Z}_j}{4}
+            \end{split}
+        \end{equation}
+        }
+        sehingga menjadi
+        {\tiny
+        \begin{equation}
+            \begin{split}
+                \hat{H} &= \sum_i Q_{ii} \left(\frac{1 - \hat{Z}_i}{2}\right) + \sum_{i\ne j} Q_{ij} \left(\frac{1 - \hat{Z}_i - \hat{Z}_j + \hat{Z}_i \hat{Z}_j}{4}\right) + AK^2 \\
+                \hat{H} &= \sum_i Q_{ii} \frac{1}{2} - \sum_i Q_{ii} \frac{\hat{Z}_i}{2} + \sum_{i\ne j} Q_{ij} \frac{1}{4} - \sum_{i\ne j} Q_{ij} \frac{\hat{Z}_i}{4} - \sum_{i\ne j} Q_{ij} \frac{\hat{Z}_j}{4} + \sum_{i\ne j} Q_{ij} \frac{\hat{Z}_i \hat{Z}_j}{4} + AK^2 \\
+                \hat{H} &= \sum_i \left(- \frac{Q_{ii}}{2} - \sum_{i\ne j} \frac{Q_{ij}}{2}\right) \hat{Z}_i + \sum_{i\ne j} \frac{Q_{ij}}{4} \hat{Z}_i \hat{Z}_j + \left(\sum_i \frac{Q_{ii}}{2} + \sum_{i\ne j} \frac{Q_{ij}}{4} + AK^2\right) \quad \text{karena } Q_{ij} = Q_{ji}
+            \end{split}
+        \end{equation}
+        }
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bab 2.4.2 - Transformasi QUBO (Lanjutan)}
+    \begin{itemize}
+        \item Bisa kita dapatkan
+        \begin{equation*}
+            h_i = - \frac{Q_{ii}}{2} - \sum_{i\ne j} \frac{Q_{ij}}{2}
+        \end{equation*}
+        \begin{equation*}
+            J_{ij} = \frac{Q_{ij}}{4}
+        \end{equation*}
+        \begin{equation*}
+            C = \sum_i \frac{Q_{ii}}{2} + \sum_{i\ne j} \frac{Q_{ij}}{4} + AK^2
+        \end{equation*}
+        \begin{equation*}
+            \hat{H} = - \sum_i h_i \hat{Z}_i - \sum_{i<j} J_{ij} \hat{Z}_i \hat{Z}_j + C
+        \end{equation*}
+        \item \textbf{Dimana;}
         \begin{itemize}
-            \item \textbf{Medan Lokal ($h_i$):} Turunan dari ekspektasi imbal hasil (utilitas marginal).
-            \item \textbf{Kopling ($J_{ij}$):} Turunan dari interaksi risiko kovariansi antar aset.
+            \item $h_i$ merupakan koefisien interaksi spin dengan fluktuasi pasar.
+            \item $J_{ij}$ merupakan koefisien interaksi antar-spin yang bergantung pada kovariansi.
+            \item $C$ merupakan konstanta.
         \end{itemize}
     \end{itemize}
 \end{frame}

@@ -1,0 +1,25 @@
+\section{Validasi Solusi Eksak Brute Force}
+
+Metode validasi berbasis \textit{brute force} digunakan untuk menetapkan standar kebenaran mutlak (\textit{ground truth}) terhadap seluruh solusi portofolio yang dihasilkan oleh algoritma kuantum variasional secara hibrida. Pendekatan ini dieksekusi dengan mengevaluasi nilai energi dari setiap kemungkinan konfigurasi biner dalam ruang solusi guna menjamin identifikasi titik minimum global secara presisi pada setiap jendela waktu. Meskipun memiliki kompleksitas komputasi yang tumbuh secara eksponensial seiring peningkatan jumlah aset, penggunaan metode ini tetap krusial pada skala sistem kecil untuk memvalidasi akurasi konvergensi model. Seluruh hasil perhitungan energi dari solusi eksak ini diposisikan sebagai pembanding utama bagi hasil optimasi yang diperoleh melalui mekanisme integrasi teori permainan Nash SBR dan optimasi HE-VQE.
+
+Algoritma pencarian solusi eksak dirancang untuk mengeksplorasi seluruh jumlahan kombinasi biner yang memenuhi batasan kardinalitas aset $K$ secara sistematis melalui iterasi ruang pencarian yang tersedia. Nilai energi dari setiap kandidat solusi dihitung menggunakan fungsi biaya Hamiltonian total yang mencakup parameter bias individual serta derajat interaksi antar pasangan aset finansial yang telah diparameterisasi sebelumnya. Konfigurasi bitstring dengan nilai energi terendah dipilih sebagai representasi portofolio optimal yang sah secara matematis menurut prinsip optimasi kuadratik dan lanskap energi Ising yang sedang dianalisis. Penemuan titik minimum global melalui metode ini memberikan jaminan teoretis bahwa perbandingan performa pada bab selanjutnya didasarkan pada standar optimasi yang paling akurat. Rangkaian operasional dari prosedur pencarian solusi eksak melalui metode \textit{brute force} tersebut dirangkum secara formal pada Algoritma \ref{alg:brute_force}.
+
+\begin{algorithm}[ht]
+\caption{Pencarian Solusi Eksak Brute Force}
+\label{alg:brute_force}
+\begin{algorithmic}[1]
+\Procedure{BruteForceValidation}{$h, J, C, N, K$}
+    \State $best\_energy \gets \infty$
+    \State $best\_x \gets \text{None}$
+    \State $all\_combinations \gets \text{GenerateCombinations}(N, K)$
+    \For{each $x \in all\_combinations$}
+        \State $E \gets \text{HitungEnergiIsing}(x, h, J, C)$ \Comment{Kalkulasi Energi Hamilton}
+        \If{$E < best\_energy$}
+            \State $best\_energy \gets E$
+            \State $best\_x \gets x$
+        \EndIf
+    \EndFor
+    \State \Return $best\_x, best\_energy$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

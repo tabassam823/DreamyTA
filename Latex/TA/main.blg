@@ -6,6 +6,7 @@ A level-1 auxiliary file: Contents/0_BagianDepan/Lembar_Pengesahan.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstrak.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstract.aux
 A level-1 auxiliary file: Contents/0_BagianDepan/Kata_Pengantar.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Tabel_Istilah.aux
 A level-1 auxiliary file: Contents/1_Pendahuluan/Bab-1.aux
 A level-1 auxiliary file: Contents/2_Daster/Bab-2.aux
 A level-1 auxiliary file: Contents/3_Metodologi/Bab-3.aux
@@ -22,6 +23,7 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Referensi.bib
+Warning--I didn't find a database entry for "gabaix_political_2020"
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
 Warning--No journal in hidalgo_quantum_2006
 ptr=1, stack=
@@ -34,45 +36,45 @@ ptr=1, stack=
 ---the literal stack isn't empty for entry sarkar_quantum_2018
 while executing---line 5079 of file apacite.bst
 Warning--No journal in spall_implementation_1998
-You've used 41 entries,
+You've used 36 entries,
             6951 wiz_defined-function locations,
-            1612 strings with 22008 characters,
-and the built_in function-call counts, 82827 in all, are:
-= -- 9807
-> -- 720
-< -- 3992
-+ -- 4056
-- -- 86
-* -- 5794
-:= -- 15104
-add.period$ -- 167
-call.type$ -- 41
-change.case$ -- 765
+            1578 strings with 20838 characters,
+and the built_in function-call counts, 72223 in all, are:
+= -- 8606
+> -- 620
+< -- 3440
++ -- 3474
+- -- 76
+* -- 5005
+:= -- 13091
+add.period$ -- 149
+call.type$ -- 36
+change.case$ -- 671
 chr.to.int$ -- 0
-cite$ -- 85
-duplicate$ -- 2400
-empty$ -- 3435
-format.name$ -- 1249
-if$ -- 15484
+cite$ -- 75
+duplicate$ -- 2070
+empty$ -- 3014
+format.name$ -- 1056
+if$ -- 13575
 int.to.chr$ -- 0
-int.to.str$ -- 123
+int.to.str$ -- 108
 missing$ -- 0
-newline$ -- 1210
-num.names$ -- 330
-pop$ -- 1180
+newline$ -- 1057
+num.names$ -- 290
+pop$ -- 1078
 preamble$ -- 1
-purify$ -- 230
+purify$ -- 200
 quote$ -- 0
-skip$ -- 5140
+skip$ -- 4527
 stack$ -- 0
-substring$ -- 4412
-swap$ -- 1447
-text.length$ -- 167
+substring$ -- 3797
+swap$ -- 1257
+text.length$ -- 153
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 3408
+type$ -- 3072
 warning$ -- 3
-while$ -- 492
+while$ -- 422
 width$ -- 0
-write$ -- 1498
+write$ -- 1299
 (There were 2 error messages)

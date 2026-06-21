@@ -35,38 +35,41 @@ Abdul~Hali, N.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Benedetti%
-, Lloyd%
-, Sack%
-\BCBL {}\ \BBA {} Fiorentini%
+Baaquie%
+, Corianò%
+\BCBL {}\ \BBA {} Srikant%
 }{%
-Benedetti%
+Baaquie%
 \ \protect \BOthers {.}}{%
-{\protect \APACyear {2019}}%
+{\protect \APACyear {2003}}%
 }]{%
-benedetti_parameterized_2019}
+baaquie_quantum_2003}
 \APACinsertmetastar {%
-benedetti_parameterized_2019}%
+baaquie_quantum_2003}%
 \begin{APACrefauthors}%
-Benedetti, M.%
-, Lloyd, E.%
-, Sack, S.%
-\BCBL {}\ \BBA {} Fiorentini, M.%
+Baaquie, B\BPBI E.%
+, Corianò, C.%
+\BCBL {}\ \BBA {} Srikant, M.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
-\APACrefYearMonthDay{2019}{{\APACmonth{11}}}{}.
+\APACrefYearMonthDay{2003}{{\APACmonth{04}}}{}.
 \newblock
-{\BBOQ}\APACrefatitle {Parameterized quantum circuits as machine learning
-  models} {Parameterized quantum circuits as machine learning models}.{\BBCQ}
+{\BBOQ}\APACrefatitle {{QUANTUM} {MECHANICS}, {PATH} {INTEGRALS} {AND} {OPTION}
+  {PRICING}: {REDUCING} {THE} {COMPLEXITY} {OF} {FINANCE}} {{QUANTUM}
+  {MECHANICS}, {PATH} {INTEGRALS} {AND} {OPTION} {PRICING}: {REDUCING} {THE}
+  {COMPLEXITY} {OF} {FINANCE}}.{\BBCQ}
 \newblock
-\APACjournalVolNumPages{Quantum Science and Technology}{4}{4}{043001}.
+\BIn{} \APACrefbtitle {Nonlinear {Physics}} {Nonlinear {Physics}}\ (\BPGS\
+  333--339).
+\newblock
+\APACaddressPublisher{Gallipoli, Italy}{WORLD SCIENTIFIC}.
 \newblock
 \begin{APACrefURL}
-  [{2026-05-20}]\url{https://iopscience.iop.org/article/10.1088/2058-9565/ab4eb5}
+  [{2026-06-16}]\url{http://www.worldscientific.com/doi/abs/10.1142/9789812704467_0046}
   \end{APACrefURL}
 \newblock
-\begin{APACrefDOI} \doi{10.1088/2058-9565/ab4eb5} \end{APACrefDOI}
+\begin{APACrefDOI} \doi{10.1142/9789812704467_0046} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -100,70 +103,6 @@ Chamberlin, R\BPBI V.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.3390/nano14221828} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Coyle%
-\ \protect \BOthers {.}}{%
-Coyle%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2021}}%
-}]{%
-coyle_quantum_2021}
-\APACinsertmetastar {%
-coyle_quantum_2021}%
-\begin{APACrefauthors}%
-Coyle, B.%
-, Henderson, M.%
-, Chan Jin~Le, J.%
-, Kumar, N.%
-, Paini, M.%
-\BCBL {}\ \BBA {} Kashefi, E.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2021}{{\APACmonth{04}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Quantum versus classical generative modelling in
-  finance} {Quantum versus classical generative modelling in finance}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Quantum Science and Technology}{6}{2}{024013}.
-\newblock
-\begin{APACrefURL}
-  [{2026-03-26}]\url{https://iopscience.iop.org/article/10.1088/2058-9565/abd3db}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.1088/2058-9565/abd3db} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Dao%
-}{%
-Dao%
-}{%
-{\protect \APACyear {2025}}%
-}]{%
-dao_exploring_2025}
-\APACinsertmetastar {%
-dao_exploring_2025}%
-\begin{APACrefauthors}%
-Dao, H\BPBI L.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2025}{{\APACmonth{06}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Exploring new variational quantum circuit ansatzes for
-  solving {SU}(2) matrix models} {Exploring new variational quantum circuit
-  ansatzes for solving {SU}(2) matrix models}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{The European Physical Journal C}{85}{6}{705}.
-\newblock
-\begin{APACrefURL}
-  [{2026-03-11}]\url{https://link.springer.com/10.1140/epjc/s10052-025-14322-7}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.1140/epjc/s10052-025-14322-7} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -493,39 +432,6 @@ Kolmogorov, A\BPBI N.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-La~Torre%
-\ \BBA {} Maggistro%
-}{%
-La~Torre%
-\ \BBA {} Maggistro%
-}{%
-{\protect \APACyear {2026}}%
-}]{%
-la_torre_multi-agent_2026}
-\APACinsertmetastar {%
-la_torre_multi-agent_2026}%
-\begin{APACrefauthors}%
-La~Torre, D.%
-\BCBT {}\ \BBA {} Maggistro, R.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2026}{{\APACmonth{01}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Multi-agent dynamic financial portfolio management: a
-  differential game approach} {Multi-agent dynamic financial portfolio
-  management: a differential game approach}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Annals of Operations Research}{356}{1}{559--580}.
-\newblock
-\begin{APACrefURL}
-  [{2026-03-11}]\url{https://link.springer.com/10.1007/s10479-024-06070-w}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.1007/s10479-024-06070-w} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 Levy%
 \ \BBA {} Levy%
 }{%
@@ -755,39 +661,6 @@ Monderer, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Navarrete%
-\ \BBA {} Davis%
-}{%
-Navarrete%
-\ \BBA {} Davis%
-}{%
-{\protect \APACyear {2022}}%
-}]{%
-navarrete_quantum_2022}
-\APACinsertmetastar {%
-navarrete_quantum_2022}%
-\begin{APACrefauthors}%
-Navarrete, Y.%
-\BCBT {}\ \BBA {} Davis, S.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2022}{{\APACmonth{11}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Quantum {Mutual} {Information}, {Fragile} {Systems} and
-  {Emergence}} {Quantum {Mutual} {Information}, {Fragile} {Systems} and
-  {Emergence}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Entropy}{24}{11}{1676}.
-\newblock
-\begin{APACrefURL}
-  [{2026-03-26}]\url{https://www.mdpi.com/1099-4300/24/11/1676}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.3390/e24111676} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 Nielsen%
 \ \BBA {} Chuan%
 }{%
@@ -912,6 +785,35 @@ Preskill, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Regadío%
+}{%
+Regadío%
+}{%
+{\protect \APACyear {2025}}%
+}]{%
+regadio_exoplanet_2025}
+\APACinsertmetastar {%
+regadio_exoplanet_2025}%
+\begin{APACrefauthors}%
+Regadío, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{06}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Exoplanet discovery with variational quantum circuits}
+  {Exoplanet discovery with variational quantum circuits}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Quantum Machine Intelligence}{7}{1}{11}.
+\newblock
+\begin{APACrefURL}
+  [{2026-06-17}]\url{https://link.springer.com/10.1007/s42484-024-00229-1}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s42484-024-00229-1} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Sarkar%
 \ \BBA {} Benjamin%
 }{%
@@ -1001,43 +903,6 @@ Schwert, G\BPBI W.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1016/S1574-0102(03)01024-0} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Scursulim%
-, Langeloh%
-, Beltran%
-\BCBL {}\ \BBA {} Brito%
-}{%
-Scursulim%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2026}}%
-}]{%
-scursulim_multiclass_2026}
-\APACinsertmetastar {%
-scursulim_multiclass_2026}%
-\begin{APACrefauthors}%
-Scursulim, J\BPBI V\BPBI S.%
-, Langeloh, G\BPBI M.%
-, Beltran, V\BPBI L.%
-\BCBL {}\ \BBA {} Brito, S.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2026}{{\APACmonth{02}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Multiclass portfolio optimization via variational
-  quantum {Eigensolver} with {Dicke} state ansatz} {Multiclass portfolio
-  optimization via variational quantum {Eigensolver} with {Dicke} state
-  ansatz}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Scientific Reports}{16}{1}{6208}.
-\newblock
-\begin{APACrefURL}
-  [{2026-04-20}]\url{https://www.nature.com/articles/s41598-026-36333-4}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.1038/s41598-026-36333-4} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1278,41 +1143,6 @@ Wei, H.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1007/s10614-025-11061-5} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Wierichs%
-, Izaac%
-, Wang%
-\BCBL {}\ \BBA {} Lin%
-}{%
-Wierichs%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2022}}%
-}]{%
-wierichs_general_2022}
-\APACinsertmetastar {%
-wierichs_general_2022}%
-\begin{APACrefauthors}%
-Wierichs, D.%
-, Izaac, J.%
-, Wang, C.%
-\BCBL {}\ \BBA {} Lin, C\BPBI Y\BHBI Y.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2022}{{\APACmonth{03}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {General parameter-shift rules for quantum gradients}
-  {General parameter-shift rules for quantum gradients}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Quantum}{6}{}{677}.
-\newblock
-\begin{APACrefURL}
-  [{2026-05-20}]\url{https://quantum-journal.org/papers/q-2022-03-30-677/}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.22331/q-2022-03-30-677} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

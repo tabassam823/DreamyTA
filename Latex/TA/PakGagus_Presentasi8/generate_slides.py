@@ -2,8 +2,8 @@ import os
 import subprocess
 
 def generate_and_compile(n_value):
-    gt_dir = f"../GTQuantumInvest/Hasil_N{n_value}_GT/Analisis_Window_N{n_value}"
-    nogt_dir = f"../GTQuantumInvest/Hasil_N{n_value}_NoGT/Analisis_Window_N{n_value}"
+    gt_dir = f"../GTQuantumInvest/Hasil_N{n_value}_GT_5/Analisis_Window_N{n_value}"
+    nogt_dir = f"../GTQuantumInvest/Hasil_N{n_value}_NoGT_5/Analisis_Window_N{n_value}"
     
     if not os.path.exists(gt_dir):
         print(f"Directory {gt_dir} not found.")

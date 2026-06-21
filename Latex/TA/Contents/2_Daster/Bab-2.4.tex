@@ -1,9 +1,27 @@
 \section{Hamiltonian Ising sebagai Representasi Sistem Kuantum}
 \label{sec:hamiltonian_ising}
-Setiap sistem fisik yang perilakunya didorong oleh prinsip minimisasi energi dapat direpresentasikan ke dalam Hamiltonian operator secara universal, tidak terkecuali pada konfigurasi seleksi aset finansial yang memiliki kompleksitas variabel yang sangat tinggi. Dalam kerangka ekonofisika, proses pengambilan keputusan untuk alokasi portofolio strategis dipetakan ke dalam lanskap energi di mana solusi optimal secara teknis setara dengan konfigurasi energi terendah atau \textit{ground state} dari sistem tersebut \cite{lucas_ising_2014}. Pemetaan ini menganggap setiap instrumen investasi sebagai partikel \textit{spin} yang saling berinteraksi, di mana derajat korelasi antar pergerakan harga dimodelkan sebagai koefisien kopling di dalam sebuah kisi kristal yang terstruktur \cite{galam_ising_2010}. Representasi Hamiltonian Ising tersebut menyediakan jembatan teoretis antara optimasi kombinatorial klasik dengan perangkat keras kuantum yang memungkinkan penggunaan algoritma variasi untuk menavigasi ruang solusi berdimensi tinggi secara efisien \cite{hidalgo_quantum_2006}. Oleh karena itu, pemodelan sistem finansial sebagai sistem fisik memungkinkan analisis yang lebih ketat terhadap stabilitas pasar dan fenomena transisi fase melalui kacamata mekanika statistik yang telah mapan.
+Setiap sistem fisik yang perilakunya didorong oleh prinsip minimisasi energi dapat direpresentasikan ke dalam Hamiltonian operator secara universal, tidak terkecuali pada konfigurasi seleksi aset finansial yang memiliki kompleksitas variabel yang sangat tinggi. Dalam kerangka ekonofisika, proses pengambilan keputusan untuk alokasi portofolio dapat dipetakan ke dalam lanskap energi di mana solusi optimal setara dengan konfigurasi energi terendah atau \textit{ground state} dari sistem tersebut \cite{lucas_ising_2014}. Pemetaan ini menganggap setiap instrumen investasi sebagai partikel \textit{spin} yang saling berinteraksi, di mana derajat korelasi antar pergerakan harga dimodelkan sebagai koefisien kopling di dalam sebuah kisi kristal yang terstruktur \cite{galam_ising_2010}. Penerapan model Ising dalam ekonomi didasarkan pada analogi formal antara parameter fisik sistem magnetik dan variabel-variabel pasar modal. Tabel \ref{tab:physics_econ_analogy} merangkum hubungan fungsional antara kedua domain tersebut. 
+
+\begin{table}[htbp]
+\centering
+\caption{Analogi Konsep Fisika Statistik dan Ekonomi Finansial dalam Kerangka Model Ising.}
+\label{tab:physics_econ_analogy}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Konsep Fisika Statistik} & \textbf{Analogi Ekonomi/Finansial} \\ \hline
+Sistem Partikel & Sekumpulan Agen Ekonomi atau Aset Saham \\ \hline
+\textit{Spin} ($s_i \in \{-1, 1\}$) & Keputusan Investasi/Seleksi Aset ($x_i \in \{0, 1\}$) \\ \hline
+Interaksi Kopling ($J_{ij}$) & Korelasi atau Kovarians antar Aset ($\sigma_{ij}$) \\ \hline
+Medan Eksternal ($h_i$) & Ekspektasi Imbal Hasil (\textit{Expected Return}) \\ \hline
+Energi Total ($H$) & Fungsi Biaya atau Risiko Portofolio \\ \hline
+\textit{Ground State} & Alokasi Portofolio Optimal \\ \hline
+Suhu ($T$) & Volatilitas atau Derau Pasar (\textit{Market Noise}) \\ \hline
+Transisi Fase & Krisis Finansial atau Perubahan Tren Pasar \\ \hline
+\end{tabular}
+\end{table}
 
 \subsection{Sejarah dan Evolusi Model Ising}
-Model Ising secara historis dikonseptualisasikan oleh Wilhelm Lenz dan Ernst Ising pada awal dekade 1920-an sebagai instrumen teoretis revolusioner untuk menyelidiki asal-usul mikroskopis dari fenomena feromagnetisme \cite{niss_history_2005}. Fokus fundamental dari model ini terletak pada penyederhanaan interaksi fisik antara momen magnetik diskrit yang disusun dalam kisi reguler guna mengevaluasi munculnya keteraturan makroskopik dari fluktuasi termal lokal. Melalui pendekatan mekanika statistik, model ini berupaya menjawab pertanyaan krusial mengenai bagaimana orientasi mandiri dari partikel-partikel \textit{spin} yang saling bertetangga dapat memicu transisi fase sistemik pada suhu kritis tertentu. Keberhasilan awal dalam merumuskan kerangka kerja aksiomatik ini memberikan fondasi yang sangat kokoh bagi pengembangan teori fenomena kooperatif yang menjadi pilar utama dalam fisika statistik modern.
+Model Ising pada awalnya dikonseptualisasikan oleh Wilhelm Lenz dan diselesaikan oleh Ernst Ising pada awal tahun 1925 sebagai instrumen teoretis revolusioner untuk menyelidiki asal-usul mikroskopis dari fenomena feromagnetisme \cite{niss_history_2005}. Fokus fundamental dari model ini terletak pada penyederhanaan interaksi fisik antara momen magnetik diskrit yang disusun dalam kisi reguler guna mengevaluasi munculnya keteraturan makroskopik dari fluktuasi termal lokal. Melalui pendekatan mekanika statistik, model ini berupaya menjawab pertanyaan krusial mengenai bagaimana orientasi mandiri dari partikel-partikel \textit{spin} yang saling bertetangga dapat memicu transisi fase sistemik pada suhu kritis tertentu. Keberhasilan awal dalam merumuskan kerangka kerja aksiomatik ini memberikan fondasi yang sangat kokoh bagi pengembangan teori fenomena kooperatif yang menjadi pilar utama dalam fisika statistik modern.
 
 Meskipun memiliki landasan yang kuat, studi orisinal oleh Ernst Ising pada sistem satu dimensi (1D) menghasilkan kesimpulan pesimistis bahwa model tersebut tidak mampu mendemonstrasikan transisi fase pada suhu di atas nol mutlak. Analisis terhadap rantai interaksi biner berukuran hingga menunjukkan bahwa fluktuasi termal selalu mendominasi energi interaksi sehingga mencegah terbentuknya keteraturan magnetik yang stabil dalam skala makroskopik \cite{chamberlin_nanothermodynamics_2024}. Figure \ref{fig:1D_Ising} mengilustrasikan konfigurasi \textit{spin} pada model satu dimensi tersebut, di mana distribusi orientasi partikel cenderung bersifat acak akibat lemahnya korelasi jangka panjang pada dimensi yang rendah. Representasi visual ini merinci interaksi antar-partikel melalui tiga simbol utama, yaitu titik hitam ($\bullet$) untuk interaksi energi rendah, tanda silang ($\mathbf{X}$) untuk interaksi energi tinggi, serta lingkaran biru kosong (\textcolor{blue}{$\circ$}) sebagai pemutusan (\textit{break}) tanpa energi. Titik hitam merepresentasikan pasangan \textit{spin} paralel yang meminimalkan energi sistem, sedangkan tanda silang menunjukkan konfigurasi anti-paralel yang memicu peningkatan tegangan energi lokal \cite{chamberlin_nanothermodynamics_2024}. Lingkaran biru (\textcolor{blue}{$\circ$}) secara khusus menandai adanya pemutusan jalinan (\textit{subdivision}) yang memisahkan rantai menjadi subsistem independen guna mencapai kestabilan termal pada skala nanoskala. Pemetaan parameter interaksi mikroskopis ini memungkinkan pemodelan perilaku kolektif dan transisi fase pada sistem berukuran terbatas melalui perhitungan energi total yang mengombinasikan jumlah interaksi dan pemutusan tersebut secara sistematis.
 \begin{figure}[htbp]
@@ -22,10 +40,101 @@ Dalam bidang ekonofisika, para agen ekonomi dianalogikan sebagai sistem partikel
 Perilaku kolektif yang terjadi di pasar finansial, seperti fenomena korelasi harga antar instrumen, dapat dianalogikan sebagai interaksi magnetik antar partikel dalam sebuah kisi kristal yang terstruktur \cite{galam_ising_2010}. Secara fisik, hubungan korelasi ini setara dengan parameter \textit{coupling} ($J_{ij}$), di mana kekuatan interaksi tersebut menentukan kecenderungan setiap \textit{spin} untuk menyelaraskan arah orientasinya terhadap tetangganya. Sementara itu, ekspektasi imbal hasil dari setiap aset berperan sebagai medan magnet eksternal (\textit{external field}) yang memberikan dorongan kuat pada arah orientasi \textit{spin} tertentu guna memaksimalkan utilitas investasi \cite{lucas_ising_2014}. Hamiltonian sistem kemudian digunakan untuk menghitung total energi yang merepresentasikan total konflik atau ketidakstabilan strategi investasi, di mana nilai energi minimum menjadi indikator utama dari solusi portofolio yang paling optimal. Integrasi antara parameter ekonomi dan variabel fisik ini menciptakan sebuah ekosistem simulasi yang mampu merefleksikan dinamika pasar finansial secara akurat melalui pendekatan mekanika statistik yang ketat \cite{hidalgo_quantum_2006}.
 
 \subsection{Pemetaan Kuantum: QUBO ke \textit{Pauli-Z}}
-Transisi operasional dari domain optimasi biner klasik menuju arsitektur komputasi kuantum mensyaratkan transformasi variabel keputusan $x_i$ menjadi operator mekanika kuantum yang dapat diproses oleh \textit{qubit} di dalam sirkuit terpadu \cite{lucas_ising_2014}. Variabel biner tersebut secara eksplisit dipetakan ke dalam operator \textit{Pauli-Z} ($\hat{Z}_i$) melalui transformasi linear guna menjaga integritas logika masalah yang nilai eigennya merepresentasikan status basis komputasi $|0\rangle$ dan $|1\rangle$. Penurunan parameter fisik dilakukan melalui substitusi variabel $x_i = (1 - \sigma_i)/2$ yang menghasilkan rumusan medan lokal ($h_i$) serta kekuatan interaksi ($J_{ij}$) guna mengakomodasi prinsip minimisasi energi pada perangkat keras kuantum \cite{fedorov_vqe_2022}. Pemetaan ini menjamin bahwa setiap interaksi kovarians antar aset dapat diterjemahkan menjadi korelasi fase antar \textit{qubit} yang saling terikat secara kuantum di dalam lanskap energi sirkuit optimasi. Secara formal, Hamiltonian Ising yang merepresentasikan risiko portofolio tersebut dinyatakan melalui rumusan negatif pada kedua sukunya guna menyelaraskan antara maksimisasi utilitas finansial dengan minimisasi energi fisik sebagai berikut:
+Agar dapat diimplementasikan ke dalam basis komputasi kuantum, maka fungsi optimasi pada domain biner klasik perlu ditransformasi menjadi fungsi yang mendukung arsitektur komputasi kuantum. Proses transformasi tersebut dapat dilakukan menggunakan tranformasi QUBO yang mengubah ruang solusi dari domain biner klasik menjadi basis operator kuantum \cite{lucas_ising_2014}. Tahap awal transformasi dilaksanakan dengan mengonversi rumusan fungsi utilitas portofolio sebelumnya menjadi model fungsi energi 
 \begin{equation}
-\label{eq:hamiltonian_ising}
-\hat{H} = - \sum_{i} h_i \hat{Z}_i - \sum_{i < j} J_{ij} \hat{Z}_i \hat{Z}_j
+    E(\mathbf{x}) = -\Phi(\mathbf{x}).
+    \label{eq:energy_function}
+\end{equation}    
+Proses transformasi tersebut berguna untuk menyelaraskan arah pergerakan optimasi yang awalnya berupa maksimasi menjadi minimasi agar dapat mendukung sistem dengan prinsip operasional pencarian energi terendah (\textit{ground state}). Sehingga persamaan (\ref{eq:potential_markowitz}) dapat disubstitusi ke dalam persamaan (\ref{eq:energy_function}) menjadi:
+\begin{equation}
+    E(\mathbf{x}) = \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i.
+    \label{eq:energy_function_markowitz}
+\end{equation}
+Mengingat kerangka matriks kovarians selalu memiliki sifat parameter numerik yang saling simetris, persamaan energi dasar portofolio ini dapat segera didekomposisi untuk mengisolasi komponen keputusan pembelian masing-masing aset. Dengan identitas variabel biner $x_i^2 = x_i$, total fungsional energi matematika di atas dapat dikonstruksi ulang melalui prosedur penjabaran sebagai berikut:
+\begin{equation*}
+    \begin{split}
+    E(\mathbf{x}) &= \frac{\gamma}{2K^2}\left(\sum_{i=1}^N\sigma_{ii} x_i^2 + \sum_{i\ne j}\sigma_{ij} x_ix_j\right) -\sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+    &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sigma_{ii} x_i^2 + \frac{\gamma}{2K^2}\sum_{i\ne j}\sigma_{ij} x_ix_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+    &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sigma_{ii} x_i + \frac{\gamma}{2K^2}\sum_{i\ne j}\sigma_{ij} x_ix_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i
+    \end{split}
+\end{equation*}
+\begin{equation}
+    \therefore E(\mathbf{x}) = \sum_{i=1}^N\left(\frac{\gamma \sigma_{ii}}{2K^2} - \frac{\mu_i}{K}\right)x_i + \sum_{i\ne j}\frac{\gamma \sigma_{ij}}{2K^2} x_ix_j.
 \end{equation}
 
-Dengan konfigurasi Hamiltonian yang telah berhasil dipetakan secara akurat, algoritma \textit{Variational Quantum Eigensolver} (VQE) kemudian diimplementasikan untuk mencari solusi \textit{ground state} yang merepresentasikan alokasi aset paling optimal \cite{wang_variational_2025}. Algoritma hibrida ini bekerja dengan cara mengoptimalkan parameter sirkuit secara iteratif melalui kontrol klasik guna meminimalkan nilai ekspektasi energi dari Hamiltonian Ising yang telah dikonstruksi secara teknis \cite{fedorov_vqe_2022}. Implementasi inisialisasi cerdas melalui kerangka kerja \textit{Exact Potential Game} menjadi sangat esensial untuk memitigasi risiko kegagalan konvergensi akibat fenomena \textit{Barren Plateaus} pada perangkat keras \textit{Noisy Intermediate-Scale Quantum} (NISQ) \cite{mcclean_barren_2018, preskill_quantum_2018}. Keberhasilan proses optimasi ini menjamin bahwa setiap hasil pengukuran akhir pada \textit{qubit} memiliki interpretasi ekonomi yang sah dan logis sehingga memberikan keunggulan kompetitif dalam pengambilan keputusan investasi strategis. Integrasi antara logika teori permainan dan komputasi kuantum tersebut pada akhirnya menyediakan solusi yang lebih presisi dan stabil dalam menghadapi tantangan optimasi finansial yang bersifat \textit{NP-hard}.
+Untuk memastikan bahwa konfigurasi portofolio rasional selalu mematuhi batasan sistem yang mengharuskan pemilihan instrumen sebesar batasan $K$, maka diperlukan penambahan suku penalti kuadratik \cite{abdul_hali_markowitz_2020}. Komponen suku penalti disimbolkan sebagai $P(\mathbf{x})$ dilengkapi dengan pemberian faktor skalar pengali $A$ yang bertindak sangat dominan dalam menjustifikasi arsitektur komputasi kuantum. Konfigurasi perlakuan energi tersebut dimaksudkan untuk menekan nilai probabilitas eksistensi dari kombinasi susunan strategis yang nyata melanggar ketentuan rasio ketersediaan anggaran. Bentuk dari fungsi penalti kuadratik tersebut secara umum dapat dirumuskan sebagai
+\begin{equation}
+    P(\mathbf{x}) = A\left(\sum_{i=1}^N x_i - K\right)^2
+    \label{eq:penalty_function}
+\end{equation}
+yang mana jika dijabarkan lebih lanjut, maka akan menjadi
+\begin{equation*}
+    \begin{split}
+    P(\mathbf{x}) &= A\left(\sum_{i=1}^N x_i^2 + \sum_{i\ne j} x_ix_j - 2K\sum_{i=1}^N x_i + K^2\right) \\
+    &= A\sum_{i=1}^N x_i^2 + A\sum_{i\ne j} x_ix_j - 2AK\sum_{i=1}^N x_i + AK^2.
+    \end{split}
+\end{equation*}
+Selanjutnya, fungsi energi finansial dasar dan komponen penalti disatukan sehingga menghasilkan sebuah arsitektur lanskap energi utuh dalam format optimasi alokasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Penggabungan kedua fungsi tersebut merumuskan fungsi objektif total bernotasi $E_{total}(\mathbf{x})$ yang merangkum seluruh perhitungan variabel dinamis dari pasar yang akan dioptimasi beserta batasannya
+\begin{equation*}
+    \begin{split}
+    E_{total}(\mathbf{x}) =& E_(\mathbf{x}) + P(\mathbf{x})\\
+    =& \sum_i \left(\frac{\gamma \sigma_{ii}}{2K^2} - \frac{\mu_i}{K}\right)x_i + \sum_{i\ne j}\frac{\gamma \sigma_{ij}}{2K^2} x_ix_j  + A\sum_{i=1}^N x_i^2 + A\sum_{i\ne j} x_ix_j \\
+    &- 2AK\sum_{i=1}^N x_i + AK^2 \\
+    \end{split}
+\end{equation*}
+\begin{equation}
+    \begin{split}
+    \therefore E_{total}(\mathbf{x}) = \sum_i \left(\frac{\gamma \sigma_{ii}}{2K^2} + A - \frac{\mu_i}{K} - 2AK\right)x_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2K^2} + A\right) x_ix_j + AK^2.
+    \end{split}
+    \label{eq:E_total}
+\end{equation}
+
+Untuk menghindari proses aljabar yang panjang pada persamaan \eqref{eq:E_total}, dapat didefinisikan notasi koefisien $Q_{ii}$ dan $Q_{ij}$ sebagai berikut:
+\begin{equation*}
+    Q_{ii} = \frac{\gamma \sigma_{ii}}{2K^2}+A-\frac{\mu_i}{K}-2AK \quad \text{dan} \quad Q_{ij} = \frac{\gamma \sigma_{ij}}{2K^2}+A.
+\end{equation*}
+Sehingga komposisi arsitektur fungsi energi \eqref{eq:E_total} dapat diringkas menjadi
+\begin{equation}
+    E_{total}(\mathbf{x}) = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2.
+\end{equation}
+Selanjutnya, dilakukan prosedur mekanika kuantum untuk memetakan variabel biner dari komputasi klasik $x_i \in \{0, 1\}$ menuju formulasi permodelan energi elemen rotasi \textit{spin} yang berniali $s_i \in \{-1, 1\}$. Perubahan domain matematika tersebut dapat dilakukan dengan konversi bentuk linearisasi \textit{affine}
+\begin{equation}
+    \begin{split}
+    x_i &= \frac{(1 - s_i)}{2} \\
+    x_ix_j &= \left(\frac{1-s_i}{2}\right)\left(\frac{1-s_j}{2}\right).
+    \end{split}
+    \label{eq:qubo_mapping}
+\end{equation}
+Sehingga, dengan simetri korelasi $Q_{ij} = Q_{ji}$, maka fungsi energi dalam domain spin menjadi
+\begin{equation*}
+\begin{split}
+E_{total}(\mathbf{s}) =& \sum_i Q_{ii} \left(\frac{1 - s_i}{2}\right) + \sum_{i\ne j} Q_{ij} \left(\frac{1 - s_i - s_j + s_is_j}{4}\right) + AK^2 \\
+=& \sum_i Q_{ii} \frac{1}{2} - \sum_i Q_{ii} \frac{s_i}{2} + \sum_{i\ne j} Q_{ij} \frac{1}{4} - \sum_{i\ne j} Q_{ij} \frac{s_i}{4} - \sum_{i\ne j} Q_{ij} \frac{s_j}{4} \\
+&+ \sum_{i\ne j} Q_{ij} \frac{s_i s_j}{4} + AK^2
+\end{split}
+\end{equation*}
+\begin{equation}
+    \begin{split}
+    \therefore E_{total}(\mathbf{s}) = &\sum_i \left(- \frac{Q_{ii}}{2} - \sum_{i\ne j} \frac{Q_{ij}}{2}\right) s_i + \sum_{i\ne j} \frac{Q_{ij}}{4} s_i s_j \\
+    &+ \left(\sum_i \frac{Q_{ii}}{2} + \sum_{i\ne j} \frac{Q_{ij}}{4} + AK^2\right).
+    \end{split}
+\label{eq:qubo_domain_s}
+\end{equation}
+
+Untuk mengubah fungsi energi dalam domain spin menjadi formalisme \textit{Hamiltonian}, maka komponen parameter \textit{Hamiltonian} dapat didefinisikan dari persamaan (\ref{eq:qubo_domain_s}) yang terdiri dari parameter bias, parameter kopling, dan parameter konstanta. Parameter bias $h_i$ didapat dari koefisien komponen linear pada persamaan (\ref{eq:qubo_domain_s})
+\begin{equation}
+    h_i = \left(- \frac{Q_{ii}}{2} - \sum_{i\ne j} \frac{Q_{ij}}{2}\right).
+\end{equation}
+Sedangkan komponen parameter kopling $J_{ij}$ didapat dari koefisien komponen kuadratik pada persamaan (\ref{eq:qubo_domain_s})
+\begin{equation}
+    J_{ij} = \frac{Q_{ij}}{4}.
+\end{equation}
+Untuk suku sisa yang tidak mengandung variabel $s_i$ dan $s_is_j$ pada persamaan (\ref{eq:qubo_domain_s}), dapat didefinisikan sebagai parameter konstanta $C$ dengan bentuk
+\begin{equation}
+    C = \sum_i \frac{Q_{ii}}{2} + \sum_{i\ne j} \frac{Q_{ij}}{4} + AK^2
+\end{equation}
+Sehingga semua parameter tersebut dapat dikonfigurasi ke dalam persamaan fungsi \textit{Hamiltonian Ising} dengan bentuk
+\begin{equation}
+    \hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C.
+\end{equation}
+Pada dasarnya, komponen parameter medan $h_i$ pada ekspresi \textit{Hamiltonian} tersebut menggambarkan kecenderungan arah orientasi pergeseran medan \textit{spin} lokal \cite{lucas_ising_2014}. Sedangkan komponen interaksi $J_{ij}$ merepresentasikan interaksi timbal balik antar elemen \textit{spin}. Dalam kasus optimasi keputusan investasi, interaksi timbal balik antar elemen \textit{spin} merepresentasikan korelasi antar aset finansial yang akan diinvestasikan. Dimana ketika interaksi timbal balik antar elemen \textit{spin} negatif maka korelasi antar aset finansial yang akan diinvestasikan berbanding terbalik dan ketika interaksi timbal balik antar elemen \textit{spin} positif maka korelasi antar aset finansial yang akan diinvestasikan berbanding lurus. Sedangkan untuk parameter medan $h_i$, merepresentasikan kecenderungan harga pasar aset finansial berfluktuasi. Sementara itu, parameter konstanta $C$ merupakan suku pergeseran skala energi yang nilainya tidak memengaruhi konfigurasi terbaik dari orientasi spin, sehingga nilainya dapat diabaikan dalam analisis optimasi namun tetap harus dilibatkan untuk analisis numerik lebih lanjut.

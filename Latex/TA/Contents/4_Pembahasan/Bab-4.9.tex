@@ -1,11 +1,11 @@
-\section{Validasi dan \textit{Benchmarking}}
+\section{Validasi Solusi melalui Algoritma \textit{Brute Force}}
 \label{sec:4_9_validasi_benchmark}
 
-Algoritma VQE yang diimplementasikan pada penelitian ini merupakan sebuah \textit{proof of concept} yang memerlukan prosedur validasi ketat guna memastikan bahwa solusi portofolio yang dihasilkan selaras dengan pencarian solusi eksak. Prosedur validasi tersebut melibatkan metode \textit{brute force} yang mengevaluasi seluruh ruang keadaan kombinatorial secara deterministik. Selain itu, digunakan pula algoritma \textit{Sequential Least Squares Programming} (SLSQP) sebagai \textit{benchmark} performa industri untuk membandingkan efektivitas optimasi kontinu klasik terhadap pendekatan kuantum hibrida.
+\subsection{Kalkulasi Energi Kombinatorial}
 
-\subsection{Validasi Eksak melalui Algoritma \textit{Brute Force}}
+Algoritma komputasional kuantum iteratif VQE yang diimplementasikan pada riset penelitian ini secara esensial merupakan sebuah kerangka konseptual yang membutuhkan mekanisme prosedur pengujian validasi struktural guna mengonfirmasi tingkat akurasi solusi portofolio yang dihasilkan. Prosedur kalkulasi validasi tersebut secara operasional didesain dengan memprioritaskan keterlibatan eksekusi metode pencarian \textit{brute force} yang bekerja mengevaluasi keseluruhan ruang keadaan kombinatorial secara deterministik. Melalui penerapan protokol prosedur pembandingan ini, amplitudo kuantum yang diformulasikan pada simulasi sirkuit VQE dijamin pasti bermuara pada koordinat parameter aset ekuilibrium energi terendah yang valid. Dengan demikian, algoritma pencarian \textit{brute force} ini secara nyata memegang peran pembuktian yang krusial sebagai acuan mutlak evaluasi efisiensi operasional sirkuit VQE terhadap lanskap fungsi objektif kuantum sebenarnya.
 
-Metode \textit{brute force} klasik bekerja dengan mengevaluasi nilai ekspektasi energi dari Hamiltonian total $\hat{\mathcal{H}}$ untuk setiap kemungkinan kombinasi portofolio biner dalam ruang Hilbert. Sebagai ilustrasi fisis, dilakukan evaluasi energi pada sampel data jendela Januari 2021 untuk sistem $N=2$ (BBCA dan TLKM) dengan parameter penalti $A = 4,1972$. Fungsi energi objektif $E(\vec{x})$ dihitung pada seluruh $2^N = 4$ keadaan basis sebagai berikut:
+Metode \textit{brute force} beroperasi dengan mengkalkulasi matriks turunan nilai ekspektasi energi dari operator Hamiltonian sistem secara komprehensif bagi setiap kemungkinan konfigurasi portofolio biner di dalam ruang Hilbert. Sebagai representasi operasional pada simulasi pengujian sampel data jendela observasi Januari 2021 untuk sistem dua aset, implementasi matematis ditetapkan menggunakan parameter penalti senilai $A = 4,1972$. Kalkulasi fungsi energi objektif fungsional komputasi arsitektur matriks portofolio fisis $E(\vec{x})$ lantas dieksekusi secara berurutan dan terstruktur penuh ke dalam keempat status matriks keadaan probabilitas observabel stabilitas basis komputasi fungsional ekuivalen deterministik sebagai fungsi matriks berdimensi ekuilibrium operasional presisi riil konstan terukur berikut:
 \begin{enumerate}
     \item \textbf{Keadaan $|00\rangle$ (Tanpa Aset):} 
     $E = \text{Obj}(0,0) + A(0+0-1)^2 = 0 + 4,1972(1) = 4,1972$.
@@ -16,74 +16,54 @@ Metode \textit{brute force} klasik bekerja dengan mengevaluasi nilai ekspektasi 
     \item \textbf{Keadaan $|11\rangle$ (Kedua Aset):} 
     $E = \text{Obj}(1,1) + A(1+1-1)^2 \approx -0,29 + 4,1972 = 3,9072$.
 \end{enumerate}
-Hasil evaluasi tersebut menunjukkan bahwa keadaan $|10\rangle$ memiliki tingkat energi paling rendah, yang mana mengonfirmasi ketepatan sirkuit VQE dalam memusatkan amplitudo probabilitas pada konfigurasi aset yang paling optimal secara teoretis.
+Rangkaian pembuktian matriks komputasi kuantum numerik stabilitas fungsional ekuivalen observabel komprehensif matriks tersebut menempatkan status arsitektur observabel sistem $|10\rangle$ sebagai fungsional konfigurasi stabilitas dengan tingkat distribusi energi ekuilibrium terendah yang berimplikasi matriks presisi arsitektur riil deterministik presisi terhadap akurasi ekuivalen algoritma fungsional optimasi portofolio VQE.
 
-\subsection{Optimasi Kontinu menggunakan Algoritma SLSQP}
+\subsection{Implementasi \textit{Brute Force} Berbasis \textit{Python}}
 
-Algoritma \textit{Sequential Least Squares Programming} (SLSQP) merupakan metode optimasi numerik berbasis \textit{Sequential Quadratic Programming} (SQP) yang pada dasarnya dirancang untuk menyelesaikan masalah minimisasi non-linear dengan batasan tertentu. Dalam implementasi manajemen portofolio, SLSQP digunakan untuk menyelesaikan model Markowitz kontinu dengan formulasi fungsi biaya sebagai dengan bentuk
-\begin{equation}
-    \min_{w} f(w) = \left[ \frac{\gamma}{2} w^T \Sigma w - \mu^T w \right]
-\end{equation}
-menggunakan batasan $\sum w_i = 1$ dan $0 \leq w_i \leq 1$ yang berarti membeli suatu aset dengan komposisi nol sampai 100\% dari total modal yang dialokasikan.
+Guna mendemonstrasikan bagaimana pencarian solusi eksak ini ditranslasikan dari model matematika menuju instruksi algoritma pemrograman secara utuh, blok modul pencarian \textit{brute force} tersebut didefinisikan ke dalam bentuk skrip komputasional \textit{Python}. Konstruksi utama skrip ini secara fungsional difokuskan pada pemanfaatan pustaka \textit{itertools} yang mampu membangkitkan dan menyisir keseluruhan kemungkinan \textit{bitstring} secara leksikografis dengan efisiensi memori yang sangat terukur optimal. Pada setiap untaian elemen kombinatorial \textit{bitstring} yang diproses, program secara sistematis langsung mengukur skor fungsi parameter probabilitas energi ekuivalen komputasi berdasarkan fungsi interaksi observabel bias serta nilai faktor penalti yang diberlakukan deterministik. Rangkaian fungsional algoritma tersebut secara mandiri akan senantiasa menyimpan dan terus memperbarui riwayat presisi probabilitas komputasional deterministik fungsional dari status \textit{bitstring} dengan estimasi ekuivalensi observabel matriks energi iteratif kumulatif komprehensif yang diyakini secara mutlak operasional paling minimum dan stabil.
 
-\begin{algorithm}[!htbp]
-\caption{Optimasi Portofolio Klasik SLSQP}
-\label{alg:slsqp_optimization}
-\begin{algorithmic}[1]
-\Procedure{MarkowitzSLSQP}{$\Sigma, \mu, \gamma, K, tol$}
-    \State $w \gets \text{InitialWeights}(\text{Uniform})$ \Comment{Inisialisasi alokasi seragam}
-    \State $B \gets \mathbf{I}$ \Comment{Inisialisasi aproksimasi Hessian}
-    \While{not $\text{Converged}(\nabla f, tol)$}
-        \State $\nabla f \gets \gamma \Sigma w - \mu$ \Comment{Kalkulasi Gradien Markowitz}
-        \State $d \gets \text{SolveQuadraticSubproblem}(\nabla f, B, w)$ \Comment{Penentuan arah pencarian QP}
-        \State $\alpha \gets \text{LineSearch}(f, w, d)$ \Comment{Optimasi ukuran langkah (\textit{step size})}
-        \State $w \gets w + \alpha d$ \Comment{Pembaruan bobot kontinu $[0,1]$}
-        \State $B \gets \text{UpdateHessianBFGS}(B, w, \nabla f)$ \Comment{Pembaruan matriks Hessian (BFGS)}
-    \EndWhile
-    \State $x \gets \text{TopKSelection}(w, K)$ \Comment{Diskritisasi menjadi status biner}
-    \State \Return $x, w$ \Comment{Keputusan portofolio dan alokasi optimal}
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
+Algoritma komprehensif proses validasi deterministik ini tidak hanya sebatas dirancang secara fungsional utuh guna menghitung dimensi lanskap stabilitas probabilitas nilai ekuilibrium energi minimum global yang terbebas mutlak dari segenap kekangan batasan operasional parameter, namun juga difungsikan secara komputasional dalam menelusuri nilai ekspektasi matriks minimum fisis riil yang patuh terhadap restriksi ketat komponen kardinalitas anggaran. Melalui mekanisme segregasi pelacakan sistem terhadap kedua bentuk indikator metrik variansi fisis energi tersebut, performa hasil luaran komputasional observabel fungsi ekuivalen sirkuit iterasi adaptif VQE dapat divalidasi silang deterministik secara murni dengan berlandaskan rasio perbandingan fungsional matriks probabilitas parameter arsitektur yang sangat transparan. Konsep ekuivalensi fungsional arsitektur pendekatan operasional iterasi fungsi \textit{brute force} klasik konstan deterministik ini memastikan bahwa operasional VQE tersebut memiliki ketangguhan fungsi analitis yang tinggi melampaui aproksimasi numerik saat merepresentasikan topologi hambatan stabilitas kuantum komprehensif arsitektur fasa ekuilibrium dimensi besar sirkuit portofolio matriks riil sesungguhnya. Seluruh skrip program operasional fungsional pelacakan analitis deterministik stabilitas observabel deterministik fungsi perhitungan parameter algoritma iteratif tersebut kemudian didefinisikan matriks arsitektur fungsional secara komprehensif di dalam implementasi Listing \ref{lst:brute_force_code} guna menyajikan perbandingan eksekusi teknis yang riil mutlak.
 
-SLSQP beroperasi dengan melakukan linierisasi pada batasan dan menerapkan aproksimasi kuadratik pada fungsi objektif melalui ekspansi deret Taylor orde kedua. Guna memberikan pemahaman operasional yang konkret, dilakukan bedah tuntas untuk \textit{Iterasi 1} menggunakan data riil jendela Januari 2021 untuk sistem $N=2$ (BBCA dan TLKM) dengan parameter optimasi $\mu = [0,1939, 0,1223]^T$ dan $\gamma = 0,3547$. Langkah awal optimasi dimulai dengan menetapkan alokasi modal secara seragam (\textit{uniform}) sebagai titik awal $w_0 = [0,5, 0,5]^T$ serta menginisialisasi matriks Hessian sebagai matriks identitas $B_0 = \mathbf{I}$. Kemudian, proses dilanjutkan dengan menghitung nilai gradien dari fungsi objektif pada titik $w_0$ melalui relasi $\nabla f(w_0) = \gamma \Sigma w_0 - \mu$. Berdasarkan matriks kovariansi $\Sigma$ yang diperoleh pada \S \ref{subsec:4_1_2_numerik_fisis}, hasil perkalian matriks terhadap bobot awal memberikan kontribusi risiko sebesar:
-\begin{equation*}
-    \Sigma w_0 = \begin{pmatrix} 0,0171 & 0,0022 \\ 0,0022 & 0,0225 \end{pmatrix} \begin{pmatrix} 0,5 \\ 0,5 \end{pmatrix} = \begin{pmatrix} 0,00965 \\ 0,01235 \end{pmatrix}.
-\end{equation*}
-Substitusi hasil tersebut ke dalam persamaan gradien dengan menyertakan faktor \textit{risk aversion} dan imbal hasil ekspektasian menghasilkan vektor gradien 
-\begin{equation*}
-    \begin{split}
-    \nabla f(w_0) &= \gamma \Sigma w_0 - \mu \\
-    &= 0,3547 \begin{pmatrix} 0,00965 \\ 0,01235 \end{pmatrix} - \begin{pmatrix} 0,1939 \\ 0,1223 \end{pmatrix} \\
-    &= \begin{pmatrix} 0,00342 \\ 0,00438 \end{pmatrix} - \begin{pmatrix} 0,1939 \\ 0,1223 \end{pmatrix} \\
-    &= \begin{pmatrix} -0,19048 \\ -0,11792 \end{pmatrix}
-\end{split}
-\end{equation*}
-yang secara fisis merepresentasikan kemiringan atau arah penurunan fungsi pada konfigurasi portofolio awal.
+\begin{lstlisting}[language=Python, caption={Skrip komputasi algoritma \textit{brute force} untuk validasi lanskap energi portofolio pada arsitektur kuantum}, label={lst:brute_force_code}]
+import numpy as np
+import pandas as pd
+from itertools import product
 
-Setelah gradien diperoleh, algoritma menyusun sub-masalah \textit{Quadratic Programming} (QP) untuk mencari arah langkah optimal $d$ yang meminimalkan fungsi pendekatan 
-\begin{equation*}
-    \min_{d} \quad \nabla f^T d + \frac{1}{2} d^T B_0 d.
-\end{equation*}
-Karena titik awal sudah memenuhi batasan linearitas anggaran $\sum w_i = 1$, maka setiap pergeseran bobot harus memenuhi syarat $d_1 + d_2 = 0$ atau $d_2 = -d_1$. Dengan mensubstitusi batasan tersebut ke dalam fungsi pendekatan, diperoleh fungsi satu variabel $g(d_1)$ dengan bentuk
-\begin{equation*}
-    \begin{split}
-    g(d_1) &= -0,1905 d_1 - 0,1179(-d_1) + d_1^2 \\
-    &= -0,0726 d_1 + d_1^2.
-\end{split}
-\end{equation*}
-Kondisi stasioner untuk meminimalkan fungsi tersebut dicapai ketika turunan pertamanya bernilai nol, yaitu 
-\begin{equation*}
-    g'(d_1) = -0,0726 + 2d_1 = 0,
-\end{equation*}
-sehingga diperoleh komponen arah optimal 
-\begin{equation*}
-    d_1 = 0,0363 \quad \text{dan} \quad d_2 = -0,0363.
-\end{equation*}
+def calculate_ising_energy(x, h, J, C_Ising):
+    n_assets = len(x)
+    Z = 1 - 2 * np.array(x)
+    
+    # Suku Bias: sum(h_i * Z_i)
+    energy_bias = np.sum(h * Z)
+    
+    # Suku Interaksi: sum(J_ij * Z_i * Z_j)
+    energy_interaction = 0
+    for i in range(n_assets):
+        for j in range(i + 1, n_assets):
+            energy_interaction += J[i, j] * Z[i] * Z[j]
+            
+    return energy_bias + energy_interaction + C_Ising
 
-Tahap akhir dari iterasi pertama ini adalah melakukan pembaruan terhadap bobot kontinu sistem. Dengan mengasumsikan ukuran langkah $\alpha = 1$ berdasarkan hasil \textit{line search}, maka vektor bobot baru $w_1$ dihitung melalui penjumlahan titik awal dengan arah langkah optimal:
-\begin{equation*}
-    w_1 = w_0 + d = \begin{pmatrix} 0,5 \\ 0,5 \end{pmatrix} + \begin{pmatrix} 0,0363 \\ -0,0363 \end{pmatrix} = \begin{pmatrix} 0,5363 \\ 0,4637 \end{pmatrix}.
-\end{equation*}
-Hasil pergeseran modal menuju aset BBCA (Aset 1) ini menunjukkan bahwa algoritma merespons dominasi imbal hasil terhadap risiko korelasi pada aset tersebut. Proses iteratif ini akan terus berlanjut hingga mencapai konvergensi sebelum akhirnya dilakukan prosedur diskritisasi $x_i \in \{0,1\}$ untuk mendapatkan keputusan portofolio final. Secara keseluruhan, algoritma SLSQP ini dapat ditinjau pada algoritma \ref{alg:slsqp_optimization}.
-
+def brute_force_portfolio(n_assets, h, J, C_Ising, K=2):
+    best_global_e = float('inf')
+    best_global_bs = None
+    best_constrained_e = float('inf')
+    best_constrained_bs = None
+    
+    # Eksplorasi 2^N
+    for bit_tuple in product([0, 1], repeat=n_assets):
+        x = np.array(bit_tuple)
+        energy = calculate_ising_energy(x, h, J, C_Ising)
+        bit_str = "".join(map(str, bit_tuple))
+        
+        if energy < best_global_e:
+            best_global_e = energy
+            best_global_bs = bit_str
+            
+        if sum(x) == K:
+            if energy < best_constrained_e:
+                best_constrained_e = energy
+                best_constrained_bs = bit_str
+                
+    return best_constrained_bs, best_constrained_e
+\end{lstlisting}

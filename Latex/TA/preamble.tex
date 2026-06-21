@@ -108,3 +108,14 @@
   \newpage
   \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \makeatother
+
+% --- Otomatisasi Rotasi Gambar Berdasarkan Halaman ---
+\usepackage{ifoddpage}
+\newcommand{\rotoimage}[2][]{%
+    \checkoddpage
+    \ifoddpage
+        \includegraphics[angle=90, origin=c, #1]{#2}%
+    \else
+        \includegraphics[angle=-90, origin=c, #1]{#2}%
+    \fi
+}

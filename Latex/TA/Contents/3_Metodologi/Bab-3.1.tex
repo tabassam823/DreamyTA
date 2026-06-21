@@ -1,5 +1,30 @@
 \section{Alur Penelitian}
-Tiga pilar metodologis utama yang mencakup analisis ekonofisika, teori permainan strategis, dan komputasi kuantum variasional diintegrasikan untuk mengoptimalkan pemilihan portofolio biner secara hibrida. Alur penelitian dimulai dengan mengekstraksi data historis saham indeks LQ45 yang kemudian ditransformasi menjadi variabel imbal hasil logaritmik guna mendeteksi korelasi stokastik antar aset finansial. Interaksi strategis antar aset tersebut dipetakan menggunakan parameter \textit{Exact Potential Game} (EPG) untuk mengidentifikasi struktur kestabilan Nash yang berfungsi sebagai input utama bagi Hamiltonian Ising. Proses pencarian solusi optimal dieksekusi melalui algoritma \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE) dengan memanfaatkan optimasi SPSA untuk meminimalkan fungsi energi sistem pada perangkat keras kuantum. Rangkaian penelitian ditutup dengan melakukan simulasi \textit{backtesting} secara komprehensif untuk mengevaluasi performa model terhadap data pasar riil melalui metrik \textit{Sharpe Ratio} dan \textit{Maximum Drawdown}.
+Tiga pilar metodologis utama yang mencakup analisis ekonofisika, teori permainan strategis, dan komputasi kuantum variasional diintegrasikan untuk mengoptimalkan pemilihan portofolio biner secara hibrida. Guna memberikan pemahaman yang seragam terhadap notasi matematis yang digunakan dalam modul-modul selanjutnya, Tabel \ref{tab:simbol_metodologi} merangkum definisi dari setiap simbol utama yang muncul dalam algoritma penelitian ini.
+
+\begin{table}[htbp]
+\centering
+\caption{Daftar Simbol dan Notasi Matematis dalam Metodologi.}
+\label{tab:simbol_metodologi}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Simbol} & \textbf{Definisi} \\ \hline
+$\mu$ & Vektor ekspektasi imbal hasil (\textit{expected return}) aset. \\ \hline
+$\Sigma$ & Matriks kovariansi yang merepresentasikan risiko sistemik antar aset. \\ \hline
+$\gamma$ & Parameter penghindaran risiko (\textit{risk aversion}) endogen. \\ \hline
+$\lambda$ & Koefisien pinalti untuk penegakan kendala kardinalitas aset. \\ \hline
+$K$ & Jumlah target aset yang akan dipilih ke dalam portofolio (\textit{budget}). \\ \hline
+$N$ & Jumlah total aset yang tersedia dalam semesta pemilihan. \\ \hline
+$x_i$ & Variabel keputusan biner untuk aset ke-$i$ ($x_i \in \{0, 1\}$). \\ \hline
+$\Phi$ & Fungsi potensial global dalam kerangka \textit{Exact Potential Game}. \\ \hline
+$\hat{\mathcal{H}}$ & Operator Hamiltonian yang merepresentasikan energi total sistem kuantum. \\ \hline
+$\theta$ & Vektor parameter sudut rotasi pada sirkuit kuantum variasional. \\ \hline
+$a_k, c_k$ & Hiperparameter laju pembelajaran dan perturbasi pada optimasi SPSA. \\ \hline
+\text{s.t.} & \textit{subject to} (dengan kendala atau batasan matematis). \\ \hline
+\end{tabular}
+\end{table}
+
+Alur penelitian dimulai dengan mengekstraksi data historis saham indeks IHSG yang kemudian ditransformasi menjadi variabel imbal hasil logaritmik guna mendeteksi korelasi stokastik antar aset finansial. 
+ Interaksi strategis antar aset tersebut dipetakan menggunakan parameter \textit{Exact Potential Game} (EPG) untuk mengidentifikasi struktur kestabilan Nash yang berfungsi sebagai input utama bagi Hamiltonian Ising. Proses pencarian solusi optimal dieksekusi melalui algoritma \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE) dengan memanfaatkan optimasi SPSA untuk meminimalkan fungsi energi sistem pada perangkat keras kuantum. Rangkaian penelitian ditutup dengan melakukan simulasi \textit{backtesting} secara komprehensif untuk mengevaluasi performa model terhadap data pasar riil melalui metrik \textit{Sharpe Ratio} dan \textit{Maximum Drawdown}.
 
 Struktur operasional penelitian dirancang ke dalam empat modul sekuensial yang saling berinteraksi secara dinamis guna menjamin integritas data dan akurasi solusi optimasi yang dihasilkan. Modul pertama difokuskan pada akuisisi serta pra-pemrosesan data mentah dan modul kedua diarahkan untuk mengekstraksi parameter interaksi melalui pendekatan teori informasi kuantum serta ekonofisika sistemik. Modul ketiga diposisikan sebagai inti optimasi yang melibatkan konstruksi matriks QUBO dan pelatihan parameter sirkuit kuantum menggunakan metode \textit{Adaptive Depth} untuk mencapai konvergensi energi minimum. Modul keempat ditugaskan untuk mengeksekusi strategi investasi secara virtual serta menghitung metrik performa portofolio guna memberikan gambaran objektif mengenai profitabilitas dan tingkat risiko model. Seluruh tahapan kerja ini disinkronkan untuk memastikan bahwa setiap transisi data memiliki landasan teoretis yang kuat berdasarkan prinsip mekanika kuantum dan dinamika pasar modal kontemporer.
 

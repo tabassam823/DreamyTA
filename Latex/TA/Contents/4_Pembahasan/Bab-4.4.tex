@@ -1,35 +1,41 @@
 \section{Arsitektur \textit{Ansatz} dalam VQE}
 \label{sec:4_4_ansatz_vqe}
 
-Setelah hamiltonian $\hat{\mathcal{H}}$ didapatkan, maka dapat dihitung nilai energi ekspektasi dari Hamiltonian tersebut dengan mengoperasikannya menggunakan sirkuit kuantum. Perhitungan nilai energi ekspektasi ini dilakukan dengan menelusuri keadaan dasar dari Hamiltonian tersebut berdasarkan parameter theta pada gerbang rotasi yang ada pada sirkuit kuantum yang digunakan pada Gambar \ref{fig:vqe_circuit_depth1}. Proses penelusuran keadaan dasar pada algoritma VQE bergantung pada desain sirkuit kuantum variasional sebagaimana ditunjukkan pada Arsitektur \textit{Ansatz} yang ada pada Gambar \ref{fig:vqe_circuit_depth1} untuk merepresentasikan ruang solusi portofolio. Arsitektur tersebut, dalam literatur lain, disebut sebagai arsitektur \textit{Hardware-Efficient Ansatz} (HEA). Dalam penelitian ini, HEA yang digunakan terdiri dari lapisan-lapisan gerbang rotasi parameter tunggal dan gerbang keterikatan untuk membentuk fungsi gelombang variasional $|\psi(\boldsymbol{\theta})\rangle$ yang akan diestimasi. lapiran gerbang rotasi dan keterikatan ini merupakan uniter yang berulang sebanyak kedalaman ($L$) yang telah ditentukan. Operator uniter ini kemudian diterapkan pada keadaan awal $|00\rangle$ di dalam sirkuit sehingga, untuk contoh Gambar \ref{fig:vqe_circuit_depth1}, membentuk persamaan gelombang
+\subsection{Konstruksi \textit{Hardware-Efficient Ansatz}}
+
+Setelah struktur Hamiltonian sistem $\hat{\mathcal{H}}$ berhasil dirumuskan secara definitif, proses kalkulasi nilai energi ekspektasi dari Hamiltonian tersebut dapat langsung dieksekusi dengan mengoperasikannya melalui simulasi sirkuit kuantum murni. Perhitungan komprehensif nilai energi ekspektasi ini secara teknis dilakukan dengan menelusuri pemetaan keadaan dasar dari matriks Hamiltonian tersebut berdasarkan fluktuasi parameter rotasi sudut $\boldsymbol{\theta}$ yang dikendalikan oleh fungsi gerbang rotasi pada sirkuit kuantum sebagaimana diilustrasikan secara visual pada Gambar \ref{fig:vqe_circuit_depth1}. Proses penelusuran keadaan dasar fisis pada kerangka algoritma VQE ini sangat bergantung secara langsung pada efisiensi desain sirkuit kuantum variasional tersebut untuk merepresentasikan topologi ruang solusi portofolio tanpa distorsi probabilitas. Arsitektur sirkuit berlapis yang spesifik ini, dalam berbagai standar literatur kuantum terapan kontemporer, umumnya diidentifikasi secara luas sebagai arsitektur \textit{Hardware-Efficient Ansatz} (HEA).
+
+Dalam batasan ruang lingkup penelitian ini, desain arsitektur HEA yang digunakan secara struktural terdiri dari susunan lapisan-lapisan gerbang rotasi berparameter tunggal yang diselingi oleh deretan matriks gerbang keterikatan (\textit{entanglement}) untuk pada akhirnya membentuk rumusan fungsi gelombang variasional $|\psi(\boldsymbol{\theta})\rangle$ yang akan diestimasi nilainya. Lapisan gerbang rotasi operasional dan matriks keterikatan fisis ini pada hakikatnya merupakan rangkaian operator uniter yang dieksekusi secara berulang sebanyak kelipatan tingkat kedalaman ($L$) yang telah ditetapkan sejak awal fase simulasi komputasi berlangsung. Operator uniter repetitif ini kemudian secara deterministik diterapkan pada keadaan awal $|0\rangle^{\otimes N}$ di dalam inisialisasi sirkuit sehingga, seperti yang dapat dicermati pada struktur sistem dua qubit di Gambar \ref{fig:vqe_circuit_depth1}, akan mensintesis bentuk persamaan fungsi gelombang utuh sebagai berikut
 \begin{equation}
-    \ket{\psi(\boldsymbol{\theta})}=\left(U_{\text{rot}}^1 U_{\text{ent}}^1 U_{\text{rot}}(\boldsymbol{\theta})^0\right)^{L}\ket{00}
-    \label{eq:parameter_theta_vqe}
+    \ket{\psi(\boldsymbol{\theta})}=\left(U_{\text{rot}}^1 U_{\text{ent}}^1 U_{\text{rot}}(\boldsymbol{\theta})^0\right)^{L}\ket{00}.
+    \label{eq:4_4_parameter_theta_vqe}
 \end{equation}
-karena hanya memiliki kedalaman 1 dan memiliki layer gerbang rotasi sebanyak 2.
+Persamaan derivatif uniter di atas merepresentasikan formulasi fisis yang tercipta secara khusus untuk mengakomodasi eksekusi sirkuit dengan tingkat kedalaman satu serta kompensasi sepasang lapisan gerbang rotasi fungsional.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{GTQuantumInvest/Hasil_N2_GT/Analisis_Window_N2/2021-05-05_circuit.png}
+    \includegraphics[width=0.7\textwidth]{GTQuantumInvest/Hasil_N2_GT_5/Analisis_Window_N2/2021-05-05_circuit.png}
     \caption{Rangkaian Sirkuit Kuantum \textit{Hardware-Efficient Ansatz} dengan Kedalaman ($L$) = 1.}
     \label{fig:vqe_circuit_depth1}
 \end{figure}
 
-Proses transformasi informasi pada lapisan rotasi $\hat{U}_{rot}^{(l)}(\theta)$ setiap iterasi didefinisikan melalui hasil perkalian tensor dari gerbang-gerbang rotasi lokal pada masing-masing qubit
+\subsection{Implementasi Sirkuit Kuantum Variasional}
+
+Proses dinamika transformasi informasi probabilitas pada setiap lapisan rotasi fungsional $\hat{U}_{rot}^{(l)}(\theta)$ dalam tahapan iterasi komputasional didefinisikan murni melalui hasil perkalian tensor spasial dari matriks gerbang-gerbang rotasi lokal yang melekat pada masing-masing qubit independen. Formulasi perakitan operator tensor matematis ini merumuskan jumlahan vektor uniter individual menjadi satu entitas matriks rotasi global sistem dengan persamaan struktural berupa
 \begin{equation}
     \hat{U}_{rot}^{(l)}(\theta) = \bigotimes_{j=0}^{N-1} \hat{U}_{q}(\theta_{l,j,z}, \theta_{l,j,y})
 \end{equation}
-dengan $N$ adalah jumlah aset dalam portofolio dan $\theta_{l,j,z}$ dan $\theta_{l,j,y}$ adalah parameter rotasi untuk aset ke-$j$ pada lapisan ke-$l$ yang dioperasikan menggunakan gerbang rotasi sumbu-Z dan gerbang rotasi sumbu-Y. Sehingga untuk sistem dengan $N=2$ aset, operator rotasi memiliki bentuk
+dengan variabel independen $N$ merepresentasikan jumlah absolut aset dalam kerangka portofolio, sementara $\theta_{l,j,z}$ dan $\theta_{l,j,y}$ mendefinisikan nilai parameter sudut rotasi untuk aset ke-$j$ pada lapisan fisis ke-$l$ yang dioperasikan secara presisi menggunakan gerbang rotasi sumbu-Z dan sumbu-Y. Sebagai hasil deduktif dari formulasi tersebut, untuk sistem biner dengan komposisi $N=2$ aset, keseluruhan operator matriks rotasi kuantum lokal akan memiliki bentuk representasi turunan
 \begin{equation}
-    \hat{U}_{rot}^{(l)}(\theta) = [\hat{R}_z(\theta_{l,1,z})\hat{R}_y(\theta_{l,1,y})] \otimes [\hat{R}_z(\theta_{l,0,z})\hat{R}_y(\theta_{l,0,y})]
+    \hat{U}_{rot}^{(l)}(\theta) = [\hat{R}_z(\theta_{l,1,z})\hat{R}_y(\theta_{l,1,y})] \otimes [\hat{R}_z(\theta_{l,0,z})\hat{R}_y(\theta_{l,0,y})].
 \end{equation}
-Matriks rotasi tunggal untuk satu qubit ($\hat{U}_{q}$) tersebut kemudian diturunkan dari perkalian gerbang rotasi sumbu-Y dan sumbu-Z dengan bentuk
+Matriks fungsi rotasi tunggal untuk setiap satu qubit individu ($\hat{U}_{q}$) tersebut pada dasarnya diturunkan secara langsung dari operasi perkalian matriks standar gerbang rotasi sumbu-Y dan sumbu-Z dengan ekspansi bentuk aljabar linear
 \begin{equation}
     \begin{split}
-    \hat{U}_{q}(\theta_{l,j,z}, \theta_{l,j,y}) &= \begin{pmatrix} e^{-i\theta_{l,j,z}/2} & 0 \\ 0 & e^{i\theta_{l,j,z}/2} \end{pmatrix} \begin{pmatrix} \cos(\theta_{l,j,y}/2) & -\sin(\theta_{l,j,y}/2) \\ \sin(\theta_{l,j,y}/2) & \cos(\theta_{l,j,y}/2) \end{pmatrix} \\ &= \begin{pmatrix} e^{-i\theta_{l,j,z}/2} \cos(\theta_{l,j,y}/2) & -e^{-i\theta_{l,j,z}/2} \sin(\theta_{l,j,y}/2) \\ e^{i\theta_{l,j,z}/2} \sin(\theta_{l,j,y}/2) & e^{i\theta_{l,j,z}/2} \cos(\theta_{l,j,y}/2) \end{pmatrix}
+    \hat{U}_{q}(\theta_{l,j,z}, \theta_{l,j,y}) &= \begin{pmatrix} e^{-i\theta_{l,j,z}/2} & 0 \\ 0 & e^{i\theta_{l,j,z}/2} \end{pmatrix} \begin{pmatrix} \cos(\theta_{l,j,y}/2) & -\sin(\theta_{l,j,y}/2) \\ \sin(\theta_{l,j,y}/2) & \cos(\theta_{l,j,y}/2) \end{pmatrix} \\ &= \begin{pmatrix} e^{-i\theta_{l,j,z}/2} \cos(\theta_{l,j,y}/2) & -e^{-i\theta_{l,j,z}/2} \sin(\theta_{l,j,y}/2) \\ e^{i\theta_{l,j,z}/2} \sin(\theta_{l,j,y}/2) & e^{i\theta_{l,j,z}/2} \cos(\theta_{l,j,y}/2) \end{pmatrix}.
     \end{split}
 \end{equation}
-Dengan mendefinisikan 
+Dengan mendefinisikan variabel bantu
 \begin{equation*}
     \begin{split}
 a_i &= e^{-i\theta_{i,z}/2}\cos(\theta_{i,y}/2) \\
@@ -37,20 +43,20 @@ b_i &= -e^{-i\theta_{i,z}/2}\sin(\theta_{i,y}/2) \\
 c_i &= e^{i\theta_{i,z}/2}\sin(\theta_{i,y}/2) \\
 d_i &= e^{i\theta_{i,z}/2}\cos(\theta_{i,y}/2)
     \end{split}
-\end{equation*}, 
-maka hasil \textit{tensor product} untuk sistem $N=2$ adalah matriks $4 \times 4$:
+\end{equation*} 
+maka kalkulasi komprehensif hasil \textit{tensor product} untuk konfigurasi fungsi sistem rotasi bernilai $N=2$ merupakan ekspansi matriks komputasi berdimensi $4 \times 4$:
 \begin{equation}
     \begin{split}
     \hat{U}_{rot}^{(l)}(\theta) &= \begin{pmatrix} a_0 \hat{U}_1(\theta_{l,1,z}, \theta_{l,1,y}) & b_0 \hat{U}_1(\theta_{l,1,z}, \theta_{l,1,y}) \\ c_0 \hat{U}_1(\theta_{l,1,z}, \theta_{l,1,y}) & d_0 \hat{U}_1(\theta_{l,1,z}, \theta_{l,1,y}) \end{pmatrix} \\
-    &= \begin{pmatrix} a_0 a_1 & a_0 b_1 & b_0 a_1 & b_0 b_1 \\ a_0 c_1 & a_0 d_1 & b_0 c_1 & b_0 d_1 \\ c_0 a_1 & c_0 b_1 & d_0 a_1 & d_0 b_1 \\ c_0 c_1 & c_0 d_1 & d_0 c_1 & d_0 d_1 \end{pmatrix}
+    &= \begin{pmatrix} a_0 a_1 & a_0 b_1 & b_0 a_1 & b_0 b_1 \\ a_0 c_1 & a_0 d_1 & b_0 c_1 & b_0 d_1 \\ c_0 a_1 & c_0 b_1 & d_0 a_1 & d_0 b_1 \\ c_0 c_1 & c_0 d_1 & d_0 c_1 & d_0 d_1 \end{pmatrix}.
     \end{split}
 \end{equation}
 
-Untuk sistem dengan $N=4$ aset, proses yang sama dilakukan melalui \textit{tensor product} berantai dari empat operator qubit tunggal
+Untuk mengatasi kompleksitas pada sistem pengujian lanjutan dengan rentang $N=4$ aset, proses eskalasi fungsional yang sama persis dilakukan melalui \textit{tensor product} berantai dari keseluruhan empat operator qubit tunggal yang terlibat penuh
 \begin{equation}
     \hat{U}_{rot, N4}^{(l)}(\theta) = \hat{U}_{q,0} \otimes \hat{U}_{q,1} \otimes \hat{U}_{q,2} \otimes \hat{U}_{q,3}.
 \end{equation}
-Operasi ini menghasilkan matriks unitari dimensi $16 \times 16$ yang memetakan seluruh $2^4$ basis status portofolio secara simultan. Setelah fase rotasi, sistem dihubungkan oleh gerbang keterikatan $U_{ent}$. Untuk sistem $N=2$, matriks keterikatan yang menggunakan kombinasi gerbang CNOT dua arah memiliki representasi
+Rangkaian operasi perkalian aljabar silang ini lantas menghasilkan blok matriks unitari raksasa berdimensi asimtotik $16 \times 16$ yang bertugas memetakan seluruh $2^4$ probabilitas basis status portofolio secara komprehensif dan amat simultan. Setelah fase rotasi sudut individual pada setiap qubit terselesaikan, sistem fisis tersebut kemudian dikonfigurasi agar saling berinteraksi secara masif dan terhubung erat oleh jembatan matriks fungsional gerbang keterikatan $U_{ent}$. Untuk ruang skenario pengujian dengan sistem $N=2$, struktur murni matriks fungsional keterikatan yang mengadopsi formasi kombinasi gerbang CNOT dua arah memiliki representasi nilai eigen aljabar
 \begin{equation}
     \begin{split}
     \hat{U}_{ent, N2} &= \text{CNOT}_{10} \text{CNOT}_{01} \\
@@ -58,10 +64,34 @@ Operasi ini menghasilkan matriks unitari dimensi $16 \times 16$ yang memetakan s
     \end{split}
     \label{eq:cnot_n2}
 \end{equation}
-Sedangkan untuk sistem dengan $N=4$ aset, matriks keterikatan yang menggunakan kombinasi gerbang CNOT dua arah memiliki representasi
+Sedangkan khusus untuk perluasan arsitektur fungsional pada ranah pengujian sistem dengan $N=4$ aset observasi, matriks uniter operasi keterikatan yang menggunakan perpaduan urutan gerbang CNOT dua arah memiliki representasi fisis struktural
 \begin{equation}
     \begin{split}
     \hat{U}_{ent, N4} &= \text{CNOT}_{30} \text{CNOT}_{23} \text{CNOT}_{12} \text{CNOT}_{01}.
     \end{split}
 \end{equation}
-$\hat{U}_{rot}$ berguna untuk mengeksplorasi bobot probabilitas individual dari setiap aset, sedangkan $\hat{U}_{ent}$ digunakan untuk memetakan korelasi risiko antar aset. Kombinasi kedua operator ini bertujuan agar sirkuit kuantum dapat membentuk superposisi keadaan-keadaan kuantum yang mengandung bobot probabilitas distribusi portofolio optimal melalui optimasi parameter $\boldsymbol{\theta}$.
+Secara fungsionalitas murni, keberadaan elemen $\hat{U}_{rot}$ dirancang khusus guna memfasilitasi proses eksplorasi matriks bobot probabilitas individual dari setiap instrumen aset komersial, sedangkan entitas $\hat{U}_{ent}$ dikonfigurasi guna memetakan seluruh matriks korelasi risiko kooperatif antar instrumen aset komersial secara terintegrasi penuh.
+
+Guna merumuskan keseluruhan pemodelan fungsi matriks matematis uniter kompleks tersebut menjadi instruksi baris pemrograman riil, kerangka \textit{hardware-efficient ansatz} (HEA) diimplementasikan secara langsung di dalam ruang kompilasi ekosistem sirkuit \textit{PennyLane}. Rangkaian fungsional \textit{ansatz} ini secara dinamis menggeneralisasi setiap rotasi RY dan RZ berlapis yang diterapkan persis pada seluruh untai iterasi qubit operasional yang secara aktif mengkalkulasi titik ekuilibrium probabilitas. Pola arsitektur ikatan melingkar \textit{circular entangling} yang melibatkan instruksi sirkuit gerbang CNOT pada setiap peralihan tahap rotasi diaplikasikan guna memaksakan fungsi keterikatan risiko antara masing-masing instrumen sektoral yang ada secara deterministik dan presisi. Konstruksi algoritmik dari fungsionalitas lapisan rotasi parametrik serta matriks konektivitas kuantum beruntun penyusun struktur sirkuit tersebut dapat secara utuh dipelajari melalui definisi hierarki operasional pemrograman di bawah ini pada Listing \ref{lst:ansatz_construction}.
+
+\begin{lstlisting}[language=Python, caption={Fungsi penyusunan arsitektur \textit{Hardware-Efficient Ansatz} pada iterasi sirkuit kuantum VQE}, label={lst:ansatz_construction}]
+def ansatz(params):
+    """
+    Membangun lapisan-lapisan sirkuit kuantum HEA berdasarkan
+    parameter rotasi (theta) yang diberikan.
+    """
+    w = params.reshape((depth + 1, n_qubits, 2))
+    
+    # Iterasi penyusunan lapisan (layer)
+    for layer in range(depth + 1):
+        # 1. Lapisan rotasi lokal (RY dan RZ)
+        for q in range(n_qubits):
+            qml.RY(w[layer, q, 0], wires=q)
+            qml.RZ(w[layer, q, 1], wires=q)
+            
+        # 2. Lapisan keterikatan / entanglement (CNOT)
+        if layer < depth:
+            for q in range(n_qubits - 1):
+                qml.CNOT(wires=[q, q + 1])
+            qml.CNOT(wires=[n_qubits - 1, 0])
+\end{lstlisting}

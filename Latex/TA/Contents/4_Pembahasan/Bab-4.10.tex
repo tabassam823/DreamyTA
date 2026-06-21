@@ -1,7 +1,15 @@
-\section{Analisis Performa Portofolio}
+\section{Analisis Performa Portofolio dan Dinamika \textit{Rebalancing}}
 \label{sec:4_10_performa_akhir}
 
-Untuk mendapatkan hasil evaluasi kinerja portofolio secara kuantitatif, dilakukan pengujian \textit{backtesting} sehingga perkembangan modal investor dapat langsung tersimulasi di pasar saat menggunakan strategi utama GT-VQE. Pengujian ini juga dapat dilakukan untuk membandingkan efektivitas dari strategi yang ditawarkan dalam penelitian ini, yaitu strategi hibrida GT-VQE dengan beberapa strategi yang berkaitan dengan strategi tersebut. Strategi yang digunakan sebagai pembanding terdiri dari strategi kuantum murni tanpa integrasi teori permainan, strategi \textit{equal weight} dengan asumsi bobot setiap N aset yang sama rata \textit{stock-picking}, dan strategi klasik. Strategi \textit{stock-picking} digunakan sebagai \textit{benchmark} bagaimana perkembangan portofolio investor bila membeli dan menahan semua aset yang ada dalam sistem selama akhir periode dengan bobot yang sama rata. Ringkasan hasil pengujian \textit{backtesting} untuk sistem dengan $N=2$ aset dan $N=4$ aset disajikan pada Tabel \ref{tab:backtest_summary_all}. Sebagai pembanding acuan, kinerja Indeks Harga Saham Gabungan (IHSG) pada periode yang sama mencatatkan imbal hasil kumulatif sebesar $19,13\%$ dengan \textit{Sharpe Ratio} $0,5557$ dan \textit{Maximum Drawdown} (MDD) sebesar $10,48\%$.
+Setelah dianalisis pada bab-bab sebelumnya, kinerja portofolio dapat diukur secara kuantitatif lewat hasil simulasi \textit{backtesting} yang pada tugas akhir ini dilakukan pada periode 2021 hingga 2023. Evaluasi ini dilakukan untuk membandingkan kinerja dari strategi yang ditawarkan dalam penelitian ini, yaitu strategi hibrida GT-VQE dengan beberapa strategi yang berkaitan dengan strategi tersebut. Simulasi \textit{backtesting} dilakukan dengan prosuddur \textit{rebalancing} bulanan yang mana bobot portofolio akan selalu dihitung ulang pada awal setiap bulan lalu alokasi portofolio yang sudah bergerak selama sebulan disesuaikan kembali. Strategi yang digunakan sebagai pembanding terdiri dari strategi kuantum murni tanpa integrasi teori permainan, strategi \textit{equal weight} dengan asumsi bobot setiap N aset yang sama rata \textit{stock-picking}, dan strategi klasik. Aset yang digunakan dalam penelitian ini yaitu BBCA, ADRO, TLKM, dan SMGR dengan data harga yang disajikan pada Tabell \ref{tab:daily_prices_merged} pada Lampiran \ref{appendix:daily_prices}. Adapun pergerakan harga saham individual secara visual dapat ditinjau pada Gambar \ref{fig:raw_price_n4} untuk menggambarkan bagaimana masing-masing saham selama periode tersebut berkorelasi. Ringkasan hasil pengujian \textit{backtesting} untuk sistem dengan $N=2$ aset dan $N=4$ aset disajikan pada Tabel \ref{tab:backtest_summary_all}. Sebagai pembanding acuan, kinerja Indeks Harga Saham Gabungan (IHSG) pada periode yang sama mencatatkan imbal hasil kumulatif sebesar $19,13\%$ dengan \textit{Sharpe Ratio} $0,5557$ dan \textit{Maximum Drawdown} (MDD) sebesar $10,48\%$.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/classic_compare/Grafik_Harga_Saham_Raw/pergerakan_harga_asli_N4.png}
+    \caption{Pergerakan Harga Saham Individual (\textit{Raw Price}) pada Sistem N=4 (2021--2023).}
+    \label{fig:raw_price_n4}
+\end{figure}
+
 
 \begin{table}[!htbp]
     \centering
@@ -20,40 +28,82 @@ Untuk mendapatkan hasil evaluasi kinerja portofolio secara kuantitatif, dilakuka
     \end{small}
 \end{table}
 
-Data tersebut menunjukkan bahwa strategi GT-VQE memberikan performa yang paling superior, terutama pada sistem dengan dimensi yang lebih besar ($N=4$). Meskipun pada sistem $N=2$ algoritma SLSQP klasik mampu menghasilkan imbal hasil yang identik dengan GT-VQE ($51,34\%$), namun GT-VQE unggul dalam metrik \textit{Sharpe Ratio} ($0,7357$ vs $0,6736$) yang berarti memiliki efisiensi manajemen risiko yang lebih baik. Performa algoritma SLSQP mengalami degradasi signifikan saat jumlah aset meningkat menjadi $N=4$, di mana imbal hasilnya merosot tajam menjadi $12,91\%$, jauh di bawah performa pasar dan strategi \textit{Equal Weight}. Sebaliknya, dengan menginjeksikan kecerdasan strategis \textit{Nash Equilibrium} melalui mekanisme \textit{warm-start}, algoritma GT-VQE mengalami peningkatan performa signifikan hingga mencapai imbal hasil $73,15\%$. Keunggulan ini membuktikan bahwa pendekatan kuantum hibrida mampu mengatasi keterbatasan optimasi klasik dalam menangani kompleksitas ruang pencarian solusi yang lebih luas. Selain itu, Penggunaan EPG sebagai pemandu awal iterasi pada algoritma VQE juga dapat meningkatkan kemampuan algoritma dalam menghindari kendala \textit{barren plateaus} serta mencegah optimasi terjebak pada minimum lokal.
+Data tersebut menunjukkan bahwa strategi GT-VQE memberikan performa yang paling unggul, terutama pada sistem dengan dimensi yang lebih besar ($N=4$). Meskipun pada sistem $N=2$ algoritma SLSQP klasik mampu menghasilkan imbal hasil yang sama dengan GT-VQE ($51,34\%$), namun GT-VQE unggul dalam metrik \textit{Sharpe Ratio} ($0,7357$ vs $0,6736$) yang berarti memiliki efisiensi manajemen risiko yang lebih baik. Performa algoritma SLSQP mengalami degradasi signifikan saat jumlah aset meningkat menjadi $N=4$, di mana imbal hasilnya merosot tajam menjadi $12,91\%$, jauh di bawah performa pasar dan strategi \textit{Equal Weight}. Sebaliknya, dengan menginjeksikan kecerdasan strategis \textit{Nash Equilibrium} melalui mekanisme \textit{warm-start}, algoritma GT-VQE mengalami peningkatan performa signifikan hingga mencapai imbal hasil $73,15\%$. Keunggulan ini membuktikan bahwa pendekatan kuantum hibrida mampu mengatasi keterbatasan optimasi klasik dalam menangani kompleksitas ruang pencarian solusi yang lebih kompleks. 
+
+Perbandingan performa antara strategi kuantum hibrida, kuantum murni, dan klasik untuk sistem $N=2$ diilustrasikan secara mendetail pada Gambar \ref{fig:comp_slsqp_n2} hingga \ref{fig:comp_all_n2}, sedangkan untuk perbandingan ekstensif pada sistem $N=4$ disajikan pada Gambar \ref{fig:comp_slsqp_n4} hingga \ref{fig:comp_all_n4}.
 
 \begin{figure}[!htbp]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N2.png}
-        \caption{Sistem $N=2$}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N4.png}
-        \caption{Sistem $N=4$}
-    \end{subfigure}
-    \caption{Visualisasi Perbandingan Pertumbuhan Modal antara Optimasi VQE Hibrida dan Metode Klasik SLSQP.}
-    \label{fig:compare_vqe_classic}
+    \includegraphics[width=\textwidth]{GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N2.png}
+    \caption{Visualisasi Pertumbuhan Modal Optimasi Klasik SLSQP pada Sistem N=2.}
+    \label{fig:comp_slsqp_n2}
 \end{figure}
 
-Hasil perbandingan menunjukkan bahwa algoritma GT-VQE mampu memberikan kurva pertumbuhan yang lebih stabil dengan tingkat risiko yang lebih terkendali dibandingkan optimasi klasik. Hal ini tercermin pada \textit{Sharpe Ratio} sistem $N=4$ yang mencapai $1,0107$, menandakan efisiensi alokasi modal yang sangat tinggi terhadap risiko. Penggunaan \textit{warm-start} tidak hanya meningkatkan imbal hasil kumulatif, tetapi juga menstabilkan kurva ekuitas melalui pemilihan aset yang memiliki profil ekuilibrium Nash.
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_GT_5/hasil_backtest_nash_N2.png}
+    \caption{Visualisasi Pertumbuhan Modal Strategi \textit{Nash} (Klasik) pada Sistem N=2.}
+    \label{fig:comp_nash_n2}
+\end{figure}
 
-Dampak yang paling signifikan dari stabilitas \textit{warm-start} ini terlihat pada pemilihan kedalaman sirkuit (\textit{depth}) yang optimal secara dinamis sebagaimana dikontraskan pada Gambar \ref{fig:circuit_efficiency}. Berdasarkan hasil observasi, ditemukan bahwa tanpa dukungan \textit{Game Theory}, algoritma VQE murni cenderung memerlukan kedalaman sirkuit yang lebih tinggi dan lebih volatil untuk mencapai status dasar Hamiltonian (panel (a) dan (c)). Sebaliknya, dengan dukungan EPG, sistem secara konsisten mampu beroperasi pada kedalaman sirkuit yang lebih rendah dan stabil, mayoritas pada \textit{Depth} 2 (panel (b) dan (d)).
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_NoGT_5/hasil_backtest_vqe_N2.png}
+    \caption{Visualisasi Pertumbuhan Modal VQE Murni (Tanpa GT) pada Sistem N=2.}
+    \label{fig:comp_vqe_n2}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_GT_5/hasil_backtest_vqe_N2.png}
+    \caption{Visualisasi Pertumbuhan Modal Strategi GT-VQE (Hibrida) pada Sistem N=2.}
+    \label{fig:comp_all_n2}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N4.png}
+    \caption{Visualisasi Pertumbuhan Modal Optimasi Klasik SLSQP pada Sistem N=4.}
+    \label{fig:comp_slsqp_n4}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_GT_5/hasil_backtest_nash_N4.png}
+    \caption{Visualisasi Pertumbuhan Modal Strategi \textit{Nash} (Klasik) pada Sistem N=4.}
+    \label{fig:comp_nash_n4}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_NoGT_5/hasil_backtest_vqe_N4.png}
+    \caption{Visualisasi Pertumbuhan Modal VQE Murni (Tanpa GT) pada Sistem N=4.}
+    \label{fig:comp_vqe_n4}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_GT_5/hasil_backtest_vqe_N4.png}
+    \caption{Visualisasi Pertumbuhan Modal Strategi GT-VQE (Hibrida) pada Sistem N=4.}
+    \label{fig:comp_all_n4}
+\end{figure}
+
+Hasil perbandingan menunjukkan bahwa algoritma GT-VQE memberikan kurva pertumbuhan yang lebih baik dengan tingkat risiko yang lebih terkendali dibandingkan optimasi klasik. Hal ini tercermin pada \textit{Sharpe Ratio} sistem $N=4$ yang mencapai $1,0107$, menandakan efisiensi alokasi modal yang sangat tinggi terhadap risiko. Penggunaan \textit{warm-start} tidak hanya meningkatkan imbal hasil kumulatif, tetapi juga menstabilkan kurva ekuitas melalui pemilihan aset yang memiliki profil ekuilibrium Nash. Perbandingan kinerja pada Gambar \ref{fig:comp_all_n2} dan \ref{fig:comp_all_n4} menunjukkan bahwa tanpa inisialisasi strategis, performa VQE murni cenderung tertahan atau bahkan mengalami degradasi saat dimensi sistem membesar. Hal yang sama juga dialami oleh optimasi klasik SLSQP yang kinerjanya merosot tajam pada sistem $N=4$. Sebaliknya, algoritma GT-VQE terbukti tidak hanya meningkatkan \textit{return}, tetapi juga mampu melindungi nilai portofolio dari potensi \textit{drawdown} yang dalam dengan mendeteksi secara dini pergeseran ekuilibrium pasar melalui dinamika fisis sirkuit kuantum.
+
+
+Dampak yang paling signifikan dari stabilitas \textit{warm-start} ini terlihat pada pemilihan kedalaman sirkuit (\textit{depth}) yang optimal secara dinamis sebagaimana dikontraskan pada Gambar \ref{fig:circuit_efficiency}. Penggunaan EPG sebagai pemandu awal iterasi tersebut mampu meningkatkan efisiensi komputasi dalam menghindari kendala \textit{barren plateaus} serta mencegah optimasi terjebak pada minimum lokal karena didominasi oleh pemilihan \textit{depth} yang rendah. Berdasarkan hasil observasi, ditemukan bahwa tanpa dukungan \textit{Game Theory}, algoritma VQE murni cenderung memerlukan kedalaman sirkuit yang lebih tinggi dan lebih volatil untuk mencapai status dasar Hamiltonian (panel (a) dan (c)). Sebaliknya, dengan dukungan EPG, sistem secara konsisten mampu beroperasi pada kedalaman sirkuit yang lebih rendah dan stabil, mayoritas pada \textit{Depth} 2 (panel (b) dan (d)).
 
 \begin{figure}[!htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_NoGT/grafik_depth_per_window_N2.png}
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_NoGT_5/grafik_depth_per_window_N2.png}
         \caption{VQE Murni ($N=2$)}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_GT/grafik_depth_per_window_N2.png}
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_GT_5/grafik_depth_per_window_N2.png}
         \caption{GT-VQE Hibrida ($N=2$)}
     \end{subfigure}
     
@@ -61,50 +111,17 @@ Dampak yang paling signifikan dari stabilitas \textit{warm-start} ini terlihat p
     
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_NoGT/grafik_depth_per_window_N4.png}
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_NoGT_5/grafik_depth_per_window_N4.png}
         \caption{VQE Murni ($N=4$)}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_GT/grafik_depth_per_window_N4.png}
+        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_GT_5/grafik_depth_per_window_N4.png}
         \caption{GT-VQE Hibrida ($N=4$)}
     \end{subfigure}
     \caption{Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (\textit{Depth}) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}
     \label{fig:circuit_efficiency}
 \end{figure}
 
-Hasil tersebut membuktikan bahwa penggunaan \textit{warm-start} tidak hanya meningkatkan akurasi, tetapi juga mengefisiensikan daya komputasi secara signifikan dengan mengurangi jumlah parameter yang perlu dioptimasi. Pemilihan \textit{depth} yang rendah menunjukkan bahwa titik awal yang diberikan oleh ekuilibrium Nash berada pada region lanskap energi yang sudah mendekati solusi global, sehingga meminimalisir kebutuhan akan ekspansi ruang parameter melalui penambahan lapisan sirkuit. Proses penyeimbangan ulang portofolio biner pada metode GT-VQE bekerja melalui siklus pembaruan Hamiltonian yang dipicu oleh masuknya data runtun waktu terbaru di setiap jendela simulasi. Dinamika ini teramati secara jelas pada transisi jendela kritis Februari--Maret 2021 (merujuk pada Gambar \ref{fig:window_2021_02_02} dan Gambar \ref{fig:window_2021_03_04} di Lampiran \ref{appendix:window_analysis_n2}). Pada periode tersebut, terjadi lonjakan risiko pada aset sektor perbankan (BBCA) yang direpresentasikan oleh peningkatan koefisien interaksi risiko pada Hamiltonian. Dalam hal ini, sirkuit kuantum merespons pergeseran energi tersebut dengan melakukan rotasi parameter sudut $\theta$ secara instan untuk memindahkan amplitudo probabilitas dari status $|10\rangle$ menuju status $|01\rangle$ yang tidak bisa dilakukan pada algoritma optimasi klasik. 
-
-\begin{figure}[!htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_NoGT/hasil_backtest_vqe_N2.png}
-        \caption{VQE Murni ($N=2$)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N2_GT/hasil_backtest_vqe_N2.png}
-        \caption{GT-VQE Hibrida ($N=2$)}
-    \end{subfigure}
-    
-    \vspace{0.5cm}
-    
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_NoGT/hasil_backtest_vqe_N4.png}
-        \caption{VQE Murni ($N=4$)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{GTQuantumInvest/Hasil_N4_GT/hasil_backtest_vqe_N4.png}
-        \caption{GT-VQE Hibrida ($N=4$)}
-    \end{subfigure}
-    \caption{Visualisasi Dampak Integrasi \textit{Game Theory} terhadap Stabilitas dan Pertumbuhan Modal Portofolio pada Berbagai Dimensi Sistem.}
-    \label{fig:quantum_gt_impact}
-\end{figure}
-
-Secara kumulatif, efektivitas dari mekanisme \textit{rebalancing} pada algoritma menghasilkan kurva pertumbuhan modal yang superior sebagaimana diilustrasikan pada Gambar \ref{fig:quantum_gt_impact}. Perbandingan kinerja pada kedua panel (a) dan (c) menunjukkan bahwa tanpa integrasi kecerdasan strategis, performa VQE murni cenderung tertahan atau bahkan mengalami degradasi saat dimensi sistem membesar. Namun, dengan integrasi \textit{Game Theory} sebagai pemandu awal pada panel (b) dan (d), sirkuit mampu mempertahankan integritas solusinya, terutama pada panel (d) karena mampu menghasilkan pertumbuhan modal yang lebih stabil dan konsisten. 
+Selama proses \textit{backtesting}, ditemukan adanya tekanan \textit{drawdown} atau penurunan nilai portofolio yang signifikan pada awal periode simulasi. Tekanan tersebut dapat diamati pada transisi jendela bulan Februari--Maret 2021. Pada periode tersebut, terjadi lonjakan risiko pada sektor telekomunikasi (TLKM) yang direpresentasikan oleh penurunan parameter bias objek pada Hamiltonian. Untuk merespons pergeseran energi ini, sirkuit kuantum melakukan rotasi parameter sudut $\theta$ secara signifikan agar amplitudo probabilitas dapat dipindahkan dari status $|0110\rangle$ menuju status $|0011\rangle$. pergeseran tersebut terjadi pada Gambar \ref{fig:window_n4_2021_02_02} dan Gambar \ref{fig:window_n4_2021_03_04} di Lampiran \ref{appendix:window_analysis_n4} yang mana memberikan nilai pergeseran $\theta$ yang cukup signifikan di awal rangkaian. Mekanisme tersebut menunjukkan bahwa strategi hibrida memiliki agilitas yang tinggi dalam mengeksplorasi parameter $\theta$ agar memperoleh energi paling efisien tanpa harus terkendala hambatan komputasi klasik. 

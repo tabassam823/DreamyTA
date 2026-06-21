@@ -4,24 +4,39 @@
 Formulasi \textit{Game Theory} dimulai dengan memetakan permasalahan optimasi Markowitz ke dalam domain \textit{Exact Potential Game} (EPG). Formulasi dasar yang digunakan merujuk pada model \textit{Mean-Variance} biner yang telah dijabarkan pada Persamaan (\ref{eq:utilitas_biner}). Dalam sistem permainan ini, setiap aset dianggap sebagai agen strategis yang berusaha memaksimalkan utilitasnya. Untuk memenuhi kendala anggaran secara fisis, digunakan aturan pemilihan aset sebanyak setengah dari total opsi instrumen yang tersedia ($k = N/2$). Dengan demikian, total bobot portofolio memenuhi syarat $\sum \omega_i = \sum \frac{x_i}{k} = 1$, yang konsisten dengan batasan kapital investasi.
 
 \subsection{Formulasi EPG}
-Berdasarkan teorema Monderer dan Shapley, sebuah permainan dikategorikan sebagai EPG apabila terdapat sebuah fungsi potensial skalar $\Phi(\vec{x})$ sedemikian rupa sehingga selisih utilitas individu $\Delta u_i$ akibat perubahan strategi satu agen secara eksak sama dengan selisih nilai fungsi potensial tersebut. Fungsi potensial diperoleh dari ekspansi fungsi biaya portofolio
-\begin{equation}
-    \Phi(\vec{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{k} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{k} \frac{x_j}{k}.
-\end{equation}
-Untuk mengidentifikasi kontribusi marginal agen ke-$i$, dilakukan dekomposisi jumlahan tersebut dengan memisahkan suku-suku yang mengandung variabel $x_i$ dan memanfaatkan properti variabel biner $x_i^2 = x_i$:
-\begin{equation}
-    \Phi(\vec{x}) = \frac{\mu_i}{k}x_i - \frac{\gamma}{2} \left( \frac{\sigma_i^2}{k^2}x_i + \frac{2}{k^2}x_i \sum_{j < i} \sigma_{ij}x_j \right) + \sum_{l \neq i} \frac{\mu_l}{k}x_l - \frac{\gamma}{2} \sum_{l \neq i} \sum_{m \neq i} \frac{\sigma_{lm}}{k^2}x_l x_m
-    \label{eq:potential_function}
-\end{equation}
-Derivasi pada Persamaan (\ref{eq:potential_function}) menghasilkan selisih fungsi potensial $\Delta \Phi$ sebagai insentif marginal saat agen $i$ mengubah status dari 0 menjadi 1:
-\begin{equation}
-    \Delta \Phi(\vec{x}) = \Phi(1, \vec{x}_{-i}) - \Phi(0, \vec{x}_{-i}) = \frac{\mu_i}{k} - \frac{\gamma \sigma_i^2}{2k^2} - \gamma \sum_{j < i} \sigma_{ij} \frac{x_j}{k^2}
-    \label{eq:delta_phi}
-\end{equation}
-Hubungan matematis pada Persamaan (\ref{eq:delta_phi}) menyatakan bahwa setiap langkah peningkatan utilitas lokal agen akan secara otomatis meningkatkan stabilitas potensial global sistem menuju titik kesetimbangan.
+
+Berdasarkan kerangka teorema Monderer dan Shapley yang mendasari teori permainan kooperatif, sebuah permainan finansial dikategorikan secara formal sebagai \textit{Exact Potential Game} (EPG) apabila terdapat sebuah fungsi potensial skalar $\Phi(\vec{x})$ sedemikian rupa sehingga ekuivalensi utilitas terpenuhi. Ekuivalensi tersebut mensyaratkan bahwa selisih utilitas individu $\Delta u_i$ akibat dinamika perubahan strategi satu agen harus secara eksak sama nilainya dengan selisih evaluasi nilai fungsi potensial sistem global tersebut. Fungsi potensial skalar ini secara matematis diperoleh dari penjabaran ekspansi fungsi biaya portofolio kuadratik yang memetakan hubungan kovariansi multivariat antar instrumen. Untuk mengidentifikasi kontribusi marginal spesifik dari agen ke-$i$, proses derivasi melakukan dekomposisi jumlahan polinomial tersebut dengan mengisolasi suku-suku yang mengandung variabel $x_i$ serta mendayagunakan sifat komutatif variabel biner $x_i^2 = x_i$. Derivasi fisis fungsi potensial tersebut pada akhirnya menghasilkan kuantitas selisih potensial $\Delta \Phi$ yang bertindak langsung sebagai insentif marginal ketika agen $i$ memutuskan untuk mengubah status transisi dari kondisi 0 menjadi 1.
+
+Dalam konteks penjabaran formulasi tersebut, perhitungan utilitas individu juga mensyaratkan penggabungan komponen ekspektasi imbal hasil strategis ($\tilde{\mu}_i$) yang diperoleh dari jumlahan probabilitas terbobot pada berbagai konfigurasi struktur mikrokondisi (\textit{microstates}) sistem pasar. Imbal hasil strategis ini mengukur kecenderungan performa suatu instrumen berdasarkan respons pergerakan pasar terhadap kombinasi seleksi aktif seluruh aset dalam portofolio yang sedang dievaluasi pada momen iterasi tersebut. Secara komputasional, kalkulasi nilai imbal hasil strategis ini diimplementasikan menggunakan rutinitas algoritma pengelompokan bersyarat pada pustaka \textit{Pandas} guna mengekstraksi nilai probabilitas kejadian bersyarat secara efisien. Rutinitas tersebut dirancang untuk mengelompokkan riwayat imbal hasil logaritmik historis berdasarkan pola status biner masing-masing konstituen aset, lalu menghitung rata-rata imbal hasil ekspektasi untuk setiap skenario mikro yang terdeteksi. Rincian blok instruksi pemrograman yang mengotomatisasi perhitungan matematis ekspektasi imbal hasil bersyarat tersebut direpresentasikan secara lengkap pada struktur kode di Listing \ref{lst:compute_strategic_returns}.
+
+\begin{lstlisting}[language=Python, caption={Algoritma kalkulasi ekspektasi imbal hasil strategis berbasis observasi probabilitas \textit{microstates}}, label={lst:compute_strategic_returns}]
+import numpy as np
+
+def compute_strategic_returns(log_rets, binary_st, tickers):
+    """
+    [Tugas 2: Perhitungan Imbal Hasil Strategis]
+    Menghitung imbal hasil strategis (mu_tilde_i) sebagai jumlahan terbobot
+    dari ekspektasi bersyarat pada 16 microstates sistem 4 aset.
+    """
+    n_assets = len(tickers)
+    total_days = len(log_rets)
+    mu_tilde = np.zeros(n_assets)
+    
+    # Kelompokkan return berdasarkan binary states (microstates) dari semua aset
+    grouped = log_rets.groupby([binary_st[t] for t in tickers])
+    
+    for state, group in grouped:
+        P_s = len(group) / total_days           # Probabilitas microstate P(s)
+        R_bar_s = group[tickers].mean().values  # Ekspektasi return bersyarat R_bar_i(s)
+        mu_tilde += P_s * R_bar_s               # Jumlahan terbobot
+        
+    return mu_tilde
+\end{lstlisting}
 
 \subsection{Pencarian \textit{Nash Equilibrium}}
-Pencarian \textit{Nash Equilibrium} dilakukan secara numerik pada sistem permainan $N=2$ dan $N=4$ menggunakan algoritma \textit{Stochastic Best Response} (SBR). Untuk kasus $N=2$ menggunakan data Januari 2021, matriks \textit{payoff} ($u_{BBCA}, u_{TLKM}$) disusun guna mengevaluasi interaksi strategis sebagai berikut:
+
+Pencarian titik kesetimbangan \textit{Nash Equilibrium} secara komputasional dilaksanakan menggunakan metode pencarian heuristik \textit{Stochastic Best Response} (SBR) untuk menavigasi lanskap fungsi potensial pada sistem permainan berdimensi $N=2$ dan $N=4$. Algoritma pencarian lokal ini didesain untuk mensimulasikan mekanisme pertukaran status (\textit{swap moves}) secara sekuensial antara aset yang berada di dalam portofolio dengan aset kandidat di luar portofolio guna mencari peningkatan fungsi potensial marginal tertinggi. Sebagai ilustrasi mekanis pada kasus $N=2$ menggunakan data periode observasi Januari 2021, matriks \textit{payoff} multivariat ($u_{BBCA}, u_{TLKM}$) disusun secara deterministik guna mengevaluasi bentuk interaksi strategis antara kedua instrumen perbankan dan telekomunikasi tersebut. Melalui komparasi utilitas marginal yang tergambar secara tabular pada matriks \textit{payoff} di bawah ini, titik kesetimbangan optimal yang saling menguntungkan bagi kedua agen strategis dapat diidentifikasi secara rasional melalui kalkulasi deret kombinasi status biner. Hasil dari komputasi matriks interaksi dua agen aset ini kemudian divisualisasikan secara matematis melalui representasi angka \textit{payoff} pada Tabel \ref{tab:payoff_n2} untuk memudahkan proses inferensi status stabil.
+
 \begin{table}[!htbp]
     \centering
     \caption{Matriks \textit{Payoff} Strategis Sistem N=2 (Januari 2021).}
@@ -34,4 +49,101 @@ Pencarian \textit{Nash Equilibrium} dilakukan secara numerik pada sistem permain
     \multicolumn{1}{|c|}{} & Status 1 & (0,1909, 0) & (0,1901, 0,1175) \\ \hline
     \end{tabular}
 \end{table}
-Berdasarkan Tabel \ref{tab:payoff_n2}, status $|10\rangle$ (BBCA terpilih) memberikan utilitas marginal tertinggi bagi sistem. Pada kasus $N=4$ dengan $k=2$, matriks \textit{payoff} menjadi tensor multidimensi yang lebih kompleks di mana interaksi risiko antar empat sektor dipertimbangkan secara simultan. Pencarian equilibrium pada sistem $N=4$ dilakukan melalui iterasi SBR yang mengevaluasi transisi status dari $|1100\rangle$ menuju status dengan kombinasi utilitas marginal tertimbang yang lebih besar (misal $|0110\rangle$), sebagaimana tercatat secara terurut pada Tabel \ref{tab:nash_history_n4} di Lampiran \ref{appendix:numerical_data_n4}. Hasil akhir ini memberikan inisialisasi kepada algoritma utama VQE, sehingga memungkinkan VQE melompati hambatan lokal pada lanskap energi kuantum.
+
+Berdasarkan observasi data pada matriks Tabel \ref{tab:payoff_n2}, konfigurasi status biner $|10\rangle$ yang merepresentasikan pemilihan tunggal aset BBCA terbukti secara komputasional memberikan nilai utilitas marginal komulatif tertinggi bagi keseluruhan stabilitas sistem. Sementara itu, pada skenario sistem $N=4$ dengan batasan kendala $k=2$, susunan matriks \textit{payoff} tersebut seketika bermutasi menjadi struktur tensor multidimensi yang jauh lebih kompleks akibat pelipatgandaan derajat kebebasan interaksi risiko lintas sektoral secara simultan. Oleh karena itu, pencarian titik ekuilibrium pada ruang dimensi $N=4$ ini secara khusus dieksekusi melalui serangkaian iterasi SBR dinamis yang mengevaluasi transisi fisis status berawal dari inisialisasi $|1100\rangle$ menuju status akhir dengan utilitas fisis tertimbang yang lebih dominan (misalnya $|0110\rangle$), sebagaimana riwayat iterasinya terdokumentasi terurut pada Tabel \ref{tab:nash_history_n4} di bagian Lampiran \ref{appendix:numerical_data_n4}. Pencapaian status \textit{Nash Equilibrium} fisis ini memegang peranan sangat krusial karena ia bertindak langsung sebagai titik referensi inisialisasi awal bagi algoritma utama \textit{Variational Quantum Eigensolver} (VQE). Inisialisasi awal berbasis teori permainan inilah yang pada akhirnya memungkinkan algoritma VQE meminimalisasi hambatan gradien energi lokal secara drastis saat memetakan topologi lanskap energi kuantum yang berdimensi amat luas.
+
+Untuk mendemonstrasikan kapabilitas implementasi kalkulasi pencarian titik kesetimbangan secara praktis, logika heuristik dari mekanisme pertukaran status algoritma \textit{Stochastic Best Response} (SBR) diterjemahkan langsung ke dalam bentuk sintaks instruksi komputasional Python. Blok program operasional ini mengotomatisasi proses evaluasi berulang untuk menghitung kuantitas skalar utilitas fungsi potensial pada setiap permutasi seleksi aset, dengan memperhitungkan komponen kompensasi imbal hasil dan penalti risiko secara komprehensif. Selain mengakomodasi batasan konstrain portofolio absolut secara efisien, fungsi rutinitas komputasional ini juga dirancang untuk secara otonom merekam setiap transisi penukaran posisi historis yang meningkatkan nilai potensial global sehingga proses pelacakan jejak konvergensi kesetimbangan dapat diaudit secara presisi. Keseluruhan logika operasional inti dari metode penemuan ekuilibrium berbasis pergeseran heuristik potensial fisis tersebut didokumentasikan dan diilustrasikan secara mendetail pada representasi blok skrip yang tersaji di Listing \ref{lst:find_nash_sbr}.
+
+\begin{lstlisting}[language=Python, caption={Skrip implementasi \textit{Stochastic Best Response} untuk pencarian konvergensi \textit{Nash Equilibrium}}, label={lst:find_nash_sbr}]
+import numpy as np
+import pandas as pd
+import os
+
+def find_nash_sbr(mu, sigma_matrix, gamma, curr_date, N=4, K=2, max_iters=100, history_file='riwayat_nash_sbr.csv'):
+    """
+    Pencarian Nash Equilibrium menggunakan Sequential Best Response (SBR)
+    dalam Exact Potential Game.
+    
+    Potensial (Utilitas Portofolio):
+    Phi = (1/K) * mu^T * x - (gamma / (2 * K^2)) * x^T * sigma * x
+    
+    Dalam Potential Game, Nash Equilibrium adalah local maximum dari fungsi potensial.
+    Karena ada batasan sum(x) = K, kita menggunakan swap moves untuk mencari NE.
+    """
+    # Inisialisasi: pilih K aset pertama
+    current_selection = set(range(K))
+    history = []
+    
+    def calculate_potential(selection):
+        x = np.zeros(N)
+        for idx in selection: x[idx] = 1
+        
+        # 1. Komponen Return: (1/K) * sum(mu_i * x_i)
+        ret = np.sum(mu[list(selection)]) / K
+        
+        # 2. Komponen Risiko: (gamma / (2 * K^2)) * sum(sigma_ij * x_i * x_j)
+        # x^T * Sigma * x untuk subset selection
+        if len(selection) > 0:
+            sub_sigma = sigma_matrix[np.ix_(list(selection), list(selection))]
+            risk = np.sum(sub_sigma) * (gamma / (2.0 * K**2))
+        else:
+            risk = 0.0
+            
+        return ret - risk
+
+    current_phi = calculate_potential(current_selection)
+    
+    history.append({
+        'Date': curr_date.date(),
+        'Iteration': 0,
+        'Bitstring': "".join(str(int(i in current_selection)) for i in range(N)),
+        'Utility': current_phi,
+        'Swap': 'Initial'
+    })
+    
+    for iteration in range(1, max_iters + 1):
+        improved = False
+        out_portfolio = set(range(N)) - current_selection
+        
+        best_swap = None
+        max_phi = current_phi
+        
+        # SBR/Local Search: Coba tukar satu aset di dalam dengan satu aset di luar
+        # Mencari swap yang meningkatkan fungsi potensial paling besar
+        for i in current_selection:
+            for j in out_portfolio:
+                new_selection = (current_selection - {i}) | {j}
+                new_phi = calculate_potential(new_selection)
+                
+                if new_phi > max_phi:
+                    max_phi = new_phi
+                    best_swap = (i, j)
+        
+        if best_swap:
+            i, j = best_swap
+            current_selection = (current_selection - {i}) | {j}
+            current_phi = max_phi
+            improved = True
+            history.append({
+                'Date': curr_date.date(),
+                'Iteration': iteration,
+                'Bitstring': "".join(str(int(idx in current_selection)) for idx in range(N)),
+                'Utility': current_phi,
+                'Swap': f"{i}<->{j}"
+            })
+        
+        if not improved:
+            break
+            
+    # --- EKSPOR RIWAYAT NASH SBR ---
+    df_history = pd.DataFrame(history)
+    if not os.path.exists(history_file):
+        df_history.to_csv(history_file, index=False)
+    else:
+        df_history.to_csv(history_file, mode='a', header=False, index=False)
+
+    final_x = np.zeros(N, dtype=int)
+    for idx in current_selection: final_x[idx] = 1
+    # Kembalikan bitstring dan utilitas akhir (sebagai potensial)
+    return "".join(str(bit) for bit in final_x), current_phi
+\end{lstlisting}

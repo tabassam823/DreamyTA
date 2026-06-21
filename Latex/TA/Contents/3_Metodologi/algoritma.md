@@ -7,7 +7,7 @@ Dokumen ini menjelaskan alur logika sistem optimasi portofolio yang menggabungka
 ```text
 Algorithm 1: Portfolio Optimization via HE-VQE
 1 function optimize_portfolio (Tickers, Capital, K, Window, Period);
-  Input: Tickers LQ45, Initial Capital, Target assets K, Sliding Window size, Rebalance Frequency
+  Input: Tickers IHSG, Initial Capital, Target assets K, Sliding Window size, Rebalance Frequency
   Output: Equity Curve and Performance Metrics
 2 Unduh data historis harga Penutupan P_t untuk semua Tickers;
 3 Hitung Log Return R_t = ln(P_t / P_{t-1});
@@ -39,7 +39,7 @@ Algorithm 1: Portfolio Optimization via HE-VQE
 ```mermaid
 graph TD
     subgraph "A. Tahap Data"
-        A1[Data Saham LQ45] --> A2[Hitung Log Return]
+        A1[Data Saham IHSG] --> A2[Hitung Log Return]
         A2 --> A3[Binerisasi Status: 0=Naik, 1=Turun]
     end
 

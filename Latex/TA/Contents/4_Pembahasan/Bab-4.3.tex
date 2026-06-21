@@ -10,73 +10,131 @@ Perubahan permasalahan dari domain klasik menuju komputasi kuantum memerlukan al
     \end{split}
 \end{equation}
 
-\subsection{Matriks Fungsi Energi dan Suku Penalti}
+\subsection{Fungsi Energi dan Suku Penalti}
 
-Setelah mengubah fungsi potensial $\Phi(\vec{x})$ menjadi fungsi energi $E(\vec{x})$ sebagaimana pada persamaan (\ref{eq:energy_function}), langkah selanjutnya adalah mengubah persamaan ke dalam representasi matriks. Dalam representasi matriks, fungsi energi $E(\vec{x})$ dapat dinyatakan sebagai
-\begin{equation}
-    E(\vec{x}) = \frac{\gamma}{2k^2} \vec{x}^T \Sigma_{diag} \vec{x} + \frac{\gamma}{2k^2} \vec{x}^T \Sigma_{off} \vec{x} - \frac{1}{k} \vec{\mu}^T \vec{x}
-\end{equation}
-di mana $\Sigma_{diag}$ adalah matriks diagonal varians dan $\Sigma_{off}$ adalah matriks kovariansi antar-aset dengan diagonal nol. Untuk menjamin solusi mematuhi kendala anggaran $\sum x_i = k$, maka ditambahkan suku penalti kuadratik $P(\vec{x}) = A(\sum x_i - k)^2$. Dalam bentuk vektor, suku penalti ini berbentuk
-\begin{equation}
-    P(\vec{x}) = \vec{x}^T \mathbf{A} \vec{x} - Ak
-\end{equation}
-di mana $\mathbf{A}$ adalah matriks yang seluruh elemennya bernilai $A$. Dengan menggabungkan kedua komponen tersebut, fungsi energi total $E_{tot} = E(\vec{x}) + P(\vec{x})$ dalam representasi matriks lengkap menjadi
+Setelah berhasil menyelesaikan transformasi fungsi potensial teoretis $\Phi(\vec{x})$ menjadi suatu bentuk representasi fungsi energi fisik $E(\vec{x})$ sebagaimana dipaparkan pada persamaan (\ref{eq:energy_function}), tahapan esensial berikutnya mengharuskan konversi persaman tersebut ke dalam struktur representasi aljabar matriks. Penggunaan identitas matematis fundamental terkait karakteristik variabel biner $x_i^2 = x_i$ secara khusus dimanfaatkan guna memastikan bahwa fungsi energi $E(\vec{x})$ dapat diekspansi dan disederhanakan tanpa mengubah esensi nilai probabilitas pengukurannya. Rangkaian penjabaran matematis ini merupakan fondasi konseptual yang sangat krusial dalam mempersiapkan transisi fungsi biaya portofolio ke dalam domain formulasi kuantum yang berbasis matriks spin. Melalui penjabaran polinomial yang diuraikan berikut ini, struktur pemetaan antara variabel portofolio klasik dengan koefisien Hamiltonian dapat diamati secara presisi yang akan menghasilkan bentuk fungsional
 \begin{equation}
     \begin{split}
-    E_{tot}(\vec{x}) =& \left[ \frac{\gamma}{2k^2}\begin{pmatrix}\sigma_{11} & 0 & \dots & \sigma_{1N} \\ 0 & \sigma_{22} & \dots & \sigma_{2N} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{N1} & \sigma_{N2} & \dots & \sigma_{NN} \end{pmatrix} - \frac{1}{k} \begin{pmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_N \end{pmatrix} + A \right] \vec{x} \\
-    &+ \vec{x}^T \left[ \frac{\gamma}{2k^2}\begin{pmatrix} 0 & \sigma_{12} & \dots & \sigma_{1N} \\ \sigma_{21} & 0 & \dots & \sigma_{2N} \\ \vdots & \vdots & \ddots & \vdots \\ \sigma_{N1} & \sigma_{N2} & \dots & \sigma_{NN} \end{pmatrix} \right] \vec{x} - Ak
+    E(\vec{x}) &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+    &= \frac{\gamma}{2K^2}\left(\sum_{i=1}^N\sigma_i^2 x_i^2 + \sum_{i\ne j}\sigma_{ij} x_ix_j\right) -\sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+    &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sigma_i^2 x_i^2 + \frac{\gamma}{2K^2}\sum_{i\ne j}\sigma_{ij} x_ix_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+    &= \frac{\gamma}{2K^2}\sum_{i=1}^N\sigma_i^2 x_i + \frac{\gamma}{2K^2}\sum_{i\ne j}\sigma_{ij} x_ix_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \\
+    &= \sum_{i=1}^N\left(\frac{\gamma \sigma_i^2}{2K^2} - \frac{\mu_i}{K}\right)x_i + \sum_{i\ne j}\frac{\gamma \sigma_{ij}}{2K^2} x_ix_j.
+    \end{split}
+\end{equation}
+Untuk menjamin solusi mematuhi kendala anggaran $\sum x_i = K$, maka ditambahkan suku penalti kuadratik
+\begin{equation}
+    \begin{split}
+    P(\vec{x}) &= A\left(\sum_{i=1}^N x_i - K\right)^2 \\
+    &= A\left(\sum_{i=1}^N x_i^2 + \sum_{i\ne j} x_ix_j - 2K\sum_{i=1}^N x_i + K^2\right) \\
+    &= A\sum_{i=1}^N x_i^2 + A\sum_{i\ne j} x_ix_j - 2AK\sum_{i=1}^N x_i + AK^2.
+    \end{split}
+\end{equation}
+Dengan menggabungkan kedua komponen tersebut, fungsi energi total $E_{total}(\vec{x}) = E(\vec{x}) + P(\vec{x})$ dalam representasi matriks lengkap menjadi
+\begin{equation}
+    \begin{split}
+    E_{total}(\vec{x}) =& \sum_i \left(\frac{\gamma \sigma_i^2}{2K^2} - \frac{\mu_i}{K}\right)x_i + \sum_{i\ne j}\frac{\gamma \sigma_{ij}}{2K^2} x_ix_j  + A\sum_{i=1}^N x_i^2 + A\sum_{i\ne j} x_ix_j \\
+    &- 2AK\sum_{i=1}^N x_i + AK^2 \\
+    =& \sum_i \left(\frac{\gamma \sigma_i^2}{2K^2} + A - \frac{\mu_i}{K} - 2AK\right)x_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2K^2} + A\right) x_ix_j + AK^2.
     \end{split}
 \end{equation}
 
-Langkah selanjutnya adalah memetakan variabel biner $x_i \in \{0, 1\}$ ke spin Ising $s_i \in \{1, -1\}$ melalui transformasi affine $x_i = (1 - s_i)/2$. 
+Jika dimisalkan 
+\begin{equation*}
+    Q_{ii} = \frac{\gamma \sigma_i^2}{2K^2}+A-\frac{\mu_i}{K}-2AK \quad \text{dan} \quad Q_{ij} = \frac{\gamma \sigma_{ij}}{2K^2}+A,
+\end{equation*}
+maka fungsi energi total menjadi
+\begin{equation}
+    E_{total}(\vec{x}) = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2.
+\end{equation}
+Selanjutnya, variabel biner $x_i \in \{0, 1\}$ dipetakan menjadi spin Ising $s_i \in \{-1, 1\}$ melalui transformasi affine 
+\begin{equation}
+    \begin{split}
+    x_i &= \frac{(1 - s_i)}{2} \\
+    x_ix_j &= \left(\frac{1-s_i}{2}\right)\left(\frac{1-s_j}{2}\right).
+    \end{split}
+\end{equation}
+Maka fungsi energi total menjadi
 \begin{equation}
 \begin{split}
-    E_{total}(\vec{x}) =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{2k^2}-\frac{\mu_i}{k}+A\right)\left(\frac{s_i+1}{2}\right) + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{2k^2} \right) \left(\frac{s_i+1}{2}\right)\left(\frac{s_j+1}{2}\right) -Ak \\
-    =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) \left(s_is_j + s_i + s_j + 1\right) -Ak \\
-    =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j \\
-    &+ \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
-    =& \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_is_j + \sum_{i=1}^N \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+\frac{A}{2}\right)s_i \\
-    &+ \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak \\
+E_{total}(\vec{x}) =& \sum_i Q_{ii} \left(\frac{1 - s_i}{2}\right) + \sum_{i\ne j} Q_{ij} \left(\frac{1 - s_i - s_j + s_is_j}{4}\right) + AK^2 \\
+=& \sum_i Q_{ii} \frac{1}{2} - \sum_i Q_{ii} \frac{s_i}{2} + \sum_{i\ne j} Q_{ij} \frac{1}{4} - \sum_{i\ne j} Q_{ij} \frac{s_i}{4} - \sum_{i\ne j} Q_{ij} \frac{s_j}{4} \\
+&+ \sum_{i\ne j} Q_{ij} \frac{s_i s_j}{4} + AK^2 \\
+=& \sum_i \left(- \frac{Q_{ii}}{2} - \sum_{i\ne j} \frac{Q_{ij}}{2}\right) s_i + \sum_{i\ne j} \frac{Q_{ij}}{4} s_i s_j + \left(\sum_i \frac{Q_{ii}}{2} \\
+&+ \sum_{i\ne j} \frac{Q_{ij}}{4} + AK^2\right) 
 \end{split}
 \end{equation}
-Substitusi ini menghasilkan operator Hamiltonian sistem ($\hat{\mathcal{H}}$) yang dinyatakan dalam gerbang Pauli-Z ($\hat{Z}$). sehingga dapat didefinisikan
+karena sifat simetri pada matriks kovarians $Q_{ij} = Q_{ji}$. Substitusi ini menghasilkan operator Hamiltonian sistem ($\hat{\mathcal{H}}$) yang dinyatakan dalam gerbang Pauli-Z ($\hat{Z}$). sehingga dapat didefinisikan
 \begin{equation}
-    h_i= \left(\frac{\gamma \sigma_i^2}{4k^2}-\frac{\mu_i}{2k}+A\right)
+    \begin{split}
+    h_i &= \left(- \frac{Q_{ii}}{2} - \sum_{i\ne j} \frac{Q_{ij}}{2}\right) \\
+    \end{split}
 \end{equation}
 dan
 \begin{equation}
-    J_{ij}= \frac{\gamma \sigma_{ij}}{8k^2} \quad \text{untuk } i \ne j
+    J_{ij}= \frac{Q_{ij}}{4} \quad 
 \end{equation}
-dengan
+untuk $i \ne j$ dengan
 \begin{equation}
-    C = \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak
+    C = \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_i + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right)s_j + \sum_{i\ne j}\left(\frac{\gamma \sigma_{ij}}{8k^2} \right) -Ak.
 \end{equation}
-yang selanjutnya dihimpun menjadi 
+Selanjutnya semua parameter tersebut dihimpun menjadi satu persamaan 
 \begin{equation}
-    \hat{\mathcal{H}} = \sum_{i=1}^N h_i \hat{Z}_i + \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C
+    \hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C
 \end{equation}
-sebagai bentuk hamiltonian Ising untuk optimasi portofolio. 
+sebagai bentuk hamiltonian Ising untuk optimasi portofolio. Seluruh komponen persamaan matematis tersebut pada akhirnya mensintesis sebuah struktur komprehensif yang direpresentasikan sebagai bentuk fungsional Hamiltonian Ising murni untuk memfasilitasi algoritma optimasi portofolio. Pada formulasi operator uniter ini, parameter $\hat{\mathcal{H}}$ mendefinisikan total Hamiltonian Ising yang merangkum keseluruhan lanskap energi konfigurasi sistem kuantum yang sedang disimulasikan secara \textit{real-time}. Variabel operasional $h_i$ secara spesifik difungsikan sebagai koefisien spin linear yang merepresentasikan tingkat bias probabilitas pemilihan pada tiap-tiap qubit secara individual. Sementara itu, parameter $J_{ij}$ merepresentasikan koefisien interaksi spin yang mengatur derajat keterikatan risiko korelasi antara dua aset yang berbeda, sedangkan $C$ adalah konstanta offset energi absolut sistem.
 
 \subsection{Implementasi Numerik Hamiltonian Ising}
 
-Struktur Hamiltonian lengkap untuk sistem $N=2$ ($k=1$) tanpa notasi jumlahan adalah:
+Pada aplikasinya, struktur persamaan Hamiltonian kuantum lengkap yang dibangun untuk mewakili sistem dua aset ($N=2$) dengan rasio kardinalitas portofolio konstan ($k=1$) dapat disederhanakan dengan mengeliminasi notasi jumlahan sigma kompleks. Penjabaran persamaan ekuivalen untuk sistem berskala kecil ini memungkinkan proses verifikasi konseptual secara manual terhadap interaksi antara koefisien bias linear dan interaksi kuadratik tanpa membebani memori komputasi secara berlebih. Sedangkan untuk menavigasi kompleksitas dinamika pasar pada sistem bervolume lebih besar dengan empat aset observasi ($N=4, k=2$), jaringan interaksi antar-spin secara simultan akan langsung bermutasi menjadi jauh lebih kompleks akibat meluasnya variasi korelasi sektoral. Konstruksi ekspansi aljabar untuk kedua dimensi matriks sistem yang diuraikan ini dapat ditinjau secara langsung melalui turunan matematis struktural berikut
 \begin{equation}
     \hat{\mathcal{H}}_{N2} = h_1 \hat{Z}_1 + h_2 \hat{Z}_2 + J_{12} \hat{Z}_1 \hat{Z}_2 + C
 \end{equation}
-Sedangkan untuk sistem $N=4$ ($k=2$), interaksi antar-spin menjadi lebih kompleks sebagai berikut:
+sedangkan untuk iterasi matriks interaksi aset majemuk:
 \begin{equation}
-    \hat{\mathcal{H}}_{N4} = h_1 \hat{Z}_1 + h_2 \hat{Z}_2 + h_3 \hat{Z}_3 + h_4 \hat{Z}_4 + J_{12} \hat{Z}_1 \hat{Z}_2 + J_{13} \hat{Z}_1 \hat{Z}_3 + J_{14} \hat{Z}_1 \hat{Z}_4 + J_{23} \hat{Z}_2 \hat{Z}_3 + J_{24} \hat{Z}_2 \hat{Z}_4 + J_{34} \hat{Z}_3 \hat{Z}_4 + C
+    \begin{split}
+    \hat{\mathcal{H}}_{N4} =& h_1 \hat{Z}_1 + h_2 \hat{Z}_2 + h_3 \hat{Z}_3 + h_4 \hat{Z}_4 + J_{12} \hat{Z}_1 \hat{Z}_2 + J_{13} \hat{Z}_1 \hat{Z}_3 + J_{14} \hat{Z}_1 \hat{Z}_4 \\
+    &+ J_{23} \hat{Z}_2 \hat{Z}_3 + J_{24} \hat{Z}_2 \hat{Z}_4 + J_{34} \hat{Z}_3 \hat{Z}_4 + C
+    \end{split}
 \end{equation}
 
-Sebagai ilustrasi numerik pada jendela Januari 2021, bentuk Hamiltonian dari sampel data $N=2$ adalah:
-\begin{equation*}
-    \hat{\mathcal{H}}_{N2} \approx 0,0915 \hat{Z}_1 + 0,0533 \hat{Z}_2 + 0,5022 \hat{Z}_1 \hat{Z}_2 - 0,1470
-\end{equation*}
-Untuk sistem $N=4$ pada jendela yang sama, diperoleh Hamiltonian numerik sebagai berikut:
-\begin{equation*}
-    \begin{split}
-    \hat{\mathcal{H}}_{N4} \approx & 0,0462 \hat{Z}_1 + 0,0575 \hat{Z}_2 + 0,0750 \hat{Z}_3 + 0,0277 \hat{Z}_4 + 0,5007 \hat{Z}_1 \hat{Z}_2 + 0,5004 \hat{Z}_1 \hat{Z}_3 \\
-    & + 0,5005 \hat{Z}_1 \hat{Z}_4 + 0,5005 \hat{Z}_2 \hat{Z}_3 + 0,5006 \hat{Z}_2 \hat{Z}_4 + 0,5005 \hat{Z}_3 \hat{Z}_4 + 1,2450
-    \end{split}
-\end{equation*}
-Nilai koefisien interaksi $J_{ij} \approx 0,5$ didominasi oleh parameter penalti $A$, yang mana akan menciptakan barier energi tinggi bagi setiap status yang melanggar kendala anggaran. Hal ini memastikan bahwa sirkuit kuantum akan tetap beroperasi pada ruang solusi yang valid sesuai dengan kardinalitas yang berlaku.
+Sebagai sebuah ilustrasi operasional numerik yang konkret pada jendela evaluasi pengujian tahap pertama, formulasi bentuk nilai Hamiltonian untuk sampel observasi sistem berskala dua aset secara presisi dapat diekstraksi. Kemudian, saat prosedur komputasi identik diaplikasikan pada dimensi ruang sistem empat aset pada periode jendela analitik yang sama persis, algoritma optimasi akan merumuskan persamaan konfigurasi Hamiltonian dengan nilai derajat kebebasan yang jauh lebih komprehensif. Pada analisis hasil perhitungan tersebut, magnitudo nilai koefisien fisis interaksi yang mencatatkan probabilitas di sekitar $J_{ij} \approx 0,5$ secara absolut terbukti sangat didominasi oleh pengaruh amplifikasi parameter penalti konstan anggaran $A$. Keberadaan nilai ambang batas penalti ini pada akhirnya berfungsi untuk menciptakan tembok penghalang energi yang teramat curam bagi setiap konfigurasi susunan mikrokondisi yang dengan sengaja melanggar pakem kendala kelayakan fraksi anggaran portofolio yang diizinkan.
+
+Guna mengakomodasi perakitan operator Hamiltonian Ising secara otomatis dalam ranah komputasi kuantum berbasis sirkuit terprogram, proses penyusunan matriks diimplementasikan murni secara algoritmik menggunakan fungsi penyusun Hamiltonian dari pustaka \textit{PennyLane}. Blok instruksi pemrograman dinamis ini dirancang untuk membaca matriks koefisien bias linear dan koefisien interaksi spin sebagai himpunan parameter masukan, lalu mengonversinya menjadi kumpulan komponen tensor Pauli-Z kuantum murni. Melalui proses penyisipan syarat presisi komputasi \textit{floating-point} sekecil $10^{-12}$, fungsi ini bertindak sangat esensial dalam menyingkirkan elemen matriks nol sehingga proses eksekusi simulasi sirkuit kuantum dapat terhindar dari redundansi operasional memori berlebih yang tidak relevan secara fisis. Keseluruhan modul pemrograman fungsional ini secara komprehensif mendokumentasikan kapabilitas algoritma dalam merakit arsitektur operator uniter pada lanskap energi VQE secara presisi sebagaimana dapat disaksikan pada Listing \ref{lst:build_hamiltonian}.
+
+\begin{lstlisting}[language=Python, caption={Skrip perakitan operator Hamiltonian Ising dinamis menggunakan pustaka \textit{PennyLane}}, label={lst:build_hamiltonian}]
+import pennylane as qml
+
+def build_hamiltonian_total(h_total, J_total, n_assets, offset=0.0):
+    """
+    Membangun operator Hamiltonian Ising dari parameter h_i dan J_ij,
+    termasuk konstanta pergeseran energi C_Ising.
+    H = sum(h_i * Z_i) + sum(J_ij * Z_i * Z_j) + offset * I
+    """
+    coeffs = []
+    obs    = []
+
+    # Suku Bias (h_i * Z_i)
+    for i in range(n_assets):
+        if abs(h_total[i]) > 1e-12:
+            coeffs.append(float(h_total[i]))
+            obs.append(qml.PauliZ(i))
+
+    # Suku Interaksi (J_ij * Z_i * Z_j)
+    for i in range(n_assets):
+        for j in range(i + 1, n_assets):
+            if abs(J_total[i, j]) > 1e-12:
+                coeffs.append(float(J_total[i, j]))
+                obs.append(qml.PauliZ(i) @ qml.PauliZ(j))
+
+    # Suku Konstanta (offset * Identity)
+    if abs(offset) > 1e-12:
+        coeffs.append(float(offset))
+        obs.append(qml.Identity(0))
+
+    if len(coeffs) == 0:
+        coeffs.append(0.0)
+        obs.append(qml.Identity(0))
+
+    return qml.Hamiltonian(coeffs, obs)
+\end{lstlisting}

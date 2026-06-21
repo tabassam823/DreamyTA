@@ -1,29 +1,113 @@
 \section{Optimasi dan VQE}
 
-% Slide 9.1: Bab 2.6.1 - Metode Finite Difference
-\begin{frame}{Bab 2.6.1 - Metode Finite Difference}
+% Slide 9.1: Bab 2.6.1 - Gradien Energi
+\begin{frame}{Bab 2.6.1 - Gradien Energi}
     \begin{itemize}
-        \item \textbf{Konsep Dasar:} Estimasi gradien melalui pergeseran parameter infinitesimal ($\epsilon \rightarrow 0$).
-        \item \textbf{Formulasi:}
+        \item Pembaruan parameter menggunakan nilai dari gradien energi
+        \begin{equation}
+            \frac{\partial E}{\partial \theta} = \frac{\langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle}{\partial \theta}
+        \end{equation}
+        \item Misal sistem memliki 2 qubit, maka 
+        \begin{equation}
+            \begin{split}
+            \frac{\partial E}{\partial \theta} &= \frac{\bra{00} \hat{U}_{A}^\dagger \hat{U}(\theta)^\dagger \hat{U}_{B}^\dagger \hat{\mathcal{H}} \hat{U}_{B} \hat{U}(\theta) \hat{U}_{A} \ket{00}}{\partial \theta} \\
+            &= \frac{\bra{\phi} \hat{U}(\theta)^\dagger \hat{U}_{B}^\dagger \hat{\mathcal{H}} \hat{U}_{B} \hat{U}(\theta) \ket{\phi}}{\partial \theta} \\
+            &= \frac{\bra{\phi} \hat{U}(\theta)^\dagger \hat{M} \hat{U}(\theta) \ket{\phi}}{\partial \theta}
+            \end{split}
+        \end{equation}
     \end{itemize}
+\end{frame}
+
+\begin{frame}{Bab 2.6.1 - Gradien Energi Lanjutan}
+    \begin{itemize}
+        \item dengan turunan uniter
+        \begin{equation*}
+            \frac{\partial U(\theta)}{\partial\theta} = -\frac{i}{2}\sigma(\theta) U(\theta) \quad \text{dan} \quad \frac{\partial U^\dagger(\theta)}{\partial\theta} = \frac{i}{2}\sigma(\theta) U^\dagger(\theta)
+        \end{equation*}
+    \item maka turunan menjadi 
+    {\tiny
     \begin{equation*}
-        g_i \approx \frac{E(\theta + \epsilon e_i) - E(\theta - \epsilon e_i)}{2\epsilon}
+        \begin{split}
+        \frac{\partial \langle E(\theta)\rangle}{\partial \theta} &= \bra{\phi} \frac{\partial U^{\dagger}(\theta)}{\partial \theta} M U(\theta) \ket{\phi} + \bra{\phi} U^{\dagger}(\theta) M \frac{\partial U(\theta)}{\partial \theta} \ket{\phi} \\
+        &= \bra{\phi} \left(\frac{i}{2}\sigma U^{\dagger}(\theta)\right) M U(\theta) \ket{\phi} + \bra{\phi} U^{\dagger}(\theta) M \left(-\frac{i}{2}\sigma U(\theta)\right) \ket{\phi} \\
+        &= \frac{i}{2} \bra{\psi(\theta)} \sigma M \ket{\psi(\theta)} - \frac{i}{2} \bra{\psi(\theta)} M \sigma \ket{\psi(\theta)} \\
+            &= \frac{i}{2} \bra{\psi(\theta)} \sigma M - M \sigma \ket{\psi(\theta)}
+        \end{split}
     \end{equation*}
-    \begin{itemize}
-        \item \textbf{Kelemahan:} Sangat rentan terhadap \textit{noise} statistik dan memiliki kompleksitas $\mathcal{O}(p)$ yang tinggi untuk sistem multi-aset.
-    \end{itemize}
+    }
+    \item sehingga didapatkan
+        \begin{equation}
+        \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{i}{2} \bra{\psi(\theta)} [\sigma, M] \ket{\psi(\theta)}
+        \end{equation}
+\end{itemize}
 \end{frame}
 
 % Slide 9.2: Bab 2.6.2 - Parameter Shift Rule (PSR)
 \begin{frame}{Bab 2.6.2 - Parameter Shift Rule (PSR)}
     \begin{itemize}
-        \item \textbf{Gradien Analitik:} Memanfaatkan sifat trigonometri sirkuit kuantum untuk mendapatkan gradien eksak tanpa bias.
+        \item PSR menggunakan konsep pergeseran parameter $\theta$ sebesar $s = \frac{\pi}{2}$ ke arah positif dan negatif
+        \begin{equation}
+            \begin{split}
+            \hat{U}(\theta \pm s) &= \exp\left(-i\frac{\theta \pm s}{2}\sigma\right) \\
+            &= \exp\left(-i\frac{\theta}{2}\sigma\right) \exp\left(\mp i\frac{s}{2}\sigma\right) \\
+            &= \hat{U}(\theta) \hat{U}(\pm s).
+            \end{split}
+        \end{equation}
+        \item sehingga ekspektasi energi menjadi
+        \begin{equation*}
+            \begin{split}
+            \langle E(\theta\pm s)\rangle &= \bra{\phi}\hat{U}(\theta\pm s)^{\dagger}\hat{M}\hat{U}(\theta\pm s)|\phi\rangle \\
+            &= \bra{\phi}\hat{U}(\theta)^{\dagger}\hat{U}(\pm s)^{\dagger}\hat{M}\hat{U}(\theta)\hat{U}(\pm s)|\phi\rangle \\
+            &= \bra{\psi} \hat{U}(\pm s)^{\dagger}\hat{M}\hat{U}(\pm s)|\psi\rangle.
+            \end{split}
+        \end{equation*}
     \end{itemize}
-    \begin{equation*}
-        \frac{\partial E}{\partial \theta} = \frac{1}{2} \left[ E\left(\theta + \frac{\pi}{2}\right) - E\left(\theta - \frac{\pi}{2}\right) \right]
-    \end{equation*}
+\end{frame}
+
+\begin{frame}{Bab 2.6.2 - Parameter Shift Rule (PSR)}
     \begin{itemize}
-        \item \textbf{Keunggulan:} Stabil terhadap noise pengukuran pada perangkat NISQ.
+        \item sehingga untuk pergeseran positif
+        {\tiny
+        \begin{equation}
+            \begin{split}
+                \langle E(\theta+s)\rangle = \bra{\psi(\theta)} & \left[ \cos\left(\frac{s}{2}\right) \hat{I} + i \sin\left(\frac{s}{2}\right) \sigma \right] \hat{M} \left[ \cos\left(\frac{s}{2}\right) \hat{I} - i \sin\left(\frac{s}{2}\right) \sigma \right] \ket{\psi(\theta)} \\
+                = \bra{\psi(\theta)} & \left[ \cos^2\left(\frac{s}{2}\right) \hat{M} - i \cos\left(\frac{s}{2}\right) \sin\left(\frac{s}{2}\right) \hat{M} \sigma + \right. \\
+                & \left. i \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \sigma \hat{M} + \sin^2\left(\frac{s}{2}\right) \sigma \hat{M} \sigma \right] \ket{\psi(\theta)}.
+            \end{split}
+        \end{equation}
+        \begin{equation}
+            \begin{split}
+            \langle E(\theta+s)\rangle = &\cos^2\left(\frac{s}{2}\right) \langle \hat{M} \rangle + \sin^2\left(\frac{s}{2}\right) \langle\sigma \hat{M} \sigma\rangle + i \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle [\sigma, \hat{M}] \rangle.
+            \end{split}
+        \end{equation}
+        \begin{equation}
+            \begin{split}
+            \langle E(\theta-s)\rangle = &\cos^2\left(\frac{s}{2}\right) \langle \hat{M} \rangle + \sin^2\left(\frac{s}{2}\right) \langle\sigma \hat{M} \sigma\rangle - i \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle [\sigma, \hat{M}] \rangle.
+            \end{split}
+        \end{equation}
+        }
+        \item dengan menghitung selisih kedua pergeserang tersebut, maka didapatkan;
+        \begin{equation}
+            \begin{split}
+                \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle &= 2 i \sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle [\sigma, \hat{M}] \rangle \\
+                &= i \sin(s) \langle [\sigma, \hat{M}] \rangle.
+            \end{split}
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bab 2.6.2 - Parameter Shift Rule (PSR)}
+    \begin{itemize}
+        \item Jika $s = \frac{\pi}{2}$, maka $\sin(s) = 1$ dan $\cos(s) = 0$, sehingga didapatkan persamaan umum parameter shift rule
+        \begin{equation*}
+            \begin{split}
+                2 \frac{\partial \langle E(\theta)\rangle}{\partial \theta} &= i \langle [\sigma, M]\rangle \\
+                2 \frac{\partial \langle E(\theta)\rangle}{\partial \theta} &= \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle \\
+            \end{split}
+        \end{equation*}
+        \begin{equation}
+            \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{1}{2} \left[ \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle \right]
+        \end{equation}
     \end{itemize}
 \end{frame}
 
@@ -31,12 +115,16 @@
 \begin{frame}{Bab 2.6.3 - Gradient Descent (GD)}
     \begin{itemize}
         \item \textbf{Mekanisme:} Parameter $\theta$ diperbarui searah negatif gradien untuk mencapai minimum energi.
-    \end{itemize}
-    \begin{equation*}
-        \theta_{t+1} = \theta_t - \eta \nabla E(\theta_t)
-    \end{equation*}
-    \begin{itemize}
-        \item \textbf{Tantangan:} Kompleksitas evaluasi gradien PSR tumbuh linear terhadap jumlah parameter ($\mathcal{O}(p)$).
+        \begin{equation*}
+            \theta_{t+1} = \theta_t - \eta \nabla E(\theta_t)
+        \end{equation*}
+        \item dimana 
+        \begin{itemize}
+            \item $\theta_{t+1}$ adalah parameter pada iterasi ke $t+1$
+            \item $\eta$ adalah laju pembelajaran 
+            \item $\nabla E(\theta_t)$ adalah gradien energi pada parameter $\theta_t$.
+        \end{itemize}
+        \item \textbf{Kekurangan:} Harus mengevaluasi gradien dua kali untuk setiap parameter, sehingga kompleksitas evaluasi gradien PSR tumbuh linear terhadap jumlah parameter.
     \end{itemize}
 \end{frame}
 
@@ -44,84 +132,106 @@
 \begin{frame}{Bab 2.6.4 - Optimizer SPSA}
     \begin{itemize}
         \item \textbf{Inovasi:} Estimasi gradien seluruh parameter secara simultan menggunakan vektor perturbasi acak ($\pm 1$).
-        \item \textbf{Efisiensi:} Hanya membutuhkan \textbf{2 evaluasi sirkuit} per iterasi, memberikan reduksi kompleksitas menjadi $\mathcal{O}(1)$.
-        \item \textbf{Ketangguhan:} Sangat robust terhadap fluktuasi statistik pasar dan noise hardware.
+        {\tiny
+        \begin{equation}
+            \begin{split}
+                E_{\pm} &= E(\theta_k \pm c_k \Delta_k) \\ 
+                &\approx E(\theta_k) \pm c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + \frac{1}{2} c_k^2 \sum_{j=1}^p \Delta_j^2 \frac{\partial^2 E}{\partial \theta_j^2} + \dots
+            \end{split}
+        \end{equation}
+        }
+        \item Sehingga jika diambil selisih kedua evaluasi tersebut,
+        {\tiny
+        \begin{equation}
+            \begin{split}
+                E_+ - E_- &= 2 c_k \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} + O(c_k^3)
+            \end{split}
+        \end{equation}
+        }
+        \item maka didapatkan bentuk estimator gradien
+        {\tiny
+        \begin{equation}
+            \begin{split}
+                \hat{g}_i &= \frac{E_+ - E_-}{2 c_k \Delta_i} \\
+                &= \frac{1}{\Delta_i} \sum_{j=1}^p \Delta_j \frac{\partial E}{\partial \theta_j} \\
+                &= \frac{\Delta_i}{\Delta_i} \frac{\partial E}{\partial \theta_i} + \sum_{j \neq i} \frac{\Delta_j}{\Delta_i} \frac{\partial E}{\partial \theta_j} \\
+                \mathbb{E} \left[ \hat{g}_i \right] &= \frac{\partial E}{\partial \theta_i} + \sum_{j \neq i} \mathbb{E} \left[ \frac{\Delta_j}{\Delta_i} \right] \frac{\partial E}{\partial \theta_j}
+            \end{split}
+        \end{equation}
+        }
     \end{itemize}
 \end{frame}
 
-% Slide 10.1: Bab 2.7.1 - Prinsip Variasi Rayleigh-Ritz
-\begin{frame}{Bab 2.7.1 - Prinsip Variasi Rayleigh-Ritz}
+\begin{frame}{Bab 2.6.4 - Optimizer SPSA}
     \begin{itemize}
-        \item \textbf{Teorema:} Energi dari status percobaan $|\psi(\theta)\rangle$ selalu lebih besar atau sama dengan energi \textit{ground state} sejati ($E_0$).
-    \end{itemize}
-    \begin{equation*}
-        E(\theta) = \frac{\langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle}{\langle\psi(\theta)|\psi(\theta)\rangle} \ge E_0
-    \end{equation*}
-    \begin{itemize}
-        \item \textbf{Fungsi Objektif:} Meminimalkan $E(\theta)$ setara dengan mencari alokasi portofolio optimal.
+        \item Sehingga dekspektasi estimasi gradien
+        \begin{equation}
+            \mathbb{E} \left[ \hat{g}_i \right] = \frac{\partial E}{\partial \theta_i}
+        \end{equation} 
+        \item  dengan proses optimasi 
+        \begin{equation}
+            \theta_{k+1} = \theta_k - \eta \hat{g}_k
+        \end{equation}
+        \item dengan 
+        \begin{itemize}
+            \item $c_k$ merupakan koefisien perturbasi yang menurun seiring dengan iterasi 
+            \item $\eta$ merupakan laju pembelajaran 
+            \item $\hat{g}_k$ merupakan estimasi gradien pada iterasi ke $k$
+        \end{itemize}
+        \item SPSA lebih efisien dibandingkan GD karena hanya membutuhkan 50\% evaluasi fungsi biaya pada setiap iterasi dari GD
     \end{itemize}
 \end{frame}
 
-% Slide 10.2: Bab 2.7.2 - Fondasi Ansatz: UCC
-\begin{frame}{Bab 2.7.2 - Fondasi Ansatz: UCC}
+% Slide 10.2: Bab 2.7 - Arsitektur EfficientSU2 (HEA)
+\begin{frame}{Bab 2.7 - VQE dengan Arsitektur EfficientSU2 (HEA)}
     \begin{itemize}
-        \item \textbf{Unitary Coupled Cluster (UCC):} Pendekatan fungsi gelombang berbasis kimia kuantum.
-        \item \textbf{Limitasi:} Menghasilkan sirkuit yang terlalu dalam (\textit{deep circuit}), sulit diimplementasikan pada era NISQ.
-    \end{itemize}
-\end{frame}
-
-% Slide 10.3: Bab 2.7.3 - Arsitektur EfficientSU2 (HEA)
-\begin{frame}{Bab 2.7.3 - Arsitektur EfficientSU2 (HEA)}
-    \begin{itemize}
-        \item \textbf{Hardware-Efficient:} Dirancang untuk kedalaman sirkuit minimal dengan ekspresivitas tinggi.
-        \item \textbf{Struktur:} Lapisan rotasi ($R_y, R_z$) diikuti oleh lapisan keterbelitan (\textit{entanglement}) menggunakan gerbang CNOT.
+        \item Menggunakan prinsip variasi Reyleigh-Ritz yang menyatakan bahwa energi dari status percobaan selalu lebih besar atau sama dengan energi \textit{ground state} sejati ($E_0$).
+        \begin{equation*}
+            E(\theta) = \frac{\langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle}{\langle\psi(\theta)|\psi(\theta)\rangle} \ge E_0
+        \end{equation*}
+        \item Menggunakan struktur lapisan rotasi ($R_y, R_z$) dan lapisan keterbelitan (\textit{entanglement}) menggunakan gerbang CNOT.
     \end{itemize}
     \begin{center}
-        \includegraphics[width=0.6\textwidth]{PQC.png} \\
-        \footnotesize \textit{Visualisasi sirkuit PQC yang digunakan sebagai ansatz VQE.}
+        \includegraphics[width=0.6\textwidth]{../GTQuantumInvest/Hasil_N2_GT/Analisis_Window_N2/2021-05-05_circuit.png}
     \end{center}
 \end{frame}
 
-% Slide 10.4: Bab 2.7.4 - Siklus Hibrida Quantum-Klasik
-\begin{frame}{Bab 2.7.4 - Siklus Hibrida Quantum-Klasik}
-    \begin{itemize}
-        \item \textbf{Distribusi Beban:}
-        \begin{itemize}
-            \item \textbf{Quantum (QPU):} Estimasi energi pada sirkuit berparameter.
-            \item \textbf{Klasik (CPU):} Optimasi parameter $\theta$ menggunakan SPSA.
-        \end{itemize}
-        \item \textbf{Sinergi:} Memanfaatkan keunggulan paralelisme kuantum dan ketangguhan logika klasik.
-    \end{itemize}
-\end{frame}
-
 % Slide 11.1: Bab 2.8.1 - Fenomena Barren Plateau
-\begin{frame}{Bab 2.8.1 - Fenomena Barren Plateau}
+\begin{frame}{Bab 2.8.1 - Fenomena Barren Plateau dan Keacakan}
     \begin{itemize}
-        \item \textbf{Masalah:} Lenyapnya sinyal gradien secara eksponensial seiring bertambahnya kedalaman sirkuit dan jumlah qubit.
-        \item \textbf{Trade-off:} Kedalaman tinggi memberikan \textit{expressibility} besar, namun meningkatkan risiko terjebak di dataran tandus (Barren Plateau).
+        \item Semakin tinggi \textbf{kedalaman sirkuit} = semakin besar \textbf{ekspresibilitas} = semakin besar risiko terjebak pada \textbf{Barren Plateau}
+        \item \textbf{Barren Plateau} ditandai oleh lenyapnya varians gradien karena  
+        \begin{equation}
+            \text{Var}[\partial_{\theta} E] \propto \frac{1}{2^{NL}}
+        \end{equation}
+        dimana N adalah jumlah qubit dan L adalah kedalaman sirkuit
+        \item Untuk mengkuran keacakan keadaaan kuantum selama optimasi, digunakan entropi von Neumann
+        \begin{equation}
+            S(\rho) = -\text{Tr}(\rho \log \rho)
+        \end{equation}
+        dimana $\rho$ merupakan matriks densitas dari keadaan kuantum
     \end{itemize}
-    \begin{equation*}
-        \text{Var}[\partial_{\theta} E] \approx \mathcal{O}(2^{-N})
-    \end{equation*}
 \end{frame}
 
 % Slide 11.2: Bab 2.8.2 - Diagnostik: Entropi Von Neumann
-\begin{frame}{Bab 2.8.2 - Diagnostik: Entropi Von Neumann}
+\begin{frame}{Bab 2.8.2 - Entropi Von Neumann dan Entropi Shannon}
     \begin{itemize}
-        \item \textbf{Metrik Keterbelitan:} Mengukur derajat kemurnian state kuantum selama optimasi.
+        \item Mengukur derajat kemurnian state kuantum selama optimasi
+        \item Berawal dari entopi Shannon, 
     \end{itemize}
+    {\scriptsize
     \begin{equation*}
-        S(\rho) = -\text{Tr}(\rho \log \rho)
+        \begin{split}
+            H &= - \sum_i p_i \log_2 (p_i) \\
+            \rho &= \sum_i p_i |\psi_i\rangle \langle \psi_i| \\
+            \rho &= \sum_j \lambda_j |e_j\rangle \langle e_j| \\
+            \log_2(\rho) &= \sum_j \log_2 (\lambda_j) |e_j\rangle \langle e_j| \\
+            \rho \log_2(\rho) &= \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j| \\
+            \text{Tr}(\rho \log_2(\rho)) &= \sum_j \lambda_j \log_2(\lambda_j) \\
+        \end{split}
     \end{equation*}
-    \begin{itemize}
-        \item \textbf{Analisis:} Penurunan entropi menuju nol mengindikasikan konvergensi sistem menuju solusi deterministik.
-    \end{itemize}
-\end{frame}
-
-% Slide 11.3: Bab 2.8.3 - Mitigasi melalui EPG Warm-start
-\begin{frame}{Bab 2.8.3 - Mitigasi melalui EPG Warm-start}
-    \begin{itemize}
-        \item \textbf{Proposisi:} Inisialisasi parameter menggunakan konfigurasi \textit{Nash Equilibrium} dari Game Theory.
-        \item \textbf{Strategi:} Memandu sirkuit langsung ke wilayah lembah energi yang potensial, menghindari jebakan \textit{Barren Plateau} sejak iterasi awal.
-    \end{itemize}
+    \begin{equation}
+        \therefore S(\rho) = -\text{Tr}(\rho \log_2(\rho)) = -\sum_j \lambda_j \log_2 (\lambda_j)
+    \end{equation}
+    }
 \end{frame}
