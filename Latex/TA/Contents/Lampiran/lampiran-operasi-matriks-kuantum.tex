@@ -1,0 +1,603 @@
+\chapter{Operasi Aljabar Linier pada Ruang Hilbert}
+
+\section{Notasi \textit{Bra-Ket}}
+Pada mekanika kuantum, keadaan suatu sistem direpresentasikan sebagai vektor pada ruang Hilbert. Notasi yang umum digunakan untuk menyatakan vektor keadaan adalah notasi \textit{bra-ket} yang diperkenalkan oleh Paul Dirac. Sebuah vektor keadaan dinyatakan dalam bentuk \textit{ket} dan direpresentasikan sebagai vektor kolom
+\begin{equation}
+    |\psi\rangle =
+    \begin{pmatrix}
+        \psi_1 \\
+        \psi_2 \\
+        \vdots \\
+        \psi_N
+    \end{pmatrix},
+\end{equation}
+dengan $\psi_i \in \mathbb{C}$ menyatakan komponen-komponen kompleks dari vektor keadaan pada ruang Hilbert berdimensi $N$. Pasangan dual dari \textit{ket} disebut \textit{bra}, yang diperoleh melalui operasi transpose konjugat (\textit{Hermitian adjoint}) terhadap \textit{ket}. Secara matematis, \textit{bra} didefinisikan sebagai
+\begin{equation}
+    \langle \psi | =
+    \begin{pmatrix}
+        \psi_1^{*} &
+        \psi_2^{*} &
+        \cdots &
+        \psi_N^{*}
+    \end{pmatrix},
+\end{equation}
+dengan simbol $^*$ menyatakan operasi konjugasi kompleks.
+
+Hubungan antara \textit{bra} dan \textit{ket} dapat dituliskan sebagai
+\begin{equation}
+    \langle \psi |
+    =
+    \left(
+    |\psi\rangle
+    \right)^{\dagger},
+\end{equation}
+di mana simbol $\dagger$ menyatakan operasi transpose konjugat. Sebagai contoh, dua keadaan dasar sebuah \textit{qubit} dapat direpresentasikan dalam notasi \textit{bra-ket} sebagai
+\begin{equation}
+    |0\rangle =
+    \begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix},
+    \qquad
+    |1\rangle =
+    \begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix}.
+\end{equation}
+Representasi \textit{bra} untuk kedua keadaan tersebut diperoleh dengan mengambil transpose konjugatnya, yaitu
+\begin{equation}
+    \langle 0| =
+    \begin{pmatrix}
+        1 & 0
+    \end{pmatrix},
+    \qquad
+    \langle 1| =
+    \begin{pmatrix}
+        0 & 1
+    \end{pmatrix}.
+\end{equation}
+Notasi \textit{bra-ket} menjadi dasar bagi berbagai operasi aljabar linier pada ruang Hilbert, seperti \textit{inner product}, \textit{outer product}, representasi operator, serta pembentukan matriks densitas yang digunakan dalam komputasi dan informasi kuantum.
+
+\section{Operasi Perkalian Dalam (\textit{Inner Product})}
+Perkalian dalam (\textit{inner product}) merupakan operasi yang memetakan dua vektor pada ruang Hilbert menjadi sebuah skalar kompleks. Operasi ini digunakan untuk menentukan hubungan antara dua keadaan kuantum, termasuk ortogonalitas dan normalisasi suatu vektor keadaan. Untuk dua buah vektor keadaan $|\psi\rangle$ dan $|\phi\rangle$ yang didefinisikan pada ruang Hilbert berdimensi $N$, \textit{inner product} dinyatakan sebagai
+\begin{equation}
+\label{eq:inner_product_def}
+    \langle \psi | \phi \rangle =
+    \begin{pmatrix}
+        \psi_1^* &
+        \psi_2^* &
+        \cdots &
+        \psi_N^*
+    \end{pmatrix}
+    \begin{pmatrix}
+        \phi_1 \\
+        \phi_2 \\
+        \vdots \\
+        \phi_N
+    \end{pmatrix}
+    =
+    \sum_{i=1}^{N}
+    \psi_i^* \phi_i.
+\end{equation}
+Salah satu penggunaan penting \textit{inner product} adalah untuk menentukan ortogonalitas dua keadaan kuantum. Dua vektor dikatakan ortogonal apabila hasil \textit{inner product}-nya bernilai nol. Sebagai contoh,
+\begin{equation}
+\label{eq:inner_product_orthogonal}
+    \langle 0 | 1 \rangle
+    =
+    \begin{pmatrix}
+        1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix}
+    =
+    (1 \times 0) + (0 \times 1)
+    =
+    0.
+\end{equation}
+Selain itu, \textit{inner product} juga digunakan untuk memeriksa normalisasi suatu keadaan kuantum. Sebuah vektor keadaan dikatakan ternormalisasi apabila memenuhi
+\begin{equation}
+    \langle \psi | \psi \rangle = 1.
+\end{equation}
+Sebagai contoh, keadaan dasar \textit{qubit} $|0\rangle$ memenuhi
+\begin{equation}
+\label{eq:inner_product_normal}
+    \langle 0 | 0 \rangle
+    =
+    \begin{pmatrix}
+        1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix}
+    =
+    (1 \times 1) + (0 \times 0)
+    =
+    1.
+\end{equation}
+Sehingga keadaan $|0\rangle$ merupakan vektor yang telah ternormalisasi.
+
+\section{Operasi Perkalian Luar (\textit{Outer Product})}
+Perkalian luar (\textit{outer product}) bertujuan menghasilkan sebuah matriks atau operator linier yang mana diperoleh melalui perkalian antara sebuah \textit{ket} dan sebuah \textit{bra} Operasi ini banyak digunakan dalam pembentukan operator proyeksi, matriks densitas, dan representasi operator kuantum. Untuk dua buah vektor keadaan $|\psi\rangle$ dan $|\phi\rangle$, \textit{outer product} didefinisikan sebagai
+\begin{equation}
+\label{eq:outer_product_def}
+    |\psi\rangle\langle\phi|
+    =
+    \begin{pmatrix}
+        \psi_1 \\
+        \psi_2 \\
+        \vdots \\
+        \psi_N
+    \end{pmatrix}
+    \begin{pmatrix}
+        \phi_1^* &
+        \phi_2^* &
+        \cdots &
+        \phi_N^*
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \psi_1\phi_1^* & \psi_1\phi_2^* & \cdots & \psi_1\phi_N^* \\
+        \psi_2\phi_1^* & \psi_2\phi_2^* & \cdots & \psi_2\phi_N^* \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \psi_N\phi_1^* & \psi_N\phi_2^* & \cdots & \psi_N\phi_N^*
+    \end{pmatrix}.
+\end{equation}
+Sebagai contoh, perkalian luar antara keadaan $|0\rangle$ dan $\langle1|$ menghasilkan
+\begin{equation}
+\label{eq:outer_product_transisi}
+    |0\rangle\langle1|
+    =
+    \begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}.
+\end{equation}
+Operator tersebut dapat dipandang sebagai operator transisi yang memetakan keadaan $|1\rangle$ menuju $|0\rangle$. Selain itu, terdapat operator proyeksi yang diperoleh dari perkalian suatu keadaan dengan dirinya sendiri. Untuk keadaan $|1\rangle$, diperoleh
+\begin{equation}
+\label{eq:outer_product_proyeksi}
+    |1\rangle\langle1|
+    =
+    \begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 0 \\
+        0 & 1
+    \end{pmatrix}.
+\end{equation}
+Operator ini disebut operator proyeksi pada keadaan $|1\rangle$ karena hanya mempertahankan komponen yang sejajar dengan keadaan tersebut.
+
+\section{Operasi Konjugasi Kompleks dan Adjoin Hermitian}
+
+\subsection{Konjugasi Kompleks}
+Konjugasi kompleks merupakan operasi yang mengubah tanda bagian imajiner suatu bilangan kompleks. Jika suatu bilangan kompleks dinyatakan sebagai
+\begin{equation}
+    c = a + ib,
+\end{equation}
+dengan $a,b \in \mathbb{R}$ dan $i=\sqrt{-1}$, maka konjugasi kompleks dari $c$ didefinisikan sebagai
+\begin{equation}
+\label{eq:complex_conjugate_def}
+    c^{*} = (a+ib)^{*} = a-ib.
+\end{equation}
+Sebagai contoh,
+\begin{equation}
+    (3+2i)^* = 3-2i,
+\end{equation}
+dan
+\begin{equation}
+    (-1-4i)^* = -1+4i.
+\end{equation}
+Pada vektor atau matriks, operasi konjugasi kompleks diterapkan pada setiap elemen secara independen. Sebagai contoh,
+\begin{equation}
+    \begin{pmatrix}
+        1+i \\
+        2-3i
+    \end{pmatrix}^{*}
+    =
+    \begin{pmatrix}
+        1-i \\
+        2+3i
+    \end{pmatrix}.
+\end{equation}
+
+\subsection{Transpose dan Adjoin Hermitian}
+Untuk suatu matriks $A$, transpose didefinisikan sebagai pertukaran baris menjadi kolom sehingga diperoleh $A^T$.Sebagai contoh,
+\begin{equation}
+    A=
+    \begin{pmatrix}
+        1 & 2 \\
+        3 & 4
+    \end{pmatrix}
+    \quad \Rightarrow \quad
+    A^T=
+    \begin{pmatrix}
+        1 & 3 \\
+        2 & 4
+    \end{pmatrix}.
+\end{equation}
+Adjoin Hermitian merupakan kombinasi antara operasi transpose dan konjugasi kompleks yang didefinisikan sebagai
+\begin{equation}
+\label{eq:hermitian_adjoint}
+    A^\dagger = (A^*)^T.
+\end{equation}
+Sebagai contoh,
+\begin{equation}
+    A=
+    \begin{pmatrix}
+        1+i & 2 \\
+        3i & 4-i
+    \end{pmatrix},
+\end{equation}
+maka
+\begin{equation}
+    A^*
+    =
+    \begin{pmatrix}
+        1-i & 2 \\
+        -3i & 4+i
+    \end{pmatrix},
+\end{equation}
+dan
+\begin{equation}
+    A^\dagger
+    =
+    \begin{pmatrix}
+        1-i & -3i \\
+        2 & 4+i
+    \end{pmatrix}.
+\end{equation}
+
+\section{Operasi \textit{Partial Trace}}
+Misalkan sistem komposit terdiri atas dua subsistem $A$ dan $B$ dengan matriks densitas gabungan $\rho_{AB}$. Matriks densitas tereduksi untuk subsistem $A$ diperoleh melalui operasi
+\begin{equation}
+\label{eq:partial_trace_def}
+    \rho_A
+    =
+    \mathrm{Tr}_B(\rho_{AB}),
+\end{equation}
+sedangkan matriks densitas tereduksi untuk subsistem $B$ diberikan oleh
+\begin{equation}
+    \rho_B
+    =
+    \mathrm{Tr}_A(\rho_{AB}).
+\end{equation}
+Secara umum, \textit{partial trace} terhadap subsistem $B$ didefinisikan sebagai
+\begin{equation}
+\label{eq:partial_trace_general}
+    \rho_A
+    =
+    \sum_j
+    \left(
+    I_A \otimes \langle j_B|
+    \right)
+    \rho_{AB}
+    \left(
+    I_A \otimes |j_B\rangle
+    \right),
+\end{equation}
+dengan $\{|j_B\rangle\}$ merupakan basis ortonormal pada subsistem $B$ dan $I_A$ adalah operator identitas pada subsistem $A$.
+
+\subsection{Langkah Perhitungan \textit{Partial Trace}}
+Untuk sistem dua qubit, basis komputasional yang umum digunakan adalah
+\begin{equation}
+    \{
+    |00\rangle,
+    |01\rangle,
+    |10\rangle,
+    |11\rangle
+    \}.
+\end{equation}
+Apabila akan dihitung matriks densitas tereduksi $\rho_A$, maka langkah perhitungannya dapat diringkas sebagai berikut:
+\begin{enumerate}
+    \item Bentuk matriks densitas gabungan $\rho_{AB}$.
+    \item Pilih basis ortonormal pada subsistem yang akan ditelusuri.
+    \item Hitung kontribusi setiap basis menggunakan Persamaan~(\ref{eq:partial_trace_general}).
+    \item Jumlahkan seluruh kontribusi untuk memperoleh matriks densitas tereduksi.
+\end{enumerate}
+
+\subsection{Contoh pada Keadaan Bell}
+Kita tinjau keadaan Bell
+\begin{equation}
+\label{eq:bell_state_phi_plus}
+    |\Phi^+\rangle
+    =
+    \frac{1}{\sqrt{2}}
+    \left(
+    |00\rangle + |11\rangle
+    \right).
+\end{equation}
+Matriks densitasnya diperoleh dari \textit{outer product}
+\begin{equation}
+    \rho_{AB}
+    =
+    |\Phi^+\rangle
+    \langle\Phi^+|,
+\end{equation}
+sehingga
+\begin{equation}
+    \rho_{AB}
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 0 & 0 & 1 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        1 & 0 & 0 & 1
+    \end{pmatrix}.
+\end{equation}
+Untuk memperoleh keadaan subsistem $A$, dilakukan \textit{partial trace} terhadap subsistem $B$
+\begin{equation}
+    \rho_A
+    =
+    \mathrm{Tr}_B(\rho_{AB}).
+\end{equation}
+Dengan menggunakan basis $\{|0\rangle_B,|1\rangle_B\}$ diperoleh
+\begin{equation}
+    \rho_A
+    =
+    (I_A\otimes\langle0|)
+    \rho_{AB}
+    (I_A\otimes|0\rangle)
+    +
+    (I_A\otimes\langle1|)
+    \rho_{AB}
+    (I_A\otimes|1\rangle),
+\end{equation}
+yang menghasilkan
+\begin{equation}
+\label{eq:rho_A_bell}
+    \rho_A
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix}.
+\end{equation}
+Karena Bell state bersifat simetris terhadap kedua qubit, maka matriks densitas tereduksi untuk subsistem $B$ memiliki bentuk yang sama
+\begin{equation}
+\label{eq:rho_B_bell}
+    \rho_B
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix}.
+\end{equation}
+Hasil ini menunjukkan bahwa meskipun keadaan gabungan $|\Phi^+\rangle$ merupakan keadaan murni (\textit{pure state}), masing-masing subsistem berada pada keadaan campuran maksimum (\textit{maximally mixed state}).
+
+\section{Sifat Dasar Operator Linier}
+
+\subsection{Linearitas dan Sifat Distributif}
+Suatu operator $A$ dikatakan linier apabila memenuhi sifat penjumlahan vektor dan perkalian skalar. Untuk dua buah keadaan $|\psi_1\rangle$ dan $|\psi_2\rangle$ serta skalar kompleks $c_1$ dan $c_2$, berlaku
+\begin{equation}
+\label{eq:linearity_operator}
+    A
+    \left(
+    c_1 |\psi_1\rangle
+    +
+    c_2 |\psi_2\rangle
+    \right)
+    =
+    c_1 A|\psi_1\rangle
+    +
+    c_2 A|\psi_2\rangle.
+\end{equation}
+Sebagai contoh, apabila
+\begin{equation}
+    |\psi\rangle
+    =
+    \alpha |0\rangle
+    +
+    \beta |1\rangle,
+\end{equation}
+maka aksi operator $A$ terhadap keadaan tersebut diberikan oleh
+\begin{equation}
+    A|\psi\rangle
+    =
+    \alpha A|0\rangle
+    +
+    \beta A|1\rangle.
+\end{equation}
+Selain linearitas, terdapat sifat distributif. Untuk operator $A$ dan dua buah vektor keadaan $|\psi\rangle$ serta $|\phi\rangle$, berlaku
+\begin{equation}
+\label{eq:distributive_property}
+    A
+    \left(
+    |\psi\rangle
+    +
+    |\phi\rangle
+    \right)
+    =
+    A|\psi\rangle
+    +
+    A|\phi\rangle.
+\end{equation}
+
+\subsection{Komutator dan Non-Komutativitas}
+Pada umumnya, dua operator kuantum tidak selalu dapat dipertukarkan urutan operasinya. Untuk memeriksa hal tersebut digunakan komutator yang didefinisikan sebagai
+\begin{equation}
+\label{eq:commutator_property}
+    [A,B]
+    =
+    AB
+    -
+    BA.
+\end{equation}
+Jika
+\begin{equation}
+    [A,B]=0,
+\end{equation}
+maka operator $A$ dan $B$ dikatakan komutatif. Sebaliknya, apabila
+\begin{equation}
+    [A,B]\neq 0,
+\end{equation}
+maka kedua operator bersifat non-komutatif.
+Sebagai contoh, operator Pauli-X dan Pauli-Z diberikan oleh
+\begin{equation}
+    X=
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix},
+    \qquad
+    Z=
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+    \end{pmatrix}.
+\end{equation}
+Perkalian kedua operator tersebut menghasilkan
+\begin{equation}
+    XZ=
+    \begin{pmatrix}
+        0 & -1 \\
+        1 & 0
+    \end{pmatrix},
+\end{equation}
+sedangkan
+\begin{equation}
+    ZX=
+    \begin{pmatrix}
+        0 & 1 \\
+        -1 & 0
+    \end{pmatrix}.
+\end{equation}
+Karena
+\begin{equation}
+    XZ \neq ZX,
+\end{equation}
+maka
+\begin{equation}
+    [X,Z]
+    =
+    XZ-ZX
+    \neq 0.
+\end{equation}
+Hasil ini menunjukkan bahwa keberurutan penerapan operator kuantum dapat memengaruhi keadaan akhir sistem.
+
+\section{Dekomposisi Spektral (\textit{Spectral Decomposition})}
+Dekomposisi spektral merupakan metode untuk merepresentasikan suatu operator dalam bentuk kombinasi nilai eigen dan vektor eigennya. Misalkan $A$ merupakan operator Hermitian yang memiliki himpunan nilai eigen $\{a_i\}$ dan vektor eigen ortonormal $\{|a_i\rangle\}$. Persamaan eigen untuk operator tersebut diberikan oleh
+\begin{equation}
+\label{eq:eigenvalue_equation}
+    A|a_i\rangle
+    =
+    a_i|a_i\rangle.
+\end{equation}
+Karena vektor-vektor eigen membentuk basis ortonormal pada ruang Hilbert, operator $A$ dapat dituliskan sebagai
+\begin{equation}
+\label{eq:spectral_decomposition}
+    A
+    =
+    \sum_i
+    a_i
+    |a_i\rangle
+    \langle a_i|.
+\end{equation}
+Persamaan~(\ref{eq:spectral_decomposition}) dikenal sebagai dekomposisi spektral. Setiap suku terdiri atas nilai eigen $a_i$ yang dikalikan dengan operator proyeksi $|a_i\rangle\langle a_i|$ pada vektor eigen yang bersesuaian.
+
+\subsection{Representasi Matriks}
+Dalam bentuk matriks, dekomposisi spektral dapat dinyatakan menggunakan matriks uniter $U$ yang kolom-kolomnya berisi vektor-vektor eigen dari operator $A$. Jika $\Lambda$ merupakan matriks diagonal yang elemennya adalah nilai-nilai eigen, maka
+\begin{equation}
+\label{eq:matrix_diagonalization}
+    A
+    =
+    U
+    \Lambda
+    U^\dagger,
+\end{equation}
+dengan
+\begin{equation}
+    \Lambda
+    =
+    \begin{pmatrix}
+        a_1 & 0 & \cdots & 0 \\
+        0 & a_2 & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & a_N
+    \end{pmatrix}.
+\end{equation}
+Bentuk diagonal ini sering digunakan karena berbagai fungsi operator dapat dihitung langsung dari nilai-nilai eigennya.
+
+\subsection{Langkah Dekomposisi Spektral}
+Secara umum, dekomposisi spektral dilakukan melalui langkah-langkah berikut:
+\begin{enumerate}
+    \item Menentukan nilai eigen $a_i$ dengan menyelesaikan persamaan karakteristik
+    \begin{equation}
+        \det(A-\lambda I)=0.
+    \end{equation}
+    \item Menentukan vektor eigen $|a_i\rangle$ untuk setiap nilai eigen yang diperoleh.
+    \item Menormalkan seluruh vektor eigen sehingga membentuk basis ortonormal.
+    \item Menyusun matriks uniter $U$ dari vektor-vektor eigen dan matriks diagonal $\Lambda$ dari nilai-nilai eigen.
+    \item Menuliskan operator dalam bentuk Persamaan (\ref{eq:matrix_diagonalization})
+\end{enumerate}
+
+\subsection{Contoh Dekomposisi Spektral}
+Sebagai contoh, pertimbangkan operator Pauli-Z
+\begin{equation}
+    Z
+    =
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+    \end{pmatrix}.
+\end{equation}
+Nilai eigen operator tersebut diperoleh dari
+\begin{equation}
+    \det(Z-\lambda I)
+    =
+    \begin{vmatrix}
+        1-\lambda & 0 \\
+        0 & -1-\lambda
+    \end{vmatrix}
+    = 0,
+\end{equation}
+sehingga diperoleh
+\begin{equation}
+    \lambda_1 = 1,
+    \qquad
+    \lambda_2 = -1.
+\end{equation}
+Vektor eigen yang bersesuaian adalah
+\begin{equation}
+    |0\rangle
+    =
+    \begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix},
+    \qquad
+    |1\rangle
+    =
+    \begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix}.
+\end{equation}
+Dengan demikian, operator Pauli-Z dapat dituliskan dalam bentuk dekomposisi spektral sebagai
+\begin{equation}
+\label{eq:pauli_z_spectral}
+    Z
+    =
+    1 \cdot |0\rangle\langle0|
+    -
+    1 \cdot |1\rangle\langle1|.
+\end{equation}

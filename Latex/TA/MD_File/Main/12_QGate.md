@@ -97,3 +97,27 @@ $$
 \end{split}
 $$
 koefisien $\frac{1}{2}$ lahir dari vektor ortogonal di ruang kuantum 2D yang direpresentasikan oleh vektor anti paralel ($180^\circ$) di ruang nyata 3D.
+
+$$
+\begin{split}
+\ket{\phi^{+}} &= \frac{1}{\sqrt2} (\ket{00}+\ket{11}) \\
+&= \ket{\phi}_A \otimes \ket{\phi}_B \\
+&= (a_0 \ket{0} + a_1 \ket{1})(b_0 \ket{0} + b_1 \ket{1}) \\
+&= a_0 b_0 \ket{00} + a_0 b_1 \ket{01} + a_1 b_0 \ket{10} + a_1 b_1 \ket{11} \\
+\end{split}$$
+
+jika 
+$$\begin{split}
+ a_0 b_0 &= \frac{1}{\sqrt2} \\
+ a_0 b_1 &= 0 \\
+ a_1 b_0 &= 0 \\
+ a_1 b_1 &= \frac{1}{\sqrt2}
+\end{split}$$
+
+dan kita coba
+$$\begin{split}
+\frac{a_0 b_1}{a_0 b_0} = 0 \quad \frac{b_1}{b_0} = 0 \\
+\text{dan} \\
+\frac{a_1b_0}{a_1b_1} = 0 \quad \frac{b_0}{b_1} = 0
+\end{split}$$
+yang mana tidak cocok dengan persamaan 

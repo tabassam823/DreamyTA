@@ -15,10 +15,9 @@ Setiap aset tunggal yang terdaftar dalam indeks IHSG dipetakan secara satu-ke-sa
     \State $Q_{ij} \gets \frac{\gamma \Sigma_{ij}}{2K^2} + \lambda$ \Comment{Off-diagonal QUBO}
     \State $h_i \gets -\frac{1}{2} (Q_{ii} + \sum_{j \neq i} Q_{ij})$ \Comment{Transformasi ke Bias Ising}
     \State $J_{ij} \gets \frac{1}{4} Q_{ij}$ \Comment{Transformasi ke Interaksi Ising}
-    \State $C \gets \frac{1}{2} \sum Q_{ii} + \frac{1}{4} \sum Q_{ij} + \lambda K^2$ \Comment{Konstanta Energi}
-    \State $H \gets \sum h_i Z_i + \sum J_{ij} Z_i Z_j + C \cdot I$ \Comment{Konstruksi Matriks Hamiltonian}
+    \State $C \gets \frac{1}{4} \sum_{i} Q_{ii} + \frac{1}{8} \sum_{i \neq j} Q_{ij} + \lambda K^2$ \Comment{Konstanta Energi}
+    \State $H \gets \sum_{i} h_i Z_i + \sum_{i < j} J_{ij} Z_i Z_j + C \cdot I$ \Comment{Konstruksi Matriks Hamiltonian}
     \State \Return $H$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
-}

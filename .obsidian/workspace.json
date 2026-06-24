@@ -25,12 +25,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/PPT/list_revisi_7jun.md",
+                "file": "Latex/TA/MD_File/Main/12_QGate.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "list_revisi_7jun"
+              "title": "12_QGate"
+            }
+          },
+          {
+            "id": "949d40db2375c8ac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/Filtered_Paper/Mutual_Information/Shannon_A_Mathematical_Theory_of_Communication.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Shannon_A_Mathematical_Theory_of_Communication"
             }
           },
           {
@@ -39,16 +53,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Contents/4_Pembahasan/Contoh_numerik_SLSQP.md",
+                "file": "Latex/TA/Contents/Big_revision.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Contoh_numerik_SLSQP"
+              "title": "Big_revision"
+            }
+          },
+          {
+            "id": "3290ad802445ba98",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/Filtered_Paper/Quantum_Circuit/Parameterized_quantum_circuits_as_machine.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Parameterized_quantum_circuits_as_machine"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -60,7 +88,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 47.87234042553192,
+        "dimension": 71.13997113997114,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -81,7 +109,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "shannon",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -102,12 +130,13 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "c38e9d58e7528e8a",
         "type": "tabs",
-        "dimension": 52.12765957446809,
+        "dimension": 28.86002886002886,
         "children": [
           {
             "id": "9e5bcccc9ae69aaf",
@@ -115,13 +144,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/PPT/list_revisi_7jun.md",
+                "file": "Latex/TA/Filtered_Paper/Mutual_Information/Shannon_A_Mathematical_Theory_of_Communication.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of list_revisi_7jun"
+              "title": "Outline of Shannon_A_Mathematical_Theory_of_Communication"
             }
           }
         ]
@@ -246,53 +275,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "e0a45905d983dc7d",
+  "active": "949d40db2375c8ac",
   "lastOpenFiles": [
-    "Latex/TA/PPT/main.snm",
-    "Latex/TA/PPT/main.toc",
-    "Latex/TA/PPT/main.nav",
-    "Latex/TA/PPT/main.vrb",
-    "Latex/TA/PPT/main.out",
-    "Latex/TA/PPT/main.aux",
-    "Latex/TA/PPT/main.pdf",
-    "Latex/TA/PPT/main.log",
+    "Latex/TA/MD_File/Main/9_Entropi.md",
+    "Latex/TA/MD_File/Main/12_QGate.md",
+    "Latex/TA/Contents/Lampiran/lampiran-operasi-matriks-kuantum.tex",
+    "Latex/TA/MD_File/Main/3_Markowitz.md",
+    "Temporary.md",
+    "Latex/TA/MD_File/Main/12_QGate_2.jpg",
+    "Latex/TA/Contents/2_Daster/Bab-2.5.1.tex",
+    "Latex/TA/Contents/2_Daster/Bab-2.5.2.tex",
+    "Latex/TA/Contents/Big_revision.md",
+    "Latex/TA/MD_File/Main/1_QF_ii.png",
+    "Latex/TA/MD_File/Main/12_QGate_1.jpg",
+    "Latex/TA/MD_File/jenis_ansatz.md",
+    "Latex/TA/MD_File/QMI.md",
+    "Latex/TA/replace_italics.py",
+    "Latex/TA/MD_File/Main/10_BellDickeState.md",
+    "Latex/TA/MD_File/Main/5_QUBO_rev.md",
+    "Latex/TA/MD_File/Main/12_QGate_3.jpg",
+    "Latex/TA/MD_File/Main/12_QGate_4.jpg",
+    "Latex/TA/MD_File/Main/6_Gradient_Descent.md",
+    "Latex/TA/MD_File/Main/7_SPSA.md",
+    "Latex/TA/MD_File/Main/5_QUBO.md",
+    "Latex/TA/Filtered_Paper/behavioral_new_keynesian_model.md",
+    "Latex/TA/Filtered_Paper/behavioral_new_keynesian_model.pdf",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/Analisis_Window_N2/2023-12-04_window.png",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/Analisis_Window_N2/2023-12-04_circuit.png",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/Analisis_Window_N2/2023-11-03_window.png",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/Analisis_Window_N2/2023-11-03_circuit.png",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/Analisis_Window_N2/2023-10-05_window.png",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/theta_final_all_depths_N2.csv",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/riwayat_nash_sbr_N2.csv",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/riwayat_iterasi_vqe_N2.csv",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/parameter_pendamping_N2.csv",
+    "Latex/TA/GTQuantumInvest/Hasil_N2_GT_5/metrik_return_dan_lambda_N2.csv",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit/Parameterized_quantum_circuits_as_machine.md",
+    "Latex/TA/Filtered_Paper/Learning_in_Large-Scale_Games_and_Cooperative_Cont.md",
+    "Latex/TA/Filtered_Paper/Portfolio_Optimization_with_a_Mean_Entropy_Mutual_Information_Model.md",
     "Latex/TA/Contents/4_Pembahasan/Contoh_numerik_SLSQP.md",
-    "Latex/TA/Contents/4_Pembahasan/list_revisi_3jun.md",
+    "Latex/TA/MD_File/Main/1_QuantFinance.md",
+    "Latex/TA/Filtered_Paper/New_Paper/Dynamics_of_market_correlations_Taxonomy_and_portfolio_analysis.md",
     "Latex/TA/PPT/list_revisi_7jun.md",
+    "Latex/TA/Contents/4_Pembahasan/list_revisi_3jun.md",
     "Latex/TA/PPT/PPT_Structure.md",
-    "Latex/TA/PPT/Gambar/222_SnR.png",
-    "Latex/TA/PPT/Gambar/SnR.png",
-    "Latex/TA/PPT/Gambar/Inflasi.png",
-    "Latex/TA/PPT/Gambar/Pasted image.png",
-    "Latex/TA/PPT/Gambar/Digital_klasika.kompas.id.png",
-    "Latex/TA/PPT/Gambar/Fiat_depositphotos.com.png",
-    "Latex/TA/PPT/Gambar/Barter_marketeers.com.png",
-    "Latex/TA/PPT/Gambar/Logam_depositphotos.com.png",
-    "Latex/TA/PPT/Gambar/Logam.png",
-    "Latex/TA/PPT/Gambar",
-    "Latex/TA/PPT/debug1.snm",
-    "Latex/TA/GTQuantumInvest/Hasil_N12_GT/Analisis_Window_N12/2023-12-04_window.png",
     "Latex/TA/Filtered_Paper/VQE/VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance.md",
     "Latex/TA/Filtered_Paper/Quantum_Circuit/Expressibility_and_entangling_capability_of_parameterized_quantum_circuits_for_hybrid.md",
     "Latex/TA/Filtered_Paper/Quantum_Circuit_pdf/Expressibility_and_entangling_capability_of_parameterized_quantum_circuits_for_hybrid.md",
     "Latex/TA/Filtered_Paper/Quantum_Circuit/Connecting_Ansatz_Expressibility_to_Gradient_Magnitudes_and_Barren_Plateaus.md",
-    "Latex/TA/Filtered_Paper/General_parameter_shift_rules_for_quantum_gradients.md",
-    "Latex/TA/MD_File/Main/7_SPSA.md",
-    "Latex/TA/MD_File/Main/6_Gradient_Descent.md",
-    "Latex/TA/MD_File/Main/5_QUBO.md",
-    "Latex/TA/MD_File/Main/1_QuantFinance.md",
-    "Latex/TA/MD_File/Main/1_QuantFinance 1.md",
-    "Latex/TA/Contents/Lampiran/list_revisi_3jun.md",
-    "Latex/TA/Contents/4_Pembahasan/list_revisi_2jun.md",
-    "Temporary.md",
-    "Latex/TA/Struktur/lampiran.md",
-    "home/asus/Documents/DreamyTA/Latex/TA/GTQuantumInvest/Hasil_N*_**GT/laporan_backtest_N2.txt.md",
-    "Latex/TA/MD_File/Main/3_Markowitz.md",
-    "Latex/TA/Struktur/3_7.md",
-    "Latex/TA/MD_File/Main/2_Risk_Avrsion.md",
-    "Latex/TA/MD_File/Main/9_Entropi.md",
-    "Latex/TA/MD_File/Main/10_BellDickeState.md",
-    "Latex/TA/Struktur/4_Rencana_Revisi.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

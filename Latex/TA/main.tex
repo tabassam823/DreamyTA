@@ -55,6 +55,11 @@
 \listoffigures
 \newpage
 \listoftables
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Daftar Kode}
+\renewcommand{\lstlistlistingname}{Daftar Kode}
+\lstlistoflistings
 
 \cleardoublepage
 \include{Contents/0_BagianDepan/Tabel_Istilah}
@@ -76,6 +81,8 @@
 \input{Contents/Lampiran/Lampiran.tex}
 	
 \cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Biodata Penulis}
 \input{Contents/BagianBelakang/Biodata_Penulis}
 
 \end{document}

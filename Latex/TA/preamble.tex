@@ -67,7 +67,7 @@
 	numberstyle=\tiny\color{codegray},
 	stringstyle=\color{purple},
 	%stringstyle=\color{black},
-	basicstyle=\ttfamily,
+	basicstyle=\ttfamily\scriptsize,
 	breakatwhitespace=false,         
 	breaklines=true,                 
 	captionpos=b,                    
@@ -91,6 +91,7 @@
 \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
 
 \addto{\captionsbahasa}{\renewcommand{\bibname}{Daftar Pustaka}}
+\renewcommand{\lstlistingname}{Kode}
 
 % --- Komentar Inline ---
 \newcommand{\komentar}[1]{}

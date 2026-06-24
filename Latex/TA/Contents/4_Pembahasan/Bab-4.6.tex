@@ -12,7 +12,7 @@ Meskipun secara fundamental algoritma matriks ini memanipulasi turunan fungsi ob
 
 Guna mentranslasikan kompleksitas matematis SPSA menjadi sebuah pemahaman operasional yang jauh lebih konkret bagi pembaca akademik, penjabaran satu siklus tahapan iterasi simulasi ini disajikan secara komprehensif. Proses manualisasi fungsi komputasi ini memanfaatkan formulasi bentuk murni Hamiltonian Ising berdimensi dua aset ($N=2$) yang secara utuh telah diturunkan pada pembahasan \S \ref{sec:4_3_pemetaan_hamiltonian} sebelumnya. Bentuk fungsional Hamiltonian Ising yang telah memperhitungkan faktor penalti pelanggaran anggaran tersebut diuraikan sebagai berikut:
 \begin{equation}
-    \hat{\mathcal{H}} \approx 0,0915 \hat{Z}_1 + 0,0533 \hat{Z}_2 + 0,5022 \hat{Z}_1 \hat{Z}_2 - 0,1470.
+    \hat{\mathcal{H}} \approx 0,1736 \hat{Z}_1 + 0,0932 \hat{Z}_2 + 2,5014 \hat{Z}_1 \hat{Z}_2 + 2,2320.
 \end{equation}
 Langkah-langkah struktural dari proses pembaruan parameter fungsional menggunakan metode SPSA ini selanjutnya dieksekusi secara mendetail melalui sekuens perhitungan sistematis yang meliputi inisialisasi gangguan hingga pada tahapan kalkulasi akhir estimator gradien.
 
@@ -26,28 +26,28 @@ Langkah-langkah struktural dari proses pembaruan parameter fungsional menggunaka
     \item \textbf{Estimasi Nilai Ekspektasi Energi ($E_{\pm}$):}
     Guna menyederhanakan ilustrasi, kita asumsikan \textit{ansatz} sederhana di mana $\langle \hat{Z}_i \rangle = \cos(\theta_i)$. Maka fungsi biaya energinya menjadi:
     \begin{equation*}
-        E(\theta) = 0,0915 \cos(\theta_1) + 0,0533 \cos(\theta_2) + 0,5022 \cos(\theta_1)\cos(\theta_2) - 0,1470
+        E(\theta) = 0,1736 \cos(\theta_1) + 0,0932 \cos(\theta_2) + 2,5014 \cos(\theta_1)\cos(\theta_2) + 2,2320
     \end{equation*}
     Substitusi nilai $\theta_+$ dan $\theta_-$ menghasilkan:
     \begin{itemize}
-        \item $E_+ \approx 0,0915 \cos(1,6708) + 0,0533 \cos(1,4708) + 0,5022 \cos(1,6708)\cos(1,4708) - 0,1470 \approx -0,1557$.
-        \item $E_- \approx 0,0915 \cos(1,4708) + 0,0533 \cos(1,6708) + 0,5022 \cos(1,4708)\cos(1,6708) - 0,1470 \approx -0,1481$.
+        \item $E_+ \approx 0,1736 \cos(1,6708) + 0,0932 \cos(1,4708) + 2,5014 \cos(1,6708)\cos(1,4708) + 2,2320 \approx 2,1990$.
+        \item $E_- \approx 0,1736 \cos(1,4708) + 0,0932 \cos(1,6708) + 2,5014 \cos(1,4708)\cos(1,6708) + 2,2320 \approx 2,2151$.
     \end{itemize}
 
     \item \textbf{Kalkulasi Estimator Gradien ($\hat{g}$):}
-    Selisih energi $\Delta E = E_+ - E_- = -0,1557 - (-0,1481) = -0,0076$. Estimator gradien dihitung sebagai:
+    Selisih energi $\Delta E = E_+ - E_- = 2,1990 - 2,2151 = -0,0161$. Estimator gradien dihitung sebagai:
     \begin{equation*}
-        \hat{g} = \frac{\Delta E}{2 c_k \Delta_k} = \begin{pmatrix} -0,0076 / (2 \cdot 0,1 \cdot 1) \\ -0,0076 / (2 \cdot 0,1 \cdot -1) \end{pmatrix} = \begin{pmatrix} -0,038 \\ 0,038 \end{pmatrix}
+        \hat{g} = \frac{\Delta E}{2 c_k \Delta_k} = \begin{pmatrix} -0,0161 / (2 \cdot 0,1 \cdot 1) \\ -0,0161 / (2 \cdot 0,1 \cdot -1) \end{pmatrix} = \begin{pmatrix} -0,0805 \\ 0,0805 \end{pmatrix}
     \end{equation*}
 
     \item \textbf{Pembaruan Parameter ($\theta^{(1)}$):}
     Dengan menggunakan \textit{learning rate} $\eta = 0,1$, parameter diperbarui menjadi:
     \begin{equation*}
-        \theta^{(1)} = \theta^{(0)} - \eta \hat{g} = \begin{pmatrix} 1,5708 \\ 1,5708 \end{pmatrix} - 0,1 \begin{pmatrix} -0,038 \\ 0,038 \end{pmatrix} = \begin{pmatrix} 1,5746 \\ 1,5670 \end{pmatrix}
+        \theta^{(1)} = \theta^{(0)} - \eta \hat{g} = \begin{pmatrix} 1,5708 \\ 1,5708 \end{pmatrix} - 0,1 \begin{pmatrix} -0,0805 \\ 0,0805 \end{pmatrix} = \begin{pmatrix} 1,5789 \\ 1,5627 \end{pmatrix}
     \end{equation*}
 \end{enumerate}
 
-Melalui skema iterasi stohastik yang dijabarkan tersebut, serangkaian hasil simulasi pengujian proses optimasi SPSA pada jendela data kuantum di bulan Januari 2021 berhasil mendeteksi keadaan optimal bagi distribusi energi fungsional untuk setiap kemungkinan konfigurasi \textit{bitstring} secara presisi. Dari evaluasi nilai komputasi ini didapatkan hasil bahwa keadaan $|00\rangle$ berasosiasi dengan $E \approx 4,197$ yang mengindikasikan status terlarang, sedangkan konfigurasi $|01\rangle$ memiliki matriks energi $E \approx -0,111$ sebagai solusi sub-optimal. Sementara itu, solusi \textit{ground state} global fungsional yang merepresentasikan optimasi portofolio terbaik dipetakan secara absolut pada konfigurasi fisis status $|10\rangle$ dengan perolehan rekor energi ekspektasi bernilai $E \approx -0,187$. Untuk menunjang implementasi fungsi komputasi berulang ini secara otonom dalam skala analisis portofolio kuantum riil, kerangka dasar algoritma stokastik tersebut diakomodasi murni secara leksikal pada \textit{script} pemrograman di dalam Listing \ref{lst:run_spsa_test}.
+Melalui skema iterasi stohastik yang dijabarkan tersebut, serangkaian hasil simulasi pengujian proses optimasi SPSA pada jendela data kuantum di bulan Januari 2021 berhasil mendeteksi keadaan optimal bagi distribusi energi fungsional untuk setiap kemungkinan konfigurasi \textit{bitstring} secara presisi. Dari evaluasi nilai komputasi ini didapatkan hasil bahwa keadaan $|00\rangle$ berasosiasi dengan $E \approx 5,0$ yang mengindikasikan status terlarang, sedangkan konfigurasi $|01\rangle$ memiliki matriks energi $E \approx -0,189$ sebagai solusi sub-optimal. Sementara itu, solusi \textit{ground state} global fungsional yang merepresentasikan optimasi portofolio terbaik dipetakan secara absolut pada konfigurasi fisis status $|10\rangle$ dengan perolehan rekor energi ekspektasi bernilai $E \approx -0,350$. Untuk menunjang implementasi fungsi komputasi berulang ini secara otonom dalam skala analisis portofolio kuantum riil, kerangka dasar algoritma stokastik tersebut diakomodasi murni secara leksikal pada \textit{script} pemrograman di dalam Daftar Kode \ref{lst:run_spsa_test}.
 
 \begin{lstlisting}[language=Python, caption={Implementasi algoritma dasar \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA)}, label={lst:run_spsa_test}]
 import numpy as np

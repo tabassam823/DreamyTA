@@ -27,7 +27,7 @@ Ketiga model permainan tersebut memberikan kerangka umum terhadap dinamika ekuil
         \caption{Battle of the Sexes}
         \label{fig:payoff_bos}
     \end{subfigure}
-    \caption{Matriks imbal hasil pada model permainan klasik: (a) \textit{Stag Hunt}, (b) \textit{Prisoner's Dilemma}, dan (c) \textit{Battle of the Sexes} yang merepresentasikan variasi struktur ekuilibrium.}
+    \caption{Matriks imbal hasil pada model permainan klasik: (a) \textit{Stag Hunt}, (b) \textit{Prisoner's Dilemma}, dan (c) \textit{Battle of the Sexes} yang merepresentasikan variasi struktur ekuilibrium~\cite{szabo_evolutionary_2016}.}
     \label{fig:payoffs}
 \end{figure}
 
@@ -47,7 +47,7 @@ Ekuilibrium Nash atau \textit{nash equilibrium} merupakan konsep stabilitas fund
     \State \quad $\omega_n^{q+1} \leftarrow \arg \min_{\omega_n \in K_n} u_n(\omega_1^{q+1}, \dots, \omega_{n-1}^{q+1}, \omega_n, \omega_{n+1}^q, \dots, \omega_N^q)$
     \State \quad \textbf{Simultaneous (Jacobi) Update:}
     \State \quad $\omega_n^{q+1} \leftarrow (1 - \frac{1}{N})\omega_n^q + \frac{1}{N} \cdot \arg \min_{\omega_n \in K_n} u_n(\omega_1^q, \dots, \omega_{n-1}^q, \omega_n, \omega_{n+1}^q, \dots, \omega_N^q)$
-\State \textbf{Step 3:} Set $q \leftarrow q + 1$; dan kembali ke \textbf{Step 1}.
+\State \textbf{Step 3:} Set $q \leftarrow q + 1$; dan kembali ke \textbf{Step 1}~\cite{monderer_potential_1996,holmes_connecting_2022}.
 \end{algorithmic}
 \end{algorithm}
 
@@ -78,7 +78,7 @@ Hubungan $\gamma = 2/\lambda$ ini merupakan konsekuensi langsung dari struktur f
 \end{equation}
 dimana $\bar{\mu}_l$ adalah rata-rata return dari seluruh aset pilihan dan $\bar{\sigma}_l$ adalah rata-rata deviasi standar dari seluruh aset pilihan yang keduanya dibangun menggunakan \textit{log returns} \cite{abdul_hali_markowitz_2020}.  
 
-Berdasarkan teorema yang digagas oleh Monderer dan Shapley \cite{monderer_potential_1996}, sebuah permainan dapat dikategorikan sebagai EPG apabila terdapat sebuah fungsi potensial skalar $\Phi(\mathbf{x})$ sedemikian rupa sehingga selisih utilitas individu $\Delta u_i$ akibat perubahan strategi satu agen secara eksak sama dengan selisih nilai fungsi potensial tersebut \cite{monderer_potential_1996}. Kesetaraan ini dapat dibuktikan dengan membandingkan Persamaan (\ref{eq:utilitas_individu_varian}) dengan suku yang bergantung pada $x_i$ pada hasil dekomposisi Persamaan (\ref{eq:potential_function}), yang menunjukkan bahwa kedua ekspresi tersebut identik secara struktural sehingga $\Delta u_i = \Delta \Phi$ terjamin berlaku untuk setiap perubahan strategi $x_i$ secara sepihak. Dari persamaan (\ref{eq:utilitas_biner}), fungsi potensial diperoleh dari ekspansi fungsi biaya portofolio yang terasosiasi langsung dengan identitas utilitas sistem:
+Berdasarkan teorema yang digagas oleh Monderer dan Shapley \cite{monderer_potential_1996}, sebuah permainan dapat dikategorikan sebagai EPG apabila terdapat sebuah fungsi potensial skalar $\Phi(\mathbf{x})$ sedemikian rupa sehingga selisih utilitas individu $\Delta u_i$ akibat perubahan strategi satu agen secara eksak sama dengan selisih nilai fungsi potensial tersebut \cite{monderer_potential_1996}. Kesetaraan ini dapat dibuktikan dengan membandingkan Persamaan (\ref{eq:utilitas_individu_varian}) dengan suku yang bergantung pada $x_i$ pada hasil dekomposisi Persamaan (\ref{eq:potential_function}), yang menunjukkan bahwa kedua ekspresi tersebut identik secara struktural sehingga $\Delta u_i = \Delta \Phi$ terjamin berlaku untuk setiap perubahan strategi $x_i$ secara sepihak~\cite{john_von_neumann_theory_1953,galam_ising_2010,page_information_1993}. Dari persamaan (\ref{eq:utilitas_biner}), fungsi potensial diperoleh dari ekspansi fungsi biaya portofolio yang terasosiasi langsung dengan identitas utilitas sistem:
 \begin{equation}
     \Phi(\mathbf{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{K} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K}.
     \label{eq:potential_markowitz}

@@ -5,18 +5,18 @@ Lampiran ini menyajikan dataset numerik untuk simulasi dengan $N=4$ aset. Untuk 
 
 \section{Parameter Dinamis Hamiltonian N=4}
 
-Berikut adalah parameter $h$ (bias), $C_{obj}$ (konstanta), dan parameter $\lambda$ yang dihitung berdasarkan volatilitas per jendela. 
+Tabel berikut menyajikan hasil komputasi harian yang diakumulasikan secara bulanan untuk mendapatkan bias linier $h_{obj}$, offset $C_{obj}$, dan nilai $\gamma$ dinamis pada sistem N=4.
 
 \begin{footnotesize}
 \begin{longtable}{llllllll}
-\caption{Parameter Dinamis Portofolio N=4 ($\lambda$, $h_{obj}$, $C_{obj}$)} \label{tab:unified_n4} \\
+\caption{Parameter Dinamis Portofolio N=4 ($\gamma$, $h_{obj}$, $C_{obj}$)} \label{tab:unified_n4} \\
 \toprule
-P & Tanggal & $\lambda$ & $h_{obj}$ (BB) & $h_{obj}$ (AD) & $h_{obj}$ (SM) & $h_{obj}$ (TL) & $C_{obj}$ \\
+P & Tanggal & $\gamma$ & $h_{obj}$ (BB) & $h_{obj}$ (AD) & $h_{obj}$ (SM) & $h_{obj}$ (TL) & $C_{obj}$ \\
 \midrule
 \endfirsthead
 \multicolumn{8}{c}{{\bfseries Lanjutan Tabel \thetable}} \\
 \toprule
-P & Tanggal & $\lambda$ & $h_{obj}$ (BB) & $h_{obj}$ (AD) & $h_{obj}$ (SM) & $h_{obj}$ (TL) & $C_{obj}$ \\
+P & Tanggal & $\gamma$ & $h_{obj}$ (BB) & $h_{obj}$ (AD) & $h_{obj}$ (SM) & $h_{obj}$ (TL) & $C_{obj}$ \\
 \midrule
 \endhead
 \midrule
@@ -67,7 +67,7 @@ Selanjutnya adalah parameter interaksi $J$ antar masing-masing aset pada setiap 
 
 \begin{footnotesize}
 \begin{longtable}{llllllll}
-\caption{Parameter Interaksi Hamiltonian $J$ N=4} \label{tab:interaction_j_n4} \\
+\caption{Kompilasi Parameter Bias $h_{obj}$, Konstanta $C_{obj}$, dan Koefisien $\gamma$ N=4} \label{tab:parameter_h_C_n4} \\
 \toprule
 P & Tanggal & BB-TL & BB-SM & BB-AD & TL-SM & TL-AD & SM-AD \\
 \midrule

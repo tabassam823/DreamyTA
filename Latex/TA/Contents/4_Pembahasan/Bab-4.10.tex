@@ -20,15 +20,15 @@ Setelah dianalisis pada bab-bab sebelumnya, kinerja portofolio dapat diukur seca
     \hline
     \multirow{2}{*}{\textbf{Strategi}} & \multicolumn{3}{c|}{\textbf{Sistem N=2}} & \multicolumn{3}{c|}{\textbf{Sistem N=4}} \\ \cline{2-7} 
      & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} \\ \hline
-    GT-VQE (Hibrida) & \textbf{51,34\%} & \textbf{0,7357} & 15,91\% & \textbf{73,15\%} & \textbf{1,0107} & \textbf{16,68\%} \\ \hline
-    VQE (Tanpa GT) & 43,21\% & 0,6471 & 15,91\% & 16,89\% & 0,3592 & 20,89\% \\ \hline
-    SLSQP (Klasik) & 51,34\% & 0,6736 & 15,91\% & 12,91\% & 0,2810 & 21,12\% \\ \hline
-    \textit{Equal Weight} & 37,29\% & 0,6848 & 14,62\% & 35,57\% & 0,6790 & 18,42\% \\ \hline
+    GT-VQE (Hibrida) & \textbf{145,07\%} & \textbf{1,0185} & 30,33\% & \textbf{73,15\%} & \textbf{1,0107} & \textbf{16,68\%} \\ \hline
+    VQE (Tanpa GT) & 121,30\% & 0,9331 & 30,33\% & 16,89\% & 0,3592 & 20,89\% \\ \hline
+    SLSQP (Klasik) & 51,34\% & 0,6736 & \textbf{15,91\%} & 12,91\% & 0,2810 & 21,12\% \\ \hline
+    \textit{Equal Weight} & 97,88\% & 0,9764 & 27,49\% & 35,57\% & 0,6790 & 18,42\% \\ \hline
     \end{tabular}
     \end{small}
 \end{table}
 
-Data tersebut menunjukkan bahwa strategi GT-VQE memberikan performa yang paling unggul, terutama pada sistem dengan dimensi yang lebih besar ($N=4$). Meskipun pada sistem $N=2$ algoritma SLSQP klasik mampu menghasilkan imbal hasil yang sama dengan GT-VQE ($51,34\%$), namun GT-VQE unggul dalam metrik \textit{Sharpe Ratio} ($0,7357$ vs $0,6736$) yang berarti memiliki efisiensi manajemen risiko yang lebih baik. Performa algoritma SLSQP mengalami degradasi signifikan saat jumlah aset meningkat menjadi $N=4$, di mana imbal hasilnya merosot tajam menjadi $12,91\%$, jauh di bawah performa pasar dan strategi \textit{Equal Weight}. Sebaliknya, dengan menginjeksikan kecerdasan strategis \textit{Nash Equilibrium} melalui mekanisme \textit{warm-start}, algoritma GT-VQE mengalami peningkatan performa signifikan hingga mencapai imbal hasil $73,15\%$. Keunggulan ini membuktikan bahwa pendekatan kuantum hibrida mampu mengatasi keterbatasan optimasi klasik dalam menangani kompleksitas ruang pencarian solusi yang lebih kompleks. 
+Data tersebut menunjukkan bahwa strategi GT-VQE memberikan performa yang paling unggul baik pada sistem berdimensi $N=2$ maupun pada sistem dengan dimensi yang lebih besar ($N=4$). Pada sistem $N=2$, algoritma GT-VQE terbukti mampu menghasilkan imbal hasil luar biasa sebesar $145,07\%$ yang mengungguli secara telak pencapaian strategi kuantum murni tanpa GT ($121,30\%$) dan jauh mendominasi portofolio \textit{Equal Weight} ($97,88\%$) maupun SLSQP klasik ($51,34\%$). Secara metrik manajemen risiko \textit{Sharpe Ratio}, GT-VQE pada sistem $N=2$ juga unggul secara meyakinkan dengan nilai $1,0185$, meskipun volatilitas profil pengembaliannya diikuti oleh \textit{drawdown} sebesar $30,33\%$. Performa algoritma SLSQP lantas mengalami degradasi signifikan saat jumlah aset meningkat menjadi $N=4$, di mana imbal hasilnya merosot tajam menjadi $12,91\%$, jauh di bawah performa pasar dan strategi \textit{Equal Weight}. Sebaliknya, dengan menginjeksikan kecerdasan strategis \textit{Nash Equilibrium} melalui mekanisme \textit{warm-start}, algoritma GT-VQE mampu menjaga ketahanan performa signifikan hingga mencapai imbal hasil $73,15\%$ dengan risiko terendah di kelasnya. Keunggulan ini secara meyakinkan membuktikan bahwa pendekatan kuantum hibrida sanggup mengatasi keterbatasan optimasi klasik dalam menavigasi kompleksitas ruang pencarian alokasi yang asimetris. 
 
 Perbandingan performa antara strategi kuantum hibrida, kuantum murni, dan klasik untuk sistem $N=2$ diilustrasikan secara mendetail pada Gambar \ref{fig:comp_slsqp_n2} hingga \ref{fig:comp_all_n2}, sedangkan untuk perbandingan ekstensif pada sistem $N=4$ disajikan pada Gambar \ref{fig:comp_slsqp_n4} hingga \ref{fig:comp_all_n4}.
 
@@ -124,4 +124,187 @@ Dampak yang paling signifikan dari stabilitas \textit{warm-start} ini terlihat p
     \label{fig:circuit_efficiency}
 \end{figure}
 
-Selama proses \textit{backtesting}, ditemukan adanya tekanan \textit{drawdown} atau penurunan nilai portofolio yang signifikan pada awal periode simulasi. Tekanan tersebut dapat diamati pada transisi jendela bulan Februari--Maret 2021. Pada periode tersebut, terjadi lonjakan risiko pada sektor telekomunikasi (TLKM) yang direpresentasikan oleh penurunan parameter bias objek pada Hamiltonian. Untuk merespons pergeseran energi ini, sirkuit kuantum melakukan rotasi parameter sudut $\theta$ secara signifikan agar amplitudo probabilitas dapat dipindahkan dari status $|0110\rangle$ menuju status $|0011\rangle$. pergeseran tersebut terjadi pada Gambar \ref{fig:window_n4_2021_02_02} dan Gambar \ref{fig:window_n4_2021_03_04} di Lampiran \ref{appendix:window_analysis_n4} yang mana memberikan nilai pergeseran $\theta$ yang cukup signifikan di awal rangkaian. Mekanisme tersebut menunjukkan bahwa strategi hibrida memiliki agilitas yang tinggi dalam mengeksplorasi parameter $\theta$ agar memperoleh energi paling efisien tanpa harus terkendala hambatan komputasi klasik. 
+Selama proses \textit{backtesting}, ditemukan adanya tekanan \textit{drawdown} atau penurunan nilai portofolio yang signifikan pada awal periode simulasi. Tekanan tersebut dapat diamati pada transisi jendela bulan Februari--Maret 2021. Pada periode tersebut, terjadi lonjakan risiko pada sektor telekomunikasi (TLKM) yang direpresentasikan oleh penurunan parameter bias objek pada Hamiltonian. Untuk merespons pergeseran energi ini, sirkuit kuantum melakukan rotasi parameter sudut $\theta$ secara signifikan agar amplitudo probabilitas dapat dipindahkan dari status $|0110\rangle$ menuju status $|0011\rangle$. pergeseran tersebut terjadi pada Gambar \ref{fig:window_n4_2021_02_02} dan Gambar \ref{fig:window_n4_2021_03_04} di Lampiran \ref{appendix:window_analysis_n4} yang mana memberikan nilai pergeseran $\theta$ yang cukup signifikan di awal rangkaian. Mekanisme tersebut menunjukkan bahwa strategi hibrida memiliki agilitas yang tinggi dalam mengeksplorasi parameter $\theta$ agar memperoleh energi paling efisien tanpa harus terkendala hambatan komputasi klasik.
+
+Secara komputasional, proses evaluasi performa dan simulasi 	extit{backtesting} ini dikendalikan oleh skrip utama yang melakukan iterasi jendela waktu dan mengeksekusi penyesuaian bobot portofolio. Skrip operasional 	extit{backtesting} dapat dilihat pada Daftar Kode \ref{lst:backtest_runner}, sedangkan mekanisme penyesuaian bobot (	extit{rebalancing}) diimplementasikan pada Daftar Kode \ref{lst:rebalance_portfolio}.
+
+\begin{lstlisting}[language=Python, caption={Skrip komputasional untuk eksekusi simulasi \textit{backtesting} dengan iterasi jendela bergulir (\texttt{backtest\_runner.py})}, label={lst:backtest_runner}]
+import numpy as np
+import pandas as pd
+from run_strategy_step import run_strategy_step
+from rebalance_portfolio import rebalance_portfolio
+
+def run_backtest(data_clean, tickers, config):
+    """
+    Menjalankan simulasi backtest berdasarkan data historis dan konfigurasi.
+    """
+    N = len(tickers)
+    K = config['K']
+    penalty_A = config['penalty_A']
+    max_depth = config['max_depth']
+    maxiter = config['maxiter']
+    max_total_iter = config.get('max_total_iter', 500)
+    batch_size = config.get('batch_size', 10)
+    conv_window = config.get('conv_window', 4)
+    conv_tol = config.get('conv_tol', 1e-3)
+    use_warm_start = config.get('use_warm_start', True)
+    initial_capital = config['initial_capital']
+    lookback_days = config['lookback_days']
+    rebalance_days = config['rebalance_days']
+    start_bt_date = pd.to_datetime(config['start_bt_date'])
+
+    start_idx = np.searchsorted(data_clean.index, start_bt_date)
+    rebalance_indices = range(start_idx, len(data_clean), rebalance_days)
+
+    value_vqe = [initial_capital] * start_idx
+    value_bench = [initial_capital] * start_idx
+    value_nash = [initial_capital] * start_idx
+    value_assets = {t: [initial_capital] * start_idx for t in tickers}
+
+    holdings_vqe, holdings_bench, holdings_nash = np.zeros(N), np.zeros(N), np.zeros(N)
+    cash_vqe, cash_bench, cash_nash = initial_capital, initial_capital, initial_capital
+    cash_assets = {t: initial_capital for t in tickers}
+    holdings_assets = {t: 0.0 for t in tickers}
+
+    detail_logs = []
+    depths_history = []
+    rebalance_dates = []
+    window_analysis_history = [] # Menyimpan semua data untuk plotting per window
+
+    print(f"\n--- Memulai Backtest dari {data_clean.index[start_idx].date()} hingga {data_clean.index[-1].date()} ---")
+
+    for i, curr_idx in enumerate(rebalance_indices):
+        curr_date = data_clean.index[curr_idx]
+        train_start = max(0, curr_idx - lookback_days)
+        train_data = data_clean.iloc[train_start:curr_idx]
+        next_idx = (rebalance_indices[i + 1] if i + 1 < len(rebalance_indices) else len(data_clean))
+
+        # Strategi Step
+        selected_indices, depth_used, energy_final, best_history, best_ent_hist, best_gvar_hist, depth_energies, lr_data, ne_bs, ne_utility, winning_probs, best_params = run_strategy_step(
+            train_data, tickers, curr_date, K=K, penalty_A=penalty_A, max_depth=max_depth, maxiter=maxiter,
+            max_total_iter=max_total_iter, batch_size=batch_size,
+            conv_window=conv_window, conv_tol=conv_tol,
+            use_warm_start=use_warm_start,
+            file_config=config.get('files')
+        )
+        
+        depths_history.append(depth_used)
+        rebalance_dates.append(curr_date.date())
+        
+        # Simpan semua detail untuk plotting nanti
+        window_analysis_history.append({
+            'date': curr_date.date(),
+            'best_history': best_history,
+            'best_ent_hist': best_ent_hist,
+            'best_gvar_hist': best_gvar_hist,
+            'depth_energies': depth_energies,
+            'lr_data': lr_data,
+            'winning_probs': winning_probs,
+            'ne_bs': ne_bs,
+            'best_params': best_params,
+            'best_depth': depth_used,
+            'K': K,
+            'use_warm_start': use_warm_start
+        })
+        
+        selected_names = [tickers[idx] for idx in selected_indices]
+        vqe_details = "".join([f"    [Depth {d}] Konvergen dalam {iters} iterasi | E = {en:.6f}\n" for d, en, iters in depth_energies])
+        
+        print(f"[{curr_date.date()}] VQE Terpilih: {selected_names} | Depth: {depth_used} | E_min: {energy_final:.6f}")
+
+        log_entry = (f"[{curr_date.date()}]\n"
+                     f"  - Nash Eq: {ne_bs} | Utility: {ne_utility:.6f}\n"
+                     f"  - LR: {lr_data[2]:.4f}\n"
+                     f"  - Detail:\n{vqe_details}"
+                     f"  - Terpilih: {selected_names} | Depth: {depth_used} | E_min: {energy_final:.6f}\n" + "-"*40)
+        detail_logs.append(log_entry)
+
+        # Rebalancing VQE
+        target_w_vqe = np.zeros(N)
+        if len(selected_indices) > 0:
+            w = 1.0 / len(selected_indices)
+            for idx in selected_indices: target_w_vqe[idx] = w
+
+        # Rebalancing Nash
+        target_w_nash = np.zeros(N)
+        nash_indices = [j for j, bit in enumerate(ne_bs) if bit == '1']
+        if len(nash_indices) > 0:
+            w_n = 1.0 / len(nash_indices)
+            for idx in nash_indices: target_w_nash[idx] = w_n
+
+        target_w_bench = np.full(N, 1.0 / N)
+        current_prices = data_clean.iloc[curr_idx].values
+
+        cash_vqe, holdings_vqe = rebalance_portfolio(cash_vqe, holdings_vqe, target_w_vqe, current_prices, N)
+        cash_nash, holdings_nash = rebalance_portfolio(cash_nash, holdings_nash, target_w_nash, current_prices, N)
+
+        if i == 0:
+            cash_bench, holdings_bench = rebalance_portfolio(cash_bench, holdings_bench, target_w_bench, current_prices, N)
+            for j, t in enumerate(tickers):
+                target_w_indiv = np.zeros(N)
+                target_w_indiv[j] = 1.0
+                c_t, h_t = rebalance_portfolio(cash_assets[t], np.zeros(N), target_w_indiv, current_prices, N)
+                cash_assets[t], holdings_assets[t] = c_t, h_t[j]
+
+        for d in range(curr_idx, next_idx):
+            prices = data_clean.iloc[d].values
+            value_vqe.append(cash_vqe + np.sum(holdings_vqe * prices))
+            value_nash.append(cash_nash + np.sum(holdings_nash * prices))
+            value_bench.append(cash_bench + np.sum(holdings_bench * prices))
+            for j, t in enumerate(tickers):
+                value_assets[t].append(cash_assets[t] + holdings_assets[t] * prices[j])
+
+    # --- EKSPOR HASIL EKUITAS KE CSV (Untuk Perbandingan) ---
+    suffix = f"_N{N}"
+    equity_df = pd.DataFrame({
+        'Date': data_clean.index[:len(value_vqe)],
+        'VQE': value_vqe,
+        'Nash': value_nash,
+        'Benchmark': value_bench
+    })
+    # Gunakan folder files config jika ada, atau default suffix
+    equity_csv_path = config.get('files', {}).get('equity_history', f'hasil_ekuitas_backtest{suffix}.csv')
+    equity_df.to_csv(equity_csv_path, index=False)
+
+    return {
+        'value_vqe': value_vqe,
+        'value_nash': value_nash,
+        'value_bench': value_bench,
+        'value_assets': value_assets,
+        'depths_history': depths_history,
+        'rebalance_dates': rebalance_dates,
+        'detail_logs': detail_logs,
+        'window_analysis_history': window_analysis_history,
+        'start_idx': start_idx
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Fungsi operasional untuk penyesuaian bobot portofolio pada momen evaluasi (\texttt{rebalance\_portfolio.py})}, label={lst:rebalance_portfolio}]
+import numpy as np
+
+def rebalance_portfolio(current_cash, current_holdings, target_weights, prices, N):
+    """
+    Menyeimbangkan portofolio berdasarkan bobot target.
+    N: Jumlah aset
+    """
+    total_value    = current_cash + np.sum(current_holdings * prices)
+    target_values  = total_value * target_weights
+    new_holdings   = current_holdings.copy()
+    new_cash       = current_cash
+
+    for j in range(N):
+        c_val = new_holdings[j] * prices[j]
+        if c_val > target_values[j]:
+            sell_val        = c_val - target_values[j]
+            new_cash       += sell_val
+            new_holdings[j] -= sell_val / prices[j]
+
+    for j in range(N):
+        c_val = new_holdings[j] * prices[j]
+        if c_val < target_values[j]:
+            buy_val       = min(target_values[j] - c_val, new_cash)
+            new_cash     -= buy_val
+            new_holdings[j] += buy_val / prices[j]
+
+    return new_cash, new_holdings
+\end{lstlisting}

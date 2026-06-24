@@ -1,7 +1,7 @@
 \section{Validasi \textit{Barren Plateau}}
 Implementasi algoritma hibrida kuantum-klasik pada era \textit{Noisy Intermediate-Scale Quantum} (\textit{NISQ}) menghasilkan keluaran yang sangat bergantung pada efektivitas proses optimasi parameter dalam menavigasi lanskap energi \cite{preskill_quantum_2018}. Namun, terdapat tantangan fundamental yang sering dihadapi oleh para peneliti dalam fase pelatihan sirkuit variasional, yaitu fenomena \textit{Barren Plateau} atau dataran tandus yang menghambat konvergensi. Kemunculan fenomena ini menghambat aliran informasi gradien secara drastis sehingga menyebabkan stagnasi pada proses pencarian solusi optimal di dalam ruang \textit{Hilbert} yang berdimensi tinggi \cite{mcclean_barren_2018}. Oleh sebab itu, dibutuhkan mekanisme diagnostik yang komprehensif melalui pemanfaatan metrik entropi \textit{Von Neumann} dan analisis statistik varians gradien guna mendeteksi serta memitigasi hambatan komputasional tersebut.
 
-Identifikasi dini terhadap gejala dataran tandus sangat krusial untuk menjaga integritas hasil simulasi portofolio finansial yang sedang dikembangkan. Tanpa pengawasan terhadap metrik keterbelitan dan varians gradien, sistem dapat terjebak dalam konfigurasi parameter suboptimal yang tidak merepresentasikan kondisi ekonomi riil. Penggunaan kerangka kerja evaluasi yang ketat memungkinkan peneliti untuk melakukan penyesuaian strategi inisialisasi parameter sebelum sirkuit memasuki fase kritis stagnasi. Subbab berikut akan menjelaskan landasan teoretis dari mekanisme \textit{Barren Plateau} dan metodologi penghitungan entropi sebagai instrumen validasi stabilitas sistem kuantum.
+Identifikasi dini terhadap gejala dataran tandus sangat krusial untuk menjaga integritas hasil simulasi portofolio finansial yang sedang dikembangkan. Tanpa pengawasan terhadap metrik keterbelitan dan varians gradien, sistem dapat terjebak dalam konfigurasi parameter suboptimal yang tidak merepresentasikan kondisi ekonomi riil. Penggunaan kerangka kerja evaluasi yang ketat memungkinkan peneliti untuk melakukan penyesuaian strategi inisialisasi parameter sebelum sirkuit memasuki fase kritis stagnasi. Subbab berikut akan menjelaskan landasan teoretis dari mekanisme \textit{Barren Plateau} dan metodologi penghitungan entropi sebagai instrumen validasi stabilitas sistem kuantum~\cite{coyle_quantum_2021,revythi_quantum_2025}.
 
 \subsection{\textit{Barren Plateau}}
 Fenomena \textit{Barren Plateau} didefinisikan secara teknis sebagai kondisi ketika lanskap fungsi biaya pada algoritma kuantum variasional menjadi sangat datar secara eksponensial seiring bertambahnya jumlah \textit{qubit} ($N$) dan kedalaman sirkuit ($L$). Kondisi ini diindikasikan oleh nilai varians gradien yang menyusut tajam mendekati nol, sehingga algoritma optimasi kehilangan arah navigasi menuju konfigurasi energi minimum sistem yang diharapkan. Secara formal, penyusutan varians gradien $\text{Var}[\partial_{\theta} E]$ mengikuti pola peluruhan asimtotik yang sangat merugikan bagi proses pembaruan parameter pada sistem komputasi hibrida:
@@ -17,7 +17,7 @@ Entropi \textit{Von Neumann} merupakan representasi metrik informasi kuantum yan
     H = - \sum_i p_i \log_2 (p_i).
 \end{equation}
 
-Dalam realitas perhitungan mekanika kuantum, probabilitas komponen sistem $p_i$ merepresentasikan bobot kontribusi dari berbagai keadaan murni atau \textit{pure state} di dalam sebuah ansambel statistik. Kumpulan probabilitas tersebut selanjutnya dapat dikristalisasi ke dalam sebuah representasi operator densitas $\rho$ untuk merangkum seluruh informasi keadaan sistem secara komprehensif. Formulasi matriks densitas ini memungkinkan peneliti untuk mengevaluasi derajat kemurnian sistem kuantum yang sedang dioperasikan dalam sirkuit variasional melalui hubungan:
+Dalam realitas perhitungan mekanika kuantum, probabilitas komponen sistem $p_i$ merepresentasikan bobot kontribusi dari berbagai keadaan murni atau \textit{pure state} di dalam sebuah ansambel statistik. Kumpulan probabilitas tersebut selanjutnya dapat dikristalisasi ke dalam sebuah representasi operator densitas $\rho$ untuk merangkum seluruh informasi keadaan sistem secara komprehensif~\cite{nielsen_quantum_2010,shaikh_feature_2025,wei_solving_2025}. Formulasi matriks densitas ini memungkinkan peneliti untuk mengevaluasi derajat kemurnian sistem kuantum yang sedang dioperasikan dalam sirkuit variasional melalui hubungan:
 \begin{equation}
     \rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|.
 \end{equation}
@@ -26,7 +26,7 @@ Melalui eksekusi dekomposisi spektral pada ruang linier sirkuit, operator densit
     \rho = \sum_j \lambda_j |e_j\rangle \langle e_j|.
 \end{equation}
 
-Sesuai dengan kaidah aljabar operator dalam domain mekanika kuantum, fungsi logaritma dari sebuah operator dapat diinterpretasikan melalui nilai eigen yang dimilikinya pada basis ortonormal yang sesuai. Berlandaskan prinsip tersebut, rumusan persamaan logaritma berbasis dua dari operator densitas dapat diturunkan menjadi bentuk stabilitas matematis yang lebih eksplisit untuk proses kalkulasi entropi selanjutnya:
+Sesuai dengan kaidah aljabar operator dalam domain mekanika kuantum, fungsi logaritma dari sebuah operator dapat diinterpretasikan melalui nilai eigen yang dimilikinya pada basis ortonormal yang sesuai~\cite{nakahara_quantum_2008}. Berlandaskan prinsip tersebut, rumusan persamaan logaritma berbasis dua dari operator densitas dapat diturunkan menjadi bentuk stabilitas matematis yang lebih eksplisit untuk proses kalkulasi entropi selanjutnya:
 \begin{equation}
     \log_2(\rho) = \sum_j \log_2 (\lambda_j) |e_j\rangle \langle e_j|.
 \end{equation}
@@ -40,7 +40,7 @@ Operasi perkalian antara matriks operator densitas $\rho$ dengan fungsi logaritm
 \end{split}
 \end{equation}
 
-Penyelesaian dari evaluasi Entropi \textit{Von Neumann} ini diakhiri dengan menerapkan fungsi skalar \textit{trace} ($\text{Tr}$) pada hasil perkalian operator densitas dan logaritmanya. Implementasi operasi \textit{trace} ini bertujuan untuk mengekstraksi jumlahan dari seluruh elemen diagonal matriks yang merepresentasikan total informasi statistik di dalam sistem kuantum terintegrasi. Langkah ini sangat krusial untuk mentransformasikan informasi operator yang kompleks menjadi nilai skalar tunggal yang dapat digunakan sebagai parameter validasi stabilitas:
+Penyelesaian dari evaluasi Entropi \textit{Von Neumann} ini diakhiri dengan menerapkan fungsi skalar \textit{trace} ($\text{Tr}$) pada hasil perkalian operator densitas dan logaritmanya. Implementasi operasi \textit{trace} ini bertujuan untuk mengekstraksi jumlahan dari seluruh elemen diagonal matriks yang merepresentasikan total informasi statistik di dalam sistem kuantum terintegrasi~\cite{yang_abnormal_2024,crosato_shannon_2023}. Langkah ini sangat krusial untuk mentransformasikan informasi operator yang kompleks menjadi nilai skalar tunggal yang dapat digunakan sebagai parameter validasi stabilitas:
 \begin{equation}
 \begin{split}
     \text{Tr}(\rho \log_2(\rho)) &= \text{Tr} \left( \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j| \right) \\

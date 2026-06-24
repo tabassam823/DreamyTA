@@ -1,4 +1,4 @@
-Ya dan tidak. Ada hubungan yang sangat dalam, tetapi arah logikanya biasanya kebalik dari yang banyak orang bayangkan.
+1Ya dan tidak. Ada hubungan yang sangat dalam, tetapi arah logikanya biasanya kebalik dari yang banyak orang bayangkan.
 
 ---
 

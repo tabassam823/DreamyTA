@@ -25,6 +25,13 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Referensi.bib
 Warning--I didn't find a database entry for "gabaix_political_2020"
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
+Warning--No journal in anshu_sample-efficient_2020
+ptr=1, stack=
+
+---the literal stack isn't empty for entry anshu_sample-efficient_2020
+while executing---line 5079 of file apacite.bst
+Warning--No journal in crosato_shannon_2023
+Warning--No journal in dixit_variational_2025
 Warning--No journal in hidalgo_quantum_2006
 ptr=1, stack=
 
@@ -36,45 +43,45 @@ ptr=1, stack=
 ---the literal stack isn't empty for entry sarkar_quantum_2018
 while executing---line 5079 of file apacite.bst
 Warning--No journal in spall_implementation_1998
-You've used 36 entries,
+You've used 68 entries,
             6951 wiz_defined-function locations,
-            1578 strings with 20838 characters,
-and the built_in function-call counts, 72223 in all, are:
-= -- 8606
-> -- 620
-< -- 3440
-+ -- 3474
-- -- 76
-* -- 5005
-:= -- 13091
-add.period$ -- 149
-call.type$ -- 36
-change.case$ -- 671
+            1813 strings with 29602 characters,
+and the built_in function-call counts, 143647 in all, are:
+= -- 16955
+> -- 1250
+< -- 7173
++ -- 7311
+- -- 140
+* -- 10109
+:= -- 26597
+add.period$ -- 281
+call.type$ -- 68
+change.case$ -- 1269
 chr.to.int$ -- 0
-cite$ -- 75
-duplicate$ -- 2070
-empty$ -- 3014
-format.name$ -- 1056
-if$ -- 13575
+cite$ -- 142
+duplicate$ -- 4146
+empty$ -- 5768
+format.name$ -- 2215
+if$ -- 26526
 int.to.chr$ -- 0
-int.to.str$ -- 108
+int.to.str$ -- 204
 missing$ -- 0
-newline$ -- 1057
-num.names$ -- 290
-pop$ -- 1078
+newline$ -- 2017
+num.names$ -- 546
+pop$ -- 2124
 preamble$ -- 1
-purify$ -- 200
+purify$ -- 380
 quote$ -- 0
-skip$ -- 4527
+skip$ -- 8636
 stack$ -- 0
-substring$ -- 3797
-swap$ -- 1257
-text.length$ -- 153
+substring$ -- 7904
+swap$ -- 2456
+text.length$ -- 273
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 3072
-warning$ -- 3
-while$ -- 422
+type$ -- 5760
+warning$ -- 6
+while$ -- 868
 width$ -- 0
-write$ -- 1299
-(There were 2 error messages)
+write$ -- 2521
+(There were 3 error messages)
