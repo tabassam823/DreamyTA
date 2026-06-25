@@ -1,14 +1,11 @@
 \section{Akuisisi dan Prapemrosesan Data Runtun Waktu Saham}
 \label{sec:4_1_akuisisi_data}
 
-\section{Akuisisi dan Prapemrosesan Data Runtun Waktu Saham}
-\label{sec:4_1_akuisisi_data}
+Proses akuisisi data difokuskan pada saham-saham unggulan yang termasuk dalam indeks IHSG dan disusun ke dalam dua konfigurasi sistem. Konfigurasi pertama terdiri atas dua aset ($N=2$), yaitu BBCA dan TLKM, sedangkan konfigurasi kedua terdiri atas empat aset ($N=4$), yaitu BBCA, ADRO, SMGR, dan TLKM. Pemilihan aset dilakukan berdasarkan prinsip diversifikasi lintas sektor perusahaan yang mencakup sektor perbankan, energi, industri dasar, dan telekomunikasi. Diversifikasi ini bertujuan untuk menghasilkan portofolio dengan karakteristik pertumbuhan dan tingkat risiko yang beragam sehingga dapat mengurangi ketergantungan terhadap kinerja satu aset tertentu. Data yang digunakan berupa harga penutupan harian pada periode Januari 2021 hingga Desember 2023. Rentang waktu tersebut dipilih untuk merepresentasikan dinamika pasar modal Indonesia pada fase pemulihan pasca-pandemi. Seluruh data harga historis yang digunakan sebagai masukan utama algoritma optimasi disajikan secara lengkap pada Lampiran \ref{appendix:daily_prices}.
 
-Proses akuisisi data difokuskan pada saham-saham unggulan yang termasuk dalam indeks IHSG dan disusun ke dalam dua konfigurasi sistem. Konfigurasi pertama terdiri atas dua aset ($N=2$), yaitu BBCA dan TLKM, sedangkan konfigurasi kedua terdiri atas empat aset ($N=4$), yaitu BBCA, ADRO, SMGR, dan TLKM. Pemilihan aset dilakukan berdasarkan prinsip diversifikasi sektoral yang mencakup sektor perbankan, energi, industri dasar, dan telekomunikasi. Diversifikasi ini bertujuan untuk menghasilkan portofolio dengan karakteristik pertumbuhan dan tingkat risiko yang beragam sehingga dapat mengurangi ketergantungan terhadap kinerja satu aset tertentu. Data yang digunakan berupa harga penutupan harian pada periode Januari 2021 hingga Desember 2023. Rentang waktu tersebut dipilih untuk merepresentasikan dinamika pasar modal Indonesia pada fase pemulihan pasca-pandemi. Seluruh data harga historis yang digunakan sebagai masukan utama algoritma optimasi disajikan secara lengkap pada Lampiran \ref{appendix:daily_prices}.
+Secara komputasional, data historis diperoleh melalui \textit{Application Programming Interface} (API) Yahoo Finance menggunakan pustaka \textit{yfinance} pada bahasa pemrograman Python. Pengunduhan data dilakukan secara otomatis untuk memperoleh harga penutupan harian setiap saham serta indeks pembanding secara konsisten. Setelah proses ekstraksi selesai, data dibersihkan dari nilai kosong (\textit{missing values}) dan diurutkan berdasarkan indeks waktu guna menjaga konsistensi \textit{time series} sebelum digunakan pada tahap analisis berikutnya. Implementasi proses pengambilan dan pembersihan data tersebut disajikan pada Daftar Kode \ref{lst:data_downloader}.
 
-Secara komputasional, data historis diperoleh melalui antarmuka pemrograman aplikasi (API) Yahoo Finance menggunakan pustaka \textit{yfinance} pada bahasa pemrograman Python. Pengunduhan data dilakukan secara otomatis untuk memperoleh harga penutupan harian setiap saham serta indeks pembanding secara konsisten. Setelah proses ekstraksi selesai, data dibersihkan dari nilai kosong (\textit{missing values}) dan diurutkan berdasarkan indeks waktu guna menjaga konsistensi runtun waktu sebelum digunakan pada tahap analisis berikutnya. Implementasi proses pengambilan dan pembersihan data tersebut disajikan pada Daftar Kode \ref{lst:data_downloader}.
-
-\begin{lstlisting}[language=Python, caption={Skrip ekstraksi data harga historis saham menggunakan antarmuka \textit{yfinance}}, label={lst:data_downloader}]
+\begin{lstlisting}[language=Python, caption={Skrip ekstraksi data harga historis saham menggunakan API \textit{yfinance}}, label={lst:data_downloader}]
 import yfinance as yf
 import pandas as pd
 
@@ -36,20 +33,15 @@ def download_market_data(tickers, benchmark_ticker, start_date, end_date, start_
 \subsection{Imbal Hasil dan Kovariansi}
 \label{subsec:4_1_1_rumus}
 
-Tahapan prapemrosesan diawali dengan mentransformasikan data harga saham menjadi data imbal hasil sederhana (\textit{simple return}) dan imbal hasil logaritmik (\textit{log return}). Imbal hasil sederhana harian untuk aset ke-$i$ pada waktu $t$ didefinisikan sebagai rasio perubahan harga terhadap harga pada periode sebelumnya, sedangkan imbal hasil logaritmik diperoleh melalui logaritma natural dari rasio harga berturut-turut. Berdasarkan kedua bentuk imbal hasil tersebut, selanjutnya dihitung nilai ekspektasi imbal hasil ($\mu_i$), varians ($\sigma_i^2$), dan kovariansi antar aset sebagai parameter utama dalam model optimasi portofolio.
+Tahap prapemrosesan diawali dengan mentransformasikan data harga saham menjadi data imbal hasil sederhana (\textit{simple return}) dan imbal hasil logaritmik (\textit{log return}). Imbal hasil sederhana harian untuk aset ke-$i$ pada waktu $t$ didefinisikan sebagai rasio perubahan harga terhadap harga pada periode sebelumnya, sedangkan imbal hasil logaritmik diperoleh melalui logaritma natural dari rasio harga berturut-turut. Berdasarkan kedua bentuk imbal hasil tersebut, selanjutnya dihitung nilai ekspektasi imbal hasil ($\mu_i$), varians ($\sigma_i^2$), dan kovariansi antar aset sebagai parameter utama dalam model optimasi portofolio. Nilai ekspektasi imbal hasil diperoleh melalui rata-rata data historis pada setiap jendela pelatihan yang terdiri atas $n=126$ hari perdagangan. Sementara itu, ukuran risiko dihitung menggunakan varians karena menunjukkan tingkat penyebaran imbal hasil terhadap nilai rata-ratanya. Semakin besar nilai varians, semakin tinggi tingkat ketidakpastian pergerakan harga aset tersebut. Selain risiko individual, hubungan antar aset juga dievaluasi melalui kovariansi. Kovariansi bernilai positif menunjukkan kecenderungan dua aset bergerak searah, sedangkan kovariansi bernilai negatif menunjukkan kecenderungan pergerakan yang berlawanan.
 
-Nilai ekspektasi imbal hasil diperoleh melalui rata-rata data historis pada setiap jendela pelatihan yang terdiri atas $n=126$ hari perdagangan. Parameter ini digunakan untuk merepresentasikan tingkat pertumbuhan rata-rata suatu aset selama periode pengamatan. Sementara itu, varians digunakan sebagai ukuran risiko karena menunjukkan tingkat penyebaran imbal hasil terhadap nilai rata-ratanya. Semakin besar nilai varians, semakin tinggi tingkat ketidakpastian pergerakan harga aset tersebut. Selain risiko individual, hubungan antar aset juga dievaluasi melalui kovariansi. Kovariansi bernilai positif menunjukkan kecenderungan dua aset bergerak searah, sedangkan kovariansi bernilai negatif menunjukkan kecenderungan pergerakan yang berlawanan.
-
-Dalam tugas akhir ini, \textit{simple return} digunakan untuk menghitung ekspektasi imbal hasil portofolio karena memiliki sifat linear terhadap bobot aset. Dengan sifat tersebut, imbal hasil portofolio dapat diperoleh secara langsung melalui kombinasi linear dari imbal hasil masing-masing aset sesuai formulasi model Markowitz. Sebaliknya, penggunaan \textit{log return} untuk menghitung ekspektasi imbal hasil portofolio dapat menghasilkan bias akibat sifat nonlinier fungsi logaritma. Bias tersebut dapat dianalisis melalui aproksimasi deret Taylor orde kedua sehingga hubungan antara imbal hasil logaritmik portofolio yang sebenarnya ($r_{true}$) dan aproksimasi logaritmik berbobot ($\hat{r}_p$) dapat dievaluasi secara kuantitatif.
-
-Proses derivasi diawali dengan mendefinisikan dua bentuk representasi \textit{log return} portofolio. Bentuk pertama adalah aproksimasi berbobot yang diperoleh dari penjumlahan \textit{log return} masing-masing aset, sedangkan bentuk kedua merupakan \textit{log return} portofolio yang sebenarnya berdasarkan total \textit{simple return} portofolio. Dengan menggunakan aproksimasi deret Taylor orde kedua,
-[
-\ln(1+x)\approx x-\frac{x^2}{2},
-]
-kedua bentuk tersebut dapat diekspansikan menjadi
-
+Dalam tugas akhir ini, \textit{simple return} digunakan untuk menghitung ekspektasi imbal hasil portofolio karena memiliki sifat linear terhadap bobot aset. Sebaliknya, penggunaan \textit{log return} untuk menghitung ekspektasi imbal hasil portofolio dapat menghasilkan bias akibat sifat nonlinier fungsi logaritma. Bias tersebut dapat dianalisis melalui aproksimasi deret Taylor orde kedua sehingga hubungan antara imbal hasil logaritmik portofolio yang sebenarnya ($r_{true}$) dan aproksimasi logaritmik berbobot ($\hat{r}_p$) dapat dievaluasi secara kuantitatif. Proses derivasi diawali dengan mendefinisikan dua bentuk representasi \textit{log return} portofolio. Bentuk pertama adalah aproksimasi berbobot yang diperoleh dari penjumlahan \textit{log return} masing-masing aset, sedangkan bentuk kedua merupakan \textit{log return} portofolio yang sebenarnya berdasarkan total \textit{simple return} portofolio. Dengan menggunakan aproksimasi deret Taylor orde kedua,
 \begin{equation}
-\hat{r}*p = \sum*{i=1}^{n} w_i \ln(1+R_i)
+\ln(1+x)\approx x-\frac{x^2}{2},
+\end{equation}
+yang mana kedua bentuk tersebut dapat diekspansikan menjadi
+\begin{equation}
+\hat{r}_p = \sum_{i=1}^{n} w_i \ln(1+R_i)
 \approx
 \sum_{i=1}^{n} w_i R_i
 -
@@ -80,54 +72,26 @@ Selisih antara kedua ekspansi tersebut merepresentasikan galat aproksimasi yang 
 
 \begin{equation*}
 \text{Error}
-=
-
-\left(
-\sum_{i=1}^{n} w_i R_i
--
-
-\frac{1}{2}
-\left(
-\sum_{i=1}^{n} w_i R_i
-\right)^2
-\right)
--
-
-\left(
-\sum_{i=1}^{n} w_i R_i
--
-
-\frac{1}{2}
-\sum_{i=1}^{n} w_i R_i^2
-\right),
+= \left(
+\sum_{i=1}^{n} w_i R_i - \frac{1}{2} \left( \sum_{i=1}^{n} w_i R_i \right)^2 \right) - \left( \sum_{i=1}^{n} w_i R_i - \frac{1}{2} \sum_{i=1}^{n} w_i R_i^2 \right),
 \end{equation*}
 
 \begin{equation*}
 \text{Error}
 =
-
 \frac{1}{2}
 \left[
-\sum_{i=1}^{n} w_i R_i^2
--
-
-\left(
-\sum_{i=1}^{n} w_i R_i
-\right)^2
+\sum_{i=1}^{n} w_i R_i^2 - \left( \sum_{i=1}^{n} w_i R_i \right)^2
 \right].
 \end{equation*}
-
-Bentuk dalam tanda kurung identik dengan varians portofolio sehingga diperoleh
-
+Bentuk dalam tanda kurung tersebut identik dengan varians portofolio sehingga diperoleh
 \begin{equation}
 \text{Error}
 =
 \frac{1}{2}
 \text{Var}(R).
 \end{equation}
-
-Dengan demikian, hubungan antara \textit{log return} portofolio yang sebenarnya dan aproksimasi berbobotnya dapat dinyatakan sebagai
-
+Sehingga, hubungan antara \textit{log return} portofolio yang sebenarnya dan aproksimasi berbobotnya dapat dinyatakan sebagai
 \begin{equation}
 r_{true}
 \approx
@@ -136,9 +100,7 @@ r_{true}
 \frac{1}{2}\text{Var}(R),
 \label{eq:eror_returns}
 \end{equation}
-
 yang menunjukkan bahwa aproksimasi berbasis \textit{log return} mengandung koreksi sebesar setengah varians portofolio. Oleh karena itu, ekspektasi imbal hasil dalam model optimasi portofolio dihitung menggunakan \textit{simple return} agar tetap konsisten dengan sifat linear formulasi Markowitz.
-
 
 Meskipun ekspektasi imbal hasil dihitung menggunakan \textit{simple return}, estimasi matriks kovariansi dalam penelitian ini dilakukan menggunakan \textit{log return}. Pemilihan tersebut didasarkan pada sifat \textit{log return} yang lebih stabil secara statistik serta memiliki distribusi yang cenderung lebih mendekati asumsi normalitas dibandingkan \textit{simple return}. Selain itu, untuk nilai imbal hasil harian yang relatif kecil, perbedaan antara kedua representasi tersebut sangat kecil sehingga tidak menghasilkan perubahan yang signifikan terhadap estimasi risiko portofolio. Berdasarkan Persamaan \ref{eq:eror_returns}, hubungan antara \textit{simple return} dan \textit{log return} dapat dituliskan secara aproksimatif sebagai
 \begin{equation}
@@ -230,7 +192,7 @@ Sebagai ilustrasi penerapan formulasi yang telah dijelaskan sebelumnya, dilakuka
 R_{BBCA,1}
 &=
 \frac{4869,32-4515,50}{4515,50}
-\approx 0,0783,\
+\approx 0,0783,\\
 r_{BBCA,1}
 &=
 \ln(1+0,0783)
@@ -245,7 +207,7 @@ Nilai varians dan kovariansi selanjutnya dihitung menggunakan data \textit{log r
 \frac{1}{n-1}
 \sum_{t=1}^{n}
 (r_{i,t}-\bar r_i)
-(r_{j,t}-\bar r_j) \
+(r_{j,t}-\bar r_j) \\
 &\approx
 \frac{1}{n-1}
 \sum_{t=1}^{n}
@@ -260,7 +222,7 @@ Untuk konfigurasi sistem dengan $N=2$ aset, matriks kovariansi pada jendela pela
 \Sigma_{N2}
 =
 \begin{pmatrix}
-\mathrm{Var}(r_1) & \mathrm{Cov}(r_1,r_2) \
+\mathrm{Var}(r_1) & \mathrm{Cov}(r_1,r_2) \\
 \mathrm{Cov}(r_2,r_1) & \mathrm{Var}(r_2)
 \end{pmatrix},
 \end{equation}
@@ -269,7 +231,7 @@ yang secara numerik menghasilkan
 \Sigma_{N2}
 =
 \begin{pmatrix}
-0,0915 & 0,0202 \
+0,0915 & 0,0202 \\
 0,0202 & 0,0367
 \end{pmatrix}.
 \end{equation}
@@ -279,9 +241,9 @@ Sementara itu, untuk konfigurasi sistem dengan $N=4$ aset, matriks kovariansi pa
 =
 
 \begin{pmatrix}
-0,0171 & 0,0012 & 0,0009 & 0,0022 \
-0,0012 & 0,0198 & 0,0015 & 0,0018 \
-0,0009 & 0,0015 & 0,0241 & 0,0011 \
+0,0171 & 0,0012 & 0,0009 & 0,0022 \\
+0,0012 & 0,0198 & 0,0015 & 0,0018 \\
+0,0009 & 0,0015 & 0,0241 & 0,0011 \\
 0,0022 & 0,0018 & 0,0011 & 0,0225
 \end{pmatrix}.
 \end{equation}
@@ -302,26 +264,22 @@ Rasio $\bar{\mu}_l/\bar{\sigma}_l$ berperan sebagai indikator keseimbangan antar
 \begin{equation}
 \bar{\mu}_l
 =
-\frac{0,3164+0,1756}{2}
-
+\frac{0,3164+0,1756}{2} =
 0,2460,
 \end{equation}
 
 \begin{equation}
 \bar{\sigma}_l
 =
-
 \frac{0,3024+0,1916}{2}
-
+=
 0,2470.
 \end{equation}
 Rasio keuntungan terhadap risiko kemudian dihitung sebagai
 \begin{equation}
 Z
 =
-\frac{\bar{\mu}_l}{\bar{\sigma}_l}
-
-\frac{0,2460}{0,2470}
+\frac{\bar{\mu}_l}{\bar{\sigma}_l} = \frac{0,2460}{0,2470}
 \approx
 0,9960.
 \end{equation}
@@ -329,9 +287,7 @@ Dengan mensubstitusikan nilai tersebut ke dalam fungsi sigmoid diperoleh
 \begin{equation}
 \gamma
 =
-
-\frac{1}{1+e^{0,9960}}
-\approx
+\frac{1}{1+e^{0,9960}} =
 0,2697.
 \end{equation}
 Nilai $\gamma$ yang relatif rendah menunjukkan bahwa kondisi pasar pada periode tersebut memiliki rasio keuntungan terhadap risiko yang cukup baik. Akibatnya, penalti risiko yang diberikan pada fungsi objektif menjadi lebih kecil sehingga algoritma optimasi cenderung memberikan toleransi yang lebih besar terhadap pengambilan risiko untuk memperoleh potensi imbal hasil yang lebih tinggi. Riwayat perubahan parameter $\gamma$ untuk seluruh jendela pengamatan disajikan pada Tabel \ref{tab:unified_n2} dan Tabel \ref{tab:unified_n4}.
