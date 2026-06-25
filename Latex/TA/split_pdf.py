@@ -23,6 +23,25 @@ def get_pages_with_images(pdf_path):
             pages.add(int(match.group(1)))
     return pages
 
+def get_python_pages(pdf_path, max_pages):
+    print("Mencari halaman dengan kode Python...")
+    python_pages = set()
+    for p in range(1, max_pages + 1):
+        cmd = ["pdftotext", "-f", str(p), "-l", str(p), pdf_path, "-"]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        text = result.stdout
+        # Deteksi heuristik untuk kode Python
+        if "import " in text and ("numpy" in text or "qiskit" in text or "def " in text or "return " in text):
+            python_pages.add(p)
+        elif "def " in text and "return " in text and (":" in text or "print(" in text):
+            python_pages.add(p)
+        elif "from " in text and " import " in text:
+            python_pages.add(p)
+        elif "plt." in text or "np." in text or "pd." in text:
+            python_pages.add(p)
+    print(f"Ditemukan {len(python_pages)} halaman dengan kode Python.")
+    return python_pages
+
 def main():
     pdf_path = "main.pdf"
     max_pages = get_pdf_info(pdf_path)
@@ -31,40 +50,35 @@ def main():
         sys.exit(1)
         
     image_pages = get_pages_with_images(pdf_path)
+    python_pages = get_python_pages(pdf_path, max_pages)
     
-    # Base rules: 
-    # 1. Page with image
-    # 2. If odd, include p+1
-    # 3. If even, include p-1 and p-3
+    # Gabungkan halaman gambar dan halaman python
+    element_pages = image_pages.union(python_pages)
+    
+    # Tambahan manual untuk memastikan halaman tertentu masuk
+    element_pages.update([35, 61, 97, 98])
+    
+    # Aturan baru:
+    # 1. jika elemen berwarna ada di halaman genap, maka masukkan halaman ganjil sebelumnya (p - 1)
+    # 2. jika elemen berwarna ada di halaman ganjil, maka masukkan halaman genap setelahnya (p + 1)
     color_set = set()
-    for p in image_pages:
+    for p in element_pages:
         color_set.add(p)
-        if p % 2 != 0: # Ganjil (Odd)
-            if p + 1 <= max_pages:
-                color_set.add(p + 1)
-        else: # Genap (Even)
+        if p % 2 == 0: # Genap (Even)
             if p - 1 >= 1:
                 color_set.add(p - 1)
-            if p - 3 >= 1:
-                color_set.add(p - 3)
+        else: # Ganjil (Odd)
+            if p + 1 <= max_pages:
+                color_set.add(p + 1)
     
     # Explicit exclusions requested by user
     # Document labels: iii (5), xviii (47), 1 (61), 6 (125), 35 (173)
-    explicit_exclude = {5, 47, 61, 125, 173}
+    # Note: 61 has been removed from explicit exclusions per user request.
+    explicit_exclude = {5, 47, 125, 173}
     color_set = color_set - explicit_exclude
-    
-    # Accompanied odd page rule:
-    # If an odd page is in color_set, it MUST have the next even page in color_set.
-    final_color_set = set()
-    for p in sorted(list(color_set)):
-        if p % 2 != 0: # Ganjil
-            if (p + 1) in color_set:
-                final_color_set.add(p)
-        else: # Genap
-            final_color_set.add(p)
             
-    color_pages = sorted(list(final_color_set))
-    nocolor_pages = [p for p in range(1, max_pages + 1) if p not in final_color_set]
+    color_pages = sorted(list(color_set))
+    nocolor_pages = [p for p in range(1, max_pages + 1) if p not in color_set]
     
     def run_gs(pages, output_file):
         if not pages:

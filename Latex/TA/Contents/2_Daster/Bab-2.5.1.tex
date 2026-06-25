@@ -26,7 +26,7 @@ Matriks Pauli dapat dihimpun dan dinotasikan dengan $\sigma_x$, $\sigma_y$, dan 
 \label{eq:matriks_pauli}
 \sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad \sigma_y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad \text{dan} \quad \sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}.
 \end{equation}
-Setiap representasi matriks Pauli tersebut difungsikan secara komputasional untuk memanipulasi informasi pada suatu \textit{qubit} tunggal melalui mekanisme pemetaan basis keadaan secara deterministik~\cite{fedorov_vqe_2022,hidalgo_quantum_2006}. Secara fungsional, gerbang Pauli-X setara dengan gerbang NOT pada sistem komputasi klasik, di mana status keadaan dari $|0\rangle$ ditukar menjadi $|1\rangle$ dan sebaliknya melalui operasi uniter tersebut. Secara aljabar, aksi pemetaan fisis dari operator Pauli-X terhadap himpunan basis komputasi tersebut dapat dinyatakan secara komprehensif melalui relasi kesamaan fisis berikut:
+Setiap representasi matriks Pauli tersebut difungsikan secara komputasional untuk memanipulasi informasi pada suatu \textit{qubit} tunggal melalui mekanisme pemetaan basis keadaan secara deterministik. Secara fungsional, gerbang Pauli-X setara dengan gerbang NOT pada sistem komputasi klasik, di mana status keadaan dari $|0\rangle$ ditukar menjadi $|1\rangle$ dan sebaliknya melalui operasi uniter tersebut. Secara aljabar, aksi pemetaan fisis dari operator Pauli-X terhadap himpunan basis komputasi tersebut dapat dinyatakan secara komprehensif melalui relasi kesamaan fisis berikut:
 \begin{equation}
 \label{eq:aksi_paulix}
 X|0\rangle = |1\rangle, \quad X|1\rangle = |0\rangle.
@@ -42,14 +42,14 @@ Sementara itu, stabilitas nilai amplitudo probabilitas pada setiap basis komputa
 Z|0\rangle = |0\rangle, \quad Z|1\rangle = -|1\rangle.
 \end{equation}
 
-Selain variasi gerbang Pauli, gerbang Hadamard ($H$) direpresentasikan sebagai gerbang logika satu \textit{qubit} yang  mana berasal dari pencarian vektor eigen dari gerbang Pauli-X. Pencarian vektor eigen tersebut diawali dengan persamaan untuk mencari nilai eigen $\lambda$ dari matriks Pauli-X yang beroperasi di dalam ruang Hilbert dua dimensi. Nilai eigen dari sebuah operator kuantum dapat diperoleh dengan menghitung nilai determinan dari selisih antara matriks Pauli-X dan perkalian skalar matriks identitas yang disamakan dengan nilai nol~\cite{kumar_family_2025,sim_expressibility_2019}. Pencarian himpunan nilai eigen tersebut dapat dirumuskan melalui persamaan
+Selain variasi gerbang Pauli, gerbang Hadamard ($H$) direpresentasikan sebagai gerbang logika satu \textit{qubit} yang  mana berasal dari pencarian vektor eigen dari gerbang Pauli-X. Pencarian vektor eigen tersebut diawali dengan persamaan untuk mencari nilai eigen $\lambda$ dari matriks Pauli-X yang beroperasi di dalam ruang Hilbert dua dimensi. Nilai eigen dari sebuah operator kuantum dapat diperoleh dengan menghitung nilai determinan dari selisih antara matriks Pauli-X dan perkalian skalar matriks identitas yang disamakan dengan nilai nol~\cite{sim_expressibility_2019}. Pencarian himpunan nilai eigen tersebut dapat dirumuskan melalui persamaan
 \begin{equation}
 \label{eq:eigen_value_x}
 \det(X - \lambda I) = \det \begin{pmatrix} -\lambda & 1 \\ 1 & -\lambda \end{pmatrix} = \lambda^2 - 1 = 0.
 \end{equation}
 Sehingga diperoleh dua buah nilai eigen, yaitu $\lambda_1 = 1$ dan $\lambda_2 = -1$.
 
-Setelah seluruh nilai eigen berhasil diperoleh, masing-masing vektor eigen dievaluasi dengan mensubstitusikan nilai $\lambda$ kembali ke dalam persamaan nilai eigen. Hubungan amplitudo antara komponen basis keadaan atas dan komponen basis keadaan bawah dihasilkan dari persamaan untuk representasi nilai eigen pertama bernilai $\lambda_1 = 1$~\cite{cohen_portfolio_2020}. Vektor eigen pertama yang mewakili keadaan kuantum positif dapat diperoleh dari persamaan
+Setelah seluruh nilai eigen berhasil diperoleh, masing-masing vektor eigen dievaluasi dengan mensubstitusikan nilai $\lambda$ kembali ke dalam persamaan nilai eigen. Hubungan amplitudo antara komponen basis keadaan atas dan komponen basis keadaan bawah dihasilkan dari persamaan untuk representasi nilai eigen pertama bernilai $\lambda_1 = 1$. Vektor eigen pertama yang mewakili keadaan kuantum positif dapat diperoleh dari persamaan
 \begin{equation}
 \label{eq:eigen_vector_1}
 |+\rangle = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{|0\rangle + |1\rangle}{\sqrt{2}}.
@@ -61,7 +61,7 @@ Di sisi lain, sistem persamaan linier mengharuskan amplitudo dari komponen basis
 \end{equation}
 Hasil kedua vektor eigen yang saling ortogonal ini digunakan sebagai landasan utama untuk mendefinisikan susunan elemen matriks transformasi basis pada arsitektur sistem komputasi kuantum.
 
-Representasi matriks dari gerbang uniter Hadamard dapat dikonstruksi dengan menyusun kedua vektor eigen hasil dari operator Pauli-X tersebut sebagai komponen kolom~\cite{wang_achieving_2025,li_ising_2023,datta_relationship_2015}. Sebuah bentuk perkalian konstanta terhadap elemen matriks yang memiliki konfigurasi tanda asimetris dapat diperoleh lewat mekanisme penyusunan vektor eigen ortogonal ini dengan relasi matematis
+Representasi matriks dari gerbang uniter Hadamard dapat dikonstruksi dengan menyusun kedua vektor eigen hasil dari operator Pauli-X tersebut sebagai komponen kolom. Sebuah bentuk perkalian konstanta terhadap elemen matriks yang memiliki konfigurasi tanda asimetris dapat diperoleh lewat mekanisme penyusunan vektor eigen ortogonal ini dengan relasi matematis
 \begin{equation}
 \label{eq:matriks_hadamard}
 H = \begin{pmatrix} |+\rangle & |-\rangle \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}.
@@ -95,7 +95,7 @@ Representasi skematis dari operasi matriks Pauli dan gerbang Hadamard tersebut d
     \label{fig:gerbang_pauli}
 \end{figure}
 
-Matriks-matriks generator Pauli tersebut selanjutnya dapat digunakan sebagai basis operator untuk merepresentasikan arah rotasi dari vektor keadaan qubit pada koordinat bola Bloch~\cite{wang_variational_2025}. Setiap elemen dari grup khusus uniter $SU(2)$ dapat diekspresikan melalui kombinasi linier dari matriks Pauli:
+Matriks-matriks generator Pauli tersebut selanjutnya dapat digunakan sebagai basis operator untuk merepresentasikan arah rotasi dari vektor keadaan qubit pada koordinat bola Bloch. Setiap elemen dari grup khusus uniter $SU(2)$ dapat diekspresikan melalui kombinasi linier dari matriks Pauli:
 \begin{equation}
 U = e^{-i\frac{\theta}{2}(n_x X + n_y Y + n_z Z)} = e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})},
 \end{equation}

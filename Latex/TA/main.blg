@@ -3,6 +3,10 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 A level-1 auxiliary file: Contents/0_BagianDepan/Cover_Dalam.aux
 A level-1 auxiliary file: Contents/0_BagianDepan/Lembar_Pengesahan.aux
+White space in argument---line 20 of file main.aux
+ : \@input{Contents/0_BagianDepan/Lembar
+ :                                       Orisinalitas.aux}
+I'm skipping whatever remains of this command
 A level-1 auxiliary file: Contents/Abstrak/Abstrak.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstract.aux
 A level-1 auxiliary file: Contents/0_BagianDepan/Kata_Pengantar.aux
@@ -23,66 +27,113 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Referensi.bib
-Warning--I didn't find a database entry for "gabaix_political_2020"
-Warning--I didn't find a database entry for "murphy_technical_1999"
-Warning--I didn't find a database entry for "bormann_role_2010"
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
 Warning--No journal in anshu_sample-efficient_2020
 ptr=1, stack=
 
 ---the literal stack isn't empty for entry anshu_sample-efficient_2020
 while executing---line 5079 of file apacite.bst
+Warning--No journal in baaquie_quantum_2003
+Warning--No journal in cohen_portfolio_2020
+ptr=1, stack=
+
+---the literal stack isn't empty for entry cohen_portfolio_2020
+while executing---line 5079 of file apacite.bst
+Warning--No journal in crosato_shannon_2023
 Warning--No journal in dixit_variational_2025
+Warning--No journal in gong_quantum_2025
+ptr=1, stack=
+
+---the literal stack isn't empty for entry gong_quantum_2025
+while executing---line 5079 of file apacite.bst
 Warning--No journal in hidalgo_quantum_2006
 ptr=1, stack=
 
 ---the literal stack isn't empty for entry hidalgo_quantum_2006
 while executing---line 5079 of file apacite.bst
+Warning--No journal in innan_quantum_2025
+ptr=1, stack=
+
+---the literal stack isn't empty for entry innan_quantum_2025
+while executing---line 5079 of file apacite.bst
+Warning--No journal in jiang_trend_2023
+Warning--No journal in john_von_neumann_theory_1953
+Warning--No journal in kabelac_one-_2021
+Warning--No journal in nakahara_quantum_2008
+ptr=1, stack=
+
+---the literal stack isn't empty for entry nakahara_quantum_2008
+while executing---line 5079 of file apacite.bst
+Warning--No journal in nielsen_quantum_2010
+Warning--No journal in ohya_fundamentals_1998
+ptr=1, stack=
+
+---the literal stack isn't empty for entry ohya_fundamentals_1998
+while executing---line 5079 of file apacite.bst
+Warning--No journal in padilla_quantum_2025
+Warning--No journal in purwanto_fisika_2016
 Warning--No journal in sarkar_quantum_2018
 ptr=1, stack=
 
 ---the literal stack isn't empty for entry sarkar_quantum_2018
 while executing---line 5079 of file apacite.bst
+Warning--No journal in schwert_chapter_2003
+Warning--No journal in serafini_symplectic_2003
+ptr=1, stack=
+
+---the literal stack isn't empty for entry serafini_symplectic_2003
+while executing---line 5079 of file apacite.bst
+Warning--No journal in shaikh_feature_2025
+ptr=1, stack=
+
+---the literal stack isn't empty for entry shaikh_feature_2025
+while executing---line 5079 of file apacite.bst
 Warning--No journal in spall_implementation_1998
-You've used 59 entries,
+Warning--No journal in wang_achieving_2025
+ptr=1, stack=
+
+---the literal stack isn't empty for entry wang_achieving_2025
+while executing---line 5079 of file apacite.bst
+Warning--No journal in jain_multi-portfolio_2012
+You've used 86 entries,
             6951 wiz_defined-function locations,
-            1756 strings with 27142 characters,
-and the built_in function-call counts, 122926 in all, are:
-= -- 14519
-> -- 1075
-< -- 6053
-+ -- 6167
-- -- 122
-* -- 8638
-:= -- 22600
-add.period$ -- 242
-call.type$ -- 59
-change.case$ -- 1101
+            1930 strings with 33570 characters,
+and the built_in function-call counts, 176768 in all, are:
+= -- 20721
+> -- 1542
+< -- 8953
++ -- 9077
+- -- 176
+* -- 12558
+:= -- 33097
+add.period$ -- 339
+call.type$ -- 86
+change.case$ -- 1600
 chr.to.int$ -- 0
-cite$ -- 123
-duplicate$ -- 3569
-empty$ -- 4994
-format.name$ -- 1891
-if$ -- 22801
+cite$ -- 195
+duplicate$ -- 4992
+empty$ -- 7037
+format.name$ -- 2745
+if$ -- 32472
 int.to.chr$ -- 0
-int.to.str$ -- 177
+int.to.str$ -- 258
 missing$ -- 0
-newline$ -- 1751
-num.names$ -- 474
-pop$ -- 1773
+newline$ -- 2509
+num.names$ -- 688
+pop$ -- 2163
 preamble$ -- 1
-purify$ -- 330
+purify$ -- 482
 quote$ -- 0
-skip$ -- 7494
+skip$ -- 10911
 stack$ -- 0
-substring$ -- 6688
-swap$ -- 2133
-text.length$ -- 241
+substring$ -- 9750
+swap$ -- 2983
+text.length$ -- 312
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 4976
-warning$ -- 5
-while$ -- 744
+type$ -- 6880
+warning$ -- 23
+while$ -- 1074
 width$ -- 0
-write$ -- 2184
-(There were 3 error messages)
+write$ -- 3143
+(There were 12 error messages)

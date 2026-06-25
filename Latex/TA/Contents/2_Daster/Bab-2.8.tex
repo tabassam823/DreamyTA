@@ -1,23 +1,23 @@
 \section{Validasi \textit{Barren Plateau}}
 \label{sec:barren_plateau}
-Keberhasilan algoritma hibrida kuantum-klasik pada era NISQ sangat bergantung pada efektivitas proses optimasi parameter \cite{preskill_quantum_2018}. Salah satu tantangan utama
+Keberhasilan algoritma hibrida kuantum-klasik pada era NISQ sangat bergantung pada efektivitas proses optimasi parameter. Salah satu tantangan utama
 dalam pelatihan sirkuit variasional adalah fenomena Barren Plateau, yaitu kondisi ketika informasi gradien menghilang sehingga proses optimasi mengalami stagnasi \cite{mcclean_barren_2018}. Untuk mendeteksi kondisi tersebut, penelitian ini memanfaatkan Entropi Von Neumann sebagai indikator keterbelitan sistem kuantum. Pada Bab ini, akan dibahas landasan teoretis fenomena \textit{Barren Plateau} dan formulasi Entropi Von Neumann yang digunakan sebagai metrik validasi keterbelitan sistem kuantum.
 
 \subsection{\textit{Barren Plateau}}
 Ketika algoritma kuantum variasional semakin berkembang, muncul pertanyaan mengenai kemampuan algoritma tersebut dalam mengatasi sistem ketika kuantum semakin besar saat algoritma dilatih. Pada tahap awal pengembangannya, banyak penelitian berfokus pada peningkatan ekspresivitas ansatz melalui penambahan jumlah qubit dan kedalaman sirkuit. Namun, pendekatan tersebut ternyata memunculkan tantangan baru berupa hilangnya informasi gradien yang dibutuhkan selama proses optimasi. Fenomena ini pertama kali dianalisis oleh McClean et al., yang menunjukkan bahwa lanskap Hamiltonian pada sirkuit kuantum acak dapat menjadi sangat datar sehingga pelatihan parameter menjadi semakin sulit (McClean et al., 2018). Fenomena tersebut dikenal sebagai barren plateau, yaitu kondisi ketika lanskap Hamiltonian pada algoritma kuantum variasional menjadi semakin datar seiring bertambahnya jumlah qubit ($N$) dan kedalaman sirkuit ($L$). Pada kondisi ini, perubahan kecil pada parameter klasik hanya menghasilkan perubahan yang sangat kecil pada nilai fungsi energi.
 
-Secara etimologi, \textit{barren plateau} berasal dari kata barren yang berarti tandus atau tidak produktif dan plateau yang berarti dataran tinggi yang relatif datar. Karakteristik utama dari \textit{barren plateau} dapat diamati melalui perilaku varians gradien terhadap ukuran sistem kuantum. Ketika jumlah qubit dan kedalaman sirkuit meningkat, varians gradien cenderung menurun secara eksponensial sehingga nilai gradien yang terukur semakin sulit dibedakan dari fluktuasi statistik dan derau pengukuran. Secara umum, hubungan tersebut dapat dituliskan sebagai
+Secara etimologi, \textit{barren plateau} berasal dari kata barren yang berarti tandus atau tidak produktif dan plateau yang berarti dataran tinggi yang relatif datar. Karakteristik utama dari \textit{barren plateau} dapat diamati melalui perilaku varians gradien terhadap ukuran sistem kuantum~\cite{shannon_mathematical_1948}. Ketika jumlah qubit dan kedalaman sirkuit meningkat, varians gradien cenderung menurun secara eksponensial sehingga nilai gradien yang terukur semakin sulit dibedakan dari fluktuasi statistik dan derau pengukuran~\cite{serafini_symplectic_2003}. Secara umum, hubungan tersebut dapat dituliskan sebagai
 \begin{equation}
     \text{Var}[\partial_\theta E] \approx \frac{C}{2^{N+L}}
 \end{equation}
-dengan $C$ merupakan konstanta yang bergantung pada Hamiltonian sistem dan struktur Hamiltonian yang digunakan. Persamaan tersebut menunjukkan bahwa peningkatan jumlah qubit maupun kedalaman sirkuit menyebabkan sinyal gradien menyusut secara eksponensial. Dalam batas tertentu, nilai gradien menjadi sangat kecil sehingga hampir tidak memberikan informasi yang berguna bagi proses optimasi.
+dengan $C$ merupakan konstanta yang bergantung pada Hamiltonian sistem dan struktur Hamiltonian yang digunakan. Persamaan tersebut menunjukkan bahwa peningkatan jumlah qubit maupun kedalaman sirkuit menyebabkan sinyal gradien menyusut secara eksponensial~\cite{ortiz_marrero_entanglement-induced_2021}. Dalam batas tertentu, nilai gradien menjadi sangat kecil sehingga hampir tidak memberikan informasi yang berguna bagi proses optimasi~\cite{barron_minimum_1991}.
 
 \subsection{Entropi Von Neumann}
-Entropi Von Neumann digunakan untuk mengukur tingkat ketidakpastian dan keterbelitan dalam sistem kuantum. Konsep ini merupakan generalisasi dari Entropi Shannon pada teori informasi klasik. Untuk suatu distribusi probabilitas diskrit $p_i$, Entropi Shannon didefinisikan sebagai
+Entropi Von Neumann digunakan untuk mengukur tingkat ketidakpastian dan keterbelitan dalam sistem kuantum. Konsep ini merupakan generalisasi dari Entropi Shannon pada teori informasi klasik~\cite{shin_estimating_2024}. Untuk suatu distribusi probabilitas diskrit $p_i$, Entropi Shannon didefinisikan sebagai
 \begin{equation}
     H = - \sum_i p_i \log_2 (p_i).
 \end{equation}
-Logaritma berbasis 2 digunakan karena satuan informasi yang dihasilkan dinyatakan dalam \textit{bit} sebagai satuan dasar informasi pada sistem komputasi biner. Entropi Shannon merepresentasikan jumlah rata-rata informasi yang diperoleh ketika hasil suatu peristiwa acak diketahui. Semakin besar nilai entropi, semakin tinggi pula tingkat ketidakpastian distribusi probabilitas yang mendeskripsikan sistem tersebut. Dalam mekanika kuantum, distribusi probabilitas tersebut direpresentasikan menggunakan operator densitas $\rho$, yang mana untuk suatu ansambel keadaan dapat dituliskan sebagai
+Logaritma berbasis 2 digunakan karena satuan informasi yang dihasilkan dinyatakan dalam \textit{bit} sebagai satuan dasar informasi pada sistem komputasi biner. Entropi Shannon merepresentasikan jumlah rata-rata informasi yang diperoleh ketika hasil suatu peristiwa acak diketahui~\cite{page_information_1993}. Semakin besar nilai entropi, semakin tinggi pula tingkat ketidakpastian distribusi probabilitas yang mendeskripsikan sistem tersebut~\cite{ohya_fundamentals_1998}. Dalam mekanika kuantum, distribusi probabilitas tersebut direpresentasikan menggunakan operator densitas $\rho$, yang mana untuk suatu ansambel keadaan dapat dituliskan sebagai
 \begin{equation}
     \rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|.
 \end{equation}
@@ -34,7 +34,7 @@ Operator densitas memiliki beberapa sifat penting, yaitu bersifat Hermitian, mem
 =
 \rho.
 \end{equation}
-Karena $\rho$ merupakan operator Hermitian, maka berdasarkan Teorema Spektral operator tersebut memiliki himpunan nilai eigen real dan vektor-vektor eigen yang saling ortogonal \cite{mitarai_quantum_2018}. Dengan demikian, $\rho$ dapat didiagonalisasi pada suatu basis ortonormal yang dibentuk oleh vektor-vektor eigennya. Melalui dekomposisi spektral, operator densitas dapat dinyatakan dalam basis ortonormal $|e_j\rangle$ dengan nilai eigen $\lambda_j$ sebagai
+Karena $\rho$ merupakan operator Hermitian, maka berdasarkan Teorema Spektral operator tersebut memiliki himpunan nilai eigen real dan vektor-vektor eigen yang saling ortogonal. Dengan demikian, $\rho$ dapat didiagonalisasi pada suatu basis ortonormal yang dibentuk oleh vektor-vektor eigennya~\cite{kumar_family_2025}. Melalui dekomposisi spektral, operator densitas dapat dinyatakan dalam basis ortonormal $|e_j\rangle$ dengan nilai eigen $\lambda_j$ sebagai
 \begin{equation}
     \rho = \sum_j \lambda_j |e_j\rangle \langle e_j|.
 \end{equation}
@@ -73,7 +73,7 @@ Berdasarkan penjabaran struktur operasi tersebut, perumusan persamaan Entropi \t
     S(\rho) = -\text{Tr}(\rho \log_2(\rho)) = -\sum_j \lambda_j \log_2 (\lambda_j).
 \end{equation}
 
-Dalam implementasi sirkuit kuantum berparameter, Entropi Von Neumann juga dapat digunakan sebagai indikator untuk menganalisis fenomena Barren Plateau. Peningkatan nilai entropi yang mendekati batas maksimumnya mengindikasikan bahwa keadaan kuantum menjadi semakin terdistribusi secara merata di dalam ruang Hilbert. Secara matematis, jika keadaan sistem memiliki entropi yang mendekati maksimum
+Dalam implementasi sirkuit kuantum berparameter, Entropi Von Neumann juga dapat digunakan sebagai indikator untuk menganalisis fenomena Barren Plateau. Peningkatan nilai entropi yang mendekati batas maksimumnya mengindikasikan bahwa keadaan kuantum menjadi semakin terdistribusi secara merata di dalam ruang Hilbert~\cite{crosato_shannon_2023}. Secara matematis, jika keadaan sistem memiliki entropi yang mendekati maksimum
 \begin{equation}
     S(\rho_A) \approx \log(d_A),
 \end{equation}

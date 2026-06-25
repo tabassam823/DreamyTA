@@ -1,5 +1,5 @@
 \subsection{Manipulasi Informasi pada Gerbang 2 \textit{Qubit}}
-Manipulasi informasi yang dilakukan oleh gerbang kuantum tidak terbatas hanya pada 1 qubit, tetapi juga dapat diterapkan pada 2 qubit untuk menghasilkan efek-efek yang lebih kompleks. Secara matematis, bentuk matriks dari 2 qubit didapatkan dari hasil kali tensor dari matriks semua basis 1 qubit yang terlibat. Perkalian tensor tersebut memungkinakn kombinasi status keadaan fungsi gelombang individual menjadi status basis gabungan yang merepresentasikan ruang probabilitas Hilbert empat dimensi. Keempat vektor basis gabungan tersebut membangun landasan ruang operasional matematis sistem komputasi fisis gabungan, yang direpresentasikan ke dalam bentuk persamaan fungsi pemetaan komputasional sebagai berikut:
+Manipulasi informasi yang dilakukan oleh gerbang kuantum tidak terbatas hanya pada 1 qubit, tetapi juga dapat diterapkan pada 2 qubit untuk menghasilkan efek-efek yang lebih kompleks~\cite{li_quantum_2025}. Secara matematis, bentuk matriks dari 2 qubit didapatkan dari hasil kali tensor dari matriks semua basis 1 qubit yang terlibat. Perkalian tensor tersebut memungkinakn kombinasi status keadaan fungsi gelombang individual menjadi status basis gabungan yang merepresentasikan ruang probabilitas Hilbert empat dimensi. Keempat vektor basis gabungan tersebut membangun landasan ruang operasional matematis sistem komputasi fisis gabungan, yang direpresentasikan ke dalam bentuk persamaan fungsi pemetaan komputasional sebagai berikut:
 \begin{equation}
     \label{eq:basis_2_qubit}
     \begin{split}
@@ -122,13 +122,13 @@ yang mana identik dengan pembangkitan superposisi melalui penerapan gerbang Hada
 \end{equation}
 
 \subsection{Sirkuit Kuantum Berparameter}
-\textit{Quantum Machine Learning} (QML) merupakan bidang multidisipliner yang menggabungkan prinsip komputasi kuantum dengan metode pemelajaran mesin. Salah satu pendekatan yang berkembang dalam QML adalah \textit{Quantum Deep Learning} (QDL), yaitu pemanfaatan model kuantum dengan parameter khusus untuk mempelajari pemodelan data kompleks. Implementasi model QDL umumnya diwujudkan melalui \textit{Parameterized Quantum Circuit} (PQC), yaitu sirkuit kuantum yang terdiri atas gerbang-gerbang kuantum yang memiliki parameter yang nilainya dapat dioptimasi. PQC menjadi komponen utama dalam keluarga \textit{Variational Quantum Algorithms} (VQA), yaitu algoritma hibrida yang menggabungkan pemrosesan kuantum dan optimasi klasik. Keluarga VQA terdiri dari \textit{Variational Quantum Eigensolver} (VQE), \textit{Quantum Approximate Optimization Algorithm} (QAOA), dan Variational Quantum Classifier (VQC) yang mana semuanya memanfaatkan PQC sebagai representasi solusi yang dievaluasi untuk kemudian nilainya diperbarui oleh algoritma optimasi klasik secara iteratif~\cite{reifenstein_coherent_2021,anshu_sample-efficient_2020,chen_enhanced_2025}.
+\textit{Quantum Machine Learning} (QML) merupakan bidang multidisipliner yang menggabungkan prinsip komputasi kuantum dengan metode pemelajaran mesin. Salah satu pendekatan yang berkembang dalam QML adalah \textit{Quantum Deep Learning} (QDL), yaitu pemanfaatan model kuantum dengan parameter khusus untuk mempelajari pemodelan data kompleks. Implementasi model QDL umumnya diwujudkan melalui \textit{Parameterized Quantum Circuit} (PQC), yaitu sirkuit kuantum yang terdiri atas gerbang-gerbang kuantum yang memiliki parameter yang nilainya dapat dioptimasi. PQC menjadi komponen utama dalam keluarga \textit{Variational Quantum Algorithms} (VQA), yaitu algoritma hibrida yang menggabungkan pemrosesan kuantum dan optimasi klasik. Keluarga VQA terdiri dari \textit{Variational Quantum Eigensolver} (VQE), \textit{Quantum Approximate Optimization Algorithm} (QAOA), dan Variational Quantum Classifier (VQC) yang mana semuanya memanfaatkan PQC sebagai representasi solusi yang dievaluasi untuk kemudian nilainya diperbarui oleh algoritma optimasi klasik secara iteratif~\cite{chen_enhanced_2025}.
 
 Sirkuit Kuantum Berparameter (\textit{Parameterized Quantum Circuit} atau PQC) adalah rangkaian gerbang kuantum yang memiliki parameter kontinu, umumnya berupa sudut rotasi. Dalam algoritma variasional, rangkaian PQC berperan sebagai ansatz yang mengeksplorasi parameter pada ruang solusi untuk fungsi gelombang dari suatu permasalahan. Pada umumnya, alur kerja PQC ditunjukkan pada Gambar \ref{fig:pqc_workflow}. Secara singkat, proses diawali dengan penyandian data klasik $x \in \mathbb{R}^n$ ke dalam keadaan kuantum $|\psi_0\rangle$ melalui fungsi prapemrosesan $f(x)$ dan operasi penyandian $R(f(x))$. Keadaan kuantum yang telah terbentuk kemudian diproses oleh sirkuit variasional $U(\boldsymbol{\theta})$, yang bertugas mentransformasikan keadaan kuantum melalui serangkaian operasi kuantum berparameter. Parameter $\boldsymbol{\theta}$ pada sirkuit ini akan diperbarui secara iteratif selama proses optimasi untuk menghasilkan suatu keadaan kuantum $|\psi(\boldsymbol{\theta})\rangle$ yang merepresentasikan solusi optimum. Selanjutnya, keadaan akhir diproyeksikan melalui pengukuran $\{M\}$ untuk memperoleh nilai ekspektasi atau probabilitas observabel yang relevan. Hasil pengukuran tersebut kemudian dievaluasi menggunakan fungsi biaya $L(\boldsymbol{\theta})$, yang digunakan oleh algoritma optimasi klasik untuk menentukan pembaruan parameter hingga diperoleh parameter optimal $\boldsymbol{\theta}^∗$ dan keluaran model $y \in \mathbb{R}^n$.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/PQC_VQDNN.png}
-    \caption{Representasi alur kerja sirkuit kuantum berparameter (PQC) yang mengilustrasikan tahap penyandian data, sirkuit variasional, pengukuran, dan pembaruan parameter oleh algoritma optimasi klasik \cite{regadio_exoplanet_2025}.}
+    \caption{Representasi alur kerja sirkuit kuantum berparameter (PQC) yang mengilustrasikan tahap penyandian data, sirkuit variasional, pengukuran, dan pembaruan parameter oleh algoritma optimasi klasik.}
     \label{fig:pqc_workflow}
 \end{figure}
 
@@ -148,8 +148,7 @@ Kualitas suatu kandidat solusi kemudian dievaluasi melalui pengukuran nilai eksp
 \label{eq:vqa_cost}
 C(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta})| \hat{O} |\psi(\boldsymbol{\theta})\rangle.
 \end{equation}
-Nilai hasil pengukuran tersebut kemudian dikirimkan kepada \textit{optimizer} klasik untuk memperbarui parameter sirkuit, kemudian proses evaluasi dan pembaruan diulang hingga kriteria konvergensi terpenuhi. Proses ini dikenal sebagai \textit{hybrid quantum-classical optimization} atau optimasi hibrida kuantum-klasik.
-
+Nilai hasil pengukuran tersebut kemudian dikirimkan kepada \textit{optimizer} klasik untuk memperbarui parameter sirkuit, kemudian proses evaluasi dan pembaruan diulang hingga kriteria konvergensi terpenuhi. Proses ini dikenal sebagai \textit{hybrid quantum-classical optimization} atau optimasi hibrida kuantum-klasik~\cite{c_scoping_2025}.
 
 \subsection{Pengukuran Kuantum}
 Pengukuran merupakan tahap yang menghubungkan informasi kuantum dengan hasil observasi klasik yang dapat diakses oleh pengguna. Dalam mekanika kuantum, setiap besaran fisik direpresentasikan oleh suatu operator observabel Hermitian $\hat{O}$ yang memiliki himpunan nilai eigen $o_n$ dan vektor eigen ortonormal $|e_n\rangle$. Hubungan antara observabel dan basis eigennya dinyatakan melalui persamaan
@@ -176,7 +175,7 @@ Jika hasil pengukuran yang diperoleh adalah nilai eigen $o_n$, maka keadaan sist
 \begin{equation}
 |\psi'\rangle = \frac{\hat{P}_n|\psi\rangle} {\sqrt{\langle\psi|\hat{P}_n|\psi\rangle}}.
 \end{equation}
-Persamaan tersebut menunjukkan bahwa pengukuran menyebabkan sistem kehilangan superposisinya dan bertransisi menuju salah satu keadaan eigen observabel. Fenomena tersebut dikenal sebagai keruntuhan keadaan kuantum (\textit{state collapse}), yaitu perubahan non-unitari dari superposisi beberapa kemungkinan hasil menuju satu keadaan yang terdefinisi secara pasti. Mekanisme fisik yang menyebabkan hilangnya interferensi kuantum dapat dipahami melalui representasi matriks densitas. Untuk keadaan murni
+Persamaan tersebut menunjukkan bahwa pengukuran menyebabkan sistem kehilangan superposisinya dan bertransisi menuju salah satu keadaan eigen observabel. Fenomena tersebut dikenal sebagai keruntuhan keadaan kuantum (\textit{state collapse}), yaitu perubahan non-unitari dari superposisi beberapa kemungkinan hasil menuju satu keadaan yang terdefinisi secara pasti~\cite{tomaz_quantum_2025}. Mekanisme fisik yang menyebabkan hilangnya interferensi kuantum dapat dipahami melalui representasi matriks densitas~\cite{revythi_quantum_2025}. Untuk keadaan murni
 \begin{equation}
 |\psi\rangle = a|0\rangle+b|1\rangle,
 \end{equation}
@@ -201,7 +200,7 @@ a^*b & |b|^2
 \end{equation}
 di mana elemen diagonal menyatakan probabilitas populasi masing-masing keadaan basis, sedangkan elemen \textit{off-diagonal} merepresentasikan koherensi kuantum yang bertanggung jawab terhadap fenomena interferensi.
 
-Pada dasarnya, sistem kuantum tidak pernah sepenuhnya terisolasi dari lingkungan. Ketika sistem berinteraksi dengan lingkungan, keadaan gabungan sistem-lingkungan dapat dituliskan sebagai
+Pada dasarnya, sistem kuantum tidak pernah sepenuhnya terisolasi dari lingkungan~\cite{li_quantum_2025}. Ketika sistem berinteraksi dengan lingkungan, keadaan gabungan sistem-lingkungan dapat dituliskan sebagai
 \begin{equation}
 |\Psi\rangle
 =
@@ -244,7 +243,7 @@ Sehingga elemen-elemen \textit{off-diagonal} menghilang dan matriks densitas sis
 \end{equation}
 Proses hilangnya koherensi kuantum ini dikenal sebagai dekoherensi (\textit{decoherence}) yaitu mengubah keadaan kuantum menjadi campuran statistik yang tidak lagi menunjukkan interferensi.
 
-Secara konsep, hubungan antara dekoherensi dan keruntuhan keadaan kuantum tersebut dapat direpresentasikan pada Gambar \ref{fig:collapse_measurement}. Gambar tersebut memperlihatkan bagaimana elemen \textit{off-diagonaal} yang merepresentasikan koherensi kuantum secara bertahap menghilang akibat interaksi dengan lingkungan, menghasilkan matriks densitas diagonal yang bersifat statistik. Setelah itu, proses pengukuran memproyeksikan sistem ke salah satu keadaan basis yang terdefinisi secara pasti sesuai probabilitas yang diberikan oleh kaidah Born.
+Secara konsep, hubungan antara dekoherensi dan keruntuhan keadaan kuantum tersebut dapat direpresentasikan pada Gambar \ref{fig:collapse_measurement}. Gambar tersebut memperlihatkan bagaimana elemen \textit{off-diagonaal} yang merepresentasikan koherensi kuantum secara bertahap menghilang akibat interaksi dengan lingkungan, menghasilkan matriks densitas diagonal yang bersifat statistik~\cite{anshu_sample-efficient_2020}. Setelah itu, proses pengukuran memproyeksikan sistem ke salah satu keadaan basis yang terdefinisi secara pasti sesuai probabilitas yang diberikan oleh kaidah Born~\cite{benedetti_parameterized_2019}.
 
 \begin{figure}[htbp]
     \centering
