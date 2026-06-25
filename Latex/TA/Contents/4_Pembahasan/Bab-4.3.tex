@@ -1,36 +1,98 @@
 \section{Pemetaan Hamiltonian Ising}
 \label{sec:4_3_pemetaan_hamiltonian}
 
-Perubahan permasalahan dari domain klasik menuju komputasi kuantum memerlukan alat transformasi yang menghubungkan utilitas ekonomi dengan energi kuantum, yakni melalui formulasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Proses transformasi ini diawali dengan mengonversi fungsi potensial $\Phi(\vec{x})$ menjadi fungsi energi minimisasi $E(\vec{x}) = -\Phi(\vec{x})$ guna menyesuaikan dengan prinsip variasi algoritma VQE
+Transformasi permasalahan optimasi portofolio ke dalam domain komputasi kuantum dilakukan melalui formulasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Pada tahap ini, fungsi potensial permainan ditransformasikan menjadi fungsi energi sehingga sesuai dengan prinsip minimisasi energi yang digunakan oleh algoritma \textit{Variational Quantum Eigensolver} (VQE). Hubungan tersebut dinyatakan sebagai
 \begin{equation}
-    \begin{split}
-    E(\vec{x}) &= -\Phi(\vec{x}) \\
-    &= -\left( \frac{1}{k} \vec{\mu}^T \vec{x} - \frac{\gamma}{2k^2} \vec{x}^T \Sigma \vec{x} \right).
-    \label{eq:energy_function}
-    \end{split}
+\begin{split}
+E(\vec{x})
+&=
+-\Phi(\vec{x}) \
+&=
+-
+\left(
+\frac{1}{k}\vec{\mu}^{,T}\vec{x}
+-
+\frac{\gamma}{2k^2}
+\vec{x}^{,T}\Sigma\vec{x}
+\right).
+\label{eq:energy_function}
+\end{split}
 \end{equation}
 
-Berdasarkan formulasi matematis dan konversi rumusan \textit{Quadratic Unconstrained Binary Optimization} (QUBO) menuju matriks Hamiltonian Ising yang telah dijabarkan secara terperinci pada Bab 2, keseluruhan parameter model klasik tersebut dipetakan secara eksak menjadi sekumpulan variabel interaksi spin fisis. Transformasi ekuivalen matematis ini pada akhirnya berhasil mensintesis sebuah struktur komprehensif yang secara langsung direpresentasikan sebagai bentuk fungsional Hamiltonian Ising murni guna memfasilitasi kebutuhan operasional algoritma optimasi portofolio berbasis kuantum. Pada formulasi operator uniter akhir ini, parameter $\hat{\mathcal{H}}$ mendefinisikan bentuk ruang lingkup total Hamiltonian Ising yang merangkum keseluruhan lanskap titik-titik ekuilibrium energi konfigurasi dari sistem kuantum yang sedang disimulasikan secara \textit{real-time}. 
-
-Dalam struktur pemetaan tersebut, variabel operasional $h_i$ secara spesifik difungsikan sebagai representasi koefisien spin linear yang mendikte tingkat persentase bias probabilitas pemilihan pada tiap-tiap agen qubit secara individual yang saling terisolasi. Sementara itu, parameter operasional deterministik $J_{ij}$ dirancang untuk merepresentasikan kuantitas koefisien interaksi spin silang yang mengatur secara tegas derajat keterikatan volatilitas risiko korelasi finansial antara dua aset yang saling berbeda identitas, sedangkan parameter $C$ sekadar berfungsi mekanis sebagai konstanta skalar pemerataan nilai \textit{offset} energi absolut bagi seluruh penjuru konfigurasi sistem. Derivasi parameter teoretis murni ini lantas memicu transisi implementasi fungsional karena struktur matriks harus diaplikasikan ke dalam ekosistem perangkat keras nyata untuk dieksekusi secara iteratif.
+Selanjutnya, fungsi energi dalam bentuk QUBO dipetakan ke Hamiltonian Ising menggunakan transformasi variabel biner ke variabel spin sebagaimana telah dijelaskan pada Bab 2. Proses ini menghasilkan operator Hamiltonian yang dapat direpresentasikan dalam bentuk
+\begin{equation}
+\hat{\mathcal H}
+=
+\sum_i h_i \hat Z_i
++
+\sum_{i<j} J_{ij}\hat Z_i\hat Z_j
++
+C,
+\end{equation}
+dengan (h_i) menyatakan koefisien bias linear, (J_{ij}) menyatakan koefisien interaksi antar-spin, dan (C) merupakan konstanta pergeseran energi. Operator Hamiltonian inilah yang kemudian digunakan sebagai fungsi objektif kuantum pada proses optimasi VQE.
 
 \subsection{Implementasi Numerik Hamiltonian Ising}
-
-Pada aplikasinya, struktur persamaan Hamiltonian kuantum lengkap yang dibangun untuk mewakili sistem dua aset ($N=2$) dengan rasio kardinalitas portofolio konstan ($k=1$) dapat disederhanakan dengan mengeliminasi notasi jumlahan sigma kompleks. Penjabaran persamaan ekuivalen untuk sistem berskala kecil ini memungkinkan proses verifikasi konseptual secara manual terhadap interaksi antara koefisien bias linear dan interaksi kuadratik tanpa membebani memori komputasi secara berlebih. Sedangkan untuk menavigasi kompleksitas dinamika pasar pada sistem bervolume lebih besar dengan empat aset observasi ($N=4, k=2$), jaringan interaksi antar-spin secara simultan akan langsung bermutasi menjadi jauh lebih kompleks akibat meluasnya variasi korelasi sektoral. Konstruksi ekspansi aljabar untuk kedua dimensi matriks sistem yang diuraikan ini dapat ditinjau secara langsung melalui turunan matematis struktural berikut
+Setelah parameter QUBO dipetakan ke model Ising, Hamiltonian kuantum dapat dinyatakan dalam bentuk operator Pauli-(Z). Untuk sistem dengan dua aset ((N=2)) dan kendala kardinalitas (k=1), Hamiltonian memiliki bentuk
 \begin{equation}
-    \hat{\mathcal{H}}_{N2} = h_1 \hat{Z}_1 + h_2 \hat{Z}_2 + J_{12} \hat{Z}_1 \hat{Z}_2 + C
+\hat{\mathcal{H}}_{N2}
+=
+h_1 \hat{Z}_1
++
+h_2 \hat{Z}*2
++
+J*{12}\hat{Z}_1\hat{Z}_2
++
+C.
 \end{equation}
-sedangkan untuk iterasi matriks interaksi aset majemuk:
+Pada sistem dengan empat aset ((N=4)) dan kendala kardinalitas (k=2), jumlah interaksi pasangan meningkat sehingga Hamiltonian berkembang menjadi
+
 \begin{equation}
-    \begin{split}
-    \hat{\mathcal{H}}_{N4} =& h_1 \hat{Z}_1 + h_2 \hat{Z}_2 + h_3 \hat{Z}_3 + h_4 \hat{Z}_4 + J_{12} \hat{Z}_1 \hat{Z}_2 + J_{13} \hat{Z}_1 \hat{Z}_3 + J_{14} \hat{Z}_1 \hat{Z}_4 \\
-    &+ J_{23} \hat{Z}_2 \hat{Z}_3 + J_{24} \hat{Z}_2 \hat{Z}_4 + J_{34} \hat{Z}_3 \hat{Z}_4 + C
-    \end{split}
+\begin{split}
+\hat{\mathcal{H}}_{N4}
+=&,
+h_1 \hat{Z}_1
++
+h_2 \hat{Z}_2
++
+h_3 \hat{Z}_3
++
+h_4 \hat{Z}*4 \
+&
++
+J*{12}\hat{Z}_1\hat{Z}*2
++
+J*{13}\hat{Z}_1\hat{Z}*3
++
+J*{14}\hat{Z}_1\hat{Z}*4 \
+&
++
+J*{23}\hat{Z}_2\hat{Z}*3
++
+J*{24}\hat{Z}_2\hat{Z}*4
++
+J*{34}\hat{Z}_3\hat{Z}_4
++
+C.
+\end{split}
 \end{equation}
 
-Sebagai sebuah ilustrasi operasional numerik yang konkret pada jendela evaluasi pengujian tahap pertama, formulasi bentuk nilai Hamiltonian untuk sampel observasi sistem berskala dua aset secara presisi dapat diekstraksi. Kemudian, saat prosedur komputasi identik diaplikasikan pada dimensi ruang sistem empat aset pada periode jendela analitik yang sama persis, algoritma optimasi akan merumuskan persamaan konfigurasi Hamiltonian dengan nilai derajat kebebasan yang jauh lebih komprehensif. Pada analisis hasil perhitungan tersebut, magnitudo nilai koefisien fisis interaksi yang mencatatkan probabilitas di sekitar $J_{ij} \approx 0,5$ secara absolut terbukti sangat didominasi oleh pengaruh amplifikasi parameter penalti konstan anggaran $A$. Keberadaan nilai ambang batas penalti ini pada akhirnya berfungsi untuk menciptakan tembok penghalang energi yang teramat curam bagi setiap konfigurasi susunan mikrokondisi yang dengan sengaja melanggar pakem kendala kelayakan fraksi anggaran portofolio yang diizinkan.
+Persamaan di atas menunjukkan bahwa setiap aset direpresentasikan oleh sebuah qubit, sedangkan hubungan risiko antar aset direpresentasikan melalui koefisien interaksi (J_{ij}). Dengan demikian, struktur korelasi yang semula tersimpan dalam matriks kovariansi ditransformasikan menjadi jaringan interaksi spin pada Hamiltonian Ising. Sebagai ilustrasi numerik pada jendela pelatihan pertama untuk sistem dua aset, proses pemetaan menghasilkan Hamiltonian Ising
+\begin{equation}
+\hat{\mathcal{H}}_{N2}
+=
+0,1735\,\hat{Z}_1
++
+0,0931\,\hat{Z}_2
++
+0,5014\,\hat{Z}_1\hat{Z}_2
++
+0,2320.
+\end{equation}
+Koefisien linear \(h_1=0,1735\) dan \(h_2=0,0931\) merepresentasikan bias energi yang terkait dengan masing-masing aset, sedangkan koefisien interaksi \(J_{12}=0,5014\) menunjukkan adanya kopling yang relatif lebih dominan dibandingkan kontribusi linear individual. Sementara itu, konstanta \(C=0,2320\) berfungsi sebagai pergeseran energi global dan tidak memengaruhi posisi keadaan dasar (\textit{ground state}) sistem.
 
-Guna mengakomodasi perakitan operator Hamiltonian Ising secara otomatis dalam ranah komputasi kuantum berbasis sirkuit terprogram, proses penyusunan matriks diimplementasikan murni secara algoritmik menggunakan fungsi penyusun Hamiltonian dari pustaka \textit{PennyLane}. Blok instruksi pemrograman dinamis ini dirancang untuk membaca matriks koefisien bias linear dan koefisien interaksi spin sebagai himpunan parameter masukan, lalu mengonversinya menjadi kumpulan komponen tensor Pauli-Z kuantum murni. Melalui proses penyisipan syarat presisi komputasi \textit{floating-point} sekecil $10^{-12}$, fungsi ini bertindak sangat esensial dalam menyingkirkan elemen matriks nol sehingga proses eksekusi simulasi sirkuit kuantum dapat terhindar dari redundansi operasional memori berlebih yang tidak relevan secara fisis. Keseluruhan modul pemrograman fungsional ini secara komprehensif mendokumentasikan kapabilitas algoritma dalam merakit arsitektur operator uniter pada lanskap energi VQE secara presisi sebagaimana dapat disaksikan pada Daftar Kode \ref{lst:build_hamiltonian}.
+Besarnya nilai koefisien interaksi menunjukkan bahwa struktur Hamiltonian tidak hanya dipengaruhi oleh ekspektasi imbal hasil dan kovariansi aset, tetapi juga oleh komponen penalti yang digunakan untuk menegakkan kendala kardinalitas portofolio. Dengan demikian, konfigurasi yang melanggar kendala pemilihan aset akan memperoleh energi yang lebih tinggi dibandingkan konfigurasi yang memenuhi batasan investasi yang telah ditetapkan. Hamiltonian hasil pemetaan inilah yang selanjutnya digunakan sebagai fungsi objektif kuantum pada algoritma VQE. Akibatnya, lanskap energi Hamiltonian tidak hanya merepresentasikan kompromi antara imbal hasil dan risiko, tetapi juga mengenkode kendala portofolio secara langsung ke dalam fungsi energi. Hamiltonian inilah yang selanjutnya digunakan sebagai masukan utama pada algoritma \textit{Variational Quantum Eigensolver} untuk mencari konfigurasi portofolio berenergi minimum.
+
+Hamiltonian Ising diimplementasikakn ke dalam simulator kuantum menggunakan pustaka \textit{PennyLane}. Fungsi yang dikembangkan menerima masukan berupa himpunan koefisien bias linear \((h_i)\), koefisien interaksi \((J_{ij})\), jumlah aset, serta konstanta pergeseran energi \(C\). Selanjutnya, setiap koefisien dipetakan ke operator Pauli-\(Z\) yang sesuai sehingga terbentuk Hamiltonian Ising dalam format yang dapat dievaluasi secara langsung oleh algoritma VQE. Koefisien yang bernilai sangat kecil (\(<10^{-12}\)) dapat diabaikan untuk menghindari penambahan operator yang tidak memberikan kontribusi signifikan terhadap energi sistem. Implementasi lengkap prosedur perakitan Hamiltonian tersebut ditunjukkan pada Daftar Kode \ref{lst:build_hamiltonian}.
 
 \begin{lstlisting}[language=Python, caption={Skrip perakitan operator Hamiltonian Ising dinamis menggunakan pustaka \textit{PennyLane}}, label={lst:build_hamiltonian}]
 import pennylane as qml
