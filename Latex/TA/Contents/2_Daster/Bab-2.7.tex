@@ -1,44 +1,127 @@
 \section{Algoritma VQE (\textit{Variational Quantum Eigensolver})}
 \label{sec:algoritma-vqe}
-\texit{Variational Quantum Eigensolver} (VQE) merupakan algoritma komputasi kuantum hibrida yang menggabungkan kemampuan pemrosesan kuantum dan optimasi klasik untuk menyelesaikan permasalahan pencarian keadaan dasar suatu Hamiltonian \cite{peruzzo_variational_2014}. Pendekatan ini dirancang untuk memanfaatkan keunggulan perangkat kuantum dalam merepresentasikan keadaan pada ruang Hilbert berdimensi tinggi, sekaligus memanfaatkan efisiensi komputer klasik dalam melakukan optimasi numerik. Dalam ber bagai bidang, termasuk kimia kuantum, ilmu material, dan optimasi kombinatorial, VQE menjadi salah satu algoritma yang paling banyak digunakan pada era perangkat NISQ karena kebutuhan sumber dayanya relatif lebih rendah dibandingkan algoritma kuantum yang sepenuhnya bergantung pada koreksi kesalahan. 
+\textit{Variational Quantum Eigensolver} (VQE) merupakan algoritma komputasi kuantum hibrida yang menggabungkan kemampuan pemrosesan kuantum dan optimasi klasik untuk menyelesaikan permasalahan pencarian keadaan dasar suatu Hamiltonian \cite{peruzzo_variational_2014}. Pendekatan ini dirancang untuk memanfaatkan keunggulan perangkat kuantum dalam merepresentasikan keadaan pada ruang Hilbert berdimensi tinggi, sekaligus memanfaatkan efisiensi komputer klasik dalam melakukan optimasi numerik. Dalam ber bagai bidang, termasuk kimia kuantum, ilmu material, dan optimasi kombinatorial, VQE menjadi salah satu algoritma yang paling banyak digunakan pada era perangkat NISQ karena kebutuhan sumber dayanya relatif lebih rendah dibandingkan algoritma kuantum yang sepenuhnya bergantung pada koreksi kesalahan. 
 
-Pada skema VQE, \texit{Quantum Processing Unit} (QPU) digunakan untuk menyiapkan keadaan kuantum serta mengevaluasi nilai ekspektasi Hamiltonian yang berperan sebagai fungsi biaya. Nilai ekspektasi tersebut kemudian dikirimkan ke \texit{Central Processing Unit} (CPU), yang bertugas memperbarui parameter sirkuit menggunakan algoritma optimasi klasik \cite{wang_variational_2025}. Interaksi berulang antara kedua komponen ini membentuk suatu siklus umpan-balik yang secara bertahap mengarahkan parameter menuju nilai optimum. Bab ini membahas landasan teoritis yang mendasari mekanisme kerja VQE. Pembahasan diawali dengan prinsip variasi dalam mekanika kuantum yang menjadi dasar formulasi masalah optimasi energi. Selanjutnya akan dijelaskan konstruksi keadaan kuantum melalui ansatz berparameter, serta mekanisme optimasi yang menghubungkan evaluasi kuantum dan pemrosesan klasik. Keseluruhan komponen tersebut membentuk kerangka kerja VQE dalam mencari pendekatan terbaik terhadap keadaan dasar suatu sistem kuantum.
+Pada skema VQE, \textit{Quantum Processing Unit} (QPU) digunakan untuk menyiapkan keadaan kuantum serta mengevaluasi nilai ekspektasi Hamiltonian yang berperan sebagai fungsi biaya. Nilai ekspektasi tersebut kemudian dikirimkan ke \textit{Central Processing Unit} (CPU), yang bertugas memperbarui parameter sirkuit menggunakan algoritma optimasi klasik \cite{wang_variational_2025}. Interaksi berulang antara kedua komponen ini membentuk suatu siklus umpan-balik yang secara bertahap mengarahkan parameter menuju nilai optimum. Bab ini akan membahas beberapa landasan teoritis yang mendasari mekanisme kerja VQE. Pembahasan diawali dengan prinsip variasi dalam mekanika kuantum yang menjadi dasar formulasi masalah optimasi energi. Selanjutnya akan dijelaskan konstruksi keadaan kuantum melalui ansatz berparameter, serta mekanisme optimasi yang menghubungkan evaluasi kuantum dan pemrosesan klasik. Keseluruhan komponen tersebut membentuk kerangka kerja VQE dalam mencari pendekatan terbaik terhadap keadaan dasar suatu sistem kuantum.
 
 \subsection{Prinsip Variasi Rayleigh-Ritz dalam Mekanika Kuantum}
-Algoritma VQE beroperasi berdasarkan Teorema Rayleigh-Ritz yang menyatakan bahwa nilai ekspektasi energi dari sembarang fungsi gelombang percobaan $|\psi(\theta)\rangle$ akan selalu bernilai lebih besar atau setara dengan tingkat energi dasar sejati sistem ($E_0$). Fungsi energi $E(\theta)$ dihitung melalui normalisasi nilai ekspektasi Hamiltonian terhadap fungsi gelombang \textit{ansatz} yang diimplementasikan pada sirkuit kuantum:
+Salah satu permasalahan utama dalam mekanika kuantum adalah menentukan keadaan dasar (ground state) dari suatu sistem yang dideskripsikan oleh Hamiltonian $\mathcal{H}$. Untuk sistem sederhana, keadaan dasar dapat diperoleh dengan menyelesaikan persamaan Schrödinger secara analitik. Namun, pada sistem yang memiliki banyak partikel atau derajat kebebasan yang besar, solusi eksak umumnya sulit diperoleh sehingga diperlukan pendekatan numerik yang lebih efisien. Prinsip variasi menyediakan kerangka matematis untuk memperkirakan energi keadaan dasar tanpa harus mengetahui solusi eksak persamaan Schrödinger. Prinsip ini menyatakan bahwa energi keadaan dasar dapat diperoleh melalui proses minimisasi nilai ekspektasi Hamiltonian terhadap seluruh keadaan kuantum yang memenuhi syarat normalisasi. Dengan demikian, pencarian keadaan dasar dapat diformulasikan sebagai suatu masalah optimasi yang mencari keadaan dengan energi serendah mungkin.
+
+Misalkan suatu sistem kuantum dideskripsikan oleh vektor keadaan $|\psi\rangle$ dalam ruang Hilbert dan memiliki Hamiltonian $\mathcal{H}$ yang memuat seluruh informasi energi sistem. Untuk keadaan tersebut, energi rata-rata sistem dinyatakan melalui fungsional energi
 \begin{equation}
-\label{eq:prinsip_variasi}
-E(\theta) = \frac{\langle\psi(\theta)|\hat{\mathcal{H}}|\psi(\theta)\rangle}{\langle\psi(\theta)|\psi(\theta)\rangle} \ge E_0.
+    \label{eq:fungsional_energi}
+    E = \langle \psi | \mathcal{H} | \psi \rangle.
 \end{equation}
-Karena fungsi gelombang kuantum pada sirkuit selalu ternormalisasi ($\langle\psi|\psi\rangle = 1$), maka tujuan utama VQE adalah mencari set parameter $\theta^*$ yang meminimalkan nilai ekspektasi tersebut sehingga mendekati $E_0$.
+Notasi $E[\psi]$ menunjukkan bahwa energi merupakan suatu fungsional yang bergantung pada bentuk keadaan kuantum yang dipilih. Berbeda dengan fungsi biasa yang bergantung pada suatu variabel, fungsional bergantung pada keseluruhan fungsi atau vektor keadaan. Oleh karena itu, perubahan pada bentuk fungsi gelombang akan menghasilkan perubahan pada nilai energi yang dihitung melalui fungsional tersebut. Karena interpretasi probabilistik mekanika kuantum mensyaratkan total probabilitas bernilai satu, maka keadaan yang diizinkan harus memenuhi kondisi normalisasi
+\begin{equation}
+    \label{eq:normalisasi_keadaan}
+    \langle \psi | \psi \rangle = 1.
+\end{equation}
+Kondisi ini bertindak sebagai kendala dalam proses optimasi karena tidak semua variasi fungsi gelombang dapat dipilih secara bebas. Setiap keadaan yang digunakan dalam proses minimisasi harus tetap mempertahankan syarat normalisasi tersebut. Sehingga, pencarian energi minimum harus dilakukan pada himpunan keadaan kuantum.
+
+Untuk menangani kendala tersebut, digunakan metode pengali Lagrange. Metode ini memungkinkan proses optimasi dilakukan tanpa harus menghilangkan kendala normalisasi. Sebagai akibatnya, perlu ditambahkan suatu parameter tambahan $\lambda$ yang berfungsi memastikan bahwa keadaan hasil optimasi tetap memenuhi syarat normalisasi. Dengan menggunakan pengali Lagrange, didefinisikan suatu fungsional baru
+\begin{equation}
+    \label{eq:fungsional_lagrange}
+    \mathcal{F}[\psi] = \langle \psi | \mathcal{H} | \psi \rangle - \lambda \left( \langle \psi | \psi \rangle - 1 \right).
+\end{equation}
+Adapun fungsi dari $\mathcal{F}[\psi]$ merupakan fungsi objektif yang akan dioptimalkan. Pada persamaan $\ref{eq:fungsional_lagrange}$, suku pertama menyatakan energi sistem, sedangkan suku kedua berfungsi mempertahankan kondisi normalisasi selama proses variasi. Nilai parameter $\lambda$ belum diketahui pada tahap ini dan akan muncul secara alami sebagai bagian dari solusi optimasi. 
+
+Karena konstanta 1 tidak memberikan kontribusi terhadap proses variasi, suku tersebut dapat diabaikan sehingga fungsional di atas dapat dituliskan kembali dalam bentuk yang lebih ringkas sebagai
+\begin{equation}
+    \label{eq:fungsional_lagrange_2}
+    \mathcal{F}[\psi] = \langle \psi | \mathcal{H} | \psi \rangle - \lambda \langle\psi|psi\rangle.
+\end{equation}
+Bentuk inilah yang akan digunakan untuk memperoleh kondisi stasioner dari fungsional energi. Pada bagian berikutnya akan ditunjukkan bahwa penerapan prinsip variasi terhadap fungsional tersebut menghasilkan persamaan nilai eigen Hamiltonian yang menjadi dasar teoritis bagi pencarian keadaan dasar dalam algoritma VQE.
+
+Kondisi energi minimum diperoleh dengan mencari titik stasioner dari fungsional $\mathcal{F}[\psi]$. Dalam kalkulus variasi, titik stasioner adalah keadaan ketika variasi orde pertama dari suatu fungsional bernilai nol terhadap perubahan infinitesimal fungsi yang diizinkan. Secara fisik, kondisi ini menyatakan bahwa perubahan yang sangat kecil pada keadaan kuantum tidak menghasilkan perubahan linear pada nilai energi. Oleh karena itu, keadaan stasioner merupakan kandidat solusi yang dapat merepresentasikan keadaan fisis sistem. Kondisi stasioner tersebut dinyatakan melalui
+\begin{equation}
+    \label{eq:kondisi_stasioner}
+    \frac{\delta \mathcal{F}}{\delta \psi} = 0.
+\end{equation}
+dengan simbol $\delta$ menyatakan operator variasi. Berbeda dengan diferensial biasa (d) yang mengukur perubahan suatu fungsi terhadap variabel independen tertentu, operator variasi mengukur perubahan suatu fungsional akibat deformasi kecil pada fungsi atau keadaan kuantum itu sendiri. Dengan demikian, operator variasi memungkinkan analisis terhadap bagaimana nilai fungsional berubah ketika bentuk fungsi gelombang dimodifikasi secara infinitesimal.
+
+Secara konseptual, variasi keadaan kuantum dapat dituliskan sebagai
+\begin{equation}
+    \label{eq:variasi_keadaan}
+    \ket{\psi} \to |\psi\rangle + \epsilon|\eta\rangle,
+\end{equation}
+dengan $\epsilon$ merupakan parameter real yang sangat kecil dan $|\eta\rangle$ adalah fungsi variasi arbitrer yang memenuhi syarat batas yang sama dengan $|\psi\rangle$. Variasi pertama dari suatu fungsional didefinisikan sebagai koefisien linear terhadap $\epsilon$ ketika $\epsilon \to 0$. Apabila koefisien linear tersebut bernilai nol untuk setiap variasi yang diperbolehkan, maka keadaan yang ditinjau merupakan titik stasioner dari fungsional.
+
+Karena fungsi gelombang pada umumnya bernilai kompleks, maka $|\psi\rangle$ dan dual vektornya $\langle\psi|$ diperlakukan sebagai variabel independen selama proses variasi. Dengan melakukan variasi terhadap fungsional $\mathcal{F}[\psi]$, diperoleh
+\begin{equation}
+    \label{eq:variasi_fungsional}
+    \delta \mathcal{F} = \langle \delta \psi | \mathcal{H} | \psi \rangle + \langle \psi | \mathcal{H} | \delta \psi \rangle - \lambda \left(\langle \delta \psi | \psi \rangle + \langle \psi | \delta \psi \rangle \right).
+\end{equation}
+Seluruh suku yang bergantung pada variasi dapat kemudian dikelompokkan sehingg diperoleh
+\begin{equation} 
+    \label{eq:variasi_fungsional_2}
+    \delta \mathcal{F} = \langle \delta \psi | \left(\mathcal{H} - \lambda \right) | \psi \rangle + c.c.,
+\end{equation}
+dengan $c.c.$ (\textit{complex conjugate}) menyatakan suku konjugat kompleks yang berasal dari variasi terhadap $|\psi\rangle$. Karena $\langle\delta\psi|$ bersifat arbitrer, syarat $\delta\mathcal{F} = 0$ hanya dapat dipenuhi apabila faktor yang mengalikan variasi tersebut bernilai nol. Akibatnya diperoleh hubungan
+\begin{equation}
+    \begin{split}
+    \left(\mathcal{H} - \lambda \right) | \psi \rangle = 0, \\
+    \mathcal{H}|\psi\rangle = \lambda|\psi\rangle.
+    \end{split}
+\end{equation}
+Persamaan di atas identik dengan masalah nilai eigen (eigenvalue problem) dalam mekanika kuantum. Vektor keadaan $|\psi\rangle$ berperan sebagai fungsi eigen Hamiltonian, sedangkan $\lambda$ merupakan nilai eigennya. Karena Hamiltonian merepresentasikan energi sistem, nilai eigen tersebut memiliki interpretasi fisik sebagai tingkat energi yang diizinkan oleh sistem kuantum.
+
+Di antara seluruh nilai eigen Hamiltonian, nilai yang paling kecil merepresentasikan energi keadaan dasar. Dengan mengidentifikasi $\lambda$ sebagai energi eigen dan memilih nilai minimum yang mungkin dicapai, diperoleh persamaan keadaan dasar
+\begin{equation}
+    \label{eq:keadaan_dasar}
+    \mathcal{H}|\psi_0\rangle = E_0|\psi_0\rangle.
+\end{equation}
+Hasil ini menunjukkan bahwa pencarian energi minimum melalui prinsip variasi ekuivalen dengan pencarian keadaan dasar Hamiltonian. Namun, pada sistem kuantum yang kompleks, bentuk eksak keadaan dasar umumnya tidak diketahui sehingga penyelesaian analitik menjadi sulit dilakukan. Oleh karena itu, diperlukan pendekatan yang memungkinkan energi keadaan dasar diperkirakan melalui suatu keadaan percobaan (\textit{trial state}) yang lebih mudah dibangun.
+
+\subsection{Teorema Rayleigh--Ritz dan Dasar Algoritma VQE}
+Misalkan $|\phi\rangle$ merupakan sembarang keadaan kuantum ternormalisasi yang digunakan sebagai pendekatan terhadap keadaan dasar sistem. Keadaan tersebut tidak harus merupakan fungsi eigen Hamiltonian, tetapi cukup berada dalam ruang Hilbert yang sama dengan sistem yang sedang ditinjau. Untuk keadaan tersebut dapat didefinisikan nilai ekspektasi energi sebagai
+\begin{equation}
+    \begin{split}
+    E[\phi] = \frac{\langle \phi | \mathcal{H} | \phi \rangle}{\langle \phi | \phi \rangle}.
+    \end{split}
+\end{equation}
+Jika keadaan percobaan diekspansikan ke dalam basis fungsi eigen Hamiltonian, maka nilai ekspektasi energi selalu dapat dinyatakan sebagai kombinasi berbobot dari nilai-nilai eigen energi sistem. Karena seluruh koefisien probabilitas bernilai tidak negatif dan jumlahnya sama dengan satu, energi yang diperoleh tidak mungkin lebih kecil daripada energi keadaan dasar. Hasil ini dikenal sebagai teorema Rayleigh–Ritz dan dinyatakan sebagai
+\begin{equation}
+    \label{eq:teorema_rayleigh_ritz}
+    \begin{split}
+    \frac{\langle \phi | \mathcal{H} | \phi \rangle}{\langle \phi | \phi \rangle} \geq E_0.
+    \end{split}
+\end{equation}
+
+Teorema Rayleigh--Ritz memberikan batas bawah yang sangat penting dalam mekanika kuantum. Semakin dekat keadaan percobaan terhadap keadaan dasar sesungguhnya, semakin dekat pula nilai ekspektasi energi terhadap $E_0$. Dengan demikian, pencarian keadaan dasar dapat diubah menjadi permasalahan optimasi yang bertujuan meminimalkan nilai ekspektasi energi. Algoritma VQE memanfaatkan prinsip tersebut dengan menggantikan keadaan percobaan umum $|\phi\rangle$ menjadi keadaan kuantum berparameter $|\psi(\boldsymbol{\theta})\rangle$ yang dibangun menggunakan suatu sirkuit kuantum. Energi sistem kemudian dituliskan sebagai fungsi parameter
+\begin{equation}
+    \begin{split}
+    E(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta}) | \mathcal{H} | \psi(\boldsymbol{\theta}) \rangle.
+    \end{split}
+\end{equation}
+Tujuan utama VQE adalah mencari parameter optimal $\boldsymbol{\theta}^*$ yang meminimalkan nilai energi tersebut. Berdasarkan Persamaan (\ref{eq:teorema_rayleigh_ritz}), energi minimum yang diperoleh akan selalu berada di atas atau sama dengan energi keadaan dasar yang sesungguhnya. Oleh karena itu, kualitas solusi VQE ditentukan oleh kemampuan ansatz dalam menghasilkan keadaan kuantum yang cukup dekat dengan keadaan dasar sistem yang dicari.Meskipun prinsip variasi menjamin keberadaan prosedur optimasi untuk mendekati energi keadaan dasar, keberhasilan VQE sangat bergantung pada bentuk ansatz yang digunakan untuk merepresentasikan keadaan kuantum. Oleh karena itu, langkah berikutnya adalah membangun suatu ansatz yang cukup ekspresif untuk menangkap korelasi kuantum sistem, tetapi tetap dapat direalisasikan pada perangkat kuantum yang tersedia.
 
 \subsection{Ansatz UCC (\textit{Unitary Coupled Cluster})}
-\textit{Unitary Coupled Cluster} (UCC) merupakan pendekatan untuk membangun fungsi gelombang percobaan yang merepresentasikan korelasi antarpartikel secara sistematis~\cite{rajak_quantum_2023,suzuki_spin-_2025}. Metode ini menggunakan operator klaster uniter untuk mentransformasi keadaan referensi $|\Phi_0\rangle$ menjadi keadaan kuantum baru melalui formulasi:
+Sebagaimana dijelaskan pada bagian sebelumnya, algoritma VQE mencari keadaan kuantum yang meminimalkan nilai ekspektasi Hamiltonian. Namun, proses optimasi tidak dapat dilakukan secara langsung terhadap seluruh ruang Hilbert karena dimensinya bertumbuh secara eksponensial terhadap jumlah partikel atau qubit. Oleh karena itu, diperlukan suatu bentuk keadaan percobaan yang direpresentasikan melalui sejumlah parameter yang dapat dioptimalkan. Dalam konteks VQE, keadaan percobaan tersebut dikenal sebagai ansatz.
+
+Salah satu ansatz yang banyak digunakan dalam simulasi kimia kuantum adalah \textit{Unitary Coupled Cluster} (UCC). Ansatz ini dikembangkan dari metode \textit{Coupled Cluster} dalam kimia komputasi dan dirancang untuk menangkap korelasi elektron secara sistematis. Keunggulan utama UCC adalah kemampuannya mempertahankan sifat uniter evolusi kuantum sehingga lebih sesuai untuk implementasi pada komputer kuantum dibandingkan formulasi \textit{Coupled Cluster} konvensional. Keadaan kuantum pada ansatz UCC dibangkitkan melalui operator uniter
 \begin{equation}
-\label{eq:ucc_ansatz}
-|\psi_{UCC}(\theta)\rangle = e^{\hat{T}(\theta)-\hat{T}^\dagger(\theta)} |\Phi_0\rangle.
+    \label{eq:ucc_ansatz}
+    \begin{split}
+    |\psi_{\text{UCC}}(\boldsymbol{\theta})\rangle = e^{\hat{T}(\boldsymbol{\theta})-\hat{T}^{\dagger}(\boldsymbol{\theta})}|\Phi_0\rangle.
+    \end{split}
 \end{equation}
-Operator $\hat{T}$ umumnya terdiri dari operator eksitasi tunggal ($\hat{T}_1$) dan ganda ($\hat{T}_2$):
+Pada persamaan tersebut, $|\Phi_0\rangle$ umumnya dipilih sebagai keadaan referensi Hartree--Fock yang merepresentasikan pendekatan medan-rata (\textit{mean-field}) terhadap sistem. Operator eksponensial kemudian menghasilkan superposisi berbagai konfigurasi tereksitasi yang memperbaiki deskripsi korelasi antarpartikel. Dengan demikian, keadaan akhir memiliki akurasi yang lebih baik dibandingkan keadaan referensi awal.
+
+Operator cluster $\hat{T}$ biasanya dibangun dari kombinasi eksitasi tunggal dan eksitasi ganda yang dituliskan sebagai
 \begin{equation}
-\hat{T}_1 = \sum_{i,a} t_i^a \hat{a}_a^\dagger \hat{a}_i, \quad \hat{T}_2 = \frac{1}{4} \sum_{i,j,a,b} t_{ij}^{ab} \hat{a}_a^\dagger \hat{a}_b^\dagger \hat{a}_j \hat{a}_i.
+    \label{eq:ucc_ansatz_2}
+    \hat{T}_1 = \sum_{i,a} t_i^a \hat{a}^\dagger_a \hat{a}_i, \quad \hat{T}_2 = \sum_{i,j,a,b} t_{ij}^{ab} \hat{a}^\dagger_a \hat{a}^\dagger_b \hat{a}_j \hat{a}_i.
 \end{equation}
-Generator uniter $\hat{T} - \hat{T}^\dagger$ bersifat anti-Hermitian, sehingga memastikan evolusi keadaan kuantum bersifat reversibel. Meskipun UCC menawarkan presisi tinggi dalam kimia kuantum, kebutuhan akan kedalaman sirkuit yang besar membuatnya sulit diimplementasikan pada perangkat NISQ saat ini.
+Indeks $i, j$ menyatakan orbital yang mula-mula terisi, sedangkan $a, b$ menyatakan orbital yang tidak terisi. Operator $\hat{T}_1$ merepresentasikan perpindahan satu partikel dari orbital terisi ke orbital kosong, sedangkan $\hat{T}_2$ merepresentasikan eksitasi dua partikel secara simultan. Koefisien $t_a^i$ dan $t_{ab}^{ij}$ berperan sebagai parameter variasional yang akan dioptimalkan selama proses VQE.
 
-\subsection{Ansatz \texttt{EfficientSU2} dan Siklus Optimasi Hibrida pada VQE}
-Berdasarkan prinsip variasi, energi keadaan dasar suatu sistem kuantum dapat didekati melalui pencarian keadaan kuantum terparameterisasi yang menghasilkan nilai ekspektasi Hamiltonian serendah mungkin. Oleh karena itu, algoritma \textit{Variational Quantum Eigensolver} (VQE) memerlukan suatu keluarga keadaan kuantum yang dapat diubah secara sistematis melalui sekumpulan parameter bebas. Keluarga keadaan tersebut dikenal sebagai ansatz, yaitu bentuk fungsi gelombang uji yang digunakan untuk merepresentasikan solusi kandidat selama proses optimasi. Dalam formulasi umum, keadaan kuantum yang dibangkitkan oleh suatu ansatz dapat dinyatakan sebagai
-\begin{equation}
-|\psi(\boldsymbol{\theta})\rangle
-=
+Karena generator $\hat{T} - \hat{T}^\dagger$ bersifat anti-Hermitian, operator eksponensial yang dihasilkan bersifat uniter. Sifat ini menjamin bahwa probabilitas total sistem tetap terjaga selama evolusi kuantum berlangsung. Selain itu, unitaritas memungkinkan implementasi ansatz dalam bentuk rangkaian gerbang kuantum yang sesuai dengan prinsip dasar komputasi kuantum.Meskipun memiliki dasar fisika yang kuat, implementasi UCC sering kali memerlukan jumlah gerbang kuantum yang besar. Kompleksitas tersebut menyebabkan kedalaman sirkuit meningkat secara signifikan ketika ukuran sistem bertambah. Pada perangkat NISQ yang masih rentan terhadap noise dan dekoherensi, kebutuhan sumber daya yang tinggi ini menjadi salah satu hambatan utama penggunaan UCC secara
+langsung.
 
-\hat U(\boldsymbol{\theta})
-|0\rangle^{\otimes N},
-\end{equation}
-dengan $\hat U(\boldsymbol{\theta})$ menyatakan rangkaian gerbang kuantum yang bergantung pada parameter $\boldsymbol{\theta}$ dan $N$ menyatakan jumlah qubit yang digunakan. Selama proses optimasi, parameter-parameter tersebut terus diperbarui sehingga keadaan yang dihasilkan dapat bergerak di dalam ruang Hilbert menuju representasi yang semakin mendekati keadaan dasar sistem.
+\subsection{Arsitektur Ansatz \texttt{EfficientSU2}}
+Keterbatasan perangkat NISQ mendorong pengembangan berbagai \textit{hardware-efficient ansatz} (HEA) yang lebih mudah diimplementasikan secara eksperimental. Jika UCC dibangun berdasarkan struktur fisika sistem, maka HEA dirancang dengan mempertimbangkan keterbatasan perangkat keras kuantum yang tersedia. Tujuannya adalah menghasilkan ansatz yang cukup ekspresif untuk proses optimasi sekaligus memiliki kedalaman sirkuit yang relatif rendah.
 
-Pemilihan ansatz merupakan salah satu aspek paling penting dalam VQE karena secara langsung menentukan ruang solusi yang dapat dieksplorasi selama optimasi. Secara umum, ansatz yang baik harus memiliki kemampuan representasi yang cukup untuk mendeskripsikan keadaan dasar sistem sekaligus tetap memungkinkan implementasi yang efisien pada perangkat kuantum yang tersedia. Pada perangkat kuantum era \textit{Noisy Intermediate-Scale Quantum} (NISQ), keterbatasan jumlah qubit, tingkat kesalahan gerbang, serta waktu koherensi yang relatif singkat menyebabkan penggunaan sirkuit yang terlalu dalam menjadi kurang praktis. Kondisi tersebut mendorong pengembangan berbagai pendekatan \textit{hardware-efficient ansatz}, yaitu ansatz yang dirancang dengan mempertimbangkan karakteristik dan keterbatasan perangkat keras kuantum sehingga dapat direalisasikan dengan jumlah gerbang yang relatif sedikit tanpa menghilangkan kemampuan eksplorasi ruang keadaan kuantum secara signifikan.
-
-Salah satu \textit{hardware-efficient ansatz} yang banyak digunakan dalam implementasi VQE adalah \texttt{EfficientSU2}. Berbeda dengan ansatz berbasis kimia kuantum seperti \textit{Unitary Coupled Cluster} (UCC) yang dibangun dari struktur fisika sistem, \texttt{EfficientSU2} disusun berdasarkan pola gerbang kuantum yang mudah direalisasikan pada berbagai arsitektur perangkat keras. Pendekatan ini memungkinkan pembentukan ruang keadaan yang cukup luas dengan kedalaman sirkuit yang relatif dangkal sehingga lebih sesuai untuk kondisi NISQ saat ini. Secara konseptual, \texttt{EfficientSU2} dibangun dari pengulangan dua komponen utama, yaitu lapisan rotasi satu-qubit yang berfungsi menghasilkan variasi keadaan lokal pada setiap qubit dan lapisan keterbelitan (\textit{entanglement layer}) yang berfungsi membentuk korelasi kuantum antarqubit. Kombinasi kedua komponen tersebut memungkinkan ansatz menghasilkan keadaan kuantum yang semakin kompleks seiring bertambahnya jumlah parameter dan kedalaman sirkuit yang digunakan.
-Struktur matematis \texttt{EfficientSU2} dibangun melalui pengulangan lapisan rotasi satu-qubit dan lapisan keterbelitan sebanyak $L$ kali. Untuk sistem yang terdiri atas $N$ qubit, keadaan kuantum yang dihasilkan dapat dituliskan sebagai
+Salah satu HEA yang banyak digunakan dalam implementasi VQE adalah \texttt{EfficientSU2}. Ansatz ini dibangun dari kombinasi gerbang rotasi satu-qubit dan lapisan keterbelitan (\textit{entanglement layer}) yang disusun secara berulang. Struktur tersebut memungkinkan eksplorasi ruang keadaan kuantum yang luas tanpa memerlukan jumlah gerbang yang terlalu besar. Untuk sistem yang terdiri atas $N$ qubit dan kedalaman sirkuit sebesar $L$, keadaan kuantum dapat dituliskan sebagai
 \begin{equation}
 \begin{split}
 |\psi(\boldsymbol{\theta})\rangle
@@ -60,73 +143,4 @@ Struktur matematis \texttt{EfficientSU2} dibangun melalui pengulangan lapisan ro
 |0\rangle^{\otimes N},
 \end{split}
 \end{equation}
-dengan $\hat R_y$ dan $\hat R_z$ masing-masing menyatakan gerbang rotasi terhadap sumbu-$y$ dan sumbu-$z$ pada Bloch sphere, sedangkan $\hat U_{\mathrm{ent}}$ merepresentasikan lapisan keterbelitan yang diterapkan setelah setiap lapisan rotasi. Parameter $\theta_{l,j,y}$ dan $\theta_{l,j,z}$ berperan sebagai variabel bebas yang akan dioptimalkan selama proses VQE. Melalui variasi parameter-parameter tersebut, setiap qubit dapat menjelajahi berbagai orientasi keadaan kuantum sehingga membentuk ruang pencarian yang cukup besar untuk merepresentasikan berbagai kandidat keadaan dasar.
-
-Dari sudut pandang geometris, lapisan rotasi satu-qubit memungkinkan transformasi keadaan pada masing-masing qubit secara independen, sedangkan pengulangan beberapa lapisan rotasi memperluas fleksibilitas ansatz dalam membangun superposisi yang lebih kompleks. Bertambahnya jumlah lapisan $L$ secara umum meningkatkan kemampuan representasi (\textit{expressibility}) sirkuit karena jumlah parameter yang dapat disesuaikan juga meningkat. Akan tetapi, peningkatan kedalaman sirkuit tidak selalu menghasilkan performa yang lebih baik karena jumlah gerbang yang lebih banyak dapat memperbesar akumulasi kesalahan implementasi dan meningkatkan sensitivitas terhadap \textit{noise}. Oleh sebab itu, pemilihan kedalaman sirkuit pada \texttt{EfficientSU2} biasanya dilakukan dengan mempertimbangkan keseimbangan antara kemampuan representasi dan keterbatasan perangkat keras yang digunakan.
-
-Selain menghasilkan superposisi keadaan yang beragam, representasi keadaan dasar sistem kuantum umumnya juga memerlukan keberadaan korelasi non-klasik antarqubit. Kebutuhan tersebut dipenuhi melalui lapisan keterbelitan yang biasanya dibangun menggunakan gerbang CNOT dengan pola konektivitas tertentu. Tanpa adanya lapisan keterbelitan, keadaan yang dihasilkan hanya berupa hasil kali keadaan individual setiap qubit sehingga tidak mampu merepresentasikan banyak fenomena kuantum yang melibatkan korelasi kolektif. Secara umum, keadaan produk dapat dinyatakan sebagai
-\begin{equation}
-|\psi_{\mathrm{prod}}\rangle
-=
-
-\bigotimes_{j=1}^{N}
-|\phi_j\rangle,
-\end{equation}
-sedangkan keadaan terbelit tidak dapat difaktorkan ke dalam bentuk tersebut. Oleh karena itu, keberadaan lapisan keterbelitan menjadi komponen penting yang memungkinkan \texttt{EfficientSU2} membangun keadaan kuantum yang lebih representatif terhadap sistem fisik yang sedang dipelajari.
-
-Meskipun tidak secara eksplisit memasukkan informasi fisika sistem sebagaimana dilakukan oleh ansatz UCC, \texttt{EfficientSU2} menawarkan keuntungan berupa implementasi yang lebih sederhana dan kedalaman sirkuit yang relatif rendah. Karakteristik ini menjadikannya salah satu pilihan yang populer pada perangkat NISQ, khususnya ketika sumber daya kuantum yang tersedia masih terbatas. Namun demikian, fleksibilitas yang diperoleh dari pendekatan \textit{hardware-efficient} juga diikuti oleh adanya kompromi terhadap kualitas representasi keadaan kuantum. Kemampuan ansatz untuk mendekati keadaan dasar tidak hanya ditentukan oleh jumlah parameter yang tersedia, tetapi juga oleh pola keterbelitan dan kedalaman sirkuit yang dipilih. Dengan demikian, keberhasilan penggunaan \texttt{EfficientSU2} sangat bergantung pada keseimbangan antara efisiensi implementasi dan kemampuan representasi ruang keadaan kuantum yang diperlukan oleh permasalahan yang diselesaikan.
-
-Setelah keadaan kuantum terparameterisasi berhasil dibangkitkan oleh ansatz, langkah berikutnya dalam VQE adalah mengevaluasi kualitas keadaan tersebut melalui perhitungan nilai ekspektasi Hamiltonian. Proses ini dilakukan menggunakan pendekatan hibrida yang memanfaatkan perangkat kuantum dan komputer klasik secara bergantian. Pada setiap iterasi, sekumpulan parameter $\boldsymbol{\theta}$ dikirimkan ke \textit{Quantum Processing Unit} (QPU) untuk membangun keadaan kuantum $|\psi(\boldsymbol{\theta})\rangle$. Keadaan tersebut kemudian digunakan untuk menghitung energi sistem yang berfungsi sebagai fungsi biaya (\textit{cost function}) selama optimasi. Berdasarkan prinsip variasi, nilai energi yang diperoleh selalu lebih besar atau sama dengan energi keadaan dasar sesungguhnya sehingga proses minimisasi energi dapat digunakan untuk mendekati solusi yang diinginkan. Secara matematis, energi yang dievaluasi pada setiap iterasi dapat dituliskan sebagai
-\begin{equation}
-\langle \hat{\mathcal H} \rangle_{\boldsymbol{\theta}}
-=
-
-\langle \psi(\boldsymbol{\theta}) |
-\hat{\mathcal H}
-|
-\psi(\boldsymbol{\theta})
-\rangle
-=
-
-\langle 0 |
-\hat U^\dagger(\boldsymbol{\theta})
-\hat{\mathcal H}
-\hat U(\boldsymbol{\theta})
-|0\rangle.
-\end{equation}
-Nilai ekspektasi inilah yang menjadi ukuran utama untuk menentukan apakah perubahan parameter menghasilkan keadaan yang lebih dekat terhadap keadaan dasar sistem atau tidak.
-
-Energi yang diperoleh dari QPU selanjutnya dikirimkan ke komputer klasik untuk diproses oleh algoritma optimasi. Tugas utama optimizer adalah menentukan bagaimana parameter harus diperbarui agar nilai energi pada iterasi berikutnya menjadi lebih rendah. Dalam implementasi pada perangkat NISQ, salah satu metode yang banyak digunakan adalah \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA). Berbeda dengan metode gradien konvensional yang memerlukan sejumlah besar evaluasi fungsi biaya untuk menghitung turunan terhadap setiap parameter, SPSA mampu memperkirakan arah gradien menggunakan jumlah evaluasi yang relatif sedikit. Karakteristik tersebut membuat SPSA lebih efisien secara komputasional dan lebih toleran terhadap fluktuasi akibat \textit{noise} pengukuran yang umum dijumpai pada perangkat kuantum saat ini. Secara umum, proses pembaruan parameter dapat dinyatakan sebagai
-\begin{equation}
-\boldsymbol{\theta}_{k+1}
-=
-## \boldsymbol{\theta}_{k}
-
-\eta_k
-\hat g_k,
-\end{equation}
-dengan $\eta_k$ menyatakan laju pembelajaran (\textit{learning rate}) yang mengontrol besar langkah optimasi dan $\hat g_k$ merupakan estimator gradien stokastik pada iterasi ke-$k$. Berdasarkan informasi tersebut, optimizer menentukan arah pencarian yang diharapkan dapat menurunkan energi sistem secara bertahap menuju minimum.
-
-Siklus evaluasi energi pada perangkat kuantum dan pembaruan parameter pada komputer klasik terus diulang hingga memenuhi kriteria konvergensi tertentu, misalnya perubahan energi yang sangat kecil antar iterasi atau tercapainya jumlah iterasi maksimum yang telah ditentukan sebelumnya. Pada kondisi konvergen diperoleh sekumpulan parameter optimal $\boldsymbol{\theta}^{*}$ yang menghasilkan energi minimum dalam ruang ansatz yang digunakan. Secara formal, proses optimasi tersebut dapat dipandang sebagai pencarian solusi
-\begin{equation}
-\boldsymbol{\theta}^{*}
-=
-
-\arg\min_{\boldsymbol{\theta}}
-;
-\langle \psi(\boldsymbol{\theta}) |
-\hat{\mathcal H}
-|
-\psi(\boldsymbol{\theta})
-\rangle,
-\end{equation}
-sehingga keadaan kuantum yang dihasilkan oleh parameter optimal dapat dituliskan sebagai
-\begin{equation}
-|\psi_{\mathrm{opt}}\rangle
-=
-
-|\psi(\boldsymbol{\theta}^{*})\rangle.
-\end{equation}
-Menurut prinsip variasi, keadaan tersebut merupakan pendekatan terbaik terhadap keadaan dasar yang dapat direpresentasikan oleh ansatz yang digunakan.
-
-Dengan demikian, VQE mengubah permasalahan pencarian keadaan dasar yang semula berbentuk persoalan mekanika kuantum menjadi masalah optimasi parameter pada suatu sirkuit kuantum berparameter. Keberhasilan pendekatan ini ditentukan oleh sinergi antara kemampuan ansatz dalam merepresentasikan ruang keadaan kuantum dan kemampuan optimizer dalam menemukan parameter yang menghasilkan energi minimum. Ansatz yang terlalu sederhana dapat membatasi ruang solusi yang tersedia, sedangkan optimizer yang kurang efektif dapat gagal menemukan minimum yang baik meskipun ruang solusi yang memadai telah tersedia. Kombinasi antara \texttt{EfficientSU2} sebagai ansatz yang sesuai untuk perangkat NISQ dan SPSA sebagai optimizer yang relatif tahan terhadap \textit{noise} menjadikan VQE salah satu algoritma kuantum hibrida yang paling banyak digunakan untuk menyelesaikan permasalahan optimasi dan simulasi kuantum pada perangkat kuantum generasi saat ini.
+Operator gerbang rotasi $\hat{R}_y$ dan $\hat{R}_z$ memungkinkan setiap qubit bergerak pada berbagai arah di bola Bloch. Parameter sudut yang terkait dengan gerbang-gerbang tersebut menjadi variabel bebas yang akan dioptimalkan oleh algoritma klasik. Semakin banyak parameter yang tersedia, semakin besar pula ruang solusi yang dapat dieksplorasi selama proses optimasi. Selain rotasi satu-qubit, \texttt{EfficientSU2} juga memanfaatkan lapisan keterbelitan yang umumnya dibangun menggunakan gerbang CNOT. Lapisan ini bertujuan agar korelasi kuantum antar qubit dapat terbentuk. Dibandingkan dengan UCC, \texttt{EfficientSU2} umumnya menghasilkan sirkuit yang lebih dangkal dan lebih sesuai untuk perangkat kuantum saat ini.

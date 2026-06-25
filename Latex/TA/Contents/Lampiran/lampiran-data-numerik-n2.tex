@@ -9,7 +9,7 @@ Data harga harian saham untuk periode simulasi ini dapat merujuk pada Tabel \ref
 
 Berikut adalah parameter $h$ (bias), interaksi $J$, $C_{obj}$ (konstanta), dan parameter $\gamma$ yang dihitung berdasarkan volatilitas per jendela untuk N=2. Karena hanya terdapat dua aset, interaksi $J$ digabungkan ke dalam satu tabel yang sama.
 
-\begin{footnotesize}
+{\footnotesize
 \begin{longtable}{llllll}
 \caption{Parameter Dinamis Portofolio N=2 ($\gamma$, $h_{obj}$, $J_{obj}$)} \label{tab:unified_n2} \\
 \toprule
@@ -63,13 +63,13 @@ P & $\gamma$ & $h_{obj}$ (BBCA) & $h_{obj}$ (ADRO) & $J_{obj}$ (BC-AD) & $C_{obj
 34 & 0.3804 & -0.0646 & -0.0150 & -0.0000 & 0.0796 \\
 35 & 0.3418 & 0.1067 & -0.0148 & 0.0001 & -0.0920 \\
 \end{longtable}
-\end{footnotesize}
+}
 
 \section{Riwayat Iterasi Sequential Best Response (SBR) N=2}
 
 Proses pencarian ekuilibrium menggunakan metode SBR dicatat pada tabel berikut. \textit{Swap} menunjukkan indeks bit yang ditukar, \textit{Utility} adalah nilai utilitas yang dicapai, dan \textit{Bitstring} merepresentasikan portofolio strategi.
 
-\begin{footnotesize}
+{\footnotesize
 \begin{longtable}{lllll}
 \caption{Riwayat Iterasi Sequential Best Response (SBR) N=2} \label{tab:sbr_history_n2} \\
 \toprule
@@ -137,13 +137,13 @@ Date & Iteration & Bitstring & Utility & Swap \\
 2023-11-03 & 1 & 01 & -0.0299 & 0<->1 \\
 2023-12-04 & 0 & 10 & 0.2136 & Initial \\
 \end{longtable}
-\end{footnotesize}
+}
 
 \section{Perbandingan Konvergensi VQE Berdasarkan Depth N=2}
 
 Tabel berikut menunjukkan perbandingan energi akhir (konvergensi) yang berhasil dicapai oleh algoritma VQE pada berbagai kedalaman sirkuit di setiap periode jendela waktu. 
 
-\begin{footnotesize}
+{\footnotesize
 \begin{longtable}{llllllll}
 \caption{Perbandingan Energi Akhir VQE Berdasarkan Depth N=2} \label{tab:vqe_depth_n2} \\
 \toprule
@@ -197,4 +197,4 @@ P & Date & D1 & D2 & D3 & D4 & D5 & D6 \\
 34 & 2023-11-03 & 0.1294 & 0.0375 & 0.0313 & 0.0366 & 0.0977 & 0.0301 \\
 35 & 2023-12-04 & 0.0292 & -0.1775 & -0.2135 & -0.2135 & -0.2135 & -0.2136 \\
 \end{longtable}
-\end{footnotesize}
+}

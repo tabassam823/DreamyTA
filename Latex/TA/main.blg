@@ -24,13 +24,14 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Referensi.bib
 Warning--I didn't find a database entry for "gabaix_political_2020"
+Warning--I didn't find a database entry for "murphy_technical_1999"
+Warning--I didn't find a database entry for "bormann_role_2010"
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
 Warning--No journal in anshu_sample-efficient_2020
 ptr=1, stack=
 
 ---the literal stack isn't empty for entry anshu_sample-efficient_2020
 while executing---line 5079 of file apacite.bst
-Warning--No journal in crosato_shannon_2023
 Warning--No journal in dixit_variational_2025
 Warning--No journal in hidalgo_quantum_2006
 ptr=1, stack=
@@ -43,45 +44,45 @@ ptr=1, stack=
 ---the literal stack isn't empty for entry sarkar_quantum_2018
 while executing---line 5079 of file apacite.bst
 Warning--No journal in spall_implementation_1998
-You've used 68 entries,
+You've used 59 entries,
             6951 wiz_defined-function locations,
-            1813 strings with 29602 characters,
-and the built_in function-call counts, 143647 in all, are:
-= -- 16955
-> -- 1250
-< -- 7173
-+ -- 7311
-- -- 140
-* -- 10109
-:= -- 26597
-add.period$ -- 281
-call.type$ -- 68
-change.case$ -- 1269
+            1756 strings with 27142 characters,
+and the built_in function-call counts, 122926 in all, are:
+= -- 14519
+> -- 1075
+< -- 6053
++ -- 6167
+- -- 122
+* -- 8638
+:= -- 22600
+add.period$ -- 242
+call.type$ -- 59
+change.case$ -- 1101
 chr.to.int$ -- 0
-cite$ -- 142
-duplicate$ -- 4146
-empty$ -- 5768
-format.name$ -- 2215
-if$ -- 26526
+cite$ -- 123
+duplicate$ -- 3569
+empty$ -- 4994
+format.name$ -- 1891
+if$ -- 22801
 int.to.chr$ -- 0
-int.to.str$ -- 204
+int.to.str$ -- 177
 missing$ -- 0
-newline$ -- 2017
-num.names$ -- 546
-pop$ -- 2124
+newline$ -- 1751
+num.names$ -- 474
+pop$ -- 1773
 preamble$ -- 1
-purify$ -- 380
+purify$ -- 330
 quote$ -- 0
-skip$ -- 8636
+skip$ -- 7494
 stack$ -- 0
-substring$ -- 7904
-swap$ -- 2456
-text.length$ -- 273
+substring$ -- 6688
+swap$ -- 2133
+text.length$ -- 241
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 5760
-warning$ -- 6
-while$ -- 868
+type$ -- 4976
+warning$ -- 5
+while$ -- 744
 width$ -- 0
-write$ -- 2521
+write$ -- 2184
 (There were 3 error messages)

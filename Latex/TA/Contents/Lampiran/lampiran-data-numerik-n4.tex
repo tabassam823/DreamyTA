@@ -7,7 +7,7 @@ Lampiran ini menyajikan dataset numerik untuk simulasi dengan $N=4$ aset. Untuk 
 
 Tabel berikut menyajikan hasil komputasi harian yang diakumulasikan secara bulanan untuk mendapatkan bias linier $h_{obj}$, offset $C_{obj}$, dan nilai $\gamma$ dinamis pada sistem N=4.
 
-\begin{footnotesize}
+{\footnotesize
 \begin{longtable}{llllllll}
 \caption{Parameter Dinamis Portofolio N=4 ($\gamma$, $h_{obj}$, $C_{obj}$)} \label{tab:unified_n4} \\
 \toprule
@@ -61,11 +61,11 @@ P & Tanggal & $\gamma$ & $h_{obj}$ (BB) & $h_{obj}$ (AD) & $h_{obj}$ (SM) & $h_{
 34 & 2023-11-03 & 0.3617 & -0.0307 & -0.0324 & 0.0234 & -0.0073 & 0.0466 \\
 35 & 2023-12-04 & 0.3681 & 0.0543 & -0.0064 & 0.0298 & -0.0072 & -0.0709 \\
 \end{longtable}
-\end{footnotesize}
+}
 
 Selanjutnya adalah parameter interaksi $J$ antar masing-masing aset pada setiap jendela waktu.
 
-\begin{footnotesize}
+{\footnotesize
 \begin{longtable}{llllllll}
 \caption{Kompilasi Parameter Bias $h_{obj}$, Konstanta $C_{obj}$, dan Koefisien $\gamma$ N=4} \label{tab:parameter_h_C_n4} \\
 \toprule
@@ -119,13 +119,13 @@ P & Tanggal & BB-TL & BB-SM & BB-AD & TL-SM & TL-AD & SM-AD \\
 34 & 2023-11-03 & -0.0000 & 0.0001 & 0.0000 & 0.0000 & 0.0000 & 0.0001 \\
 35 & 2023-12-04 & 0.0000 & 0.0001 & 0.0001 & 0.0001 & 0.0000 & 0.0002 \\
 \end{longtable}
-\end{footnotesize}
+}
 
 \section{Riwayat Iterasi Sequential Best Response (SBR) N=4}
 
 Proses pencarian ekuilibrium menggunakan metode SBR dicatat pada tabel berikut. 	extit{Swap} menunjukkan indeks bit yang ditukar, 	extit{Utility} adalah nilai utilitas yang dicapai, dan 	extit{Bitstring} merepresentasikan portofolio strategi.
 
-\begin{footnotesize}
+{\footnotesize
 \begin{longtable}{lllll}
 \caption{Riwayat Iterasi Sequential Best Response (SBR) N=4} \label{tab:sbr_history_n4} \\
 \toprule
@@ -212,13 +212,13 @@ Date & Iteration & Bitstring & Utility & Swap \\
 2023-12-04 & 0 & 1100 & 0.0947 & Initial \\
 2023-12-04 & 1 & 1010 & 0.1689 & 1<->2 \\
 \end{longtable}
-\end{footnotesize}
+}
 
 \section{Perbandingan Konvergensi VQE Berdasarkan Depth}
 
 Tabel berikut menunjukkan perbandingan energi akhir (konvergensi) yang berhasil dicapai oleh algoritma VQE pada berbagai kedalaman sirkuit (Depth 1 hingga 8) di setiap periode jendela waktu. 
 
-\begin{footnotesize}
+{\footnotesize
 \begin{longtable}{llllllllll}
 \caption{Perbandingan Energi Akhir VQE Berdasarkan Depth N=4} \label{tab:vqe_depth_n4} \\
 \toprule
@@ -272,4 +272,4 @@ P & Date & D1 & D2 & D3 & D4 & D5 & D6 & D7 & D8 \\
 34 & 2023-11-03 & 0.0446 & -0.0068 & 0.0397 & 0.0710 & -0.0280 & 0.0045 & -0.0100 & 0.0244 \\
 35 & 2023-12-04 & -0.0947 & 4.8910 & 4.9673 & 4.9179 & 5.0122 & -0.0965 & 4.8457 & -0.0473 \\
 \end{longtable}
-\end{footnotesize}
+}
