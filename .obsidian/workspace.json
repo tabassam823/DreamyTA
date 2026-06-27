@@ -39,12 +39,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Filtered_Paper/Mutual_Information/Shannon_A_Mathematical_Theory_of_Communication.md",
+                "file": "Latex/TA/PPT/Rencana_Urutan_Presentasi.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Shannon_A_Mathematical_Theory_of_Communication"
+              "title": "Rencana_Urutan_Presentasi"
             }
           },
           {
@@ -109,7 +109,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "shannon",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -130,13 +130,12 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "c38e9d58e7528e8a",
         "type": "tabs",
-        "dimension": 28.86002886002886,
+        "dimension": 28.860028860028862,
         "children": [
           {
             "id": "9e5bcccc9ae69aaf",
@@ -144,13 +143,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/Filtered_Paper/Mutual_Information/Shannon_A_Mathematical_Theory_of_Communication.md",
+                "file": "Latex/TA/PPT/Rencana_Urutan_Presentasi.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Shannon_A_Mathematical_Theory_of_Communication"
+              "title": "Outline of Rencana_Urutan_Presentasi"
             }
           }
         ]
@@ -277,6 +276,9 @@
   },
   "active": "949d40db2375c8ac",
   "lastOpenFiles": [
+    "Latex/TA/PPT/list_revisi_7jun.md",
+    "Latex/TA/PPT/Rencana_Urutan_Presentasi.md",
+    "Latex/TA/Filtered_Paper/Mutual_Information/Shannon_A_Mathematical_Theory_of_Communication.md",
     "Latex/TA/MD_File/Main/9_Entropi.md",
     "Latex/TA/MD_File/Main/12_QGate.md",
     "Latex/TA/Contents/Lampiran/lampiran-operasi-matriks-kuantum.tex",
@@ -316,13 +318,10 @@
     "Latex/TA/Contents/4_Pembahasan/Contoh_numerik_SLSQP.md",
     "Latex/TA/MD_File/Main/1_QuantFinance.md",
     "Latex/TA/Filtered_Paper/New_Paper/Dynamics_of_market_correlations_Taxonomy_and_portfolio_analysis.md",
-    "Latex/TA/PPT/list_revisi_7jun.md",
     "Latex/TA/Contents/4_Pembahasan/list_revisi_3jun.md",
     "Latex/TA/PPT/PPT_Structure.md",
     "Latex/TA/Filtered_Paper/VQE/VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance.md",
     "Latex/TA/Filtered_Paper/Quantum_Circuit/Expressibility_and_entangling_capability_of_parameterized_quantum_circuits_for_hybrid.md",
-    "Latex/TA/Filtered_Paper/Quantum_Circuit_pdf/Expressibility_and_entangling_capability_of_parameterized_quantum_circuits_for_hybrid.md",
-    "Latex/TA/Filtered_Paper/Quantum_Circuit/Connecting_Ansatz_Expressibility_to_Gradient_Magnitudes_and_Barren_Plateaus.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
