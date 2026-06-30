@@ -1,0 +1,35 @@
+# Fase 0: Pendahuluan
+
+## Latar Belakang Masalah
+* **Limitasi Model Markowitz:** Pendekatan klasik kesulitan menangani anomali pasar (*fat-tailed distribution*) dan dinamika non-linear ketika jumlah parameter korelasi antar aset membesar.
+* **Pendekatan Ekonofisika:** Mengubah fungsi objektif optimasi menjadi kerangka *Quadratic Unconstrained Binary Optimization* (QUBO) agar selaras dengan model Hamiltonian Ising.
+* **Potensi Komputasi Kuantum:** Memanfaatkan *Variational Quantum Eigensolver* (VQE) untuk mencari *ground state* energi (representasi alokasi portofolio terbaik) dengan waktu komputasi yang efisien.
+
+---
+
+## Penelitian Terdahulu dan *Gap* Riset
+:::: {.columns}
+::: {.column width="55%"}
+* **Wang dkk. (2025):** Menggunakan WCVaR dan CMA-ES untuk stabilisasi konvergensi energi pada arsitektur VQE.
+* **Wei dkk. (2025):** Memecah masalah QUBO kompleks menjadi sub-masalah (*Quantum-Classical Hybrid Annealing*).
+* **Kelemahan Terdahulu:** Algoritma hibrida seringkali masih bergantung pada inisialisasi awal acak yang rentan terjebak *Barren Plateaus* pada dimensi ruang Hilbert yang tinggi.
+* **Solusi yang Diajukan:** Memanfaatkan titik *Nash Equilibrium* dari *Game Theory* (EPG) sebagai inisialisasi cerdas (*Warm-Start*).
+:::
+::: {.column width="40%"}
+**Fokus Metrik Tambahan:**  
+Memantau keacakan (purity) distribusi probabilitas sirkuit *Ansatz* menggunakan metrik analitik **Entropi Von Neumann** selama proses optimasi berlangsung.
+
+::: {style="font-size: 0.35em; margin-top: 2em; line-height: 1.2; color: #666666;"}
+**Referensi:**  
+1. Wang, A., Lv, Z., Ma, Z., Cai, D., & Zhang, Z. (2025, August). Achieving High-Quality Portfolio Optimization with the Variational Quantum Eigensolver. Retrieved 2026-03-11, from http://arxiv.org/abs/2508.18625 (arXiv:2508.18625 \[quant-ph\]) doi: 10.48550/arXiv.2508.18625
+2. Wei, H., Wang, Y. J., Yang, H., Yang, X., Cao, M., Xu, Q., … Zhao, W. (2025, July). Solving Multiple Discretization Portfolio Optimization Problem with Quantum-Classical Hybrid Algorithms. Computational Economics. Retrieved 2026-03-11, from https://link.springer.com/10.1007/s10614-025-11061-5 doi: 10.1007/s10614-025-11061-5  
+:::
+:::
+::::
+
+---
+
+## Tujuan Penelitian
+1. Menganalisis ketepatan transformasi matematika dan kardinalitas portofolio pada fungsi potensial EPG ke kerangka *Spin* Ising.
+2. Mengevaluasi kontribusi strategi inisialisasi *warm-start* (dibanding inisialisasi acak) terhadap peningkatan efisiensi konvergensi energi kuantum.
+3. Menguji supremasi (*backtesting*) pengembalian finansial strategi portofolio hibrida GT-VQE pada kondisi pergerakan historis pasar modal riil.

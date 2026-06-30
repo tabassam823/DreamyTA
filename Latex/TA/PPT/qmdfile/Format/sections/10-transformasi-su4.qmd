@@ -1,0 +1,26 @@
+## Operator SU(4) {.bg2}
+
+Operator SU(4) memiliki 15 parameter:
+
+$$
+U =
+e^{i\lambda_3\alpha_1}
+e^{i\lambda_2\alpha_2}
+e^{i\lambda_3\alpha_3}
+e^{i\lambda_5\alpha_4}
+e^{i\lambda_3\alpha_5}
+e^{i\lambda_{10}\alpha_6}
+e^{i\lambda_3\alpha_7}
+e^{i\lambda_2\alpha_8}
+e^{i\lambda_3\alpha_9}
+e^{i\lambda_5\alpha_{10}}
+e^{i\lambda_3\alpha_{11}}
+e^{i\lambda_2\alpha_{12}}
+e^{i\lambda_3\alpha_{13}}
+e^{i\lambda_8\alpha_{14}}
+e^{i\lambda_{15}\alpha_{15}}
+$$
+
+::: fragment
+Dalam penelitian ini, perubahan kelas keterbelitan dikaji dari kombinasi pasangan parameter tertentu.
+:::

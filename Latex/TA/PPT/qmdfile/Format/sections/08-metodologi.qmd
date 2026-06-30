@@ -1,0 +1,51 @@
+## Metodologi Penelitian {.bg2}
+
+Alur utama penelitian:
+
+::: fragment
+1. Bangun keadaan awal separabel penuh.
+:::
+
+::: fragment
+2. Terapkan operator transformasi berbasis SU(4).
+:::
+
+::: fragment
+3. Hitung matriks densitas global dan tereduksi.
+:::
+
+::: fragment
+4. Evaluasi entropi, concurrence, dan three-tangle.
+:::
+
+::: fragment
+5. Klasifikasikan kelas keterbelitan.
+:::
+
+---
+
+## Diagram Operasi {.bg2}
+
+$$
+|000\rangle
+\longrightarrow
+|\psi\rangle
+=
+U_{42}|000\rangle
+$$
+
+Kemudian:
+
+$$
+|\phi\rangle
+=
+U_{24}|\psi\rangle
+$$
+
+Akhirnya dilakukan klasifikasi:
+
+$$
+|\phi\rangle
+\longrightarrow
+\{\text{separabel},\text{biseparabel},\text{GHZ},\text{W}\}
+$$

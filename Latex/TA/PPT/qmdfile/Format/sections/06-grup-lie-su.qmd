@@ -1,0 +1,52 @@
+## Grup Lie dan Generator {.bg2}
+
+Transformasi kuantum tertutup direpresentasikan oleh operator uniter:
+
+$$
+U^\dagger U = I
+$$
+
+Elemen grup Lie dapat ditulis dalam bentuk eksponensial:
+
+$$
+U(\vec{\alpha})
+=
+\exp\left(
+i \sum_{a=1}^{N^2-1}
+\alpha_a \lambda_a
+\right)
+$$
+
+::: fragment
+Untuk sistem dua qubit:
+
+$$
+N = 4,
+\qquad
+\dim SU(4)=4^2-1=15
+$$
+:::
+
+---
+
+## Komutator Generator {.bg2}
+
+Struktur aljabar Lie ditentukan oleh komutator:
+
+$$
+[\lambda_i,\lambda_j]
+=
+\lambda_i\lambda_j-\lambda_j\lambda_i
+$$
+
+Secara umum:
+
+$$
+[\lambda_i,\lambda_j]
+=
+i f_{ijk}\lambda_k
+$$
+
+::: fragment
+Generator non-lokal berperan penting dalam pembentukan entanglement.
+:::

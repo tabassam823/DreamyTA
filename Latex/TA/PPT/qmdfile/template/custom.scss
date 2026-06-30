@@ -1,0 +1,138 @@
+/*-- scss:defaults --*/
+
+$its-blue: #0a6289;
+$footer-blue: #3c6e94;
+
+/*-- scss:rules --*/
+
+.reveal .slides section {
+  background-color: #ffffff;
+
+  padding-top: 40px;
+  padding-bottom: 65px;
+
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.reveal .slides {
+  width: 40%;
+}
+
+.reveal .slides section {
+  background: #fafafa;
+}
+
+.reveal .slides section {
+  background: #fafafa;
+}
+
+/* Header biru */
+/* Header full layar */
+.top-band {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  // height: 120px; 
+  height: 110px; 
+  background: linear-gradient(90deg, #0a6289 0%, #0b6d97 100%);
+  z-index: 900;
+}
+
+/* Footer full layar */
+.bottom-band {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 70px;
+  background: #3c6e94;
+  z-index: 900;
+}
+
+
+/* Logo */
+.its-header {
+  position: fixed;
+  top: 8px;
+  left: 28px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 999;
+}
+
+.its-header img {
+  filter: brightness(0) invert(1);
+  width: auto;
+}
+
+.logo-its {
+  height: 80px !important;
+}
+
+.logo-phi {
+  height: 72px !important;
+}
+
+.logo-laftifa {
+  height: 70px !important;
+}
+
+.logo-brin {
+  height: 70px !important;
+}
+
+/* Motto kanan atas */
+.motto {
+  position: fixed;
+  top: 35px;
+  right: 40px;
+  color: white;
+  text-align: right;
+  font-size: 1.55em;
+  font-weight: 300;
+  z-index: 999;
+}
+
+/* Footer text */
+.footer-left {
+  position: fixed;
+  left: 25px;
+  bottom: 40px;
+  color: white;
+  font-size: 1.55em;
+  z-index: 999;
+}
+
+.footer-right {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  color: white;
+  font-size: 1.55em;
+  z-index: 999;
+}
+
+/* Nomor slide */
+.reveal .slide-number {
+  top: 18px !important;
+  right: 18px !important;
+  bottom: auto !important;
+  color: #d5d53f !important;
+  font-size: 0.7em !important;
+}
+
+/* Hilangkan progress bar */
+.reveal .progress {
+  display: none !important;
+}
+
+
+.its-header,
+.motto,
+.footer-left,
+.footer-right {
+  z-index: 1000;
+}

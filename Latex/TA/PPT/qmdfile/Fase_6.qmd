@@ -1,0 +1,52 @@
+# Fase 6: Optimasi pada VQE
+
+## Gradien Energi
+* Pembaruan parameter sirkuit membutuhkan nilai gradien dari fungsi objektif (energi).
+  $$ \frac{\partial E}{\partial \theta} = \frac{\partial}{\partial \theta} \langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle $$
+* Melalui komutator unitari, turunan analitik dari nilai ekspektasi kuantum dapat disederhanakan menjadi:
+  $$ \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{i}{2} \langle{\psi(\theta)}| [\sigma, M] |{\psi(\theta)}\rangle $$
+  (dimana $M$ merepresentasikan operator gabungan pada sirkuit).
+
+---
+
+## Parameter Shift Rule (PSR)
+* PSR adalah metode kalkulasi gradien analitik (bukan numerik) secara langsung di perangkat keras kuantum.
+* Menggunakan konsep pergeseran parameter $\theta$ sebesar $s = \frac{\pi}{2}$ ke arah positif dan negatif.
+  $$ \langle E(\theta \pm s)\rangle = \langle{\psi}| \hat{U}(\pm s)^{\dagger}\hat{M}\hat{U}(\pm s)|{\psi}\rangle $$
+* Selisih kedua evaluasi menghasilkan gradien eksak:
+  $$ \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{1}{2} \left[ \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle \right] $$
+
+---
+
+## Optimasi Klasik: Gradient Descent (GD)
+* **Mekanisme:** Parameter $\theta$ diperbarui searah negatif gradien untuk mencapai minimum energi secara bertahap.
+  $$ \theta_{t+1} = \theta_t - \eta \nabla E(\theta_t) $$
+  * $\theta_{t+1}$: Parameter iterasi baru
+  * $\eta$: Laju pembelajaran (*learning rate*)
+  * $\nabla E(\theta_t)$: Gradien energi pada parameter $\theta_t$
+* **Kekurangan:** Harus mengevaluasi gradien dua kali untuk *setiap* parameter tunggal. Kompleksitas komputasi tumbuh linear $O(N)$ terhadap jumlah parameter, sehingga tidak skalabel untuk PQC besar.
+
+---
+
+## Optimizer SPSA
+
+::: {.panel-tabset}
+### Penurunan Rumus
+**SPSA (Simultaneous Perturbation Stochastic Approximation)**
+* **Inovasi:** Mengestimasi gradien *seluruh* parameter secara simultan (bersamaan) hanya menggunakan dua pengukuran (satu vektor perturbasi acak $\Delta$).
+  $$ \hat{g}_k = \frac{E(\theta_k + c_k \Delta_k) - E(\theta_k - c_k \Delta_k)}{2 c_k \Delta_k} $$
+* Dengan ekspektasi estimasi gradien yang terbukti ekuivalen dengan gradien eksak:
+  $$ \mathbb{E} \left[ \hat{g}_k \right] = \nabla E(\theta_k) $$
+* **Keunggulan:** SPSA jauh lebih efisien karena kompleksitas evaluasi fungsinya konstan $O(1)$, terlepas dari berapapun jumlah parameter $\theta$ yang ada dalam sirkuit.
+
+### Tabel Data
+::: {.scrollable style="max-height: 450px;"}
+**Sampel Data Perturbasi & Estimasi SPSA**
+| Vektor $\theta_k$ | Vektor Perturbasi $\Delta_k$ | Estimasi Gradien $\hat{g}_k$ | Energi $E(\theta_k)$ |
+|---|---|---|---|
+| $[0.1, -0.5, \dots]$ | $[1, -1, 1, 1, \dots]$ | $[0.02, -0.01, \dots]$ | -0.1245 |
+| $[0.12, -0.49, \dots]$ | $[-1, -1, 1, -1, \dots]$ | $[0.015, -0.005, \dots]$ | -0.1530 |
+| $[0.15, -0.45, \dots]$ | $[1, 1, -1, 1, \dots]$ | $[0.005, 0.001, \dots]$ | -0.1880 |
+| $[0.16, -0.44, \dots]$ | $[-1, 1, -1, -1, \dots]$ | $[0.0001, 0.0002, \dots]$ | -0.1909 |
+:::
+:::

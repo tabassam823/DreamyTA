@@ -1,0 +1,59 @@
+## Entropi Von Neumann {.bg2}
+
+Entropi digunakan untuk mendeteksi ketercampuran subsistem:
+
+$$
+S(\rho)
+=
+-\mathrm{Tr}(\rho \log \rho)
+$$
+
+::: fragment
+Jika keadaan global murni tetapi subsistem campuran, maka terdapat keterbelitan.
+:::
+
+---
+
+## Concurrence {.bg2}
+
+Untuk sistem dua qubit:
+
+$$
+C(\rho)
+=
+\max \left(
+0,
+\lambda_1-\lambda_2-\lambda_3-\lambda_4
+\right)
+$$
+
+dengan $\lambda_i$ adalah akar nilai eigen dari matriks:
+
+$$
+R = \rho \tilde{\rho}
+$$
+
+---
+
+## Three-Tangle {.bg2}
+
+Three-tangle digunakan untuk mengukur keterbelitan tripartit residual:
+
+$$
+\tau_3
+=
+C^2_{A|BC}
+-
+C^2_{AB}
+-
+C^2_{AC}
+$$
+
+Interpretasi:
+
+| Kelas | Ciri |
+|---|---|
+| Separabel | Semua ukuran keterbelitan nol |
+| Biseparabel | Entanglement hanya pada satu partisi |
+| W | Concurrence pasangan tidak nol, $\tau_3=0$ |
+| GHZ | $\tau_3 \neq 0$ |

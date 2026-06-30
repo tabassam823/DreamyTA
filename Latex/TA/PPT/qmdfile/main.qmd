@@ -1,0 +1,42 @@
+---
+title: "OPTIMASI PORTOFOLIO BERBASIS MODEL MARKOWITZ MENGGUNAKAN METODE VARIATIONAL QUANTUM EIGENSOLVER"
+subtitle: "Tugas Akhir SF234801"
+author: 
+  - name: "Putra Naufal Tabassam"
+    affiliations:
+      - "Pembimbing : Dr. Heru Sukamto, M.Si."
+      - "Ko-Pembimbing : Dr. Gagus K. Sunnardianto"
+      - "Departemen Fisika, Institut Teknologi Sepuluh Nopember"
+format:
+  revealjs:
+    theme: [simple, template/custom.scss]
+    slide-number: true
+    chalkboard: true
+    navigation-mode: vertical
+    transition: fade
+    background-transition: fade
+    mathjax: true
+    width: 1600
+    height: 900
+    include-after-body: template/header.html
+---
+
+{{< include Fase_0.qmd >}}
+
+{{< include Fase_1.qmd >}}
+
+{{< include Fase_2.qmd >}}
+
+{{< include Fase_3.qmd >}}
+
+{{< include Fase_4.qmd >}}
+
+{{< include Fase_5.qmd >}}
+
+{{< include Fase_6.qmd >}}
+
+{{< include Fase_7.qmd >}}
+
+{{< include Fase_8.qmd >}}
+
+{{< include Fase_9.qmd >}}

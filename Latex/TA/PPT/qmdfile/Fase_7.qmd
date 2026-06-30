@@ -1,0 +1,57 @@
+# Fase 7: Tantangan Kuantum dan Diagnostik Entropi
+
+## Fenomena *Barren Plateau*
+* Tantangan besar saat mengeksekusi sirkuit variasi kuantum (seperti Ansatz *Hardware-Efficient*) pada arsitektur skala besar atau *depth* yang dalam.
+* **Jebakan Gradien:** Permukaan fungsi objektif (energi) menjadi sangat datar, sehingga turunan parsialnya menyusut eksponensial menuju nol.
+* Hal ini ditandai oleh lenyapnya varians gradien parameter terhadap kedalaman sirkuit ($L$) dan jumlah qubit ($N$):
+  $$ \text{Var}[\partial_{\theta} E] \propto \frac{1}{2^{NL}} $$
+* **Dilema Ekspresibilitas:** Semakin kompleks/ekspresif sirkuit kuantum, semakin besar kemungkinan sirkuit terjebak di area *Barren Plateau* sebelum dapat dioptimasi.
+
+---
+
+## Analisis *Barren Plateau* pada Simulasi
+:::: {.columns}
+::: {.column width="60%"}
+* Inisialisasi parameter acak murni pada $L>5$ (sistem $N=4$) memicu hilangnya arah optimasi.
+* **Observasi:** Inisialisasi strategi melalui *Nash Equilibrium* (*Warm-Start*) terbukti memandu sirkuit langsung menuju sub-ruang Hilbert yang bermakna, menghindari keacakan buta dan menjaga agar gradien tetap cukup besar untuk dioptimasi (Trainability).
+:::
+::: {.column width="40%"}
+![](../Gambar/grafik_depth_per_window_N4.png)
+<div style="font-size: 0.7em; text-align: center;">Visualisasi pemilihan kedalaman sirkuit (Depth) optimal.</div>
+:::
+::::
+
+---
+
+## Entropi Von Neumann
+* Bagaimana kita mengukur "keacakan" atau kemurnian (*purity*) status probabilitas qubit di dalam sirkuit selama iterasi?
+* Ekstensi teoretis dari **Entropi Shannon** klasik ($H = - \sum p_i \log_2 (p_i)$) ke dalam mekanika kuantum yang bekerja pada matriks densitas ($\rho$).
+* Formulasi **Entropi Von Neumann**:
+  $$ S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2 (\lambda_j) $$
+* Jika nilai entropi $S \approx 0$, sistem berpusat pada satu konfigurasi status dominan. Jika nilai entropi $S$ sangat tinggi, probabilitas tersebar luas (menandakan *Barren Plateau* atau kesulitan konvergensi algoritma).
+
+---
+
+## Evolusi Entropi: Studi Kasus Numerik
+Pemanfaatan Entropi Von Neumann dalam memantau jejak persebaran probabilitas di titik konvergensi akhir VQE.
+
+:::: {.columns}
+::: {.column width="50%"}
+**Sistem $N=2$**
+* Probabilitas status mayoritas ($p_1$): $0,98$
+* Sisa status probabilitas ($p_{rest}$): $0,02$
+* Kalkulasi Entropi:
+  $$ S = -(0,98 \cdot \log_2(0,98) + 0,02 \cdot \log_2(0,02)) $$
+  $$ S \approx 0,1414 \text{ bit} $$
+* Menandakan probabilitas yang sangat tersentralisasi dan stabil.
+:::
+::: {.column width="50%"}
+**Sistem $N=4$**
+* Probabilitas status mayoritas ($p_1$): $0,94$
+* Sisa status probabilitas ($p_{rest}$): $0,06$
+* Kalkulasi Entropi:
+  $$ S = -(0,94 \cdot \log_2(0,94) + 0,06 \cdot \log_2(0,06)) $$
+  $$ S \approx 0,3274 \text{ bit} $$
+* Meskipun sedikit melebar karena dimensi yang bertambah, nilai tetap jauh di bawah batas entropi maksimum, mengindikasikan deteksi *ground state* yang handal.
+:::
+::::

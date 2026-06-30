@@ -1,0 +1,14 @@
+## Rumusan Masalah {.bg2}
+
+1. Bagaimana membangun operator transformasi kuantum tiga qubit berbasis SU(4)?
+2. Bagaimana pasangan parameter non-diagonal memengaruhi pembentukan keterbelitan?
+3. Bagaimana mengklasifikasikan keadaan separabel, biseparabel, GHZ, dan W?
+4. Mengapa kombinasi parameter tertentu menghasilkan kelas keterbelitan berbeda?
+
+---
+
+## Tujuan Penelitian {.bg2}
+
+1. Memformulasikan transformasi kuantum berbasis Grup Lie dan Aljabar Lie.
+2. Menganalisis pembentukan korelasi non-lokal melalui generator SU(4).
+3. Menghitung ukuran keterbelitan menggunakan concurrence dan three-tangle.

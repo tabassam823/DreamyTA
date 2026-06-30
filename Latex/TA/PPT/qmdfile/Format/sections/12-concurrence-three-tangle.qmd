@@ -1,0 +1,70 @@
+## Kondisi W {.bg2}
+
+Bentuk representatif:
+
+$$
+|W\rangle
+=
+\frac{1}{\sqrt{3}}
+\left(
+|001\rangle + |010\rangle + |100\rangle
+\right)
+$$
+
+Untuk keadaan W:
+
+$$
+C_{AB}\neq 0,
+\qquad
+C_{AC}\neq 0,
+\qquad
+C_{BC}\neq 0
+$$
+
+tetapi:
+
+$$
+\tau_3 = 0
+$$
+
+::: fragment
+Artinya keterbelitan W didominasi oleh korelasi bipartit, bukan residual tripartit.
+:::
+
+---
+
+## Perhitungan Three-Tangle {.bg2}
+
+Untuk partisi $A|BC$:
+
+$$
+C_{A|BC}
+=
+2\sqrt{\det \rho_A}
+$$
+
+Three-tangle:
+
+$$
+\tau_3
+=
+C^2_{A|BC}
+-
+C^2_{AB}
+-
+C^2_{AC}
+$$
+
+Kriteria:
+
+$$
+\tau_3 = 0
+\quad \Rightarrow \quad
+\text{tipe W atau biseparabel}
+$$
+
+$$
+\tau_3 \neq 0
+\quad \Rightarrow \quad
+\text{tipe GHZ}
+$$

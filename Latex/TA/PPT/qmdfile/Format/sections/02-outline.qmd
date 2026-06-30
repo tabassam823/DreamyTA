@@ -1,0 +1,9 @@
+## Alur Presentasi 
+
+1. Latar belakang dan masalah penelitian
+2. Dasar teori: qubit, matriks densitas, Grup Lie
+3. Ukuran keterbelitan: entropi, concurrence, three-tangle
+4. Metode transformasi berbasis SU(4)
+5. Hasil klasifikasi keterbelitan 3 qubit
+6. Interpretasi pola parameter SU(4)
+7. Kesimpulan

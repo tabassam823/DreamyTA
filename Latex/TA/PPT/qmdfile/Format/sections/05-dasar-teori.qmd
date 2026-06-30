@@ -1,0 +1,144 @@
+## Keadaan Qubit {auto-animate=true}
+
+Keadaan umum satu qubit:
+
+:::{.fragment}
+$$
+|\psi\rangle = a_0 |0\rangle + a_1 |1\rangle
+$$
+:::
+:::{.fragment .fade-in}
+dengan syarat normalisasi:
+
+$$
+|a_0|^2 + |a_1|^2 = 1
+$$
+:::
+
+::: fragment
+Untuk dua qubit:
+
+$$
+|\psi\rangle =
+\sum_{i,j=0}^{1}
+a_{ij}|ij\rangle
+$$
+Untuk tiga qubit:
+
+$$
+|\psi\rangle =
+\sum_{i,j,k=0}^{1}
+a_{ijk}|ijk\rangle
+$$
+:::
+## {auto-animate=true}
+
+<div data-id="dua-qubit">
+
+Untuk dua qubit:
+
+$$
+|\psi\rangle =
+\sum_{i,j=0}^{1}
+a_{ij}|ij\rangle
+$$
+
+</div>
+
+<div data-id="tiga-qubit">
+
+Untuk tiga qubit:
+
+$$
+|\psi\rangle =
+\sum_{i,j,k=0}^{1}
+a_{ijk}|ijk\rangle
+$$
+
+</div>
+
+---
+
+## {auto-animate=true}
+
+::: {.columns}
+
+:::: {.column width="50%"}
+
+<div data-id="dua-qubit">
+
+Untuk dua qubit:
+
+$$
+|\psi\rangle =
+\sum_{i,j=0}^{1}
+a_{ij}|ij\rangle
+$$
+
+</div>
+
+<div data-id="tiga-qubit">
+
+Untuk tiga qubit:
+
+$$
+|\psi\rangle =
+\sum_{i,j,k=0}^{1}
+a_{ijk}|ijk\rangle
+$$
+
+</div>
+
+::::
+
+:::: {.column width="50%"}
+
+<div data-id="normalisasi">
+
+Syarat normalisasi
+
+Untuk dua qubit:
+
+$$
+\sum_{i,j=0}^{1}
+|a_{ij}|^2 = 1
+$$
+
+Untuk tiga qubit:
+
+$$
+\sum_{i,j,k=0}^{1}
+|a_{ijk}|^2 = 1
+$$
+
+</div>
+
+::::
+
+:::
+
+---
+
+## Matriks Densitas {auto-animate=true}
+
+Untuk keadaan murni:
+
+$$
+\rho = |\psi\rangle \langle \psi|
+$$
+
+Sifat penting:
+
+$$
+\mathrm{Tr}(\rho)=1,
+\qquad
+\rho^2=\rho,
+\qquad
+\mathrm{Tr}(\rho^2)=1
+$$
+
+Untuk subsistem:
+
+$$
+\rho_A = \mathrm{Tr}_{BC}(\rho_{ABC})
+$$

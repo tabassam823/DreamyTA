@@ -1,0 +1,41 @@
+---
+title: "SU(2) dan SU(4) untuk Klasifikasi Keterbelitan 3 Qubit"
+author: "Alief Hisyam Al Hasany MR"
+institute: "Departemen Fisika, FSAD ITS"
+format:
+  revealjs:
+    theme: [simple, template/custom.scss]
+    slide-number: true
+    transition: fade
+    chalkboard: true
+---
+
+{{< include sections/01-cover.qmd >}}
+
+{{< include sections/02-outline.qmd >}}
+
+{{< include sections/03-latar-belakang.qmd >}}
+
+{{< include sections/04-rumusan-tujuan.qmd >}}
+
+{{< include sections/05-dasar-teori.qmd >}}
+
+{{< include sections/06-grup-lie-su.qmd >}}
+
+{{< include sections/07-entanglement-measures.qmd >}}
+
+{{< include sections/08-metodologi.qmd >}}
+
+{{< include sections/09-parameterisasi-su.qmd >}}
+
+{{< include sections/10-transformasi-su4.qmd >}}
+
+{{< include sections/11-hasil-klasifikasi.qmd >}}
+
+{{< include sections/12-concurrence-three-tangle.qmd >}}
+
+{{< include sections/13-interpretasi-su4.qmd >}}
+
+{{< include sections/14-kesimpulan.qmd >}}
+
+{{< include sections/15-terima-kasih.qmd >}}

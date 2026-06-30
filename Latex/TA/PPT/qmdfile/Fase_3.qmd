@@ -1,0 +1,48 @@
+# Fase 3: Teori Permainan dan SBR *Warm-Start*
+
+## Pengantar Teori Permainan
+* Mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan tindakan agen yang lain.
+* Komponen Utama: Agen (Pemain), Himpunan Strategi, dan Fungsi Utilitas (*Payoff*).
+* **Nash Equilibrium:** Kondisi paling stabil di mana tidak ada satu pun agen yang bisa meningkatkan utilitasnya dengan mengubah strateginya sendiri secara sepihak.
+
+## Jenis-Jenis Permainan (*Game Types*)
+Contoh klasik *Game Theory* dengan matriks *payoff*:
+
+:::: {.columns}
+::: {.column width="33%"}
+![](../Gambar/232_payoff_SH.png)
+<div style="font-size: 0.7em; text-align: center;">*Stag Hunt*</div>
+:::
+::: {.column width="33%"}
+![](../Gambar/232_payoff_PD.png)
+<div style="font-size: 0.7em; text-align: center;">*Prisoner's Dilemma*</div>
+:::
+::: {.column width="33%"}
+![](../Gambar/232_payoff_BoS.png)
+<div style="font-size: 0.7em; text-align: center;">*Battle of the Sexes*</div>
+:::
+::::
+
+---
+
+## Exact Potential Game (EPG)
+* Model permainan yang memetakan seluruh utilitas pemain menjadi satu fungsi potensial global ($\Phi$).
+* Berfungsi sebagai kerangka analitik untuk mencari *Nash Equilibrium* (NE) secara terstruktur melalui maksimisasi nilai $\Phi$.
+* Perubahan utilitas lokal ($\Delta u_i$) sebanding persis dengan perubahan potensial global ($\Delta \Phi$).
+  $$ \Delta \Phi = \Phi(s_i', s_{-i}) - \Phi(s_i, s_{-i}) = u_i(s_i', s_{-i}) - u_i(s_i, s_{-i}) $$
+* Jika $\Delta \Phi > 0$, agen termotivasi untuk bertukar strategi. Jika $\Delta \Phi < 0$, agen akan menolak perubahan, sehingga sistem mencapai *Nash Equilibrium*.
+
+---
+
+## EPG pada Alokasi Portofolio
+* Transformasi persamaan utilitas Markowitz menjadi fungsi potensial global EPG.
+  $$ \Phi(x) = \frac{1}{K} \sum_i \mu_i x_i - \frac{\gamma}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j $$
+* Representasi ini memudahkan integrasi antara teori ekonomi rasional (Markowitz) dan fisika statistik (Model Ising).
+* Fungsi potensial ini langsung dikonversikan menjadi nilai energi Hamiltonian (dengan $\hat{H} = -\Phi(x)$) setelah disubstitusi dari biner $x_i \in \{0, 1\}$ ke spin $Z_i \in \{1, -1\}$.
+
+---
+
+## Sequential Best Response (SBR) sebagai Warm-Start
+* **Algoritma SBR:** Mencari *Nash Equilibrium* klasik dengan mengevaluasi pertukaran strategi (swap aset) yang menghasilkan nilai potensial $\Phi$ lebih tinggi secara iteratif.
+* Konfigurasi aset dari titik ekuilibrium (misal: `|0101>`) akan digunakan sebagai status awal (**Warm-Star]t**) bagi sirkuit kuantum VQE.
+* Strategi ini mencegah sirkuit kuantum melakukan pencarian di wilayah probabilitas yang sama sekali buta (*blind search*), sehingga proses optimasi parameter bisa langsung difokuskan pada sub-ruang Hilbert yang bermakna secara finansial.

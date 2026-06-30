@@ -1,0 +1,48 @@
+## Klasifikasi Keterbelitan {.bg2}
+
+Kelas yang diuji:
+
+| Kelas | Struktur |
+|---|---|
+| Separabel penuh | $A-B-C$ |
+| Biseparabel | $A-BC$, $B-AC$, $C-AB$ |
+| Genuine entangled | GHZ dan W |
+
+---
+
+## Kondisi Separabel Penuh {.bg2}
+
+Keadaan separabel penuh dapat ditulis sebagai:
+
+$$
+|\psi\rangle
+=
+|\psi_A\rangle
+\otimes
+|\psi_B\rangle
+\otimes
+|\psi_C\rangle
+$$
+
+Maka tidak ada korelasi non-lokal antar qubit.
+
+---
+
+## Kondisi GHZ {.bg2}
+
+Bentuk representatif:
+
+$$
+|\mathrm{GHZ}\rangle
+=
+\frac{1}{\sqrt{2}}
+\left(
+|000\rangle + |111\rangle
+\right)
+$$
+
+Ciri utama:
+
+- keterbelitan tripartit dominan,
+- three-tangle tidak nol,
+- korelasi global kuat.

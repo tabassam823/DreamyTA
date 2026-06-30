@@ -1,0 +1,40 @@
+## Parameterisasi SU(2) {.bg2}
+
+Matriks uniter umum berdimensi $2\times 2$:
+
+$$
+U =
+\begin{pmatrix}
+a_1 e^{i\alpha_1} & a_2 e^{i\alpha_2} \\
+b_1 e^{i\beta_1} & b_2 e^{i\beta_2}
+\end{pmatrix}
+$$
+
+Syarat uniter:
+
+$$
+UU^\dagger = I
+$$
+
+::: fragment
+Dari syarat ini diperoleh relasi antar amplitudo dan fase.
+:::
+
+---
+
+## Parameterisasi SU(3) {.bg2}
+
+Bentuk umum transformasi SU(3) dapat dibangun dari generator Gell-Mann:
+
+$$
+U_{SU(3)}
+=
+\exp
+\left(
+i\sum_{a=1}^{8}\alpha_a\lambda_a
+\right)
+$$
+
+::: fragment
+Bagian ini menjadi jembatan menuju struktur SU(4).
+:::

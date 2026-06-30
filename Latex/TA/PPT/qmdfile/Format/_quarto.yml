@@ -1,0 +1,26 @@
+project:
+  type: default
+  output-dir: output
+
+format:
+  revealjs:
+    theme:
+      - simple
+      - template/custom.scss
+    slide-number: true
+    transition: fade
+    chalkboard: true
+    progress: false
+    include-after-body: template/header.html
+# format:
+#   revealjs:
+#     theme: [simple, template/custom.scss]
+#     slide-number: true
+#     transition: fade
+#     chalkboard: true
+#     include-after-body: template/header.html
+
+  pdf: default
+
+  pptx:
+    reference-doc: template/template.pptx

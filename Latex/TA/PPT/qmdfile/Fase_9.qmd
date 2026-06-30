@@ -1,0 +1,79 @@
+# Fase 9: Hasil Analisis dan Kesimpulan
+
+## Penurunan Markowitz ke QUBO dan Ising
+
+::: {.panel-tabset}
+### Penurunan Rumus
+* **Fungsi Potensial EPG (Energi Objektif):**
+  $$ E(\mathbf{x}) = \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i $$
+* **Transformasi ke Hamiltonian QUBO:** Menggabungkan Fungsi Energi dan Suku Penalti Anggaran $A$:
+  $$ E_{total}(\mathbf{x}) = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2 $$
+* **Variabel Keputusan Diskrit ke *Spin* Mekanika Kuantum:** 
+  Substitusi $x_i = \frac{1 - \hat{Z}_i}{2}$, menghasilkan koefisien Hamiltonian Ising akhir ($h_i$ dan $J_{ij}$):
+  $$ \hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C $$
+
+### Tabel Data
+::: {.scrollable style="max-height: 450px;"}
+**Tabel: Ringkasan Performa Finansial Strategi Kuantum, SLSQP, dan Equal Weight (N=2,4)**
+
+| Strategi | N=2 Return | N=2 Sharpe | N=2 MDD | N=4 Return | N=4 Sharpe | N=4 MDD |
+|---|---|---|---|---|---|---|
+| **GT-VQE (Hibrida)** | **145,07%** | **1,0185** | 30,33% | **73,15%** | **1,0107** | **16,68%** |
+| VQE (Tanpa GT) | 121,30% | 0,9331 | 30,33% | 16,89% | 0,3592 | 20,89% |
+| SLSQP (Klasik) | 51,34% | 0,6736 | **15,91%** | 12,91% | 0,2810 | 21,12% |
+| *Equal Weight* | 97,88% | 0,9764 | 27,49% | 35,57% | 0,6790 | 18,42% |
+:::
+:::
+
+---
+
+## Validasi *Brute Force* vs Benchmark SLSQP ($N=2$)
+:::: {.columns}
+::: {.column width="50%"}
+**Hasil Validasi *Brute Force*:**
+* **Status Valid ($|01\rangle$):**
+  $\Phi = 0,1909 \to E = -0,1909 + \text{Penalti}(0) = \mathbf{-0,1909}$
+* **Status Terlarang ($|00\rangle$):**
+  $E = \mathbf{4,1972}$ (Tertolak oleh penalti $A \approx 0,5$)
+:::
+::: {.column width="50%"}
+**Hasil Optimasi Klasik (SLSQP):**
+* Membutuhkan kalkulasi Jacobian secara diskrit berulang-ulang untuk mencari akar.
+* Memberikan output probabilitas pecahan $w_{eq}$ yang perlu digenapkan paksa (*Top-K roundings*) ke himpunan kardinalitas biner.
+:::
+::::
+
+> **Konfirmasi VQE:** Pencarian sirkuit kuantum secara eksplisit memberikan amplitudo pengukuran absolut paling tinggi untuk konfigurasi $|01\rangle$ yang identik dengan nilai titik energi terendah eksak sistem.
+
+---
+
+## Ringkasan Performa Simulasi Finansial
+Performa *backtesting* menggunakan optimasi kuantum yang dibantu inisialisasi teori permainan (GT-VQE).
+
+| Strategi Algoritma | Return ($N=2$) | Sharpe ($N=2$) | Return ($N=4$) | Sharpe ($N=4$) |
+|:---:|:---:|:---:|:---:|:---:|
+| **GT-VQE (Hibrida)** | **51,34%** | **0,7357** | **73,15%** | **1,0107** |
+| VQE (Tanpa GT) | 43,21% | 0,6471 | 16,89% | 0,3592 |
+| SLSQP (Klasik) | 51,34% | 0,6736 | 12,91% | 0,2810 |
+| Equal Weight ($1/N$) | 37,29% | 0,6848 | 35,57% | 0,6790 |
+
+**Catatan:** GT-VQE mendominasi performa pengembalian maupun rasio lindung nilai karena memiliki kemampuan adaptabilitas (*agilitas*) tinggi dalam memutar portofolio di saat rezim pergerakan tren pasar berubah.
+
+---
+
+## Kesimpulan
+1. **Formulasi EPG-Hamiltonian:** Kerangka *Exact Potential Game* secara presisi sanggup menjembatani parameter utilitas ekonomi Markowitz ke dalam konfigurasi energi mekanika kuantum yang konsisten secara kardinalitas maupun struktur interaksinya.
+2. **Efektivitas *Warm-Start* Nash:** Integrasi inisialisasi awal menggunakan *Nash Equilibrium* mengatasi kendala probabilitas acak, memandu parameter sirkuit ke sub-ruang yang bermakna, dan mampu mitigasi bahaya kehilangan arah gradien (*Barren Plateaus*).
+3. **Kapabilitas Strategis Eksekusi:** Algoritma GT-VQE tangguh menghadapi volatilitas pasar (*Sharpe* tertinggi 1,0107), memberikan prospek *agilitas* rebalancing yang lebih unggul dibandingkan dengan optimasi portofolio deterministik klasik.
+
+---
+
+## Saran Pengembangan
+1. **Model Hambatan (*Noise*):** Penambahan fungsi *de-phasing* (*gate fidelity* dan *decoherence*) untuk mensimulasikan operasionalitas VQE pada infrastruktur perangkat keras *Noisy Intermediate-Scale Quantum* (NISQ) sesungguhnya.
+2. **Eksplorasi Skala:** Uji coba sirkuit *Ansatz* yang lebih modular agar sanggup mencakup optimasi portofolio bervolume puluhan aset secara bersamaan.
+
+<br><br>
+<div style="text-align: center;">
+  <h1>Terima Kasih</h1>
+  <p>Ada Pertanyaan?</p>
+</div>

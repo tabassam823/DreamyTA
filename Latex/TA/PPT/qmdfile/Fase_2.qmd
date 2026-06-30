@@ -1,0 +1,97 @@
+# Fase 2: Strategi Analisis Investasi
+
+## Tiga Pilar Utama Analisis
+Terdapat 3 pilar utama analisa yang digunakan sebelum mengambil keputusan investasi:
+1. **Analisis Fundamental:** Evaluasi nilai intrinsik dan kesehatan emiten.
+2. **Analisis Teknikal:** Pemetaan psikologi pasar melalui pola visual harga.
+3. **Analisis Kuantitatif:** Pemodelan matematis berbasis data runtun waktu.
+
+---
+
+## Analisis Fundamental
+:::: {.columns}
+::: {.column width="55%"}
+Mengapa harus analisis fundamental?
+* **Ekonometrik Perusahaan:** Laporan keuangan, Kapitalisasi pasar, Peran tokoh-tokoh yang terlibat.
+* **Kesehatan Fiskal:** *Price-to-Earnings Ratio* (PER), *Debt-to-Equity Ratio* (DER).
+* **Sentimen Pasar:** Berita ekonomi, Kebijakan pemerintah, Tren media sosial.
+:::
+::: {.column width="45%"}
+![](../Gambar/221_Cashflow_statement.png)
+
+<div style="font-size: 0.7em; text-align: center;">Struktur laporan arus kas fundamental.</div>
+:::
+::::
+
+---
+
+## Analisis Teknikal
+Representasi visual menggunakan *Candlestick* dan *Price Chart* untuk mendeteksi psikologi kolektif pelaku pasar.
+
+:::: {.columns}
+::: {.column width="33%"}
+![](../Gambar/222_Candle.png)
+<div style="font-size: 0.7em; text-align: center;">*Candlestick*</div>
+:::
+::: {.column width="33%"}
+![](../Gambar/222_Chart.png)
+<div style="font-size: 0.7em; text-align: center;">*Price Chart*</div>
+:::
+::: {.column width="33%"}
+![](../Gambar/222_SnR.png)
+<div style="font-size: 0.7em; text-align: center;">*Support & Resistance*</div>
+:::
+::::
+
+---
+
+## Analisis Kuantitatif
+:::: {.columns}
+::: {.column width="50%"}
+Mengapa dan jenis analisis kuantitatif:
+* **Simple Return ($R$):**
+  $$ R_t = \frac{P_t - P_{t-1}}{P_{t-1}} $$
+* **Logarithmic Return ($r$):**
+  $$ r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) $$
+* $P_t$: Harga pada waktu $t$
+:::
+::: {.column width="50%"}
+![](../Gambar/223_Price_log.png)
+<div style="font-size: 0.7em; text-align: center;">Transformasi pergerakan harga saham.</div>
+:::
+::::
+
+---
+
+## Model Markowitz sebagai Pelopor
+
+::: {.panel-tabset}
+### Penurunan Rumus
+:::: {.columns}
+::: {.column width="55%"}
+* **Mean-Variance:** Didasarkan oleh prinsip Pareto Optimum (mencari imbal hasil setinggi mungkin dengan risiko serendah mungkin).
+  $$ \mathcal{L}(w) = \lambda \sum_i \mu_i w_i -\sum_{i,j} \sigma_{ij} w_i w_j $$
+* $\mu_i$: Imbal hasil rata-rata aset ke-$i$
+* $\sigma_{ij}$: Kovarians antara aset $i$ dan $j$
+* $w_i$: Proporsi bobot aset ke-$i$
+* $\lambda$: Parameter bobot toleransi risiko
+:::
+::: {.column width="45%"}
+![](../Gambar/224_Efficient_Frontier.png)
+<div style="font-size: 0.7em; text-align: center;">Grafik Efficient Frontier</div>
+:::
+::::
+
+### Tabel Data
+::: {.scrollable style="max-height: 450px;"}
+**Analogi Konsep Fisika Statistik dan Ekonomi Finansial**
+| Konsep Fisika Statistik | Analogi Ekonomi/Finansial |
+|---|---|
+| Sistem Partikel | Sekumpulan Aset Saham |
+| *Spin* ($s_i \in \{-1, 1\}$) | Keputusan Investasi/Seleksi Aset ($x_i \in \{0, 1\}$) |
+| Interaksi Kopling ($J_{ij}$) | Korelasi atau Kovarians antar Aset ($\sigma_{ij}$) |
+| Medan Eksternal ($h_i$) | Ekspektasi Imbal Hasil (*Expected Return*) |
+| Energi Total ($H$) | Fungsi Biaya atau Risiko Portofolio |
+| *Ground State* | Alokasi Portofolio Optimal |
+:::
+:::

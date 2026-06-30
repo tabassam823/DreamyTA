@@ -1,0 +1,33 @@
+## Interpretasi Parameter SU(4) {.bg2}
+
+Tidak semua pasangan parameter menghasilkan kelas keterbelitan yang sama.
+
+::: fragment
+Pasangan parameter tertentu hanya menghasilkan keadaan separabel.
+:::
+
+::: fragment
+Pasangan lain menghasilkan keadaan biseparabel.
+:::
+
+::: fragment
+Kombinasi tertentu dapat menghasilkan kelas GHZ atau W.
+:::
+
+---
+
+## Ide Fisis {.bg2}
+
+Generator non-diagonal dapat mencampurkan amplitudo basis komputasi:
+
+$$
+|ijk\rangle
+\longrightarrow
+\sum_{i,j,k} a_{ijk}|ijk\rangle
+$$
+
+Jika pencampuran menghasilkan korelasi non-lokal, maka keadaan berubah menjadi terbelit.
+
+::: fragment
+Dengan kata lain, pola keterbelitan dikontrol oleh struktur generator dan urutan operator.
+:::

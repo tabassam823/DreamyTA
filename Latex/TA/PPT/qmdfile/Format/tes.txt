@@ -1,0 +1,18 @@
+<!-- ::: {.its-header}
+![](logo/Logo-ITS-1.svg){.logo-its}
+![](logo/cropped-Javicon-Renaudie.svg){.logo-phi}
+![](logo/LaFTiFA1.svg){.logo-laftifa}
+:::
+
+::: {.motto}
+"The Beauty of Mind"<br>
+"The Art of Thinking"
+:::
+
+::: {.footer-left}
+www.its.ac.id
+:::
+
+::: {.footer-right}
+INSTITUT TEKNOLOGI SEPULUH NOPEMBER, Surabaya - Indonesia
+::: -->

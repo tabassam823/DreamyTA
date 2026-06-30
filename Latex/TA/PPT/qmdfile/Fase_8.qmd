@@ -1,0 +1,108 @@
+# Fase 8: Metodologi Penelitian
+
+## Alur Penelitian
+![](../Gambar/31_Dialir.png){fig-align="center" width=45%}
+
+---
+
+## Tahap 1: Akuisisi dan Pra-pemrosesan Data
+
+```pseudocode
+Procedure DataPreprocessing(tickers, start_time, end_time)
+  1. P <- DownloadClosingPrice(tickers)
+  2. r_log <- ln(P_t / P_t-1)  // Kalkulasi Log Return
+  3. mu_log <- Mean(r_log) - 0.5 * Var(r_log) // Volatility Drag
+  4. Sigma <- Covariance(r_log)
+  5. gamma <- ComputeEndogenousLambda(mu_log, Sigma)
+  6. Return mu_log, Sigma, gamma
+EndProcedure
+```
+* **Catatan:** *Volatility drag* dihitung untuk mencegah divergensi linearitas aset terhadap parameter fluktuasi ekspektasi logaritmik dalam periode panjang.
+
+---
+
+## Tahap 2: Pemodelan Hamiltonian Portofolio
+
+```pseudocode
+Procedure BuildHamiltonian(mu, Sigma, gamma, K, lambda_penalti)
+  1. Q_ii <- (gamma * Sigma_ii) / (2 * K^2) - (mu_i / K) + lambda_penalti * (1 - 2K)
+  2. Q_ij <- (gamma * Sigma_ij) / (2 * K^2) + lambda_penalti
+  3. h_i <- -0.5 * (Q_ii + Sum_over_j!=i (Q_ij))
+  4. J_ij <- 0.25 * Q_ij
+  5. H <- Sum(h_i * Z_i) + Sum(J_ij * Z_i * Z_j) + C * I
+  6. Return H
+EndProcedure
+```
+* **Catatan:** Suku penalti kardinalitas ($\lambda$) menjamin alokasi portofolio sesuai dengan *budget* ketersediaan dana ($K$).
+
+---
+
+## Tahap 3: EPG *Sequential Best Response* (SBR)
+Algoritma pencarian *Nash Equilibrium* untuk digunakan sebagai strategi *warm-start*.
+
+```pseudocode
+Procedure NashSBR(mu, Sigma, gamma, N, K)
+  1. x <- InitialSelection(K)
+  2. For iter = 1 to max_iter:
+  3.     For i in S_in and j in S_out:
+  4.         x_new <- Swap(x, i, j)
+  5.         If Phi(x_new) > Phi(x):
+  6.             x <- x_new, Phi <- Phi_new, improved <- True
+  7.             Break
+  8.     If not improved: Break
+  9. Return x // Bitstring ekuilibrium (contoh: |0101>)
+EndProcedure
+```
+
+---
+
+## Tahap 4: Optimasi Variasional HE-VQE Adaptif
+
+```pseudocode
+Procedure AdaptiveVQE(H, x_NE, D_max, lambda_target)
+  1. theta <- InitialParameters(x_NE) // Warm-Start Injection
+  2. For depth d = 1 to D_max:
+  3.     For k = 1 to N_iter:
+  4.         lambda_k <- PenaltyAnnealing(k)
+  5.         L(theta) <- <psi(theta)| H_obj + lambda_k H_pen |psi(theta)>
+  6.         theta <- theta - a_k * SPSA_Gradient(L, theta)
+  7.     theta <- LayerExpansion(theta) // Heuristic Ansatz
+  8.     If Converged(theta): Break
+  9. Return x_best <- Argmax(|<x|psi(theta_final)>|^2)
+EndProcedure
+```
+
+---
+
+## Tahap 5 & 6: *Backtesting* dan Validasi *Brute Force*
+
+:::: {.columns}
+::: {.column width="50%"}
+**Simulasi Backtesting**
+```pseudocode
+Procedure BacktestLoop(Data, K)
+  1. For t in Timeline:
+  2.    mu, Sigma, gamma <- DataPreprocessing
+  3.    H <- BuildHamiltonian
+  4.    x_NE <- NashSBR
+  5.    x_best_t <- AdaptiveVQE(H, x_NE)
+  6.    R_t <- ExecuteRebalance(x_best_t)
+  7. Return PerformanceMetrics
+EndProcedure
+```
+:::
+::: {.column width="50%"}
+**Validasi Brute Force**
+```pseudocode
+Procedure BruteForce(H, N, K)
+  1. best_E <- infinity
+  2. For each x in Combinations(N, K):
+  3.    E <- CalculateIsingEnergy(x, H)
+  4.    If E < best_E:
+  5.       best_E <- E
+  6.       best_x <- x
+  7. Return best_x, best_E
+EndProcedure
+```
+:::
+::::

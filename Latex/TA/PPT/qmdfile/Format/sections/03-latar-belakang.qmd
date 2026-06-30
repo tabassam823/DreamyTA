@@ -1,0 +1,18 @@
+## Latar Belakang {.bg2}
+
+::: fragment
+Keterbelitan kuantum adalah korelasi kuantum antar subsistem yang tidak dapat dijelaskan secara klasik.
+:::
+
+::: fragment
+Pada sistem tiga qubit, struktur keterbelitan menjadi lebih kaya dibandingkan sistem bipartit.
+:::
+
+::: fragment
+Kelas penting yang muncul:
+
+- Separabel penuh
+- Biseparabel
+- GHZ
+- W
+:::
