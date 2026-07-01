@@ -41,14 +41,14 @@
   $$ |\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle $$
 :::
 ::: {.column width="40%"}
-![](../Gambar/bloch_sphere.png)
-<div style="font-size: 0.7em; text-align: center;">Sumber: Qiskit Documentation</div>
+<iframe src="bloch_interactive.html" width="100%" height="420px" style="border:none;"></iframe>
+<div style="font-size: 0.7em; text-align: center;">Interaktif: Atur parameter & putar objek 3D</div>
 :::
 ::::
 
 ---
 
-## Rotasi Qubit dan Grup SU(2) {.scrollable}
+## Gerbang 1 Qubit (Rotasi SU2)
 
 ::: {.panel-tabset}
 ### Rumus Utama
