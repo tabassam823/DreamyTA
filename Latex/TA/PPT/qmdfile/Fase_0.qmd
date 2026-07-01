@@ -7,25 +7,167 @@
 
 ---
 
-## Penelitian Terdahulu dan *Gap* Riset
-:::: {.columns}
-::: {.column width="55%"}
-* **Wang dkk. (2025):** Menggunakan WCVaR dan CMA-ES untuk stabilisasi konvergensi energi pada arsitektur VQE.
-* **Wei dkk. (2025):** Memecah masalah QUBO kompleks menjadi sub-masalah (*Quantum-Classical Hybrid Annealing*).
-* **Kelemahan Terdahulu:** Algoritma hibrida seringkali masih bergantung pada inisialisasi awal acak yang rentan terjebak *Barren Plateaus* pada dimensi ruang Hilbert yang tinggi.
-* **Solusi yang Diajukan:** Memanfaatkan titik *Nash Equilibrium* dari *Game Theory* (EPG) sebagai inisialisasi cerdas (*Warm-Start*).
-:::
-::: {.column width="40%"}
-**Fokus Metrik Tambahan:**  
-Memantau keacakan (purity) distribusi probabilitas sirkuit *Ansatz* menggunakan metrik analitik **Entropi Von Neumann** selama proses optimasi berlangsung.
+## Penelitian Terdahulu dan Research Gap
 
-::: {style="font-size: 0.35em; margin-top: 2em; line-height: 1.2; color: #666666;"}
-**Referensi:**  
-1. Wang, A., Lv, Z., Ma, Z., Cai, D., & Zhang, Z. (2025, August). Achieving High-Quality Portfolio Optimization with the Variational Quantum Eigensolver. Retrieved 2026-03-11, from http://arxiv.org/abs/2508.18625 (arXiv:2508.18625 \[quant-ph\]) doi: 10.48550/arXiv.2508.18625
-2. Wei, H., Wang, Y. J., Yang, H., Yang, X., Cao, M., Xu, Q., … Zhao, W. (2025, July). Solving Multiple Discretization Portfolio Optimization Problem with Quantum-Classical Hybrid Algorithms. Computational Economics. Retrieved 2026-03-11, from https://link.springer.com/10.1007/s10614-025-11061-5 doi: 10.1007/s10614-025-11061-5  
+<style>
+.card{
+border:2px solid #d9d9d9;
+border-radius:12px;
+padding:12px;
+height:240px;
+background:#fafafa;
+box-shadow:2px 2px 6px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.arrow{
+font-size:2em;
+text-align:center;
+margin-top:90px;
+color:#666;
+}
+
+.title{
+font-weight:bold;
+font-size:1.05em;
+margin-top:8px;
+margin-bottom:8px;
+color:#003366;
+}
+
+.gap{
+border:2px solid #cc3333;
+background:#fff6f6;
+}
+
+.solution{
+border:2px solid #2e8b57;
+background:#f3fff5;
+}
+
+.metric{
+border:2px solid #5b3cc4;
+background:#faf7ff;
+}
+</style>
+
+:::: {.columns}
+
+::: {.column width="23%"}
+
+<div class="card">
+
+<img src="images/vqe.png" width="120">
+
+<div class="title">
+Penelitian Terdahulu
+</div>
+
+**Wang dkk. (2025)**
+
+VQE + WCVaR + CMA-ES
+
+Stabilisasi konvergensi energi.
+
+</div>
+
 :::
+
+::: {.column width="4%"}
+
+<div class="arrow">
+
+➜
+
+</div>
+
+:::
+
+::: {.column width="23%"}
+
+<div class="card">
+
+<img src="images/hybrid.png" width="120">
+
+<div class="title">
+Penelitian Terdahulu
+</div>
+
+**Wei dkk. (2025)**
+
+Quantum-Classical Hybrid Annealing
+
+Memecah masalah QUBO kompleks menjadi submasalah.
+
+</div>
+
+:::
+
+::: {.column width="4%"}
+
+<div class="arrow">
+
+➜
+
+</div>
+
+:::
+
+::: {.column width="23%"}
+
+<div class="card gap">
+
+<img src="images/barren.png" width="120">
+
+<div class="title">
+Research Gap
+</div>
+
+Masih bergantung pada
+
+**inisialisasi acak**
+
+yang rentan mengalami
+
+**Barren Plateau**
+
+</div>
+
+:::
+
+::: {.column width="23%"}
+
+<div class="card solution">
+
+<img src="images/nash.png" width="120">
+
+<div class="title">
+Penelitian Ini
+</div>
+Menggunakan **Nash Equilibrium** sebagai **Warm-Start Initialization**
+</div>
 :::
 ::::
+
+<br>
+
+<div class="metric">
+
+### 🔍 Kontribusi Tambahan
+
+<img src="images/entropy.png" width="90">
+
+**Entropi Von Neumann**
+
+Digunakan untuk memantau perubahan *purity* dan tingkat keacakan keadaan kuantum selama proses optimasi.
+
+</div>
+
+<div style="font-size:0.45em;margin-top:8px;color:#666;">
+
+Wang *et al.* (2025); Wei *et al.* (2025)
+
+</div>
 
 ---
 

@@ -63,18 +63,19 @@ Mengapa dan jenis analisis kuantitatif:
 
 ---
 
-## Model Markowitz sebagai Pelopor
+## Model Markowitz sebagai Pelopor {.scrollable}
 
 ::: {.panel-tabset}
-### Penurunan Rumus
+### Rumus Utama
 :::: {.columns}
 ::: {.column width="55%"}
-* **Mean-Variance:** Didasarkan oleh prinsip Pareto Optimum (mencari imbal hasil setinggi mungkin dengan risiko serendah mungkin).
-  $$ \mathcal{L}(w) = \lambda \sum_i \mu_i w_i -\sum_{i,j} \sigma_{ij} w_i w_j $$
+* **Mean-Variance:** Didasarkan oleh prinsip *Pareto Optimum* (mencari imbal hasil setinggi mungkin dengan risiko serendah mungkin).
+  $$ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i $$
 * $\mu_i$: Imbal hasil rata-rata aset ke-$i$
 * $\sigma_{ij}$: Kovarians antara aset $i$ dan $j$
-* $w_i$: Proporsi bobot aset ke-$i$
-* $\lambda$: Parameter bobot toleransi risiko
+* $\omega_i$: Proporsi bobot kontinu aset ke-$i$ $(\sum \omega_i = 1)$
+* $\lambda$: Parameter toleransi risiko
+<br><br>
 :::
 ::: {.column width="45%"}
 ![](../Gambar/224_Efficient_Frontier.png)
@@ -82,16 +83,51 @@ Mengapa dan jenis analisis kuantitatif:
 :::
 ::::
 
-### Tabel Data
-::: {.scrollable style="max-height: 450px;"}
-**Analogi Konsep Fisika Statistik dan Ekonomi Finansial**
-| Konsep Fisika Statistik | Analogi Ekonomi/Finansial |
-|---|---|
-| Sistem Partikel | Sekumpulan Aset Saham |
-| *Spin* ($s_i \in \{-1, 1\}$) | Keputusan Investasi/Seleksi Aset ($x_i \in \{0, 1\}$) |
-| Interaksi Kopling ($J_{ij}$) | Korelasi atau Kovarians antar Aset ($\sigma_{ij}$) |
-| Medan Eksternal ($h_i$) | Ekspektasi Imbal Hasil (*Expected Return*) |
-| Energi Total ($H$) | Fungsi Biaya atau Risiko Portofolio |
-| *Ground State* | Alokasi Portofolio Optimal |
-:::
+### Penurunan Rumus
+<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
+**Penurunan: Dari Bobot Kontinu $\omega$ ke Variabel Biner $x$**
+
+**Langkah 1 — Formulasi Lagrangian Kontinu (Markowitz):**
+
+Fungsi biaya Markowitz dalam domain bobot kontinu $\omega_i$:
+
+$$\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i$$
+
+dengan kendala $\sum_i \omega_i = 1$ dan $\omega_i \geq 0$.
+
+---
+
+**Langkah 2 — Substitusi Variabel Biner:**
+
+Variabel bobot kontinu $\omega_i$ diubah menjadi variabel biner $x_i \in \{0, 1\}$ melalui hubungan:
+
+$$\omega_i = \frac{x_i}{K}$$
+
+di mana $K$ adalah jumlah aset yang dipilih dari total $N$ kandidat.
+
+---
+
+**Langkah 3 — Substitusi ke Lagrangian:**
+
+Substitusi $\omega_i = x_i/K$ ke dalam fungsi Lagrangian:
+
+$$\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
+
+$$\therefore \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
+
+Nilai $x_i = 1$ merepresentasikan **beli**, sedangkan $x_i = 0$ merepresentasikan **tidak membeli**.
+
+---
+
+**Interpretasi:**
+
+| Simbol | Domain Kontinu | Domain Biner |
+|:---:|:---:|:---:|
+| Variabel keputusan | $\omega_i \in [0, 1]$ | $x_i \in \{0, 1\}$ |
+| Kendala | $\sum \omega_i = 1$ | $\sum x_i = K$ |
+| Bobot per aset | $\omega_i$ (kontinu) | $1/K$ (seragam) |
+| Dimensi ruang solusi | Kontinu ($\mathbb{R}^N$) | Diskrit ($2^N$) |
+
+<br><br><br>
+</div>
 :::

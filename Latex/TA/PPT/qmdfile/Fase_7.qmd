@@ -23,35 +23,130 @@
 
 ---
 
-## Entropi Von Neumann
-* Bagaimana kita mengukur "keacakan" atau kemurnian (*purity*) status probabilitas qubit di dalam sirkuit selama iterasi?
-* Ekstensi teoretis dari **Entropi Shannon** klasik ($H = - \sum p_i \log_2 (p_i)$) ke dalam mekanika kuantum yang bekerja pada matriks densitas ($\rho$).
-* Formulasi **Entropi Von Neumann**:
+## Entropi Von Neumann {.scrollable}
+
+::: {.panel-tabset}
+### Rumus Utama
+* Ekstensi teoretis dari **Entropi Shannon** klasik ke dalam mekanika kuantum yang bekerja pada matriks densitas ($\rho$).
+* **Entropi Shannon** (klasik): $H = - \sum_i p_i \log_2 (p_i)$
+* **Entropi Von Neumann** (kuantum):
   $$ S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2 (\lambda_j) $$
-* Jika nilai entropi $S \approx 0$, sistem berpusat pada satu konfigurasi status dominan. Jika nilai entropi $S$ sangat tinggi, probabilitas tersebar luas (menandakan *Barren Plateau* atau kesulitan konvergensi algoritma).
+* Jika $S \approx 0$: sistem berpusat pada satu konfigurasi dominan (*pure state*).
+* Jika $S$ tinggi: probabilitas tersebar luas → indikasi *Barren Plateau*.
+
+### Penurunan Rumus
+<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
+**Penurunan: Dari Entropi Shannon ke Entropi Von Neumann**
+
+**Langkah 1 — Entropi Shannon (Klasik):**
+
+Untuk distribusi probabilitas diskrit $p_i$:
+
+$$H = - \sum_i p_i \log_2 (p_i)$$
+
+Logaritma basis 2 digunakan karena satuan informasi dinyatakan dalam *bit*.
 
 ---
 
-## Evolusi Entropi: Studi Kasus Numerik
+**Langkah 2 — Operator Densitas:**
+
+Dalam mekanika kuantum, distribusi probabilitas direpresentasikan oleh operator densitas:
+
+$$\rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|$$
+
+Sifat: Hermitian ($\rho^\dagger = \rho$), jejak bernilai satu ($\text{Tr}(\rho) = 1$), semidefinit positif.
+
+---
+
+**Langkah 3 — Dekomposisi Spektral:**
+
+Berdasarkan Teorema Spektral, $\rho$ dapat didiagonalisasi pada basis ortonormal $|e_j\rangle$:
+
+$$\rho = \sum_j \lambda_j |e_j\rangle \langle e_j|$$
+
+dengan $\lambda_j$ adalah nilai eigen real dari $\rho$.
+
+---
+
+**Langkah 4 — Logaritma Operator Densitas:**
+
+$$\log_2(\rho) = \sum_j \log_2 (\lambda_j) |e_j\rangle \langle e_j|$$
+
+---
+
+**Langkah 5 — Perkalian $\rho \log_2(\rho)$:**
+
+Dengan ortonormalitas $\langle e_j | e_k \rangle = \delta_{jk}$:
+
+$$\rho \log_2(\rho) = \left(\sum_j \lambda_j |e_j\rangle \langle e_j|\right) \left( \sum_k \log_2 (\lambda_k) |e_k\rangle \langle e_k|\right)$$
+
+$$= \sum_j \sum_k \lambda_j \log_2(\lambda_k) |e_j\rangle \underbrace{\langle e_j | e_k\rangle}_{\delta_{jk}} \langle e_k|$$
+
+$$= \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j|$$
+
+---
+
+**Langkah 6 — Operasi *Trace*:**
+
+$$\text{Tr}(\rho \log_2(\rho)) = \sum_k \langle e_k | \left( \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j| \right) |e_k\rangle$$
+
+$$= \sum_k \sum_j \lambda_j \log_2(\lambda_j) \underbrace{\langle e_k | e_j \rangle}_{\delta_{kj}} \underbrace{\langle e_j | e_k \rangle}_{\delta_{jk}} = \sum_j \lambda_j \log_2(\lambda_j)$$
+
+---
+
+**Hasil Akhir — Entropi Von Neumann:**
+
+$$\boxed{S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2 (\lambda_j)}$$
+
+---
+
+**Indikator *Barren Plateau*:**
+
+Jika entropi mendekati batas maksimum $S(\rho_A) \approx \log(d_A)$, maka:
+
+$$\nabla\langle\psi(\theta)| \hat{H}|\psi(\theta)\rangle \to 0$$
+
+karena distribusi probabilitas semakin homogen dalam ruang keadaan.
+
+<br><br><br>
+</div>
+:::
+
+---
+
+## Evolusi Entropi: Studi Kasus Numerik {.smaller}
+
 Pemanfaatan Entropi Von Neumann dalam memantau jejak persebaran probabilitas di titik konvergensi akhir VQE.
 
 :::: {.columns}
 ::: {.column width="50%"}
 **Sistem $N=2$**
-* Probabilitas status mayoritas ($p_1$): $0,98$
-* Sisa status probabilitas ($p_{rest}$): $0,02$
-* Kalkulasi Entropi:
-  $$ S = -(0,98 \cdot \log_2(0,98) + 0,02 \cdot \log_2(0,02)) $$
-  $$ S \approx 0,1414 \text{ bit} $$
-* Menandakan probabilitas yang sangat tersentralisasi dan stabil.
+
+| Parameter | Nilai |
+|:---|:---:|
+| Probabilitas mayoritas ($p_1$) | $0{,}98$ |
+| Sisa probabilitas ($p_\text{rest}$) | $0{,}02$ |
+
+**Kalkulasi:**
+
+$$ S = -(0{,}98 \cdot \log_2(0{,}98) + 0{,}02 \cdot \log_2(0{,}02)) $$
+$$ S \approx 0{,}1414 \text{ bit} $$
+
+→ Probabilitas sangat tersentralisasi dan stabil.
 :::
 ::: {.column width="50%"}
 **Sistem $N=4$**
-* Probabilitas status mayoritas ($p_1$): $0,94$
-* Sisa status probabilitas ($p_{rest}$): $0,06$
-* Kalkulasi Entropi:
-  $$ S = -(0,94 \cdot \log_2(0,94) + 0,06 \cdot \log_2(0,06)) $$
-  $$ S \approx 0,3274 \text{ bit} $$
-* Meskipun sedikit melebar karena dimensi yang bertambah, nilai tetap jauh di bawah batas entropi maksimum, mengindikasikan deteksi *ground state* yang handal.
+
+| Parameter | Nilai |
+|:---|:---:|
+| Probabilitas mayoritas ($p_1$) | $0{,}94$ |
+| Sisa probabilitas ($p_\text{rest}$) | $0{,}06$ |
+
+**Kalkulasi:**
+
+$$ S = -(0{,}94 \cdot \log_2(0{,}94) + 0{,}06 \cdot \log_2(0{,}06)) $$
+$$ S \approx 0{,}3274 \text{ bit} $$
+
+→ Sedikit melebar karena dimensi bertambah, namun jauh di bawah batas entropi maksimum → deteksi *ground state* handal.
 :::
 ::::
