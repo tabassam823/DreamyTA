@@ -1,19 +1,26 @@
 # Fase 7: Tantangan Kuantum dan Diagnostik Entropi
 
 ## Fenomena *Barren Plateau*
-* Tantangan besar saat mengeksekusi sirkuit variasi kuantum (seperti Ansatz *Hardware-Efficient*) pada arsitektur skala besar atau *depth* yang dalam.
-* **Jebakan Gradien:** Permukaan fungsi objektif (energi) menjadi sangat datar, sehingga turunan parsialnya menyusut eksponensial menuju nol.
-* Hal ini ditandai oleh lenyapnya varians gradien parameter terhadap kedalaman sirkuit ($L$) dan jumlah qubit ($N$):
-  $$ \text{Var}[\partial_{\theta} E] \propto \frac{1}{2^{NL}} $$
-* **Dilema Ekspresibilitas:** Semakin kompleks/ekspresif sirkuit kuantum, semakin besar kemungkinan sirkuit terjebak di area *Barren Plateau* sebelum dapat dioptimasi.
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../Gambar/BarrenPlateau.jpeg)
+:::
+::: {.column width="50%"}
+![](../Gambar/barren_plateau.png)
+:::
+::::
 
 ---
 
 ## Analisis *Barren Plateau* pada Simulasi
 :::: {.columns}
 ::: {.column width="60%"}
-* Inisialisasi parameter acak murni pada $L>5$ (sistem $N=4$) memicu hilangnya arah optimasi.
-* **Observasi:** Inisialisasi strategi melalui *Nash Equilibrium* (*Warm-Start*) terbukti memandu sirkuit langsung menuju sub-ruang Hilbert yang bermakna, menghindari keacakan buta dan menjaga agar gradien tetap cukup besar untuk dioptimasi (Trainability).
+* Sirkuit dengan *depth* rendah memiliki fungsi biaya yang sederhana dan gradien yang informatif.
+* Penambahan gerbang *entanglement* (CNOT) secara berulang menyebabkan parameter saling terhubung dan bercampur secara kompleks.
+* Karena efek *Central Limit Theorem*, banyak komponen gradien yang saling membatalkan hingga ekspektasinya mendekati nol.
+* Akibatnya, **semakin banyak *depth* dan *qubit*, maka akan semakin rentan terhadap *barren plateau*** karena perilakunya mendekati acak penuh (*unitary 2-design*).
+* **Solusi Simulasi:** Inisialisasi parameter (*warm-start*) menggunakan *Nash Equilibrium* terbukti menghindari jebakan *barren plateau* pada sistem $N=4$.
 :::
 ::: {.column width="40%"}
 ![](../Gambar/grafik_depth_per_window_N4.png)
@@ -23,80 +30,84 @@
 
 ---
 
-## Entropi Von Neumann {.scrollable}
+## Entropi Shannon $\to$ Entropi Von Neumann {.scrollable}
 
 ::: {.panel-tabset}
 ### Rumus Utama
-* Ekstensi teoretis dari **Entropi Shannon** klasik ke dalam mekanika kuantum yang bekerja pada matriks densitas ($\rho$).
-* **Entropi Shannon** (klasik): $H = - \sum_i p_i \log_2 (p_i)$
-* **Entropi Von Neumann** (kuantum):
-  $$ S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2 (\lambda_j) $$
-* Jika $S \approx 0$: sistem berpusat pada satu konfigurasi dominan (*pure state*).
-* Jika $S$ tinggi: probabilitas tersebar luas → indikasi *Barren Plateau*.
+
+:::: {.columns}
+::: {.column width="25%"}
+![](../Gambar/Shannon_Foto.png)
+<div style="font-size: 0.5em; text-align: center; margin-top: 5px;">Claude Shannon (Bapak Teori Informasi)</div>
+:::
+::: {.column width="75%"}
+* **Ide Fundamental Shannon:** Menginterpretasikan "keacakan" atau ketidakpastian informasi dalam suatu sistem dan merumuskannya menjadi **entropi** dalam satuan bit.
+* **Entropi Shannon** (klasik): 
+  $$ H = - \sum_i p_i \log_2 (p_i) $$
+* **Entropi Von Neumann** menggeneralisasi konsep Shannon ke dalam mekanika kuantum menggunakan matriks densitas ($\rho$):
+  $$ S(\rho) = -\text{Tr}(\rho \log_2 \rho) $$
+* Jika $S \approx 0$: Sistem stabil pada *pure state* (satu konfigurasi dominan).
+* Jika $S$ tinggi: Probabilitas tersebar merata (indikasi *Barren Plateau*).
+:::
+::::
 
 ### Penurunan Rumus
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-**Penurunan: Dari Entropi Shannon ke Entropi Von Neumann**
+**Generalisasi: Dari Entropi Shannon ke Entropi Von Neumann**
 
 **Langkah 1 — Entropi Shannon (Klasik):**
 
-Untuk distribusi probabilitas diskrit $p_i$:
+Untuk distribusi probabilitas diskrit $p_i$, entropi informasi didefinisikan sebagai:
 
 $$H = - \sum_i p_i \log_2 (p_i)$$
 
-Logaritma basis 2 digunakan karena satuan informasi dinyatakan dalam *bit*.
+---
+
+**Langkah 2 — Definisi Entropi Von Neumann:**
+
+Dalam mekanika kuantum, probabilitas digantikan oleh operator densitas $\rho$. Entropi Von Neumann didefinisikan langsung melalui fungsi operator tersebut:
+
+$$S(\rho) = -\text{Tr}(\rho \log_2 \rho)$$
 
 ---
 
-**Langkah 2 — Operator Densitas:**
+**Langkah 3 — Teorema Spektral:**
 
-Dalam mekanika kuantum, distribusi probabilitas direpresentasikan oleh operator densitas:
+Karena operator densitas $\rho$ bersifat Hermitian, ia selalu dapat didiagonalisasi (dekomposisi spektral):
 
-$$\rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|$$
+$$\rho = U \Lambda U^\dagger$$
 
-Sifat: Hermitian ($\rho^\dagger = \rho$), jejak bernilai satu ($\text{Tr}(\rho) = 1$), semidefinit positif.
-
----
-
-**Langkah 3 — Dekomposisi Spektral:**
-
-Berdasarkan Teorema Spektral, $\rho$ dapat didiagonalisasi pada basis ortonormal $|e_j\rangle$:
-
-$$\rho = \sum_j \lambda_j |e_j\rangle \langle e_j|$$
-
-dengan $\lambda_j$ adalah nilai eigen real dari $\rho$.
+dengan $\Lambda$ adalah matriks diagonal yang berisi nilai eigen $\lambda_i$, dan $U$ adalah matriks uniter.
 
 ---
 
-**Langkah 4 — Logaritma Operator Densitas:**
+**Langkah 4 — Logaritma Matriks:**
 
-$$\log_2(\rho) = \sum_j \log_2 (\lambda_j) |e_j\rangle \langle e_j|$$
+Berdasarkan definisi fungsi matriks, logaritma diterapkan pada nilai eigennya:
 
----
-
-**Langkah 5 — Perkalian $\rho \log_2(\rho)$:**
-
-Dengan ortonormalitas $\langle e_j | e_k \rangle = \delta_{jk}$:
-
-$$\rho \log_2(\rho) = \left(\sum_j \lambda_j |e_j\rangle \langle e_j|\right) \left( \sum_k \log_2 (\lambda_k) |e_k\rangle \langle e_k|\right)$$
-
-$$= \sum_j \sum_k \lambda_j \log_2(\lambda_k) |e_j\rangle \underbrace{\langle e_j | e_k\rangle}_{\delta_{jk}} \langle e_k|$$
-
-$$= \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j|$$
+$$\log_2(\rho) = U (\log_2 \Lambda) U^\dagger$$
 
 ---
 
-**Langkah 6 — Operasi *Trace*:**
+**Langkah 5 — Operasi *Trace* dan Invariansi:**
 
-$$\text{Tr}(\rho \log_2(\rho)) = \sum_k \langle e_k | \left( \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j| \right) |e_k\rangle$$
+Kita kalikan $\rho$ dengan $\log_2(\rho)$:
 
-$$= \sum_k \sum_j \lambda_j \log_2(\lambda_j) \underbrace{\langle e_k | e_j \rangle}_{\delta_{kj}} \underbrace{\langle e_j | e_k \rangle}_{\delta_{jk}} = \sum_j \lambda_j \log_2(\lambda_j)$$
+$$\rho \log_2(\rho) = (U \Lambda U^\dagger) (U (\log_2 \Lambda) U^\dagger) = U (\Lambda \log_2 \Lambda) U^\dagger$$
+
+Gunakan sifat invariansi *trace* ($\text{Tr}(U A U^\dagger) = \text{Tr}(A)$):
+
+$$S(\rho) = -\text{Tr}(U (\Lambda \log_2 \Lambda) U^\dagger) = -\text{Tr}(\Lambda \log_2 \Lambda)$$
+
+Karena $\Lambda$ adalah matriks diagonal, perhitungan *trace*-nya hanyalah jumlahan dari elemen diagonal:
+
+$$\boxed{S(\rho) = -\sum_i \lambda_i \log_2 (\lambda_i)}$$
 
 ---
 
-**Hasil Akhir — Entropi Von Neumann:**
+**Langkah 6 — Reduksi ke Bentuk Klasik:**
 
-$$\boxed{S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2 (\lambda_j)}$$
+Jika $\rho$ sudah dalam bentuk diagonal murni di mana matriksnya mewakili campuran klasik murni, maka nilai eigen $\lambda_i$ akan sama dengan probabilitas $p_i$, sehingga rumusnya akan mereduksi secara identik menjadi Entropi Shannon biasa.
 
 ---
 
@@ -139,14 +150,18 @@ $$ S \approx 0{,}1414 \text{ bit} $$
 
 | Parameter | Nilai |
 |:---|:---:|
-| Probabilitas mayoritas ($p_1$) | $0{,}94$ |
-| Sisa probabilitas ($p_\text{rest}$) | $0{,}06$ |
+| Prob. Optimal ($p_1$) | $0{,}94$ |
+| Prob. Alternatif 1 ($p_2$) | $0{,}02$ |
+| Prob. Alternatif 2 ($p_3$) | $0{,}02$ |
+| Prob. Alternatif 3 ($p_4$) | $0{,}02$ |
+
+*Total 4 keadaan dengan probabilitas relevan karena pembatasan ruang pencarian oleh fungsi penalti.*
 
 **Kalkulasi:**
 
-$$ S = -(0{,}94 \cdot \log_2(0{,}94) + 0{,}06 \cdot \log_2(0{,}06)) $$
-$$ S \approx 0{,}3274 \text{ bit} $$
+$$ S = -\left(0{,}94 \log_2(0{,}94) + 3 \times (0{,}02 \log_2(0{,}02))\right) $$
+$$ S \approx 0{,}4225 \text{ bit} $$
 
-→ Sedikit melebar karena dimensi bertambah, namun jauh di bawah batas entropi maksimum → deteksi *ground state* handal.
+→ Sedikit melebar karena dimensi bertambah, namun jauh di bawah batas entropi maksimum $\log_2(4) = 2$ bit → deteksi *ground state* handal.
 :::
 ::::

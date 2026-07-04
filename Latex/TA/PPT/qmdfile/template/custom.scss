@@ -136,3 +136,9 @@ $footer-blue: #3c6e94;
 .footer-right {
   z-index: 1000;
 }
+
+/* Pastikan tombol navigasi (controls) berada di atas footer */
+.reveal .controls {
+  z-index: 1005 !important;
+  bottom: 75px !important;
+}

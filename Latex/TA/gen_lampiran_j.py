@@ -37,7 +37,7 @@ def format_latex(df, caption, label, longtable=True):
     return "\n".join(latex)
 
 # 1. Daily Prices
-df_prices = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/harga_harian_saham_N4.csv")
+df_prices = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/harga_harian_saham_N4.csv")
 # Reorder to match: Date, BBCA, ADRO, SMGR, TLKM
 df_prices = df_prices[['Date', 'BBCA.JK', 'ADRO.JK', 'SMGR.JK', 'TLKM.JK']]
 df_prices.columns = ['Tanggal', 'BBCA', 'ADRO', 'SMGR', 'TLKM']
@@ -55,7 +55,7 @@ for ticker in ['BBCA', 'ADRO', 'SMGR', 'TLKM']:
 df_rets_clean = df_rets.dropna().reset_index(drop=True)
 
 # 3. Expected Returns & Variance
-df_metrics = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/metrik_return_dan_lambda_N4.csv")
+df_metrics = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/metrik_return_dan_lambda_N4.csv")
 # Tickers: BBCA, ADRO, SMGR, TLKM
 # Period index 1 to 36
 dates = df_metrics['Date'].unique()
@@ -74,7 +74,7 @@ df_sum_metrics = pd.DataFrame(summary_metrics)
 # 4. Covariance (Approximate from window logic)
 # We need to compute covariance for each window (126 days ending at date)
 # Let's compute it from df_rets_all
-df_prices_all = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/harga_harian_saham_N4.csv")
+df_prices_all = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/harga_harian_saham_N4.csv")
 df_prices_all.set_index('Date', inplace=True)
 df_prices_all = df_prices_all[['BBCA.JK', 'ADRO.JK', 'SMGR.JK', 'TLKM.JK']]
 df_log_rets_all = np.log(df_prices_all / df_prices_all.shift(1)).dropna()

@@ -37,10 +37,10 @@ def format_latex(df, caption, label, longtable=True):
     return "\n".join(latex)
 
 # 1. Bias H, J, C_Obj, Lambda
-df_bias = pd.read_csv("GTQuantumInvest/Hasil_N2_GT_5/bias_h_total_N2.csv")
-df_param = pd.read_csv("GTQuantumInvest/Hasil_N2_GT_5/parameter_pendamping_N2.csv")
-df_metrics = pd.read_csv("GTQuantumInvest/Hasil_N2_GT_5/metrik_return_dan_lambda_N2.csv")
-df_j = pd.read_csv("GTQuantumInvest/Hasil_N2_GT_5/interaksi_J_total_N2.csv")
+df_bias = pd.read_csv("GTQuantumInvest/Hasil_N2_GT/bias_h_total_N2.csv")
+df_param = pd.read_csv("GTQuantumInvest/Hasil_N2_GT/parameter_pendamping_N2.csv")
+df_metrics = pd.read_csv("GTQuantumInvest/Hasil_N2_GT/metrik_return_dan_lambda_N2.csv")
+df_j = pd.read_csv("GTQuantumInvest/Hasil_N2_GT/interaksi_J_total_N2.csv")
 
 dates = df_bias['Date'].unique()
 
@@ -76,11 +76,11 @@ latex_unified = format_latex(df_unified, "Parameter Dinamis Portofolio N=2 ($\\l
 
 
 # 2. SBR Iterations
-df_sbr = pd.read_csv("GTQuantumInvest/Hasil_N2_GT_5/riwayat_nash_sbr_N2.csv")
+df_sbr = pd.read_csv("GTQuantumInvest/Hasil_N2_GT/riwayat_nash_sbr_N2.csv")
 latex_sbr = format_latex(df_sbr, "Riwayat Iterasi Sequential Best Response (SBR) N=2", "tab:sbr_history_n2")
 
 # 3. VQE Convergence
-df_vqe = pd.read_csv("GTQuantumInvest/Hasil_N2_GT_5/hasil_depth_vs_energi_N2.csv")
+df_vqe = pd.read_csv("GTQuantumInvest/Hasil_N2_GT/hasil_depth_vs_energi_N2.csv")
 # Group by Date, Depth, get Energy
 df_vqe_pivot = df_vqe.pivot(index='Date', columns='Depth', values='Energy').reset_index()
 df_vqe_pivot.insert(0, 'P', range(1, len(df_vqe_pivot) + 1))

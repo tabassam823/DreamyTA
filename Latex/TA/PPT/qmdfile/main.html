@@ -98,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="main_files/libs/revealjs/dist/theme/quarto-03cc377db2a9599f66446c4910079c00.css">
+  <link rel="stylesheet" href="main_files/libs/revealjs/dist/theme/quarto-fdaac0e0506a159c16366bc875771b4f.css">
   <link href="main_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="main_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="main_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -192,6 +192,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="main_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="main_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="main_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -226,11 +229,32 @@ Putra Naufal Tabassam
 </section>
 <section id="latar-belakang-masalah" class="slide level2">
 <h2>Latar Belakang Masalah</h2>
-<ul>
-<li><strong>Limitasi Model Markowitz:</strong> Pendekatan klasik kesulitan menangani anomali pasar (<em>fat-tailed distribution</em>) dan dinamika non-linear ketika jumlah parameter korelasi antar aset membesar.</li>
-<li><strong>Pendekatan Ekonofisika:</strong> Mengubah fungsi objektif optimasi menjadi kerangka <em>Quadratic Unconstrained Binary Optimization</em> (QUBO) agar selaras dengan model Hamiltonian Ising.</li>
-<li><strong>Potensi Komputasi Kuantum:</strong> Memanfaatkan <em>Variational Quantum Eigensolver</em> (VQE) untuk mencari <em>ground state</em> energi (representasi alokasi portofolio terbaik) dengan waktu komputasi yang efisien.</li>
-</ul>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div style="text-align: center;">
+<div class="fragment fade-in">
+<p><img data-src="../Gambar/Markowitz_Foto.png" style="border-radius: 10px; margin-bottom: 10px;;width:80.0%"></p>
+</div>
+<div class="fragment fade-in">
+<p><img data-src="../Gambar/Porto_selection.png" style="border-radius: 10px;;width:100.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div style="text-align: center;">
+<div class="fragment fade-in">
+<p><img data-src="../Gambar/Mantegna_Foto.png" style="border-radius: 10px; margin-bottom: 10px;;width:80.0%"></p>
+</div>
+<div class="fragment fade-in">
+<p><img data-src="../Gambar/intro_econophys.png" style="border-radius: 10px;;width:100.0%"></p>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<div style="text-align: center;">
+<div class="fragment fade-in">
+<p><img data-src="../Gambar/komputer_kuantum.png" style="border-radius: 10px;;width:100.0%"></p>
+</div>
+</div>
+</div></div>
 </section>
 <section id="penelitian-terdahulu-dan-research-gap" class="slide level2">
 <h2>Penelitian Terdahulu dan Research Gap</h2>
@@ -239,16 +263,17 @@ Putra Naufal Tabassam
 border:2px solid #d9d9d9;
 border-radius:12px;
 padding:12px;
-height:240px;
+min-height:340px;
 background:#fafafa;
 box-shadow:2px 2px 6px rgba(0,0,0,.08);
 text-align:center;
+font-size:0.9em;
 }
 
 .arrow{
 font-size:2em;
 text-align:center;
-margin-top:90px;
+margin-top:120px;
 color:#666;
 }
 
@@ -278,13 +303,15 @@ background:#faf7ff;
 <div class="columns">
 <div class="column" style="width:23%;">
 <div class="card">
-<p><img src="images/vqe.png" width="120"></p>
 <div class="title">
 <p>Penelitian Terdahulu</p>
 </div>
+<p><img src="../Gambar/wang_pct.png" width="350"></p>
+<div style="margin-top: 20px;">
 <p><strong>Wang dkk. (2025)</strong></p>
 <p>VQE + WCVaR + CMA-ES</p>
 <p>Stabilisasi konvergensi energi.</p>
+</div>
 </div>
 </div><div class="column" style="width:4%;">
 <div class="arrow">
@@ -292,13 +319,15 @@ background:#faf7ff;
 </div>
 </div><div class="column" style="width:23%;">
 <div class="card">
-<p><img src="images/hybrid.png" width="120"></p>
 <div class="title">
 <p>Penelitian Terdahulu</p>
 </div>
+<p><img src="../Gambar/wei_pct.png" width="350"></p>
+<div style="margin-top: 20px;">
 <p><strong>Wei dkk. (2025)</strong></p>
 <p>Quantum-Classical Hybrid Annealing</p>
 <p>Memecah masalah QUBO kompleks menjadi submasalah.</p>
+</div>
 </div>
 </div><div class="column" style="width:4%;">
 <div class="arrow">
@@ -306,41 +335,55 @@ background:#faf7ff;
 </div>
 </div><div class="column" style="width:23%;">
 <div class="card gap">
-<p><img src="images/barren.png" width="120"></p>
 <div class="title">
 <p>Research Gap</p>
 </div>
+<p><img src="../Gambar/barren_plateau.png" width="350"></p>
+<div style="margin-top: 20px;">
 <p>Masih bergantung pada</p>
 <p><strong>inisialisasi acak</strong></p>
 <p>yang rentan mengalami</p>
 <p><strong>Barren Plateau</strong></p>
 </div>
+</div>
 </div><div class="column" style="width:23%;">
 <div class="card proof solution">
-<p><span class="proof-title"><em>Solution</em>. </span><img src="images/nash.png" width="120"></p>
+<p><span class="proof-title"><em>Solution</em>. </span></p>
 <div class="title">
-<p>Penelitian Ini</p>
+<p>Solusi</p>
 </div>
+<p><img src="../Gambar/GT_pct.png" width="150"></p>
+<div style="margin-top: 20px;">
 <p>Menggunakan <strong>Nash Equilibrium</strong> sebagai <strong>Warm-Start Initialization</strong></p>
 </div>
+</div>
 </div></div>
-<p><br></p>
-<section id="kontribusi-tambahan" class="metric">
-<h3>🔍 Kontribusi Tambahan</h3>
-<p><img src="images/entropy.png" width="90"></p>
-<p><strong>Entropi Von Neumann</strong></p>
-<p>Digunakan untuk memantau perubahan <em>purity</em> dan tingkat keacakan keadaan kuantum selama proses optimasi.</p>
-</section>
-<div style="font-size:0.45em;margin-top:8px;color:#666;">
-<p>Wang <em>et al.</em> (2025); Wei <em>et al.</em> (2025)</p>
+<div style="font-size:0.45em;margin-top:20px;color:#666;text-align:center;">
+<p>Sumber: Wang <em>et al.</em> (2025); Wei <em>et al.</em> (2025)</p>
 </div>
 </section>
 <section id="tujuan-penelitian" class="slide level2">
 <h2>Tujuan Penelitian</h2>
 <ol type="1">
-<li>Menganalisis ketepatan transformasi matematika dan kardinalitas portofolio pada fungsi potensial EPG ke kerangka <em>Spin</em> Ising.</li>
-<li>Mengevaluasi kontribusi strategi inisialisasi <em>warm-start</em> (dibanding inisialisasi acak) terhadap peningkatan efisiensi konvergensi energi kuantum.</li>
-<li>Menguji supremasi (<em>backtesting</em>) pengembalian finansial strategi portofolio hibrida GT-VQE pada kondisi pergerakan historis pasar modal riil.</li>
+<li>Menganalisis formulasi bias aset sebagai parameter medan lokal (<span class="math inline">\(h_i\)</span>) dan interaksi antar aset sebagai koefisien kopling (<span class="math inline">\(J_{ij}\)</span>) melalui pendekatan fungsi potensial dalam sistem Hamiltonian berbasis <em>Exact Potential Game</em> (EPG).</li>
+<li>Mengevaluasi kontribusi strategi <em>warm-start</em> berbasis <em>Nash Equilibrium</em> dalam meningkatkan efisiensi pencarian solusi optimal pada algoritma VQE.</li>
+<li>Menguji kapabilitas algoritma VQE yang menggunakan optimasi SPSA dan <em>Ansatz EfficientSU(2)</em> untuk menghasilkan keputusan alokasi aset yang optimal dalam kondisi pasar yang kompleks.</li>
+</ol>
+</section>
+<section id="batasan-masalah-12" class="slide level2">
+<h2>Batasan Masalah (1/2)</h2>
+<ol type="1">
+<li>Portofolio yang dianalisis dibatasi pada pemilihan 1 aset dari 2 pilihan aset pada sistem <span class="math inline">\(N=2\)</span> dan 2 aset dari 4 pilihan aset pada sistem <span class="math inline">\(N=4\)</span>.</li>
+<li>Model permainan yang digunakan adalah skema <em>non zero-sum game</em> dalam kerangka <em>Exact Potential Game</em>.</li>
+<li>Simulasi dan implementasi algoritma dilakukan menggunakan simulator <em>Pennylane</em> tanpa mempertimbangkan <em>noise</em>.</li>
+</ol>
+</section>
+<section id="batasan-masalah-22" class="slide level2">
+<h2>Batasan Masalah (2/2)</h2>
+<ol start="4" type="1">
+<li>Tugas akhir ini hanya merupakan <em>proof-of-concept</em> dari implementasi <em>warm-start</em> ekuilibrium Nash terhadap performa algoritma VQE dalam menemukan solusi <em>ground state</em> pada model portofolio hibrida.</li>
+<li>Analisis Entropi Von Neumann dibatasi sebagai indikator perubahan distribusi probabilitas keadaan kuantum selama proses optimasi VQE dan tidak digunakan sebagai kajian mendalam mengenai sifat keterbelitan dari <em>ansatz</em>.</li>
+<li>Analisis berfokus pada pengaruh <em>warm-start</em> ekuilibrium Nash terhadap proses optimasi VQE, bukan untuk membuktikan keunggulan komputasi kuantum terhadap metode klasik.</li>
 </ol>
 </section></section>
 <section>
@@ -348,53 +391,88 @@ background:#faf7ff;
 <h1>Fase 1: Landasan Finansial</h1>
 
 </section>
-<section id="konsep-uang" class="slide level2">
-<h2>Konsep Uang</h2>
-<ul>
-<li>Kebutuhan manusia yang terbatas, namun keinginan tidak terbatas.</li>
-<li>Sumber daya alam bersifat terbatas.</li>
-<li>Uang berfungsi sebagai alat penyeimbang antara sumber daya yang ada dan keinginan manusia.</li>
-</ul>
+<section id="konsep-uang" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Konsep Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh;">
+
+</div>
 </section>
-<section id="sejarah-dan-evolusi-uang" class="slide level2">
-<h2>Sejarah dan Evolusi Uang</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><strong>Barter:</strong> Sistem pertukaran barang secara langsung.</li>
-<li><strong>Uang Logam/Komoditas:</strong> Menggunakan nilai intrinsik barang (misal: emas, perak).</li>
-<li><strong>Uang Kertas Basis Logam:</strong> Representasi fisik dari logam mulia.</li>
-<li><strong>Uang Fiat:</strong> Nilai uang tidak didukung aset fisik, melainkan kebijakan pemerintah dan kepercayaan.</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="../Gambar/211_Barter_marketeers.com.png" style="width:20.0%"> <img data-src="../Gambar/211_Logam_depositphotos.com.png" style="width:20.0%"> <img data-src="../Gambar/211_Fiat_depositphotos.com.png" style="width:20.0%"> <img data-src="../Gambar/211_Digital_klasika.kompas.id.png" style="width:20.0%"></p>
-</div></div>
+<section id="konsep-uang-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Konsep Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh;">
+<p><img data-src="../Gambar/Kebutuhan.jpeg" style="width:50.0%" data-id="uang1"></p>
+</div>
+</section>
+<section id="konsep-uang-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Konsep Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 50px;">
+<p><img data-src="../Gambar/Kebutuhan.jpeg" style="width:30.0%" data-id="uang1"> <img data-src="../Gambar/Keinginan.jpeg" style="width:30.0%" data-id="uang2"></p>
+</div>
+</section>
+<section id="konsep-uang-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Konsep Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 20px;">
+<p><img data-src="../Gambar/Kebutuhan.jpeg" style="width:30.0%" data-id="uang1"> <img data-src="../Gambar/Keinginan.jpeg" style="width:30.0%" data-id="uang2"> <img data-src="../Gambar/KeinginanBatas.jpeg" style="width:30.0%" data-id="uang3"></p>
+</div>
+</section>
+<section id="sejarah-dan-evolusi-uang" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sejarah dan Evolusi Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh;">
+
+</div>
+</section>
+<section id="sejarah-dan-evolusi-uang-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sejarah dan Evolusi Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh;">
+<p><img data-src="../Gambar/211_Barter_marketeers.com.png" style="width:50.0%" data-id="img1"></p>
+</div>
+</section>
+<section id="sejarah-dan-evolusi-uang-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sejarah dan Evolusi Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 50px;">
+<p><img data-src="../Gambar/211_Barter_marketeers.com.png" style="width:25.0%" data-id="img1"> <img data-src="../Gambar/211_Logam_depositphotos.com.png" style="width:25.0%" data-id="img2"></p>
+</div>
+</section>
+<section id="sejarah-dan-evolusi-uang-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sejarah dan Evolusi Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 30px;">
+<p><img data-src="../Gambar/211_Barter_marketeers.com.png" style="width:20.0%" data-id="img1"> <img data-src="../Gambar/211_Logam_depositphotos.com.png" style="width:20.0%" data-id="img2"> <img data-src="../Gambar/211_Fiat_depositphotos.com.png" style="width:20.0%" data-id="img3"></p>
+</div>
+</section>
+<section id="sejarah-dan-evolusi-uang-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sejarah dan Evolusi Uang</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 20px;">
+<p><img data-src="../Gambar/211_Barter_marketeers.com.png" style="width:20.0%" data-id="img1"> <img data-src="../Gambar/211_Logam_depositphotos.com.png" style="width:20.0%" data-id="img2"> <img data-src="../Gambar/211_Fiat_depositphotos.com.png" style="width:20.0%" data-id="img3"> <img data-src="../Gambar/211_Digital_klasika.kompas.id.png" style="width:20.0%" data-id="img4"></p>
+</div>
 </section>
 <section id="inflasi" class="slide level2">
 <h2>Inflasi</h2>
-<div class="columns">
-<div class="column" style="width:55%;">
-<ul>
-<li><strong>Penyebab Inflasi:</strong> Uang fiat dapat dicetak dan diedarkan seiring dengan kebijakan pemerintah (<em>Nixon Shock 1971</em> - akhir dari standar emas).</li>
-<li><strong>Dampak:</strong> Nilai uang terdegradasi seiring waktu; daya beli menurun.</li>
-<li><strong>Solusi:</strong> Menjaga kekayaan dari inflasi melalui investasi.</li>
-</ul>
-</div><div class="column" style="width:45%;">
-<p><img data-src="../Gambar/212_Inflasi.png"></p>
-</div></div>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 50px;">
+<p><img data-src="../Gambar/nixxon_shock.png" style="width:40.0%"> <img data-src="../Gambar/212_Inflasi.png" style="width:40.0%"></p>
+</div>
 </section>
 <section id="investasi" class="slide level2">
 <h2>Investasi</h2>
-<div class="columns">
-<div class="column" style="width:55%;">
+<div class="columns" style="display: flex; align-items: center; height: 70vh;">
+<div class="column" style="width:50%;">
 <ul>
-<li><strong>Proteksi Aset:</strong> Investasi sebagai instrumen untuk mempertahankan nilai kekayaan pribadi dari inflasi.</li>
-<li><strong>Pemutar Ekonomi:</strong> Dibutuhkan oleh sistem ekonomi agar barang dan jasa dapat bertumbuh.</li>
-<li><strong>Risk-Return &amp; Risk Profile:</strong> Mengambil risiko terukur (<em>money management</em>) untuk mendapat imbal hasil di atas inflasi.</li>
-<li><strong>Loss Aversion (Teori Prospek):</strong> Rasa sakit kehilangan lebih intens daripada kegembiraan dari keuntungan bernilai sama. Toleransi risiko menurun seiring usia dan meningkat seiring kekayaan.</li>
+<li><strong>Proteksi Aset</strong></li>
+<li><strong>Pemutar Ekonomi</strong></li>
+<li><strong>Risk-Return &amp; Risk Profile</strong></li>
 </ul>
-</div><div class="column" style="width:45%;">
-<p><img data-src="../Gambar/213_Investasi.png"> <img data-src="../Gambar/214_RiskAversion_invespcro.com.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Gambar/213_Investasi.png" style="width:80.0%"></p>
+</div></div>
+</section>
+<section id="teori-prospek" class="slide level2">
+<h2>Teori Prospek</h2>
+<div class="columns" style="display: flex; align-items: center; height: 70vh;">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Loss Aversion (Teori Prospek)</strong></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Gambar/214_RiskAversion_invespcro.com.png" style="width:100.0%"></p>
 </div></div>
 </section></section>
 <section>
@@ -402,15 +480,29 @@ background:#faf7ff;
 <h1>Fase 2: Strategi Analisis Investasi</h1>
 
 </section>
-<section id="tiga-pilar-utama-analisis" class="slide level2">
-<h2>Tiga Pilar Utama Analisis</h2>
-<p>Terdapat 3 pilar utama analisa yang digunakan sebelum mengambil keputusan investasi: 1. <strong>Analisis Fundamental:</strong> Evaluasi nilai intrinsik dan kesehatan emiten. 2. <strong>Analisis Teknikal:</strong> Pemetaan psikologi pasar melalui pola visual harga. 3. <strong>Analisis Kuantitatif:</strong> Pemodelan matematis berbasis data runtun waktu.</p>
-</section>
 <section id="analisis-fundamental" class="slide level2">
 <h2>Analisis Fundamental</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
-<p>Mengapa harus analisis fundamental? * <strong>Ekonometrik Perusahaan:</strong> Laporan keuangan, Kapitalisasi pasar, Peran tokoh-tokoh yang terlibat. * <strong>Kesehatan Fiskal:</strong> <em>Price-to-Earnings Ratio</em> (PER), <em>Debt-to-Equity Ratio</em> (DER). * <strong>Sentimen Pasar:</strong> Berita ekonomi, Kebijakan pemerintah, Tren media sosial.</p>
+<ul>
+<li><strong>Ekonometrik Perusahaan</strong>
+<ul>
+<li>Laporan keuangan</li>
+<li>Kapitalisasi pasar</li>
+<li>Peran tokoh-tokoh yang terlibat</li>
+</ul></li>
+<li><strong>Kesehatan Fiskal</strong>
+<ul>
+<li><em>Price-to-Earnings Ratio</em> (PER)</li>
+<li><em>Debt-to-Equity Ratio</em> (DER)</li>
+</ul></li>
+<li><strong>Sentimen Pasar</strong>
+<ul>
+<li>Berita ekonomi</li>
+<li>Kebijakan pemerintah</li>
+<li>Tren media sosial</li>
+</ul></li>
+</ul>
 </div><div class="column" style="width:45%;">
 <p><img data-src="../Gambar/221_Cashflow_statement.png"></p>
 <div style="font-size: 0.7em; text-align: center;">
@@ -420,7 +512,6 @@ Struktur laporan arus kas fundamental.
 </section>
 <section id="analisis-teknikal" class="slide level2">
 <h2>Analisis Teknikal</h2>
-<p>Representasi visual menggunakan <em>Candlestick</em> dan <em>Price Chart</em> untuk mendeteksi psikologi kolektif pelaku pasar.</p>
 <div class="columns">
 <div class="column" style="width:33%;">
 <img data-src="../Gambar/222_Candle.png">
@@ -443,7 +534,14 @@ Struktur laporan arus kas fundamental.
 <h2>Analisis Kuantitatif</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Mengapa dan jenis analisis kuantitatif: * <strong>Simple Return (<span class="math inline">\(R\)</span>):</strong> <span class="math display">\[ R_t = \frac{P_t - P_{t-1}}{P_{t-1}} \]</span> * <strong>Logarithmic Return (<span class="math inline">\(r\)</span>):</strong> <span class="math display">\[ r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) \]</span> * <span class="math inline">\(P_t\)</span>: Harga pada waktu <span class="math inline">\(t\)</span></p>
+<div style="font-size: 0.75em;">
+<ul>
+<li><strong>Simple Return (<span class="math inline">\(R\)</span>):</strong> <span class="math display">\[ R_t = \frac{P_t - P_{t-1}}{P_{t-1}} \]</span></li>
+<li><strong>Variance (<span class="math inline">\(\sigma^2\)</span>):</strong> <span class="math display">\[ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (R_t - \bar{R})^2 \]</span></li>
+<li><strong>Covariance (<span class="math inline">\(\sigma_{ij}\)</span>):</strong> <span class="math display">\[ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) \]</span></li>
+<li><span class="math inline">\(P_t\)</span>: Harga pada waktu <span class="math inline">\(t\)</span></li>
+</ul>
+</div>
 </div><div class="column" style="width:50%;">
 <img data-src="../Gambar/223_Price_log.png">
 <div style="font-size: 0.7em; text-align: center;">
@@ -451,21 +549,29 @@ Transformasi pergerakan harga saham.
 </div>
 </div></div>
 </section>
-<section id="model-markowitz-sebagai-pelopor" class="slide level2 scrollable">
-<h2>Model Markowitz sebagai Pelopor</h2>
+<section id="model-markowitz" class="slide level2 scrollable">
+<h2>Model Markowitz</h2>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Rumus Utama</a></li><li><a href="#tabset-1-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="columns">
 <div class="column" style="width:55%;">
+<div style="font-size: 0.75em;">
 <ul>
-<li><strong>Mean-Variance:</strong> Didasarkan oleh prinsip <em>Pareto Optimum</em> (mencari imbal hasil setinggi mungkin dengan risiko serendah mungkin). <span class="math display">\[ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i \]</span></li>
+<li><strong>Mean-Variance:</strong> <span class="math display">\[ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i \]</span></li>
+<li><strong>Binerisasi:</strong> <span class="math display">\[ \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} \]</span></li>
+</ul>
+</div>
+<div style="font-size: 0.75em">
+<ul>
 <li><span class="math inline">\(\mu_i\)</span>: Imbal hasil rata-rata aset ke-<span class="math inline">\(i\)</span></li>
 <li><span class="math inline">\(\sigma_{ij}\)</span>: Kovarians antara aset <span class="math inline">\(i\)</span> dan <span class="math inline">\(j\)</span></li>
-<li><span class="math inline">\(\omega_i\)</span>: Proporsi bobot kontinu aset ke-<span class="math inline">\(i\)</span> <span class="math inline">\((\sum \omega_i = 1)\)</span></li>
-<li><span class="math inline">\(\lambda\)</span>: Parameter toleransi risiko <br><br></li>
+<li><span class="math inline">\(\omega_i\)</span>: Proporsi bobot kontinu aset ke-<span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\lambda\)</span>: Parameter toleransi risiko</li>
 </ul>
+</div>
+<p><br><br></p>
 </div><div class="column" style="width:45%;">
 <img data-src="../Gambar/224_Efficient_Frontier.png">
 <div style="font-size: 0.7em; text-align: center;">
@@ -475,11 +581,10 @@ Grafik Efficient Frontier
 </div>
 <div id="tabset-1-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-<p><strong>Penurunan: Dari Bobot Kontinu <span class="math inline">\(\omega\)</span> ke Variabel Biner <span class="math inline">\(x\)</span></strong></p>
 <p><strong>Langkah 1 — Formulasi Lagrangian Kontinu (Markowitz):</strong></p>
-<p>Fungsi biaya Markowitz dalam domain bobot kontinu <span class="math inline">\(\omega_i\)</span>:</p>
+<p>Fungsi biaya Markowitz dalam domain bobot <span class="math inline">\(\omega_i\)</span>:</p>
 <p><span class="math display">\[\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i\]</span></p>
-<p>dengan kendala <span class="math inline">\(\sum_i \omega_i = 1\)</span> dan <span class="math inline">\(\omega_i \geq 0\)</span>.</p>
+<p>dengan syarat <span class="math inline">\(\sum_i \omega_i = 1\)</span> dan <span class="math inline">\(\omega_i \geq 0\)</span>.</p>
 <hr>
 <p><strong>Langkah 2 — Substitusi Variabel Biner:</strong></p>
 <p>Variabel bobot kontinu <span class="math inline">\(\omega_i\)</span> diubah menjadi variabel biner <span class="math inline">\(x_i \in \{0, 1\}\)</span> melalui hubungan:</p>
@@ -492,7 +597,6 @@ Grafik Efficient Frontier
 <p><span class="math display">\[\therefore \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
 <p>Nilai <span class="math inline">\(x_i = 1\)</span> merepresentasikan <strong>beli</strong>, sedangkan <span class="math inline">\(x_i = 0\)</span> merepresentasikan <strong>tidak membeli</strong>.</p>
 <hr>
-<p><strong>Interpretasi:</strong></p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -517,11 +621,6 @@ Grafik Efficient Frontier
 <td style="text-align: center;"><span class="math inline">\(\omega_i\)</span> (kontinu)</td>
 <td style="text-align: center;"><span class="math inline">\(1/K\)</span> (seragam)</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;">Dimensi ruang solusi</td>
-<td style="text-align: center;">Kontinu (<span class="math inline">\(\mathbb{R}^N\)</span>)</td>
-<td style="text-align: center;">Diskrit (<span class="math inline">\(2^N\)</span>)</td>
-</tr>
 </tbody>
 </table>
 <p><br><br><br></p>
@@ -531,17 +630,47 @@ Grafik Efficient Frontier
 </div>
 </section></section>
 <section>
-<section id="fase-3-teori-permainan-dan-sbr-warm-start" class="title-slide slide level1 center">
-<h1>Fase 3: Teori Permainan dan SBR <em>Warm-Start</em></h1>
+<section id="fase-3-teori-permainan-untuk-warm-start" class="title-slide slide level1 center">
+<h1>Fase 3: Teori Permainan untuk <em>Warm-Start</em></h1>
 
 </section>
-<section id="pengantar-teori-permainan" class="slide level2">
-<h2>Pengantar Teori Permainan</h2>
+<section id="teori-permainan" class="slide level2">
+<h2>Teori Permainan</h2>
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="1">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+<div style="display: flex; justify-content: center; gap: 40px;">
+<div style="text-align: center;">
+<p><img data-src="../Gambar/VonNeumann_Foto.png" height="250"></p>
+<div style="font-size: 0.8em; margin-top: 10px;">
+<p>John von Neumann</p>
+</div>
+</div>
+<div style="text-align: center;">
+<p><img data-src="../Gambar/Morgenstern_Foto.png" height="250"></p>
+<div style="font-size: 0.8em; margin-top: 10px;">
+<p>Oskar Morgenstern</p>
+</div>
+</div>
+</div>
+<p><img data-src="../Gambar/GT_pct.png" height="250"></p>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<div class="columns" style="display: flex; align-items: center;">
+<div class="column" style="width:60%;">
+<div style="text-align: left; padding-right: 20px; font-size: 1.0em;">
 <ul>
-<li>Mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan tindakan agen yang lain.</li>
-<li>Komponen Utama: Agen (Pemain), Himpunan Strategi, dan Fungsi Utilitas (<em>Payoff</em>).</li>
+<li><strong>Teori Permainan:</strong> Cabang matematika terapan yang mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan tindakan agen yang lain. <br><br></li>
+<li><strong>Komponen Utama:</strong> Agen (Pemain), Himpunan Strategi, dan Fungsi Utilitas (<em>Payoff</em>). <br><br></li>
 <li><strong>Nash Equilibrium:</strong> Kondisi paling stabil di mana tidak ada satu pun agen yang bisa meningkatkan utilitasnya dengan mengubah strateginya sendiri secara sepihak.</li>
 </ul>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="../Gambar/nasheq.png" style="width:100.0%"></p>
+</div></div>
+</div>
+</div>
 </section>
 <section id="jenis-jenis-permainan-game-types" class="slide level2">
 <h2>Jenis-Jenis Permainan (<em>Game Types</em>)</h2>
@@ -566,12 +695,24 @@ Grafik Efficient Frontier
 </section>
 <section id="exact-potential-game-epg" class="slide level2">
 <h2>Exact Potential Game (EPG)</h2>
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="1" style="width: 100%;">
 <ul>
-<li>Model permainan yang memetakan seluruh utilitas pemain menjadi satu fungsi potensial global (<span class="math inline">\(\Phi\)</span>).</li>
-<li>Berfungsi sebagai kerangka analitik untuk mencari <em>Nash Equilibrium</em> (NE) secara terstruktur melalui maksimisasi nilai <span class="math inline">\(\Phi\)</span>.</li>
-<li>Perubahan utilitas lokal (<span class="math inline">\(\Delta u_i\)</span>) sebanding persis dengan perubahan potensial global (<span class="math inline">\(\Delta \Phi\)</span>). <span class="math display">\[ \Delta \Phi = \Phi(s_i', s_{-i}) - \Phi(s_i, s_{-i}) = u_i(s_i', s_{-i}) - u_i(s_i, s_{-i}) \]</span></li>
-<li>Jika <span class="math inline">\(\Delta \Phi &gt; 0\)</span>, agen termotivasi untuk bertukar strategi. Jika <span class="math inline">\(\Delta \Phi &lt; 0\)</span>, agen akan menolak perubahan, sehingga sistem mencapai <em>Nash Equilibrium</em>.</li>
+<li><strong>Definisi:</strong> Model permainan yang memiliki fungsi potensial global (<span class="math inline">\(\Phi\)</span>), di mana setiap perubahan utilitas individu akibat perubahan strategi sepenuhnya tercermin oleh perubahan nilai <span class="math inline">\(\Phi\)</span>.</li>
+<li><strong>Makna “Potensial” &amp; “Global”:</strong>
+<ul>
+<li><strong>Potensial:</strong> Sistem agen berdinamika menuju nilai ekuilibrium (maksimalisasi utilitas), yang secara fundamental ekuivalen dengan prinsip minimisasi energi (<span class="math inline">\(H = -\Phi\)</span>) dalam fisika fisis.</li>
+<li><strong>Global:</strong> <span class="math inline">\(\Phi\)</span> merangkum seluruh utilitas individu ke dalam satu fungsi skalar tunggal untuk merepresentasikan kualitas konfigurasi strategi permainan secara keseluruhan.</li>
+</ul></li>
 </ul>
+</div>
+<div class="fragment fade-in" data-fragment-index="1" style="width: 100%;">
+<ul>
+<li><strong>Kondisi <em>Nash Equilibrium</em>:</strong> Perubahan utilitas lokal (<span class="math inline">\(\Delta u_i\)</span>) sebanding persis dengan perubahan potensial global (<span class="math inline">\(\Delta \Phi\)</span>). <span class="math display">\[ \Delta \Phi = \Phi(s_i', s_{-i}) - \Phi(s_i, s_{-i}) = u_i(s_i', s_{-i}) - u_i(s_i, s_{-i}) \]</span></li>
+<li>Dinamika sistem akan terhenti dan mencapai <em>Nash Equilibrium</em> ketika tidak ada lagi strategi yang menghasilkan peningkatan potensial (<span class="math inline">\(\Delta \Phi &lt; 0\)</span>).</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="epg-pada-alokasi-portofolio" class="slide level2 scrollable">
 <h2>EPG pada Alokasi Portofolio</h2>
@@ -581,8 +722,7 @@ Grafik Efficient Frontier
 <div id="tabset-2-1">
 <ul>
 <li>Transformasi persamaan utilitas Markowitz biner menjadi fungsi potensial global EPG: <span class="math display">\[ \Phi(\mathbf{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{K} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} \]</span></li>
-<li>Representasi ini memudahkan integrasi antara teori ekonomi rasional (Markowitz) dan fisika statistik (Model Ising).</li>
-<li>Fungsi potensial ini langsung dikonversikan menjadi nilai energi Hamiltonian (dengan <span class="math inline">\(\hat{H} = -\Phi(x)\)</span>) setelah disubstitusi dari biner <span class="math inline">\(x_i \in \{0, 1\}\)</span> ke spin <span class="math inline">\(Z_i \in \{1, -1\}\)</span>.</li>
+<li>dengan <span class="math inline">\(\gamma\)</span> mendefinisikan faktor penghindaran risiko (<em>risk aversion</em>) pada fungsi utilitas agen.</li>
 </ul>
 </div>
 <div id="tabset-2-2">
@@ -622,75 +762,6 @@ Grafik Efficient Frontier
 </div>
 </div>
 </div>
-</section>
-<section id="sequential-best-response-sbr-sebagai-warm-start" class="slide level2 scrollable">
-<h2>Sequential Best Response (SBR) sebagai Warm-Start</h2>
-<div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Konsep Utama</a></li><li><a href="#tabset-3-2">Algoritma SBR</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1">
-<ul>
-<li><strong>Algoritma SBR:</strong> Mencari <em>Nash Equilibrium</em> klasik dengan mengevaluasi pertukaran strategi (<em>swap</em> aset) yang menghasilkan nilai potensial <span class="math inline">\(\Phi\)</span> lebih tinggi secara iteratif.</li>
-<li>Konfigurasi aset dari titik ekuilibrium (misal: <code>|0101&gt;</code>) akan digunakan sebagai status awal (<strong>Warm-Start</strong>) bagi sirkuit kuantum VQE.</li>
-<li>Strategi ini mencegah sirkuit kuantum melakukan pencarian di wilayah probabilitas yang sama sekali buta (<em>blind search</em>), sehingga proses optimasi parameter bisa langsung difokuskan pada sub-ruang Hilbert yang bermakna secara finansial.</li>
-</ul>
-</div>
-<div id="tabset-3-2">
-<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-<p><strong>Algorithm 1: Iterative Best Response</strong></p>
-<p><strong>Data:</strong> Pilih strategi awal <span class="math inline">\(\omega_n^0 \in K_n\)</span> untuk semua <span class="math inline">\(n = 1, \dots, N\)</span>, dan set <span class="math inline">\(q = 0\)</span>.</p>
-<p><strong>Step 1:</strong> Jika <span class="math inline">\(\mathbf{\omega}^q\)</span> memenuhi kriteria penghentian yang sesuai: <strong>STOP</strong>.</p>
-<p><strong>Step 2:</strong> Perbarui strategi <span class="math inline">\(\omega_n^{q+1}\)</span> untuk <span class="math inline">\(n = 1, \dots, N\)</span> menggunakan salah satu metode:</p>
-<blockquote>
-<p><strong>Sequential (Gauss-Seidel) Update:</strong></p>
-<p><span class="math display">\[\omega_n^{q+1} \leftarrow \arg \min_{\omega_n \in K_n} u_n(\omega_1^{q+1}, \dots, \omega_{n-1}^{q+1}, \omega_n, \omega_{n+1}^q, \dots, \omega_N^q)\]</span></p>
-<p><strong>Simultaneous (Jacobi) Update:</strong></p>
-<p><span class="math display">\[\omega_n^{q+1} \leftarrow (1 - \tfrac{1}{N})\omega_n^q + \tfrac{1}{N} \cdot \arg \min_{\omega_n \in K_n} u_n(\omega_1^q, \dots, \omega_{n-1}^q, \omega_n, \omega_{n+1}^q, \dots, \omega_N^q)\]</span></p>
-</blockquote>
-<p><strong>Step 3:</strong> Set <span class="math inline">\(q \leftarrow q + 1\)</span>; dan kembali ke <strong>Step 1</strong>.</p>
-<hr>
-<p><strong>Catatan Implementasi:</strong></p>
-<table class="caption-top">
-<colgroup>
-<col style="width: 28%">
-<col style="width: 35%">
-<col style="width: 35%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Aspek</th>
-<th style="text-align: center;">Gauss-Seidel</th>
-<th style="text-align: center;">Jacobi</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Tipe pembaruan</td>
-<td style="text-align: center;">Sekuensial</td>
-<td style="text-align: center;">Simultan</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Info yang digunakan</td>
-<td style="text-align: center;">Strategi terbaru agen sebelumnya</td>
-<td style="text-align: center;">Data iterasi sebelumnya</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Konvergensi</td>
-<td style="text-align: center;">Lebih cepat (umumnya)</td>
-<td style="text-align: center;">Lebih stabil</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Paralelisasi</td>
-<td style="text-align: center;">Sulit</td>
-<td style="text-align: center;">Mudah</td>
-</tr>
-</tbody>
-</table>
-<p><br><br><br></p>
-</div>
-</div>
-</div>
-</div>
 </section></section>
 <section>
 <section id="fase-4-ekonofisika-dan-model-ising" class="title-slide slide level1 center">
@@ -699,18 +770,29 @@ Grafik Efficient Frontier
 </section>
 <section id="sejarah-ising" class="slide level2">
 <h2>Sejarah Ising</h2>
-<ul>
-<li><strong>1920-an:</strong> Wilhelm Lenz dan Ernst Ising merumuskan model interaksi spin elektron diskrit pada 1 dimensi.</li>
-<li><strong>1944:</strong> Lars Onsager membuktikan transisi fase dan mengatasi model Ising untuk 2 dimensi.</li>
-<li><strong>Kontemporer:</strong> Ising menjadi “bahasa standar” dalam optimasi kombinatorial berkat kemajuan komputasi kuantum.</li>
-</ul>
-<img data-src="../Gambar/1D_Model_atT.png">
-<div style="font-size: 0.7em; text-align: center;">
+<div style="text-align: center;">
+<img src="../Gambar/LenzIsing_Foto.png" style="height: 350px; margin-bottom: 20px;"> <br> <img src="../Gambar/1D_Model_atT.png" style="height: 120px;">
+<div style="font-size: 0.7em; margin-top: 10px;">
 Model Ising 1D
+</div>
 </div>
 </section>
 <section id="perkembangan-ising-ke-sistem-kompleks" class="slide level2">
 <h2>Perkembangan Ising ke Sistem Kompleks</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../Gambar/Onsager_Foto.png" class="quarto-figure quarto-figure-center" height="200"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../Gambar/Spin2D.png" class="quarto-figure quarto-figure-center" height="200"></p>
+</figure>
+</div>
+</div></div>
 <p>Model Ising terbukti efektif memetakan sistem kompleks di luar fisika material. Contoh kasus kompleks yang bisa diatasi: * Optimasi jaringan logistik dan rantai pasok. * Pemodelan dinamika sosial dan fenomena <em>herding</em> (perilaku ikut-ikutan). * <strong>Ekonofisika:</strong> Mengatasi tantangan limitasi model Markowitz (seperti anomali pasar dan distribusi <em>fat-tailed</em>) dengan pendekatan komputasi fisika.</p>
 </section>
 <section id="analogi-keputusan-investasi-dan-ising" class="slide level2">
@@ -750,13 +832,14 @@ Model Ising 1D
 </tr>
 </tbody>
 </table>
+<p><br> (Lucas, 2014; Galam, 2010)</p>
 </section>
 <section id="hamiltonian-ising-untuk-portofolio" class="slide level2 scrollable">
 <h2>Hamiltonian Ising untuk Portofolio</h2>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Rumus Utama</a></li><li><a href="#tabset-4-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Rumus Utama</a></li><li><a href="#tabset-3-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-3-1">
 <p><strong>Hamiltonian Ising Lengkap:</strong></p>
 <p><span class="math display">\[\hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i&lt;j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C\]</span></p>
 <p>dengan parameter:</p>
@@ -766,7 +849,7 @@ Model Ising 1D
 <li><span class="math inline">\(C\)</span> : Pergeseran skala energi (konstanta). <br><br></li>
 </ul>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-3-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Penurunan: Dari Fungsi Potensial Game ke Hamiltonian Ising</strong></p>
 <p><strong>Langkah 1 — Fungsi Energi dari Potensial:</strong></p>
@@ -853,21 +936,38 @@ Model Ising 1D
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Bit Klasik:</strong> * Unit informasi fundamental komputer konvensional. * Bersifat deterministik: hanya bernilai 0 atau 1. * Representasi fisik: 0 (tidak ada arus listrik), 1 (ada arus listrik).</p>
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 15px;">
+<div style="border: 2px solid #555; border-radius: 5px; padding: 10px; background: #f0f0f0; color: black; font-weight: bold; width: 40px; text-align: center;">
+0
+</div>
+<div style="font-size: 1.5em;">
+⇄
+</div>
+<div style="border: 2px solid #555; border-radius: 5px; padding: 10px; background: #f0f0f0; color: black; font-weight: bold; width: 40px; text-align: center;">
+1
+</div>
+</div>
+<div style="font-size: 0.7em; text-align: center; margin-top: 5px;">
+Transistor: 1 dan 0 secara bergantian
+</div>
 </div><div class="column" style="width:50%;">
 <p><strong>Qubit Kuantum:</strong> * Unit informasi fundamental komputer kuantum. * Memanfaatkan prinsip Superposisi: 0, 1, atau kombinasi linear keduanya. <span class="math display">\[ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle \]</span></p>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
+<div style="border: 2px solid #555; border-radius: 50%; padding: 15px 10px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: black; font-weight: bold; text-align: center; width: 100px;">
+<pre><code>0 &amp;amp; 1&lt;br&gt;
+&lt;span style="font-size: 0.6em;"&gt;Bersamaan&lt;/span&gt;</code></pre>
+</div>
+</div>
+<div style="font-size: 0.7em; text-align: center; margin-top: 5px;">
+Qubit: 1 dan 0 secara bersamaan
+</div>
 </div></div>
 </section>
-<section id="representasi-qubit-dan-quantum-measurement" class="slide level2">
-<h2>Representasi Qubit dan Quantum Measurement</h2>
+<section id="representasi-qubit" class="slide level2">
+<h2>Representasi Qubit</h2>
 <ul>
 <li>Status qubit didefinisikan sebagai vektor kolom di ruang Hilbert kompleks.</li>
 <li><strong>Basis Komputasi:</strong> <span class="math display">\[ |0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \]</span></li>
-<li><strong>Aturan Born (Born Rule):</strong> Probabilitas menemukan sistem pada status <span class="math inline">\(i\)</span> adalah <span class="math inline">\(P(i) = |\langle i | \psi \rangle|^2\)</span>.
-<ul>
-<li><span class="math inline">\(|\psi\rangle\)</span>: Keadaan sistem kuantum sebelum diukur</li>
-<li><span class="math inline">\(|i\rangle\)</span>: Keadaan sistem kuantum setelah diukur</li>
-<li><span class="math inline">\(\langle i | \psi \rangle\)</span>: Amplitudo probabilitas</li>
-</ul></li>
 <li><strong>Syarat Normalisasi:</strong> Total probabilitas harus bernilai 1 (<span class="math inline">\(|\alpha|^2 + |\beta|^2 = 1\)</span>).</li>
 </ul>
 </section>
@@ -885,36 +985,28 @@ Model Ising 1D
 <li>Fungsi gelombang qubit: <span class="math display">\[ |\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle \]</span></li>
 </ul>
 </div><div class="column" style="width:40%;">
-<iframe src="bloch_interactive.html" width="100%" height="420px" style="border:none;">
+<iframe src="bloch_interactive.html" width="100%" height="550px" style="border:none;">
 </iframe>
 <div style="font-size: 0.7em; text-align: center;">
 Interaktif: Atur parameter &amp; putar objek 3D
 </div>
 </div></div>
 </section>
-<section id="gerbang-1-qubit-rotasi-su2" class="slide level2">
-<h2>Gerbang 1 Qubit (Rotasi SU2)</h2>
+<section id="gerbang-1-qubit-pauli-hadamard" class="slide level2 scrollable">
+<h2>Gerbang 1 Qubit (Pauli &amp; Hadamard)</h2>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Rumus Utama</a></li><li><a href="#tabset-5-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Rumus Utama</a></li><li><a href="#tabset-4-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
-<div class="columns">
-<div class="column" style="width:55%;">
+<div id="tabset-4-1">
 <ul>
-<li>Evolusi keadaan kuantum harus mempertahankan probabilitas total → transformasi harus berupa <strong>operator uniter</strong>: <span class="math display">\[ U^\dagger U = I \]</span></li>
-<li>Untuk satu qubit, operator rotasi termasuk dalam grup khusus <strong>SU(2)</strong> dengan syarat: <span class="math display">\[ \det(U) = 1 \]</span></li>
-<li>Bentuk umum matriks SU(2): <span class="math display">\[ U = e^{i\alpha} \begin{pmatrix} e^{i\beta}\cos\theta &amp; e^{i\gamma}\sin\theta \\ -e^{-i\gamma}\sin\theta &amp; e^{-i\beta}\cos\theta \end{pmatrix} \]</span></li>
-<li>Seluruh gerbang satu qubit (<span class="math inline">\(R_x, R_y, R_z\)</span>) dapat dibangun dari matriks SU(2).</li>
+<li>Matriks Pauli beroperasi sebagai operator uniter pemetaan deterministik: <span class="math display">\[ X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \quad Y = \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix}, \quad Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \]</span></li>
+<li><strong>Penurunan Gerbang Hadamard (<span class="math inline">\(H\)</span>):</strong> Pencarian nilai eigen (<span class="math inline">\(\lambda\)</span>) dari matriks Pauli-<span class="math inline">\(X\)</span>: <span class="math display">\[ \det(X - \lambda I) = \det \begin{pmatrix} -\lambda &amp; 1 \\ 1 &amp; -\lambda \end{pmatrix} = \lambda^2 - 1 = 0 \implies \lambda_{1,2} = \pm 1 \]</span></li>
+<li>Substitusi nilai eigen menghasilkan vektor eigen ortogonal: <span class="math display">\[ |+\rangle = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{|0\rangle + |1\rangle}{\sqrt{2}}, \quad |-\rangle = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ -1 \end{pmatrix} = \frac{|0\rangle - |1\rangle}{\sqrt{2}} \]</span></li>
+<li>Matriks Hadamard dibentuk dengan menyusun vektor-vektor eigen tersebut sebagai kolom: <span class="math display">\[ H = \begin{pmatrix} |+\rangle &amp; |-\rangle \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix} \]</span></li>
 </ul>
-</div><div class="column" style="width:45%;">
-<p><strong>Notasi ringkas:</strong></p>
-<p><span class="math display">\[ U = \begin{pmatrix} a &amp; b \\ -b^* &amp; a^* \end{pmatrix}, \quad |a|^2 + |b|^2 = 1 \]</span></p>
-<p><br></p>
-<p>Matriks ini merepresentasikan <strong>semua rotasi</strong> yang mungkin dilakukan pada permukaan Bola Bloch.</p>
-</div></div>
 </div>
-<div id="tabset-5-2">
-<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
+<div id="tabset-4-2">
+<div style="font-size: 0.7em;">
 <p><strong>Penurunan: Bentuk Umum Matriks Uniter SU(2)</strong></p>
 <p><strong>Langkah 1 — Matriks Umum Kompleks <span class="math inline">\(2 \times 2\)</span>:</strong></p>
 <p><span class="math display">\[U = \begin{pmatrix} u_{11} &amp; u_{12} \\ u_{21} &amp; u_{22} \end{pmatrix}\]</span></p>
@@ -957,42 +1049,151 @@ Interaktif: Atur parameter &amp; putar objek 3D
 </div>
 </div>
 </section>
-<section id="implementasi-rotasi-gerbang-r_x-r_y-r_z" class="slide level2">
+<section id="implementasi-rotasi-gerbang-r_x-r_y-r_z" class="slide level2 scrollable">
 <h2>Implementasi Rotasi: Gerbang <span class="math inline">\(R_x\)</span>, <span class="math inline">\(R_y\)</span>, <span class="math inline">\(R_z\)</span></h2>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Rumus Utama</a></li><li><a href="#tabset-5-2">Penurunan Rumus</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
 <ul>
 <li>Gerbang kuantum adalah operator unitari untuk memanipulasi status qubit berdasarkan matriks Pauli: <span class="math display">\[ \sigma_x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \quad \sigma_y = \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix}, \quad \sigma_z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} \]</span></li>
 <li>Dengan rumus dasar <span class="math inline">\(R_{\sigma}(\theta) = e^{-i \frac{\theta}{2} \sigma} = \cos\frac{\theta}{2} I - i \sin\frac{\theta}{2} \sigma\)</span>, matriks rotasi menjadi: <span class="math display">\[ R_x(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} &amp; -i\sin\frac{\theta}{2} \\ -i\sin\frac{\theta}{2} &amp; \cos\frac{\theta}{2} \end{pmatrix}, \quad R_y(\theta) = \begin{pmatrix} \cos\frac{\theta}{2} &amp; -\sin\frac{\theta}{2} \\ \sin\frac{\theta}{2} &amp; \cos\frac{\theta}{2} \end{pmatrix} \]</span> <span class="math display">\[ R_z(\phi) = \begin{pmatrix} e^{-i\phi/2} &amp; 0 \\ 0 &amp; e^{i\phi/2} \end{pmatrix} \]</span></li>
 </ul>
+</div>
+<div id="tabset-5-2">
+<div style="font-size: 0.7em;">
+<p><strong>Penurunan Gerbang Rotasi dari Matriks Uniter Umum SU(2)</strong></p>
+<p>Bentuk umum matriks uniter SU(2) adalah:</p>
+<p><span class="math display">\[ U = e^{i\alpha} \begin{pmatrix} e^{i\beta}\cos\theta &amp; e^{i\gamma}\sin\theta \\ -e^{-i\gamma}\sin\theta &amp; e^{-i\beta}\cos\theta \end{pmatrix} \]</span></p>
+<hr>
+<p><strong>1. Gerbang Rotasi <span class="math inline">\(R_x(\theta_{rot})\)</span>:</strong></p>
+<p>Mensubstitusikan parameter <span class="math inline">\(\alpha = 0\)</span>, <span class="math inline">\(\theta = \frac{\theta_{rot}}{2}\)</span>, <span class="math inline">\(\beta = 0\)</span>, dan <span class="math inline">\(\gamma = -\frac{\pi}{2}\)</span>:</p>
+<p><span class="math display">\[ e^{i(-\pi/2)} = -i, \quad e^{-i(-\pi/2)} = i \]</span></p>
+<p>Substitusi ke dalam matriks <span class="math inline">\(U\)</span>:</p>
+<p><span class="math display">\[ R_x(\theta_{rot}) = \begin{pmatrix} \cos\frac{\theta_{rot}}{2} &amp; (-i)\sin\frac{\theta_{rot}}{2} \\ -(i)\sin\frac{\theta_{rot}}{2} &amp; \cos\frac{\theta_{rot}}{2} \end{pmatrix} = \begin{pmatrix} \cos\frac{\theta_{rot}}{2} &amp; -i\sin\frac{\theta_{rot}}{2} \\ -i\sin\frac{\theta_{rot}}{2} &amp; \cos\frac{\theta_{rot}}{2} \end{pmatrix} \]</span></p>
+<hr>
+<p><strong>2. Gerbang Rotasi <span class="math inline">\(R_y(\theta_{rot})\)</span>:</strong></p>
+<p>Mensubstitusikan parameter <span class="math inline">\(\alpha = 0\)</span>, <span class="math inline">\(\theta = \frac{\theta_{rot}}{2}\)</span>, <span class="math inline">\(\beta = 0\)</span>, dan <span class="math inline">\(\gamma = \pi\)</span>:</p>
+<p><span class="math display">\[ e^{i\pi} = -1, \quad e^{-i\pi} = -1 \]</span></p>
+<p>Substitusi ke dalam matriks <span class="math inline">\(U\)</span>:</p>
+<p><span class="math display">\[ R_y(\theta_{rot}) = \begin{pmatrix} \cos\frac{\theta_{rot}}{2} &amp; (-1)\sin\frac{\theta_{rot}}{2} \\ -(-1)\sin\frac{\theta_{rot}}{2} &amp; \cos\frac{\theta_{rot}}{2} \end{pmatrix} = \begin{pmatrix} \cos\frac{\theta_{rot}}{2} &amp; -\sin\frac{\theta_{rot}}{2} \\ \sin\frac{\theta_{rot}}{2} &amp; \cos\frac{\theta_{rot}}{2} \end{pmatrix} \]</span></p>
+<hr>
+<p><strong>3. Gerbang Rotasi <span class="math inline">\(R_z(\theta_{rot})\)</span>:</strong></p>
+<p>Mensubstitusikan parameter <span class="math inline">\(\alpha = 0\)</span>, <span class="math inline">\(\theta = 0\)</span>, <span class="math inline">\(\beta = -\frac{\theta_{rot}}{2}\)</span>, dan nilai <span class="math inline">\(\gamma\)</span> sembarang (karena <span class="math inline">\(\sin(0)=0\)</span>):</p>
+<p><span class="math display">\[ R_z(\theta_{rot}) = \begin{pmatrix} e^{-i\theta_{rot}/2}(1) &amp; 0 \\ 0 &amp; e^{i\theta_{rot}/2}(1) \end{pmatrix} = \begin{pmatrix} e^{-i\theta_{rot}/2} &amp; 0 \\ 0 &amp; e^{i\theta_{rot}/2} \end{pmatrix} \]</span></p>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="gerbang-2-qubit-keterbelitan-entanglement" class="slide level2">
+<section id="simulasi-gerbang-1-qubit" class="slide level2">
+<h2>Simulasi Gerbang 1 Qubit</h2>
+<iframe src="bloch_gates_v2.html" width="100%" height="600px" style="border:none;">
+</iframe>
+<div style="font-size: 0.7em; text-align: center;">
+Interaktif: Klik tombol gerbang untuk mengubah posisi status <span class="math inline">\(|\psi\rangle\)</span> pada bola Bloch.
+</div>
+</section>
+<section id="gerbang-2-qubit-keterbelitan-entanglement" class="slide level2 scrollable">
 <h2>Gerbang 2 Qubit (Keterbelitan / Entanglement)</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Rumus Utama</a></li><li><a href="#tabset-6-2">Matriks <span class="math inline">\(\text{CNOT}_{10}\)</span> dan <span class="math inline">\(\text{CNOT}_{01}\)</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
 <ul>
 <li><strong>Interaksi Non-Lokal:</strong> Status satu qubit menjadi bergantung pada qubit lainnya.</li>
-<li><strong>Gerbang CNOT:</strong> Membalik fasa qubit target jika qubit kontrol bernilai 1. <span class="math display">\[ \begin{split} \text{CNOT}_{01} \quad &amp;|00\rangle \to |00\rangle \\ &amp;|01\rangle \to |01\rangle \\ &amp;|10\rangle \to |11\rangle \\ &amp;|11\rangle \to |10\rangle \end{split} \]</span></li>
+<li><strong>Gerbang CNOT:</strong> Membalik keadaan qubit target jika qubit kontrol bernilai 1.</li>
+<li><strong>Bentuk Umum <span class="math inline">\(\text{CNOT}_{total}\)</span> (N-Qubit):</strong> Matriks CNOT secara matematis dapat diekspresikan dengan produk tensor proyektor dari qubit kontrol (<span class="math inline">\(c\)</span>) dan operator Pauli X pada qubit target (<span class="math inline">\(t\)</span>): <span class="math display">\[ \text{CNOT}_{c,t} = |0\rangle\langle0|_c \otimes I_t + |1\rangle\langle1|_c \otimes X_t \]</span> Bentuk ini memberikan bayangan visual apabila sistem memiliki lebih dari 2 qubit, di mana operasi spesifik pada sepasang qubit akan dikenakan, sementara identitas <span class="math inline">\(I\)</span> diterapkan pada qubit lain yang tidak saling berinteraksi.</li>
 </ul>
+</div>
+<div id="tabset-6-2">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Control Qubit 0, Target Qubit 1 (<span class="math inline">\(\text{CNOT}_{01}\)</span>)</strong></p>
+<p>Operasi dengan qubit indeks 0 sebagai kontrol dan qubit indeks 1 sebagai target:</p>
+<p><span class="math display">\[ \text{CNOT}_{01} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{pmatrix} \]</span></p>
+<p><strong>Perubahan Basis:</strong> <span class="math display">\[ \begin{split} &amp;|00\rangle \to |00\rangle \\ &amp;|01\rangle \to |01\rangle \\ &amp;|10\rangle \to |11\rangle \\ &amp;|11\rangle \to |10\rangle \end{split} \]</span></p>
 </div><div class="column" style="width:50%;">
-<ul>
-<li>Bentuk matriks transformasi CNOT: <span class="math display">\[ \text{CNOT}_{01} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \end{pmatrix} \]</span></li>
-</ul>
+<p><strong>Control Qubit 1, Target Qubit 0 (<span class="math inline">\(\text{CNOT}_{10}\)</span>)</strong></p>
+<p>Operasi dengan qubit indeks 1 sebagai kontrol dan qubit indeks 0 sebagai target:</p>
+<p><span class="math display">\[ \text{CNOT}_{10} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \end{pmatrix} \]</span></p>
+<p><strong>Perubahan Basis:</strong> <span class="math display">\[ \begin{split} &amp;|00\rangle \to |00\rangle \\ &amp;|01\rangle \to |11\rangle \\ &amp;|10\rangle \to |10\rangle \\ &amp;|11\rangle \to |01\rangle \end{split} \]</span></p>
 </div></div>
+</div>
+</div>
+</div>
 </section>
-<section id="vqe-parameterized-quantum-circuit-pqc" class="slide level2">
-<h2>VQE: Parameterized Quantum Circuit (PQC)</h2>
+<section id="pembangkitan-keterbelitan-entanglement" class="slide level2 scrollable">
+<h2>Pembangkitan Keterbelitan (Entanglement)</h2>
 <ul>
-<li>Sirkuit kuantum berparameter (PQC) merupakan rangkaian gerbang kuantum yang nilai parameternya (<span class="math inline">\(\boldsymbol{\theta}\)</span>) dapat diatur/dioptimasi.</li>
-<li><strong>Variational Quantum Eigensolver (VQE):</strong> Algoritma hybrid klasik-kuantum (<em>Quantum Machine Learning</em>).</li>
-<li>Tahapan PQC:
-<ol type="1">
-<li><em>Data Encoding</em></li>
-<li><em>Variational Layers</em> (Ansatz)</li>
-<li><em>Measurement</em> (Pengukuran)</li>
-</ol></li>
-<li>Pengukuran energi dievaluasi oleh optimasi klasik untuk memperbarui nilai parameter <span class="math inline">\(\boldsymbol{\theta}\)</span>.</li>
+<li>Keadaan terbelit maksimum (seperti <em>Bell States</em>) umumnya dibangkitkan menggunakan kombinasi gerbang <strong>Hadamard</strong> dan <strong>CNOT</strong>.</li>
+<li>Jika qubit pertama diberikan gerbang Hadamard dan qubit kedua dipertahankan, superposisi awal terbentuk: <span class="math display">\[ (H \otimes I)|00\rangle = \frac{|00\rangle + |10\rangle}{\sqrt{2}} \]</span></li>
+<li>Penerapan CNOT dengan qubit pertama sebagai kontrol dan qubit kedua sebagai target akan membalik keadaan secara bersyarat, menghasilkan keterbelitan: <span class="math display">\[ \text{CNOT} \left( \frac{|00\rangle + |10\rangle}{\sqrt{2}} \right) = \frac{|00\rangle + |11\rangle}{\sqrt{2}} = |\Phi^+\rangle \]</span></li>
+<li><strong>Keterbelitan via Gerbang Rotasi:</strong> Gerbang Hadamard ekuivalen dengan kombinasi rotasi <span class="math inline">\(R_z\)</span> dan <span class="math inline">\(R_y\)</span>: <span class="math display">\[ H = e^{i\pi/2} R_z(\pi) R_y\left(\frac{\pi}{2}\right) \sim R_z(\pi) R_y\left(\frac{\pi}{2}\right) \]</span></li>
+<li>Karena <span class="math inline">\(R_z(\pi)\)</span> pada keadaan <span class="math inline">\(|0\rangle\)</span> hanya memberikan fase global tanpa mengubah probabilitas, superposisi murni dapat dihasilkan oleh <span class="math inline">\(R_y(\pi/2)\)</span> saja: <span class="math display">\[ R_y\left(\frac{\pi}{2}\right) |0\rangle = \begin{pmatrix} \cos\frac{\pi}{4} &amp; -\sin\frac{\pi}{4} \\ \sin\frac{\pi}{4} &amp; \cos\frac{\pi}{4} \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{|0\rangle + |1\rangle}{\sqrt{2}} \]</span></li>
+<li>Dengan demikian, keadaan terbelit <span class="math inline">\(|\Phi^+\rangle\)</span> dapat diproduksi langsung dari kombinasi gerbang rotasi berparameter dengan CNOT: <span class="math display">\[ \text{CNOT} \left( R_y\left(\frac{\pi}{2}\right) \otimes I \right) |00\rangle = |\Phi^+\rangle \]</span></li>
 </ul>
-
-<img data-src="../Gambar/256_PQC1.jpeg" class="quarto-figure quarto-figure-center r-stretch" style="width:40.0%"></section></section>
+</section>
+<section id="simulasi-gerbang-2-qubit-keterbelitan" class="slide level2">
+<h2>Simulasi Gerbang 2 Qubit &amp; Keterbelitan</h2>
+<iframe src="bloch_2qubit_interactive.html" width="100%" height="650px" style="border:none;">
+</iframe>
+<div style="font-size: 0.7em; text-align: center;">
+Interaktif: Gunakan kombinasi H dan CNOT untuk mengamati hilangnya informasi lokal (vektor menyusut) saat terjadi keterbelitan maksimal.
+</div>
+</section>
+<section id="pengukuran-kuantum-quantum-measurement" class="slide level2 scrollable">
+<h2>Pengukuran Kuantum (Quantum Measurement)</h2>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Konsep &amp; Dekoherensi</a></li><li><a href="#tabset-7-2">Penurunan Rumus</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../Gambar/Collapse_Measurement.png" style="width:80.0%"></p>
+<figcaption>Gambar: Dekoherensi dan Keruntuhan Keadaan Kuantum</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-7-2">
+<div style="font-size: 0.6em;">
+<p>Secara matematis, probabilitas hasil pengukuran diprediksi menggunakan Kaidah Born melalui operasi proyektor <span class="math inline">\(\hat{P}_n = |e_n\rangle\langle e_n|\)</span>. Untuk keadaan <span class="math inline">\(|\psi\rangle = a|0\rangle + b|1\rangle\)</span>, probabilitasnya adalah:</p>
+<p><span class="math display">\[ P(0) = |a|^2, \quad P(1) = |b|^2 \]</span></p>
+<p>Setelah diobservasi, keadaan sistem mengalami keruntuhan (<em>collapse</em>) menuju salah satu basis sesuai dengan normalisasi proyektor: <span class="math display">\[ |\psi'\rangle = \frac{\hat{P}_n|\psi\rangle} {\sqrt{\langle\psi|\hat{P}_n|\psi\rangle}} \]</span></p>
+<p>Dalam formalisme matriks densitas, keadaan murni dari vektor tersebut diturunkan menjadi <span class="math inline">\(\rho = |\psi\rangle\langle\psi|\)</span>: <span class="math display">\[ \rho = \begin{bmatrix} |a|^2 &amp; ab^* \\ a^*b &amp; |b|^2 \end{bmatrix} \]</span> Elemen diagonal mendeskripsikan probabilitas populasi secara absolut, sedangkan elemen <em>off-diagonal</em> merepresentasikan koherensi fasa yang secara krusial membangun interferensi sistem.</p>
+<p>Saat sistem terganggu oleh observasi atau berinteraksi dengan lingkungan (<span class="math inline">\(E\)</span>), integrasi derajat kebebasan lingkungan memicu operasi <em>partial trace</em> <span class="math inline">\(\rho_S = \text{Tr}_E(|\Psi\rangle\langle\Psi|)\)</span>. Hilangnya tumpang tindih fungsi lingkungan (<span class="math inline">\(\langle e_1|e_0\rangle \to 0\)</span>) akhirnya mengeliminasi seluruh elemen <em>off-diagonal</em>: <span class="math display">\[ \rho_S \to \begin{bmatrix} |a|^2 &amp; 0 \\ 0 &amp; |b|^2 \end{bmatrix} \]</span> Reduksi menjadi matriks diagonal inilah yang membuktikan bahwa sifat koheren sistem mekanika kuantum merosot sepenuhnya menjadi distribusi probabilitas klasik biasa pasca-pengukuran.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="implementasi-algoritma-kuantum-pada-machine-learning" class="slide level2 scrollable">
+<h2>Implementasi Algoritma Kuantum pada Machine Learning</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-reveal="true" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    QML["Quantum Machine&lt;br/&gt;Learning (QML)"] --&gt; QDL["Quantum Deep&lt;br/&gt;Learning (QDL)"]
+    QDL --&gt; PQC["Parameterized&lt;br/&gt;Quantum Circuit&lt;br/&gt;(PQC)"]
+    PQC --&gt; VQA["Variational&lt;br/&gt;Quantum Algorithms&lt;br/&gt;(VQA)"]
+    VQA --&gt; VQE["VQE"]
+    VQA --&gt; QAOA["QAOA"]
+    VQA --&gt; VQC["VQC"]
+    VQA --&gt; QNN["QNN"]
+</pre>
+</div>
+<p></p><figcaption> Gambar: Hierarki Quantum Machine Learning</figcaption> </figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><br><br> <img data-src="../Gambar/PQC_VQDNN.png" class="quarto-figure quarto-figure-center" style="width:100.0%" alt="Gambar: Alur Kerja Sirkuit Kuantum Berparameter (PQC)"></p>
+</div></div>
+</section></section>
 <section>
 <section id="fase-6-optimasi-pada-vqe" class="title-slide slide level1 center">
 <h1>Fase 6: Optimasi pada VQE</h1>
@@ -1001,31 +1202,26 @@ Interaktif: Atur parameter &amp; putar objek 3D
 <section id="gradien-energi" class="slide level2 scrollable">
 <h2>Gradien Energi</h2>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Rumus Utama</a></li><li><a href="#tabset-6-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Rumus Utama</a></li><li><a href="#tabset-8-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
+<div id="tabset-8-1">
 <ul>
 <li>Pembaruan parameter sirkuit membutuhkan nilai gradien dari fungsi objektif (energi). <span class="math display">\[ \frac{\partial E}{\partial \theta} = \frac{\partial}{\partial \theta} \langle\psi(\theta)|\hat{H}|\psi(\theta)\rangle \]</span></li>
 <li>Melalui komutator unitari, turunan analitik dari nilai ekspektasi kuantum dapat disederhanakan menjadi: <span class="math display">\[ \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{i}{2} \langle{\psi(\theta)}| [\sigma, M] |{\psi(\theta)}\rangle \]</span> (dimana <span class="math inline">\(M\)</span> merepresentasikan operator gabungan pada sirkuit).</li>
+<li><strong>Keterbatasan <em>Finite Difference</em> (FD):</strong> Pendekatan numerik seperti FD sering kali gagal karena sangat bergantung pada presisi selisih berskala kecil. Derau statistik (<em>noise</em>) pada perangkat keras kuantum memicu ketidakstabilan numerik yang merusak akurasi kalkulasi gradien.</li>
+<li><strong>Solusi <em>Parameter Shift Rule</em> (PSR):</strong> Untuk mengatasi hal tersebut, PSR diterapkan guna membantu <em>Gradient Descent</em> mengoptimasi parameter sirkuit secara kokoh. PSR mengeksploitasi sifat periodik dari operator uniter untuk menghitung gradien analitis secara eksak tanpa memperburuk tingkat eror.</li>
 </ul>
 </div>
-<div id="tabset-6-2">
-<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-<p><strong>Penurunan: Gradien Energi pada Sirkuit Kuantum</strong></p>
-<p><strong>Langkah 1 — Turunan Parsial Nilai Ekspektasi:</strong></p>
-<p><span class="math display">\[\frac{\partial E(\theta)}{\partial \theta_j} = \left\langle \frac{\partial \psi(\theta)}{\partial \theta_j} \right| \hat{\mathcal{H}} |\psi(\theta)\rangle + \langle \psi(\theta)| \hat{\mathcal{H}} \left| \frac{\partial \psi(\theta)}{\partial \theta_j} \right\rangle\]</span></p>
-<hr>
-<p><strong>Langkah 2 — Dekomposisi Keadaan Kuantum:</strong></p>
-<p>Untuk gerbang rotasi berparameter <span class="math inline">\(\theta\)</span>:</p>
-<p><span class="math display">\[|\psi(\theta)\rangle = \hat{U}_B \hat{U}(\theta) \hat{U}_A |00\rangle, \quad \hat{U}(\theta) = e^{-i\frac{\theta}{2}\sigma}\]</span></p>
-<p>Definisikan: <span class="math inline">\(|\phi\rangle = \hat{U}_A|00\rangle\)</span> dan <span class="math inline">\(\hat{M} = \hat{U}_B^\dagger \hat{\mathcal{H}} \hat{U}_B\)</span>, sehingga:</p>
-<p><span class="math display">\[E(\theta) = \langle \phi| \hat{U}^\dagger(\theta) \hat{M} \hat{U}(\theta) |\phi\rangle\]</span></p>
-<hr>
-<p><strong>Langkah 3 — Turunan Operator Uniter:</strong></p>
-<p><span class="math display">\[\frac{\partial \hat{U}(\theta)}{\partial \theta} = -\frac{i}{2}\sigma \hat{U}(\theta)\]</span></p>
-<p>Substitusi ke turunan energi:</p>
-<p><span class="math display">\[\frac{\partial E(\theta)}{\partial \theta} = \frac{i}{2} \langle \psi(\theta)| \sigma \hat{M} |\psi(\theta)\rangle - \frac{i}{2} \langle \psi(\theta)| \hat{M}\sigma |\psi(\theta)\rangle\]</span></p>
-<p><span class="math display">\[\therefore \frac{\partial E(\theta)}{\partial \theta} = \frac{i}{2} \langle \psi(\theta)| [\sigma, \hat{M}] |\psi(\theta)\rangle\]</span></p>
+<div id="tabset-8-2">
+<div class="scrollable" style="max-height: 450px; font-size: 0.65em;">
+<p><strong>Penurunan: Gradien Energi dan Parameter Shift Rule</strong></p>
+<p><strong>Langkah 1 — Turunan Parsial Nilai Ekspektasi:</strong> <span class="math display">\[\frac{\partial E(\theta)}{\partial \theta_j} = \left\langle \frac{\partial \psi(\theta)}{\partial \theta_j} \right| \hat{\mathcal{H}} |\psi(\theta)\rangle + \langle \psi(\theta)| \hat{\mathcal{H}} \left| \frac{\partial \psi(\theta)}{\partial \theta_j} \right\rangle\]</span></p>
+<p><strong>Langkah 2 — Dekomposisi Keadaan Kuantum:</strong> Untuk gerbang rotasi berparameter <span class="math inline">\(\theta\)</span>: <span class="math display">\[|\psi(\theta)\rangle = \hat{U}_B \hat{U}(\theta) \hat{U}_A |00\rangle, \quad \hat{U}(\theta) = e^{-i\frac{\theta}{2}\sigma}\]</span> Definisikan <span class="math inline">\(|\phi\rangle = \hat{U}_A|00\rangle\)</span> dan <span class="math inline">\(\hat{M} = \hat{U}_B^\dagger \hat{\mathcal{H}} \hat{U}_B\)</span>, sehingga: <span class="math display">\[E(\theta) = \langle \phi| \hat{U}^\dagger(\theta) \hat{M} \hat{U}(\theta) |\phi\rangle\]</span></p>
+<p><strong>Langkah 3 — Turunan Operator Uniter dan Komutator:</strong> Turunan parsial ekspektasi energi adalah: <span class="math display">\[\frac{\partial E(\theta)}{\partial \theta} = \langle \phi| \frac{\partial \hat{U}^{\dagger}(\theta)}{\partial \theta} \hat{M} \hat{U}(\theta) |\phi\rangle + \langle \phi| \hat{U}^{\dagger}(\theta) \hat{M} \frac{\partial \hat{U}(\theta)}{\partial \theta} |\phi\rangle\]</span> Karena <span class="math inline">\(\frac{\partial \hat{U}(\theta)}{\partial \theta} = -\frac{i}{2}\sigma \hat{U}(\theta)\)</span>, persamaan disederhanakan menjadi bentuk komutator: <span class="math display">\[\frac{\partial E(\theta)}{\partial \theta} = \frac{i}{2} \langle \psi(\theta)| \sigma \hat{M} |\psi(\theta)\rangle - \frac{i}{2} \langle \psi(\theta)| \hat{M}\sigma |\psi(\theta)\rangle = \frac{i}{2} \langle \psi(\theta)| [\sigma, \hat{M}] |\psi(\theta)\rangle\]</span></p>
+<p><strong>Langkah 4 — Pergeseran Parameter (Parameter Shift):</strong> Bentuk komutator sulit diukur pada perangkat keras. Gunakan pergeseran parameter <span class="math inline">\(s\)</span>: <span class="math display">\[\hat{U}(\theta\pm s) = \exp\left[-i\frac{\theta\pm s}{2}\sigma\right] = \hat{U}(\theta)\hat{U}(\pm s)\]</span> <span class="math display">\[E(\theta+s) = \langle \psi(\theta)| \hat{U}^{\dagger}(s) \hat{M} \hat{U}(s) |\psi(\theta)\rangle\]</span></p>
+<p><strong>Langkah 5 — Identitas Euler:</strong> <span class="math display">\[\hat{U}(s) = \cos\left(\frac{s}{2}\right)\hat{I} - i\sin\left(\frac{s}{2}\right)\sigma\]</span> Substitusikan untuk pergeseran positif dan negatif: <span class="math display">\[E(\theta\pm s) = \cos^2\left(\frac{s}{2}\right)\langle\hat{M}\rangle + \sin^2\left(\frac{s}{2}\right) \langle \sigma\hat{M}\sigma\rangle \pm i\sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle[\sigma,\hat{M}]\rangle\]</span></p>
+<p><strong>Langkah 6 — Selisih Ekspektasi Energi:</strong> Kurangkan ekspektasi positif dan negatif: <span class="math display">\[E(\theta+s) - E(\theta-s) = 2i\sin\left(\frac{s}{2}\right)\cos\left(\frac{s}{2}\right)\langle[\sigma,\hat{M}]\rangle = i\sin(s)\langle[\sigma,\hat{M}]\rangle\]</span></p>
+<p><strong>Langkah 7 — Pemilihan <span class="math inline">\(s = \pi/2\)</span> (Gradien Eksak):</strong> Dengan memilih pergeseran sudut <span class="math inline">\(s=\pi/2\)</span>, gradien akhir diformulasikan sebagai: <span class="math display">\[\boxed{\frac{\partial E(\theta)}{\partial \theta} = \frac{1}{2}\left[E\left(\theta+\frac{\pi}{2}\right) - E\left(\theta-\frac{\pi}{2}\right)\right]}\]</span></p>
 <p><br><br><br></p>
 </div>
 </div>
@@ -1035,16 +1231,16 @@ Interaktif: Atur parameter &amp; putar objek 3D
 <section id="parameter-shift-rule-psr" class="slide level2 scrollable">
 <h2>Parameter Shift Rule (PSR)</h2>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Rumus Utama</a></li><li><a href="#tabset-7-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Rumus Utama</a></li><li><a href="#tabset-9-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
+<div id="tabset-9-1">
 <ul>
 <li>PSR adalah metode kalkulasi gradien analitik (bukan numerik) secara langsung di perangkat keras kuantum.</li>
-<li>Menggunakan konsep pergeseran parameter <span class="math inline">\(\theta\)</span> sebesar <span class="math inline">\(s = \frac{\pi}{2}\)</span> ke arah positif dan negatif. <span class="math display">\[ \langle E(\theta \pm s)\rangle = \langle{\psi}| \hat{U}(\pm s)^{\dagger}\hat{M}\hat{U}(\pm s)|{\psi}\rangle \]</span></li>
+<li>Menggunakan konsep pergeseran parameter <span class="math inline">\(\theta\)</span> sebesar <span class="math inline">\(s = \frac{\pi}{2}\)</span> ke arah positif dan negatif. <span class="math display">\[ \langle E(\theta \pm s)\rangle = \langle{\psi (\theta)}| \hat{U}(\pm s)^{\dagger}\hat{M}\hat{U}(\pm s)|{\psi (\theta)}\rangle \]</span></li>
 <li>Selisih kedua evaluasi menghasilkan gradien eksak: <span class="math display">\[ \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{1}{2} \left[ \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle \right] \]</span></li>
 </ul>
 </div>
-<div id="tabset-7-2">
+<div id="tabset-9-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Penurunan: Parameter Shift Rule</strong></p>
 <p><strong>Langkah 1 — Pergeseran Parameter:</strong></p>
@@ -1086,17 +1282,16 @@ Interaktif: Atur parameter &amp; putar objek 3D
 <section id="optimizer-spsa" class="slide level2 scrollable">
 <h2>Optimizer SPSA</h2>
 <div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Rumus Utama</a></li><li><a href="#tabset-8-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Rumus Utama</a></li><li><a href="#tabset-10-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-8-1">
+<div id="tabset-10-1">
 <p><strong>SPSA (Simultaneous Perturbation Stochastic Approximation)</strong></p>
 <ul>
 <li><strong>Inovasi:</strong> Mengestimasi gradien <em>seluruh</em> parameter secara simultan hanya menggunakan dua pengukuran (satu vektor perturbasi acak <span class="math inline">\(\Delta\)</span>). <span class="math display">\[ \hat{g}_k = \frac{E(\theta_k + c_k \Delta_k) - E(\theta_k - c_k \Delta_k)}{2 c_k \Delta_k} \]</span></li>
 <li>Dengan ekspektasi estimasi gradien yang terbukti ekuivalen dengan gradien eksak: <span class="math display">\[ \mathbb{E} \left[ \hat{g}_k \right] = \nabla E(\theta_k) \]</span></li>
-<li><strong>Keunggulan:</strong> SPSA jauh lebih efisien karena kompleksitas evaluasi fungsinya konstan <span class="math inline">\(O(1)\)</span>, terlepas dari berapapun jumlah parameter <span class="math inline">\(\theta\)</span> yang ada dalam sirkuit.</li>
 </ul>
 </div>
-<div id="tabset-8-2">
+<div id="tabset-10-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Penurunan: Estimator Gradien SPSA</strong></p>
 <p><strong>Langkah 1 — Vektor Perturbasi Acak:</strong></p>
@@ -1138,20 +1333,23 @@ Interaktif: Atur parameter &amp; putar objek 3D
 </section>
 <section id="fenomena-barren-plateau" class="slide level2">
 <h2>Fenomena <em>Barren Plateau</em></h2>
-<ul>
-<li>Tantangan besar saat mengeksekusi sirkuit variasi kuantum (seperti Ansatz <em>Hardware-Efficient</em>) pada arsitektur skala besar atau <em>depth</em> yang dalam.</li>
-<li><strong>Jebakan Gradien:</strong> Permukaan fungsi objektif (energi) menjadi sangat datar, sehingga turunan parsialnya menyusut eksponensial menuju nol.</li>
-<li>Hal ini ditandai oleh lenyapnya varians gradien parameter terhadap kedalaman sirkuit (<span class="math inline">\(L\)</span>) dan jumlah qubit (<span class="math inline">\(N\)</span>): <span class="math display">\[ \text{Var}[\partial_{\theta} E] \propto \frac{1}{2^{NL}} \]</span></li>
-<li><strong>Dilema Ekspresibilitas:</strong> Semakin kompleks/ekspresif sirkuit kuantum, semakin besar kemungkinan sirkuit terjebak di area <em>Barren Plateau</em> sebelum dapat dioptimasi.</li>
-</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="../Gambar/BarrenPlateau.jpeg"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../Gambar/barren_plateau.png"></p>
+</div></div>
 </section>
 <section id="analisis-barren-plateau-pada-simulasi" class="slide level2">
 <h2>Analisis <em>Barren Plateau</em> pada Simulasi</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li>Inisialisasi parameter acak murni pada <span class="math inline">\(L&gt;5\)</span> (sistem <span class="math inline">\(N=4\)</span>) memicu hilangnya arah optimasi.</li>
-<li><strong>Observasi:</strong> Inisialisasi strategi melalui <em>Nash Equilibrium</em> (<em>Warm-Start</em>) terbukti memandu sirkuit langsung menuju sub-ruang Hilbert yang bermakna, menghindari keacakan buta dan menjaga agar gradien tetap cukup besar untuk dioptimasi (Trainability).</li>
+<li>Sirkuit dengan <em>depth</em> rendah memiliki fungsi biaya yang sederhana dan gradien yang informatif.</li>
+<li>Penambahan gerbang <em>entanglement</em> (CNOT) secara berulang menyebabkan parameter saling terhubung dan bercampur secara kompleks.</li>
+<li>Karena efek <em>Central Limit Theorem</em>, banyak komponen gradien yang saling membatalkan hingga ekspektasinya mendekati nol.</li>
+<li>Akibatnya, <strong>semakin banyak <em>depth</em> dan <em>qubit</em>, maka akan semakin rentan terhadap <em>barren plateau</em></strong> karena perilakunya mendekati acak penuh (<em>unitary 2-design</em>).</li>
+<li><strong>Solusi Simulasi:</strong> Inisialisasi parameter (<em>warm-start</em>) menggunakan <em>Nash Equilibrium</em> terbukti menghindari jebakan <em>barren plateau</em> pada sistem <span class="math inline">\(N=4\)</span>.</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <img data-src="../Gambar/grafik_depth_per_window_N4.png">
@@ -1160,53 +1358,58 @@ Visualisasi pemilihan kedalaman sirkuit (Depth) optimal.
 </div>
 </div></div>
 </section>
-<section id="entropi-von-neumann" class="slide level2 scrollable">
-<h2>Entropi Von Neumann</h2>
+<section id="entropi-shannon-to-entropi-von-neumann" class="slide level2 scrollable">
+<h2>Entropi Shannon <span class="math inline">\(\to\)</span> Entropi Von Neumann</h2>
 <div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Rumus Utama</a></li><li><a href="#tabset-9-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Rumus Utama</a></li><li><a href="#tabset-11-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-9-1">
-<ul>
-<li>Ekstensi teoretis dari <strong>Entropi Shannon</strong> klasik ke dalam mekanika kuantum yang bekerja pada matriks densitas (<span class="math inline">\(\rho\)</span>).</li>
-<li><strong>Entropi Shannon</strong> (klasik): <span class="math inline">\(H = - \sum_i p_i \log_2 (p_i)\)</span></li>
-<li><strong>Entropi Von Neumann</strong> (kuantum): <span class="math display">\[ S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2 (\lambda_j) \]</span></li>
-<li>Jika <span class="math inline">\(S \approx 0\)</span>: sistem berpusat pada satu konfigurasi dominan (<em>pure state</em>).</li>
-<li>Jika <span class="math inline">\(S\)</span> tinggi: probabilitas tersebar luas → indikasi <em>Barren Plateau</em>.</li>
-</ul>
+<div id="tabset-11-1">
+<div class="columns">
+<div class="column" style="width:25%;">
+<img data-src="../Gambar/Shannon_Foto.png">
+<div style="font-size: 0.5em; text-align: center; margin-top: 5px;">
+Claude Shannon (Bapak Teori Informasi)
 </div>
-<div id="tabset-9-2">
+</div><div class="column" style="width:75%;">
+<ul>
+<li><strong>Ide Fundamental Shannon:</strong> Menginterpretasikan “keacakan” atau ketidakpastian informasi dalam suatu sistem dan merumuskannya menjadi <strong>entropi</strong> dalam satuan bit.</li>
+<li><strong>Entropi Shannon</strong> (klasik): <span class="math display">\[ H = - \sum_i p_i \log_2 (p_i) \]</span></li>
+<li><strong>Entropi Von Neumann</strong> menggeneralisasi konsep Shannon ke dalam mekanika kuantum menggunakan matriks densitas (<span class="math inline">\(\rho\)</span>): <span class="math display">\[ S(\rho) = -\text{Tr}(\rho \log_2 \rho) \]</span></li>
+<li>Jika <span class="math inline">\(S \approx 0\)</span>: Sistem stabil pada <em>pure state</em> (satu konfigurasi dominan).</li>
+<li>Jika <span class="math inline">\(S\)</span> tinggi: Probabilitas tersebar merata (indikasi <em>Barren Plateau</em>).</li>
+</ul>
+</div></div>
+</div>
+<div id="tabset-11-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-<p><strong>Penurunan: Dari Entropi Shannon ke Entropi Von Neumann</strong></p>
+<p><strong>Generalisasi: Dari Entropi Shannon ke Entropi Von Neumann</strong></p>
 <p><strong>Langkah 1 — Entropi Shannon (Klasik):</strong></p>
-<p>Untuk distribusi probabilitas diskrit <span class="math inline">\(p_i\)</span>:</p>
+<p>Untuk distribusi probabilitas diskrit <span class="math inline">\(p_i\)</span>, entropi informasi didefinisikan sebagai:</p>
 <p><span class="math display">\[H = - \sum_i p_i \log_2 (p_i)\]</span></p>
-<p>Logaritma basis 2 digunakan karena satuan informasi dinyatakan dalam <em>bit</em>.</p>
 <hr>
-<p><strong>Langkah 2 — Operator Densitas:</strong></p>
-<p>Dalam mekanika kuantum, distribusi probabilitas direpresentasikan oleh operator densitas:</p>
-<p><span class="math display">\[\rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|\]</span></p>
-<p>Sifat: Hermitian (<span class="math inline">\(\rho^\dagger = \rho\)</span>), jejak bernilai satu (<span class="math inline">\(\text{Tr}(\rho) = 1\)</span>), semidefinit positif.</p>
+<p><strong>Langkah 2 — Definisi Entropi Von Neumann:</strong></p>
+<p>Dalam mekanika kuantum, probabilitas digantikan oleh operator densitas <span class="math inline">\(\rho\)</span>. Entropi Von Neumann didefinisikan langsung melalui fungsi operator tersebut:</p>
+<p><span class="math display">\[S(\rho) = -\text{Tr}(\rho \log_2 \rho)\]</span></p>
 <hr>
-<p><strong>Langkah 3 — Dekomposisi Spektral:</strong></p>
-<p>Berdasarkan Teorema Spektral, <span class="math inline">\(\rho\)</span> dapat didiagonalisasi pada basis ortonormal <span class="math inline">\(|e_j\rangle\)</span>:</p>
-<p><span class="math display">\[\rho = \sum_j \lambda_j |e_j\rangle \langle e_j|\]</span></p>
-<p>dengan <span class="math inline">\(\lambda_j\)</span> adalah nilai eigen real dari <span class="math inline">\(\rho\)</span>.</p>
+<p><strong>Langkah 3 — Teorema Spektral:</strong></p>
+<p>Karena operator densitas <span class="math inline">\(\rho\)</span> bersifat Hermitian, ia selalu dapat didiagonalisasi (dekomposisi spektral):</p>
+<p><span class="math display">\[\rho = U \Lambda U^\dagger\]</span></p>
+<p>dengan <span class="math inline">\(\Lambda\)</span> adalah matriks diagonal yang berisi nilai eigen <span class="math inline">\(\lambda_i\)</span>, dan <span class="math inline">\(U\)</span> adalah matriks uniter.</p>
 <hr>
-<p><strong>Langkah 4 — Logaritma Operator Densitas:</strong></p>
-<p><span class="math display">\[\log_2(\rho) = \sum_j \log_2 (\lambda_j) |e_j\rangle \langle e_j|\]</span></p>
+<p><strong>Langkah 4 — Logaritma Matriks:</strong></p>
+<p>Berdasarkan definisi fungsi matriks, logaritma diterapkan pada nilai eigennya:</p>
+<p><span class="math display">\[\log_2(\rho) = U (\log_2 \Lambda) U^\dagger\]</span></p>
 <hr>
-<p><strong>Langkah 5 — Perkalian <span class="math inline">\(\rho \log_2(\rho)\)</span>:</strong></p>
-<p>Dengan ortonormalitas <span class="math inline">\(\langle e_j | e_k \rangle = \delta_{jk}\)</span>:</p>
-<p><span class="math display">\[\rho \log_2(\rho) = \left(\sum_j \lambda_j |e_j\rangle \langle e_j|\right) \left( \sum_k \log_2 (\lambda_k) |e_k\rangle \langle e_k|\right)\]</span></p>
-<p><span class="math display">\[= \sum_j \sum_k \lambda_j \log_2(\lambda_k) |e_j\rangle \underbrace{\langle e_j | e_k\rangle}_{\delta_{jk}} \langle e_k|\]</span></p>
-<p><span class="math display">\[= \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j|\]</span></p>
+<p><strong>Langkah 5 — Operasi <em>Trace</em> dan Invariansi:</strong></p>
+<p>Kita kalikan <span class="math inline">\(\rho\)</span> dengan <span class="math inline">\(\log_2(\rho)\)</span>:</p>
+<p><span class="math display">\[\rho \log_2(\rho) = (U \Lambda U^\dagger) (U (\log_2 \Lambda) U^\dagger) = U (\Lambda \log_2 \Lambda) U^\dagger\]</span></p>
+<p>Gunakan sifat invariansi <em>trace</em> (<span class="math inline">\(\text{Tr}(U A U^\dagger) = \text{Tr}(A)\)</span>):</p>
+<p><span class="math display">\[S(\rho) = -\text{Tr}(U (\Lambda \log_2 \Lambda) U^\dagger) = -\text{Tr}(\Lambda \log_2 \Lambda)\]</span></p>
+<p>Karena <span class="math inline">\(\Lambda\)</span> adalah matriks diagonal, perhitungan <em>trace</em>-nya hanyalah jumlahan dari elemen diagonal:</p>
+<p><span class="math display">\[\boxed{S(\rho) = -\sum_i \lambda_i \log_2 (\lambda_i)}\]</span></p>
 <hr>
-<p><strong>Langkah 6 — Operasi <em>Trace</em>:</strong></p>
-<p><span class="math display">\[\text{Tr}(\rho \log_2(\rho)) = \sum_k \langle e_k | \left( \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j| \right) |e_k\rangle\]</span></p>
-<p><span class="math display">\[= \sum_k \sum_j \lambda_j \log_2(\lambda_j) \underbrace{\langle e_k | e_j \rangle}_{\delta_{kj}} \underbrace{\langle e_j | e_k \rangle}_{\delta_{jk}} = \sum_j \lambda_j \log_2(\lambda_j)\]</span></p>
-<hr>
-<p><strong>Hasil Akhir — Entropi Von Neumann:</strong></p>
-<p><span class="math display">\[\boxed{S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2 (\lambda_j)}\]</span></p>
+<p><strong>Langkah 6 — Reduksi ke Bentuk Klasik:</strong></p>
+<p>Jika <span class="math inline">\(\rho\)</span> sudah dalam bentuk diagonal murni di mana matriksnya mewakili campuran klasik murni, maka nilai eigen <span class="math inline">\(\lambda_i\)</span> akan sama dengan probabilitas <span class="math inline">\(p_i\)</span>, sehingga rumusnya akan mereduksi secara identik menjadi Entropi Shannon biasa.</p>
 <hr>
 <p><strong>Indikator <em>Barren Plateau</em>:</strong></p>
 <p>Jika entropi mendekati batas maksimum <span class="math inline">\(S(\rho_A) \approx \log(d_A)\)</span>, maka:</p>
@@ -1256,18 +1459,27 @@ Visualisasi pemilihan kedalaman sirkuit (Depth) optimal.
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Probabilitas mayoritas (<span class="math inline">\(p_1\)</span>)</td>
+<td style="text-align: left;">Prob. Optimal (<span class="math inline">\(p_1\)</span>)</td>
 <td style="text-align: center;"><span class="math inline">\(0{,}94\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Sisa probabilitas (<span class="math inline">\(p_\text{rest}\)</span>)</td>
-<td style="text-align: center;"><span class="math inline">\(0{,}06\)</span></td>
+<td style="text-align: left;">Prob. Alternatif 1 (<span class="math inline">\(p_2\)</span>)</td>
+<td style="text-align: center;"><span class="math inline">\(0{,}02\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Prob. Alternatif 2 (<span class="math inline">\(p_3\)</span>)</td>
+<td style="text-align: center;"><span class="math inline">\(0{,}02\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Prob. Alternatif 3 (<span class="math inline">\(p_4\)</span>)</td>
+<td style="text-align: center;"><span class="math inline">\(0{,}02\)</span></td>
 </tr>
 </tbody>
 </table>
+<p><em>Total 4 keadaan dengan probabilitas relevan karena pembatasan ruang pencarian oleh fungsi penalti.</em></p>
 <p><strong>Kalkulasi:</strong></p>
-<p><span class="math display">\[ S = -(0{,}94 \cdot \log_2(0{,}94) + 0{,}06 \cdot \log_2(0{,}06)) \]</span> <span class="math display">\[ S \approx 0{,}3274 \text{ bit} \]</span></p>
-<p>→ Sedikit melebar karena dimensi bertambah, namun jauh di bawah batas entropi maksimum → deteksi <em>ground state</em> handal.</p>
+<p><span class="math display">\[ S = -\left(0{,}94 \log_2(0{,}94) + 3 \times (0{,}02 \log_2(0{,}02))\right) \]</span> <span class="math display">\[ S \approx 0{,}4225 \text{ bit} \]</span></p>
+<p>→ Sedikit melebar karena dimensi bertambah, namun jauh di bawah batas entropi maksimum <span class="math inline">\(\log_2(4) = 2\)</span> bit → deteksi <em>ground state</em> handal.</p>
 </div></div>
 </section></section>
 <section>
@@ -1281,28 +1493,28 @@ Visualisasi pemilihan kedalaman sirkuit (Depth) optimal.
 <img data-src="../Gambar/31_Dialir.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
 <section id="tahap-1-akuisisi-dan-pra-pemrosesan-data" class="slide level2">
 <h2>Tahap 1: Akuisisi dan Pra-pemrosesan Data</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>Procedure DataPreprocessing(tickers, start_time, end_time)</span>
-<span id="cb1-2"><a href=""></a>  1. P &lt;- DownloadClosingPrice(tickers)</span>
-<span id="cb1-3"><a href=""></a>  2. r_log &lt;- ln(P_t / P_t-1)  // Kalkulasi Log Return</span>
-<span id="cb1-4"><a href=""></a>  3. mu_log &lt;- Mean(r_log) - 0.5 * Var(r_log) // Volatility Drag</span>
-<span id="cb1-5"><a href=""></a>  4. Sigma &lt;- Covariance(r_log)</span>
-<span id="cb1-6"><a href=""></a>  5. gamma &lt;- ComputeEndogenousLambda(mu_log, Sigma)</span>
-<span id="cb1-7"><a href=""></a>  6. Return mu_log, Sigma, gamma</span>
-<span id="cb1-8"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>Procedure DataPreprocessing(tickers, start_time, end_time)</span>
+<span id="cb2-2"><a href=""></a>  1. P &lt;- DownloadClosingPrice(tickers)</span>
+<span id="cb2-3"><a href=""></a>  2. r_log &lt;- ln(P_t / P_t-1)  // Kalkulasi Log Return</span>
+<span id="cb2-4"><a href=""></a>  3. mu_log &lt;- Mean(r_log) - 0.5 * Var(r_log) // Volatility Drag</span>
+<span id="cb2-5"><a href=""></a>  4. Sigma &lt;- Covariance(r_log)</span>
+<span id="cb2-6"><a href=""></a>  5. gamma &lt;- ComputeEndogenousLambda(mu_log, Sigma)</span>
+<span id="cb2-7"><a href=""></a>  6. Return mu_log, Sigma, gamma</span>
+<span id="cb2-8"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><strong>Catatan:</strong> <em>Volatility drag</em> dihitung untuk mencegah divergensi linearitas aset terhadap parameter fluktuasi ekspektasi logaritmik dalam periode panjang.</li>
 </ul>
 </section>
 <section id="tahap-2-pemodelan-hamiltonian-portofolio" class="slide level2">
 <h2>Tahap 2: Pemodelan Hamiltonian Portofolio</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>Procedure BuildHamiltonian(mu, Sigma, gamma, K, lambda_penalti)</span>
-<span id="cb2-2"><a href=""></a>  1. Q_ii &lt;- (gamma * Sigma_ii) / (2 * K^2) - (mu_i / K) + lambda_penalti * (1 - 2K)</span>
-<span id="cb2-3"><a href=""></a>  2. Q_ij &lt;- (gamma * Sigma_ij) / (2 * K^2) + lambda_penalti</span>
-<span id="cb2-4"><a href=""></a>  3. h_i &lt;- -0.5 * (Q_ii + Sum_over_j!=i (Q_ij))</span>
-<span id="cb2-5"><a href=""></a>  4. J_ij &lt;- 0.25 * Q_ij</span>
-<span id="cb2-6"><a href=""></a>  5. H &lt;- Sum(h_i * Z_i) + Sum(J_ij * Z_i * Z_j) + C * I</span>
-<span id="cb2-7"><a href=""></a>  6. Return H</span>
-<span id="cb2-8"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href=""></a>Procedure BuildHamiltonian(mu, Sigma, gamma, K, lambda_penalti)</span>
+<span id="cb3-2"><a href=""></a>  1. Q_ii &lt;- (gamma * Sigma_ii) / (2 * K^2) - (mu_i / K) + lambda_penalti * (1 - 2K)</span>
+<span id="cb3-3"><a href=""></a>  2. Q_ij &lt;- (gamma * Sigma_ij) / (2 * K^2) + lambda_penalti</span>
+<span id="cb3-4"><a href=""></a>  3. h_i &lt;- -0.5 * (Q_ii + Sum_over_j!=i (Q_ij))</span>
+<span id="cb3-5"><a href=""></a>  4. J_ij &lt;- 0.25 * Q_ij</span>
+<span id="cb3-6"><a href=""></a>  5. H &lt;- Sum(h_i * Z_i) + Sum(J_ij * Z_i * Z_j) + C * I</span>
+<span id="cb3-7"><a href=""></a>  6. Return H</span>
+<span id="cb3-8"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><strong>Catatan:</strong> Suku penalti kardinalitas (<span class="math inline">\(\lambda\)</span>) menjamin alokasi portofolio sesuai dengan <em>budget</em> ketersediaan dana (<span class="math inline">\(K\)</span>).</li>
 </ul>
@@ -1310,57 +1522,57 @@ Visualisasi pemilihan kedalaman sirkuit (Depth) optimal.
 <section id="tahap-3-epg-sequential-best-response-sbr" class="slide level2">
 <h2>Tahap 3: EPG <em>Sequential Best Response</em> (SBR)</h2>
 <p>Algoritma pencarian <em>Nash Equilibrium</em> untuk digunakan sebagai strategi <em>warm-start</em>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href=""></a>Procedure NashSBR(mu, Sigma, gamma, N, K)</span>
-<span id="cb3-2"><a href=""></a>  1. x &lt;- InitialSelection(K)</span>
-<span id="cb3-3"><a href=""></a>  2. For iter = 1 to max_iter:</span>
-<span id="cb3-4"><a href=""></a>  3.     For i in S_in and j in S_out:</span>
-<span id="cb3-5"><a href=""></a>  4.         x_new &lt;- Swap(x, i, j)</span>
-<span id="cb3-6"><a href=""></a>  5.         If Phi(x_new) &gt; Phi(x):</span>
-<span id="cb3-7"><a href=""></a>  6.             x &lt;- x_new, Phi &lt;- Phi_new, improved &lt;- True</span>
-<span id="cb3-8"><a href=""></a>  7.             Break</span>
-<span id="cb3-9"><a href=""></a>  8.     If not improved: Break</span>
-<span id="cb3-10"><a href=""></a>  9. Return x // Bitstring ekuilibrium (contoh: |0101&gt;)</span>
-<span id="cb3-11"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href=""></a>Procedure NashSBR(mu, Sigma, gamma, N, K)</span>
+<span id="cb4-2"><a href=""></a>  1. x &lt;- InitialSelection(K)</span>
+<span id="cb4-3"><a href=""></a>  2. For iter = 1 to max_iter:</span>
+<span id="cb4-4"><a href=""></a>  3.     For i in S_in and j in S_out:</span>
+<span id="cb4-5"><a href=""></a>  4.         x_new &lt;- Swap(x, i, j)</span>
+<span id="cb4-6"><a href=""></a>  5.         If Phi(x_new) &gt; Phi(x):</span>
+<span id="cb4-7"><a href=""></a>  6.             x &lt;- x_new, Phi &lt;- Phi_new, improved &lt;- True</span>
+<span id="cb4-8"><a href=""></a>  7.             Break</span>
+<span id="cb4-9"><a href=""></a>  8.     If not improved: Break</span>
+<span id="cb4-10"><a href=""></a>  9. Return x // Bitstring ekuilibrium (contoh: |0101&gt;)</span>
+<span id="cb4-11"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tahap-4-optimasi-variasional-he-vqe-adaptif" class="slide level2">
 <h2>Tahap 4: Optimasi Variasional HE-VQE Adaptif</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href=""></a>Procedure AdaptiveVQE(H, x_NE, D_max, lambda_target)</span>
-<span id="cb4-2"><a href=""></a>  1. theta &lt;- InitialParameters(x_NE) // Warm-Start Injection</span>
-<span id="cb4-3"><a href=""></a>  2. For depth d = 1 to D_max:</span>
-<span id="cb4-4"><a href=""></a>  3.     For k = 1 to N_iter:</span>
-<span id="cb4-5"><a href=""></a>  4.         lambda_k &lt;- PenaltyAnnealing(k)</span>
-<span id="cb4-6"><a href=""></a>  5.         L(theta) &lt;- &lt;psi(theta)| H_obj + lambda_k H_pen |psi(theta)&gt;</span>
-<span id="cb4-7"><a href=""></a>  6.         theta &lt;- theta - a_k * SPSA_Gradient(L, theta)</span>
-<span id="cb4-8"><a href=""></a>  7.     theta &lt;- LayerExpansion(theta) // Heuristic Ansatz</span>
-<span id="cb4-9"><a href=""></a>  8.     If Converged(theta): Break</span>
-<span id="cb4-10"><a href=""></a>  9. Return x_best &lt;- Argmax(|&lt;x|psi(theta_final)&gt;|^2)</span>
-<span id="cb4-11"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href=""></a>Procedure AdaptiveVQE(H, x_NE, D_max, lambda_target)</span>
+<span id="cb5-2"><a href=""></a>  1. theta &lt;- InitialParameters(x_NE) // Warm-Start Injection</span>
+<span id="cb5-3"><a href=""></a>  2. For depth d = 1 to D_max:</span>
+<span id="cb5-4"><a href=""></a>  3.     For k = 1 to N_iter:</span>
+<span id="cb5-5"><a href=""></a>  4.         lambda_k &lt;- PenaltyAnnealing(k)</span>
+<span id="cb5-6"><a href=""></a>  5.         L(theta) &lt;- &lt;psi(theta)| H_obj + lambda_k H_pen |psi(theta)&gt;</span>
+<span id="cb5-7"><a href=""></a>  6.         theta &lt;- theta - a_k * SPSA_Gradient(L, theta)</span>
+<span id="cb5-8"><a href=""></a>  7.     theta &lt;- LayerExpansion(theta) // Heuristic Ansatz</span>
+<span id="cb5-9"><a href=""></a>  8.     If Converged(theta): Break</span>
+<span id="cb5-10"><a href=""></a>  9. Return x_best &lt;- Argmax(|&lt;x|psi(theta_final)&gt;|^2)</span>
+<span id="cb5-11"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tahap-5-6-backtesting-dan-validasi-brute-force" class="slide level2">
 <h2>Tahap 5 &amp; 6: <em>Backtesting</em> dan Validasi <em>Brute Force</em></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Simulasi Backtesting</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href=""></a>Procedure BacktestLoop(Data, K)</span>
-<span id="cb5-2"><a href=""></a>  1. For t in Timeline:</span>
-<span id="cb5-3"><a href=""></a>  2.    mu, Sigma, gamma &lt;- DataPreprocessing</span>
-<span id="cb5-4"><a href=""></a>  3.    H &lt;- BuildHamiltonian</span>
-<span id="cb5-5"><a href=""></a>  4.    x_NE &lt;- NashSBR</span>
-<span id="cb5-6"><a href=""></a>  5.    x_best_t &lt;- AdaptiveVQE(H, x_NE)</span>
-<span id="cb5-7"><a href=""></a>  6.    R_t &lt;- ExecuteRebalance(x_best_t)</span>
-<span id="cb5-8"><a href=""></a>  7. Return PerformanceMetrics</span>
-<span id="cb5-9"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a>Procedure BacktestLoop(Data, K)</span>
+<span id="cb6-2"><a href=""></a>  1. For t in Timeline:</span>
+<span id="cb6-3"><a href=""></a>  2.    mu, Sigma, gamma &lt;- DataPreprocessing</span>
+<span id="cb6-4"><a href=""></a>  3.    H &lt;- BuildHamiltonian</span>
+<span id="cb6-5"><a href=""></a>  4.    x_NE &lt;- NashSBR</span>
+<span id="cb6-6"><a href=""></a>  5.    x_best_t &lt;- AdaptiveVQE(H, x_NE)</span>
+<span id="cb6-7"><a href=""></a>  6.    R_t &lt;- ExecuteRebalance(x_best_t)</span>
+<span id="cb6-8"><a href=""></a>  7. Return PerformanceMetrics</span>
+<span id="cb6-9"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p><strong>Validasi Brute Force</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a>Procedure BruteForce(H, N, K)</span>
-<span id="cb6-2"><a href=""></a>  1. best_E &lt;- infinity</span>
-<span id="cb6-3"><a href=""></a>  2. For each x in Combinations(N, K):</span>
-<span id="cb6-4"><a href=""></a>  3.    E &lt;- CalculateIsingEnergy(x, H)</span>
-<span id="cb6-5"><a href=""></a>  4.    If E &lt; best_E:</span>
-<span id="cb6-6"><a href=""></a>  5.       best_E &lt;- E</span>
-<span id="cb6-7"><a href=""></a>  6.       best_x &lt;- x</span>
-<span id="cb6-8"><a href=""></a>  7. Return best_x, best_E</span>
-<span id="cb6-9"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href=""></a>Procedure BruteForce(H, N, K)</span>
+<span id="cb7-2"><a href=""></a>  1. best_E &lt;- infinity</span>
+<span id="cb7-3"><a href=""></a>  2. For each x in Combinations(N, K):</span>
+<span id="cb7-4"><a href=""></a>  3.    E &lt;- CalculateIsingEnergy(x, H)</span>
+<span id="cb7-5"><a href=""></a>  4.    If E &lt; best_E:</span>
+<span id="cb7-6"><a href=""></a>  5.       best_E &lt;- E</span>
+<span id="cb7-7"><a href=""></a>  6.       best_x &lt;- x</span>
+<span id="cb7-8"><a href=""></a>  7. Return best_x, best_E</span>
+<span id="cb7-9"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section></section>
 <section>
@@ -1368,84 +1580,12 @@ Visualisasi pemilihan kedalaman sirkuit (Depth) optimal.
 <h1>Fase 9: Hasil Analisis dan Kesimpulan</h1>
 
 </section>
-<section id="penurunan-markowitz-ke-qubo-dan-ising" class="slide level2">
-<h2>Penurunan Markowitz ke QUBO dan Ising</h2>
-<div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Penurunan Rumus</a></li><li><a href="#tabset-10-2">Tabel Data</a></li></ul>
-<div class="tab-content">
-<div id="tabset-10-1">
-<ul>
-<li><strong>Fungsi Potensial EPG (Energi Objektif):</strong> <span class="math display">\[ E(\mathbf{x}) = \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i \]</span></li>
-<li><strong>Transformasi ke Hamiltonian QUBO:</strong> Menggabungkan Fungsi Energi dan Suku Penalti Anggaran <span class="math inline">\(A\)</span>: <span class="math display">\[ E_{total}(\mathbf{x}) = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2 \]</span></li>
-<li><strong>Variabel Keputusan Diskrit ke <em>Spin</em> Mekanika Kuantum:</strong> Substitusi <span class="math inline">\(x_i = \frac{1 - \hat{Z}_i}{2}\)</span>, menghasilkan koefisien Hamiltonian Ising akhir (<span class="math inline">\(h_i\)</span> dan <span class="math inline">\(J_{ij}\)</span>): <span class="math display">\[ \hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i&lt;j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C \]</span></li>
-</ul>
-</div>
-<div id="tabset-10-2">
-<div class="scrollable" style="max-height: 450px;">
-<p><strong>Tabel: Ringkasan Performa Finansial Strategi Kuantum, SLSQP, dan Equal Weight (N=2,4)</strong></p>
-<table class="caption-top" style="width:100%;">
-<colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Strategi</th>
-<th>N=2 Return</th>
-<th>N=2 Sharpe</th>
-<th>N=2 MDD</th>
-<th>N=4 Return</th>
-<th>N=4 Sharpe</th>
-<th>N=4 MDD</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>GT-VQE (Hibrida)</strong></td>
-<td><strong>145,07%</strong></td>
-<td><strong>1,0185</strong></td>
-<td>30,33%</td>
-<td><strong>73,15%</strong></td>
-<td><strong>1,0107</strong></td>
-<td><strong>16,68%</strong></td>
-</tr>
-<tr class="even">
-<td>VQE (Tanpa GT)</td>
-<td>121,30%</td>
-<td>0,9331</td>
-<td>30,33%</td>
-<td>16,89%</td>
-<td>0,3592</td>
-<td>20,89%</td>
-</tr>
-<tr class="odd">
-<td>SLSQP (Klasik)</td>
-<td>51,34%</td>
-<td>0,6736</td>
-<td><strong>15,91%</strong></td>
-<td>12,91%</td>
-<td>0,2810</td>
-<td>21,12%</td>
-</tr>
-<tr class="even">
-<td><em>Equal Weight</em></td>
-<td>97,88%</td>
-<td>0,9764</td>
-<td>27,49%</td>
-<td>35,57%</td>
-<td>0,6790</td>
-<td>18,42%</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
+<section id="simulasi-interaktif-konvergensi-vqe" class="slide level2">
+<h2>Simulasi Interaktif Konvergensi VQE</h2>
+<iframe src="interactive_vqe.html" width="100%" height="600px" style="border:none; border-radius:15px; background:transparent;">
+</iframe>
+<div style="font-size:0.55em; text-align:center; color:#666; margin-top:5px;">
+<p>Silakan sesuaikan parameter bias dan interaksi (<span class="math inline">\(h_i\)</span>, <span class="math inline">\(J_{ij}\)</span>) lalu klik <b>Mulai SPSA</b> untuk melihat simulasi konvergensi.</p>
 </div>
 </section>
 <section id="validasi-brute-force-vs-benchmark-slsqp-n2" class="slide level2">

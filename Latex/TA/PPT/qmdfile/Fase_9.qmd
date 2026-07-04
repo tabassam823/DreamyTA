@@ -1,29 +1,12 @@
 # Fase 9: Hasil Analisis dan Kesimpulan
 
-## Penurunan Markowitz ke QUBO dan Ising
+## Simulasi Interaktif Konvergensi VQE
 
-::: {.panel-tabset}
-### Penurunan Rumus
-* **Fungsi Potensial EPG (Energi Objektif):**
-  $$ E(\mathbf{x}) = \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i $$
-* **Transformasi ke Hamiltonian QUBO:** Menggabungkan Fungsi Energi dan Suku Penalti Anggaran $A$:
-  $$ E_{total}(\mathbf{x}) = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2 $$
-* **Variabel Keputusan Diskrit ke *Spin* Mekanika Kuantum:** 
-  Substitusi $x_i = \frac{1 - \hat{Z}_i}{2}$, menghasilkan koefisien Hamiltonian Ising akhir ($h_i$ dan $J_{ij}$):
-  $$ \hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C $$
+<iframe src="interactive_vqe.html" width="100%" height="600px" style="border:none; border-radius:15px; background:transparent;"></iframe>
 
-### Tabel Data
-::: {.scrollable style="max-height: 450px;"}
-**Tabel: Ringkasan Performa Finansial Strategi Kuantum, SLSQP, dan Equal Weight (N=2,4)**
-
-| Strategi | N=2 Return | N=2 Sharpe | N=2 MDD | N=4 Return | N=4 Sharpe | N=4 MDD |
-|---|---|---|---|---|---|---|
-| **GT-VQE (Hibrida)** | **145,07%** | **1,0185** | 30,33% | **73,15%** | **1,0107** | **16,68%** |
-| VQE (Tanpa GT) | 121,30% | 0,9331 | 30,33% | 16,89% | 0,3592 | 20,89% |
-| SLSQP (Klasik) | 51,34% | 0,6736 | **15,91%** | 12,91% | 0,2810 | 21,12% |
-| *Equal Weight* | 97,88% | 0,9764 | 27,49% | 35,57% | 0,6790 | 18,42% |
-:::
-:::
+<div style="font-size:0.55em; text-align:center; color:#666; margin-top:5px;">
+Silakan sesuaikan parameter bias dan interaksi ($h_i$, $J_{ij}$) lalu klik <b>Mulai SPSA</b> untuk melihat simulasi konvergensi.
+</div>
 
 ---
 

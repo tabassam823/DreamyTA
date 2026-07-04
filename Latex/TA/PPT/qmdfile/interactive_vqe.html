@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPSA VQE Interactive Simulation</title>
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 15px;
+            font-family: 'Inter', sans-serif;
+            background-color: #090b10;
+            color: #c9d1d9;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(13, 17, 23, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="number"] {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #30363d;
+            color: #58a6ff;
+            border-radius: 8px;
+            padding: 10px;
+            width: 70px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 800;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #58a6ff;
+            box-shadow: 0 0 8px rgba(88, 166, 255, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, #1f6feb, #388bfd);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(31, 111, 235, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(31, 111, 235, 0.5);
+            background: linear-gradient(135deg, #388bfd, #58a6ff);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .viz-container {
+            display: flex;
+            flex: 1;
+            gap: 15px;
+            min-height: 0; /* Important for flex child with Plotly */
+        }
+
+        .plot-box {
+            flex: 1;
+            background: rgba(13, 17, 23, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .plot-div {
+            flex: 1;
+            width: 100%;
+        }
+
+        .target-info {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #58a6ff;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="glass-panel controls">
+        <div class="input-group">
+            <label>Bias h₀</label>
+            <input type="number" id="h0" value="0.1735" step="0.01">
+        </div>
+        <div class="input-group">
+            <label>Bias h₁</label>
+            <input type="number" id="h1" value="0.0931" step="0.01">
+        </div>
+        <div class="input-group">
+            <label>Interaksi J₀₁</label>
+            <input type="number" id="j01" value="-0.5014" step="0.01">
+        </div>
+        <div class="input-group">
+            <label>Shift C</label>
+            <input type="number" id="c_shift" value="0.3683" step="0.01">
+        </div>
+        <button onclick="startSim()">Mulai SPSA 🚀</button>
+    </div>
+
+    <div class="viz-container">
+        <div class="plot-box">
+            <div id="bloch0" class="plot-div"></div>
+            <div id="target0" class="target-info">Target: |0⟩</div>
+        </div>
+        <div class="plot-box">
+            <div id="bloch1" class="plot-div"></div>
+            <div id="target1" class="target-info">Target: |1⟩</div>
+        </div>
+        <div class="plot-box" style="flex: 1.2;">
+            <div id="energyPlot" class="plot-div"></div>
+        </div>
+    </div>
+
+    <script>
+        // Create Sphere Data
+        function createSphereMesh() {
+            let u = [], v = [], x = [], y = [], z = [];
+            for(let i=0; i<=30; i++){
+                let phi = Math.PI * i / 30;
+                for(let j=0; j<=30; j++){
+                    let theta = 2 * Math.PI * j / 30;
+                    x.push(Math.sin(phi) * Math.cos(theta));
+                    y.push(Math.sin(phi) * Math.sin(theta));
+                    z.push(Math.cos(phi));
+                }
+            }
+            return {
+                type: 'mesh3d',
+                x: x, y: y, z: z,
+                alphahull: 0,
+                opacity: 0.08,
+                color: '#58a6ff',
+                hoverinfo: 'none',
+                lighting: { ambient: 0.8, diffuse: 0.2, specular: 0.1 }
+            };
+        }
+
+        const axesData = [
+            { type: 'scatter3d', mode: 'lines', x: [-1.2, 1.2], y: [0, 0], z: [0, 0], line: {color: '#8b949e', width: 2}, hoverinfo: 'none'},
+            { type: 'scatter3d', mode: 'lines', x: [0, 0], y: [-1.2, 1.2], z: [0, 0], line: {color: '#8b949e', width: 2}, hoverinfo: 'none'},
+            { type: 'scatter3d', mode: 'lines', x: [0, 0], y: [0, 0], z: [-1.2, 1.2], line: {color: '#8b949e', width: 2}, hoverinfo: 'none'},
+            { type: 'scatter3d', mode: 'text', x: [1.3, -1.3, 0, 0, 0, 0], y: [0, 0, 1.3, -1.3, 0, 0], z: [0, 0, 0, 0, 1.3, -1.3], 
+              text: ['|+⟩', '|-⟩', '|i⟩', '|-i⟩', '|0⟩', '|1⟩'], textfont: {color: '#c9d1d9', size: 14, family: 'Inter'}, hoverinfo: 'none'}
+        ];
+
+        const layout3d = (title) => ({
+            title: { text: title, font: { color: '#ffffff', size: 16, family: 'Inter' } },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            margin: { l: 0, r: 0, b: 0, t: 40 },
+            scene: {
+                xaxis: { visible: false, range: [-1.5, 1.5] },
+                yaxis: { visible: false, range: [-1.5, 1.5] },
+                zaxis: { visible: false, range: [-1.5, 1.5] },
+                camera: { eye: { x: 1.3, y: 1.3, z: 0.8 } },
+                aspectmode: 'cube'
+            }
+        });
+
+        // Initial setup
+        const sphereMesh = createSphereMesh();
+        const vector0 = { type: 'scatter3d', mode: 'lines+markers', x: [0,0], y: [0,0], z: [0,1], 
+                          line: {width: 6, color: '#ff7b72'}, marker: {size: [0, 6], color: '#ff7b72'} };
+        const vector1 = { type: 'scatter3d', mode: 'lines+markers', x: [0,0], y: [0,0], z: [0,1], 
+                          line: {width: 6, color: '#3fb950'}, marker: {size: [0, 6], color: '#3fb950'} };
+
+        Plotly.newPlot('bloch0', [sphereMesh, ...axesData, vector0], layout3d('Qubit 0 State'), {displayModeBar: false});
+        Plotly.newPlot('bloch1', [sphereMesh, ...axesData, vector1], layout3d('Qubit 1 State'), {displayModeBar: false});
+
+        const energyLayout = {
+            title: { text: 'Konvergensi Energi SPSA', font: { color: '#ffffff', size: 16, family: 'Inter' } },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            margin: { l: 50, r: 20, b: 50, t: 40 },
+            xaxis: { title: 'Iterasi', gridcolor: '#30363d', color: '#8b949e' },
+            yaxis: { title: 'Energi Hamiltonian', gridcolor: '#30363d', color: '#8b949e' },
+            showlegend: false
+        };
+        const energyTrace = { type: 'scatter', mode: 'lines+markers', x: [], y: [], line: {color: '#58a6ff', width: 3}, marker: {size: 4, color: '#58a6ff'} };
+        Plotly.newPlot('energyPlot', [energyTrace], energyLayout, {displayModeBar: false});
+
+        // Animation logic
+        let animationId;
+        let frame = 0;
+        const totalFrames = 120;
+        let q0Trajectory = [], q1Trajectory = [], energyTrajectory = [];
+
+        function getTargetName(z) {
+            return z > 0 ? '|0⟩' : '|1⟩';
+        }
+
+        function generateBlochTrajectory(targetZ) {
+            let traj = [];
+            // Random start
+            let th = Math.acos(2 * Math.random() - 1);
+            let ph = Math.random() * 2 * Math.PI;
+            let start = [Math.sin(th)*Math.cos(ph), Math.sin(th)*Math.sin(ph), Math.cos(th)];
+            let target = [0, 0, targetZ];
+            
+            for(let i=0; i<totalFrames; i++) {
+                let frac = i / (totalFrames - 1);
+                let ease = 1 - Math.pow(1 - frac, 4); // Quartic ease out
+                
+                let v = [
+                    start[0]*(1-ease) + target[0]*ease,
+                    start[1]*(1-ease) + target[1]*ease,
+                    start[2]*(1-ease) + target[2]*ease
+                ];
+                
+                // Add decaying SPSA noise
+                let noiseAmt = 0.6 * (1 - ease);
+                v[0] += (Math.random()-0.5) * noiseAmt;
+                v[1] += (Math.random()-0.5) * noiseAmt;
+                v[2] += (Math.random()-0.5) * noiseAmt;
+                
+                // Normalize to surface
+                let norm = Math.sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+                traj.push([v[0]/norm, v[1]/norm, v[2]/norm]);
+            }
+            return traj;
+        }
+
+        function startSim() {
+            if(animationId) cancelAnimationFrame(animationId);
+            
+            let h0 = parseFloat(document.getElementById('h0').value);
+            let h1 = parseFloat(document.getElementById('h1').value);
+            let j01 = parseFloat(document.getElementById('j01').value);
+            let c_shift = parseFloat(document.getElementById('c_shift').value);
+            
+            // Calculate energies for Z basis states using H = -h0*Z0 - h1*Z1 - J01*Z0*Z1 + C
+            let states = [
+                { s: '00', z0: 1, z1: 1, e: -h0 - h1 - j01 + c_shift },
+                { s: '01', z0: 1, z1: -1, e: -h0 + h1 + j01 + c_shift },
+                { s: '10', z0: -1, z1: 1, e: h0 - h1 + j01 + c_shift },
+                { s: '11', z0: -1, z1: -1, e: h0 + h1 - j01 + c_shift }
+            ];
+            states.sort((a, b) => a.e - b.e);
+            let ground = states[0];
+            
+            // Show targets
+            document.getElementById('target0').innerText = `Target: ${getTargetName(ground.z0)}`;
+            document.getElementById('target1').innerText = `Target: ${getTargetName(ground.z1)}`;
+            document.getElementById('target0').style.opacity = 1;
+            document.getElementById('target1').style.opacity = 1;
+
+            q0Trajectory = generateBlochTrajectory(ground.z0);
+            q1Trajectory = generateBlochTrajectory(ground.z1);
+            
+            let maxE = Math.max(...states.map(s => s.e));
+            let startE = maxE + Math.abs(maxE)*0.5 + 0.5; // Start high
+            energyTrajectory = [];
+            for(let i=0; i<totalFrames; i++){
+                let frac = i / (totalFrames - 1);
+                let ease = 1 - Math.pow(1 - frac, 5); // Faster energy drop
+                let noiseAmt = Math.abs(startE - ground.e) * 0.3 * (1 - ease);
+                let e = startE * (1 - ease) + ground.e * ease + (Math.random()-0.5)*noiseAmt;
+                energyTrajectory.push(e);
+            }
+            
+            frame = 0;
+            Plotly.restyle('energyPlot', {x: [[]], y: [[]]}, [0]);
+            
+            // Update y-axis range dynamically
+            let layoutUpdate = {
+                'yaxis.range': [ground.e - 0.5, startE + 0.5],
+                'xaxis.range': [0, totalFrames]
+            };
+            Plotly.relayout('energyPlot', layoutUpdate);
+            
+            animate();
+        }
+
+        function animate() {
+            if(frame >= totalFrames) return;
+            
+            let v0 = q0Trajectory[frame];
+            let v1 = q1Trajectory[frame];
+            
+            // Traces: 0=mesh, 1,2,3=axes, 4=text, 5=vector
+            Plotly.restyle('bloch0', {'x': [[0, v0[0]]], 'y': [[0, v0[1]]], 'z': [[0, v0[2]]]}, [5]);
+            Plotly.restyle('bloch1', {'x': [[0, v1[0]]], 'y': [[0, v1[1]]], 'z': [[0, v1[2]]]}, [5]);
+            
+            let eX = Array.from({length: frame+1}, (_, i) => i);
+            let eY = energyTrajectory.slice(0, frame+1);
+            Plotly.restyle('energyPlot', {'x': [eX], 'y': [eY]}, [0]);
+            
+            frame++;
+            // Control speed (requestAnimationFrame is 60fps, skip frames if needed or just let it run)
+            animationId = requestAnimationFrame(animate);
+        }
+    </script>
+</body>
+</html>

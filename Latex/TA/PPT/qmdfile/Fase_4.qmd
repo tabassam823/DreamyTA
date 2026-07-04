@@ -1,16 +1,27 @@
 # Fase 4: Ekonofisika dan Model Ising
 
 ## Sejarah Ising
-* **1920-an:** Wilhelm Lenz dan Ernst Ising merumuskan model interaksi spin elektron diskrit pada 1 dimensi.
-* **1944:** Lars Onsager membuktikan transisi fase dan mengatasi model Ising untuk 2 dimensi.
-* **Kontemporer:** Ising menjadi "bahasa standar" dalam optimasi kombinatorial berkat kemajuan komputasi kuantum.
 
-![](../Gambar/1D_Model_atT.png)
-<div style="font-size: 0.7em; text-align: center;">Model Ising 1D</div>
+<div style="text-align: center;">
+  <img src="../Gambar/LenzIsing_Foto.png" style="height: 350px; margin-bottom: 20px;">
+  <br>
+  <img src="../Gambar/1D_Model_atT.png" style="height: 120px;">
+  <div style="font-size: 0.7em; margin-top: 10px;">Model Ising 1D</div>
+</div>
 
 ---
 
 ## Perkembangan Ising ke Sistem Kompleks
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../Gambar/Onsager_Foto.png){fig-align="center" height="200px"}
+:::
+::: {.column width="50%"}
+![](../Gambar/Spin2D.png){fig-align="center" height="200px"}
+:::
+::::
+
 Model Ising terbukti efektif memetakan sistem kompleks di luar fisika material. 
 Contoh kasus kompleks yang bisa diatasi:
 * Optimasi jaringan logistik dan rantai pasok.
@@ -29,6 +40,9 @@ Memetakan fungsi biaya portofolio ke dalam struktur Hamiltonian sistem fisik.
 | Tren/Ekspektasi Pasar | Medan Magnet Lokal ($h_i$) |
 | Korelasi/Kovariansi Antar Aset | Interaksi Kopling Antar *Spin* ($J_{ij}$) |
 | Alokasi Modal Paling Efisien | Konfigurasi Energi Terendah (*Ground State*) |
+
+<br>
+(Lucas, 2014; Galam, 2010)
 
 ---
 

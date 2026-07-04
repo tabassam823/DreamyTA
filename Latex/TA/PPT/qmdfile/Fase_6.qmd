@@ -9,38 +9,45 @@
 * Melalui komutator unitari, turunan analitik dari nilai ekspektasi kuantum dapat disederhanakan menjadi:
   $$ \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{i}{2} \langle{\psi(\theta)}| [\sigma, M] |{\psi(\theta)}\rangle $$
   (dimana $M$ merepresentasikan operator gabungan pada sirkuit).
+* **Keterbatasan *Finite Difference* (FD):** Pendekatan numerik seperti FD sering kali gagal karena sangat bergantung pada presisi selisih berskala kecil. Derau statistik (*noise*) pada perangkat keras kuantum memicu ketidakstabilan numerik yang merusak akurasi kalkulasi gradien.
+* **Solusi *Parameter Shift Rule* (PSR):** Untuk mengatasi hal tersebut, PSR diterapkan guna membantu *Gradient Descent* mengoptimasi parameter sirkuit secara kokoh. PSR mengeksploitasi sifat periodik dari operator uniter untuk menghitung gradien analitis secara eksak tanpa memperburuk tingkat eror.
 
 ### Penurunan Rumus
-<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-**Penurunan: Gradien Energi pada Sirkuit Kuantum**
+<div class="scrollable" style="max-height: 450px; font-size: 0.65em;">
+**Penurunan: Gradien Energi dan Parameter Shift Rule**
 
 **Langkah 1 — Turunan Parsial Nilai Ekspektasi:**
-
 $$\frac{\partial E(\theta)}{\partial \theta_j} = \left\langle \frac{\partial \psi(\theta)}{\partial \theta_j} \right| \hat{\mathcal{H}} |\psi(\theta)\rangle + \langle \psi(\theta)| \hat{\mathcal{H}} \left| \frac{\partial \psi(\theta)}{\partial \theta_j} \right\rangle$$
 
----
-
 **Langkah 2 — Dekomposisi Keadaan Kuantum:**
-
-Untuk gerbang rotasi berparameter $\theta$:
-
+Untuk gerbang rotasi berparameter $\theta$: 
 $$|\psi(\theta)\rangle = \hat{U}_B \hat{U}(\theta) \hat{U}_A |00\rangle, \quad \hat{U}(\theta) = e^{-i\frac{\theta}{2}\sigma}$$
-
-Definisikan: $|\phi\rangle = \hat{U}_A|00\rangle$ dan $\hat{M} = \hat{U}_B^\dagger \hat{\mathcal{H}} \hat{U}_B$, sehingga:
-
+Definisikan $|\phi\rangle = \hat{U}_A|00\rangle$ dan $\hat{M} = \hat{U}_B^\dagger \hat{\mathcal{H}} \hat{U}_B$, sehingga:
 $$E(\theta) = \langle \phi| \hat{U}^\dagger(\theta) \hat{M} \hat{U}(\theta) |\phi\rangle$$
 
----
+**Langkah 3 — Turunan Operator Uniter dan Komutator:**
+Turunan parsial ekspektasi energi adalah:
+$$\frac{\partial E(\theta)}{\partial \theta} = \langle \phi| \frac{\partial \hat{U}^{\dagger}(\theta)}{\partial \theta} \hat{M} \hat{U}(\theta) |\phi\rangle + \langle \phi| \hat{U}^{\dagger}(\theta) \hat{M} \frac{\partial \hat{U}(\theta)}{\partial \theta} |\phi\rangle$$
+Karena $\frac{\partial \hat{U}(\theta)}{\partial \theta} = -\frac{i}{2}\sigma \hat{U}(\theta)$, persamaan disederhanakan menjadi bentuk komutator:
+$$\frac{\partial E(\theta)}{\partial \theta} = \frac{i}{2} \langle \psi(\theta)| \sigma \hat{M} |\psi(\theta)\rangle - \frac{i}{2} \langle \psi(\theta)| \hat{M}\sigma |\psi(\theta)\rangle = \frac{i}{2} \langle \psi(\theta)| [\sigma, \hat{M}] |\psi(\theta)\rangle$$
 
-**Langkah 3 — Turunan Operator Uniter:**
+**Langkah 4 — Pergeseran Parameter (Parameter Shift):**
+Bentuk komutator sulit diukur pada perangkat keras. Gunakan pergeseran parameter $s$:
+$$\hat{U}(\theta\pm s) = \exp\left[-i\frac{\theta\pm s}{2}\sigma\right] = \hat{U}(\theta)\hat{U}(\pm s)$$
+$$E(\theta+s) = \langle \psi(\theta)| \hat{U}^{\dagger}(s) \hat{M} \hat{U}(s) |\psi(\theta)\rangle$$
 
-$$\frac{\partial \hat{U}(\theta)}{\partial \theta} = -\frac{i}{2}\sigma \hat{U}(\theta)$$
+**Langkah 5 — Identitas Euler:**
+$$\hat{U}(s) = \cos\left(\frac{s}{2}\right)\hat{I} - i\sin\left(\frac{s}{2}\right)\sigma$$
+Substitusikan untuk pergeseran positif dan negatif:
+$$E(\theta\pm s) = \cos^2\left(\frac{s}{2}\right)\langle\hat{M}\rangle + \sin^2\left(\frac{s}{2}\right) \langle \sigma\hat{M}\sigma\rangle \pm i\sin\left(\frac{s}{2}\right) \cos\left(\frac{s}{2}\right) \langle[\sigma,\hat{M}]\rangle$$
 
-Substitusi ke turunan energi:
+**Langkah 6 — Selisih Ekspektasi Energi:**
+Kurangkan ekspektasi positif dan negatif:
+$$E(\theta+s) - E(\theta-s) = 2i\sin\left(\frac{s}{2}\right)\cos\left(\frac{s}{2}\right)\langle[\sigma,\hat{M}]\rangle = i\sin(s)\langle[\sigma,\hat{M}]\rangle$$
 
-$$\frac{\partial E(\theta)}{\partial \theta} = \frac{i}{2} \langle \psi(\theta)| \sigma \hat{M} |\psi(\theta)\rangle - \frac{i}{2} \langle \psi(\theta)| \hat{M}\sigma |\psi(\theta)\rangle$$
-
-$$\therefore \frac{\partial E(\theta)}{\partial \theta} = \frac{i}{2} \langle \psi(\theta)| [\sigma, \hat{M}] |\psi(\theta)\rangle$$
+**Langkah 7 — Pemilihan $s = \pi/2$ (Gradien Eksak):**
+Dengan memilih pergeseran sudut $s=\pi/2$, gradien akhir diformulasikan sebagai:
+$$\boxed{\frac{\partial E(\theta)}{\partial \theta} = \frac{1}{2}\left[E\left(\theta+\frac{\pi}{2}\right) - E\left(\theta-\frac{\pi}{2}\right)\right]}$$
 
 <br><br><br>
 </div>
@@ -54,7 +61,7 @@ $$\therefore \frac{\partial E(\theta)}{\partial \theta} = \frac{i}{2} \langle \p
 ### Rumus Utama
 * PSR adalah metode kalkulasi gradien analitik (bukan numerik) secara langsung di perangkat keras kuantum.
 * Menggunakan konsep pergeseran parameter $\theta$ sebesar $s = \frac{\pi}{2}$ ke arah positif dan negatif.
-  $$ \langle E(\theta \pm s)\rangle = \langle{\psi}| \hat{U}(\pm s)^{\dagger}\hat{M}\hat{U}(\pm s)|{\psi}\rangle $$
+  $$ \langle E(\theta \pm s)\rangle = \langle{\psi (\theta)}| \hat{U}(\pm s)^{\dagger}\hat{M}\hat{U}(\pm s)|{\psi (\theta)}\rangle $$
 * Selisih kedua evaluasi menghasilkan gradien eksak:
   $$ \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{1}{2} \left[ \langle E(\theta+s)\rangle - \langle E(\theta-s)\rangle \right] $$
 
@@ -124,7 +131,6 @@ Gradien dihitung **hanya dari dua evaluasi sirkuit** yang digeser $\pm \pi/2$.
   $$ \hat{g}_k = \frac{E(\theta_k + c_k \Delta_k) - E(\theta_k - c_k \Delta_k)}{2 c_k \Delta_k} $$
 * Dengan ekspektasi estimasi gradien yang terbukti ekuivalen dengan gradien eksak:
   $$ \mathbb{E} \left[ \hat{g}_k \right] = \nabla E(\theta_k) $$
-* **Keunggulan:** SPSA jauh lebih efisien karena kompleksitas evaluasi fungsinya konstan $O(1)$, terlepas dari berapapun jumlah parameter $\theta$ yang ada dalam sirkuit.
 
 ### Penurunan Rumus
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">

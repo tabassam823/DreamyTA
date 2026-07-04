@@ -1,9 +1,47 @@
 # Fase 0: Pendahuluan
 
 ## Latar Belakang Masalah
-* **Limitasi Model Markowitz:** Pendekatan klasik kesulitan menangani anomali pasar (*fat-tailed distribution*) dan dinamika non-linear ketika jumlah parameter korelasi antar aset membesar.
-* **Pendekatan Ekonofisika:** Mengubah fungsi objektif optimasi menjadi kerangka *Quadratic Unconstrained Binary Optimization* (QUBO) agar selaras dengan model Hamiltonian Ising.
-* **Potensi Komputasi Kuantum:** Memanfaatkan *Variational Quantum Eigensolver* (VQE) untuk mencari *ground state* energi (representasi alokasi portofolio terbaik) dengan waktu komputasi yang efisien.
+:::: {.columns}
+
+::: {.column width="30%"}
+<div style="text-align: center;">
+
+::: {.fragment .fade-in}
+![](../Gambar/Markowitz_Foto.png){width="80%" style="border-radius: 10px; margin-bottom: 10px;"}
+:::
+
+::: {.fragment .fade-in}
+![](../Gambar/Porto_selection.png){width="100%" style="border-radius: 10px;"}
+:::
+
+</div>
+:::
+
+::: {.column width="30%"}
+<div style="text-align: center;">
+
+::: {.fragment .fade-in}
+![](../Gambar/Mantegna_Foto.png){width="80%" style="border-radius: 10px; margin-bottom: 10px;"}
+:::
+
+::: {.fragment .fade-in}
+![](../Gambar/intro_econophys.png){width="100%" style="border-radius: 10px;"}
+:::
+
+</div>
+:::
+
+::: {.column width="30%"}
+<div style="text-align: center;">
+
+::: {.fragment .fade-in}
+![](../Gambar/komputer_kuantum.png){width="100%" style="border-radius: 10px;"}
+:::
+
+</div>
+:::
+
+::::
 
 ---
 
@@ -14,16 +52,17 @@
 border:2px solid #d9d9d9;
 border-radius:12px;
 padding:12px;
-height:240px;
+min-height:340px;
 background:#fafafa;
 box-shadow:2px 2px 6px rgba(0,0,0,.08);
 text-align:center;
+font-size:0.9em;
 }
 
 .arrow{
 font-size:2em;
 text-align:center;
-margin-top:90px;
+margin-top:120px;
 color:#666;
 }
 
@@ -57,17 +96,21 @@ background:#faf7ff;
 
 <div class="card">
 
-<img src="images/vqe.png" width="120">
-
 <div class="title">
 Penelitian Terdahulu
 </div>
+
+<img src="../Gambar/wang_pct.png" width="350">
+
+<div style="margin-top: 20px;">
 
 **Wang dkk. (2025)**
 
 VQE + WCVaR + CMA-ES
 
 Stabilisasi konvergensi energi.
+
+</div>
 
 </div>
 
@@ -87,17 +130,21 @@ Stabilisasi konvergensi energi.
 
 <div class="card">
 
-<img src="images/hybrid.png" width="120">
-
 <div class="title">
 Penelitian Terdahulu
 </div>
+
+<img src="../Gambar/wei_pct.png" width="350">
+
+<div style="margin-top: 20px;">
 
 **Wei dkk. (2025)**
 
 Quantum-Classical Hybrid Annealing
 
 Memecah masalah QUBO kompleks menjadi submasalah.
+
+</div>
 
 </div>
 
@@ -117,11 +164,13 @@ Memecah masalah QUBO kompleks menjadi submasalah.
 
 <div class="card gap">
 
-<img src="images/barren.png" width="120">
-
 <div class="title">
 Research Gap
 </div>
+
+<img src="../Gambar/barren_plateau.png" width="350">
+
+<div style="margin-top: 20px;">
 
 Masih bergantung pada
 
@@ -133,45 +182,55 @@ yang rentan mengalami
 
 </div>
 
+</div>
+
 :::
 
 ::: {.column width="23%"}
 
 <div class="card solution">
 
-<img src="images/nash.png" width="120">
-
 <div class="title">
-Penelitian Ini
+Solusi
 </div>
+
+<img src="../Gambar/GT_pct.png" width="150">
+
+<div style="margin-top: 20px;">
+
 Menggunakan **Nash Equilibrium** sebagai **Warm-Start Initialization**
+
+</div>
 </div>
 :::
 ::::
 
-<br>
+<div style="font-size:0.45em;margin-top:20px;color:#666;text-align:center;">
 
-<div class="metric">
-
-### 🔍 Kontribusi Tambahan
-
-<img src="images/entropy.png" width="90">
-
-**Entropi Von Neumann**
-
-Digunakan untuk memantau perubahan *purity* dan tingkat keacakan keadaan kuantum selama proses optimasi.
-
-</div>
-
-<div style="font-size:0.45em;margin-top:8px;color:#666;">
-
-Wang *et al.* (2025); Wei *et al.* (2025)
+Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 
 </div>
 
 ---
 
 ## Tujuan Penelitian
-1. Menganalisis ketepatan transformasi matematika dan kardinalitas portofolio pada fungsi potensial EPG ke kerangka *Spin* Ising.
-2. Mengevaluasi kontribusi strategi inisialisasi *warm-start* (dibanding inisialisasi acak) terhadap peningkatan efisiensi konvergensi energi kuantum.
-3. Menguji supremasi (*backtesting*) pengembalian finansial strategi portofolio hibrida GT-VQE pada kondisi pergerakan historis pasar modal riil.
+
+1. Menganalisis formulasi bias aset sebagai parameter medan lokal ($h_i$) dan interaksi antar aset sebagai koefisien kopling ($J_{ij}$) melalui pendekatan fungsi potensial dalam sistem Hamiltonian berbasis *Exact Potential Game* (EPG).
+2. Mengevaluasi kontribusi strategi *warm-start* berbasis *Nash Equilibrium* dalam meningkatkan efisiensi pencarian solusi optimal pada algoritma VQE.
+3. Menguji kapabilitas algoritma VQE yang menggunakan optimasi SPSA dan *Ansatz EfficientSU(2)* untuk menghasilkan keputusan alokasi aset yang optimal dalam kondisi pasar yang kompleks.
+
+---
+
+## Batasan Masalah (1/2)
+
+1. Portofolio yang dianalisis dibatasi pada pemilihan 1 aset dari 2 pilihan aset pada sistem $N=2$ dan 2 aset dari 4 pilihan aset pada sistem $N=4$.
+2. Model permainan yang digunakan adalah skema *non zero-sum game* dalam kerangka *Exact Potential Game*.
+3. Simulasi dan implementasi algoritma dilakukan menggunakan simulator *Pennylane* tanpa mempertimbangkan *noise*.
+
+---
+
+## Batasan Masalah (2/2)
+
+4. Tugas akhir ini hanya merupakan *proof-of-concept* dari implementasi *warm-start* ekuilibrium Nash terhadap performa algoritma VQE dalam menemukan solusi *ground state* pada model portofolio hibrida.
+5. Analisis Entropi Von Neumann dibatasi sebagai indikator perubahan distribusi probabilitas keadaan kuantum selama proses optimasi VQE dan tidak digunakan sebagai kajian mendalam mengenai sifat keterbelitan dari *ansatz*.
+6. Analisis berfokus pada pengaruh *warm-start* ekuilibrium Nash terhadap proses optimasi VQE, bukan untuk membuktikan keunggulan komputasi kuantum terhadap metode klasik.

@@ -37,9 +37,9 @@ def format_latex(df, caption, label, longtable=True):
     return "\n".join(latex)
 
 # 1. Bias H and C_Obj, Lambda
-df_bias = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/bias_h_total_N4.csv")
-df_param = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/parameter_pendamping_N4.csv")
-df_metrics = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/metrik_return_dan_lambda_N4.csv")
+df_bias = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/bias_h_total_N4.csv")
+df_param = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/parameter_pendamping_N4.csv")
+df_metrics = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/metrik_return_dan_lambda_N4.csv")
 
 dates = df_bias['Date'].unique()
 
@@ -65,7 +65,7 @@ df_h = pd.DataFrame(data_h)
 latex_h = format_latex(df_h, "Parameter Dinamis Portofolio N=4 ($\\lambda$, $h_{obj}$, $C_{obj}$)", "tab:unified_n4")
 
 # 2. Interaksi J
-df_j = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/interaksi_J_total_N4.csv")
+df_j = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/interaksi_J_total_N4.csv")
 data_j = []
 for i, d in enumerate(dates, 1):
     row = {'P': i, 'Tanggal': d}
@@ -88,14 +88,14 @@ df_j_table = pd.DataFrame(data_j)
 latex_j = format_latex(df_j_table, "Parameter Interaksi Hamiltonian $J$ N=4", "tab:interaction_j_n4")
 
 # 3. SBR Iterations
-df_sbr = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/riwayat_nash_sbr_N4.csv")
+df_sbr = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/riwayat_nash_sbr_N4.csv")
 # To avoid making it too long, we might just list the SBR iterations
 # The CSV has Date, Iteration, Bitstring, Utility, Swap
 # I will just format this directly
 latex_sbr = format_latex(df_sbr, "Riwayat Iterasi Sequential Best Response (SBR) N=4", "tab:sbr_history_n4")
 
 # 4. VQE Convergence
-df_vqe = pd.read_csv("GTQuantumInvest/Hasil_N4_GT_5/hasil_depth_vs_energi_N4.csv")
+df_vqe = pd.read_csv("GTQuantumInvest/Hasil_N4_GT/hasil_depth_vs_energi_N4.csv")
 # Group by Date, Depth, get Energy
 # Pivot so Columns are Depth 1 to 8, Rows are Dates (or P)
 df_vqe_pivot = df_vqe.pivot(index='Date', columns='Depth', values='Energy').reset_index()
