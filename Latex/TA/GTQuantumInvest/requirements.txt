@@ -1,0 +1,14 @@
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+qiskit
+qiskit-aer
+pennylane
+yfinance
+statsmodels
+marimo
+altair
+scipy
+pylatexenc

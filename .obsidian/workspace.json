@@ -53,12 +53,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/MD_File/Main/14_QuatumMeasurement.md",
+                "file": "Latex/TA/PPT/Revisi1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "14_QuatumMeasurement"
+              "title": "Revisi1"
             }
           },
           {
@@ -102,7 +102,7 @@
       {
         "id": "c40d213367596153",
         "type": "tabs",
-        "dimension": 71.13997113997114,
+        "dimension": 61.82728410513142,
         "children": [
           {
             "id": "1e33936fe2683637",
@@ -149,7 +149,7 @@
       {
         "id": "c38e9d58e7528e8a",
         "type": "tabs",
-        "dimension": 28.860028860028862,
+        "dimension": 38.17271589486859,
         "children": [
           {
             "id": "9e5bcccc9ae69aaf",
@@ -157,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/MD_File/Main/14_QuatumMeasurement.md",
+                "file": "Latex/TA/PPT/Revisi1.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 14_QuatumMeasurement"
+              "title": "Outline of Revisi1"
             }
           }
         ]
@@ -290,36 +290,41 @@
   },
   "active": "83e083c0f0e0e623",
   "lastOpenFiles": [
-    "Latex/TA/PPT/qmdfile/main_files/mediabag",
-    "Latex/TA/main.lot",
-    "Latex/TA/main.lof",
-    "Latex/TA/main.blg",
+    "Latex/TA/GTQuantumInvest/WhatsApp Image 2026-06-10 at 3.16.25 PM.jpeg",
+    "Latex/TA/GTQuantumInvest/test_qiskit_render.py",
+    "Latex/TA/GTQuantumInvest/run_vqe_adaptive.py",
+    "Latex/TA/GTQuantumInvest/run_strategy_step.py",
+    "Latex/TA/GTQuantumInvest/run_spsa_test.py",
+    "Latex/TA/GTQuantumInvest/Run.sh",
+    "Latex/TA/GTQuantumInvest/Run.ps1",
+    "Latex/TA/GTQuantumInvest/riwayat_nash_sbr.csv",
+    "Latex/TA/GTQuantumInvest/requirements.txt",
+    "Latex/TA/GTQuantumInvest/report_generator.py",
+    "Latex/TA/GTQuantumInvest/render_vqe_probs.py",
+    "Latex/TA/GTQuantumInvest/README.md",
+    "Latex/TA/GTQuantumInvest/project_graph.png",
+    "Latex/TA/GTQuantumInvest/Graph.png",
+    "Latex/TA/GTQuantumInvest/evaluasi_performa.md",
+    "Latex/TA/GTQuantumInvest/EPG_report.md",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N8.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N6.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N4.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N2.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N12.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_SLSQP_Only/slsqp_vs_benchmarks_N10.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N8.png",
+    "Latex/TA/GTQuantumInvest/classic_compare/Grafik_Perbandingan/perbandingan_VQE_vs_Classic_N6.png",
+    "Latex/TA/PPT/BarrenPlateau.md",
+    "Latex/TA/PPT/Revisi1.md",
+    "Latex/TA/MD_File/Main/14_QuatumMeasurement.md",
     "Latex/TA/Contents/Big_revision.md",
-    "Latex/TA/Contents/BagianBelakang/Biodata_Penulis.tex",
-    "Latex/TA/Contents/BagianBelakang",
-    "Latex/TA/Contents/Abstrak/Abstrak.tex",
-    "Latex/TA/Contents/Abstrak/Abstract.tex",
-    "Latex/TA/Contents/5_Penutup/Bab-5.tex",
     "Latex/TA/Contents/4_Pembahasan/list_revisi_3jun.md",
     "Latex/TA/Contents/4_Pembahasan/list_revisi_2jun.md",
     "Latex/TA/Contents/4_Pembahasan/Contoh_numerik_SLSQP.md",
-    "Latex/TA/Contents/4_Pembahasan/Bab-4.tex",
-    "Latex/TA/Contents/4_Pembahasan/Bab-4.9.tex",
     "Latex/TA/Contents/3_Metodologi/metodologi.md",
     "Latex/TA/Contents/3_Metodologi/algoritma.md",
-    "Latex/TA/PPT/qmdfile/Format/logo/cropped-Javicon-Renaudie.svg",
-    "Latex/TA/PPT/qmdfile/Format/logo/Logo-ITS-1.svg",
-    "Latex/TA/PPT/qmdfile/Format/logo/LaFTiFA1.svg",
-    "Latex/TA/PPT/qmdfile/Format/assets/bg2.png",
-    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-solid-900.svg",
-    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-regular-400.svg",
-    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-brands-400.svg",
-    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/img/whiteboard.png",
-    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/img/sponge.png",
-    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-yellow.png",
     "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
     "Latex/TA/MD_File/Main/13_SLSQP.md",
-    "Latex/TA/MD_File/Main/14_QuatumMeasurement.md",
     "Latex/TA/MD_File/Main/12_QGate.md",
     "Untitled 1.md",
     "Latex/TA/MD_File/Main/8_Ansatz.md",
@@ -331,11 +336,6 @@
     "Latex/TA/MD_File/Sumur_Potensial_Parabolik.md",
     "Latex/TA/MD_File/Teorema_Reyleigh_Ritz.md",
     "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
-    "Latex/TA/MD_File/Variational_Principle.md",
-    "Latex/TA/MD_File/Von_Neumann_Entropy.md",
-    "Latex/TA/MD_File/jenis_optimasi_vqe.md",
-    "Latex/TA/MD_File/Parameter_Shift_Rule.md",
-    "Latex/TA/Filtered_Paper/VQE/QUBO_PortofolioOpt.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

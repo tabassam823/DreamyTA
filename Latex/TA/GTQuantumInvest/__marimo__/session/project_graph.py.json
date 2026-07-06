@@ -1,0 +1,35 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.23.5",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "125cdeeb88969961d15df2a474a3629c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "c67ed642dcff27d5bcce3fb5d9b23a37",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"peta-hubungan-kode-proyekmu\">\ud83d\uddfa\ufe0f Peta Hubungan Kode Proyekmu</h1></span><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Garis panah menunjukkan file mana yang 'memanggil' file lainnya.</span></span><marimo-mermaid data-diagram='&quot;graph TD&#92;n    classDef core fill:#FF9800,stroke:#E65100,stroke-width:2px,color:white;&#92;n    classDef strategy fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:white;&#92;n    classDef engine fill:#4CAF50,stroke:#1B5E20,stroke-width:2px,color:white;&#92;n    classDef math fill:#9C27B0,stroke:#4A148C,stroke-width:1px,color:white;&#92;n    find_optimal_lr_spsa_py[&#92;&quot;find_optimal_lr_spsa.py&#92;&quot;]:::engine&#92;n    find_optimal_lr_spsa_py --&gt; run_spsa_test_py&#92;n    brute_force_validator_py[&#92;&quot;brute_force_validator.py&#92;&quot;]:::engine&#92;n    plot_generator_py[&#92;&quot;plot_generator.py&#92;&quot;]:::core&#92;n    render_circuit_only_py[&#92;&quot;render_circuit_only.py&#92;&quot;]&#92;n    render_circuit_only_py --&gt; plot_generator_py&#92;n    run_spsa_test_py[&#92;&quot;run_spsa_test.py&#92;&quot;]:::engine&#92;n    data_downloader_py[&#92;&quot;data_downloader.py&#92;&quot;]:::core&#92;n    report_generator_py[&#92;&quot;report_generator.py&#92;&quot;]:::core&#92;n    report_generator_py --&gt; compute_beta_py&#92;n    report_generator_py --&gt; compute_metrics_py&#92;n    build_hamiltonian_total_py[&#92;&quot;build_hamiltonian_total.py&#92;&quot;]:::math&#92;n    backtest_runner_py[&#92;&quot;backtest_runner.py&#92;&quot;]:::core&#92;n    backtest_runner_py --&gt; rebalance_portfolio_py&#92;n    backtest_runner_py --&gt; run_strategy_step_py&#92;n    find_nash_sbr_py[&#92;&quot;find_nash_sbr.py&#92;&quot;]:::engine&#92;n    compute_endogenous_lambda_py[&#92;&quot;compute_endogenous_lambda.py&#92;&quot;]:::math&#92;n    calc_simple_return_py[&#92;&quot;calc_simple_return.py&#92;&quot;]:::math&#92;n    calculate_energy_py[&#92;&quot;calculate_energy.py&#92;&quot;]&#92;n    run_vqe_adaptive_py[&#92;&quot;run_vqe_adaptive.py&#92;&quot;]:::engine&#92;n    run_vqe_adaptive_py --&gt; compute_metrics_py&#92;n    test_qiskit_render_py[&#92;&quot;test_qiskit_render.py&#92;&quot;]&#92;n    test_qiskit_render_py --&gt; plot_generator_py&#92;n    compute_beta_py[&#92;&quot;compute_beta.py&#92;&quot;]:::math&#92;n    run_strategy_step_py[&#92;&quot;run_strategy_step.py&#92;&quot;]:::strategy&#92;n    run_strategy_step_py --&gt; compute_endogenous_lambda_py&#92;n    run_strategy_step_py --&gt; calc_log_return_py&#92;n    run_strategy_step_py --&gt; build_hamiltonian_total_py&#92;n    run_strategy_step_py --&gt; run_vqe_adaptive_py&#92;n    run_strategy_step_py --&gt; brute_force_validator_py&#92;n    run_strategy_step_py --&gt; calc_expected_returns_py&#92;n    run_strategy_step_py --&gt; find_nash_sbr_py&#92;n    run_strategy_step_py --&gt; calc_simple_return_py&#92;n    run_strategy_step_py --&gt; find_optimal_lr_spsa_py&#92;n    render_vqe_probs_py[&#92;&quot;render_vqe_probs.py&#92;&quot;]&#92;n    calc_log_return_py[&#92;&quot;calc_log_return.py&#92;&quot;]:::math&#92;n    rebalance_portfolio_py[&#92;&quot;rebalance_portfolio.py&#92;&quot;]:::strategy&#92;n    calc_expected_returns_py[&#92;&quot;calc_expected_returns.py&#92;&quot;]:::math&#92;n    compute_metrics_py[&#92;&quot;compute_metrics.py&#92;&quot;]:::math&#92;n    main_py[&#92;&quot;main.py&#92;&quot;]:::core&#92;n    main_py --&gt; config_py&#92;n    main_py --&gt; report_generator_py&#92;n    main_py --&gt; backtest_runner_py&#92;n    main_py --&gt; data_downloader_py&#92;n    main_py --&gt; plot_generator_py&#92;n    config_py[&#92;&quot;config.py&#92;&quot;]:::core&#92;n    compute_strategic_returns_py[&#92;&quot;compute_strategic_returns.py&#92;&quot;]:::math&quot;'></marimo-mermaid></div>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}
