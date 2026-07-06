@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Bloch Sphere</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            height: 100vh; background-color: transparent; overflow: hidden; 
+        }
+        #plot { width: 100%; height: 85%; }
+        .controls { 
+            display: flex; flex-direction: column; gap: 8px; 
+            padding: 10px; background: rgba(255, 255, 255, 0.85); 
+            border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+            width: 90%; max-width: 400px;
+            justify-content: center; align-items: center; 
+            z-index: 10; font-size: 14px;
+        }
+        .control-row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+        input[type="range"] { flex-grow: 1; margin: 0 10px; }
+        input[type="number"] { width: 50px; padding: 2px; border: 1px solid #ccc; border-radius: 4px; text-align: center; }
+        label { font-weight: bold; color: #2c3e50; min-width: 65px; }
+        .equation { 
+            font-family: monospace; font-size: 14px; background: #f8f9fa; 
+            padding: 5px 10px; border-radius: 4px; color: #d63384; 
+            font-weight: bold; width: 100%; text-align: center; 
+            box-sizing: border-box; border: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-row">
+            <label for="theta">θ (Polar)</label>
+            <input type="range" id="theta-slider" min="0" max="180" value="45" step="1">
+            <div><input type="number" id="theta-input" min="0" max="180" value="45" step="1">°</div>
+        </div>
+        <div class="control-row">
+            <label for="phi">φ (Azimuth)</label>
+            <input type="range" id="phi-slider" min="0" max="360" value="90" step="1">
+            <div><input type="number" id="phi-input" min="0" max="360" value="90" step="1">°</div>
+        </div>
+        <div class="equation" id="state-eq">|ψ⟩ = α|0⟩ + β|1⟩</div>
+    </div>
+    <div id="plot"></div>
+
+    <script>
+        function createBlochSphere() {
+            const u = [], v = [], x = [], y = [], z = [];
+            for (let i = 0; i <= 24; i++) u.push((i * 2 * Math.PI) / 24); 
+            for (let i = 0; i <= 12; i++) v.push((i * Math.PI) / 12); 
+
+            for (let i = 0; i < u.length; i++) {
+                x.push([]); y.push([]); z.push([]);
+                for (let j = 0; j < v.length; j++) {
+                    x[i].push(Math.cos(u[i]) * Math.sin(v[j]));
+                    y[i].push(Math.sin(u[i]) * Math.sin(v[j]));
+                    z[i].push(Math.cos(v[j]));
+                }
+            }
+
+            const sphere = {
+                type: 'surface',
+                x: x, y: y, z: z,
+                opacity: 0.15,
+                colorscale: [[0, '#3498db'], [1, '#3498db']],
+                showscale: false,
+                hoverinfo: 'none'
+            };
+
+            const axisLine = (x, y, z) => ({
+                type: 'scatter3d',
+                mode: 'lines',
+                x: x, y: y, z: z,
+                line: {color: '#7f8c8d', width: 2, dash: 'dot'},
+                hoverinfo: 'none',
+                showlegend: false
+            });
+
+            const xAxis = axisLine([-1.2, 1.2], [0, 0], [0, 0]);
+            const yAxis = axisLine([0, 0], [-1.2, 1.2], [0, 0]);
+            const zAxis = axisLine([0, 0], [0, 0], [-1.2, 1.2]);
+
+            const labels = {
+                type: 'scatter3d',
+                mode: 'text',
+                x: [1.35, 0, 0, -1.35, 0, 0],
+                y: [0, 1.35, 0, 0, -1.35, 0],
+                z: [0, 0, 1.35, 0, 0, -1.35],
+                text: ['+X (|+⟩)', '+Y (|i⟩)', '+Z (|0⟩)', '-X (|-⟩)', '-Y (|-i⟩)', '-Z (|1⟩)'],
+                textfont: {size: 13, color: '#2c3e50', weight: 'bold'},
+                showlegend: false,
+                hoverinfo: 'none'
+            };
+
+            // Equator line for visual reference
+            const eqX = [], eqY = [], eqZ = [];
+            for (let i = 0; i <= 36; i++) {
+                const angle = i * 2 * Math.PI / 36;
+                eqX.push(Math.cos(angle));
+                eqY.push(Math.sin(angle));
+                eqZ.push(0);
+            }
+            const equator = {
+                type: 'scatter3d',
+                mode: 'lines',
+                x: eqX, y: eqY, z: eqZ,
+                line: {color: '#bdc3c7', width: 2},
+                hoverinfo: 'none',
+                showlegend: false
+            };
+
+            return [sphere, xAxis, yAxis, zAxis, equator, labels];
+        }
+
+        const baseData = createBlochSphere();
+
+        const layout = {
+            margin: {l: 0, r: 0, b: 0, t: 0},
+            scene: {
+                xaxis: {visible: false, range: [-1.5, 1.5]},
+                yaxis: {visible: false, range: [-1.5, 1.5]},
+                zaxis: {visible: false, range: [-1.5, 1.5]},
+                camera: { eye: {x: 1.3, y: 1.3, z: 0.8} },
+                aspectmode: 'cube'
+            },
+            paper_bgcolor: 'transparent',
+            plot_bgcolor: 'transparent'
+        };
+
+        function getVectorData(thetaDeg, phiDeg) {
+            const theta = thetaDeg * Math.PI / 180;
+            const phi = phiDeg * Math.PI / 180;
+            const x = Math.sin(theta) * Math.cos(phi);
+            const y = Math.sin(theta) * Math.sin(phi);
+            const z = Math.cos(theta);
+            return {x: [0, x], y: [0, y], z: [0, z]};
+        }
+        
+        const initVec = getVectorData(45, 90);
+        const vectorTrace = {
+            type: 'scatter3d',
+            mode: 'lines+markers',
+            x: initVec.x, y: initVec.y, z: initVec.z,
+            line: {color: '#e74c3c', width: 8},
+            marker: {size: 6, color: '#c0392b'},
+            name: '|ψ⟩',
+            showlegend: false,
+            hoverinfo: 'none'
+        };
+
+        Plotly.newPlot('plot', [...baseData, vectorTrace], layout, {displayModeBar: false});
+
+        function formatCmplx(real, imag) {
+            const r = (Math.abs(real) < 1e-10) ? 0 : real;
+            const i = (Math.abs(imag) < 1e-10) ? 0 : imag;
+            
+            if (r === 0 && i === 0) return "0";
+            if (i === 0) return r.toFixed(2);
+            if (r === 0) return (i === 1 ? "i" : (i === -1 ? "-i" : i.toFixed(2) + "i"));
+            
+            const sign = i > 0 ? "+" : "-";
+            return `(${r.toFixed(2)} ${sign} ${Math.abs(i).toFixed(2)}i)`;
+        }
+
+        function updateState() {
+            let theta = parseFloat(document.getElementById('theta-input').value);
+            let phi = parseFloat(document.getElementById('phi-input').value);
+            
+            if (theta < 0) theta = 0; if (theta > 180) theta = 180;
+            
+            const vec = getVectorData(theta, phi);
+            
+            // The vector is the 7th trace (index 6) in the array
+            Plotly.restyle('plot', {
+                'x': [vec.x],
+                'y': [vec.y],
+                'z': [vec.z]
+            }, [6]);
+
+            // Update Equation
+            const thetaRad = theta * Math.PI / 180;
+            const phiRad = phi * Math.PI / 180;
+            
+            const alpha = Math.cos(thetaRad / 2);
+            const betaMag = Math.sin(thetaRad / 2);
+            
+            const betaReal = betaMag * Math.cos(phiRad);
+            const betaImag = betaMag * Math.sin(phiRad);
+
+            const alphaStr = Math.abs(alpha) < 1e-10 ? "0" : alpha.toFixed(2);
+            const betaStr = formatCmplx(betaReal, betaImag);
+            
+            let sign = "";
+            if (betaStr !== "0" && !betaStr.startsWith("-") && !betaStr.startsWith("(")) {
+                sign = "+ ";
+            } else if (betaStr.startsWith("(")) {
+                sign = "+ ";
+            }
+
+            let finalStr = `|ψ⟩ = ${alphaStr}|0⟩ `;
+            if (betaStr !== "0") {
+                finalStr += `${sign}${betaStr}|1⟩`;
+            }
+            
+            document.getElementById('state-eq').innerText = finalStr;
+        }
+
+        const sync = (sliderId, inputId) => {
+            const slider = document.getElementById(sliderId);
+            const input = document.getElementById(inputId);
+            slider.addEventListener('input', () => { input.value = slider.value; updateState(); });
+            input.addEventListener('input', () => { slider.value = input.value; updateState(); });
+        };
+
+        sync('theta-slider', 'theta-input');
+        sync('phi-slider', 'phi-input');
+        
+        updateState();
+    </script>
+</body>
+</html>
