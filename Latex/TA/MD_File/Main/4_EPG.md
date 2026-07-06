@@ -63,3 +63,42 @@ $$\begin{split}
 \Delta \Phi(\vec{x}) &= \Phi(1, \vec{x}_{-i}) - \Phi(0, \vec{x}_{-i}) \\
 &= \frac{\mu_i }{k} + \frac{\gamma}{2}\frac{\sigma_i^2}{k^2} + \gamma \sum_{j\lt i}\sigma_{ij}\frac{x_j}{k^2}
 \end{split}$$
+
+dengan deviasi menjadi $i'$
+$$
+\Delta u_i = (1-2x_i)M_i
+$$
+# Contoh perhitungan
+misal $\gamma=1 , \quad \mu_1=12, \quad \mu_2=11, \quad \mu_3=8, \quad \sigma_11=10, \quad \sigma_22=10, \quad \sigma_33=10, \quad \sigma_12=\sigma_21=8, \quad \sigma_13=\sigma_31=2, \quad \sigma_23=\sigma_32=-2$, maka 
+$$
+\begin{split}
+\text{aset 1:} \quad M_1 &= 12 - \frac{1}{2}(10) - (8x_2 + 2x_3) = 7 - 8x_2 - 2x_3 \\
+\text{aset 3:} \quad M_2 &= 11 - \frac{1}{2}(10) - (8x_1 - 2x_3) = 6 - 8x_2 + 2x_3 \\
+\text{aset 3:} \quad M_3 &= 8 - \frac{1}{2}(10) - (2x_1 - 2x_2) = 3 - 2x_1 + 2x_2 \\
+\end{split}
+$$
+maka pada iterasi 0: $\vec{x} = (0,0,0)$ 
+$$
+\begin{split}
+M_1 &= 7 - 0 - 0 = 7 \\
+M_2 &= 6 - 0 - 0 = 6 \\
+M_3 &= 3 - 0 + 0 = 3 \\
+\end{split}
+$$
+karena 7 adalah angka paling tinggi, maka ubah keputusannya menjadi 1. sehingga pada iterasi 1: $\vec{x}=(1,0,0)$
+$$
+\begin{split}
+M_1 &= 7 - 0 - 0 = 7  \to \Delta\mu_1 = -7\\
+M_2 &= 6 - 8 - 0 = -2 \\
+M_3 &= 3 - 2 + 0 = 1 \\
+\end{split}
+$$
+iterasi tersebut menunjukkan aset 1 akan rugi jika dijual (tahan strategi), aset 2 akan rugi jika dibeli (tahan strategi), dan aset 3 akan untuk jika dibeli (maka ganti strategi). sehingga iterasi 3 menjadi $\vec{x} = (1,0,1)$
+$$
+\begin{split}
+M_1 &= 7 - 0 - 2 = 5  \to \Delta\mu_1 = -5\\
+M_2 &= 6 - 8 + 2 = 0 \\
+M_3 &= 3 - 2 + 0 = 1  \to \Delta\mu_3 = -1\\
+\end{split}
+$$
+iterasi terakhir ini menunjukkan nash equilibrium karena tidak ada deviasi yang lebih dari 0.

@@ -9,8 +9,6 @@
 * Melalui komutator unitari, turunan analitik dari nilai ekspektasi kuantum dapat disederhanakan menjadi:
   $$ \frac{\partial \langle E(\theta)\rangle}{\partial \theta} = \frac{i}{2} \langle{\psi(\theta)}| [\sigma, M] |{\psi(\theta)}\rangle $$
   (dimana $M$ merepresentasikan operator gabungan pada sirkuit).
-* **Keterbatasan *Finite Difference* (FD):** Pendekatan numerik seperti FD sering kali gagal karena sangat bergantung pada presisi selisih berskala kecil. Derau statistik (*noise*) pada perangkat keras kuantum memicu ketidakstabilan numerik yang merusak akurasi kalkulasi gradien.
-* **Solusi *Parameter Shift Rule* (PSR):** Untuk mengatasi hal tersebut, PSR diterapkan guna membantu *Gradient Descent* mengoptimasi parameter sirkuit secara kokoh. PSR mengeksploitasi sifat periodik dari operator uniter untuk menghitung gradien analitis secara eksak tanpa memperburuk tingkat eror.
 
 ### Penurunan Rumus
 <div class="scrollable" style="max-height: 450px; font-size: 0.65em;">

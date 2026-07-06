@@ -22,11 +22,12 @@
 :::
 ::::
 
-Model Ising terbukti efektif memetakan sistem kompleks di luar fisika material. 
+Lars Onsager berhasil memecahkan model Ising 2D pada tahun 1944. Hal ini menyebabkan model Ising juga dapat digunakan untuk memetakan sistem kompleks di luar fisika material. 
 Contoh kasus kompleks yang bisa diatasi:
+
 * Optimasi jaringan logistik dan rantai pasok.
 * Pemodelan dinamika sosial dan fenomena *herding* (perilaku ikut-ikutan).
-* **Ekonofisika:** Mengatasi tantangan limitasi model Markowitz (seperti anomali pasar dan distribusi *fat-tailed*) dengan pendekatan komputasi fisika.
+* **Ekonofisika:** Mengatasi limitasi model Markowitz (seperti distribusi *fat-tailed* dan anomali pasar) dengan pendekatan komputasi fisika.
 
 ---
 

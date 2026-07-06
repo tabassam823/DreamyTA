@@ -7,6 +7,13 @@ author:
       - "Pembimbing : Dr. Heru Sukamto, M.Si."
       - "Ko-Pembimbing : Dr. Gagus K. Sunnardianto"
       - "Departemen Fisika, Institut Teknologi Sepuluh Nopember"
+description: "Presentasi Tugas Akhir mengenai optimasi portofolio dengan Quantum Computing (VQE), Model Markowitz, dan Game Theory (Nash Equilibrium)."
+keywords: ["Quantum Computing", "VQE", "Markowitz", "Game Theory", "Econophysics", "Ekonofisika", "Tugas Akhir Fisika ITS"]
+open-graph:
+  title: "Optimasi Portofolio Finansial Menggunakan VQE"
+  description: "Presentasi riset mengenai implementasi Variational Quantum Eigensolver untuk mencari Nash Equilibrium pada pasar modal."
+  image: "Gambar/GT_hasil_backtest_vqe_N4.png"
+twitter-card: true
 format:
   revealjs:
     theme: [simple, template/custom.scss]

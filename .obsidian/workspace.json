@@ -39,12 +39,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Latex/TA/Filtered_Paper/VQE/QUBO_PortofolioOpt.md",
+                "file": "Latex/TA/MD_File/Main/12_QGate.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "QUBO_PortofolioOpt"
+              "title": "12_QGate"
+            }
+          },
+          {
+            "id": "83e083c0f0e0e623",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/Main/14_QuatumMeasurement.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "14_QuatumMeasurement"
             }
           },
           {
@@ -76,7 +90,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -130,8 +144,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "c38e9d58e7528e8a",
@@ -144,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/Filtered_Paper/VQE/QUBO_PortofolioOpt.md",
+                "file": "Latex/TA/MD_File/Main/14_QuatumMeasurement.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of QUBO_PortofolioOpt"
+              "title": "Outline of 14_QuatumMeasurement"
             }
           }
         ]
@@ -275,53 +288,54 @@
       "marp-slides:Show Slide Preview": false
     }
   },
-  "active": "949d40db2375c8ac",
+  "active": "83e083c0f0e0e623",
   "lastOpenFiles": [
     "Latex/TA/PPT/qmdfile/main_files/mediabag",
-    "Latex/TA/PPT/Gambar/Shannon_Foto.png",
-    "Latex/TA/PPT/Gambar/Pasted image.png",
-    "Latex/TA/PPT/Gambar/VonNeumann_Foto.png",
-    "Latex/TA/PPT/Gambar/Morgenstern_Foto.png",
-    "Latex/TA/PPT/Gambar/GT_pct.png",
-    "Latex/TA/PPT/Gambar/barren_plateau.png",
-    "Latex/TA/PPT/Gambar/wang_pct.png",
-    "Latex/TA/PPT/Gambar/wei_pct.png",
-    "Latex/TA/Filtered_Paper/VQE/EfficientSU2_SPSA.md",
-    "Latex/TA/Filtered_Paper/VQE/VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance.md",
-    "Latex/TA/PPT/Rencana_Urutan_Presentasi.md",
-    "Latex/TA/PPT/qmdfile/main_files/libs/revealjs/dist/theme/quarto-03cc377db2a9599f66446c4910079c00.css",
-    "Latex/TA/PPT/qmdfile/logo/LogoBrin1.png",
-    "Latex/TA/PPT/qmdfile/logo/LogoBrin2.png",
-    "Latex/TA/PPT/qmdfile/Fase_temp.qmd",
-    "Latex/TA/PPT/qmdfile/Fase_8.qmd",
-    "Latex/TA/PPT/qmdfile/Fase_9.qmd",
-    "Latex/TA/PPT/qmdfile/Fase_0.qmd",
-    "Latex/TA/Images/img_reference.md",
-    "Latex/TA/PPT/qmdfile/main_files/libs/revealjs/dist/theme/quarto-d42dc654213f423e8950b9516ad1b73a.css",
-    "Latex/TA/PPT/qmdfile/logo",
-    "Latex/TA/PPT/qmdfile/template/header.html",
-    "Latex/TA/PPT/qmdfile/template/custom.scss",
-    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
-    "Latex/TA/PPT/qmdfile/Presentasi/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
-    "Latex/TA/PPT/qmdfile/main_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
-    "Latex/TA/PPT/list_revisi_7jun.md",
-    "Latex/TA/Filtered_Paper/Mutual_Information/Shannon_A_Mathematical_Theory_of_Communication.md",
-    "Latex/TA/MD_File/Main/9_Entropi.md",
-    "Latex/TA/MD_File/Main/12_QGate.md",
-    "Latex/TA/MD_File/Main/3_Markowitz.md",
-    "Temporary.md",
+    "Latex/TA/main.lot",
+    "Latex/TA/main.lof",
+    "Latex/TA/main.blg",
     "Latex/TA/Contents/Big_revision.md",
-    "Latex/TA/MD_File/jenis_ansatz.md",
-    "Latex/TA/MD_File/QMI.md",
-    "Latex/TA/MD_File/Main/10_BellDickeState.md",
-    "Latex/TA/MD_File/Main/5_QUBO_rev.md",
-    "Latex/TA/MD_File/Main/6_Gradient_Descent.md",
+    "Latex/TA/Contents/BagianBelakang/Biodata_Penulis.tex",
+    "Latex/TA/Contents/BagianBelakang",
+    "Latex/TA/Contents/Abstrak/Abstrak.tex",
+    "Latex/TA/Contents/Abstrak/Abstract.tex",
+    "Latex/TA/Contents/5_Penutup/Bab-5.tex",
+    "Latex/TA/Contents/4_Pembahasan/list_revisi_3jun.md",
+    "Latex/TA/Contents/4_Pembahasan/list_revisi_2jun.md",
+    "Latex/TA/Contents/4_Pembahasan/Contoh_numerik_SLSQP.md",
+    "Latex/TA/Contents/4_Pembahasan/Bab-4.tex",
+    "Latex/TA/Contents/4_Pembahasan/Bab-4.9.tex",
+    "Latex/TA/Contents/3_Metodologi/metodologi.md",
+    "Latex/TA/Contents/3_Metodologi/algoritma.md",
+    "Latex/TA/PPT/qmdfile/Format/logo/cropped-Javicon-Renaudie.svg",
+    "Latex/TA/PPT/qmdfile/Format/logo/Logo-ITS-1.svg",
+    "Latex/TA/PPT/qmdfile/Format/logo/LaFTiFA1.svg",
+    "Latex/TA/PPT/qmdfile/Format/assets/bg2.png",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-solid-900.svg",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-regular-400.svg",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/webfonts/fa-brands-400.svg",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/img/whiteboard.png",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/img/sponge.png",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/img/chalk-yellow.png",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
+    "Latex/TA/MD_File/Main/13_SLSQP.md",
+    "Latex/TA/MD_File/Main/14_QuatumMeasurement.md",
+    "Latex/TA/MD_File/Main/12_QGate.md",
+    "Untitled 1.md",
+    "Latex/TA/MD_File/Main/8_Ansatz.md",
     "Latex/TA/MD_File/Main/7_SPSA.md",
-    "Latex/TA/MD_File/Main/5_QUBO.md",
-    "Latex/TA/Filtered_Paper/behavioral_new_keynesian_model.md",
-    "Latex/TA/Filtered_Paper/Quantum_Circuit/Parameterized_quantum_circuits_as_machine.md",
-    "Latex/TA/Filtered_Paper/Learning_in_Large-Scale_Games_and_Cooperative_Cont.md",
-    "Latex/TA/Filtered_Paper/Portfolio_Optimization_with_a_Mean_Entropy_Mutual_Information_Model.md",
+    "Latex/TA/MD_File/Main/4_EPG.md",
+    "Latex/TA/MD_File/risk_aversion_endogen.md",
+    "Latex/TA/contoh_hitung.md",
+    "Latex/TA/MD_File/SPSA.md",
+    "Latex/TA/MD_File/Sumur_Potensial_Parabolik.md",
+    "Latex/TA/MD_File/Teorema_Reyleigh_Ritz.md",
+    "Latex/TA/MD_File/TwoLocal_to_EfficientSU2.md",
+    "Latex/TA/MD_File/Variational_Principle.md",
+    "Latex/TA/MD_File/Von_Neumann_Entropy.md",
+    "Latex/TA/MD_File/jenis_optimasi_vqe.md",
+    "Latex/TA/MD_File/Parameter_Shift_Rule.md",
+    "Latex/TA/Filtered_Paper/VQE/QUBO_PortofolioOpt.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"

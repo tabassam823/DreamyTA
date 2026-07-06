@@ -1,0 +1,14 @@
+[91mERROR: Unable to publish to GitHub Pages (the remote origin does not have a branch named "gh-pages". Use first `quarto publish gh-pages` locally to initialize the remote repository for publishing.)
+
+Stack trace:
+    at resolveDeployment (file:///opt/quarto/bin/quarto.js:173076:13)
+    at eventLoopTick (ext:core/01_core.js:179:7)
+    at async publishAction (file:///opt/quarto/bin/quarto.js:173687:7)
+    at async _Command.actionHandler (file:///opt/quarto/bin/quarto.js:173652:9)
+    at async _Command.execute (file:///opt/quarto/bin/quarto.js:102091:7)
+    at async _Command.parseCommand (file:///opt/quarto/bin/quarto.js:101968:14)
+    at async quarto4 (file:///opt/quarto/bin/quarto.js:187649:5)
+    at async file:///opt/quarto/bin/quarto.js:187677:5
+    at async file:///opt/quarto/bin/quarto.js:187532:14
+    at async mainRunner (file:///opt/quarto/bin/quarto.js:187534:5)
+    at async file:///opt/quarto/bin/quarto.js:187670:3[39m
