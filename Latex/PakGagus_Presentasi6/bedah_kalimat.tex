@@ -1,0 +1,26 @@
+\section{Latar Belakang dan Kerangka Teoretis}
+
+\begin{frame}{Pendahuluan: Dinamika Derivatif Finansial}
+    \begin{itemize}
+        \item Instrumen derivatif seperti \textit{forwards, futures}, dan \textit{swaps} dimanfaatkan secara masif untuk mitigasi eksposur (\textit{hedging}) maupun akumulasi nilai spekulatif murni.
+        \item Penetapan harga wajar (\textit{fair pricing}) memiliki dependensi mutlak terhadap presisi pemodelan evolusi temporal suku bunga (\textit{interest rates}).
+        \item Model deterministik maupun stokastik satu faktor seperti model Vasicek dan \textit{Cox-Ingersoll-Ross} (CIR) mengusung kepraktisan algoritmik, namun terbukti gagal mengalibrasi data pasar secara simultan terhadap struktur korelasi antar maturitas.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Formulasi Kerangka \textit{Heath-Jarrow-Morton} (HJM)}
+    \begin{itemize}
+        \item Model HJM memodelkan evolusi \textit{forward rates} secara langsung dan diposisikan sebagai \textit{general family} induktif bagi diversitas pemodelan suku bunga.
+        \item Evolusi \textit{forward rate} secara eksklusif dikendalikan oleh faktor volatilitas difusif $\sigma$, yang mematuhi dinamika diferensial stokastik berikut:
+        $$ df(t, T) = \alpha(t, T)dt + \sum_{i=1}^N \sigma_i(t, T) dW_i(t) $$
+        \item \textbf{Limitasi Komputasional:} Eksis sebuah \textit{trade-off} fundamental pada simulasi numerik berbasis mesin komputasi klasik antara penambahan faktor \textit{noisy} (untuk fidelitas akurasi) dan pembengkakan durasi komputasi komprehensif.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Potensi Substitusi Kuantum (\textit{Quantum Paradigm Shift})}
+    \begin{itemize}
+        \item Arsitektur komputasi kuantum menjanjikan \textit{exponential speedup} melalui pemanfaatan sumber daya \textit{entanglement} untuk mendobrak limitasi komputasi klasik dalam simulasi sistem fisik dan finansial.
+        \item Algoritma \textit{quantum Principal Component Analysis} (qPCA) direkayasa untuk mereduksi dimensi faktor volatilitas \textit{noisy} dalam ruang Hilbert tanpa mereduksi akurasi simulasi secara sistemik.
+        \item Kontribusi riset ini meresmikan studi \textit{quantum option pricing} pertama dan mewujudkan implementasi qPCA bermatriks terbesar pada \textit{noisy intermediate-scale quantum} (NISQ) IBMQX2 bertenaga 5-qubit.
+    \end{itemize}
+\end{frame}

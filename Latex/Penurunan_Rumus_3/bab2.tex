@@ -1,0 +1,48 @@
+\section{Transformasi Model Markowitz ke QUBO}
+
+\subsection{Fungsi Objektif Markowitz}
+Model Markowitz murni meminimalkan varians dan memaksimalkan imbal hasil secara simultan:
+\begin{equation}
+\min \mathcal{L}_{pure} = x^T \Sigma x - \lambda \mu^T x
+\end{equation}
+dengan $x \in \{0, 1\}^N$. Sebagai contoh, untuk sistem interaksi 2 aset, formulasi Markowitz murni diekspresikan sebagai perkalian operasi matriks:
+\begin{equation}
+\mathcal{L}_{pure} = \begin{pmatrix} x_1 & x_2 \end{pmatrix} \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} - \lambda \begin{pmatrix} \mu_1 & \mu_2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+\end{equation}
+
+Penjabaran dilakukan dalam dua tahap. Tahap pertama (Baris $\times$ Matriks):
+\begin{equation}
+\begin{pmatrix} x_1 \sigma_1^2 + x_2 \sigma_{21} & x_1 \sigma_{12} + x_2 \sigma_2^2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} - \lambda(\mu_1 x_1 + \mu_2 x_2)
+\end{equation}
+Tahap kedua (Skalar):
+\begin{equation}
+(x_1^2 \sigma_1^2 + x_1 x_2 \sigma_{21}) + (x_1 x_2 \sigma_{12} + x_2^2 \sigma_2^2) - \lambda(\mu_1 x_1 + \mu_2 x_2)
+\end{equation}
+Karena matriks kovarians bersifat simetris ($\sigma_{12} = \sigma_{21}$), maka diperoleh:
+\begin{equation}
+\mathcal{L}_{pure} = \sigma_1^2 x_1^2 + \sigma_2^2 x_2^2 + 2\sigma_{12}x_1 x_2 - \lambda(\mu_1 x_1 + \mu_2 x_2)
+\end{equation}
+
+\subsection{Properti Idempotensi dan Reduksi QUBO}
+Dalam ruang parameter biner $x_i \in \{0, 1\}$, berlaku properti idempotensi di mana nilai kuadrat dari variabel tersebut sama dengan nilai aslinya ($x_i^2 = x_i$). Hal ini dapat dibuktikan secara sederhana:
+\begin{itemize}
+    \item Jika $x_i = 0$, maka $0^2 = 0$.
+    \item Jika $x_i = 1$, maka $1^2 = 1$.
+\end{itemize}
+Dengan menerapkan properti ini pada suku varians, maka orde kuadratik pada variabel tunggal dapat direduksi menjadi bentuk linear:
+\begin{equation}
+\begin{aligned}
+\mathcal{L}_{pure} &= \sigma_1^2 x_1 + \sigma_2^2 x_2 + 2\sigma_{12}x_1 x_2 - \lambda(\mu_1 x_1 + \mu_2 x_2) \\
+&= (\sigma_1^2 - \lambda \mu_1) x_1 + (\sigma_2^2 - \lambda \mu_2) x_2 + 2\sigma_{12}x_1 x_2
+\end{aligned}
+\end{equation}
+
+Bentuk tersebut selanjutnya digeneralisasi untuk $N$ dimensi aset agar sesuai dengan format standar \textit{Quadratic Unconstrained Binary Optimization} (QUBO):
+\begin{equation}
+\mathcal{L}_{pure}(x) = \sum_{i=1}^N Q_{ii} x_i + \sum_{i < j} 2Q_{ij} x_i x_j
+\end{equation}
+di mana elemen diagonal $Q_{ii}$ merepresentasikan kontribusi individu (\textit{risk-adjusted return}) dan elemen non-diagonal $Q_{ij}$ merepresentasikan interaksi antar aset:
+\begin{align}
+Q_{ii} &= \sigma_i^2 - \lambda \mu_i \\
+Q_{ij} &= \sigma_{ij}
+\end{align}

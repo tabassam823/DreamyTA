@@ -1,0 +1,56 @@
+\section{Pemetaan QMI ke Parameter Kopling $J_{ij}$}
+
+\subsection{Distribusi Boltzmann dan Temperatur Pasar}
+Dalam kerangka fisika statistik, sistem yang berada dalam kesetimbangan termal mengikuti distribusi Boltzmann untuk menentukan probabilitas keadaan energi $E$:
+\begin{equation}
+P(E) = \frac{1}{Z} \exp(-\beta E) = \frac{1}{Z} \exp(-E/\alpha)
+\label{eq:boltzmann_alpha_appendix}
+\end{equation}
+di mana $\beta = 1/(k_B T_{market})$ and $\alpha = k_B T_{market}$ didefinisikan sebagai parameter skala energi. Dalam pendekatan ekonofisika, energi efektif sistem portofolio diasosiasikan dengan kuadrat imbal hasil ($E \sim R^2/2$), yang analog dengan energi kinetik dalam mekanika klasik ($E = p^2/2m$). Substitusi relasi energi ini ke dalam distribusi Boltzmann menghasilkan distribusi probabilitas imbal hasil:
+\begin{equation}
+P(R) \propto \exp\left(-\frac{R^2}{2\alpha}\right)
+\end{equation}
+Bentuk ini merupakan distribusi Gaussian standar:
+\begin{equation}
+P(R) = \frac{1}{\sqrt{2\pi\alpha}} \exp\left(-\frac{R^2}{2\alpha}\right)
+\end{equation}
+Dari properti distribusi Gaussian, diketahui bahwa varians dari imbal hasil diberikan oleh $\text{Var}(R) = \alpha$. Mengingat $\alpha = k_B T_{market}$, maka diperoleh hubungan fundamental:
+\begin{equation}
+\sigma_{avg}^2 = k_B T_{market} \implies T_{market} \propto \sigma_{avg}^2
+\end{equation}
+Hubungan ini menunjukkan bahwa temperatur pasar efektif berbanding lurus dengan kuadrat volatilitas rata-rata. Dengan demikian, volatilitas pasar dapat diinterpretasikan secara fisik sebagai temperatur dalam sistem ekonomi kompleks.
+
+\subsection{Aproksimasi QMI pada Interaksi Lemah}
+Dalam rezim interaksi lemah pada model Ising ($J_{ij} \ll 1$), distribusi sistem dapat dipandang sebagai perturbasi dari distribusi independen. Nilai QMI didekati melalui ekspansi Taylor orde kedua terhadap parameter kopling di sekitar titik tanpa interaksi ($J_{ij} = 0$):
+\begin{equation}
+I(J_{ij}) \approx I(0) + \frac{\partial I}{\partial J_{ij}} \bigg|_{J_{ij}=0} J_{ij} + \frac{1}{2!} \frac{\partial^2 I}{\partial J_{ij}^2} \bigg|_{J_{ij}=0} J_{ij}^2
+\end{equation}
+Evaluasi terhadap suku-suku ekspansi tersebut adalah sebagai berikut:
+\begin{itemize}
+    \item $I(0) = 0$: Pada kondisi tanpa interaksi, variabel bersifat independen sehingga tidak ada informasi yang dibagikan.
+    \item $I'(0) = 0$: Suku pertama bernilai nol karena sifat simetri dari sistem Ising terhadap orientasi spin.
+    \item $I''(0) = 1$: Turunannya terhadap parameter kopling (melalui derivasi fungsional KL-Divergence) menghasilkan nilai satu pada titik kesetimbangan.
+\end{itemize}
+Sehingga diperoleh hubungan aproksimasi kuadratik:
+\begin{equation}
+I(i:j) \approx \frac{1}{2} J_{ij}^2 \implies |J_{ij}| \approx \sqrt{2 I(i:j)}
+\end{equation}
+Dalam praktik pemodelan ekonofisika, faktor $\sqrt{2}$ ini sering diserap ke dalam koefisien kalibrasi $\alpha$, sehingga diperoleh relasi $|J_{ij}| \propto \sqrt{I(i:j)}$.
+
+\subsection{Korelasi Pearson dan Orientasi Interaksi}
+Karena QMI selalu bernilai non-negatif, arah interaksi (feromagnetik atau antiferomagnetik) ditentukan melalui korelasi Pearson $\rho_{ij}^{Pearson}$. Koefisien ini dihitung sebagai rasio kovarians terhadap produk standar deviasi aset:
+\begin{equation}
+\begin{aligned}
+\rho_{ij}^{Pearson} &= \frac{\text{Cov}(r_i, r_j)}{\sqrt{\text{Var}(r_i) \cdot \text{Var}(r_j)}} \\
+&= \frac{\sum_{t=1}^{T}(r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j)}{\sqrt{\sum_t(r_{i,t}-\bar{r}_i)^2 \cdot \sum_t(r_{j,t}-\bar{r}_j)^2}}
+\end{aligned}
+\label{eq:pearson_derivation_appendix}
+\end{equation}
+Fungsi \textit{Signum} dari hasil ini digunakan untuk memberikan polaritas pada kekuatan interaksi yang diperoleh dari QMI.
+
+\subsection{Formulasi Akhir Kopling J}
+Dengan menggabungkan magnitudo dari pendekatan QMI dan arah dari korelasi Pearson, diperoleh formulasi parameter kopling total:
+\begin{equation}
+J_{ij} = \alpha \cdot \text{sgn}(\rho_{ij}^{Pearson}) \sqrt{I(i:j)}
+\end{equation}
+Parameter ini secara efektif memetakan dependensi informasi statistik (linear dan non-linear) ke dalam lanskap energi Hamiltonian Ising untuk proses optimasi portofolio.

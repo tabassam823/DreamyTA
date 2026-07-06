@@ -1,0 +1,20 @@
+\hypertarget{ekspektasi-energi-dan-optimasi-parametrik}{%
+\section{Ekspektasi Energi dan Optimasi Parametrik}\label{ekspektasi-energi-dan-optimasi-parametrik}}
+
+Tujuan kita adalah mencari parameter \(\theta\) yang meminimalkan nilai ekspektasi Hamiltonian.
+
+\hypertarget{a.-ansatz-tanpa-entanglement}{%
+\subsection{Ansatz Tanpa Entanglement}\label{a.-ansatz-tanpa-entanglement}}
+
+Jika kita menggunakan \emph{ansatz} produk \(|\psi(\theta)\rangle = \bigotimes_{i=1}^N R_y(\theta_i)|0\rangle\), nilai ekspektasi energinya adalah: \[ \langle E(\theta) \rangle = \sum_{i<j} J_{ij} \cos(2\theta_i)\cos(2\theta_j) + \sum_i h_i \cos(2\theta_i) + C \]
+
+Fungsi ini adalah lanskap energi non-linear yang akan ditelusuri oleh \emph{optimizer} klasik. Secara fisik, \(\theta_i\) menentukan probabilitas ``spin'' aset \(i\) mengarah ke \(+1\) atau \(-1\).
+
+\hypertarget{b.-gradien-analitik}{%
+\subsection{Gradien Analitik}\label{b.-gradien-analitik}}
+
+Gradien terhadap parameter \(\theta_k\) dapat dihitung secara langsung: \[ \frac{\partial \langle E \rangle}{\partial \theta_k} = -2\sin(2\theta_k) \left[ \sum_{j \neq k} J_{kj} \cos(2\theta_j) + h_k \right] \]
+
+Persamaan gradien ini menunjukkan bahwa perubahan pada satu aset \(\theta_k\) dipengaruhi oleh ``medan efektif'' yang dihasilkan oleh aset lainnya (\(J_{kj}\)) dan medan lokalnya sendiri (\(h_k\)).
+
+

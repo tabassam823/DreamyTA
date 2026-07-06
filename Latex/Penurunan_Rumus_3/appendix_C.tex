@@ -1,0 +1,15 @@
+\section{Derivasi Konstanta Energi C pada Ising}
+Konstanta energi $C$ diperoleh dengan menjumlahkan seluruh suku bebas (independent of $\sigma_i^z$) dari ekspansi Hamiltonian Ising.
+Dari suku linear QUBO:
+\begin{equation}
+C_{linear} = \sum_{i=1}^N \frac{Q_{ii}}{2}
+\end{equation}
+Dari suku kuadratik QUBO:
+\begin{equation}
+C_{quadratic} = \sum_{i<j}^N 2Q_{ij} \frac{1}{4} = \sum_{i<j}^N \frac{Q_{ij}}{2}
+\end{equation}
+Penjumlahan total suku bebas adalah:
+\begin{equation}
+C = \sum_{i=1}^N \frac{Q_{ii}}{2} + \sum_{i<j}^N \frac{Q_{ij}}{2}
+\end{equation}
+Suku ini berfungsi sebagai offset energi agar nilai Hamiltonian kuantum identik dengan nilai fungsi objektif biner asli.

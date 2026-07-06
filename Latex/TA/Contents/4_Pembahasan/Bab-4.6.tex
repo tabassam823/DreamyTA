@@ -1,0 +1,289 @@
+\section{Optimasi \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA)}
+\label{sec:4_6_optimasi_spsa}
+
+\subsection{Dinamika Pembaruan Parameter SPSA}
+Setelah struktur \textit{ansatz} variasional berhasil dibangun, tahap berikutnya dalam algoritma \textit{Variational Quantum Eigensolver} (VQE) adalah menentukan himpunan parameter rotasi $\boldsymbol{\theta}$ yang meminimalkan nilai ekspektasi energi Hamiltonian. Permasalahan optimasi ini secara matematis dapat dituliskan sebagai pencarian solusi
+\begin{equation}
+    \boldsymbol{\theta}^{*}
+    =
+    \arg \min_{\boldsymbol{\theta}}
+    \left\langle
+    \psi(\boldsymbol{\theta})
+    \right|
+    \hat{\mathcal{H}}
+    \left|
+    \psi(\boldsymbol{\theta})
+    \right\rangle ,
+\end{equation}
+dengan fungsi biaya yang didefinisikan sebagai energi ekspektasi keadaan kuantum variasional
+\begin{equation}
+    E(\boldsymbol{\theta})
+    =
+    \left\langle
+    \psi(\boldsymbol{\theta})
+    \right|
+    \hat{\mathcal{H}}
+    \left|
+    \psi(\boldsymbol{\theta})
+    \right\rangle .
+\end{equation}
+Pada sistem berdimensi tinggi, jumlah parameter rotasi yang harus dioptimasi meningkat seiring bertambahnya jumlah qubit dan kedalaman sirkuit. Kondisi tersebut menyebabkan evaluasi gradien eksak menjadi semakin mahal karena memerlukan banyak pengukuran sirkuit kuantum pada setiap iterasi optimasi. Untuk mengatasi kendala tersebut, penelitian ini menggunakan algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) sebagai prosedur pembaruan parameter utama \cite{spall_implementation_1998}.
+
+Prinsip dasar SPSA adalah memperkirakan seluruh komponen gradien menggunakan hanya dua evaluasi fungsi biaya pada setiap iterasi, terlepas dari banyaknya parameter yang dimiliki sirkuit. Pada iterasi ke-$k$, dibangkitkan sebuah vektor gangguan acak
+\begin{equation}
+    \Delta_k=
+    \left(
+    \Delta_{k,1},
+    \Delta_{k,2},
+    \ldots,
+    \Delta_{k,p}
+    \right)^T ,
+\end{equation}
+dengan setiap komponen $\Delta_{k,i}$ mengikuti distribusi Rademacher
+\begin{equation}
+    \Delta_{k,i}
+    =
+    \begin{cases}
+        +1, & P=\frac{1}{2},\\
+        -1, & P=\frac{1}{2}.
+    \end{cases}
+\end{equation}
+Vektor gangguan ini digunakan untuk membentuk dua titik evaluasi parameter yang terletak simetris terhadap posisi parameter saat ini,
+\begin{equation}
+    \boldsymbol{\theta}_{k}^{(+)}
+    =
+    \boldsymbol{\theta}_{k}
+    +
+    c_k \Delta_k,
+\end{equation}
+dan
+\begin{equation}
+    \boldsymbol{\theta}_{k}^{(-)}
+    =
+    \boldsymbol{\theta}_{k}
+    -
+    c_k \Delta_k,
+\end{equation}
+dengan $c_k$ menyatakan amplitudo gangguan pada iterasi ke-$k$. Kedua konfigurasi parameter tersebut kemudian digunakan untuk menghitung energi ekspektasi
+\begin{equation}
+    E_k^{(+)}
+    =
+    E\!\left(
+    \boldsymbol{\theta}_{k}^{(+)}
+    \right),
+    \qquad
+    E_k^{(-)}
+    =
+    E\!\left(
+    \boldsymbol{\theta}_{k}^{(-)}
+    \right).
+\end{equation}
+
+Berdasarkan dua hasil evaluasi energi tersebut, estimator gradien SPSA diperoleh melalui hubungan
+\begin{equation}
+    \hat{\mathbf{g}}_k
+    =
+    \frac{
+    E_k^{(+)}
+    -
+    E_k^{(-)}
+    }{
+    2c_k
+    }
+    \Delta_k^{-1},
+\end{equation}
+dengan operasi invers dilakukan secara elemen-per-elemen sehingga
+\begin{equation}
+    \hat{g}_{k,i}
+    =
+    \frac{
+    E_k^{(+)}
+    -
+    E_k^{(-)}
+    }{
+    2c_k \Delta_{k,i}
+    }.
+\end{equation}
+Karena setiap komponen $\Delta_{k,i}$ hanya bernilai $\pm1$, proses perhitungan estimator gradien menjadi sangat sederhana dan tidak memerlukan evaluasi parsial terhadap masing-masing parameter secara terpisah. Karakteristik inilah yang membuat SPSA jauh lebih efisien dibandingkan metode diferensiasi numerik konvensional yang memerlukan sedikitnya $2p$ evaluasi fungsi biaya untuk sistem dengan $p$ parameter.
+
+Setelah estimator gradien diperoleh, parameter sirkuit diperbarui menggunakan aturan iteratif
+\begin{equation}
+    \boldsymbol{\theta}_{k+1}
+    =
+    \boldsymbol{\theta}_{k}
+    -
+    a_k
+    \hat{\mathbf{g}}_k,
+\end{equation}
+dengan $a_k$ menyatakan laju pembelajaran (\textit{learning rate}) yang nilainya diperkecil secara bertahap sepanjang iterasi. Dalam implementasi SPSA, koefisien pembaruan dan amplitudo gangguan umumnya mengikuti bentuk
+\begin{equation}
+    a_k
+    =
+    \frac{a}{(A+k+1)^{\alpha}},
+    \qquad
+    c_k
+    =
+    \frac{c}{(k+1)^{\gamma}},
+\end{equation}
+dengan parameter $a$, $c$, $A$, $\alpha$, dan $\gamma$ dipilih untuk mengendalikan stabilitas proses konvergensi. Melalui mekanisme tersebut, SPSA mampu mengarahkan parameter variasional menuju daerah energi yang semakin rendah meskipun informasi gradien yang digunakan hanya berupa estimasi stokastik. Efisiensi evaluasi fungsi biaya inilah yang menjadikan SPSA sangat sesuai untuk optimasi VQE pada perangkat kuantum NISQ, khususnya ketika jumlah parameter sirkuit meningkat dan pengukuran kuantum menjadi sumber biaya komputasi yang dominan.
+
+\subsection{Implementasi Numerik dan Konvergensi Energi Optimal}
+\label{subsec:4_6_2_numerik_fisis}
+
+Untuk memberikan gambaran yang lebih konkret mengenai mekanisme optimasi SPSA, pada subsection ini ditunjukkan satu siklus pembaruan parameter menggunakan Hamiltonian Ising dua aset yang telah diperoleh pada pembahasan sebelumnya. Sebagai ilustrasi, digunakan Hamiltonian
+\begin{equation}
+    \hat{\mathcal{H}}_{N2}
+    =
+    0,1735\hat{Z}_1
+    +
+    0,0931\hat{Z}_2
+    +
+    0,5014\hat{Z}_1\hat{Z}_2
+    +
+    0,2320.
+\end{equation}
+Hamiltonian tersebut mendefinisikan lanskap energi yang harus diminimalkan oleh algoritma VQE melalui penyesuaian parameter rotasi sirkuit kuantum. Dalam praktiknya, energi ekspektasi dihitung melalui pengukuran keadaan variasional $|\psi(\boldsymbol{\theta})\rangle$ yang dibangkitkan oleh \textit{hardware-efficient ansatz}. Namun, untuk mempermudah ilustrasi matematis, energi ekspektasi pada contoh ini direpresentasikan menggunakan hubungan sederhana $\langle \hat{Z}_i \rangle = \cos(\theta_i)$ sehingga fungsi biaya dapat dituliskan sebagai
+\begin{equation}
+    E(\boldsymbol{\theta})
+    =
+    0,1735\cos(\theta_1)
+    +
+    0,0931\cos(\theta_2)
+    +
+    0,5014\cos(\theta_1)\cos(\theta_2)
+    +
+    0,2320.
+\end{equation}
+
+Berdasarkan fungsi biaya tersebut, prosedur SPSA dimulai dengan menentukan parameter awal, amplitudo gangguan, serta vektor perturbasi Rademacher yang akan digunakan untuk mengestimasi gradien. Misalkan parameter awal dipilih sebagai
+\begin{equation}
+    \boldsymbol{\theta}^{(0)}
+    =
+    \begin{pmatrix}
+        \pi/2 \\
+        \pi/2
+    \end{pmatrix}
+    \approx
+    \begin{pmatrix}
+        1,5708 \\
+        1,5708
+    \end{pmatrix},
+\end{equation}
+dengan koefisien perturbasi $c_k = 0,1$ dan vektor gangguan
+\begin{equation}
+    \Delta_k
+    =
+    \begin{pmatrix}
+        1\\
+        -1
+    \end{pmatrix}.
+\end{equation}
+Dari konfigurasi tersebut diperoleh dua titik evaluasi parameter
+\begin{equation}
+    \boldsymbol{\theta}_{+}
+    =
+    \boldsymbol{\theta}^{(0)}
+    +
+    c_k\Delta_k
+    =
+    \begin{pmatrix}
+        1,6708\\
+        1,4708
+    \end{pmatrix},
+\end{equation}
+dan
+\begin{equation}
+    \boldsymbol{\theta}_{-}
+    =
+    \boldsymbol{\theta}^{(0)}
+    -
+    c_k\Delta_k
+    =
+    \begin{pmatrix}
+        1,4708\\
+        1,6708
+    \end{pmatrix}.
+\end{equation}
+Nilai energi pada kedua titik tersebut kemudian dievaluasi menggunakan fungsi biaya yang sama sehingga diperoleh energi $E_{+}$ dan $E_{-}$. Selisih kedua energi ini digunakan untuk membangun estimator gradien SPSA
+\begin{equation}
+    \hat{\mathbf{g}}
+    =
+    \frac{
+    E_{+}-E_{-}
+    }{
+    2c_k
+    }
+    \Delta_k^{-1}.
+\end{equation}
+
+Sebagai ilustrasi numerik, misalkan hasil evaluasi menghasilkan $E_{+}=0,2066$ dan $E_{-}=0,2227$, sehingga
+\begin{equation}
+    E_{+}-E_{-}
+    =
+    -0,0161.
+\end{equation}
+Estimator gradien yang diperoleh menjadi
+\begin{equation}
+    \hat{\mathbf{g}}
+    =
+    \begin{pmatrix}
+        -0,0805\\
+        0,0805
+    \end{pmatrix}.
+\end{equation}
+Dengan menggunakan laju pembelajaran $\eta=0,1$, parameter kemudian diperbarui menurut aturan SPSA
+\begin{equation}
+    \boldsymbol{\theta}^{(1)}
+    =
+    \boldsymbol{\theta}^{(0)}
+    -
+    \eta
+    \hat{\mathbf{g}}
+    =
+    \begin{pmatrix}
+        1,5789\\
+        1,5627
+    \end{pmatrix}.
+\end{equation}
+Siklus perturbasi, estimasi gradien, dan pembaruan parameter tersebut diulang secara terus-menerus hingga perubahan energi antar iterasi menjadi sangat kecil. Pada implementasi penelitian ini, proses optimasi dilakukan secara penuh terhadap energi ekspektasi yang dihitung langsung dari simulasi sirkuit kuantum VQE, sehingga seluruh parameter rotasi pada \textit{hardware-efficient ansatz} diperbarui secara simultan menuju keadaan energi minimum. Konvergensi energi yang dicapai pada akhir proses optimasi kemudian diinterpretasikan sebagai pendekatan terhadap \textit{ground state} Hamiltonian Ising yang merepresentasikan solusi portofolio optimal.
+
+Untuk mengotomatisasi proses optimasi tersebut pada seluruh jendela data pengamatan, algoritma SPSA diimplementasikan menggunakan pustaka \textit{NumPy}. Implementasi ini membangkitkan vektor perturbasi Rademacher secara acak pada setiap iterasi, mengevaluasi energi ekspektasi pada dua titik perturbasi yang simetris, lalu memperbarui parameter sirkuit menggunakan estimator gradien SPSA. Selain itu, koefisien pembelajaran $a_k$ dan amplitudo perturbasi $c_k$ dibuat menurun secara adaptif mengikuti formulasi standar SPSA sehingga proses optimasi tetap stabil ketika mendekati titik minimum energi. Struktur algoritma lengkap yang digunakan pada penelitian ini ditunjukkan pada Daftar Kode \ref{lst:run_spsa_test}.
+
+\begin{lstlisting}[language=Python, caption={Implementasi algoritma dasar \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA)}, label={lst:run_spsa_test}]
+import numpy as np
+
+def run_spsa_test(cost_circuit, n_params, init_params=None, a_base=0.1, c_base=0.1, max_iters=30, batch_size=25):
+    """Versi ringan SPSA untuk pengetesan Learning Rate."""
+    rng = np.random.default_rng(42)
+    if init_params is not None:
+        params = init_params.copy()
+    else:
+        params = rng.uniform(0, 2 * np.pi, n_params)
+    
+    A_coeff = max_iters * 0.1
+    alpha_exp = 0.602
+    gamma_exp = 0.101
+    
+    total_iters = 0
+    while total_iters < max_iters:
+        for _ in range(batch_size):
+            k = total_iters
+            a_k = a_base / (A_coeff + k + 1) ** alpha_exp
+            c_k = c_base / (k + 1) ** gamma_exp
+            
+            # Formulasi parameter perturbasi serentak (Rademacher)
+            delta = 2 * rng.integers(0, 2, size=n_params) - 1
+            
+            # Estimasi fungsi biaya energi (cost circuit)
+            cost_plus = float(cost_circuit(params + c_k * delta))
+            cost_minus = float(cost_circuit(params - c_k * delta))
+            
+            # Kalkulasi gradien
+            grad = (cost_plus - cost_minus) / (2 * c_k * delta)
+            params = params - a_k * grad
+            
+            total_iters += 1
+            
+    return float(cost_circuit(params))
+\end{lstlisting}
+

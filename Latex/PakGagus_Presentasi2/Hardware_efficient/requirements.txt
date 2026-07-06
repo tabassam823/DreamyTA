@@ -1,0 +1,18 @@
+# Hardware-Efficient VQE Replication (Kandala 2017)
+# PennyLane-based molecular simulation
+
+# Core quantum computing framework
+pennylane>=0.35.0
+pennylane-qchem>=0.35.0
+
+# Numerical computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Jupyter notebook support
+jupyter>=1.0.0
+ipykernel>=6.25.0

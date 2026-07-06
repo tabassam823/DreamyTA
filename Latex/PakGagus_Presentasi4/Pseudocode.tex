@@ -1,0 +1,398 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Quantum Mutual Information (QMI)}
+
+Bagian ini berisi algoritma dari modul \texttt{entropy\_qmi.py} untuk menghitung matriks interaksi $J_{ij}$ berbasis informasi kuantum.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FComputeQMI}{compute\_qmi\_jij}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FComputeQMI{binary\_states, asset\_a, asset\_b, $\alpha=1.0$}}{
+    $state_A \gets binary\_states[asset\_a]$\;
+    $state_B \gets binary\_states[asset\_b]$\;
+    $N \gets \text{length of } state_A$\;
+    Initialize $n_{ij}$ as $2 \times 2$ zero matrix\;
+    \For{$t \gets 0$ \KwTo $N-1$}{
+        $i \gets state_A[t]$\;
+        $j \gets state_B[t]$\;
+        $n_{ij}[i, j] \gets n_{ij}[i, j] + 1$\;
+    }
+    \tcp{Regularization and Probability Matrix}
+    $P_{joint} \gets \frac{n_{ij} + \alpha}{N + 4\alpha}$\;
+    $\rho_{LF} \gets \text{diag}(\text{flatten}(P_{joint}))$\;
+    $\rho_L \gets \text{diag}(\text{sum rows of } P_{joint})$\;
+    $\rho_F \gets \text{diag}(\text{sum columns of } P_{joint})$\;
+    
+    \SetKwFunction{FEnt}{von\_neumann\_entropy}
+    \SetKwProg{SubFn}{Sub-Function}{:}{}
+    \SubFn{\FEnt{$\rho$}}{
+        $\lambda \gets \text{eigenvalues of } \rho$\;
+        $\lambda \gets \lambda[\lambda > 10^{-12}]$\;
+        \KwRet $-\sum (\lambda \cdot \ln(\lambda))$\;
+    }
+    
+    $S_{LF} \gets \text{\FEnt}(\rho_{LF})$\;
+    $S_L \gets \text{\FEnt}(\rho_L)$\;
+    $S_F \gets \text{\FEnt}(\rho_F)$\;
+    
+    \KwRet $S_L + S_F - S_{LF}$\;
+}
+\caption{Menghitung Quantum Mutual Information antara dua aset.}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FComputeAllQMI}{compute\_all\_qmi}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FComputeAllQMI{binary\_states, tickers}}{
+    $n \gets \text{number of tickers}$\;
+    Initialize $J$ as $n \times n$ zero matrix\;
+    \For{$i \gets 0$ \KwTo $n-1$}{
+        \For{$j \gets i+1$ \KwTo $n-1$}{
+            $qmi \gets \text{compute\_qmi\_jij}(binary\_states, tickers[i], tickers[j])$\;
+            $J[i, j] \gets qmi$\;
+            $J[j, i] \gets qmi$\;
+        }
+    }
+    \KwRet $J$\;
+}
+\caption{Menghitung matriks QMI untuk semua pasangan aset.}
+\end{algorithm}
+
+\clearpage
+
+\section{Markowitz Payoff Matrix}
+
+Bagian ini berisi algoritma dari modul \texttt{payoff\_matrix.py} untuk membangun matriks payoff berdasarkan teori portofolio Markowitz dalam konteks Game Theory.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FCompLambda}{compute\_endogenous\_lambda}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FCompLambda{log\_returns, tickers}}{
+    $\mu_{annual} \gets \text{mean}(log\_returns[tickers]) \times 252$\;
+    $\sigma_{annual} \gets \text{std}(log\_returns[tickers]) \times \sqrt{252}$\;
+    $\mu_{avg} \gets \text{mean}(|\mu_{annual}|)$\;
+    $\sigma_{avg} \gets \text{mean}(\sigma_{annual})$\;
+    \If{$(\mu_{avg} + \sigma_{avg}) == 0$}{
+        \KwRet $0.5$\;
+    }
+    \KwRet $\sigma_{avg} / (\mu_{avg} + \sigma_{avg})$\;
+}
+\caption{Menghitung faktor risiko $\lambda$ secara endogen.}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FCompPayoff}{compute\_markowitz\_payoff\_matrix}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FCompPayoff{log\_returns, binary\_states, asset\_a, asset\_b, $\lambda$}}{
+    Initialize $P_A, P_B, counts$ as $2 \times 2$ zero matrices\;
+    \For{$t \gets 0$ \KwTo $N-1$}{
+        $i, j \gets binary\_states[asset\_a][t], binary\_states[asset\_b][t]$\;
+        $counts[i, j] \gets counts[i, j] + 1$\;
+        $u_A \gets (1-\lambda)(ret_A[t] \cdot 252) - \lambda|ret_A[t] \cdot 252|$\;
+        $u_B \gets (1-\lambda)(ret_B[t] \cdot 252) - \lambda|ret_B[t] \cdot 252|$\;
+        $P_A[i, j] \gets P_A[i, j] + u_A$\;
+        $P_B[i, j] \gets P_B[i, j] + u_B$\;
+    }
+    Divide $P_A, P_B$ element-wise by $counts$ where $counts > 0$\;
+    \KwRet $P_A, P_B$\;
+}
+\caption{Membangun matriks payoff untuk sepasang aset.}
+\end{algorithm}
+
+\clearpage
+
+\section{Hamiltonian Construction}
+
+Bagian ini berisi algoritma dari modul \texttt{hamiltonian.py} untuk menghitung bias $h_i$ dan membangun operator Hamiltonian total untuk optimasi kuantum.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FCompBias}{compute\_bias\_hi}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FCompBias{all\_payoffs, tickers}}{
+    $n \gets \text{length of } tickers$\;
+    Initialize $h$ as zero vector of size $n$\;
+    \For{$i \gets 0$ \KwTo $n-1$}{
+        $sum \gets 0, count \gets 0$\;
+        \For{$(key, (P_A, P_B))$ \textbf{in} all\_payoffs}{
+            $(idx_A, idx_B) \gets \text{get indices from } key$\;
+            \If{$idx_A == i$}{
+                $u_{down} \gets (P_A[1,0] + P_A[1,1]) / 2.0$\;
+                $u_{up} \gets (P_A[0,0] + P_A[0,1]) / 2.0$\;
+                $sum \gets sum + (u_{down} - u_{up})$\;
+                $count \gets count + 1$\;
+            }
+            \ElseIf{$idx_B == i$}{
+                $u_{down} \gets (P_B[0,1] + P_B[1,1]) / 2.0$\;
+                $u_{up} \gets (P_B[0,0] + P_B[1,0]) / 2.0$\;
+                $sum \gets sum + (u_{down} - u_{up})$\;
+                $count \gets count + 1$\;
+            }
+        }
+        $h[i] \gets sum / count$ \textbf{ if } $count > 0$\;
+    }
+    \KwRet $h$\;
+}
+\caption{Menghitung bias $h_i$ dari marginal payoff matrices.}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FBuildH}{build\_hamiltonian}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FBuildH{$h, J, n, K, A$}}{
+    Initialize $H_{cost} \gets \sum h_i Z_i + \sum_{i<j} J_{ij} Z_i Z_j$\;
+    $C \gets (n/2 - K)$\;
+    $const \gets A(C^2 + n/4)$\;
+    $H_{constraint} \gets const \cdot I - A \cdot C \sum Z_i + \frac{A}{2} \sum_{i<j} Z_i Z_j$\;
+    \KwRet $H_{cost} + H_{constraint}$\;
+}
+\caption{Membangun Hamiltonian total $H = H_{cost} + H_{penalty}$.}
+\end{algorithm}
+
+\clearpage
+
+\section{VQE Optimization (SPSA)}
+
+Bagian ini berisi algoritma dari modul \texttt{vqe\_optimization.py} untuk mencari solusi optimal menggunakan metode \textit{Variational Quantum Eigensolver} dengan optimizer SPSA.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FVQESPSA}{run\_vqe\_spsa}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FVQESPSA{$H, n, K, depth, maxiter$}}{
+    Initialize random parameters $\theta$\;
+    Set SPSA hyperparameters: $a, c, A, \alpha, \gamma$\;
+    \For{$k \gets 0$ \KwTo $maxiter-1$}{
+        $a_k \gets a / (A + k + 1)^\alpha, \quad c_k \gets c / (k + 1)^\gamma$\;
+        Generate random perturbation vector $\Delta \in \{-1, 1\}^n$\;
+        $E_+ \gets \text{Circuit}(\theta + c_k \Delta)$\;
+        $E_- \gets \text{Circuit}(\theta - c_k \Delta)$\;
+        $grad \gets (E_+ - E_-) / (2 c_k \Delta)$\;
+        $\theta \gets \theta - a_k \cdot grad$\;
+        Store $E(\theta)$ in history\;
+    }
+    \KwRet $\theta, history$\;
+}
+\caption{Optimasi VQE menggunakan algoritma SPSA.}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FSample}{sample\_results}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FSample{$\theta, n, depth, K$}}{
+    Run Circuit with $\theta$ to get probabilities $P(\text{bitstrings})$\;
+    $best\_prob \gets -1, \quad best\_bit \gets \text{null}$\;
+    \For{bitstring \textbf{in} states}{
+        \If{$\text{HammingWeight}(bitstring) == K$}{
+            \If{$P(bitstring) > best\_prob$}{
+                $best\_prob \gets P(bitstring)$\;
+                $best\_bit \gets bitstring$\;
+            }
+        }
+    }
+    $indices \gets \{i \mid best\_bit[i] == '1'\}$\;
+    \KwRet $indices, best\_bit, P$\;
+}
+\caption{Sampling hasil VQE untuk mendapatkan bitstring terbaik.}
+\end{algorithm}
+
+\clearpage
+
+\section{VQE Optimization (Adam)}
+
+Bagian ini berisi algoritma dari modul \texttt{vqe\_adam.py} yang menggunakan optimizer Adam sebagai alternatif pembanding untuk SPSA.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FVQEAdam}{run\_vqe\_adam}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FVQEAdam{$H, n, K, depth, maxiter, stepsize$}}{
+    Initialize random parameters $\theta \in [0, 2\pi]^n$\;
+    Initialize Adam moments: $m \gets 0, v \gets 0$\;
+    \For{$t \gets 1$ \KwTo $maxiter$}{
+        $Cost \gets \text{Circuit}(\theta)$\;
+        $g \gets \nabla_\theta \text{Circuit}(\theta)$\;
+        \tcp{Adam Update Rule}
+        $m \gets \beta_1 m + (1-\beta_1)g$\;
+        $v \gets \beta_2 v + (1-\beta_2)g^2$\;
+        $\hat{m} \gets m / (1-\beta_1^t)$\;
+        $\hat{v} \gets v / (1-\beta_2^t)$\;
+        $\theta \gets \theta - \text{stepsize} \cdot \hat{m} / (\sqrt{\hat{v}} + \epsilon)$\;
+        Store $Cost$ in history\;
+    }
+    \KwRet $\theta, history$\;
+}
+\caption{Optimasi VQE menggunakan algoritma Adam.}
+\end{algorithm}
+
+\clearpage
+
+\section{Portfolio Backtesting}
+
+Bagian ini berisi algoritma dari modul \texttt{backtest.py} untuk mengevaluasi kinerja portofolio melalui simulasi data historis.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FCalcMetrics}{calculate\_metrics}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FCalcMetrics{portfolio\_values}}{
+    $returns \gets \text{percentage change of } portfolio\_values$\;
+    $CAGR \gets (V_{final} / V_{initial})^{1/n\_years} - 1$\;
+    $vol \gets \text{std}(returns) \cdot \sqrt{252}$\;
+    $Sharpe \gets (\text{mean}(returns) \cdot 252) / vol$\;
+    $cum\_ret \gets \prod(1 + returns)$\;
+    $peak \gets \text{rolling\_max}(cum\_ret)$\;
+    $MaxDD \gets \min((cum\_ret - peak) / peak)$\;
+    \KwRet $\{CAGR, vol, Sharpe, MaxDD\}$\;
+}
+\caption{Menghitung indikator kinerja portofolio (KPI).}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FRebalance}{rebalance\_portfolio}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FRebalance{cash, holdings, weights, prices, $tc$}}{
+    $V_{total} \gets cash + \sum (holdings \cdot prices)$\;
+    $V_{target} \gets V_{total} \cdot weights$\;
+    $diff \gets V_{target} - (holdings \cdot prices)$\;
+    \tcp{Sell assets first}
+    \For{$i$ \textbf{where} $diff[i] < 0$}{
+        $shares \gets |diff[i]| / prices[i]$\;
+        $cash \gets cash + (shares \cdot prices[i] \cdot (1 - tc))$\;
+        $holdings[i] \gets holdings[i] - shares$\;
+    }
+    \tcp{Buy assets second}
+    \For{$i$ \textbf{where} $diff[i] > 0$}{
+        $shares \gets diff[i] / (prices[i] \cdot (1 + tc))$\;
+        $cash \gets cash - (shares \cdot prices[i] \cdot (1 + tc))$\;
+        $holdings[i] \gets holdings[i] + shares$\;
+    }
+    \KwRet $cash, holdings$\;
+}
+\caption{Melakukan rebalancing portofolio ke target bobot baru.}
+\end{algorithm}
+
+\clearpage
+
+\section{Data Analysis and Preprocessing}
+
+Bagian ini berisi algoritma dari modul \texttt{data\_analysis.py} untuk pengambilan data historis dan penghitungan statistik dasar aset.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FDownload}{download\_data}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FDownload{tickers, start, end}}{
+    Download adjusted close prices $P$ from Yahoo Finance\;
+    Remove rows with missing values\;
+    \KwRet $P$\;
+}
+\caption{Mengunduh data harga historis aset.}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FLogRet}{calculate\_log\_returns}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FLogRet{$P$}}{
+    $R_t \gets \ln(P_t / P_{t-1})$ for all $t > 0$\;
+    \KwRet $R$\;
+}
+\caption{Menghitung log-return harian aset.}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FStats}{calculate\_statistics}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FStats{$R$}}{
+    Initialize empty list $stats$\;
+    $B \gets (R \le 0)$ \tcp{Binary state: 1 if Down, 0 if Up}
+    \For{ticker $k$ \textbf{in} $R$}{
+        $\mu_k \gets \text{mean}(R_k)$\;
+        $\sigma_k \gets \text{std}(R_k)$\;
+        $Up\% \gets \text{mean}(B_k == 0) \times 100$\;
+        Add $\{\mu_k, \sigma_k, Up\%\}$ to $stats$\;
+    }
+    \KwRet $stats$\;
+}
+\caption{Menghitung statistik return dan probabilitas arah pergerakan harga.}
+\end{algorithm}
+
+\clearpage
+
+\section{Integrated Pipeline and Backtest Execution}
+
+Bagian ini berisi algoritma dari \texttt{main.py} yang mengintegrasikan seluruh modul ke dalam satu \textit{rolling window backtest} pipeline.
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwFunction{FRunPipeline}{run\_analysis\_pipeline}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FRunPipeline{window\_data, tickers, K}}{
+    $R \gets \text{calculate\_log\_returns}(window\_data)$\;
+    $B \gets (R \le 0)$\;
+    $(all\_payoffs, \lambda) \gets \text{run\_payoff\_analysis}(R, B, tickers)$\;
+    $J \gets \text{compute\_all\_qmi}(B, tickers)$\;
+    $h \gets \text{compute\_bias\_hi}(all\_payoffs, tickers)$\;
+    $H \gets \text{build\_hamiltonian}(h, J, \text{length}(tickers), K)$\;
+    $\theta \gets \text{run\_vqe\_spsa}(H, \dots)$\;
+    $indices \gets \text{sample\_results}(\theta, \dots)$\;
+    \KwRet $indices$\;
+}
+\caption{Alur integrasi optimasi kuantum-klasikal.}
+\end{algorithm}
+
+\vspace{1em}
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwProg{Fn}{Main}{:}{}
+\Fn{Main}{
+    Download historical data for $TICKERS$ from $Start$ to $End$\;
+    Define rebalance dates $D_{reb}$ (Monthly schedule)\;
+    Initialize VQE and Benchmark engines with initial capital\;
+    \For{date $t$ \textbf{in} simulation\_period}{
+        \If{$t \in D_{reb}$}{
+            $window \gets$ slice historical data $[t - Lookback, t]$\;
+            $sel\_idx \gets \text{run\_analysis\_pipeline}(window, TICKERS, K)$\;
+            Update target weights for VQE portfolio based on $sel\_idx$\;
+            Execute \text{rebalance\_portfolio} for VQE and Benchmark\;
+        }
+        \Else{
+            Update daily portfolio values based on current prices\;
+        }
+    }
+    Calculate performance metrics (CAGR, Sharpe, etc.)\;
+    Generate Equity Curve and Metrics Comparison Table\;
+}
+\caption{Simulasi rolling-window backtesting.}
+\end{algorithm}
+
+\end{document}

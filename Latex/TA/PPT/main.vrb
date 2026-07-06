@@ -1,0 +1,16 @@
+\frametitle{Bab 3.7 - Validasi Solusi Eksak Brute Force}
+\begin{algorithm}[H]
+        \footnotesize
+        \begin{algorithmic}[1]
+            \Procedure{BruteForceValidation}{$H, N, K$}
+                \State $best\_energy \gets \infty$
+                \For{each $x \in \text{Combinations}(N, K)$}
+                    \State $E \gets \text{CalculateIsingEnergy}(x, H)$
+                    \If{$E < best\_energy$}
+                        \State $best\_energy \gets E, best\_x \gets x$
+                    \EndIf
+                \EndFor
+                \State \Return $best\_x, best\_energy$
+            \EndProcedure
+        \end{algorithmic}
+    \end{algorithm}

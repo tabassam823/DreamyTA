@@ -1,0 +1,141 @@
+\begin{equation}
+    X \sim \text{Bernoulli}(p=0.5) \implies P(X=1) = 0.5, \quad P(X=0) = 0.5
+\end{equation}
+\begin{itemize}
+    \item $X$ : variabel acak Bernoulli
+\end{itemize}
+
+\begin{equation}
+    \Delta_i = 2X - 1 \implies \Delta_i \in \{-1, 1\}
+\end{equation}
+\begin{itemize}
+    \item $\Delta_{i}$ : variabel acak Rademacher komponen $i$
+\end{itemize}
+
+\begin{equation}
+    \vec{\Delta}_k = (\Delta_{k1}, \Delta_{k2}, \dots, \Delta_{kp})^T
+\end{equation}
+\begin{itemize}
+    \item $\vec{\Delta}_k$ : vektor perturbasi stokastik pada iterasi $k$
+\end{itemize}
+
+\begin{align}
+    E_+ &= E(\vec{\theta}_k + c_k \vec{\Delta}_k) \\
+    E_- &= E(\vec{\theta}_k - c_k \vec{\Delta}_k)
+\end{align}
+\begin{itemize}
+    \item $\vec{\theta}_k$ : vektor parameter pada iterasi $k$
+    \item $c_k$ : \textit{perturbation step} pada iterasi $k$
+\end{itemize}
+
+\begin{align}
+    E_+ &= E(\vec{\theta}_k) + c_k \vec{\Delta}_k^T \nabla E(\vec{\theta}_k) + \frac{1}{2} c_k^2 \vec{\Delta}_k^T \nabla^2 E(\vec{\theta}_k) \vec{\Delta}_k + O(c_k^3) \\
+    E_- &= E(\vec{\theta}_k) - c_k \vec{\Delta}_k^T \nabla E(\vec{\theta}_k) + \frac{1}{2} c_k^2 \vec{\Delta}_k^T \nabla^2 E(\vec{\theta}_k) \vec{\Delta}_k - O(c_k^3)
+\end{align}
+\begin{align}
+    E_+ - E_- &= 2 c_k \vec{\Delta}_k^T \nabla E(\vec{\theta}_k) + O(c_k^3) \\
+    E_+ - E_- &= 2 c_k \sum_{j=1}^p \Delta_{kj} \frac{\partial E(\vec{\theta}_k)}{\partial \theta_j} + O(c_k^3)
+\end{align}
+
+\begin{equation}
+    \hat{g}_{ki} = \frac{E_+ - E_-}{2 c_k \Delta_{ki}}
+\end{equation}
+\begin{itemize}
+    \item $\hat{g}_{ki}$ : estimator gradien komponen $i$ pada iterasi $k$
+\end{itemize}
+
+\begin{equation}
+    \hat{g}_{ki} = \frac{2 c_k \Delta_{ki} \frac{\partial E}{\partial \theta_i} + 2 c_k \sum_{j \neq i}^p \Delta_{kj} \frac{\partial E}{\partial \theta_j} + O(c_k^3)}{2 c_k \Delta_{ki}}
+\end{equation}
+
+\begin{equation}
+    \hat{g}_{ki} = \frac{\partial E(\vec{\theta}_k)}{\partial \theta_i} + \sum_{j \neq i}^p \frac{\Delta_{kj}}{\Delta_{ki}} \frac{\partial E(\vec{\theta}_k)}{\partial \theta_j} + O(c_k^2)
+\end{equation}
+
+\begin{equation}
+    \mathbb{E}[\hat{g}_{ki} | \vec{\theta}_k] = \mathbb{E} \left[ \frac{\partial E(\vec{\theta}_k)}{\partial \theta_i} + \sum_{j \neq i}^p \frac{\Delta_{kj}}{\Delta_{ki}} \frac{\partial E(\vec{\theta}_k)}{\partial \theta_j} + O(c_k^2) \right]
+\end{equation}
+
+\begin{equation}
+    \mathbb{E} \left[ \frac{\Delta_{kj}}{\Delta_{ki}} \right] = \mathbb{E}[\Delta_{kj}] \mathbb{E} \left[ \frac{1}{\Delta_{ki}} \right]
+\end{equation}
+
+\begin{equation}
+    \mathbb{E}[\Delta_{kj}] = 0.5(1) + 0.5(-1) = 0
+\end{equation}
+
+\begin{equation}
+    \mathbb{E} \left[ \frac{\Delta_{kj}}{\Delta_{ki}} \right] = 0 \cdot 0 = 0, \quad \forall j \neq i
+\end{equation}
+
+\begin{equation}
+    \mathbb{E}[\hat{g}_{ki} | \vec{\theta}_k] = \frac{\partial E(\vec{\theta}_k)}{\partial \theta_i} + O(c_k^2)
+\end{equation}
+
+\begin{equation}
+    \hat{H} = 10 \hat{Z}_1 + 5 \hat{Z}_2
+\end{equation}
+\begin{equation}
+    \hat{H} = 10 (\hat{Z} \otimes \hat{I}) + 5 (\hat{I} \otimes \hat{Z})
+\end{equation}
+
+\textbf{Konfigurasi Awal:}
+\begin{itemize}
+    \item Hiperparameter: $a = 0.1, c = 0.1, \alpha = 0.602, \gamma = 0.101$
+    \item Parameter Awal: $\vec{\theta}^{(0)} = [0.7854, 0.7854]^T$
+    \item Fungsi Energi: $E(\vec{\theta}) = 10 \cos(\theta_1) + 5 \cos(\theta_2)$
+\end{itemize}
+
+\textbf{Iterasi 1 ($k=1$)}
+\begin{align}
+    a_1 &= \frac{0.1}{1^{0.602}} = 0.1, \quad c_1 = \frac{0.1}{1^{0.101}} = 0.1 \\
+    \vec{\Delta}_1 &= [1, -1]^T \\
+    \vec{\theta}^+ &= \vec{\theta}^{(0)} + c_1 \vec{\Delta}_1 = [0.8854, 0.6854]^T \\
+    \vec{\theta}^- &= \vec{\theta}^{(0)} - c_1 \vec{\Delta}_1 = [0.6854, 0.8854]^T
+\end{align}
+\begin{align}
+    E(\vec{\theta}^+) &= 10 \cos(0.8854) + 5 \cos(0.6854) = 10.1995 \\
+    E(\vec{\theta}^-) &= 10 \cos(0.6854) + 5 \cos(0.8854) = 10.9055
+\end{align}
+\begin{align}
+    \hat{g}_{11} &= \frac{10.1995 - 10.9055}{2(0.1)(1)} = -3.53 \\
+    \hat{g}_{12} &= \frac{10.1995 - 10.9055}{2(0.1)(-1)} = 3.53
+\end{align}
+\begin{align}
+    \vec{\theta}^{(1)} &= \vec{\theta}^{(0)} - a_1 \hat{g}_1 = [1.1384, 0.4324]^T \\
+    E(\vec{\theta}^{(1)}) &= 10 \cos(1.1384) + 5 \cos(0.4324) = 8.7306
+\end{align}
+
+\textbf{Iterasi 2 ($k=2$)}
+\begin{align}
+    a_2 &= \frac{0.1}{2^{0.602}} = 0.0659, \quad c_2 = \frac{0.1}{2^{0.101}} = 0.0932 \\
+    \vec{\Delta}_2 &= [-1, -1]^T \\
+    \vec{\theta}^+ &= \vec{\theta}^{(1)} + c_2 \vec{\Delta}_2 = [1.0451, 0.3392]^T \\
+    \vec{\theta}^- &= \vec{\theta}^{(1)} - c_2 \vec{\Delta}_2 = [1.2316, 0.5257]^T
+\end{align}
+\begin{align}
+    E(\vec{\theta}^+) &= 10 \cos(1.0451) + 5 \cos(0.3392) = 9.7331 \\
+    E(\vec{\theta}^-) &= 10 \cos(1.2316) + 5 \cos(0.5257) = 7.6522
+\end{align}
+\begin{align}
+    \hat{g}_{21} &= \frac{9.7331 - 7.6522}{2(0.0932)(-1)} = -11.1587 \\
+    \hat{g}_{22} &= \frac{9.7331 - 7.6522}{2(0.0932)(-1)} = -11.1587
+\end{align}
+\begin{align}
+    \vec{\theta}^{(2)} &= \vec{\theta}^{(1)} - a_2 \hat{g}_2 = [1.8735, 1.1676]^T \\
+    E(\vec{\theta}^{(2)}) &= 10 \cos(1.8735) + 5 \cos(1.1676) = -1.0197
+\end{align}
+
+\textit{Catatan: Karena $\Delta_{21} = \Delta_{22} = -1$, maka $\hat{g}_{21} = \hat{g}_{22}$. Estimator gradien SPSA tidak membedakan kontribusi parameter individual saat perturbasi seragam, berbeda dengan gradien analitik: $\nabla E = [-9.0795, -2.0954]^T$.}
+
+\textbf{Ringkasan Konvergensi:}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Iterasi ($k$) & $\theta_1$ & $\theta_2$ & $E(\vec{\theta})$ & Jarak ke $-15$ \\ \hline
+0 & 0.7854 & 0.7854 & 10.6066 & 25.6066 \\ \hline
+1 & 1.1384 & 0.4324 & 8.7306 & 23.7306 \\ \hline
+2 & 1.8735 & 1.1676 & -1.0197 & 13.9803 \\ \hline
+\end{tabular}
+\end{center}
+

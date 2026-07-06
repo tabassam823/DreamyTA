@@ -1,0 +1,88 @@
+\documentclass[12pt,a4paper]{book}
+
+\input{preamble}
+
+\begin{document}
+
+\begin{titlepage}
+    \input{Contents/0_BagianDepan/"Cover Luar.tex"}
+\end{titlepage}
+
+\backgroundsetup{
+    scale = 1,
+    angle = 0,
+    opacity = 1,
+    firstpage = false,
+    contents = {}
+}
+
+\cleardoublepage
+	
+\pagenumbering{roman}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Halaman Judul}
+\include{Contents/0_BagianDepan/Cover_Dalam}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Lembar Pengesahan}
+\include{Contents/0_BagianDepan/Lembar_Pengesahan}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Lembar Orisinalitas}
+\include{Contents/0_BagianDepan/Lembar Orisinalitas}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abstrak}
+\include{Contents/Abstrak/Abstrak}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abstract}
+\include{Contents/Abstrak/Abstract}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Kata Pengantar}
+\include{Contents/0_BagianDepan/Kata_Pengantar}
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Daftar Kode}
+\renewcommand{\lstlistlistingname}{Daftar Kode}
+\lstlistoflistings
+
+\cleardoublepage
+\include{Contents/0_BagianDepan/Tabel_Istilah}
+
+\cleardoublepage
+
+\pagenumbering{arabic}
+\include{Contents/1_Pendahuluan/Bab-1}
+\include{Contents/2_Daster/Bab-2}
+\include{Contents/3_Metodologi/Bab-3}
+\include{Contents/4_Pembahasan/Bab-4}
+\include{Contents/5_Penutup/Bab-5}
+
+\cleardoublepage
+\bibliographystyle{apacite}
+\bibliography{Referensi}
+
+\cleardoublepage
+\input{Contents/Lampiran/Lampiran.tex}
+	
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Biodata Penulis}
+\input{Contents/BagianBelakang/Biodata_Penulis}
+
+\end{document}

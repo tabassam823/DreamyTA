@@ -1,0 +1,19 @@
+\section{Detail Derivasi QMI ke KL-Divergence}
+QMI didefinisikan sebagai $I(i:j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij})$.
+Langkah 1 (Substitusi entropi):
+\begin{equation}
+I(i:j) = -\sum_a P(a) \ln P(a) - \sum_b P(b) \ln P(b) + \sum_{a,b} P(a,b) \ln P(a,b)
+\end{equation}
+Langkah 2 (Ekspansi marginal ke gabungan):
+\begin{equation}
+\sum_a P(a) \ln P(a) = \sum_a \left(\sum_b P(a,b)\right) \ln P(a) = \sum_{a,b} P(a,b) \ln P(a)
+\end{equation}
+Langkah 3 (Penggabungan suku):
+\begin{equation}
+\begin{aligned}
+I(i:j) &= -\sum_{a,b} P(a,b) \ln P(a) - \sum_{a,b} P(a,b) \ln P(b) + \sum_{a,b} P(a,b) \ln P(a,b) \\
+&= \sum_{a,b} P(a,b) \left[ \ln P(a,b) - (\ln P(a) + \ln P(b)) \right] \\
+&= \sum_{a,b} P(a,b) \ln \frac{P(a,b)}{P(a)P(b)}
+\end{aligned}
+\end{equation}
+Bentuk ini membuktikan ekuivalensi antara QMI dan KL-Divergence.

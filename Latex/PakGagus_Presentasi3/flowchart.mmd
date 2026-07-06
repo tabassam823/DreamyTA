@@ -1,0 +1,31 @@
+graph TD
+    subgraph "A. Tahap Data"
+        A1[Data Saham LQ45] --> A2[Hitung Log Return]
+        A2 --> A3[Binerisasi Status: 0=Naik, 1=Turun]
+    end
+
+    subgraph "B. Analisis Ekonofisika & Game Theory"
+        A3 --> B1[Sliding Window 126 Hari]
+        B1 --> B2[Hitung Lambda Endogen]
+        B2 --> B3[Matriks Payoff 2x2]
+        B3 --> B4[Hitung Bias h_i & Klasifikasi Game]
+        B1 --> B5[Hitung J_ij via Quantum Mutual Information]
+    end
+
+    subgraph "C. Optimasi Kuantum (HE-VQE)"
+        B4 & B5 --> C1[Konstruksi Hamiltonian Ising]
+        C1 --> C2[Hardware-Efficient Ansatz]
+        C2 --> C3[Loop Optimasi SPSA]
+        C3 --> C4{Konvergen?}
+        C4 -- Tidak --> C3
+        C4 -- Ya --> C5[Probabilistic Sampling]
+        C5 --> C6[Seleksi Bitstring K-Aset]
+    end
+
+    subgraph "D. Rebalancing & Performa"
+        C6 --> D1[Eksekusi Jual/Beli & Biaya Transaksi]
+        D1 --> D2[Update Nilai Ekuitas Harian]
+        D2 --> D3{Selesai Periode?}
+        D3 -- Tidak --> B1
+        D3 -- Ya --> D4[Hasil: Sharpe Ratio, MDD, Kurva Ekuitas]
+    end

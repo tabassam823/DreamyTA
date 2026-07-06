@@ -1,0 +1,61 @@
+\babel@toc {bahasa}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh ikhtisar laporan posisi keuangan konsolidasian yang merepresentasikan struktur aset dan kesehatan fiskal entitas.}}{9}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Struktur anatomi \textit {bullish} dan \textit {bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}}{10}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Representasi visual level \textit {support} dan \textit {resistance} sebagai batas memori sosial dalam dinamika harga aset.}}{11}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Kurva \textit {Efficient Frontier} sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{13}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Matriks imbal hasil pada model permainan klasik}}{15}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Representasi visual model Ising satu dimensi (1D)}}{19}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Visualisasi Bola Bloch sebagai representasi geometris dari status \textit {qubit} dalam ruang parameter kontinu.}}{25}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Simbolisme gerbang Pauli dan gerbang Hadamard pada sirkuit kuantum yang merepresentasikan transformasi uniter dasar $X$, $Y$, $Z$, dan $H$ pada satu \textit {qubit}.}}{27}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Simbolisme gerbang rotasi pada sirkuit kuantum yang merepresentasikan rotasi parameter tunggal pada sumbu-X, sumbu-Y, dan sumbu-Z di bola Bloch.}}{28}{figure.caption.24}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Representasi simbolik gerbang keterbelitan (\textit {Controlled-NOT}) yang mengilustrasikan interaksi non-lokal antar \textit {qubit} dalam sistem sirkuit.}}{30}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Representasi alur kerja sirkuit kuantum berparameter (PQC) yang mengilustrasikan tahap penyandian data, sirkuit variasional, pengukuran, dan pembaruan parameter oleh algoritma optimasi klasik.}}{32}{figure.caption.26}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Representasi konseptual hubungan antara dekoherensi dan keruntuhan keadaan kuantum. Interaksi sistem dengan lingkungan menyebabkan hilangnya elemen koherensi (\textit {off-diagonaal}) pada matriks densitas, sedangkan proses pengukuran memproyeksikan sistem ke salah satu keadaan eigen yang terdefinisi.}}{35}{figure.caption.27}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{50}{figure.caption.29}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum \textit {Hardware-Efficient Ansatz} dengan Kedalaman ($L$) = 1.}}{70}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Pergerakan Harga Saham Individual (\textit {Raw Price}) pada Sistem N=4 (2021--2023).}}{81}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Visualisasi Pertumbuhan Modal Optimasi Klasik SLSQP pada Sistem N=2.}}{82}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi \textit {Nash} (Klasik) pada Sistem N=2.}}{83}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Visualisasi Pertumbuhan Modal VQE Murni (Tanpa GT) pada Sistem N=2.}}{83}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi GT-VQE (Hibrida) pada Sistem N=2.}}{84}{figure.caption.37}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Visualisasi Pertumbuhan Modal Optimasi Klasik SLSQP pada Sistem N=4.}}{84}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi \textit {Nash} (Klasik) pada Sistem N=4.}}{85}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Visualisasi Pertumbuhan Modal VQE Murni (Tanpa GT) pada Sistem N=4.}}{85}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi GT-VQE (Hibrida) pada Sistem N=4.}}{86}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (\textit {Depth}) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}}{86}{figure.caption.42}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {E.1}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2021-01-04}}{155}{figure.caption.44}%
+\contentsline {figure}{\numberline {E.2}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-02-09}}{156}{figure.caption.45}%
+\contentsline {figure}{\numberline {E.3}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-09-21}}{157}{figure.caption.46}%
+\contentsline {figure}{\numberline {E.4}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2022-12-19}}{158}{figure.caption.47}%
+\contentsline {figure}{\numberline {E.5}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-02-16}}{159}{figure.caption.48}%
+\contentsline {figure}{\numberline {E.6}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-03-17}}{160}{figure.caption.49}%
+\contentsline {figure}{\numberline {E.7}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-07-05}}{161}{figure.caption.50}%
+\contentsline {figure}{\numberline {E.8}{\ignorespaces Perbandingan Alokasi Portofolio N=2 Jendela Waktu 2023-12-04}}{162}{figure.caption.51}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {G.1}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-04-06}}{169}{figure.caption.52}%
+\contentsline {figure}{\numberline {G.2}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-07-09}}{170}{figure.caption.53}%
+\contentsline {figure}{\numberline {G.3}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-10-11}}{171}{figure.caption.54}%
+\contentsline {figure}{\numberline {G.4}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2021-11-10}}{172}{figure.caption.55}%
+\contentsline {figure}{\numberline {G.5}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-01-10}}{173}{figure.caption.56}%
+\contentsline {figure}{\numberline {G.6}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-03-14}}{174}{figure.caption.57}%
+\contentsline {figure}{\numberline {G.7}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-04-12}}{175}{figure.caption.58}%
+\contentsline {figure}{\numberline {G.8}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-05-23}}{176}{figure.caption.59}%
+\contentsline {figure}{\numberline {G.9}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-06-23}}{177}{figure.caption.60}%
+\contentsline {figure}{\numberline {G.10}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-08-23}}{178}{figure.caption.61}%
+\contentsline {figure}{\numberline {G.11}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2022-12-19}}{179}{figure.caption.62}%
+\contentsline {figure}{\numberline {G.12}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-08-04}}{180}{figure.caption.63}%
+\contentsline {figure}{\numberline {G.13}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-09-05}}{181}{figure.caption.64}%
+\contentsline {figure}{\numberline {G.14}{\ignorespaces Perbandingan Alokasi Portofolio N=4 Jendela Waktu 2023-11-03}}{182}{figure.caption.65}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }

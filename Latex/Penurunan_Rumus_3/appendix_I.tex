@@ -1,0 +1,8 @@
+\section{Representasi Matriks Gerbang CX}
+Gerbang \textit{Controlled-NOT} (CX) beroperasi pada dua qubit, qubit kontrol $c$ dan qubit target $t$.
+Dalam basis komputasi $\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}$, matriksnya adalah:
+\begin{equation}
+CX = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}
+\end{equation}
+Gerbang ini mengaplikasikan operator Pauli-X ($X$) pada qubit target jika dan hanya jika qubit kontrol berada pada status $|1\rangle$.
+Fungsi utamanya dalam \textit{ansatz} adalah untuk membangun keterbelitan (\textit{entanglement}) antar aset.

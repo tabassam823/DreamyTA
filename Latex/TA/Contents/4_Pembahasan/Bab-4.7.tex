@@ -1,0 +1,50 @@
+\section{Evolusi Entropi \textit{Von Neumann} dan Distribusi Probabilitas}
+\label{sec:4_7_entropi_vqe}
+
+\subsection{Formulasi Entropi \textit{Von Neumann}}
+
+Secara fundamental, entropi dapat didefinisikan sebagai ukuran kuantitatif dari derajat ketidakpastian atau ketakterdugaan informasi yang terkandung di dalam suatu sistem stokastik. Dalam komputasi klasik, keacakan probabilistik ini diukur dengan menggunakan satuan informasi digital berupa \textit{bit}, yang diperoleh melalui penerapan fungsi logaritma basis dua terhadap distribusi probabilitas kejadian elemen sistem. Satuan kapasitas komputasional \textit{bit} ini merepresentasikan jumlah pertanyaan biner yang dibutuhkan untuk mengidentifikasi secara pasti keadaan spesifik dari sistem acak tersebut. Formulasi matematis umum untuk mengukur derajat ketidakpastian informasi ini dinyatakan sebagai nilai ekspektasi dari fungsi logaritmik probabilitas
+\begin{equation}
+H = -\sum_{i} p_i \log_2 p_i
+\end{equation}
+dengan nilai $-\log_2 p_i$ merepresentasikan kandungan informasi dari setiap kemungkinan kejadian yang ditinjau \cite{nielsen_quantum_2010}.  Dalam pengembangan simulasi sistem sirkuit kuantum, konsep ketidakpastian matematis tersebut diperluas oleh John von Neumann menjadi entropi \textit{Von Neumann} untuk mengakomodasi sifat fisis dualitas dan probabilitas fenomena superposisi yang ada pada matriks operator densitas sistem \textit{qubit}. Entropi \textit{Von Neumann} ($S$) didapat melalui nilai \textit{trace} dari perkalian matriks densitas ($\rho$) dengan operasi logaritma dari matriks densitas tersebut. Jika matriks densitas didiagonalisasi dengan sempurna menjadi sekumpulan observabel nilai eigen ($\lambda_i$), maka formulasi entropi \textit{Von Neumann} ini akan bertransformasi menjadi 
+\begin{equation}
+    S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_i \lambda_i \log_2 \lambda_i
+    \label{eq:4_7_entropy}
+\end{equation}
+dengan urutan proses derivasi komprehensif pada perhitungan entropi ruang fase tersebut dicantumkan secara detail pada dokumentasi matematis Bab \ref{sec:barren_plateau}.
+
+\subsection{Evaluasi Distribusi Probabilitas Portofolio}
+Dalam kasus simulasi pencarian alokasi portofolio optimum menggunakan VQE, probabilitas keputusan strategis yang didapatkan senantiasa mengalami perubahan pada setiap siklus evaluasi parameter. Pada tahap awal pembaruan iterasi, sirkuit kuantum pada umumnya menghasilkan distribusi probabilitas yang tersebar secara merata pada seluruh kemungkinan formasi kombinasi basis. Pola persebaran semacam ini mengindikasikan bahwa arsitektur algoritma kuantum masih berada dalam pengaruh keadaan superposisi maksimal dengan nilai entropi global yang sangat tinggi. Namun, seiring dengan peluruhan pembaruan parameter rotasi oleh \textit{optimizer}, sistem kuantum pada akhirnya akan mengalami peluruhan fungsi gelombang menuju satu basis keadaan. Fenomena tersebut dapat teramati pada hasil simulasi yang diperoleh. Pada Gambar \ref{fig:window_n4_2022_01_10}, nilai Entropi \textit{Von Neumann} mengalami penurunan sepanjang proses optimasi SPSA hingga mencapai daerah konvergensi bernilai rendah. Penurunan entropi tersebut mengindikasikan bahwa parameter sirkuit mampu menghasilkan perubahan distribusi probabilitas signifikan selama proses optimasi berlangsung. Sebaliknya, pada Gambar \ref{fig:window_n4_2021_07_09}, nilai Entropi \textit{Von Neumann} cenderung bertahan pada tingkat yang relatif tinggi meskipun proses optimasi telah berlangsung selama banyak iterasi. Kondisi tersebut mengindikasikan bahwa distribusi probabilitas sistem tetap tersebar pada banyak keadaan basis sehingga proses lokalisasi probabilitas menuju satu konfigurasi dominan tidak berlangsung secara efektif.
+
+Untuk merealisasikan evaluasi tersebut pada lingkungan komputasi numerik, keadaan kuantum akhir yang dihasilkan oleh sirkuit VQE terlebih dahulu direpresentasikan sebagai \textit{statevector} \(\ket{\psi}\). Selanjutnya dilakukan proses \textit{partial trace} terhadap seluruh qubit kecuali satu subsistem pengamatan guna memperoleh matriks densitas tereduksi \(\rho_A\). Nilai eigen dari matriks \(\rho_A\) kemudian digunakan untuk menghitung Entropi \textit{Von Neumann} sesuai Persamaan (\ref{eq:4_7_entropy}). Implementasi algoritmik dari prosedur tersebut ditunjukkan pada Daftar Kode \ref{lst:calc_entropy_vn}.
+
+\begin{lstlisting}[language=Python, caption={Skrip kalkulasi fungsional matriks evaluasi observabel algoritma Entropi \textit{Von Neumann} (\textit{Entanglement Entropy}) komputasional menggunakan matriks \textit{Partial Trace} arsitektur operasional pada ruang fase deterministik fungsi ekuilibrium}, label={lst:calc_entropy_vn}]
+import numpy as np
+
+def calculate_entanglement_entropy(psi):
+    """
+    Menghitung Entanglement Entropy (Von Neumann) dari statevector N-qubit.
+    Menggunakan partial trace terhadap semua qubit kecuali qubit 0.
+    """
+    # 1. Konversi ke numpy array complex
+    psi = np.array(psi, dtype=complex)
+    dim = len(psi)
+    n_qubits = int(np.round(np.log2(dim)))
+
+    # 2. Partial Trace untuk mendapatkan Reduced Density Matrix rho_A (Qubit 0)
+    psi_reshaped = psi.reshape(2, 2**(n_qubits - 1))
+    rho_A = np.dot(psi_reshaped, psi_reshaped.conj().T)
+
+    # 3. Hitung Eigenvalues dari rho_A (matriks 2x2)
+    eigvals = np.linalg.eigvalsh(rho_A)
+
+    # 4. Bersihkan nilai negatif sangat kecil akibat floating point error
+    eigvals = eigvals[eigvals > 1e-12]
+
+    # 5. Von Neumann Entropy: S = -sum(p * log2(p))
+    if len(eigvals) == 0:
+        return 0.0
+        
+    return -np.sum(eigvals * np.log2(eigvals))
+\end{lstlisting}

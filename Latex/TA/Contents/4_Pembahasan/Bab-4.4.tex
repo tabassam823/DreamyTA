@@ -1,0 +1,62 @@
+\section{Arsitektur \textit{Ansatz} dalam VQE}
+\label{sec:4_4_ansatz_vqe}
+
+\subsection{Konstruksi \textit{Hardware-Efficient Ansatz}}
+
+Setelah Hamiltonian Ising berhasil dibangun, langkah berikutnya adalah menyiapkan keadaan kuantum variasional yang digunakan untuk menghitung energi ekspektasi sistem. Dalam algoritma VQE, keadaan kuantum tersebut dinyatakan sebagai fungsi dari parameter bebas ($\boldsymbol{\theta}$) yang dioptimasi secara iteratif untuk mendekati keadaan dasar (\textit{ground state}) Hamiltonian. Ansatz yang digunakan pada tugas akhir ini adalah arsitektur \textit{Hardware-Efficient Ansatz} (HEA), yaitu rangkaian kuantum yang tersusun atas lapisan gerbang rotasi satu-qubit dan lapisan keterikatan (\textit{entanglement}) antar-qubit. Struktur ini dipilih karena memiliki jumlah parameter yang relatif sedikit, mudah diimplementasikan pada perangkat kuantum, dan mampu menghasilkan ruang keadaan yang cukup fleksibel untuk merepresentasikan solusi optimasi portofolio.Secara umum, keadaan variasional yang dibangkitkan oleh HEA dapat dituliskan sebagai
+\begin{equation}
+\ket{\psi(\boldsymbol{\theta})}=
+\left(
+U_{\mathrm{ent}}
+U_{\mathrm{rot}}(\boldsymbol{\theta})
+\right)^L
+\ket{0}^{\otimes N},
+\end{equation}
+dengan \(L\) menyatakan kedalaman (\textit{depth}) sirkuit, \(U_{\mathrm{rot}}\)- menyatakan lapisan rotasi parametrik, dan \(U_{\mathrm{ent}}\)- menyatakan lapisan keterikatan antar-qubit. Pada penelitian ini digunakan konfigurasi sebagaimana ditunjukkan pada Gambar \ref{fig:vqe_circuit_depth1}, yaitu HEA dengan satu lapisan keterikatan (\(L=1\)). Melalui variasi parameter ($\boldsymbol{\theta}$), sirkuit menghasilkan himpunan keadaan kuantum kandidat yang berbeda-beda. Algoritma optimasi klasik kemudian memperbarui parameter tersebut secara iteratif untuk memperoleh keadaan dengan energi ekspektasi minimum terhadap Hamiltonian yang telah dibangun pada tahap sebelumnya.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{GTQuantumInvest/Hasil_N2_GT/Analisis_Window_N2/2021-05-05_circuit.png}
+    \caption{Rangkaian Sirkuit Kuantum \textit{Hardware-Efficient Ansatz} dengan Kedalaman ($L$) = 1.}
+    \label{fig:vqe_circuit_depth1}
+\end{figure}
+
+\subsection{Implementasi Sirkuit Kuantum Variasional}
+
+Pada arsitektur \textit{Hardware-Efficient Ansatz} yang digunakan, setiap lapisan rotasi dibangun dari kombinasi gerbang \(\hat{R}_Y\) dan \(\hat{R}_Z\) yang diterapkan pada seluruh qubit. Untuk lapisan ke-(l), operator rotasi dapat dinyatakan sebagai
+\begin{equation}
+\hat{U}_{\mathrm{rot}}^{(l)}(\boldsymbol{\theta})
+=
+\bigotimes_{j=0}^{N-1}
+\left[
+\hat{R}_Y(\theta_{l,j,y})
+\hat{R}_Z(\theta_{l,j,z})
+\right],
+\end{equation}
+dengan \(N\) menyatakan jumlah qubit yang merepresentasikan aset portofolio, sedangkan \(\theta_{l,j,y}\) dan \(\theta_{l,j,z}\) merupakan parameter variasional yang dioptimasi selama proses VQE. Lapisan rotasi ini berfungsi untuk mengatur amplitudo dan fase keadaan kuantum sehingga ruang solusi dapat dieksplorasi secara fleksibel.
+
+Setelah seluruh qubit mengalami rotasi parametrik, diterapkan lapisan keterikatan (\textit{entanglement}) menggunakan gerbang CNOT. Pada sistem dua aset (\(N=2\)), keterikatan dibangun melalui hubungan langsung antara kedua qubit. Sementara itu, pada sistem empat aset (\(N=4\)), gerbang CNOT disusun dalam pola melingkar (\textit{circular entanglement}) sehingga setiap qubit terhubung dengan qubit tetangganya. Struktur ini memungkinkan informasi kuantum dan korelasi antar aset disebarkan ke seluruh sistem selama proses optimasi. Kombinasi lapisan rotasi dan lapisan keterikatan menghasilkan keadaan variasional ($\ket{\psi(\boldsymbol{\theta})}$) yang selanjutnya digunakan untuk menghitung nilai energi ekspektasi Hamiltonian Ising. Melalui pembaruan parameter ($\boldsymbol{\theta}$) secara iteratif, algoritma VQE menelusuri ruang keadaan kuantum untuk menemukan konfigurasi dengan energi minimum yang merepresentasikan solusi optimasi portofolio.
+
+\textit{Hardware-Efficient Ansatz} juga diimplementasikan menggunakan pustaka \textit{PennyLane}. Fungsi ansatz menerima vektor parameter variasional yang kemudian diorganisasikan ke dalam beberapa lapisan rotasi sesuai kedalaman sirkuit yang ditentukan. Pada setiap lapisan, seluruh qubit dikenai gerbang RY dan RZ, kemudian dihubungkan melalui rangkaian gerbang CNOT dengan pola keterikatan melingkar. Struktur ini menghasilkan rangkaian kuantum yang bersifat fleksibel namun tetap efisien dari sisi jumlah parameter. Selain mampu merepresentasikan berbagai konfigurasi keadaan kuantum kandidat, arsitektur tersebut juga memungkinkan pembentukan keterbelitan antar-qubit yang diperlukan untuk memodelkan korelasi antar aset pada proses optimasi portofolio. Implementasi lengkap konstruksi \textit{ansatz} ditunjukkan pada Daftar Kode \ref{lst:ansatz_construction}.
+
+\begin{lstlisting}[language=Python, caption={Fungsi penyusunan arsitektur \textit{Hardware-Efficient Ansatz} pada iterasi sirkuit kuantum VQE}, label={lst:ansatz_construction}]
+def ansatz(params):
+    """
+    Membangun lapisan-lapisan sirkuit kuantum HEA berdasarkan
+    parameter rotasi (theta) yang diberikan.
+    """
+    w = params.reshape((depth + 1, n_qubits, 2))
+    
+    # Iterasi penyusunan lapisan (layer)
+    for layer in range(depth + 1):
+        # 1. Lapisan rotasi lokal (RY dan RZ)
+        for q in range(n_qubits):
+            qml.RY(w[layer, q, 0], wires=q)
+            qml.RZ(w[layer, q, 1], wires=q)
+            
+        # 2. Lapisan keterikatan / entanglement (CNOT)
+        if layer < depth:
+            for q in range(n_qubits - 1):
+                qml.CNOT(wires=[q, q + 1])
+            qml.CNOT(wires=[n_qubits - 1, 0])
+\end{lstlisting}

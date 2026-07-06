@@ -1,0 +1,16 @@
+\chapter{Penutup}
+\section{Kesimpulan}
+Berdasarkan analisis hasil simulasi dan evaluasi secara komprehensif yang telah dilakukan pada bab sebelumnya, penelitian ini menghasilkan tiga kesimpulan utama yang menjawab rumusan masalah sebagai berikut:
+\begin{enumerate}
+    \item Formulasi model Markowitz ke dalam kerangka \textit{Exact Potential Game} (EPG) telah berhasil memetakan utilitas ekonomi menjadi sistem Hamiltonian fisis secara akurat dan konsisten. Penggunaan \textit{log return} untuk pembentukan matriks kovarians terbukti efektif menjaga simetri interaksi risiko ($J_{ij}$) tanpa distorsi, sementara \textit{simple return} mempertahankan linieritas bias ekspektasi imbal hasil ($h_i$). Implementasi suku penalti anggaran ($A$) dapat mendominasi koefisien kopling sehingga menciptakan batasan energi untuk mencegah sirkuit kuantum terjebak pada status portofolio yang melanggar aturan diversifikasi investasi.
+    \item Penerapan \textit{Pure Strategy Nash Equilibrium} (PSNE) sebagai inisialisasi \textit{warm-start} terbukti mampu meningkatkan efisiensi dan stabilitas konvergensi algoritma VQE. Injeksi solusi \textit{Nash Equilibrium} pada rotasi parameter awal memandu sirkuit melewati area \textit{barren plateaus} yang dicirikan oleh kelenyapan varians gradien. Keunggulan strategis ini memungkinkan algoritma mencapai \textit{ground state} pada kedalaman sirkuit yang dangkal ($L=2$ hingga $L=3$). Hal tersebut dapat mereduksi beban komputasi dan memicu keruntuhan entropi \textit{Von Neumann} menuju konfigurasi probabilitas tunggal yang paling optimal.
+    \item Arsitektur \textit{Hardware-Efficient Ansatz} yang dikombinasikan dengan algoritma SPSA menunjukkan performa komputasi yang efisien dalam mengeksekusi optimasi portofolio. Estimasi gradien menggunakan distribusi Rademacher memungkinkan sistem merespons volatilitas pasar melalui mekanisme \textit{rebalancing}. Hal ini divalidasi oleh hasil \textit{backtesting} yang mana algoritma GT-VQE menghasilkan pertumbuhan modal lebih superior dibandingkan strategi klasik maupun VQE murni dengan nilai \textit{Sharpe Ratio} sebesar 1,0107 pada sistem $N=4$.
+\end{enumerate}
+
+\section{Saran}
+Berdasarkan keterbatasan dan temuan dalam pengerjaan tugas akhir ini, terdapat beberapa saran untuk penelitian lanjutan di masa mendatang
+\begin{enumerate}
+    \item Mempertimbangkan parameter \textit{noise} sirkuit, seperti dekoherensi qubit dan \textit{gate fidelity} dalam mengeksekusi algoritma ini agar dapat diaplikasikan pada infrastruktur perangkat keras kuantum sesungguhnya.
+    \item Menggunakan variasi struktur \textit{ansatz} lain (seperti \textit{Qubit-Efficient} atau \textit{Variational Quantum Circuit}) serta membandingkan performa berbagai algoritma optimasi klasik lainnya untuk menemukan kombinasi hibrida yang memiliki laju konvergensi paling efisien dalam menangkap kompleksitas interaksi agen di pasar modal.
+    \item Menggunakan rentang periode data historis yang lebih lama. Selain itu, pengujian pada periode yang sedang mengalami fenomena \textit{Black Swan} atau krisis ekonomi tertentu sangat dianjurkan supaya dapat mengevaluasi agilitas dan reliabilitas algoritma dalam mempertahankan stabilitas ekuilibrium portofolio di tengah volatilitas pasar yang ekstrem.
+\end{enumerate}

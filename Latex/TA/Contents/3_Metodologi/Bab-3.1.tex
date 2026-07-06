@@ -1,0 +1,72 @@
+\section{Alur Penelitian}
+Penelitian ini diawali dengan merumuskan alur metodologi yang komprehensif untuk memecahkan masalah optimasi portofolio biner menggunakan pendekatan hibrida kuantum. Struktur metodologis ini dipetakan secara sistematis untuk menghubungkan tahap ekstraksi data finansial historis dengan perumusan model Hamiltonian Ising yang merepresentasikan lanskap energi sistem. Lanskap energi tersebut selanjutnya dikalibrasi menggunakan prinsip \textit{Exact Potential Game} guna menemukan titik ekuilibrium strategis sebelum diproses secara intensif oleh perangkat keras kuantum. Titik ekuilibrium strategis ini bertindak sebagai basis inisialisasi awal bagi algoritma \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE) dalam menemukan konfigurasi portofolio dengan energi paling minimum. Keseluruhan alur kerja komputasi kuantum tersebut kemudian dievaluasi menggunakan simulasi \textit{backtesting} berkelanjutan untuk mengukur ketahanan strategi investasi pada kondisi pasar riil yang sangat dinamis.
+
+Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_vqe} menjabarkan keterkaitan fungsional antar setiap modul komputasi secara sekuensial dari awal hingga evaluasi akhir. Modul pra-pemrosesan data klasik berperan krusial dalam menghasilkan parameter fundamental seperti vektor imbal hasil dan matriks kovariansi yang mutlak dibutuhkan untuk membentuk operator kuantum. Proses optimasi kuantum yang divisualisasikan secara eksplisit mencakup siklus iteratif penyesuaian sudut gerbang rotasi kuantum serta mekanisme adaptasi kedalaman sirkuit secara bertahap sesuai kebutuhan. Parameter pinalti dinamis turut diintegrasikan ke dalam rangkaian siklus optimasi untuk membatasi ruang pencarian sehingga konfigurasi portofolio yang dihasilkan selalu terjamin memenuhi kendala kardinalitas. Keterpaduan struktural antara ekstraksi parameter klasik, inisialisasi teori permainan, dan optimasi kuantum adaptif ini dikonstruksi secara logis untuk menjamin keandalan operasional metodologi secara keseluruhan.
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[node distance=1.3cm, every node/.style={fill=white, font=\footnotesize}, align=center]
+        % Styles
+        \tikzstyle{startstop} = [ellipse, minimum width=2.5cm, minimum height=0.6cm, text centered, draw=black, fill=white]
+        \tikzstyle{process} = [rectangle, minimum width=3.2cm, minimum height=0.8cm, text centered, draw=black, fill=white]
+        \tikzstyle{decision} = [diamond, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=white, aspect=2]
+        \tikzstyle{connector} = [circle, draw=black, minimum size=0.5cm, text centered, inner sep=2pt]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+        
+        % KOLOM 1: Pra-pemrosesan & Parameterisasi
+        \node (start) [startstop] {Mulai};
+        \node (data) [process, below of=start, yshift=-0.5cm] {Akuisisi Data \& \\ Setup Jendela Waktu};
+        \node (param) [process, below of=data, yshift=-0.5cm] {Hitung $\mu$, $\Sigma$ \& \\ \textit{Risk Aversion} endogen ($\gamma$)};
+        \node (hamil) [process, below of=param, yshift=-0.5cm] {Formulasi QUBO \& \\ Hamiltonian ($h_i, J_{ij}$)};
+        \node (nash) [process, below of=hamil, yshift=-0.5cm] {Pencarian \\ \textit{Nash Equilibrium (SBR)}};
+        \node (c1a) [connector, below of=nash, yshift=-0.5cm] {1};
+        \node (c3b) [connector, left of=data, xshift=-1cm] {3};
+        
+        % KOLOM 2: Optimasi Kuantum (VQE)
+        \node (c1b) [connector, right of=start, xshift=4.0cm] {1};
+        \node (vqe_init) [process, below of=c1b, yshift=-0.2cm] {Inisialisasi State Awal \\ $|0\dots0\rangle \to |\text{bitstring}_{NE}\rangle$ \\ \& Parameter $\theta$};
+        \node (spsa) [process, below of=vqe_init, yshift=-0.5cm] {Optimasi SPSA};
+        \node (conv) [decision, below of=spsa, yshift=-0.5cm] {Konvergen?};
+        \node (layer_eval) [process, below of=conv, yshift=-0.6cm] {Simpan Energi $E_d$ \\ pada \textit{Depth} $d$};
+        \node (layer_dec) [decision, below of=layer_eval, yshift=-0.5cm] {$d < D_{max}$?};
+        \node (best_state) [process, below of=layer_dec, yshift=-0.7cm] {Pilih Bitstring \\ dengan $E_{min}$};
+        \node (c2a) [connector, below of=best_state, yshift=-0.3cm] {2};
+        
+        % KOLOM 3: Evaluasi & Backtesting
+        \node (c2b) [connector, right of=c1b, xshift=4.0cm] {2};
+        \node (rebal) [process, below of=c2b, yshift=-0.5cm] {Eksekusi \textit{Rebalancing} \\ Portofolio};
+        \node (end_dec) [decision, below of=rebal, yshift=-1cm] {Akhir \\ Periode?};
+        \node (eval) [process, below of=end_dec, yshift=-1cm] {Kalkulasi Metrik \\ Kinerja Akhir};
+        \node (stop) [startstop, below of=eval, yshift=-0.5cm] {Selesai};
+        \node (c3a) [connector, right of=end_dec, xshift=2.1cm] {3};
+
+        % Alur Kolom 1
+        \draw [arrow] (start) -- (data);
+        \draw [arrow] (data) -- (param);
+        \draw [arrow] (param) -- (hamil);
+        \draw [arrow] (hamil) -- (nash);
+        \draw [arrow] (nash) -- (c1a);
+        \draw [arrow] (c3b) -- (data);
+
+        % Alur Kolom 2
+        \draw [arrow] (c1b) -- (vqe_init);
+        \draw [arrow] (vqe_init) -- (spsa);
+        \draw [arrow] (spsa) -- (conv);
+        \draw [arrow] (conv) -- node[anchor=east] {Ya} (layer_eval);
+        \draw [arrow] (conv.west) -- ++(-0.6,0) |- (spsa.west) node[pos=0.25, anchor=west] {Tidak};
+        \draw [arrow] (layer_eval) -- (layer_dec);
+        \draw [arrow] (layer_dec) -- node[anchor=east] {Tidak} (best_state);
+        \draw [arrow] (layer_dec.east) -- ++(0.7,0) |- (vqe_init.east) node[pos=0.25, anchor=west] {Ya (Tambah \\ \textit{Depth})};
+        \draw [arrow] (best_state) -- (c2a);
+
+        % Alur Kolom 3
+        \draw [arrow] (c2b) -- (rebal);
+        \draw [arrow] (rebal) -- (end_dec);
+        \draw [arrow] (end_dec) -- node[anchor=east] {Ya} (eval);
+        \draw [arrow] (eval) -- (stop);
+        \draw [arrow] (end_dec.east) -- (c3a.west) node[midway, anchor=south] {Tidak};
+
+    \end{tikzpicture}
+    \caption{Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}
+    \label{fig:flowchart_gt_vqe}
+\end{figure}

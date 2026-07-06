@@ -1,0 +1,18 @@
+\section{Pemodelan Hamiltonian Portofolio dan Pemetaan Qubit}
+Transformasi masalah optimasi portofolio menjadi kerangka kerja QUBO bertujuan untuk merepresentasikan objektif minimalisasi risiko dan maksimalisasi imbal hasil finansial. Variabel keputusan biner dalam matriks QUBO dipetakan ke dalam variabel \textit{spin} fisis untuk membentuk model Hamiltonian Ising agar menghasilkan vektor bias serta matriks interaksi. Prosedur transformasi QUBO menuju representasi operator Pauli disajikan secara algoritmik melalui tahapan komputasi berurutan yang diformalkan pada Algoritma \ref{alg:hamiltonian_construction}. Algoritma tersebut menerima input matriks statistik finansial klasik untuk kemudian mengonstruksi nilai diagonal serta elemen luar diagonal dari matriks kuadratik bobot pinalti. Transformasi variabel Ising diaplikasikan pada baris-baris algoritma untuk mendapatkan koefisien kopling magnetik dan nilai bias lokal yang akan disuntikkan ke dalam gerbang rotasi Kuantum.
+
+\begin{algorithm}[ht]
+\caption{Konstruksi Hamiltonian Portofolio Ising}
+\label{alg:hamiltonian_construction}
+\begin{algorithmic}[1]
+\Procedure{BuildHamiltonian}{$\mu, \Sigma, \gamma, K, \lambda$}
+    \State $Q_{ii} \gets \frac{\gamma \Sigma_{ii}}{2K^2} - \frac{\mu_i}{K} + \lambda(1 - 2K)$ \Comment{Diagonal QUBO}
+    \State $Q_{ij} \gets \frac{\gamma \Sigma_{ij}}{2K^2} + \lambda$ \Comment{Off-diagonal QUBO}
+    \State $h_i \gets -\frac{1}{2} (Q_{ii} + \sum_{j \neq i} Q_{ij})$ \Comment{Transformasi ke Bias Ising}
+    \State $J_{ij} \gets \frac{1}{4} Q_{ij}$ \Comment{Transformasi ke Interaksi Ising}
+    \State $C \gets \frac{1}{4} \sum_{i} Q_{ii} + \frac{1}{8} \sum_{i \neq j} Q_{ij} + \lambda K^2$ \Comment{Konstanta Energi}
+    \State $H \gets \sum_{i} h_i Z_i + \sum_{i < j} J_{ij} Z_i Z_j + C \cdot I$ \Comment{Konstruksi Matriks Hamiltonian}
+    \State \Return $H$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

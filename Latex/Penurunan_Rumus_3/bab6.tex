@@ -1,0 +1,34 @@
+\section{Quantum Mutual Information (QMI)}
+
+\subsection{Representasi Basis Kuantum}
+Qubit tunggal dalam ruang Hilbert $\mathbb{C}^2$ direpresentasikan oleh basis komputasi:
+\begin{equation}
+|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \qquad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+\end{equation}
+Sistem bipartit (dua aset) direpresentasikan oleh produk tensor $|ij\rangle = |i\rangle \otimes |j\rangle$:
+\begin{equation}
+|\psi\rangle_{ij} = \alpha_{00}|00\rangle + \alpha_{01}|01\rangle + \alpha_{10}|10\rangle + \alpha_{11}|11\rangle
+\end{equation}
+
+\subsection{Matriks Densitas Mixed State}
+Untuk data finansial klasik, digunakan matriks densitas \textit{mixed state} diagonal:
+\begin{equation}
+\rho_{ij}^{(mixed)} = \sum_{a,b} P(a,b) |ab\rangle\langle ab| = \begin{pmatrix} P(00) & 0 & 0 & 0 \\ 0 & P(01) & 0 & 0 \\ 0 & 0 & P(10) & 0 \\ 0 & 0 & 0 & P(11) \end{pmatrix}
+\end{equation}
+di mana $P(a,b)$ adalah probabilitas gabungan historis.
+
+\subsection{Entropi Von Neumann}
+Entropi Von Neumann $S(\rho)$ mengukur ketidakpastian informasi dalam sistem kuantum:
+\begin{equation}
+S(\rho) = -\text{Tr}(\rho \ln \rho)
+\end{equation}
+Karena $\rho$ berbentuk diagonal, maka entropi gabungannya adalah:
+\begin{equation}
+S(\rho_{ij}) = -\sum_{a \in \{0, 1\}} \sum_{b \in \{0, 1\}} P(a, b) \ln P(a, b)
+\end{equation}
+Dan entropi marginal aset $i$ dan $j$ adalah:
+\begin{align}
+S(\rho_i) &= -\sum_{a \in \{0, 1\}} P(a) \ln P(a) \\
+S(\rho_j) &= -\sum_{b \in \{0, 1\}} P(b) \ln P(b)
+\end{align}
+Informasi bersama (QMI) didefinisikan sebagai $I(i:j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij})$.

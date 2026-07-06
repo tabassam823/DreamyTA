@@ -1,0 +1,253 @@
+\subsection{Manipulasi Informasi pada Gerbang 2 \textit{Qubit}}
+Manipulasi informasi yang dilakukan oleh gerbang kuantum tidak terbatas hanya pada 1 qubit, tetapi juga dapat diterapkan pada 2 qubit untuk menghasilkan efek-efek yang lebih kompleks~\shortcite{li_quantum_2025}. Secara matematis, bentuk matriks dari 2 qubit didapatkan dari hasil kali tensor dari matriks semua basis 1 qubit yang terlibat. Perkalian tensor tersebut memungkinakn kombinasi status keadaan fungsi gelombang individual menjadi status basis gabungan yang merepresentasikan ruang probabilitas Hilbert empat dimensi. Keempat vektor basis gabungan tersebut membangun landasan ruang operasional matematis sistem komputasi fisis gabungan, yang direpresentasikan ke dalam bentuk persamaan fungsi pemetaan komputasional sebagai berikut:
+\begin{equation}
+    \label{eq:basis_2_qubit}
+    \begin{split}
+        |00\rangle &\equiv |0\rangle \otimes |0\rangle = \begin{pmatrix} 1 & 0 & 0 & 0 \end{pmatrix}^T, \\
+        |01\rangle &\equiv |0\rangle \otimes |1\rangle = \begin{pmatrix} 0 & 1 & 0 & 0 \end{pmatrix}^T, \\
+        |10\rangle &\equiv |1\rangle \otimes |0\rangle = \begin{pmatrix} 0 & 0 & 1 & 0 \end{pmatrix}^T, \\
+        |11\rangle &\equiv |1\rangle \otimes |1\rangle = \begin{pmatrix} 0 & 0 & 0 & 1 \end{pmatrix}^T.
+    \end{split}
+\end{equation}
+
+Salah satu gerbang dua qubit yang berfungsi sebagai elemen dasar untuk mengendalikan interaksi dalam ruang probabilitas adalah operator \textit{Controlled-NOT} (CNOT). Gerbang transformasi CNOT merupakan sebuah gerbang uniter yang memiliki aksi pemetaan langsung terhadap keadaan basis komputasi dari sistem yang terdiri dari qubit kontrol dan qubit target. Gerbang CNOT bekerja dengan mengubah keadaan qubit target menjadi keadaan sebaliknya apabila syarat dari qubit kontrol terpenuhi, yaitu $|1\rangle$. Jika qubit pertama menjadi qubit kontrol dan qubit kedua adalah qubit target, maka secara matematis gerbangnya akan menjadi
+\begin{equation}
+    \label{eq:cnot_action_matrix}
+    \text{CNOT} = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 0 & 1 & 0
+    \end{pmatrix}.
+\end{equation}
+Sehingga jika difungsikan ke dalam ruang probabilitas ruang keadaan gabungan, aksi
+CNOT akan menghasilkan masing-masing keluaran keadaan basis gabungan sebagai berikut:
+\begin{equation}
+    \label{eq:cnot_action_basis}
+        \text{CNOT}|00\rangle = |00\rangle, \quad
+        \text{CNOT}|01\rangle = |01\rangle, \quad
+        \text{CNOT}|10\rangle = |11\rangle, \quad
+        \text{CNOT}|11\rangle = |10\rangle.
+\end{equation}
+
+Dari pemetaan komputasi fisis tersebut, maka dapat dibentuk persamaan CNOT berdasarkan mekanisme operasi outer product dari operator transformasi CNOT. Bentuk representasi konstruksi turunan matriks komputasi fisis ini meregulasi orientasi aksi interaktif secara matematis berdasarkan skema polaritas penetapan arah operasi parameter kontrol utamanya menjadi
+\begin{equation}
+    \label{eq:cnot_from_basis}
+    \text{CNOT} = \sum_{i,j} |\text{output}\rangle\langle \text{input}|.
+\end{equation}
+Berdasarkan mekanisma operasi outer product tersebut, maka dapat dibentuk matriks CNOT sebagai berikut:
+\begin{equation}
+    \begin{split}
+    \label{eq:cnot_matrix}
+    \text{CNOT}_{01} = |00\rangle\langle00| + |01\rangle\langle01| + |10\rangle\langle11| + |11\rangle\langle10|, \\
+    \text{CNOT}_{10} = |00\rangle\langle00| + |11\rangle\langle01| + |01\rangle\langle10| + |10\rangle\langle11|.
+    \end{split}
+\end{equation}
+Sehingga secara matematis dapat dibentuk CNOT qubit kontrol pertama dengan qubit target kedua dan sebaliknya menjadi
+\begin{equation}
+    \label{eq:cnot_matrix_2}
+    \text{CNOT}_{01} = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 0 & 1 & 0
+    \end{pmatrix}, \quad
+    \text{CNOT}_{10} = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 0 & 1 & 0 \\
+        0 & 1 & 0 & 0
+    \end{pmatrix}.
+\end{equation}
+Pada rangkaian kuantum, CNOT memiliki skema pada Gambar 2.10. Gambar tersebut memberikan notasi pada lintasan pemrosesan kuantum di mana inisiasi qubit kontrol ditandai dengan representasi koordinat titik solid ($\bullet$), sedangkan qubit target ditandai dengan penggunaan bentuk plus di dalam lingkara ($\oplus$).
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1.5, >=stealth]
+        \draw (0,1.5) -- (2,1.5) node[pos=0, left] {$q_{control}$};
+        \draw (0,0.5) -- (2,0.5) node[pos=0, left] {$q_{target}$};
+        \filldraw (1,1.5) circle (2.5pt);
+        \draw (1,1.5) -- (1,0.5);
+        \draw (1,0.5) circle (6pt);
+        \draw (1,0.3) -- (1,0.7);
+        \draw (0.8,0.5) -- (1.2,0.5);
+    \end{tikzpicture}
+    \caption{Representasi simbolik gerbang keterbelitan (\textit{Controlled-NOT}) yang mengilustrasikan interaksi non-lokal antar \textit{qubit} dalam sistem sirkuit.}
+    \label{fig:gerbang_cnot}
+\end{figure}
+
+Selain dapat memanipulasi informasi kuantum, gerbang CNOT juga berperan penting dalam menghasilkan keterbelitan kuantum (entanglement). Suatu sistem kuantum dikatakan terbelit apabila probabilitas hasil pengukuran pada setiap subsistem tidak lagi dapat dijelaskan secara independen, Namun menunjukkan korelasi kuantum yang tidak akan dapat diobservasi pada sistem klasik. Salah satu contoh keadaan terbelit maksimum adalah Keadaan Bell (Bell States), yaitu himpunan empat keadaan dua qubit. Pada umumnya, keadaan-keadaan yang terhimpun dalam (Bell States) dapat dibangkitkan menggunakan kombinasi gerbang Hadamard dan CNOT. Pertama, gerbang Hadamard diterapkan pada qubit pertama untuk menghasilkan superposisi, sedangkan qubit kedua tidak mengalami perubahan. Untuk keadaan awal $|00\rangle$, proses tersebut menghasilkan
+\begin{equation}
+    \label{eq:bell_state}
+    (H \otimes I) |00\rangle = \frac{|00\rangle + |10\rangle}{\sqrt{2}}
+\end{equation}
+Keadaan tersebut merupakan superposisi dari dua basis komputasi yang masih dapat dipisahkan. Selanjutnya, gerbang CNOT diterapkan dengan qubit pertama sebagai kontrol dan qubit kedua sebagai target. Operasi ini membalik keadaan qubit target ketika qubit kontrol berada pada keadaan $|1\rangle$, sehingga diperoleh:
+\begin{equation}
+    \label{eq:bell_state_2}
+    \text{CNOT} \left( \frac{|00\rangle + |10\rangle}{\sqrt{2}} \right) = \frac{|00\rangle + |11\rangle}{\sqrt{2}} = |\Phi^+\rangle
+\end{equation}
+Keadaan $|\Phi^+\rangle$ merupakan salah satu dari empat Keadaan Bell dan tidak dapat dituliskan sebagai hasil kali tensor dua keadaan qubit tunggal, sehingga keadaan tersebut merepresentasikan sistem dua qubit yang terbelit secara maksimum.
+
+Dengan menerapkan kombinasi gerbang Hadamard dan CNOT pada basis komputasi yang berbeda, dapat diperoleh empat keadaan Bell yang saling ortogonal. Keempat keadaan ini membentuk suatu basis ortonormal pada ruang Hilbert dua qubit dan merepresentasikan bentuk keterbelitan maksimum. Karena membentuk basis lengkap, setiap keadaan dua qubit dapat dinyatakan sebagai kombinasi linier dari Keadaan Bell. Secara matematis, keempat Keadaan Bell tersebut dapat dinyatakan sebagai
+\begin{equation}
+    \label{eq:bell_state_3}
+    \begin{split}
+        |\Phi^{\pm}\rangle &= \frac{|00\rangle \pm |11\rangle}{\sqrt{2}} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 0 & 0 & \pm 1 \end{pmatrix}^T, \\
+        |\Psi^{\pm}\rangle &= \frac{|01\rangle \pm |10\rangle}{\sqrt{2}} = \frac{1}{\sqrt{2}} \begin{pmatrix} 0 & 1 & \pm 1 & 0 \end{pmatrix}^T
+    \end{split}
+\end{equation}
+Keempat keadaan tersebut memiliki amplitudo probabilitas yang sama besar pada dua basis komputasi penyusunnya, sehingga pengukuran pada salah satu qubit akan langsung menentukan hasil pengukuran pada qubit lainnya. Sifat inilah yang menjadikan Keadaan Bell sebagai sumber daya fundamental dalam berbagai protokol komputasi dan komunikasi kuantum, seperti teleportasi kuantum, superdense coding, dan distribusi kunci kuantum.
+
+Selain dapat dibangkitkan lewat kombinasi gerbang Hadamard dan CNOT, keterbelitan juga dapat dibangkitkan menggunakan kombinasi gerbang rotasi yang dikombinasikan dengan gerbang CNOT. Hal tersebut dapat terjadi karena gerbang Hadamard memiliki hubungan dengan gerbang rotasi. Secara matematis, gerbang Hadamard ekuivalen dengan kombinasi gerbang rotasi terhadap sumbu-Y dan sumbu-Z. Hubungan tersebut dapat dinyatakan sebagai
+\begin{equation}
+    \label{eq:hadamard_rotation_relation}
+    H = e^{i\pi/2} R_z(\pi) R_y \left(\frac{\pi}{2}\right) \sim R_z(\pi)R_y \left(\frac{\pi}{2}\right)
+\end{equation}
+Karena fase global tidak memiliki konsekuensi fisik yang dapat diamati, faktor $e^{i\pi/2}$ umumnya dapat diabaikan. Ketika keadaan awal sistem adalah $|0\rangle$, pengaruh $R_Z (\pi)$ hanya berupa perubahan fase yang tidak mengubah distribusi probabilitas hasil pengukuran. Oleh karena itu, pembentukan superposisi sering kali cukup dianalisis melalui aksi gerbang rotasi $R_Y (\theta)$. Untuk menunjukkan bahwa gerbang $R_Y$ dapat menghasilkan superposisi yang ekuivalen dengan gerbang Hadamard, aksi gerbang tersebpat ditinjau terhadap keadaan dasar $|0\rangle$. Variabel sudut rotasi pada matriks gerbang rotasi terhadap sumbu-Y yang didefinisikan pada persamaan (\ref{eq:unitary_general}) disubstitusikan dengan nilai parameter rotasi $\theta = \pi/2$, sehingga diperoleh
+\begin{equation}
+    \label{eq:hadamard_rotation}
+    R_y \left(\frac{\pi}{2}\right) |0\rangle = \begin{pmatrix} \cos(\frac{\pi}{2}) & -\sin(\frac{\pi}{2}) \\ \sin(\frac{\pi}{2}) & \cos(\frac{\pi}{2}) \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{pmatrix} = \frac{|0\rangle + |1\rangle}{\sqrt{2}}
+\end{equation}
+Hasil tersebut menunjukkan bahwa gerbang $R_Y (\pi/2)$ menghasilkan superposisi dengan amplitudo yang sama besar pada basis $|0\rangle$ dan $|1\rangle$. Hal tersebut serupa dengan gerbang Hadamard dalam membangkitkan superposisi awal pada suatu qubit.
+
+Keadaan superposisi tersebut selanjutnya dapat diperluas ke sistem dua qubit dengan menerapkan gerbang $R_Y (\pi/2)$ pada qubit kontrol dan gerbang identitas pada qubit target. Untuk keadaan awal $|00\rangle$, diperoleh
+\begin{equation}
+    \label{eq:hadamard_rotation}
+    \left( R_y \left(\frac{\pi}{2}\right) \otimes I \right) |00\rangle = \frac{|00\rangle + |10\rangle}{\sqrt{2}}
+\end{equation}
+yang mana identik dengan pembangkitan superposisi melalui penerapan gerbang Hadamard pada qubit pertama. Selanjutnya, dengan menerapkan gerbang CNOT, diperoleh
+\begin{equation}
+    \label{eq:hadamard_rotation}
+    \text{CNOT} \left( R_y \left(\frac{\pi}{2}\right) \otimes I \right) |00\rangle = \text{CNOT} \frac{|00\rangle + |10\rangle}{\sqrt{2}} = |\Phi^+\rangle.
+\end{equation}
+
+\subsection{Sirkuit Kuantum Berparameter}
+\textit{Quantum Machine Learning} (QML) merupakan bidang multidisipliner yang menggabungkan prinsip komputasi kuantum dengan metode pemelajaran mesin. Salah satu pendekatan yang berkembang dalam QML adalah \textit{Quantum Deep Learning} (QDL), yaitu pemanfaatan model kuantum dengan parameter khusus untuk mempelajari pemodelan data kompleks. Implementasi model QDL umumnya diwujudkan melalui \textit{Parameterized Quantum Circuit} (PQC), yaitu sirkuit kuantum yang terdiri atas gerbang-gerbang kuantum yang memiliki parameter yang nilainya dapat dioptimasi. PQC menjadi komponen utama dalam keluarga \textit{Variational Quantum Algorithms} (VQA), yaitu algoritma hibrida yang menggabungkan pemrosesan kuantum dan optimasi klasik. Keluarga VQA terdiri dari \textit{Variational Quantum Eigensolver} (VQE), \textit{Quantum Approximate Optimization Algorithm} (QAOA), dan Variational Quantum Classifier (VQC) yang mana semuanya memanfaatkan PQC sebagai representasi solusi yang dievaluasi untuk kemudian nilainya diperbarui oleh algoritma optimasi klasik secara iteratif~\shortcite{chen_enhanced_2025}.
+
+Sirkuit Kuantum Berparameter (\textit{Parameterized Quantum Circuit} atau PQC) adalah rangkaian gerbang kuantum yang memiliki parameter kontinu, umumnya berupa sudut rotasi. Dalam algoritma variasional, rangkaian PQC berperan sebagai ansatz yang mengeksplorasi parameter pada ruang solusi untuk fungsi gelombang dari suatu permasalahan. Pada umumnya, alur kerja PQC ditunjukkan pada Gambar \ref{fig:pqc_workflow}. Secara singkat, proses diawali dengan penyandian data klasik $x \in \mathbb{R}^n$ ke dalam keadaan kuantum $|\psi_0\rangle$ melalui fungsi prapemrosesan $f(x)$ dan operasi penyandian $R(f(x))$. Keadaan kuantum yang telah terbentuk kemudian diproses oleh sirkuit variasional $U(\boldsymbol{\theta})$, yang bertugas mentransformasikan keadaan kuantum melalui serangkaian operasi kuantum berparameter. Parameter $\boldsymbol{\theta}$ pada sirkuit ini akan diperbarui secara iteratif selama proses optimasi untuk menghasilkan suatu keadaan kuantum $|\psi(\boldsymbol{\theta})\rangle$ yang merepresentasikan solusi optimum. Selanjutnya, keadaan akhir diproyeksikan melalui pengukuran $\{M\}$ untuk memperoleh nilai ekspektasi atau probabilitas observabel yang relevan. Hasil pengukuran tersebut kemudian dievaluasi menggunakan fungsi biaya $L(\boldsymbol{\theta})$, yang digunakan oleh algoritma optimasi klasik untuk menentukan pembaruan parameter hingga diperoleh parameter optimal $\boldsymbol{\theta}^∗$ dan keluaran model $y \in \mathbb{R}^n$.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Images/PQC_VQDNN.png}
+    \caption{Representasi alur kerja sirkuit kuantum berparameter (PQC) yang mengilustrasikan tahap penyandian data, sirkuit variasional, pengukuran, dan pembaruan parameter oleh algoritma optimasi klasik.}
+    \label{fig:pqc_workflow}
+\end{figure}
+
+Setelah data dikodekan ke dalam keadaan kuantum $|\psi(\boldsymbol{\theta})\rangle$, sirkuit variasional $U(\boldsymbol{\theta})$ diterapkan untuk menghasilkan keadaan kuantum yang bergantung pada parameter-parameter optimasi. Berdasarkan sifat evolusi uniter dalam mekanika kuantum, keadaan keluaran sirkuit dapat dituliskan sebagai
+\begin{equation}
+\label{eq:vqa_state}
+|\psi(\boldsymbol{\theta})\rangle = U(\boldsymbol{\theta})|\psi_0\rangle.
+\end{equation}
+di mana operator variasional $U(\boldsymbol{\theta})$ dibangun dari kombinasi gerbang rotasi satu-qubit dan gerbang keterbelitan dua-qubit. Secara umum, operator tersebut dapat dinyatakan
+\begin{equation}
+    U(\boldsymbol{\theta}) = \prod_{l=1}^L U_{(ent)}^{(l)} U_{(rot)}^{(l)} (\boldsymbol{\theta}^{(l)})
+\end{equation}
+dengan $U_{(rot)}^{(l)}$ merepresentasikan lapisan gerbang rotasi berparameter, seperti $Rx(\theta)$, $Ry(\theta)$, dan $Rz (\theta)$, sedangkan $U_{(ent)}^{(l)}$ menyatakan lapisan gerbang keterbelitan, misalnya gerbang CNOT. Struktur berlapis ini memungkinkan sirkuit menghasilkan keadaan kuantum yang semakin kompleks seiring bertambahnya jumlah parameter dan lapisan yang digunakan. Variasi nilai parameter $\boldsymbol{\theta}$ akan menghasilkan fungsi gelombang yang berbeda sehingga memungkinkan eksplorasi berbagai kandidat solusi di dalam ruang pencarian.
+
+Kualitas suatu kandidat solusi kemudian dievaluasi melalui pengukuran nilai ekspektasi suatu operator observabel $\hat{O}$, yang umumnya merepresentasikan fungsi biaya atau besaran fisik yang ingin dioptimalkan. Nilai fungsi biaya tersebut dirumuskan sebagai
+\begin{equation}
+\label{eq:vqa_cost}
+C(\boldsymbol{\theta}) = \langle \psi(\boldsymbol{\theta})| \hat{O} |\psi(\boldsymbol{\theta})\rangle.
+\end{equation}
+Nilai hasil pengukuran tersebut kemudian dikirimkan kepada \textit{optimizer} klasik untuk memperbarui parameter sirkuit, kemudian proses evaluasi dan pembaruan diulang hingga kriteria konvergensi terpenuhi. Proses ini dikenal sebagai \textit{hybrid quantum-classical optimization} atau optimasi hibrida kuantum-klasik~\shortcite{c_scoping_2025}.
+
+\subsection{Pengukuran Kuantum}
+Pengukuran merupakan tahap yang menghubungkan informasi kuantum dengan hasil observasi klasik yang dapat diakses oleh pengguna. Dalam mekanika kuantum, setiap besaran fisik direpresentasikan oleh suatu operator observabel Hermitian $\hat{O}$ yang memiliki himpunan nilai eigen $o_n$ dan vektor eigen ortonormal $|e_n\rangle$. Hubungan antara observabel dan basis eigennya dinyatakan melalui persamaan
+\begin{equation}
+\hat{O}|e_n\rangle = o_n |e_n\rangle.
+\end{equation}
+Jika suatu sistem berada pada keadaan $|\psi\rangle$, maka hasil pengukuran yang mungkin diperoleh hanyalah nilai-nilai eigen dari operator observabel tersebut. Untuk sebuah qubit yang berada pada keadaan superposisi
+\begin{equation}
+|\psi\rangle = a|0\rangle + b|1\rangle,
+\end{equation}
+probabilitas diperolehnya suatu hasil pengukuran ditentukan oleh kaidah Born (\textit{Born rule}). tersebut menyatakan bahwa probabilitas untuk memperoleh nilai eigen $o_n$ diberikan oleh proyeksi keadaan terhadap basis eigen observabel,
+\begin{equation}
+P(o_n) = |\langle e_n|\psi\rangle|^2.
+\end{equation}
+Sehingga, pada basis komputasi, probabilitas diperolehnya keadaan $|0\rangle$ dan $|1\rangle$ menjadi
+\begin{equation} P(0)=|a|^2, \qquad P(1)=|b|^2.
+\end{equation}
+Hal tersebut menginterpretasi probabilistik ini menunjukkan bahwa hasil pengukuran tidak dapat diprediksi secara deterministik untuk satu percobaan tunggal, melainkan hanya dapat diprediksi melalui distribusi probabilitas hasil pengukuran.
+
+Secara matematis, proses pengukuran direpresentasikan menggunakan operator proyeksi
+\begin{equation} \hat{P}_n = |e_n\rangle\langle e_n|.
+\end{equation}
+Jika hasil pengukuran yang diperoleh adalah nilai eigen $o_n$, maka keadaan sistem setelah pengukuran diberikan oleh
+\begin{equation}
+|\psi'\rangle = \frac{\hat{P}_n|\psi\rangle} {\sqrt{\langle\psi|\hat{P}_n|\psi\rangle}}.
+\end{equation}
+Persamaan tersebut menunjukkan bahwa pengukuran menyebabkan sistem kehilangan superposisinya dan bertransisi menuju salah satu keadaan eigen observabel. Fenomena tersebut dikenal sebagai keruntuhan keadaan kuantum (\textit{state collapse}), yaitu perubahan non-unitari dari superposisi beberapa kemungkinan hasil menuju satu keadaan yang terdefinisi secara pasti~\shortcite{tomaz_quantum_2025}. Mekanisme fisik yang menyebabkan hilangnya interferensi kuantum dapat dipahami melalui representasi matriks densitas~\cite{revythi_quantum_2025}. Untuk keadaan murni
+\begin{equation}
+|\psi\rangle = a|0\rangle+b|1\rangle,
+\end{equation}
+matriks densitas sistem didefinisikan sebagai
+\begin{equation}
+\rho = |\psi\rangle\langle\psi|.
+\end{equation}
+Dengan melakukan perkalian luar (\textit{outer product}), diperoleh
+\begin{equation}
+\begin{split}
+\rho &= (a|0\rangle+b|1\rangle) (a^*\langle0|+b^*\langle1|)\\
+&= |a|^2|0\rangle\langle0|+ ab^*|0\rangle\langle1| + a^*b|1\rangle\langle0| + |b|^2|1\rangle\langle1|.
+\end{split}
+\end{equation}
+Dalam basis komputasi, bentuk tersebut dapat dituliskan sebagai
+\begin{equation}
+\rho=
+\begin{bmatrix}
+|a|^2 & ab^*\\
+a^*b & |b|^2
+\end{bmatrix}
+\end{equation}
+di mana elemen diagonal menyatakan probabilitas populasi masing-masing keadaan basis, sedangkan elemen \textit{off-diagonal} merepresentasikan koherensi kuantum yang bertanggung jawab terhadap fenomena interferensi.
+
+Pada dasarnya, sistem kuantum tidak pernah sepenuhnya terisolasi dari lingkungan~\shortcite{li_quantum_2025}. Ketika sistem berinteraksi dengan lingkungan, keadaan gabungan sistem-lingkungan dapat dituliskan sebagai
+\begin{equation}
+|\Psi\rangle
+=
+a|0\rangle|e_0\rangle
++
+b|1\rangle|e_1\rangle.
+\end{equation}
+Matriks densitas sistem kemudian diperoleh melalui operasi \textit{partial trace} terhadap derajat kebebasan lingkungan,
+\begin{equation}
+\rho_S
+=
+\mathrm{Tr}_E
+\left(
+|\Psi\rangle\langle\Psi|
+\right),
+\end{equation}
+yang menghasilkan
+\begin{equation}
+\rho_S=
+\begin{bmatrix}
+|a|^2 &
+ab^*\langle e_1|e_0\rangle\\
+a^*b\langle e_0|e_1\rangle &
+|b|^2
+\end{bmatrix}.
+\end{equation}
+Keberadaan faktor $\langle e_1|e_0\rangle$ menunjukkan bahwa koherensi sistem bergantung pada tingkat tumpang tindih keadaan lingkungan yang berkorelasi dengan masing-masing keadaan basis qubit. Namun seiring bertambahnya interaksi dengan lingkungan, keadaan lingkungan menjadi semakin ortogonal sehingga
+\begin{equation}
+\langle e_1|e_0\rangle
+\rightarrow 0.
+\end{equation}
+Sehingga elemen-elemen \textit{off-diagonal} menghilang dan matriks densitas sistem mereduksi menjadi
+\begin{equation}
+\rho_S
+\rightarrow
+\begin{bmatrix}
+|a|^2 & 0\\
+0 & |b|^2
+\end{bmatrix}.
+\end{equation}
+Proses hilangnya koherensi kuantum ini dikenal sebagai dekoherensi (\textit{decoherence}) yaitu mengubah keadaan kuantum menjadi campuran statistik yang tidak lagi menunjukkan interferensi.
+
+Secara konsep, hubungan antara dekoherensi dan keruntuhan keadaan kuantum tersebut dapat direpresentasikan pada Gambar \ref{fig:collapse_measurement}. Gambar tersebut memperlihatkan bagaimana elemen \textit{off-diagonaal} yang merepresentasikan koherensi kuantum secara bertahap menghilang akibat interaksi dengan lingkungan, menghasilkan matriks densitas diagonal yang bersifat statistik~\shortcite{anshu_sample-efficient_2020}. Setelah itu, proses pengukuran memproyeksikan sistem ke salah satu keadaan basis yang terdefinisi secara pasti sesuai probabilitas yang diberikan oleh kaidah Born~\shortcite{benedetti_parameterized_2019}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{Images/Collapse_Measurement.png}
+    \caption{Representasi konseptual hubungan antara dekoherensi dan keruntuhan keadaan kuantum. Interaksi sistem dengan lingkungan menyebabkan hilangnya elemen koherensi (\textit{off-diagonaal}) pada matriks densitas, sedangkan proses pengukuran memproyeksikan sistem ke salah satu keadaan eigen yang terdefinisi.}
+    \label{fig:collapse_measurement}
+\end{figure}

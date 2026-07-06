@@ -1,0 +1,63 @@
+\section{Lagrange Multiplier dalam Markowitz-QUBO}\label{appendix-c}
+
+\hypertarget{definisi-mengapa-a-disebut-bobot-penalti-lagrange-multiplier}{%
+\subsection{\texorpdfstring{Definisi: Mengapa \(A\) disebut Bobot Penalti (Lagrange Multiplier)?}{Definisi: Mengapa A disebut Bobot Penalti (Lagrange Multiplier)?}}\label{definisi-mengapa-a-disebut-bobot-penalti-lagrange-multiplier}}
+
+Dalam konteks \textbf{QUBO (Quadratic Unconstrained Binary Optimization)}, kata kuncinya adalah ``\emph{Unconstrained}'' (Tanpa Kendala). Algoritma kuantum hanya bisa meminimalkan fungsi energi tanpa batasan eksternal.
+
+Namun, dalam dunia nyata, kita memiliki batasan (seperti: ``harus memilih tepat \(K\) aset''). Untuk memasukkan batasan ini ke dalam fungsi yang ``tanpa batasan'', kita menggunakan \textbf{Metode Penalti}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\(A\) sebagai Bobot Penalti}: Menentukan seberapa besar ``hukuman'' (peningkatan energi) yang diberikan jika solusi melanggar batasan.
+\item
+  \textbf{\(A\) sebagai Lagrange Multiplier}: Secara fungsional bertindak seperti pengali \(\lambda\) dalam kalkulus, yang menghubungkan fungsi objektif utama dengan fungsi kendala.
+\end{itemize}
+
+\hypertarget{hubungan-dengan-metode-lagrange-standar}{%
+\subsection{Hubungan dengan Metode Lagrange Standar}\label{hubungan-dengan-metode-lagrange-standar}}
+
+Suku penalti tersebut adalah adaptasi dari \textbf{Metode Lagrange Multiplier} untuk optimasi diskrit. Dalam optimasi kontinu standar:
+
+\[\min f(x) \quad \text{dengan kendala} \quad g(x) = 0\]
+
+Dirumuskan menjadi fungsi Lagrangian: \[\mathcal{L}(x, \lambda) = f(x) + \lambda g(x)\]
+
+Dalam QUBO, kita menggunakan variasi yang disebut \textbf{Penalty Method} (bagian dari \emph{Augmented Lagrangian Method}). Perbedaannya, kita menguadratkan kendalanya: \(A(g(x))^2\).
+
+\textbf{Mengapa dikuadratkan?} 1. \textbf{Selalu Positif}: Jika \(g(x) \neq 0\) (baik positif atau negatif), nilai \((g(x))^2\) akan selalu positif, sehingga menambah energi (memberi penalti). 2. \textbf{Kesesuaian QUBO}: Bentuk kuadrat memastikan hubungan antar variabel tetap dalam orde dua (kuadratik), yang merupakan syarat format QUBO.
+
+\hypertarget{penurunan-rumus-penalti}{%
+\subsection{Penurunan Rumus Penalti}\label{penurunan-rumus-penalti}}
+
+Berikut adalah langkah transformasi dari kendala menjadi suku penalti:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Kendala Asli}: \(\sum_{i=1}^N x_i = K\) (Jumlah aset yang dipilih harus sama dengan \(K\)).
+\item
+  \textbf{Bentuk Normal Kendala}: \(g(x) = \sum_{i=1}^N x_i - K = 0\).
+\item
+  \textbf{Konstruksi Penalti Kuadratik}: Agar nilai minimum fungsi tepat berada di titik di mana \(\sum x_i - K = 0\), kita kuadratkan selisihnya: \[ P(x) = A \cdot (g(x))^2 = A \left( \sum_{i=1}^N x_i - K \right)^2 \]
+\end{enumerate}
+
+Jika \(\sum x_i = K\), maka \((K - K)^2 = 0\) (Tanpa penalti). Jika terjadi pelanggaran, energi naik sebesar \(A \times (\text{error})^2\).
+
+\hypertarget{fungsi-umum-lagrange-multiplier}{%
+\subsection{Fungsi Umum Lagrange Multiplier}\label{fungsi-umum-lagrange-multiplier}}
+
+Fungsi utama Lagrange Multiplier (\(A\)) adalah sebagai \textbf{penyeimbang antara dua tujuan yang saling bertentangan}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Optimalitas (Fungsi Objektif)}: Mencari nilai sekecil atau sebesar mungkin (misal: risiko terkecil atau keuntungan terbesar).
+\item
+  \textbf{Validitas (Kendala)}: Memastikan solusi tersebut memenuhi syarat yang ditetapkan (misal: jumlah aset pas).
+\end{enumerate}
+
+Dalam QUBO, nilai \(A\) harus dipilih agar cukup besar sehingga kendala tidak dilanggar, tetapi tidak terlalu besar sehingga menutupi detail dari fungsi risiko dan return yang ingin kita optimalkan.

@@ -1,0 +1,20 @@
+\frametitle{Algoritma Exhaustive Search (Brute Force)}
+\begin{itemize}
+        \item \textbf{Tujuan:} Menemukan solusi eksak $\min_{x \in \{0,1\}^N} H(x)$.
+    \end{itemize}
+    \begin{block}{Pseudocode: Ising Ground State Search}
+    \begin{enumerate}
+        \item \textbf{Input:} Matriks interaksi $J_{ij}$, vektor bias $h_i$, konstanta $C$.
+        \item \textbf{Initialize:} $E_{min} = \infty$, $x_{best} = \text{None}$.
+        \item \textbf{Loop:} Untuk setiap bitstring $x \in \{0, 1\}^N$:
+        \begin{itemize}
+            \item Hitung Energi: $E(x) = \sum_{i<j} J_{ij} x_i x_j + \sum_{i} h_i x_i + C$
+            \item \textbf{Update:} Jika $E(x) < E_{min}$:
+            \begin{itemize}
+                \item $E_{min} = E(x)$
+                \item $x_{best} = x$
+            \end{itemize}
+        \end{itemize}
+        \item \textbf{Output:} Energi Ground State $E_{min}$ dan konfigurasi $x_{best}$.
+    \end{enumerate}
+    \end{block}

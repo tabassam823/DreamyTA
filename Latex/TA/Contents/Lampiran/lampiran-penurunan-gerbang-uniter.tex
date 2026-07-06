@@ -1,0 +1,115 @@
+\chapter{Penurunan Matriks Umum Gerbang Uniter Satu \textit{Qubit}}
+\label{app:penurunan_gerbang_uniter}
+
+Operator uniter $U$ didefinisikan sebagai matriks kompleks berukuran dua kali dua yang dinotasikan dengan persamaan
+\begin{equation}
+\label{eq:app_gerbang_umum}
+U = \begin{pmatrix} u_{11} & u_{12} \\ u_{21} & u_{22} \end{pmatrix}.
+\end{equation}
+Karena operator tersebut merupakan representasi dari elemen grup khusus uniter $SU(2)$, maka syarat keuniteran matriks dan nilai determinan satu harus dipenuhi. Syarat uniter tersebut menyatakan bahwa perkalian antara konjugat Hermitian dari matriks tersebut dengan matriks itu sendiri menghasilkan matriks identitas kuantum dua dimensi dengan bentuk matematis
+\begin{equation}
+\label{eq:app_syarat_uniter}
+U^\dagger U = I,
+\end{equation}
+\begin{equation}
+\label{eq:app_syarat_det}
+\det(U) = 1.
+\end{equation}
+
+Konjugat Hermitian dari matriks kompleks uniter tersebut didefinisikan sebagai transpose konjugat yang disimbolkan dengan $U^\dagger$ dan dinyatakan melalui bentuk persamaan
+\begin{equation}
+\label{eq:app_hermitian_conj}
+U^\dagger = \begin{pmatrix} u_{11}^* & u_{21}^* \\ u_{12}^* & u_{22}^* \end{pmatrix}.
+\end{equation}
+Dengan menyubstitusikan persamaan (\ref{eq:app_gerbang_umum}) dan (\ref{eq:app_hermitian_conj}) ke dalam syarat keuniteran (\ref{eq:app_syarat_uniter}), maka perkalian matriks tersebut akan menghasilkan beberapa hubungan elemen internal. Hubungan tersebut diperoleh melalui perkalian baris terhadap kolom yang menghasilkan persamaan kuadrat mutlak dari masing-masing elemen matriks pada baris pertama dan kedua. Hubungan tersebut dapat dinyatakan dalam bentuk matematis
+\begin{equation}
+\label{eq:app_norm_kolom1}
+|u_{11}|^2 + |u_{21}|^2 = 1,
+\end{equation}
+\begin{equation}
+\label{eq:app_norm_kolom2}
+|u_{12}|^2 + |u_{22}|^2 = 1,
+\end{equation}
+\begin{equation}
+\label{eq:app_ortogonalitas_kolom}
+u_{11}^* u_{12} + u_{21}^* u_{22} = 0.
+\end{equation}
+Persamaan (\ref{eq:app_ortogonalitas_kolom}) menyatakan bahwa kolom pertama dan kolom kedua dari matriks uniter tersebut harus saling ortogonal satu sama lain.
+
+Berdasarkan syarat kekekalan probabilitas pada persamaan (\ref{eq:app_norm_kolom1}), elemen-elemen pada kolom pertama dapat diparameterisasikan menggunakan fungsi trigonometri dengan amplitudo polar $\theta$ dan fase kompleks. Parameterisasi ini dilakukan dengan mendefinisikan elemen matriks $u_{11}$ dan $u_{21}$ menggunakan koordinat lingkaran yang dimodifikasi oleh parameter fase independen $\gamma_1$ dan $\gamma_2$ sebagai berikut:
+\begin{equation}
+\label{eq:app_param_u11}
+u_{11} = e^{i\gamma_1} \cos\theta,
+\end{equation}
+\begin{equation}
+\label{eq:app_param_u21}
+u_{21} = e^{i\gamma_2} \sin\theta.
+\end{equation}
+Secara geometris, representasi kolom pertama tersebut bertujuan untuk memetakan posisi keadaan \textit{qubit} pada proyeksi lingkaran satuan di bawah koordinat bola \textit{Bloch}. Parameter $\theta$ menentukan orientasi sudut terhadap kutub bola, sedangkan fase $\gamma_1$ dan $\gamma_2$ mengatur pergeseran fase kompleks. Dengan demikian, kolom pertama dari matriks uniter $U$ dapat dinyatakan secara formal sebagai vektor kolom
+\begin{equation}
+\label{eq:app_vektor_kolom1}
+\begin{pmatrix} u_{11} \\ u_{21} \end{pmatrix} = \begin{pmatrix} e^{i\gamma_1} \cos\theta \\ e^{i\gamma_2} \sin\theta \end{pmatrix}.
+\end{equation}
+
+Untuk menentukan elemen-elemen pada kolom kedua dari matriks $U$, dapat dimisalkan suatu representasi variabel bebas berupa komponen $a$ dan $b$.
+\begin{equation}
+\label{eq:app_param_kolom2}
+\begin{pmatrix} u_{12} \\ u_{22} \end{pmatrix} = \begin{pmatrix} a \\ b \end{pmatrix}.
+\end{equation}
+Dengan menggunakan syarat ortogonalitas kolom yang dinyatakan pada persamaan (\ref{eq:app_ortogonalitas_kolom}), substitusi dari parameterisasi sebelumnya menghasilkan hubungan linear
+\begin{equation}
+\label{eq:app_persamaan_ortogonal}
+e^{-i\gamma_1} \cos\theta \cdot a + e^{-i\gamma_2} \sin\theta \cdot b = 0.
+\end{equation}
+Salah satu solusi umum yang dapat memenuhi persamaan (\ref{eq:app_persamaan_ortogonal}) dapat dinyatakan dengan menyertakan parameter fase tambahan $\delta$ pada komponen tersebut adalah
+\begin{equation}
+\label{eq:app_solusi_a}
+a = -e^{i\delta} e^{i\gamma_1} \sin\theta
+\end{equation}
+dan
+\begin{equation}
+\label{eq:app_solusi_b}
+b = e^{i\delta} e^{i\gamma_2} \cos\theta.
+\end{equation}
+Hal ini dapat dibuktikan dengan menyubstitusikan persamaan (\ref{eq:app_solusi_a}) dan (\ref{eq:app_solusi_b}) ke dalam persamaan (\ref{eq:app_persamaan_ortogonal}) yang menghasilkan
+\begin{equation}
+e^{-i\gamma_1} \cos\theta \left( -e^{i\delta} e^{i\gamma_1} \sin\theta \right) + e^{-i\gamma_2} \sin\theta \left( e^{i\delta} e^{i\gamma_2} \cos\theta \right) = 0.
+\end{equation}
+
+Dengan menyubstitusikan seluruh parameter solusi kolom pertama dan kedua, diperoleh matriks uniter dengan bentuk parametrisasi fase kompleks dengan bentuk umum
+\begin{equation}
+U = \begin{pmatrix} e^{i\gamma_1}\cos\theta & -e^{i\delta}e^{i\gamma_1}\sin\theta \\ e^{i\gamma_2}\sin\theta & e^{i\delta}e^{i\gamma_2}\cos\theta \end{pmatrix}.
+\end{equation}
+Untuk menyederhanakan bentuk representasi matriks tersebut, faktor fase global sebesar $e^{i(\gamma_1+\gamma_2)/2}$ dapat dikeluarkan dari setiap elemen di dalam matriks tersebut. Sehingga dapat didefinisikan dua buah variabel fase baru $\alpha$ dan $\beta$ yang mewakili kombinasi penjumlahan dan pengurangan fase awal
+\begin{equation}
+\label{eq:app_def_alpha}
+\alpha = \frac{\gamma_1 + \gamma_2}{2},
+\end{equation}
+\begin{equation}
+\label{eq:app_def_beta}
+\beta = \frac{\gamma_1 - \gamma_2}{2}.
+\end{equation}
+Berdasarkan definisi fase baru tersebut, bentuk eksponensial fase $\gamma_1$ dan $\gamma_2$ dapat ditulis ulang ke dalam kombinasi parameter fase sehingga berbentuk
+\begin{equation}
+\label{eq:app_rel_g1}
+e^{i\gamma_1} = e^{i\alpha} e^{i\beta},
+\end{equation}
+\begin{equation}
+\label{eq:app_rel_g2}
+e^{i\gamma_2} = e^{i\alpha} e^{-i\beta}.
+\end{equation}
+Hubungan eksponensial fase tersebut dapat disubstitusikan ke dalam struktur matriks $U$ sehingga menghasilkan formulasi dengan representasi fase global terpisah berbentuk
+\begin{equation}
+U = e^{i\alpha} \begin{pmatrix} e^{i\beta}\cos\theta & -e^{i(\delta+\beta)}\sin\theta \\ e^{-i\beta}\sin\theta & e^{i(\delta-\beta)}\cos\theta \end{pmatrix}.
+\label{eq:app_U_subtitusi}
+\end{equation}
+
+Untuk menyempurnakan bentuk uniter, langkah selanjutnya yaitu menerapkan syarat nilai determinan sama dengan satu dari grup khusus uniter $SU(2)$. Nilai determinan dapat dihitung dengan mengalikan elemen diagonal utama lalu dikurangi hasil kali elemen-elemen pada diagonal yang dalam bentuk matematis menjadi
+\begin{equation}
+\det(U) = e^{i(2\alpha+\delta)}.
+\end{equation}
+Karena nilai determinan dari elemen grup khusus ini harus bernilai satu, maka diperoleh hubungan fase kuantum baru sebesar $2\alpha+\delta=2\pi n$, dengan $n$ sebagai bilangan bulat ($n \in \mathbb{Z}$). Dari penyederhanaan tersebut, hubungan antara parameter fase $\delta$ dan $\alpha$ dapat didefinisikan melalui hubungan matematis $\delta = -2\alpha$. Setelah memasukkan nilai fase $\delta$ dan mendefinisikan ulang variabel fase $\gamma = \delta + \beta$ ke dalam persamaan (\ref{eq:app_U_subtitusi}), diperoleh representasi matriks uniter paling umum untuk gerbang satu \textit{qubit} dengan bentuk
+\begin{equation}
+\label{eq:app_unitary_general}
+U = e^{i\alpha} \begin{pmatrix} e^{i\beta}\cos\theta & e^{i\gamma}\sin\theta \\ -e^{-i\gamma}\sin\theta & e^{-i\beta}\cos\theta \end{pmatrix}.
+\end{equation}

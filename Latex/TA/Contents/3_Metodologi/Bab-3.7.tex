@@ -1,0 +1,22 @@
+\section{Optimasi Klasik SLSQP (\textit{Sequential Least Squares Programming})}
+Penyelesaian masalah portofolio Markowitz secara tradisional menggunakan algoritma \textit{Sequential Least Squares Programming} (SLSQP) diposisikan sebagai standar komparasi utama bagi keandalan model komputasi kuantum. Algoritma optimasi non-linear ini beroperasi dengan menyelesaikan serangkaian sub-masalah pemrograman kuadratik yang diaproksimasi melalui matriks Hessian serta vektor gradien dari fungsi utilitas finansial objektif. Alur komputasi untuk optimasi bobot portofolio dilakukan secara iteratif dan berkelanjutan dengan memanfaatkan matriks Hessian hampiran yang disajikan pada Algoritma \ref{alg:slsqp_optimizer}. Instruksi algoritma ini dimulai dengan penetapan bobot alokasi yang setara pada seluruh kandidat aset sebagai titik inisialisasi yang netral bagi pergerakan ruang solusi berkelanjutan. Pada setiap siklus komputasi, algoritma menghitung arah pencarian ideal berdasarkan gradien analitis dan melakukan pembaruan matriks menggunakan teknik kalibrasi kuasi-Newton secara sistematis dan efisien. Eksekusi program terus diulang hingga parameter bobot portofolio mencapai kriteria toleransi konvergensi yang ditetapkan guna menghasilkan vektor investasi kontinu terbaik sebagai perbandingan evaluasi.
+
+\begin{algorithm}[ht]
+\caption{Optimasi Klasik Markowitz menggunakan SLSQP}
+\label{alg:slsqp_optimizer}
+\begin{algorithmic}[1]
+\Procedure{SLSQPOptimizer}{$\mu, \Sigma, \gamma$}
+    \State $w_0 \gets \text{InitialWeights}(1/N)$ \Comment{Inisialisasi Seragam}
+    \State $B_0 \gets \mathbf{I}$ \Comment{Inisialisasi Hessian Identitas}
+    \For{$k = 0, 1, 2, \dots$ until converged}
+        \State $g_k \gets \nabla f(w_k) = \gamma \Sigma w_k - \mu$ \Comment{Hitung Gradien}
+        \State Solve Sub-QP: $\min_{d} (g_k^T d + \frac{1}{2} d^T B_k d) \text{ s.t. } \mathbf{1}^T d = 0, \text{ bounds}$
+        \State $\alpha_k \gets \text{LineSearch}(w_k, d)$ \Comment{Cari ukuran langkah}
+        \State $w_{k+1} \gets w_k + \alpha_k d$ \Comment{Update Bobot}
+        \State $s_k \gets w_{k+1} - w_k, y_k \gets g_{k+1} - g_k$
+        \State $B_{k+1} \gets \text{UpdateBFGS}(B_k, s_k, y_k)$ \Comment{Update Aproksimasi Hessian}
+    \EndFor
+    \State \Return $w_{final}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

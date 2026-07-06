@@ -1,0 +1,12 @@
+\frametitle{Visualisasi Sirkuit Replikasi (2 Qubit, d=1)}
+\begin{itemize}
+        \item Struktur sirkuit pada simulasi (inisialisasi nol):
+    \end{itemize}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{Pasted image.png}
+    \end{center}
+    \footnotesize
+    \begin{itemize}
+        \item Lapisan Rotasi: Gate $R_Z, R_X, R_Z$ dengan parameter bebas.
+        \item Lapisan Entanglement: CNOT menghubungkan qubit 0 dan 1.
+    \end{itemize}

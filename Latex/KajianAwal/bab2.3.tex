@@ -1,0 +1,38 @@
+\subsection{Metode Solusi Komputasi untuk Ekuilibrium Ekonomi}
+Setelah memodelkan interaksi pasar dan dinamika aset menggunakan formalisme kuantum dan statistik, tantangan berikutnya adalah menemukan solusi ekuilibrium atau harga derivatif yang adil. Seringkali, persamaan yang dihasilkan (seperti Hamiltonian sistem banyak benda atau SDE dimensi tinggi) tidak memiliki solusi analitik tertutup. Oleh karena itu, teknik simulasi dan komputasi numerik diperlukan untuk menyelesaikan persamaan kompleks tersebut, sesuai dengan konsep dari \textbf{Fisika Komputasi}.
+
+\subsubsection{Metode Monte Carlo dan Rantai Markov (MCMC)}
+Metode Monte Carlo adalah teknik sampling stokastik untuk menyelesaikan integral dimensi tinggi atau masalah optimasi. Dalam konteks \textbf{Libor Market Model (LMM)}, yang merupakan model standar untuk penetapan harga derivatif suku bunga, dinamika \textit{forward Libor rates} $L_n(t)$ dimodelkan sebagai:
+
+\[ dL_n(t) = \sigma_n(t, L_n(t)) dW^{n+1}(t) \]
+
+bawah ukuran forward $T_{n+1}$. Simulasi Monte Carlo digunakan untuk memproyeksikan lintasan suku bunga ini ke masa depan untuk menghitung nilai ekspektasi payoff derivatif \citep{wang_deep_2018}.
+
+\subsubsection{Persamaan Diferensial Stokastik Mundur (BSDE) dan Deep Learning}
+Masalah penetapan harga opsi, terutama opsi gaya Amerika atau Bermudan yang memungkinkan eksekusi dini, sering kali diformulasikan sebagai \textbf{Persamaan Diferensial Stokastik Mundur (Backward Stochastic Differential Equations - BSDE)}. Bentuk umum BSDE untuk harga opsi $Y(t)$ diberikan oleh:
+
+\[ dY(t) = -f(t, Y(t), Z(t)) dt + Z(t) dW(t), \quad Y(T) = \xi \]
+
+di mana $\xi$ adalah payoff pada saat jatuh tempo $T$, $f$ adalah generator (misalnya, suku bunga bebas risiko), dan $Z(t)$ merepresentasikan strategi lindung nilai (\textit{hedging strategy}).
+
+Dalam model kompleks seperti \textbf{Libor Market Model (LMM)}, penetapan harga derivatif sering menghadapi tantangan \textbf{``Curse of Dimensionality''}, di mana metode numerik tradisional (seperti \textit{finite difference}) gagal karena dimensi ruang keadaan yang sangat tinggi (misalnya, puluhan \textit{rate} yang saling berkorelasi).
+
+Untuk mengatasi hal ini, pendekatan berbasis \textbf{Deep Learning} telah dikembangkan \citep{wang_deep_2018}. Solusi BSDE ($Y(t), Z(t)$) diaproksimasi menggunakan jaringan saraf tiruan (\textit{Deep Neural Networks} - DNN). Algoritma ini memecah masalah menjadi sub-masalah yang lebih kecil dan menyelesaikannya secara mundur (\textit{backward}) dari waktu $T$ ke $t_0$, memungkinkan solusi yang efisien dan akurat bahkan dalam dimensi tinggi yang sebelumnya sulit dijangkau.
+
+\subsubsection{Algoritma Optimasi Kuantum (QAOA)}
+Sebagai alternatif dari metode klasik seperti Monte Carlo, \textbf{Quantum Approximate Optimization Algorithm (QAOA)} menawarkan pendekatan kuantum untuk menemukan solusi optimal. Seperti yang telah dibahas pada sub-bab 2.2.1, banyak masalah optimasi ekonomi (seperti TSP atau penemuan Nash Equilibrium) dapat dipetakan ke dalam pencarian keadaan dasar (\textit{ground state}) dari Hamiltonian Ising.
+
+QAOA bekerja dengan menerapkan serangkaian gerbang kuantum yang diparameterisasi untuk memandu sistem kuantum menuju keadaan energi terendah tersebut. Dalam konteks \textit{Quantum Game Theory}, ini berarti QAOA dapat digunakan untuk menemukan strategi optimal yang meminimalkan fungsi biaya atau memaksimalkan \textit{payoff} pemain dalam ruang pencarian yang sangat besar, yang mungkin sulit dijangkau oleh algoritma klasik.
+
+\subsubsection{Jaringan Saraf Tiruan Kuantum (QNN)}
+
+Untuk mengatasi tantangan prediksi pada data finansial berdimensi tinggi, dikembangkan algoritma \textbf{Quantum Neural Networks (QNN)} atau sering disebut sebagai \textit{Parameterized Quantum Circuits (PQC)}. QNN adalah algoritma hibrida klasik-kuantum yang memanfaatkan ruang Hilbert untuk memproses fitur data dengan cara yang sulit dilakukan oleh jaringan saraf klasik.
+
+Langkah fundamental dalam QNN adalah \textbf{Data Encoding}, yaitu proses memetakan data klasik $\mathbf{x}$ ke dalam state kuantum $|\psi(\mathbf{x})\rangle$. Beberapa metode encoding yang relevan meliputi:
+
+\begin{enumerate}
+    \item \textbf{Angle Encoding:} Memetakan nilai fitur $x_i$ ke dalam sudut rotasi qubit, misalnya $R_y(x_i)|0\rangle$. Metode ini efisien dalam penggunaan gerbang tetapi membutuhkan $N$ qubit untuk $N$ fitur.
+    \item \textbf{Amplitude Encoding:} Memetakan vektor data ternormalisasi $\mathbf{x}$ ke dalam amplitudo state kuantum $|\psi\rangle = \sum_{i} x_i |i\rangle$. Keunggulan utamanya adalah kompresi eksponensial, di mana $N$ fitur dapat direpresentasikan oleh $\log_2 N$ qubit.
+\end{enumerate}
+
+Arsitektur QNN terdiri dari lapisan sirkuit kuantum yang memiliki parameter rotasi yang dapat dilatih ($\theta$). Proses pelatihan (\textit{training}) dilakukan secara hibrida: sirkuit kuantum mengevaluasi fungsi biaya (misalnya berdasarkan \textbf{Fidelity} atau jarak antara output state dengan target), dan pengoptimal klasik (seperti \textit{Gradient Descent}) memperbarui parameter $\theta$ untuk meminimalkan \textit{loss} tersebut. Pendekatan ini diharapkan memberikan \textit{quantum advantage} dalam hal kecepatan konvergensi dan kemampuan generalisasi pada data pasar yang kompleks.

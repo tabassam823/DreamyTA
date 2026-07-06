@@ -1,0 +1,27 @@
+\section{Transformasi Game Theory ke Ising: Derivasi Parameter Bias (\texorpdfstring{\(h_i\)}{h\_i})}\label{appendix-i}
+
+\subsection{Matriks Probabilitas Payoff}\label{konstruksi-matriks-probabilitas-payoff}
+Pergerakan harga saham direpresentasikan sebagai strategi campuran (\emph{mixed strategy}) dari partisipan pasar dalam kerangka \emph{non zero-sum game}. Kita mendefinisikan himpunan \emph{state} biner observasional \(s_i \in \{+1, -1\}\) dimana \(+1\) merepresentasikan probabilitas naik dan \(-1\) merepresentasikan probabilitas turun. Matriks probabilitas gabungan empiris dari dua aset didapatkan dari data frekuensi historis:
+\[ P(s_i, s_j) = \frac{n(s_i, s_j)}{N} \]
+Ekspektasi \emph{payoff} kondisional aset \(i\) ketika berada pada state \(s_i\) dengan mempertimbangkan seluruh kemungkinan state aset \(j\) dirumuskan sebagai:
+\[ E[i|s_i] = \sum_{s_j \in \{+1, -1\}} P(s_j) \cdot V(s_i, s_j) \]
+Dengan demikian, nilai \emph{expected payoff} untuk probabilitas kondisi aset naik (\(E[i|+]\)) dan turun (\(E[i|-]\)) diekspresikan secara matriks sebagai:
+\begin{align}
+E[i|+] &= P(+1)V(+1,+1) + P(-1)V(+1,-1) \\
+E[i|-] &= P(+1)V(-1,+1) + P(-1)V(-1,-1) 
+\end{align}
+
+\subsection{Ekuivalensi ke Parameter Ising}\label{ekuivalensi-parameter-hamiltonian}
+Model Hamiltonian Ising untuk entitas tunggal dengan \emph{local field} \(h_i\) didefinisikan sebagai:
+\[ H_{lokal}(s_i) = -h_i s_i \]
+Terdapat ekuivalensi fundamental antara energi Hamiltonian dan ekspektasi utilitas dalam \emph{market game theory}, yakni \(H \equiv -E\). Substitusi langsung memberikan pemetaan energi kuantitatif murni:
+\begin{align}
+H_{lokal}(+1) &= -h_i(1) = -h_i \equiv -E[i|+] \\
+H_{lokal}(-1) &= -h_i(-1) = +h_i \equiv -E[i|-]
+\end{align}
+Evaluasi selisih tingkat energi (\(\Delta H\)) pada kedua kutub observasional menghasilkan:
+\[ \Delta H = H_{lokal}(-1) - H_{lokal}(+1) = (+h_i) - (-h_i) = 2h_i \]
+Memadankannya dengan selisih absolut ekspektasi utilitas komputasional \(-E[i|-] - (-E[i|+])\), diperoleh persamaan:
+\[ 2h_i = E[i|+] - E[i|-] \]
+Sehingga derivasi bentuk akhir untuk parameter \emph{bias} atau limit medan magnet independen \(h_i\) diturunkan menjadi murni matematis spesifik:
+\[ h_i = \frac{E[i|+] - E[i|-]}{2} \]

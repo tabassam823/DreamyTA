@@ -1,0 +1,148 @@
+\section{Formulasi \textit{Exact Potential Game} (EPG) dan Pencarian \textit{Nash Equilibrium}}
+\label{sec:4_2_epg_nash}
+Tahap berikutnya adalah memetakan permasalahan optimasi portofolio Markowitz ke dalam kerangka \textit{Exact Potential Game} (EPG). Formulasi yang digunakan mengacu pada model \textit{Mean-Variance} biner sebagaimana telah dijabarkan pada Bab \ref{sec:2_3_formalime_EPG}. Dalam representasi ini, setiap aset diperlakukan sebagai agen strategis yang memilih status biner ($x_i \in {0,1}$), dengan nilai ($x_i=1$) menyatakan bahwa aset dipilih ke dalam portofolio dan ($x_i=0$) menyatakan sebaliknya.Untuk memenuhi kendala anggaran, jumlah aset yang dipilih ditetapkan sebanyak ($k=N/2$). Dengan demikian, bobot portofolio dapat dituliskan sebagai ($\omega_i=x_i/k$), sehingga berlaku
+\begin{equation}
+    \sum_i \frac{x_i}{k} = 1.
+\end{equation}
+Konstruksi tersebut dilakukan agar total alokasi modal selalu memenuhi kendala investasi yang digunakan dalam formulasi optimasi portofolio dasar dari model Markowitz.
+
+\subsection{Formulasi EPG}
+Berdasarkan kerangka teorema Monderer dan Shapley yang mendasari teori permainan kooperatif, suatu permainan finansial dikategorikan secara formal sebagai \textit{Exact Potential Game} (EPG) apabila terdapat sebuah fungsi potensial skalar $\Phi(\vec{x})$ sedemikian rupa sehingga ekuivalensi utilitas terpenuhi. Ekuivalensi tersebut mensyaratkan bahwa selisih utilitas individu $\Delta u_i$ akibat dinamika perubahan strategi satu agen harus secara eksak sama nilainya dengan selisih evaluasi nilai fungsi potensial sistem global tersebut. Fungsi potensial skalar ini secara matematis diperoleh dari penjabaran ekspansi fungsi biaya portofolio kuadratik yang memetakan hubungan kovariansi multivariat antar instrumen. Untuk mengidentifikasi kontribusi marginal spesifik dari agen ke-$i$, proses derivasi melakukan dekomposisi jumlahan polinomial tersebut dengan mengisolasi suku-suku yang mengandung variabel $x_i$ serta mendayagunakan sifat komutatif variabel biner $x_i^2 = x_i$. Derivasi fisis fungsi potensial tersebut pada akhirnya menghasilkan kuantitas selisih potensial $\Delta \Phi$ yang bertindak langsung sebagai insentif marginal ketika agen $i$ memutuskan untuk mengubah status transisi dari kondisi 0 menjadi 1. Implementasi prosedur perhitungan tersebut menggunakan pustaka \textit{Pandas} untuk melakukan pengelompokan data dan evaluasi probabilitas setiap \textit{microstate}. Detail implementasinya ditunjukkan pada Daftar Kode \ref{lst:compute_strategic_returns}.
+
+\begin{lstlisting}[language=Python, caption={Algoritma kalkulasi ekspektasi imbal hasil strategis berbasis observasi probabilitas \textit{microstates}}, label={lst:compute_strategic_returns}]
+import numpy as np
+
+def compute_strategic_returns(log_rets, binary_st, tickers):
+    """
+    [Tugas 2: Perhitungan Imbal Hasil Strategis]
+    Menghitung imbal hasil strategis (mu_tilde_i) sebagai jumlahan terbobot
+    dari ekspektasi bersyarat pada 16 microstates sistem 4 aset.
+    """
+    n_assets = len(tickers)
+    total_days = len(log_rets)
+    mu_tilde = np.zeros(n_assets)
+    
+    # Kelompokkan return berdasarkan binary states (microstates) dari semua aset
+    grouped = log_rets.groupby([binary_st[t] for t in tickers])
+    
+    for state, group in grouped:
+        P_s = len(group) / total_days           # Probabilitas microstate P(s)
+        R_bar_s = group[tickers].mean().values  # Ekspektasi return bersyarat R_bar_i(s)
+        mu_tilde += P_s * R_bar_s               # Jumlahan terbobot
+        
+    return mu_tilde
+\end{lstlisting}
+
+\subsection{Pencarian \textit{Nash Equilibrium}}
+
+Setelah fungsi potensial sistem diperoleh, langkah berikutnya adalah menentukan konfigurasi strategi yang memenuhi kondisi \textit{Nash Equilibrium}. Pada kerangka \textit{Exact Potential Game}, titik \textit{Nash Equilibrium} ekuivalen dengan maksimum lokal dari fungsi potensial \(\Phi(\mathbf{x})\). Oleh karena itu, pencarian kesetimbangan dapat dilakukan dengan mencari konfigurasi biner yang tidak lagi memberikan peningkatan nilai fungsi potensial ketika salah satu agen mengubah strateginya. Pada tugas akhir ini, pencarian \textit{Nash Equilibrium} dilakukan menggunakan metode \textit{Stochastic Best Response} (SBR). Algoritma ini bekerja melalui mekanisme \textit{swap move}, yaitu menukar satu aset yang sedang berada di dalam portofolio dengan satu aset yang berada di luar portofolio. Pada setiap iterasi, seluruh kandidat pertukaran dievaluasi dan dipilih perubahan yang memberikan kenaikan fungsi potensial terbesar. Proses iteratif tersebut dihentikan ketika tidak ditemukan lagi pertukaran yang mampu meningkatkan nilai fungsi potensial. Sebagai ilustrasi pada sistem dengan \(N=2\), interaksi strategis antar aset dapat direpresentasikan melalui matriks \textit{payoff} pada Tabel \ref{tab:payoff_n2}. Setiap elemen matriks menunjukkan utilitas yang diperoleh kedua agen untuk kombinasi status biner tertentu. Berdasarkan evaluasi seluruh konfigurasi yang memungkinkan, keadaan \(|10\rangle\) menghasilkan utilitas sistem tertinggi sehingga diidentifikasi sebagai titik \textit{Nash Equilibrium} pada periode observasi tersebut.
+\begin{table}[!htbp]
+    \centering
+    \caption{Matriks \textit{Payoff} Strategis Sistem N=2 (Januari 2021).}
+    \label{tab:payoff_n2}
+    \begin{tabular}{cc|c|c|}
+    \cline{3-4}
+    & & \multicolumn{2}{c|}{Aset ADRO ($x_2$)} \\ \cline{3-4}
+    & & Status 0 & Status 1 \\ \hline
+    \multicolumn{1}{|c|}{\multirow{2}{*}{Aset BBCA ($x_1$)}} & Status 0 & (0, 0) & (0, 0,1890) \\ \cline{2-4} 
+    \multicolumn{1}{|c|}{} & Status 1 & (0,3498, 0) & (0,3444, 0,1836) \\ \hline
+    \end{tabular}
+\end{table}
+
+Pada sistem dengan \(N=4\), jumlah konfigurasi yang memenuhi kendala \(k=2\) meningkat secara signifikan sehingga evaluasi seluruh kemungkinan strategi menjadi lebih kompleks. Oleh karena itu, pencarian kesetimbangan harus dilakukan menggunakan prosedur SBR yang menelusuri ruang solusi melalui serangkaian pertukaran aset sampai pada titik konfigurasi yang tidak mengalami peningkatan fungsi potensial lagi. Riwayat iterasi dan konfigurasi yang dihasilkan pada setiap periode pengamatan disajikan pada Lampiran \ref{appendix:numerical_data_n4}. Konfigurasi \textit{Nash Equilibrium} yang diperoleh memiliki peran penting dalam penelitian ini karena digunakan sebagai titik inisialisasi bagi algoritma \textit{Variational Quantum Eigensolver} (VQE). Pemanfaatan solusi hasil teori permainan sebagai tebakan awal memungkinkan proses optimasi kuantum dimulai dari wilayah solusi yang telah memiliki kualitas utilitas tinggi sehingga mempercepat konvergensi menuju keadaan energi minimum.
+
+Implementasi pencarian \textit{Nash Equilibrium} dilakukan menggunakan Python melalui algoritma \textit{Stochastic Best Response}. Fungsi yang dikembangkan menerima masukan berupa vektor ekspektasi imbal hasil, matriks kovariansi, dan parameter \textit{risk aversion}, kemudian mengevaluasi fungsi potensial untuk setiap kandidat pertukaran aset yang memenuhi kendala portofolio. Selama masih terdapat pertukaran yang meningkatkan fungsi potensial, konfigurasi portofolio akan diperbarui secara iteratif hingga tercapai kondisi konvergen. Selain menghasilkan konfigurasi kesetimbangan akhir, algoritma juga merekam seluruh riwayat iterasi sehingga proses konvergensi dapat dianalisis lebih lanjut. Implementasi lengkap prosedur tersebut ditunjukkan pada Daftar Kode \ref{lst:find_nash_sbr}.
+
+\begin{lstlisting}[language=Python, caption={Skrip implementasi \textit{Stochastic Best Response} untuk pencarian konvergensi \textit{Nash Equilibrium}}, label={lst:find_nash_sbr}]
+import numpy as np
+import pandas as pd
+import os
+
+def find_nash_sbr(mu, sigma_matrix, gamma, curr_date, N=4, K=2, max_iters=100, history_file='riwayat_nash_sbr.csv'):
+    """
+    Pencarian Nash Equilibrium menggunakan Sequential Best Response (SBR)
+    dalam Exact Potential Game.
+    
+    Potensial (Utilitas Portofolio):
+    Phi = (1/K) * mu^T * x - (gamma / (2 * K^2)) * x^T * sigma * x
+    
+    Dalam Potential Game, Nash Equilibrium adalah local maximum dari fungsi potensial.
+    Karena ada batasan sum(x) = K, kita menggunakan swap moves untuk mencari NE.
+    """
+    # Inisialisasi: pilih K aset pertama
+    current_selection = set(range(K))
+    history = []
+    
+    def calculate_potential(selection):
+        x = np.zeros(N)
+        for idx in selection: x[idx] = 1
+        
+        # 1. Komponen Return: (1/K) * sum(mu_i * x_i)
+        ret = np.sum(mu[list(selection)]) / K
+        
+        # 2. Komponen Risiko: (gamma / (2 * K^2)) * sum(sigma_ij * x_i * x_j)
+        # x^T * Sigma * x untuk subset selection
+        if len(selection) > 0:
+            sub_sigma = sigma_matrix[np.ix_(list(selection), list(selection))]
+            risk = np.sum(sub_sigma) * (gamma / (2.0 * K**2))
+        else:
+            risk = 0.0
+            
+        return ret - risk
+
+    current_phi = calculate_potential(current_selection)
+    
+    history.append({
+        'Date': curr_date.date(),
+        'Iteration': 0,
+        'Bitstring': "".join(str(int(i in current_selection)) for i in range(N)),
+        'Utility': current_phi,
+        'Swap': 'Initial'
+    })
+    
+    for iteration in range(1, max_iters + 1):
+        improved = False
+        out_portfolio = set(range(N)) - current_selection
+        
+        best_swap = None
+        max_phi = current_phi
+        
+        # SBR/Local Search: Coba tukar satu aset di dalam dengan satu aset di luar
+        # Mencari swap yang meningkatkan fungsi potensial paling besar
+        for i in current_selection:
+            for j in out_portfolio:
+                new_selection = (current_selection - {i}) | {j}
+                new_phi = calculate_potential(new_selection)
+                
+                if new_phi > max_phi:
+                    max_phi = new_phi
+                    best_swap = (i, j)
+        
+        if best_swap:
+            i, j = best_swap
+            current_selection = (current_selection - {i}) | {j}
+            current_phi = max_phi
+            improved = True
+            history.append({
+                'Date': curr_date.date(),
+                'Iteration': iteration,
+                'Bitstring': "".join(str(int(idx in current_selection)) for idx in range(N)),
+                'Utility': current_phi,
+                'Swap': f"{i}<->{j}"
+            })
+        
+        if not improved:
+            break
+            
+    # --- EKSPOR RIWAYAT NASH SBR ---
+    df_history = pd.DataFrame(history)
+    if not os.path.exists(history_file):
+        df_history.to_csv(history_file, index=False)
+    else:
+        df_history.to_csv(history_file, mode='a', header=False, index=False)
+
+    final_x = np.zeros(N, dtype=int)
+    for idx in current_selection: final_x[idx] = 1
+    # Kembalikan bitstring dan utilitas akhir (sebagai potensial)
+    return "".join(str(bit) for bit in final_x), current_phi
+\end{lstlisting}

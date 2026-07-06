@@ -1,0 +1,193 @@
+\begin{equation}
+    |\psi\rangle_{AB} = |\psi\rangle_A \otimes |\psi\rangle_B
+\end{equation}
+$|\psi\rangle_{AB}$ : Keadaan produk (\textit{separable}).
+Untuk keadaan produk;
+\begin{equation}
+    \begin{split}
+    |\psi \rangle _A &= \frac{1}{\sqrt{2}} (|0\rangle_A + |1\rangle_A) \\
+    &= \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix}
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+    |\psi \rangle _B &= \frac{1}{\sqrt{2}} (|0\rangle_B + |1\rangle_B) \\
+    &= \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix}
+    \end{split}
+\end{equation}
+maka keadaan produk adalah
+\begin{equation}
+    \begin{split}
+    |\Psi\rangle_{AB} &= |\psi\rangle_A \otimes |\psi\rangle_B \\
+    &= \frac{1}{2} (|00\rangle + |01\rangle + |10\rangle + |11\rangle) \\
+    &= \frac{1}{2} \begin{pmatrix} 1 \\ 1 \end{pmatrix} \otimes \begin{pmatrix} 1 \\ 1 \end{pmatrix} \\
+    &= \frac{1}{2} \begin{pmatrix} 1 \\ 1 \\ 1 \\ 1 \end{pmatrix}
+    \end{split}
+\end{equation}
+
+sedangkan untuk keadaan terbelit (bell);
+\begin{equation}
+    |\Psi\rangle_{AB} \ne |\phi\rangle_A \otimes |\phi\rangle_B
+\end{equation}
+$|\Psi\rangle_{AB}$ : Keadaan terbelit (\textit{entangled}).
+
+di mana
+\begin{equation}
+    \begin{split}
+    |\phi\rangle_A &= \frac{1}{\sqrt{2}} (|0\rangle_A + |1\rangle_A) \\
+    &= \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix}
+    \end{split}
+\end{equation}
+\begin{equation}
+    \begin{split}
+    |\phi\rangle_B &= \frac{1}{\sqrt{2}} (|0\rangle_B + |1\rangle_B) \\
+    &= \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix}
+    \end{split}
+\end{equation}
+maka
+\begin{equation}
+    \begin{split}
+    |\Phi^+\rangle &= \frac{1}{\sqrt{2}} \left( |00\rangle + |11\rangle \right) \\
+    &= \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \end{pmatrix}
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \rho = \sum_i p_i |\psi_i\rangle \langle \psi_i |
+\end{equation}
+$\rho$ : Matriks densitas.
+
+\begin{equation}
+    \begin{split}
+    \rho_{AB} &= |\psi\rangle_{AB} \langle \psi|_{AB} \\
+    &= \frac{1}{2} \begin{pmatrix} 1 \\ 1 \end{pmatrix} \frac{1}{2} \begin{pmatrix} 1 & 1 \end{pmatrix} \\
+    &= \frac{1}{4} \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \rho_A = \text{Tr}_B(\rho_{AB})
+\end{equation}
+$\text{Tr}_B$ : \textit{Partial trace} terhadap subsistem B.
+
+\begin{equation}
+    \begin{split}
+    \rho_{AB} &= \begin{pmatrix} \rho_{11} & \rho_{12} \\ \rho_{21} & \rho_{22} \end{pmatrix} \\ 
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \rho_{AB} = \begin{pmatrix} \rho_{00:00} & \rho_{00:01} & \rho_{00:10} & \rho_{00:11} \\ \rho_{01:00} & \rho_{01:01} & \rho_{01:10} & \rho_{01:11} \\ \rho_{10:00} & \rho_{10:01} & \rho_{10:10} & \rho_{10:11} \\ \rho_{11:00} & \rho_{11:01} & \rho_{11:10} & \rho_{11:11} \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    \rho_A = \rho_{11} + \rho_{22}
+\end{equation}
+
+\begin{equation}
+    \rho_A = \begin{pmatrix} \rho_{00:00} + \rho_{10:01} & \rho_{00:01} + \rho_{10:11} \\ \rho_{01:00} + \rho_{11:10} & \rho_{01:01} + \rho_{11:11} \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+    \text{Tr}_B(\rho_{AB}) &= \sum_{i,j} \left(\sum_{k} C_{i,j,k,l} \right) |i \rangle _A \langle j |_A \\
+    \end{split}
+\end{equation}
+untuk keadaan produk $|\Psi\rangle_{AB} = \frac{1}{2}|00\rangle + \frac{1}{2}|01\rangle + \frac{1}{2}|10\rangle + \frac{1}{2}|11\rangle$ 
+
+\begin{equation}
+    \rho_{AB} = \frac{1}{4} \begin{pmatrix} 1 & 1 & 1 & 1 \\ 1 & 1 & 1 & 1 \\ 1 & 1 & 1 & 1 \\ 1 & 1 & 1 & 1 \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+    \rho_{A} &= \begin{pmatrix} \frac{1}{4} + \frac{1}{4} & \frac{1}{4} + \frac{1}{4} \\ \frac{1}{4} + \frac{1}{4} & \frac{1}{4} + \frac{1}{4} \end{pmatrix} \\
+    &= \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix}
+    \end{split}
+\end{equation}
+
+untuk keadaan bell $|\Phi^+\rangle = \frac{1}{\sqrt{2}} (|00\rangle + |11\rangle)$
+\begin{equation}
+    \rho_{AB} = \frac{1}{2} \begin{pmatrix} 1 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 1 & 0 & 0 & 1 \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+    \rho_{A} &= \begin{pmatrix} \frac{1}{2} + 0 & 0 + 0 \\ 0 + 0 & \frac{1}{2} + 0 \end{pmatrix} \\
+    &= \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & \frac{1}{2} \end{pmatrix}
+    \end{split}
+\end{equation}
+
+ENTROPI SHANNON
+\begin{equation}
+    H(P) = -\sum_i p_i \log_2 p_i
+\end{equation}
+
+\begin{equation}
+    S(\rho) = -\text{Tr}(\rho \ln \rho)
+\end{equation}
+$S(\rho)$ : Entropi Von Neumann.
+
+Dekomposisi Spektral
+\begin{equation}
+    \rho = U \Lambda U^\dagger
+\end{equation}
+$\Lambda$ : matriks diagonal real. dengan bentuk $\Lambda = diag(\lambda_1, \lambda_2, ..., \lambda_n)$.
+
+reduksi
+\begin{equation}
+    \log_2(\rho) = U \log_2(\Lambda) U^\dagger
+\end{equation}
+\begin{equation}
+    \log_2(\Lambda) = diag(\log_2(\lambda_1), \log_2(\lambda_2), ..., \log_2(\lambda_n))
+\end{equation}
+
+substitusi
+\begin{equation}
+    \begin{split}
+    S(\rho) &= -\text{Tr}\left[\rho \log_2(\rho)\right] \\
+    &= -\text{Tr}\left[ U \Lambda U^\dagger U \log_2(\Lambda) U^\dagger \right] \\
+    &= -\text{Tr}\left[ U \Lambda \log_2(\Lambda) U^\dagger \right] \\
+    &= -\text{Tr}\left[ \Lambda \log_2(\Lambda) \right] \\
+    &= -\text{Tr}\left[ diag(\lambda_1, \lambda_2, ..., \lambda_n) diag(\log_2(\lambda_1), \log_2(\lambda_2), ..., \log_2(\lambda_n)) \right] \\
+    &= -\text{Tr}\left[ diag(\lambda_1 \log_2(\lambda_1), \lambda_2 \log_2(\lambda_2), ..., \lambda_n \log_2(\lambda_n)) \right] \\
+    &= -\sum_i \lambda_i \log_2(\lambda_i)
+    \end{split}
+\end{equation}
+
+evaluasi numerik untuk keadaan produk:
+
+\begin{equation}
+    \rho_A = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    \lambda = \{1, 0\}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+    S(\rho_A) &= -(1 \log_2(1) + 0 \log_2(0)) \\
+    &= 0
+    \end{split}
+\end{equation}
+
+
+evaluasi numerik untuk keadaan bell:
+
+\begin{equation}
+    \rho_A = \begin{pmatrix} 1/2 & 0 \\ 0 & 1/2 \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    \lambda = \{1/2, 1/2\}
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+    S(\rho_A) &= -(1/2 \log_2(1/2) + 1/2 \log_2(1/2)) \\
+    &= -\left( -1/2 - 1/2 \right) \\
+    &= 1
+    \end{split}
+\end{equation}

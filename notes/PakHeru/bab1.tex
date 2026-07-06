@@ -1,0 +1,14 @@
+\hypertarget{pendahuluan-risk-return-trade-off}{%
+\section{Pendahuluan: Risk-Return Trade-off}\label{pendahuluan-risk-return-trade-off}}
+
+Dalam teori portofolio finansial, model objektif keseimbangan risiko (\emph{risk}) dan rasio keuntungan (\emph{return}) difokuskan pada dekomposisi struktur kuantitatif Hamiltonian: \(H_{final} = H_{pure} + H_{pen}\). Dengan tujuan meminimalkan hamiltonian, sistem ditugaskan
+\begin{itemize}
+    \item meminimalkan metrik risiko agregat (\(\min x^T \Sigma x\))
+    \item mensintesis maksimisasi \emph{return} (\(\max \mu^T x \implies \min -\lambda \mu^T x\))
+    \item dan memenuhi batasan ukuran kardinalitas alokasi (penalti).
+\end{itemize}
+Model Markowitz \hyperref[appendix-a]{(lihat Appendix A)} untuk matriks keputusan biner observasional (\(x_i \in \{0, 1\}\)) diformulasikan menjadi derivasi analitik murni:
+\[ \min_{x \in \{0,1\}^N} \mathcal{L}(x) = \underbrace{x^T \Sigma x - \lambda \mu^T x}_{\text{Objektif Murni}} + \underbrace{A \left(\sum_{i=1}^N x_i - K \right)^2}_{\text{Penalti Batasan}} \qquad (1) \]
+Dimana \(\Sigma\) adalah matriks kovarians, \(\mu\) adalah ekspektasi \emph{return}, \(\lambda\) parameter toleransi risiko, \(K\) limit aset, dan \(A\) Lagrange multiplier untuk penalti ekuivalen.
+
+

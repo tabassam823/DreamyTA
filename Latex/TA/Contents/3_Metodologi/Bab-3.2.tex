@@ -1,0 +1,20 @@
+\section{Akuisisi dan Pra-pemrosesan Data}
+Prosedur akuisisi data finansial dirancang untuk memperoleh representasi harga penutupan aset secara historis yang kemudian dikonversi menjadi variabel yang dibutuhkan untuk membentuk model Hamiltonian. Parameter penghindaran risiko atau \textit{risk aversion} diekstraksi secara otomatis menggunakan skor-Z agregat, yang mencerminkan tingkat volatilitas serta ekspektasi keuntungan pasar pada jendela observasi tertentu. Rangkaian prosedur pra-pemrosesan data beserta ekstraksi metrik statistika tersebut dideskripsikan ke dalam Algoritma \ref{alg:data_prep} untuk memudahkan pembacaan kode. Algoritma ini menerima input berupa daftar simbol aset serta batasan periode waktu untuk menghasilkan matriks kovariansi, vektor imbal hasil, dan nilai penghindaran risiko. Modul pembersihan data terintegrasi di dalam prosedur algoritma untuk menghilangkan nilai kosong atau anomali yang berpotensi merusak integritas matriks kovariansi dan operator kuantum. Penggunaan formula sigmoid pada perhitungan variabel penghindaran risiko memberikan batas atas dan batas bawah yang terukur sehingga koefisien pinalti tidak mendominasi fungsi objektif utama. Konfigurasi numerik yang dihasilkan oleh algoritma awal ini langsung didistribusikan ke dalam modul konstruksi Hamiltonian untuk dipetakan menjadi arsitektur sirkuit kuantum yang setara.
+
+\begin{algorithm}[ht]
+\caption{Akuisisi dan Pra-pemrosesan Data Finansial}
+\label{alg:data_prep}
+\begin{algorithmic}[1]
+\Procedure{DataPreprocessing}{tickers, $t_{start}, t_{end}, K$}
+    \State $\mathbf{P} \gets \text{DownloadClosingPrice}(tickers, t_{start}, t_{end})$
+    \State $\mathbf{P}_{clean} \gets \text{DropNaN}(\mathbf{P})$
+    \State $r_{log} \gets \ln(\mathbf{P}_{t} / \mathbf{P}_{t-1})$
+    \State $\bar{\mu} \gets \text{Mean}(|r_{log}|)$
+    \State $\bar{\sigma} \gets \text{Mean}(\text{Variance}(r_{log}))$
+    \State $Z \gets \bar{\mu} / \bar{\sigma}$ \Comment{Skor-Z Agregat}
+    \State $\gamma \gets 1 / (1 + \exp(Z))$ \Comment{Risk Aversion Endogen}
+    \State $\mu_{log}, \Sigma \gets \text{CalculateStats}(r_{log})$
+    \State \Return $\mu_{log}, \Sigma, \gamma$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

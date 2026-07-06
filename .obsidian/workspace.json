@@ -1,0 +1,329 @@
+{
+  "main": {
+    "id": "398f127e6b1e3900",
+    "type": "split",
+    "children": [
+      {
+        "id": "0c11afe2a2670673",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "146806a6d3869904",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Latex/TA/MD_File/Main/1_QF_ii.png"
+              },
+              "icon": "lucide-image",
+              "title": "1_QF_ii"
+            }
+          },
+          {
+            "id": "e0a45905d983dc7d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/MD_File/Main/12_QGate.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "12_QGate"
+            }
+          },
+          {
+            "id": "949d40db2375c8ac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/Filtered_Paper/VQE/QUBO_PortofolioOpt.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "QUBO_PortofolioOpt"
+            }
+          },
+          {
+            "id": "4dbd95d6f63cbb49",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/Contents/Big_revision.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Big_revision"
+            }
+          },
+          {
+            "id": "3290ad802445ba98",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/Filtered_Paper/Quantum_Circuit/Parameterized_quantum_circuits_as_machine.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Parameterized_quantum_circuits_as_machine"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4ba537aa042ef2fc",
+    "type": "split",
+    "children": [
+      {
+        "id": "c40d213367596153",
+        "type": "tabs",
+        "dimension": 71.13997113997114,
+        "children": [
+          {
+            "id": "1e33936fe2683637",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "38d750c91b0c3cd4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "haijing wei",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ff1a5bbf9ca24e95",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "c38e9d58e7528e8a",
+        "type": "tabs",
+        "dimension": 28.860028860028862,
+        "children": [
+          {
+            "id": "9e5bcccc9ae69aaf",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Latex/TA/Filtered_Paper/VQE/QUBO_PortofolioOpt.md",
+                "followCursor": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of QUBO_PortofolioOpt"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 232.5
+  },
+  "right": {
+    "id": "2be21e54251959f5",
+    "type": "split",
+    "children": [
+      {
+        "id": "9f1085aa09918c44",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f4c016249b3139c2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Temporary.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Temporary"
+            }
+          },
+          {
+            "id": "418c9b37a14becc8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Latex/TA/MD_File/QMI.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from QMI"
+            }
+          },
+          {
+            "id": "b2a9353aae5b5d5c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "c816a6e5cfd12495",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "9a96fc51d30b74ee",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "notes/deep_learning_bsde.pdf",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of deep_learning_bsde"
+            }
+          },
+          {
+            "id": "3866c047beb62ade",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "paper/Deep_Learning-Based_BSDE_Solver_for_Libor.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Deep_Learning-Based_BSDE_Solver_for_Libor"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "marp-slides:Show Slide Preview": false
+    }
+  },
+  "active": "949d40db2375c8ac",
+  "lastOpenFiles": [
+    "Latex/TA/PPT/qmdfile/main_files/mediabag",
+    "Latex/TA/PPT/Gambar/Shannon_Foto.png",
+    "Latex/TA/PPT/Gambar/Pasted image.png",
+    "Latex/TA/PPT/Gambar/VonNeumann_Foto.png",
+    "Latex/TA/PPT/Gambar/Morgenstern_Foto.png",
+    "Latex/TA/PPT/Gambar/GT_pct.png",
+    "Latex/TA/PPT/Gambar/barren_plateau.png",
+    "Latex/TA/PPT/Gambar/wang_pct.png",
+    "Latex/TA/PPT/Gambar/wei_pct.png",
+    "Latex/TA/Filtered_Paper/VQE/EfficientSU2_SPSA.md",
+    "Latex/TA/Filtered_Paper/VQE/VQE_with_linear_depth_problem_inspired_ansatz_for_solving_portfolio_optimization_in_finance.md",
+    "Latex/TA/PPT/Rencana_Urutan_Presentasi.md",
+    "Latex/TA/PPT/qmdfile/main_files/libs/revealjs/dist/theme/quarto-03cc377db2a9599f66446c4910079c00.css",
+    "Latex/TA/PPT/qmdfile/logo/LogoBrin1.png",
+    "Latex/TA/PPT/qmdfile/logo/LogoBrin2.png",
+    "Latex/TA/PPT/qmdfile/Fase_temp.qmd",
+    "Latex/TA/PPT/qmdfile/Fase_8.qmd",
+    "Latex/TA/PPT/qmdfile/Fase_9.qmd",
+    "Latex/TA/PPT/qmdfile/Fase_0.qmd",
+    "Latex/TA/Images/img_reference.md",
+    "Latex/TA/PPT/qmdfile/main_files/libs/revealjs/dist/theme/quarto-d42dc654213f423e8950b9516ad1b73a.css",
+    "Latex/TA/PPT/qmdfile/logo",
+    "Latex/TA/PPT/qmdfile/template/header.html",
+    "Latex/TA/PPT/qmdfile/template/custom.scss",
+    "Latex/TA/PPT/qmdfile/Format/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
+    "Latex/TA/PPT/qmdfile/Presentasi/output/slides_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
+    "Latex/TA/PPT/qmdfile/main_files/libs/revealjs/plugin/reveal-chalkboard/README.md",
+    "Latex/TA/PPT/list_revisi_7jun.md",
+    "Latex/TA/Filtered_Paper/Mutual_Information/Shannon_A_Mathematical_Theory_of_Communication.md",
+    "Latex/TA/MD_File/Main/9_Entropi.md",
+    "Latex/TA/MD_File/Main/12_QGate.md",
+    "Latex/TA/MD_File/Main/3_Markowitz.md",
+    "Temporary.md",
+    "Latex/TA/Contents/Big_revision.md",
+    "Latex/TA/MD_File/jenis_ansatz.md",
+    "Latex/TA/MD_File/QMI.md",
+    "Latex/TA/MD_File/Main/10_BellDickeState.md",
+    "Latex/TA/MD_File/Main/5_QUBO_rev.md",
+    "Latex/TA/MD_File/Main/6_Gradient_Descent.md",
+    "Latex/TA/MD_File/Main/7_SPSA.md",
+    "Latex/TA/MD_File/Main/5_QUBO.md",
+    "Latex/TA/Filtered_Paper/behavioral_new_keynesian_model.md",
+    "Latex/TA/Filtered_Paper/Quantum_Circuit/Parameterized_quantum_circuits_as_machine.md",
+    "Latex/TA/Filtered_Paper/Learning_in_Large-Scale_Games_and_Cooperative_Cont.md",
+    "Latex/TA/Filtered_Paper/Portfolio_Optimization_with_a_Mean_Entropy_Mutual_Information_Model.md",
+    "Untitled.canvas",
+    "Untitled 1.canvas",
+    "paper/Relation.canvas"
+  ]
+}

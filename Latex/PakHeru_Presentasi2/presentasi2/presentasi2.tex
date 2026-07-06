@@ -1,0 +1,188 @@
+\documentclass{beamer}
+
+% Theme selection
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+% Title information
+\title[Quantum Bayesian Game Framework]{Deep Dive: Dari Classical Bayesian Game ke Quantum EWL Framework}
+\subtitle{Transisi Teoritis dan Arsitektur Sistem}
+\author{DreamyTA Team}
+\date{\today}
+
+\begin{document}
+
+% Slide 1: Title
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 2: Daftar Isi
+\begin{frame}{Daftar Isi}
+    \tableofcontents
+\end{frame}
+
+
+
+\section{Landasan Teori: Classical Bayesian Game Theory}
+
+% Slide 4: Konsep Dasar
+\begin{frame}{Landasan Teori: Classical Bayesian Game Theory}
+    \begin{block}{Definisi dan Konsep Dasar}
+        \begin{itemize}
+            \item \textbf{Masalah:} Di pasar nyata, investor tidak memiliki informasi sempurna (\textit{incomplete information}).
+            \item \textbf{Bayesian Game:} Menangani situasi di mana pemain tidak mengetahui "tipe" dari lawan ("Nature").
+            \item \textbf{Komponen:}
+            \begin{itemize}
+                \item \textbf{Pemain:} Investor/Algoritma Portofolio.
+                \item \textbf{Nature:} Pasar Saham.
+                \item \textbf{Tipe:} Kondisi Pasar (Bullish/Bearish).
+                \item \textbf{Prior Belief:} Probabilitas tipe pasar (misal: 60\% Bull).
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide 5: Transformasi Harsanyi
+\begin{frame}{Transformasi Harsanyi}
+    Mengubah permainan informasi tidak lengkap menjadi permainan informasi tidak sempurna namun lengkap.
+    
+    \begin{enumerate}
+        \item \textbf{Nature Move:} Alam memilih tipe pasar (Bull/Bear) sesuai probabilitas.
+        \item \textbf{Player Move:} Investor memilih strategi alokasi aset.
+        \item \textbf{Payoff:} Bergantung pada strategi dan tipe pasar.
+    \end{enumerate}
+
+    \vspace{0.5cm}
+    \textbf{Ekspektasi Payoff:}
+    $$ \mathbb{E}[\text{Payoff}] = \sum_{t \in \text{Types}} P(t) \cdot u(\text{Strategi}, t) $$
+\end{frame}
+
+\section{Landasan Teori: Skema EWL}
+
+% Slide 6: Mengapa Perlu Kuantum?
+\begin{frame}{Landasan Teori: Skema EWL}
+    \begin{itemize}
+        \item \textbf{Superposisi:} Strategi bukan biner, tapi kombinasi linier basis strategi.
+        \item \textbf{Entanglement:} Korelasi non-lokal antar aset yang lebih kuat dari korelasi klasik.
+        \item \textbf{Interferensi:} Memungkinkan solusi Pareto Optimal yang tidak terjangkau secara klasik.
+    \end{itemize}
+\end{frame}
+
+% Slide 7: Protokol Standar EWL
+\begin{frame}{Protokol Standar EWL}
+    Dipetakan ke dalam 3 tahap sirkuit kuantum:
+    
+    \begin{enumerate}
+        \item \textbf{Entangling Operator ($\hat{J}$):}
+        $$ |\psi_{ent}\rangle = \hat{J} |00\dots0\rangle $$
+        Biasanya $\hat{J} = \exp(i \frac{\gamma}{2} \sigma_x^{\otimes n}) $$ untuk korelasi maksimal.
+        
+        \item \textbf{Strategy Operator ($\hat{U}$):}
+        Rotasi parameter ($\theta, \phi$) merepresentasikan bobot alokasi.
+        $$ |\psi_{strat}\rangle = (\hat{U}_1 \otimes \hat{U}_2 \otimes \dots) |\psi_{ent}\rangle $$
+        
+        \item \textbf{Disentangling Operator ($\hat{J}^\dagger$):}
+        $$ |\psi_{fin}\rangle = \hat{J}^\dagger |\psi_{strat}\rangle $$
+    \end{enumerate}
+\end{frame}
+
+\section{Formulasi Matematis \& Hamiltonian}
+
+% Slide 8: Fungsi Objektif (Markowitz)
+\begin{frame}{1. Fungsi Objektif: Model Markowitz}
+    Tujuan utama adalah meminimalkan risiko (varians) sekaligus memaksimalkan return.
+    
+    \begin{block}{Persamaan Dasar}
+    $$ \text{Minimize } \quad C(x) = w \sum_{i,j} \sigma_{ij} x_i x_j - (1-w) \sum_i \mu_i x_i $$
+    \end{block}
+    
+    \begin{itemize}
+        \item $x_i \in \{0, 1\}$: Variabel keputusan biner (Aset dipilih/tidak).
+        \item $\sigma_{ij}$: Kovarians antar aset $i$ dan $j$ (Risiko).
+        \item $\mu_i$: Ekspektasi return aset $i$.
+        \item $w$: Parameter penghindaran risiko (Risk Aversion, $0 \le w \le 1$).
+    \end{itemize}
+\end{frame}
+
+% Slide 9: Constraints & Penalty
+\begin{frame}{2. Kendala \& Penalti (Penalty Term)}
+    VQE meminimalkan Hamiltonian tanpa kendala, sehingga kendala harus diubah menjadi "Soft Constraint" berupa penalti energi.
+    
+    \begin{block}{Kendala Kardinalitas}
+    Kita ingin memilih tepat $B$ aset:
+    $$ \sum_{i=1}^N x_i = B $$
+    \end{block}
+    
+    \begin{alertblock}{Penalty Term}
+    $$ P \left( \sum_{i=1}^N x_i - B \right)^2 $$
+    Dimana $P$ adalah koefisien penalti yang besar.
+    \end{alertblock}
+\end{frame}
+
+% Slide 10: Mapping ke Ising Hamiltonian
+\begin{frame}{3. Mapping ke Ising Hamiltonian}
+    Komputer kuantum bekerja dengan qubit (spin), bukan bit biner $0/1$.
+    
+    \textbf{Transformasi Variabel:}
+    $$ x_i = \frac{1 - Z_i}{2} \quad \text{dimana } Z_i \in \{1, -1\} $$
+    
+    \vspace{0.3cm}
+    \textbf{Hamiltonian Akhir (QUBO to Ising):}
+    Substitusi $x_i$ ke dalam fungsi biaya menghasilkan operator Pauli-Z:
+    \begin{equation*}
+        H = \underbrace{\sum_i h_i Z_i}_{\text{Field Eksternal}} + \underbrace{\sum_{i<j} J_{ij} Z_i Z_j}_{\text{Interaksi (Coupling)}} + C
+    \end{equation*}
+    Inilah Hamiltonian yang akan dicari Ground State-nya oleh sirkuit EWL.
+\end{frame}
+
+\section{Arsitektur Sistem (Fase 1 \& 2)}
+
+% Slide 11: Arsitektur Sistem Revised
+\begin{frame}{Arsitektur Sistem: Input \& Pembentukan Model}
+    \begin{center}
+        \textbf{Fokus: Konstruksi Model Teoritis}
+    \end{center}
+    
+    \begin{block}{Fase 1: Input \& Teori Dasar}
+        \begin{itemize}
+            \item \textbf{Data Historis} $\xrightarrow{\text{Statistik}}$ Risk ($\sigma_{ij}$) \& Return ($\mu_i$)
+            \item \textbf{Game Theory} $\xrightarrow{\text{Incomplete Info}}$ Bayesian Game
+            \item \textbf{Quantum Mechanics} $\xrightarrow{\text{Superposition}}$ EWL Scheme
+        \end{itemize}
+    \end{block}
+    
+    \begin{block}{Fase 2: Pembentukan Hamiltonian}
+        \begin{itemize}
+            \item \textbf{Langkah 1:} Tentukan Matriks Payoff (Basis Markowitz).
+            \item \textbf{Langkah 2:} Terapkan Penalti $P(\sum x - B)^2$.
+            \item \textbf{Langkah 3:} Transformasi Biner ke Spin ($x \to Z$).
+            \item \textbf{Output:} \textbf{Bayesian Weighted Hamiltonian} ($H_{total}$).
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\section{Kesimpulan}
+
+% Slide 12: Kesimpulan
+\begin{frame}{Kesimpulan Formulasi}
+    \begin{enumerate}
+        \item \textbf{Integrasi Hibrida:} 
+        Kita berhasil memetakan masalah optimasi portofolio klasik (Markowitz) ke dalam domain fisika kuantum (Ising Model).
+        
+        \item \textbf{Peran Game Theory:}
+        Fungsi bobot ($w$) dan parameter penalti ($P$) dapat diadaptasi secara dinamis berdasarkan outcome dari Bayesian Game (Kondisi Pasar).
+        
+        \item \textbf{Siap untuk Eksekusi:}
+        Hamiltonian $H$ yang telah dikonstruksi siap menjadi input bagi algoritma VQE, dimana sirkuit EWL akan bertindak sebagai \textit{Ansatz} pencari solusi.
+    \end{enumerate}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,318 @@
+\section{Akuisisi dan Prapemrosesan Data Runtun Waktu Saham}
+\label{sec:4_1_akuisisi_data}
+
+Proses akuisisi data difokuskan pada saham-saham unggulan yang termasuk dalam indeks IHSG dan disusun ke dalam dua konfigurasi sistem. Konfigurasi pertama terdiri atas dua aset ($N=2$), yaitu BBCA dan TLKM, sedangkan konfigurasi kedua terdiri atas empat aset ($N=4$), yaitu BBCA, ADRO, SMGR, dan TLKM. Pemilihan aset dilakukan berdasarkan prinsip diversifikasi lintas sektor perusahaan yang mencakup sektor perbankan, energi, industri dasar, dan telekomunikasi. Diversifikasi ini bertujuan untuk menghasilkan portofolio dengan karakteristik pertumbuhan dan tingkat risiko yang beragam sehingga dapat mengurangi ketergantungan terhadap kinerja satu aset tertentu. Data yang digunakan berupa harga penutupan harian pada periode Januari 2021 hingga Desember 2023. Rentang waktu tersebut dipilih untuk merepresentasikan dinamika pasar modal Indonesia pada fase pemulihan pasca-pandemi. Seluruh data harga historis yang digunakan sebagai masukan utama algoritma optimasi disajikan secara lengkap pada Lampiran \ref{appendix:daily_prices}.
+
+Secara komputasional, data historis diperoleh melalui \textit{Application Programming Interface} (API) Yahoo Finance menggunakan pustaka \textit{yfinance} pada bahasa pemrograman Python. Pengunduhan data dilakukan secara otomatis untuk memperoleh harga penutupan harian setiap saham serta indeks pembanding secara konsisten. Setelah proses ekstraksi selesai, data dibersihkan dari nilai kosong (\textit{missing values}) dan diurutkan berdasarkan indeks waktu guna menjaga konsistensi \textit{time series} sebelum digunakan pada tahap analisis berikutnya. Implementasi proses pengambilan dan pembersihan data tersebut disajikan pada Daftar Kode \ref{lst:data_downloader}.
+
+\begin{lstlisting}[language=Python, caption={Skrip ekstraksi data harga historis saham menggunakan API \textit{yfinance}}, label={lst:data_downloader}]
+import yfinance as yf
+import pandas as pd
+
+def download_market_data(tickers, benchmark_ticker, start_date, end_date, start_bt_date):
+    """
+    Mengunduh data saham dan benchmark, melakukan pembersihan dasar,
+    dan mengekspor data harga harian.
+    """
+    print("Mengunduh data saham...")
+    data = yf.download(tickers, start=start_date, end=end_date, progress=False)['Close']
+    data = data.dropna()
+    data_clean = data.sort_index()
+
+    print(f"Mengunduh data indeks pembanding ({benchmark_ticker})...")
+    # Mengunduh benchmark mulai dari tanggal backtest agar rets bisa dihitung dengan benar
+    benchmark_data = yf.download(benchmark_ticker, start=start_bt_date, end=end_date, progress=False)['Close']
+    benchmark_data = benchmark_data.dropna()
+    benchmark_rets = benchmark_data.pct_change().dropna()
+
+    print(f"Data Berhasil Diunduh. Total hari observasi: {len(data_clean)}")
+    
+    return data_clean, benchmark_data, benchmark_rets
+\end{lstlisting}
+
+\subsection{Imbal Hasil dan Kovariansi}
+\label{subsec:4_1_1_rumus}
+
+Tahap prapemrosesan diawali dengan mentransformasikan data harga saham menjadi data imbal hasil sederhana (\textit{simple return}) dan imbal hasil logaritmik (\textit{log return}). Imbal hasil sederhana harian untuk aset ke-$i$ pada waktu $t$ didefinisikan sebagai rasio perubahan harga terhadap harga pada periode sebelumnya, sedangkan imbal hasil logaritmik diperoleh melalui logaritma natural dari rasio harga berturut-turut. Berdasarkan kedua bentuk imbal hasil tersebut, selanjutnya dihitung nilai ekspektasi imbal hasil ($\mu_i$), varians ($\sigma_i^2$), dan kovariansi antar aset sebagai parameter utama dalam model optimasi portofolio. Nilai ekspektasi imbal hasil diperoleh melalui rata-rata data historis pada setiap jendela pelatihan yang terdiri atas $n=126$ hari perdagangan. Sementara itu, ukuran risiko dihitung menggunakan varians karena menunjukkan tingkat penyebaran imbal hasil terhadap nilai rata-ratanya. Semakin besar nilai varians, semakin tinggi tingkat ketidakpastian pergerakan harga aset tersebut. Selain risiko individual, hubungan antar aset juga dievaluasi melalui kovariansi. Kovariansi bernilai positif menunjukkan kecenderungan dua aset bergerak searah, sedangkan kovariansi bernilai negatif menunjukkan kecenderungan pergerakan yang berlawanan.
+
+Dalam tugas akhir ini, \textit{simple return} digunakan untuk menghitung ekspektasi imbal hasil portofolio karena memiliki sifat linear terhadap bobot aset. Sebaliknya, penggunaan \textit{log return} untuk menghitung ekspektasi imbal hasil portofolio dapat menghasilkan bias akibat sifat nonlinier fungsi logaritma. Bias tersebut dapat dianalisis melalui aproksimasi deret Taylor orde kedua sehingga hubungan antara imbal hasil logaritmik portofolio yang sebenarnya ($r_{true}$) dan aproksimasi logaritmik berbobot ($\hat{r}_p$) dapat dievaluasi secara kuantitatif. Proses derivasi diawali dengan mendefinisikan dua bentuk representasi \textit{log return} portofolio. Bentuk pertama adalah aproksimasi berbobot yang diperoleh dari penjumlahan \textit{log return} masing-masing aset, sedangkan bentuk kedua merupakan \textit{log return} portofolio yang sebenarnya berdasarkan total \textit{simple return} portofolio. Dengan menggunakan aproksimasi deret Taylor orde kedua,
+\begin{equation}
+\ln(1+x)\approx x-\frac{x^2}{2},
+\end{equation}
+yang mana kedua bentuk tersebut dapat diekspansikan menjadi
+\begin{equation}
+\hat{r}_p = \sum_{i=1}^{n} w_i \ln(1+R_i)
+\approx
+\sum_{i=1}^{n} w_i R_i
+-
+\frac{1}{2}
+\sum_{i=1}^{n} w_i R_i^2 ,
+\end{equation}
+
+\begin{equation}
+r_{true}
+=
+\ln(1+R_p)
+\approx
+\left(
+\sum_{i=1}^{n} w_i R_i
+\right)
+-
+\frac{1}{2}
+\left(
+\sum_{i=1}^{n} w_i R_i
+\right)^2 .
+\end{equation}
+
+Selisih antara kedua ekspansi tersebut merepresentasikan galat aproksimasi yang muncul akibat penggunaan \textit{log return} berbobot sebagai pengganti \textit{log return} portofolio yang sebenarnya. Galat tersebut dapat dituliskan sebagai
+
+\begin{equation*}
+\text{Error}=r_{true}-\hat{r}_p,
+\end{equation*}
+
+\begin{equation*}
+\text{Error}
+= \left(
+\sum_{i=1}^{n} w_i R_i - \frac{1}{2} \left( \sum_{i=1}^{n} w_i R_i \right)^2 \right) - \left( \sum_{i=1}^{n} w_i R_i - \frac{1}{2} \sum_{i=1}^{n} w_i R_i^2 \right),
+\end{equation*}
+
+\begin{equation*}
+\text{Error}
+=
+\frac{1}{2}
+\left[
+\sum_{i=1}^{n} w_i R_i^2 - \left( \sum_{i=1}^{n} w_i R_i \right)^2
+\right].
+\end{equation*}
+Bentuk dalam tanda kurung tersebut identik dengan varians portofolio sehingga diperoleh
+\begin{equation}
+\text{Error}
+=
+\frac{1}{2}
+\text{Var}(R).
+\end{equation}
+Sehingga, hubungan antara \textit{log return} portofolio yang sebenarnya dan aproksimasi berbobotnya dapat dinyatakan sebagai
+\begin{equation}
+r_{true}
+\approx
+\hat{r}_p
++
+\frac{1}{2}\text{Var}(R),
+\label{eq:eror_returns}
+\end{equation}
+yang menunjukkan bahwa aproksimasi berbasis \textit{log return} mengandung koreksi sebesar setengah varians portofolio. Oleh karena itu, ekspektasi imbal hasil dalam model optimasi portofolio dihitung menggunakan \textit{simple return} agar tetap konsisten dengan sifat linear formulasi Markowitz.
+
+Meskipun ekspektasi imbal hasil dihitung menggunakan \textit{simple return}, estimasi matriks kovariansi dalam penelitian ini dilakukan menggunakan \textit{log return}. Pemilihan tersebut didasarkan pada sifat \textit{log return} yang lebih stabil secara statistik serta memiliki distribusi yang cenderung lebih mendekati asumsi normalitas dibandingkan \textit{simple return}. Selain itu, untuk nilai imbal hasil harian yang relatif kecil, perbedaan antara kedua representasi tersebut sangat kecil sehingga tidak menghasilkan perubahan yang signifikan terhadap estimasi risiko portofolio. Berdasarkan Persamaan \ref{eq:eror_returns}, hubungan antara \textit{simple return} dan \textit{log return} dapat dituliskan secara aproksimatif sebagai
+\begin{equation}
+r_i \approx R_i - \frac{1}{2}R_i^2.
+\end{equation}
+Karena nilai imbal hasil harian umumnya berada pada orde $10^{-2}$, maka suku kuadrat $R_i^2$ hanya berada pada orde $10^{-4}$ dan jauh lebih kecil dibandingkan suku utamanya. Dengan demikian dapat digunakan pendekatan
+\begin{equation}
+r_i \approx R_i.
+\end{equation}
+Akibatnya, kovariansi yang dihitung menggunakan \textit{log return} akan mendekati kovariansi yang dihitung menggunakan \textit{simple return}. Secara eksplisit,
+\begin{equation*}
+\begin{aligned}
+\text{Cov}(r_A,r_B)
+&\approx
+\text{Cov}
+\left(
+R_A-\frac{R_A^2}{2},
+R_B-\frac{R_B^2}{2}
+\right) .
+\end{aligned}
+\end{equation*}
+
+Dengan memanfaatkan sifat bilinear kovariansi diperoleh
+\begin{equation}
+\begin{aligned}
+\text{Cov}(r_A,r_B)
+&\approx
+\text{Cov}(R_A,R_B)
+-\frac{1}{2}\text{Cov}(R_A,R_B^2) \
+&\quad
+-\frac{1}{2}\text{Cov}(R_A^2,R_B)
++\frac{1}{4}\text{Cov}(R_A^2,R_B^2).
+\end{aligned}
+\end{equation}
+Suku utama pada persamaan tersebut adalah $\text{Cov}(R_A,R_B)$ yang berada pada orde $10^{-4}$, sedangkan suku-suku yang melibatkan pangkat dua imbal hasil berada pada orde yang lebih kecil, yaitu sekitar $10^{-6}$ hingga $10^{-8}$. Oleh karena itu kontribusi suku-suku koreksi dapat diabaikan sehingga diperoleh pendekatan
+\begin{equation}
+\text{Cov}(r_A,r_B)
+\approx
+\text{Cov}(R_A,R_B).
+\end{equation}
+Hasil ini menunjukkan bahwa penggunaan \textit{log return} untuk estimasi matriks kovariansi tetap memberikan representasi risiko yang konsisten terhadap penggunaan \textit{simple return}, terutama pada data saham harian dengan tingkat volatilitas yang relatif rendah.
+
+
+Transformasi data harga saham menjadi \textit{simple return} dan \textit{log return} diimplementasikan menggunakan pustaka \textit{NumPy} dan \textit{Pandas}. Fungsi yang dikembangkan menerima masukan berupa deret harga historis dan menghasilkan deret imbal hasil sesuai dengan formulasi matematis yang telah dijelaskan sebelumnya. Selain itu, dilakukan pula perhitungan nilai ekspektasi imbal hasil sederhana sebagai parameter pertumbuhan aset pada setiap jendela pelatihan. Untuk keperluan analisis risiko, \textit{log return} dihitung menggunakan transformasi logaritma natural terhadap rasio harga berturut-turut. Sementara itu, estimasi ekspektasi \textit{log return} diperoleh melalui pendekatan koreksi volatilitas (\textit{volatility drag}) yang dinyatakan sebagai selisih antara rata-rata \textit{simple return} dan setengah variansnya. Pendekatan ini digunakan untuk menjaga konsistensi antara estimasi pertumbuhan geometrik dan karakteristik fluktuasi harga yang diamati pada data historis. Implementasi lengkap dari proses transformasi imbal hasil dan perhitungan parameter statistik tersebut ditunjukkan pada Daftar Kode \ref{lst:calc_returns}.
+
+
+\begin{lstlisting}[language=Python, caption={Fungsi prapemrosesan imbal hasil dan ekspektasi pertumbuhan portofolio}, label={lst:calc_returns}]
+import numpy as np
+import pandas as pd
+
+def calculate_simple_return(prices):
+    """
+    Menghitung simple return secara manual berdasarkan rumus:
+    R_t = (P_t - P_{t-1}) / P_{t-1}
+    """
+    prev_prices = prices.shift(1)
+    simple_returns = (prices - prev_prices) / prev_prices
+    return simple_returns.dropna()
+
+def calculate_log_return(prices):
+    """
+    Menghitung log return secara manual berdasarkan rumus:
+    r_t = ln(P_t / P_{t-1})
+    """
+    prev_prices = prices.shift(1)
+    log_returns = np.log(prices / prev_prices)
+    return log_returns.dropna()
+
+def calculate_expected_simple_return(simple_rets):
+    """
+    Menghitung expected simple return: mu_R = sum(R_t) / T
+    """
+    return simple_rets.mean()
+
+def calculate_expected_log_return_with_drag(mu_simple, var_simple):
+    """
+    Menghitung expected log return dengan volatility drag:
+    mu_r = mu_R - 0.5 * sigma_R^2
+    """
+    return mu_simple - 0.5 * var_simple
+\end{lstlisting}
+
+\subsection{Implementasi Numerik pada Sampel Data}
+\label{subsec:4_1_2_numerik_fisis}
+
+Sebagai ilustrasi penerapan formulasi yang telah dijelaskan sebelumnya, dilakukan perhitungan numerik menggunakan data historis saham BBCA pada periode observasi pertama. Berdasarkan Tabel \ref{tab:daily_prices_merged}, harga penutupan meningkat dari 4515,50 menjadi 4869,32 sehingga diperoleh \textit{simple return} dan \textit{log return} harian sebagai berikut
+\begin{equation*}
+\begin{aligned}
+R_{BBCA,1}
+&=
+\frac{4869,32-4515,50}{4515,50}
+\approx 0,0783,\\
+r_{BBCA,1}
+&=
+\ln(1+0,0783)
+\approx 0,0754.
+\end{aligned}
+\end{equation*}
+Nilai varians dan kovariansi selanjutnya dihitung menggunakan data \textit{log return} pada jendela pelatihan yang terdiri atas 126 hari perdagangan. Untuk dua aset $i$ dan $j$, kovariansi sampel didefinisikan sebagai
+\begin{equation}
+\begin{aligned}
+\sigma_{ij}
+&=
+\frac{1}{n-1}
+\sum_{t=1}^{n}
+(r_{i,t}-\bar r_i)
+(r_{j,t}-\bar r_j) \\
+&\approx
+\frac{1}{n-1}
+\sum_{t=1}^{n}
+(R_{i,t}-\bar R_i)
+(R_{j,t}-\bar R_j),
+\end{aligned}
+\end{equation}
+dengan pendekatan pada baris kedua mengikuti hasil analisis pada Subsection \ref{subsec:4_1_1_rumus} yang menunjukkan bahwa kovariansi \textit{log return} dan \textit{simple return} bernilai hampir identik untuk data imbal hasil harian.
+
+Untuk konfigurasi sistem dengan $N=2$ aset, matriks kovariansi pada jendela pelatihan pertama diperoleh dalam bentuk
+\begin{equation}
+\Sigma_{N2}
+=
+\begin{pmatrix}
+\mathrm{Var}(r_1) & \mathrm{Cov}(r_1,r_2) \\
+\mathrm{Cov}(r_2,r_1) & \mathrm{Var}(r_2)
+\end{pmatrix},
+\end{equation}
+yang secara numerik menghasilkan
+\begin{equation}
+\Sigma_{N2}
+=
+\begin{pmatrix}
+0,0915 & 0,0202 \\
+0,0202 & 0,0367
+\end{pmatrix}.
+\end{equation}
+Sementara itu, untuk konfigurasi sistem dengan $N=4$ aset, matriks kovariansi pada jendela pelatihan pertama diperoleh sebagai
+\begin{equation}
+\Sigma_{N4}
+=
+\begin{pmatrix}
+0,0171 & 0,0012 & 0,0009 & 0,0022 \\
+0,0012 & 0,0198 & 0,0015 & 0,0018 \\
+0,0009 & 0,0015 & 0,0241 & 0,0011 \\
+0,0022 & 0,0018 & 0,0011 & 0,0225
+\end{pmatrix}.
+\end{equation}
+Matriks kovariansi tersebut selanjutnya digunakan sebagai masukan utama dalam pembentukan fungsi objektif Markowitz dan konstruksi Hamiltonian portofolio pada tahap optimasi kuantum.
+
+
+\subsection{Parameter \textit{Risk Aversion} Endogen}
+\label{subsec:4_1_3_risk_aversion}
+
+Dalam model optimasi portofolio Markowitz, parameter \textit{risk aversion} ($\gamma$) umumnya diperlakukan sebagai konstanta eksogen yang nilainya ditentukan sebelum proses optimasi dilakukan. Berbeda dengan pendekatan tersebut, penelitian ini menggunakan parameter \textit{risk aversion} yang dihitung secara endogen berdasarkan karakteristik data pasar pada setiap jendela pelatihan. Dengan demikian, tingkat penalti risiko dapat berubah secara adaptif mengikuti kondisi pasar yang diamati. Nilai $\gamma$ ditentukan melalui fungsi sigmoid yang dibangun dari perbandingan antara rata-rata ekspektasi imbal hasil logaritmik ($\bar{\mu}_l$) dan rata-rata volatilitas logaritmik ($\bar{\sigma}_l$), yaitu
+\begin{equation}
+\gamma =
+\frac{1}
+{1+\exp\left(\bar{\mu}_l/\bar{\sigma}_l\right)}.
+\end{equation}
+
+Rasio $\bar{\mu}_l/\bar{\sigma}_l$ berperan sebagai indikator keseimbangan antara potensi keuntungan dan risiko pasar. Ketika ekspektasi imbal hasil relatif lebih tinggi dibandingkan volatilitas, nilai rasio akan meningkat sehingga menghasilkan nilai $\gamma$ yang lebih kecil. Sebaliknya, ketika volatilitas mendominasi, nilai $\gamma$ akan meningkat dan memberikan penalti risiko yang lebih besar pada fungsi objektif optimasi. Sebagai ilustrasi, pada jendela pelatihan pertama diperoleh parameter logaritmik BBCA sebesar $\mu_{l,1}=0,3164$ dan $\sigma_{l,1}=0,3024$, serta parameter ADRO sebesar $\mu_{l,2}=0,1756$ dan $\sigma_{l,2}=0,1916$. Dari data tersebut diperoleh rata-rata lintas aset
+\begin{equation}
+\bar{\mu}_l
+=
+\frac{0,3164+0,1756}{2} =
+0,2460,
+\end{equation}
+
+\begin{equation}
+\bar{\sigma}_l
+=
+\frac{0,3024+0,1916}{2}
+=
+0,2470.
+\end{equation}
+Rasio keuntungan terhadap risiko kemudian dihitung sebagai
+\begin{equation}
+Z
+=
+\frac{\bar{\mu}_l}{\bar{\sigma}_l} = \frac{0,2460}{0,2470}
+\approx
+0,9960.
+\end{equation}
+Dengan mensubstitusikan nilai tersebut ke dalam fungsi sigmoid diperoleh
+\begin{equation}
+\gamma
+=
+\frac{1}{1+e^{0,9960}} =
+0,2697.
+\end{equation}
+Nilai $\gamma$ yang relatif rendah menunjukkan bahwa kondisi pasar pada periode tersebut memiliki rasio keuntungan terhadap risiko yang cukup baik. Akibatnya, penalti risiko yang diberikan pada fungsi objektif menjadi lebih kecil sehingga algoritma optimasi cenderung memberikan toleransi yang lebih besar terhadap pengambilan risiko untuk memperoleh potensi imbal hasil yang lebih tinggi. Riwayat perubahan parameter $\gamma$ untuk seluruh jendela pengamatan disajikan pada Tabel \ref{tab:unified_n2} dan Tabel \ref{tab:unified_n4}.
+
+Perhitungan parameter \textit{risk aversion} endogen diimplementasikan menggunakan pustaka \textit{NumPy}. Fungsi yang dikembangkan menerima masukan berupa vektor ekspektasi imbal hasil dan volatilitas dari seluruh aset pada suatu jendela pelatihan, kemudian menghitung rata-rata lintas aset untuk memperoleh rasio keuntungan terhadap risiko. Nilai rasio tersebut selanjutnya ditransformasikan menggunakan fungsi sigmoid sehingga menghasilkan parameter $\gamma$ yang berada pada rentang $0$ hingga $1$. Untuk menjaga stabilitas numerik, fungsi juga melakukan pemeriksaan terhadap nilai yang hilang (\textit{missing values}) maupun kondisi volatilitas bernilai nol. Apabila salah satu kondisi tersebut terdeteksi, fungsi akan mengembalikan nilai $\gamma=0,5$ sebagai nilai netral. Implementasi lengkap prosedur perhitungan parameter \textit{risk aversion} endogen ditunjukkan pada Daftar Kode \ref{lst:compute_endogenous_lambda}.
+
+\begin{lstlisting}[language=Python, caption={Algoritma kalkulasi parameter \textit{risk aversion} dinamis berbasis Rasio Sharpe agregat}, label={lst:compute_endogenous_lambda}]
+import numpy as np
+
+def compute_endogenous_lambda(mu_period, sigma_period):
+    """
+    Menghitung parameter risk-aversion (gamma) secara endogen berdasarkan
+    Sharpe Ratio rata-rata lintas aset menggunakan variabel yang sudah 
+    dihitung (termasuk volatility drag).
+    
+    Z = mu_avg / sigma_avg (Sharpe Ratio agregat)
+    gamma = 1 / (1 + exp(Z))
+    """
+    mu_avg    = np.abs(mu_period).mean()
+    sigma_avg = sigma_period.mean()
+    
+    if np.isnan(mu_avg) or np.isnan(sigma_avg) or sigma_avg == 0:
+        return 0.5
+        
+    Z = mu_avg / sigma_avg   # Sharpe Ratio agregat
+    gamma = 1.0 / (1.0 + np.exp(Z))
+    
+    return gamma
+\end{lstlisting}

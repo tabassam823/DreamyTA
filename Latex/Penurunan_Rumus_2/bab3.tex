@@ -1,0 +1,28 @@
+\hypertarget{transformasi-markowitz-ke-qubo-general-form}{%
+\section{Transformasi Markowitz ke QUBO (General Form)}\label{transformasi-markowitz-ke-qubo-general-form}}
+
+Model Markowitz \emph{constrained} dikonversi menjadi fungsional tunggal \emph{Quadratic Unconstrained Binary Optimization} (QUBO) untuk kalkulasi VQE parametrik kuantum. Pemisahan dilakukan spesifik untuk fungsi objektif murni (\(H_{pure}\)) dan struktur penalti fiktif (\(H_{pen}\)) secara deterministik asimetris.
+
+\subsection{Reduksionisme (Kasus Minimal: 2 Aset)}
+Model Markowitz murni (tanpa batasan) untuk $N$ aset dinyatakan secara matriks empiris sebagai kombinasi kuadratik deterministik risiko dan asimetris linear \emph{return}:
+\[ \mathcal{L}(x) = x^T \Sigma x - \lambda \mu^T x \qquad (4) \]
+
+\textbf{Visualisasi Operasi Matriks Markowitz (2 Aset):} \\
+Penjabaran matriks \emph{expected state} komposit gabungan untuk formulasi $N=2$ mereduksi sistem menjadi fungsi linear nilai kuadratik biner:
+\begin{equation}
+\begin{split} 
+\mathcal{L}(x) &= \begin{pmatrix} x_1 & x_2 \end{pmatrix} \begin{pmatrix} \sigma_1^2 & \sigma_{12} \\ \sigma_{21} & \sigma_2^2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} - \lambda \begin{pmatrix} \mu_1 & \mu_2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \\
+&= \sigma_1^2 x_1^2 + \sigma_2^2 x_2^2 + 2\sigma_{12}x_1 x_2 - \lambda(\mu_1 x_1 + \mu_2 x_2)
+\end{split} 
+\end{equation}
+Mengingat properti asimtot substitusi biner $x_i \in \{0, 1\}$, maka berlaku konsisten $x_i^2 = x_i$. Substitusi menghasilkan koefisien QUBO murni yang linier terhadap varians individu parameter:
+\[ \mathcal{L}_{pure} = (\sigma_1^2 - \lambda \mu_1) x_1 + (\sigma_2^2 - \lambda \mu_2) x_2 + 2\sigma_{12}x_1 x_2 \qquad (5) \]
+
+\subsection{Derivasi Objektif Murni dan Penalti QUBO}
+Pola interaksi ko-variatif asimetris komposit tersebut digeneralisasikan secara deterministik untuk \(N\) aset. Kita mendefinisikan koefisien matriks QUBO murni diagonal \(Q_{ii} = \sigma_i^2 - \lambda \mu_i\) dan interaksi matriks \emph{off-diagonal} deterministik fungsional \(Q_{ij} = \sigma_{ij}\):
+\[ \mathcal{L}_{pure}(x) = \sum_{i=1}^N Q_{ii} x_i + \sum_{i < j} 2Q_{ij} x_i x_j \qquad (6) \]
+
+Distribusi fungsional komputasi \emph{penalty term} (\(H_{pen}\)) terekspansi murni menjadi fungsional linier ortogonal dan ekuasi korelatif deterministik nilai kuadratik asimetris:
+\[ H_{pen}(x) = A \left( \sum_{i=1}^N x_i^2 + 2 \sum_{i < j} x_i x_j - 2K \sum_{i=1}^N x_i + K^2 \right) \qquad (7) \]
+
+

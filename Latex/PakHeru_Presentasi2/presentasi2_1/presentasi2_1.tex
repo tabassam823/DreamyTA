@@ -1,0 +1,215 @@
+\documentclass{beamer}
+
+% Theme selection
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{braket} % For Dirac notation
+
+% Title information
+\title[Quantum Bayesian Portfolio]{Optimasi Portofolio Menggunakan Quantum Bayesian Game Theory dengan VQE Ansatz}
+\subtitle{Dari Ketidakpastian Ekonomi ke Solusi Fisika Kuantum}
+\author{DreamyTA Team}
+\date{\today}
+
+\begin{document}
+
+% --- BAGIAN 1: PENDAHULUAN & MASALAH ---
+
+% Slide 1: Title
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Slide 2: Masalah Utama (Ekonomi)
+\begin{frame}{Masalah: Ketidakpastian Pasar}
+    \begin{block}{Model Klasik (Markowitz) vs Realita}
+        \begin{itemize}
+            \item \textbf{Asumsi Klasik:} Pasar bersifat \textit{deterministik}. Parameter (return $\mu$, risiko $\sigma$) dianggap statis berdasarkan data historis.
+            \item \textbf{Realita:} Pasar penuh \textit{ketidakpastian (incomplete information)}.
+            \item \textbf{Dampak:} Portofolio optimal pada data masa lalu seringkali \textbf{gagal total} saat kondisi pasar berubah drastis (Crash/Bearish).
+        \end{itemize}
+    \end{block}
+
+    \begin{alertblock}{Problem Statement}
+        Bagaimana kita membangun portofolio yang "tahan banting" (robust) terhadap perubahan kondisi pasar yang tidak diketahui sebelumnya?
+    \end{alertblock}
+\end{frame}
+
+% Slide 3: Solusi Quantum Bayesian
+\begin{frame}{Solusi: Quantum Bayesian Game Framework}
+    Pendekatan multidisiplin yang menggabungkan tiga pilar:
+    
+    \begin{enumerate}
+        \item \textbf{Game Theory (Bayesian):}
+        Memodelkan interaksi strategi investor melawan "Nature" (Ketidakpastian Pasar) secara probabilistik.
+        
+        \item \textbf{Quantum Computing (EWL Scheme):}
+        Memanfatkan superposisi dan entanglement untuk memperluas ruang strategi dan menghindari jebakan lokal minimum klasik.
+        
+        \item \textbf{VQE (Variational Quantum Eigensolver):}
+        Algoritma hibrida untuk mencari konfigurasi portofolio paling optimal (Ground State) secara efisien.
+    \end{enumerate}
+\end{frame}
+
+
+% --- BAGIAN 2: LANDASAN TEORI ---
+
+% Slide 4: Landasan Teori - Classical Bayesian Game
+\begin{frame}{Landasan Teori: Konsep Bayesian Game}
+    Dalam Bayesian Game, pemain bertindak tanpa mengetahui "tipe" lawan secara pasti.
+    
+    \begin{itemize}
+        \item \textbf{Players:} Investor vs Nature (Alam/Pasar).
+        \item \textbf{Types of Nature ($\Theta$):}
+        Alam memiliki dua kemungkinan identitas (State):
+        \begin{itemize}
+            \item $\theta_1$: \textbf{Bullish} (Pasar Naik)
+            \item $\theta_2$: \textbf{Bearish} (Pasar Turun/Crash)
+        \end{itemize}
+        \item \textbf{Prior Belief ($P$):}
+        Keyakinan investor terhadap kondisi pasar:
+        $$ P(\text{Bull}) = q, \quad P(\text{Bear}) = 1-q $$
+    \end{itemize}
+\end{frame}
+
+% Slide 5: Landasan Teori - Quantum EWL Scheme
+\begin{frame}{Landasan Teori: Skema Kuantum EWL}
+    EWL (Eisert-Wilkens-Lewenstein) adalah protokol untuk memainkankan game di sirkuit kuantum.
+    
+    \begin{center}
+    \textbf{Komponen Utama:}
+    \end{center}
+    
+    \begin{enumerate}
+        \item \textbf{State Awal ($\ket{\psi_0}$):} Superposisi strategi.
+        \item \textbf{Entanglement Operator ($\hat{J}$):} 
+        Menciptakan korelasi kuantum antar aset yang tidak mungkin ada di fisika klasik.
+        $$ \hat{J} = \exp(i \frac{\gamma}{2} \hat{\sigma}_x^{\otimes n}) $$
+        \item \textbf{Strategi Operator ($\hat{U}$):}
+        Pemain memutar qubit mereka untuk memilih strategi (Beli/Jual).
+    \end{enumerate}
+\end{frame}
+
+
+% --- BAGIAN 3: METODOLOGI (CRITICAL) ---
+
+% Slide 6: Metodologi - Langkah 1 (Matriks Payoff)
+\begin{frame}{Metodologi: Konstruksi Matriks Payoff Kuantum}
+    Alih-alih satu matriks, kita mendefinisikan operator Payoff (Hamiltonian) terpisah untuk setiap kondisi pasar.
+    
+    \begin{block}{1. Matriks Payoff Kondisi Bullish ($\hat{H}_{Bull}$)}
+    $$ \hat{H}_{Bull} = \sum_{i,j} w \sigma_{ij}^{bull} \hat{Z}_i \hat{Z}_j - (1-w) \mu_i^{bull} \hat{Z}_i $$
+    \footnotesize{Menggunakan kovarians dan return saat pasar naik.}
+    \end{block}
+    
+    \begin{block}{2. Matriks Payoff Kondisi Bearish ($\hat{H}_{Bear}$)}
+    $$ \hat{H}_{Bear} = \sum_{i,j} w \sigma_{ij}^{bear} \hat{Z}_i \hat{Z}_j - (1-w) \mu_i^{bear} \hat{Z}_i + \text{Penalty}_{crash} $$
+    \footnotesize{Menggunakan parameter saat krisis, ditambah penalti risiko ekstrem.}
+    \end{block}
+\end{frame}
+
+% Slide 7: Metodologi - Langkah 2 (Bayesian Weighted)
+\begin{frame}{Metodologi: Bayesian Weighted Hamiltonian}
+    Inilah inti dari pendekatan \textbf{Quantum Bayesian}. Kita menggabungkan kedua matriks payoff berdasarkan probabilitas (Belief) investor.
+    
+    $$ \hat{H}_{Total} = \mathbb{E}[\hat{H}] = \sum_{\theta \in \Theta} P(\theta) \cdot \hat{H}_{\theta} $$
+    
+    \begin{alertblock}{Derivasi Hamiltonian Akhir}
+    \Large
+    $$ \hat{H}_{QBG} = q \cdot \hat{H}_{Bull} + (1-q) \cdot \hat{H}_{Bear} $$
+    \end{alertblock}
+    
+    \vspace{0.2cm}
+    \textbf{Artinya:} Kita mencari portofolio yang meminimalkan energi rata-rata di seluruh kemungkinan semesta (Bull & Bear) secara simultan.
+\end{frame}
+
+% Slide 8: Metodologi - Langkah 3 (Penalti & Kendala)
+\begin{frame}{Metodologi: Penambahan Kendala (Penalty Term)}
+    Hamiltonian $\hat{H}_{QBG}$ belum lengkap tanpa kendala anggaran (jumlah aset = $K$).
+    
+    \textbf{Fungsi Penalti Lagrangian:}
+    $$ \hat{H}_{constraint} = \lambda \left( \sum_{i=1}^N \frac{1-\hat{Z}_i}{2} - K \right)^2 $$
+    
+    \textbf{Hamiltonian Lengkap untuk VQE:}
+    $$ \hat{H}_{VQE} = \hat{H}_{QBG} + \hat{H}_{constraint} $$
+    
+    Inilah operator hermit, berupa matriks raksasa ($2^N \times 2^N$), yang akan dicari Ground State-nya.
+\end{frame}
+
+
+% --- BAGIAN 4: EKSEKUSI KUANTUM ---
+
+% Slide 9: Eksekusi - Mapping ke Qubit (Ising)
+\begin{frame}{Eksekusi: Mapping ke Model Ising}
+    Agar dapat dijalankan di Komputer Kuantum, variabel biner portofolio $x_i \in \{0,1\}$ dipetakan ke spin operator $\hat{Z}_i$.
+    
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{Domain Klasik ($x_i$):}
+        \begin{itemize}
+            \item $x_i = 1$: Aset Dipilih
+            \item $x_i = 0$: Aset Tidak Dipilih
+        \end{itemize}
+        
+        \column{0.5\textwidth}
+        \textbf{Domain Kuantum ($\hat{Z}_i$):}
+        \begin{itemize}
+            \item $\Ket{1}$ (Spin Down): Terpilih
+            \item $\Ket{0}$ (Spin Up): Tidak Terpilih
+        \end{itemize}
+    \end{columns}
+    
+    \vspace{0.5cm}
+    Transformasi: $x_i \rightarrow \frac{1-\hat{Z}_i}{2}$
+\end{frame}
+
+% Slide 10: Eksekusi - Algoritma VQE
+\begin{frame}{Eksekusi: Algoritma VQE}
+    \textbf{Variational Quantum Eigensolver (VQE)} bekerja sebagai loop hibrida:
+    
+    \begin{enumerate}
+        \item \textbf{QPU (Quantum):} Menyiapkan state ansatz $\ket{\psi(\vec{\theta})}$ dan mengukur ekspektasi energi $\braket{\psi | \hat{H}_{VQE} | \psi}$.
+        \item \textbf{CPU (Klasik):} Menggunakan optimizer (COBYLA/SPSA) untuk memperbarui parameter $\vec{\theta}$ agar energi semakin kecil.
+        \item \textbf{Konvergensi:} Loop berulang hingga energi minimum dicapai (Ground State).
+    \end{enumerate}
+\end{frame}
+
+% Slide 11: Eksekusi - Hasil Optimasi
+\begin{frame}{Eksekusi: Output Portofolio}
+    Hasil akhir dari VQE adalah state kuantum dengan probabilitas tertinggi untuk diukur.
+    
+    \textbf{Interpretasi Hasil:}
+    Jika hasil pengukuran state adalah $\ket{1101...}$, maka:
+    \begin{itemize}
+        \item Aset 1: Beli
+        \item Aset 2: Beli
+        \item Aset 3: Jangan Beli
+        \item Aset 4: Beli
+        \item dst.
+    \end{itemize}
+    
+    Portofolio ini secara matematis adalah \textit{Best Response} terhadap strategi campuran Nature (Bull/Bear).
+\end{frame}
+
+
+% --- BAGIAN 5: KESIMPULAN ---
+
+% Slide 12: Kesimpulan
+\begin{frame}{Kesimpulan}
+    \begin{enumerate}
+        \item \textbf{Novelty:} Penggabungan \textbf{Bayesian Game Theory} dengan \textbf{Quantum VQE} memberikan kerangka kerja baru untuk optimasi portofolio di bawah ketidakpastian.
+        
+        \item \textbf{Robustness:} Dengan memisahkan matriks payoff ($\hat{H}_{Bull}$ dan $\hat{H}_{Bear}$) dan menggabungkannya via pembobotan Bayesian, solusi yang dihasilkan lebih tahan terhadap crash pasar.
+        
+        \item \textbf{Keunggulan Kuantum:} Skema EWL dan VQE memungkinkan eksplorasi ruang solusi yang lebih luas dibanding algoritma optimasi klasik, terutama untuk masalah kombinatorial yang kompleks.
+    \end{enumerate}
+\end{frame}
+
+\end{document}

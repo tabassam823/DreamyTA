@@ -1,0 +1,63 @@
+\documentclass[aspectratio=169]{beamer}
+
+% --- Theme and Style ---
+\usetheme{Madrid}
+\usecolortheme{whale}
+\usefonttheme{professionalfonts}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath, amsfonts, amssymb, braket}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% --- Metadata ---
+\title[Integrasi EPG dan  VQE]{OPTIMASI PORTOFOLIO INVESTASI BERBASIS EKONOFISIKA DAN GAME THEORY MENGGUNAKAN VARIATIONAL QUANTUM EIGENSOLVER}
+
+\subtitle{Tugas Akhir}
+\author[Nama Anda]{Putra Naufal Tabassam} % Silakan ganti dengan nama lengkap
+\institute[Institusi]{Pembimbing I : Dr. Heru Sukamto, M.Si. \\ Pembimbing II : Dr. Gagus K. Sunnardianto \\ Departemen Fisika \\ Institut Teknologi Sepuluh Nopember}
+\date{\today}
+
+\graphicspath{{../Images/}{Gambar/}{../GTQuantumInvest/}}
+
+% --- Custom Colors (Optional) ---
+\definecolor{primaryblue}{RGB}{0, 31, 63}
+\setbeamercolor{palette primary}{bg=primaryblue, fg=white}
+\setbeamercolor{titlelike}{parent=palette primary}
+
+% --- Logo ---
+%\logo{\includegraphics[height=1cm]{Images/logo_universitas.png}}
+
+\begin{document}
+
+% Slide 1: Judul
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Daftar Isi
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+% --- Konten Modular ---
+\input{1_Pendahuluan}
+\input{2_LandasanFinansial}
+\input{3_GameTheoryIsing}
+\input{4_QuantumFoundation}
+\input{5_OptimasiVQE}
+\input{6_Metodologi}
+\input{7_HasilPembahasan}
+\input{8_Penutup}
+
+\end{document}

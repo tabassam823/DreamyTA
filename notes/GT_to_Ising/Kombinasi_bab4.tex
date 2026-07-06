@@ -1,0 +1,27 @@
+\section{Pemetaan Hamiltonian Ising}
+
+\subsection{Konstruksi QUBO dengan Penalti Kardinalitas}
+Minimasi biaya murni didefinisikan sebagai $H_{pure}(\mathbf{x}) = -\Phi_{enriched}(\mathbf{x})$. Penalti kardinalitas diintegrasikan melalui fungsi kuadratik $P(\mathbf{x})$:
+\begin{equation}
+    P(\mathbf{x}) = \lambda \left( \sum_{i=1}^N x_i - K \right)^2 = \lambda \left[ (1 - 2K) \sum_{i=1}^N x_i + 2 \sum_{i < j} x_i x_j + K^2 \right]
+\end{equation}
+Hamiltonian QUBO total, $H_{total} = H_{pure} + P(\mathbf{x})$, dinyatakan dalam format standar $\sum Q_{ii} x_i + \sum Q_{ij} x_i x_j$. Parameter matriks QUBO total didefinisikan sebagai:
+\begin{equation}
+    Q_{ii} = \left( \frac{\gamma}{2} \sigma_{ii} - \tilde{\mu}_i \right) + \lambda(1 - 2K)
+\end{equation}
+\begin{equation}
+    Q_{ij} = \gamma \tilde{\sigma}_{ij} + 2\lambda
+\end{equation}
+
+\subsection{Transformasi ke Operator Pauli-Z}
+Substitusi variabel biner ke variabel \textit{spin} $x_i \mapsto \frac{1 - \hat{Z}_i}{2}$ memetakan domain keputusan ke operator Pauli-Z. Hamiltonian kuantum final dinyatakan sebagai:
+\begin{equation}
+    \hat{H}_{Ising} = \sum_{i < j} J_{ij} (\hat{Z}_i \otimes \hat{Z}_j) + \sum_{i=1}^N h_i \hat{Z}_i
+\end{equation}
+di mana parameter fisik diekstraksi dari elemen matriks QUBO:
+\begin{equation}
+    J_{ij} = \frac{Q_{ij}}{4} = \frac{\gamma \tilde{\sigma}_{ij} + 2\lambda}{4}
+\end{equation}
+\begin{equation}
+    h_i = -\frac{Q_{ii}}{2} - \sum_{j \neq i} \frac{Q_{ij}}{4} = -\frac{1}{2} \left[ \left( \frac{\gamma}{2} \sigma_{ii} - \tilde{\mu}_i \right) + \lambda(1 - 2K) \right] - \sum_{j \neq i} \frac{\gamma \tilde{\sigma}_{ij} + 2\lambda}{4}
+\end{equation}

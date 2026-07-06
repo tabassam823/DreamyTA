@@ -1,0 +1,399 @@
+\section{Optimasi Parameter pada Sistem Klasik}
+Dalam pemodelan sistem makroskopik, pencarian titik ekuilibrium pada algoritma kuantum merupakan proses yang sangat rentan terhadap pengaruh derau atau \textit{noise} lingkungan. Komputasi pada perangkat keras kuantum era NISQ sering kali menghasilkan distorsi sinyal informasi yang signifikan sehingga memerlukan metode optimasi parameter yang stabil untuk menavigasi kompleksitas ruang solusi secara kokoh. Algoritma optimasi klasik digunakan sebagai pendukung sistem hibrida untuk melakukan kalibrasi model secara iteratif untuk meminimalkan fungsi biaya yang ditentukan. Oleh karena itu, diperlukan pemilihan metodologi evaluasi gradien dengan mempertimbangkan efisiensi sumber daya dan ketahanan terhadap fluktuasi statistik yang melekat pada pengukuran observabel kuantum skala industri \cite{spall_implementation_1998}.
+
+Metode optimasi yang tepat memungkinkan sistem untuk mencapai konvergensi energi minimum meskipun beroperasi di tengah keterbatasan koherensi sirkuit~\shortcite{fontana_evaluating_2021}. Algoritma gradien klasik konvensional sering kali mengalami kendala teknis saat diterapkan langsung pada lanskap energi kuantum yang bergejolak akibat \textit{noise} pengukuran~\shortcite{sharma_noise_2020}. Ketidakstabilan numerik ini dapat diatasi dengan menerapkan teknik estimasi gradien yang mengeksploitasi properti analitis dari operator uniter tanpa memperburuk eror yang terjadi pada sistem~\shortcite{wierichs_general_2022}. Bab ini akan menguraikan implementasi teknis dari metode \textit{Parameter Shift Rule} dan optimasi stokastik \textit{SPSA} sebagai pilar utama dalam pembaruan parameter sirkuit secara efisien dan akurat.
+
+\subsection{Metode Pergeseran Parameter (\textit{Parameter Shift Rule})}
+Dalam setiap proses optimasi berparameter pada arsitektur komputasi kuantum, diperlukan perhitungan gradien analitis yang cepat dan tepat untuk mengarahkan pembaruan matriks parameter menuju titik konfigurasi energi minimum. Pendekatan konvensional dengan menggunakan metode diferensiasi beda hingga (\textit{finite difference}) sering kali sulit diimplementasikan karena algoritma tersebut sangat bergantung pada presisi pengukuran selisih ruang parameter berskala sangat kecil. Ketergantungan terhadap interval pergeseran fasa infinitesimal pada perangkat keras sirkuit dunia nyata selalu memicu munculnya ketidakstabilan akibat derau statistik yang merusak akurasi perhitungan gradien. Untuk mengatasi hambatan teknis tersebut, metode \textit{Parameter Shift Rule} diimplementasikan ke dalam simulasi karena mampu mengeksploitasi sifat periodik dari operator uniter pada gerbang rotasi kuantum secara eksak \shortcite{mitarai_quantum_2018}. Penerapan algoritma perhitungan analitis ini diawali secara sistematis dengan merumuskan turunan parsial dari nilai ekspektasi energi terhadap variabel sudut representasi $\theta_j$ melalui hubungan:
+\begin{equation}
+    \begin{split}
+    \frac{\partial E(\theta)}{\partial \theta_j}
+    &= \frac{\partial}{\partial \theta_j}
+    \langle \psi(\theta)|\hat{\mathcal{H}}|\psi(\theta)\rangle \\
+    &= \left\langle \frac{\partial \psi(\theta)}{\partial \theta_j}
+    \right|
+    \hat{\mathcal{H}}
+    |\psi(\theta)\rangle
+    +
+    \langle \psi(\theta)|
+    \hat{\mathcal{H}}
+    \left|
+    \frac{\partial \psi(\theta)}{\partial \theta_j}
+    \right\rangle.
+    \end{split}
+\end{equation}
+
+Untuk suatu gerbang rotasi yang bergantung pada parameter $\theta$, keadaan kuantum dapat dituliskan sebagai
+\begin{equation}
+    |\psi(\theta)\rangle
+    =
+    \hat{U}_B
+    \hat{U}(\theta)
+    \hat{U}_A
+    |00\rangle,
+    \qquad
+    \hat{U}(\theta)
+    =
+    e^{-i\frac{\theta}{2}\sigma},
+\end{equation}
+dengan $\sigma$ merupakan generator gerbang rotasi. Definisikan
+\begin{equation}
+    |\phi\rangle=\hat{U}_A|00\rangle,
+    \qquad
+    \hat{M}
+    =
+    \hat{U}_B^\dagger
+    \hat{\mathcal{H}}
+    \hat{U}_B.
+\end{equation}
+Nilai ekspektasi energi kemudian dapat ditulis ulang sebagai
+\begin{equation}
+    \begin{split}
+    E(\theta)
+    &=
+    \langle \psi(\theta)|
+    \hat{\mathcal{H}}
+    |\psi(\theta)\rangle \\
+    &=
+    \langle \phi|
+    \hat{U}^\dagger(\theta)
+    \hat{M}
+    \hat{U}(\theta)
+    |\phi\rangle.
+    \end{split}
+\end{equation}
+Turunannya terhadap $\theta$ adalah
+\begin{equation}
+    \frac{\partial E(\theta)}{\partial \theta}
+    =
+    \langle \phi|
+    \frac{\partial \hat{U}^{\dagger}(\theta)}{\partial \theta}
+    \hat{M}
+    \hat{U}(\theta)
+    |\phi\rangle
+    +
+    \langle \phi|
+    \hat{U}^{\dagger}(\theta)
+    \hat{M}
+    \frac{\partial \hat{U}(\theta)}{\partial \theta}
+    |\phi\rangle.
+\end{equation}
+Karena
+\begin{equation}
+    \frac{\partial \hat{U}(\theta)}{\partial \theta}
+    =
+    -\frac{i}{2}\sigma \hat{U}(\theta),
+\end{equation}
+maka diperoleh
+\begin{equation}
+    \begin{split}
+    \frac{\partial E(\theta)}{\partial \theta}
+    &=
+    \frac{i}{2}
+    \langle \psi(\theta)|
+    \sigma \hat{M}
+    |\psi(\theta)\rangle
+    -
+    \frac{i}{2}
+    \langle \psi(\theta)|
+    \hat{M}\sigma
+    |\psi(\theta)\rangle \\
+    &=
+    \frac{i}{2}
+    \langle \psi(\theta)|
+    [\sigma,\hat{M}]
+    |\psi(\theta)\rangle.
+    \end{split}
+\end{equation}
+
+Bentuk komutator tersebut sulit diukur secara langsung pada perangkat NISQ. Oleh karena itu digunakan pergeseran parameter sebesar $s$:
+\begin{equation}
+    \begin{split}
+    \hat{U}(\theta\pm s)
+    &=
+    \exp\left[
+    -i\frac{\theta\pm s}{2}\sigma
+    \right] \\
+    &=
+    \hat{U}(\theta)\hat{U}(\pm s).
+    \end{split}
+\end{equation}
+Untuk pergeseran positif,
+\begin{equation}
+    \begin{split}
+    E(\theta+s)
+    &=
+    \langle \phi|
+    \hat{U}^{\dagger}(\theta)
+    \hat{U}^{\dagger}(s)
+    \hat{M}
+    \hat{U}(\theta)
+    \hat{U}(s)
+    |\phi\rangle \\
+    &=
+    \langle \psi(\theta)|
+    \hat{U}^{\dagger}(s)
+    \hat{M}
+    \hat{U}(s)
+    |\psi(\theta)\rangle.
+    \end{split}
+\end{equation}
+Dengan menggunakan identitas Euler
+\begin{equation}
+    \hat{U}(s)
+    =
+    \cos\left(\frac{s}{2}\right)\hat{I}
+    -
+    i\sin\left(\frac{s}{2}\right)\sigma,
+\end{equation}
+diperoleh
+\begin{equation}
+    E(\theta+s)
+    =
+    \cos^2\left(\frac{s}{2}\right)\langle\hat{M}\rangle
+    +
+    \sin^2\left(\frac{s}{2}\right)
+    \langle \sigma\hat{M}\sigma\rangle
+    +
+    i\sin\left(\frac{s}{2}\right)
+    \cos\left(\frac{s}{2}\right)
+    \langle[\sigma,\hat{M}]\rangle.
+\end{equation}
+Dengan cara yang sama,
+\begin{equation}
+    E(\theta-s)
+    =
+    \cos^2\left(\frac{s}{2}\right)\langle\hat{M}\rangle
+    +
+    \sin^2\left(\frac{s}{2}\right)
+    \langle \sigma\hat{M}\sigma\rangle
+    -
+    i\sin\left(\frac{s}{2}\right)
+    \cos\left(\frac{s}{2}\right)
+    \langle[\sigma,\hat{M}]\rangle.
+\end{equation}
+Mengurangkan kedua persamaan menghasilkan
+\begin{equation}
+    \begin{split}
+    E(\theta+s)-E(\theta-s)
+    &=
+    2i
+    \sin\left(\frac{s}{2}\right)
+    \cos\left(\frac{s}{2}\right)
+    \langle[\sigma,\hat{M}]\rangle \\
+    &=
+    i\sin(s)\langle[\sigma,\hat{M}]\rangle.
+    \end{split}
+\end{equation}
+Jika dipilih $s=\pi/2$, maka hubungan gradien menjadi
+\begin{equation}
+\label{eq:parameter_shift_rule}
+\frac{\partial E(\theta)}{\partial \theta}
+=
+\frac{1}{2}
+\left[
+E\left(\theta+\frac{\pi}{2}\right)
+-
+E\left(\theta-\frac{\pi}{2}\right)
+\right].
+\end{equation}
+Persamaan \eqref{eq:parameter_shift_rule} menunjukkan bahwa gradien dapat dihitung hanya dari dua evaluasi sirkuit yang digeser sebesar $\pm \pi/2$, sehingga sangat sesuai untuk optimasi pada perangkat kuantum NISQ \shortcite{mitarai_quantum_2018}.
+
+Algoritma utama yang menggunakan prinsip dari parameter shift rule adalah algoritma Gradient Descent (GD). Algoritma GD merupakan metode optimasi yang memperbarui parameter pada setiap langkah iterasi ke-$t$ menggunakan vektor gradien energi $\nabla E(\theta_t)$ dan laju pembelajaran $\eta$. Proses pembaruan parameter ini dilakukan secara repetitif untuk mengarahkan sistem menuju lembah fungsi biaya dengan mengikuti arah kemiringan negatif dari permukaan energi. Secara matematis, prosedur iteratif untuk memperbarui konfigurasi parameter sirkuit dinyatakan melalui persamaan pembaruan berikut:
+\begin{equation}
+\theta_{t+1} = \theta_t − \eta \nabla E(\theta_t).
+\end{equation}
+Meskipun Gradient Descent yang dikombinasikan dengan \textit{Parameter Shift Rule} memberikan hasil yang sangat akurat, implementasinya pada sistem berdimensi tinggi sering kali kurang efisien dalam penggunaan sumber daya. Hal ini disebabkan oleh kebutuhan dua kali evaluasi sirkuit untuk setiap komponen parameter tunggal yang ingin dioptimasi dalam jaringan sirkuit berukuran besar.
+
+\subsection{Optimasi SPSA (\textit{Simultaneous Perturbation Stochastic Approximation})}
+Untuk mengatasi keterbatasan kendala efisiensi yang melekat pada algoritma GD tersebut, algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) digunakan sebagai metode optimasi stokastik yang mampu mengestimasi seluruh komponen gradien hanya menggunakan dua evaluasi fungsi biaya pada setiap iterasi \cite{spall_implementation_1998}. Pada iterasi ke-$k$, SPSA membangkitkan vektor perturbasi acak
+\begin{equation}
+\Delta_k
+=
+(\Delta_{k,1},\Delta_{k,2},\ldots,\Delta_{k,p}),
+\end{equation}
+dengan setiap komponen perturbasi mengikuti distribusi \textit{Rademacher}
+\begin{equation}
+\Delta_{k,i}
+=
+\begin{cases}
++1, & P=\frac{1}{2},\\
+-1, & P=\frac{1}{2}.
+\end{cases}
+\end{equation}
+
+Vektor perturbasi tersebut digunakan untuk menghasilkan dua himpunan parameter yang digeser secara simultan ke arah positif dan negatif,
+\begin{equation}
+\boldsymbol{\theta}_k^{+}
+=
+\boldsymbol{\theta}_k
++
+c_k \Delta_k,
+\end{equation}
+
+\begin{equation}
+\boldsymbol{\theta}_k^{-}
+=
+\boldsymbol{\theta}_k
+-
+c_k \Delta_k,
+\end{equation}
+dengan $c_k$ menyatakan amplitudo perturbasi pada iterasi ke-$k$. Evaluasi fungsi biaya pada kedua titik tersebut menghasilkan
+\begin{equation}
+E_+
+=
+E(\boldsymbol{\theta}_k+c_k\Delta_k),
+\end{equation}
+dan
+\begin{equation}
+E_-
+=
+E(\boldsymbol{\theta}_k-c_k\Delta_k).
+\end{equation}
+Hubungan antara kedua evaluasi energi tersebut dan gradien fungsi biaya dapat diperoleh melalui ekspansi deret Taylor di sekitar titik $\boldsymbol{\theta}_k$. Untuk arah perturbasi positif diperoleh
+\begin{equation}
+\begin{split}
+E_+
+&=
+E(\boldsymbol{\theta}_k+c_k\Delta_k)
+\\
+&=
+E(\boldsymbol{\theta}_k)
++
+c_k
+\sum_{j=1}^{p}
+\Delta_j
+\frac{\partial E}{\partial \theta_j}
++
+\frac{1}{2}c_k^2
+\sum_{j=1}^{p}
+\Delta_j^2
+\frac{\partial^2 E}{\partial \theta_j^2}
++
+O(c_k^3),
+\end{split}
+\label{eq:spsa_taylor_plus}
+\end{equation}
+sedangkan untuk arah perturbasi negatif diperoleh
+\begin{equation}
+\begin{split}
+E_-
+&=
+E(\boldsymbol{\theta}_k-c_k\Delta_k)
+\\
+&=
+E(\boldsymbol{\theta}_k)
+-
+c_k
+\sum_{j=1}^{p}
+\Delta_j
+\frac{\partial E}{\partial \theta_j}
++
+\frac{1}{2}c_k^2
+\sum_{j=1}^{p}
+\Delta_j^2
+\frac{\partial^2 E}{\partial \theta_j^2}
++
+O(c_k^3).
+\end{split}
+\label{eq:spsa_taylor_minus}
+\end{equation}
+
+Dengan mengurangkan Persamaan \eqref{eq:spsa_taylor_plus} dan \eqref{eq:spsa_taylor_minus}, seluruh suku berpangkat genap saling menghilangkan sehingga diperoleh
+\begin{equation}
+E_+ - E_-
+=
+2c_k
+\sum_{j=1}^{p}
+\Delta_j
+\frac{\partial E}{\partial \theta_j}
++
+O(c_k^3).
+\label{eq:spsa_difference}
+\end{equation}
+Berdasarkan hasil tersebut, estimator gradien SPSA untuk komponen parameter ke-$i$ didefinisikan sebagai
+\begin{equation}
+\hat g_i
+=
+\frac{E_+-E_-}
+{2c_k\Delta_i}.
+\label{eq:spsa_estimator}
+\end{equation}
+Dengan mensubstitusikan Persamaan \eqref{eq:spsa_difference} ke dalam Persamaan \eqref{eq:spsa_estimator}, diperoleh
+\begin{equation}
+\begin{split}
+\hat g_i
+&=
+\frac{1}{\Delta_i}
+\sum_{j=1}^{p}
+\Delta_j
+\frac{\partial E}{\partial\theta_j}
+\\
+&=
+\frac{\Delta_i}{\Delta_i}
+\frac{\partial E}{\partial\theta_i}
++
+\sum_{j\neq i}
+\frac{\Delta_j}{\Delta_i}
+\frac{\partial E}{\partial\theta_j}
+\\
+&=
+\frac{\partial E}{\partial\theta_i}
++
+\sum_{j\neq i}
+\frac{\Delta_j}{\Delta_i}
+\frac{\partial E}{\partial\theta_j}.
+\end{split}
+\label{eq:spsa_unbiased}
+\end{equation}
+Karena setiap komponen perturbasi bersifat independen dan mengikuti distribusi \textit{Rademacher}, maka berlaku
+\begin{equation}
+\mathbb{E}
+\left[
+\frac{\Delta_j}{\Delta_i}
+\right]
+=
+0,
+\qquad
+j\neq i.
+\end{equation}
+Dengan mengambil nilai ekspektasi pada Persamaan \eqref{eq:spsa_unbiased}, diperoleh
+\begin{equation}
+\begin{split}
+\mathbb{E}[\hat g_i]
+&=
+\frac{\partial E}{\partial\theta_i}
++
+\sum_{j\neq i}
+\mathbb{E}
+\left[
+\frac{\Delta_j}{\Delta_i}
+\right]
+\frac{\partial E}{\partial\theta_j}
+\\
+&=
+\frac{\partial E}{\partial\theta_i}.
+\end{split}
+\end{equation}
+Hasil tersebut menunjukkan bahwa estimator SPSA merupakan estimator tak-bias (\textit{unbiased estimator}) terhadap gradien sebenarnya. Sehingga meskipun estimasi gradien diperoleh hanya dari dua evaluasi fungsi biaya, rata-rata statistik estimator tersebut tetap konvergen menuju gradien eksak \cite{spall_implementation_1998}.
+
+Setelah gradien diperoleh, parameter sirkuit diperbarui menggunakan aturan
+\begin{equation}
+\boldsymbol{\theta}_{k+1}
+=
+\boldsymbol{\theta}_k
+-
+a_k \hat{\mathbf g}_k,
+\end{equation}
+dengan $\hat{\mathbf g}_k$ menyatakan vektor gradien hasil estimasi SPSA. Untuk menjaga stabilitas konvergensi, SPSA menggunakan hiperparameter yang mengalami peluruhan secara bertahap sepanjang iterasi optimasi,
+\begin{equation}
+a_k
+=
+\frac{a}{(A+k+1)^\alpha},
+\qquad
+c_k
+=
+\frac{c}{(k+1)^\gamma},
+\label{eq:spsa_decay}
+\end{equation}
+dengan $a$, $A$, $c$, $\alpha$, dan $\gamma$ merupakan konstanta yang ditentukan sebelum proses optimasi dimulai. Karena jumlah evaluasi fungsi biaya pada setiap iterasi tidak bergantung pada banyaknya parameter sirkuit, kompleksitas estimasi gradien SPSA tetap konstan terhadap dimensi ruang parameter. Karakteristik ini menjadikan SPSA sangat sesuai untuk optimasi \textit{Parameterized Quantum Circuit} (PQC) berskala besar pada perangkat NISQ yang rentan terhadap derau statistik dan memiliki keterbatasan sumber daya pengukuran \cite{spall_implementation_1998}.

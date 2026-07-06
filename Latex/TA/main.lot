@@ -1,0 +1,30 @@
+\babel@toc {bahasa}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Analogi Konsep Fisika Statistik dan Ekonomi Finansial dalam Kerangka Model Ising.}}{18}{table.caption.20}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Daftar Simbol dan Notasi Matematis dalam Metodologi.}}{49}{table.caption.28}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Matriks \textit {Payoff} Strategis Sistem N=2 (Januari 2021).}}{66}{table.caption.30}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Ringkasan Performa Finansial Strategi Kuantum, SLSQP, dan \textit {Equal Weight} ($N=2,4$).}}{80}{table.caption.33}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Data Harga Harian Saham Gabungan (BBCA, ADRO, SMGR, TLKM)}}{113}{table.a.C.1}%
+\contentsline {table}{\numberline {C.2}{\ignorespaces Data Simple Return dan Log Return Saham (BBCA, ADRO, SMGR, TLKM)}}{130}{table.a.C.2}%
+\contentsline {table}{\numberline {C.3}{\ignorespaces Ekspektasi Return dan Varians Log Return 36 Periode - Skala 126 Hari (BBCA, ADRO, SMGR, TLKM)}}{147}{table.a.C.3}%
+\contentsline {table}{\numberline {C.4}{\ignorespaces Kovarians Log Return 36 Periode - Skala 126 Hari}}{148}{table.a.C.4}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {D.1}{\ignorespaces Parameter Dinamis Portofolio N=2 ($\gamma $, $h_{obj}$, $J_{obj}$)}}{151}{table.a.D.1}%
+\contentsline {table}{\numberline {D.2}{\ignorespaces Riwayat Iterasi Sequential Best Response (SBR) N=2}}{152}{table.a.D.2}%
+\contentsline {table}{\numberline {D.3}{\ignorespaces Perbandingan Energi Akhir VQE Berdasarkan Depth N=2}}{153}{table.a.D.3}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {F.1}{\ignorespaces Parameter Dinamis Portofolio N=4 ($\gamma $, $h_{obj}$, $C_{obj}$)}}{163}{table.a.F.1}%
+\contentsline {table}{\numberline {F.2}{\ignorespaces Kompilasi Parameter Bias $h_{obj}$, Konstanta $C_{obj}$, dan Koefisien $\gamma $ N=4}}{164}{table.a.F.2}%
+\contentsline {table}{\numberline {F.3}{\ignorespaces Riwayat Iterasi Sequential Best Response (SBR) N=4}}{165}{table.a.F.3}%
+\contentsline {table}{\numberline {F.4}{\ignorespaces Perbandingan Energi Akhir VQE Berdasarkan Depth N=4}}{166}{table.a.F.4}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

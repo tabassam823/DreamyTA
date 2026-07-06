@@ -1,0 +1,13 @@
+\section{Tabel Parameter SPSA Standar}
+Algoritma SPSA memerlukan parameter kalibrasi untuk menjamin konvergensi yang stabil.
+Tabel berikut merangkum nilai parameter yang umum digunakan:
+\begin{longtable}{|c|l|c|}
+\hline
+\textbf{Parameter} & \textbf{Deskripsi} & \textbf{Nilai Standar} \\ \hline
+$a$ & Skala \textit{learning rate} awal & 0,628 \\ \hline
+$c$ & Skala perturbasi awal & 0,1 \\ \hline
+$A$ & Konstanta stabilitas $a_k$ & $0,1 \times N_{iter}$ \\ \hline
+$\alpha$ & Eksponen peluruhan \textit{learning rate} & 0,602 \\ \hline
+$\gamma$ & Eksponen peluruhan perturbasi & 0,101 \\ \hline
+\end{longtable}
+Pemilihan nilai-nilai ini didasarkan pada stabilitas sistem terhadap gangguan statistik pada perangkat keras kuantum (NISQ).

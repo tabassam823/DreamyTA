@@ -1,0 +1,41 @@
+\documentclass[aspectratio=169]{beamer}
+
+% --- Konfigurasi Tema ---
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{} % Menghapus simbol navigasi
+
+% --- Paket Standar ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{hyperref}
+
+% --- Metadata ---
+\title[Revisi GTQuantumInvest]{Laporan Revisi Teknis}
+\subtitle{Penyesuaian algoritma dan Validasi Metrik Informasi}
+\date{\today}
+
+\begin{document}
+
+% --- Slide Judul ---
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% --- Agenda ---
+\begin{frame}{Agenda Presentasi}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+
+% --- Input Bab ---
+\input{bab1}
+\input{bab2}
+\input{bab3}
+\input{bab4}
+
+\end{document}

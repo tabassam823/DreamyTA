@@ -1,0 +1,101 @@
+\section{Pendahuluan}
+
+% Slide 2: 1.1 Latar Belakang - Limitasi Model Markowitz
+\begin{frame}{1.1 Latar Belakang - Limitasi Model Markowitz}
+    \begin{itemize}
+        \item \textbf{Modern Portfolio Theory:} Model \textit{Mean-Variance} (MV) sebagai fondasi utama alokasi aset dan \textbf{Diversifikasi}.
+        \item \textbf{Masalah Utama:}
+        \begin{itemize}
+            \item Asumsi distribusi \textit{return} yang normal dan stasioner seringkali tidak realistis.
+            \item Ketidakmampuan menangkap anomali pasar dan ketergantungan non-linear selama krisis.
+        \end{itemize}
+        \item \textbf{Solusi:} Transformasi fungsi objektif ke dalam kerangka \textit{Quadratic Unconstrained Binary Optimization} (QUBO).
+    \end{itemize}
+    \begin{center}
+        \textit{Saran Gambar: Grafik Efficient Frontier Klasik vs Realitas Pasar (Fat-tailed distribution).}
+    \end{center}
+\end{frame}
+
+% Slide 3: 1.1 Latar Belakang - Pendekatan Ekonofisika
+\begin{frame}{1.1 Latar Belakang - Pendekatan Ekonofisika}
+    \begin{itemize}
+        \item \textbf{Model Ising:} Memetakan fungsi biaya portofolio ke dalam struktur Hamiltonian sistem fisik.
+        \item \textbf{Representasi Spin:} Aset dianalogikan sebagai \textit{spins} yang berinteraksi dalam kisi kristal.
+        \item \textbf{Fenomena Herding:} Sinkronisasi keputusan investor dicerminkan melalui keselarasan orientasi \textit{spin}.
+        \item \textbf{Tujuan:} Mencari konfigurasi energi terendah (\textit{ground state}) yang setara dengan alokasi modal paling efisien.
+    \end{itemize}
+    \begin{center}
+        %\includegraphics[width=0.4\textwidth]{Spin_Interaction_each.png} \\
+        \textit{Saran Gambar: Visualisasi interaksi spin dalam kisi (Grid/Lattice).}
+    \end{center}
+\end{frame}
+
+% Slide 4: 1.1 Latar Belakang - Integrasi Teori Permainan
+\begin{frame}{1.1 Latar Belakang - Integrasi Teori Permainan}
+    \begin{itemize}
+        \item \textbf{Exact Potential Game (EPG):} Pemodelan interaksi strategis antar partisipan pasar secara dinamis.
+        \item \textbf{Fungsi Potensial ($\Phi$):} Menjamin konsistensi antara utilitas marginal individu dan energi sistem total.
+        \item \textbf{Kelebihan:} Deteksi bias aset secara presisi melalui pencarian titik \textit{Nash Equilibrium}.
+        \item \textbf{Sinergi:} Integrasi EPG ke model Ising memodifikasi parameter medan lokal ($h_i$) berdasarkan logika permainan.
+    \end{itemize}
+\end{frame}
+
+% Slide 5: 1.1 Latar Belakang - Strategi Warm-Start
+\begin{frame}{1.1 Latar Belakang - Strategi Warm-Start}
+    \begin{itemize}
+        \item \textbf{Barren Plateaus:} Kendala lenyapnya gradien pada sirkuit kuantum variasional yang menghambat optimasi.
+        \item \textbf{Warm-Start Strategis:} Memanfaatkan konfigurasi \textit{Nash Equilibrium} sebagai inisialisasi parameter awal VQE.
+        \item \textbf{Mekanisme:} Menempatkan sirkuit pada wilayah probabilitas tinggi sejak iterasi pertama.
+        \item \textbf{Hasil:} Mempercepat konvergensi energi menuju solusi optimal secara signifikan.
+    \end{itemize}
+\end{frame}
+
+% Slide 6: 1.1 Latar Belakang - VQE dan Optimasi SPSA
+\begin{frame}{1.1 Latar Belakang - VQE dan Optimasi SPSA}
+    \begin{itemize}
+        \item \textbf{Variational Quantum Eigensolver (VQE):} Algoritma hibrida yang fleksibel untuk perangkat keras era NISQ.
+        \item \textbf{Optimasi SPSA:}
+        \begin{itemize}
+            \item Estimasi gradien efisien (hanya 2 pengukuran per iterasi).
+            \item Tangguh terhadap \textit{noise} pengukuran dan fluktuasi statistik pasar.
+        \end{itemize}
+        \item \textbf{Ansatz EfficientSU(2):} Struktur sirkuit ringkas yang meminimalkan akumulasi \textit{gate noise} tanpa mengurangi ekspresivitas.
+    \end{itemize}
+\end{frame}
+
+% Slide 7: 1.2 Rumusan Masalah
+\begin{frame}{1.2 Rumusan Masalah}
+    \begin{enumerate}
+        \item Bagaimana perumusan bias aset ($h_i$) dan kopling ($J_{ij}$) menggunakan fungsi potensial EPG memengaruhi akurasi pemetaan Hamiltonian?
+        \item Bagaimana efektivitas \textit{Nash Equilibrium} sebagai strategi \textit{warm-start} dalam mengatasi kendala inisialisasi algoritma VQE?
+        \item Bagaimana performa algoritma VQE dengan optimasi SPSA dan \textit{Ansatz EfficientSU(2)} dalam menemukan solusi \textit{ground state}?
+    \end{enumerate}
+\end{frame}
+
+% Slide 8: 1.3 Tujuan Penelitian
+\begin{frame}{1.3 Tujuan Penelitian}
+    \begin{enumerate}
+        \item Menganalisis formulasi bias dan interaksi aset melalui pendekatan fungsi potensial EPG dalam sistem Hamiltonian.
+        \item Mengevaluasi kontribusi strategi \textit{warm-start} berbasis \textit{Nash Equilibrium} dalam meningkatkan efisiensi pencarian solusi VQE.
+        \item Menguji kapabilitas kombinasi VQE, SPSA, dan \textit{EfficientSU(2)} untuk alokasi aset di pasar yang kompleks.
+    \end{enumerate}
+\end{frame}
+
+% Slide 9: 1.4 Batasan Masalah
+\begin{frame}{1.4 Batasan Masalah}
+    \begin{itemize}
+        \item \textbf{Portofolio:} Pemilihan aset dari pasangan sektor berbeda ($N=2$ dan $N=4$).
+        \item \textbf{Model Game:} Skema \textit{non zero-sum game} dalam kerangka \textit{Exact Potential Game}.
+        \item \textbf{Algoritma:} Pencarian ekuilibrium menggunakan \textit{Sequential Best Response} (SBR).
+        \item \textbf{Implementasi:} Simulasi menggunakan framework \textit{PennyLane}.
+    \end{itemize}
+\end{frame}
+
+% Slide 10: 1.5 Manfaat Penelitian
+\begin{frame}{1.5 Manfaat Penelitian}
+    \begin{itemize}
+        \item Memberikan alternatif metode optimasi portofolio yang lebih tangguh terhadap dinamika korelasi pasar.
+        \item Berkontribusi dalam literatur akademis mengenai penerapan komputasi kuantum pada bidang finansial (Econophysics).
+        \item Menjembatani logika teori permainan dengan presisi optimasi mekanika kuantum.
+    \end{itemize}
+\end{frame}

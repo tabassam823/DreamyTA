@@ -1,0 +1,38 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[bahasa]{babel}  % Indonesian language support
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Title setup
+\title{Achieving High Quality Portfolio Optimization with the Variational Quantum Eigensolver}
+\author{Putra Naufal Tabassam}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\input{doc_QUBO.tex}
+\pagebreak
+\input{doc_vqe_cvar.tex}
+\pagebreak
+\input{doc_wcvar.tex}
+\pagebreak
+\input{doc_cmaes.tex}
+
+\section{Kesimpulan}
+
+Dokumen ini menyajikan penurunan teoritis untuk optimisasi portfolio menggunakan VQE dengan pendekatan WCVaR dan CMA-ES. Kombinasi metode ini memberikan kerangka kerja yang kuat untuk menyelesaikan masalah optimisasi portfolio yang kompleks pada perangkat keras kuantum NISQ.
+
+\end{document}

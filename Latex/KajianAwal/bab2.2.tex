@@ -1,0 +1,71 @@
+\subsection{Fisika Statistik dalam Pemodelan Pasar dan Optimasi}
+Studi ekonomi modern semakin mengadopsi pendekatan dari fisika untuk memahami kompleksitas dan dinamika pasar. Oleh karena itu, pada bagian ini akan dihubungkan konsep termodinamika dan mekanika statistik dengan fenomena ekonomi. Dalam kerangka ini, pasar dipandang sebagai sistem banyak benda (\textit{many-body system}) di mana agen-agen ekonomi berinteraksi satu sama lain, sebagaimana pada partikel dalam fisika. Ekuilibrium pasar kemudian dapat dipahami sebagai keadaan kesetimbangan termodinamika atau \textit{ground state} dari sistem tersebut.
+
+\subsubsection{Model Ising dan Distribusi Boltzmann dalam Konteks Optimasi}
+
+Model Ising adalah model interaksi spin klasik yang awalnya dikembangkan untuk menjelaskan feromagnetisme, namun kini menjadi landasan penting dalam pemodelan masalah optimasi kombinatorial. Sistem didefinisikan oleh \textbf{Hamiltonian Ising} sebagai berikut \citep{layden_quantum-enhanced_2022}:
+
+\[ E(s) = - \sum_{j>k=1}^n J_{jk}s_j s_k - \sum_{j=1}^n h_j s_j \]
+
+di mana $s_j \in \{+1, -1\}$ adalah variabel spin, $J_{jk}$ adalah koefisien kopling interaksi antar spin, dan $h_j$ adalah medan eksternal. Konfigurasi spin mengikuti \textbf{Distribusi Boltzmann} $\mu(s) = \frac{1}{Z} e^{-E(s)/T}$, di mana keadaan dasar (\textit{ground state}) dengan energi terendah merepresentasikan solusi yang paling mungkin terjadi pada suhu rendah ($T \to 0$). 
+
+Relevansi model ini dalam teori permainan dan ekonomi terletak pada kemampuannya memetakan masalah optimasi, seperti \textbf{Travelling Salesman Problem (TSP)}, ke dalam pencarian \textit{ground state}. Fungsi biaya (\textit{cost function}) TSP, yang meminimalkan total jarak $w_{i,j}$, dapat dipetakan ke Hamiltonian Ising melalui transformasi variabel biner keputusan $x_{i,t} \in \{0, 1\}$ (apakah kota $i$ dikunjungi pada waktu $t$) ke variabel spin $\sigma_{i,j}^z$ (Pauli-Z) menggunakan relasi \citep{sinaga_important_2023}:
+
+\[ x_{i,t} = \frac{I - \sigma_{i,j}^z}{2} \]
+
+Dengan demikian, biaya Hamiltonian (\textit{Cost Hamiltonian}) $H_C$ dikonstruksi sedemikian rupa sehingga meminimalkan energi sistem ekuivalen dengan meminimalkan biaya perjalanan sekaligus memenuhi batasan-batasan (\textit{constraints}) perjalanan:
+
+\[ H_C = \sum_{i} c_i \sigma_i^z + \sum_{i,j} c_{i,j} \sigma_i^z \sigma_j^z \]
+
+Pendekatan ini menjadi dasar bagi algoritma kuantum seperti \textit{Quantum Approximate Optimization Algorithm} (QAOA) dan \textit{Quantum Annealing} untuk menyelesaikan masalah optimasi yang kompleks secara lebih efisien dibandingkan metode klasik yang akan dijelaskan pada sub-bab 2.3.3.
+
+\subsubsection{Proses Stokastik: Dari Black-Scholes hingga Fraktal}
+
+Dasar bagi pemodelan fluktuasi harga aset yang bersifat acak sering kali menggunakan \textbf{Gerak Brown Geometris (Geometric Brownian Motion - GBM)}. Persamaan diferensial stokastik untuk GBM diberikan oleh:
+
+\[ dS_t = \mu S_t dt + \sigma S_t dW_t \]
+
+di mana $S_t$ adalah harga aset pada waktu $t$, $\mu$ adalah \textit{drift}, $\sigma$ adalah volatilitas, dan $W_t$ adalah proses Wiener standar. Solusi analitik dari persamaan ini menghasilkan distribusi log-normal untuk harga aset:
+
+\[ S_t = S_0 \exp\left( (\mu - \frac{1}{2}\sigma^2)t + \sigma W_t \right) \]
+
+Berdasarkan asumsi bahwa harga aset mengikuti GBM ini, \textbf{Model Black-Scholes} dikembangkan sebagai standar untuk penetapan harga opsi Eropa \citep{schwert_chapter_2003}. Persamaan diferensial parsial Black-Scholes untuk harga opsi $V(S, t)$ adalah:
+
+\[ \frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + rS \frac{\partial V}{\partial S} - rV = 0 \]
+
+Solusi untuk harga opsi \textit{call} Eropa diberikan oleh:
+
+\[ C(S, t) = S N(d_1) - K e^{-r(T-t)} N(d_2) \]
+
+di mana $d_1 = \frac{\ln(S/K) + (r + \sigma^2/2)(T-t)}{\sigma\sqrt{T-t}}$, $d_2 = d_1 - \sigma\sqrt{T-t}$, dan $N(\cdot)$ adalah fungsi distribusi kumulatif normal standar.
+
+Namun, model klasik ini memiliki keterbatasan fundamental karena mengasumsikan volatilitas konstan dan distribusi Gaussian, yang sering gagal menangkap fenomena pasar nyata seperti ``fat tails'', \textit{long-range dependence} (memori jangka panjang), dan ``volatility smile''.
+
+Untuk mengatasi hal ini, pendekatan \textbf{Black-Scholes Fraktal (Generalized BSE)} diperkenalkan \citep{el-nabulsi_qualitative_2025}. Model ini menggunakan operator turunan fraktal untuk memperhitungkan dimensi fraktal ruang ($S^\alpha$) dan waktu ($t^\beta$), serta parameter yang mengikuti \textit{power-laws}:
+
+\[ \frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2(t)S^2 \frac{\partial^2 V}{\partial S^2} + (r(t) - D(t))S \frac{\partial V}{\partial S} - r(t)V = 0 \]
+
+dengan volatilitas $\sigma^2(t) \propto t^\gamma$ dan suku bunga $r(S,t) \propto t^\xi S^{\alpha-1}$. Konsep dimensi fraktal ini sangat relevan untuk memodelkan ``noise'' atau ketidakpastian pasar yang lebih realistis dalam \textit{mixed state} matriks densitas kuantum, di mana pasar tidak sepenuhnya acak murni tetapi memiliki struktur fraktal yang mendasari.
+
+\subsubsection{Fraktal dan Analisis Runtun Waktu (Time Series)}
+Analisis pasar keuangan modern sering menggunakan \textbf{konsep dimensi fraktal} untuk mengukur kekasaran dan kompleksitas data runtun waktu yang tidak dapat dijelaskan oleh model Gaussian standar. Dimensi fraktal ($D$) berkaitan erat dengan \textit{Hurst Exponent} ($H$), parameter yang mengukur autokorelasi dalam runtun waktu \citep{el-nabulsi_qualitative_2025}.
+
+Dalam konteks \textit{Fractal Market Hypothesis}, dimensi fraktal memberikan indikator stabilitas pasar; aset berisiko tinggi cenderung memiliki dimensi fraktal yang lebih tinggi, sementara aset stabil memiliki dimensi fraktal mendekati satu. Operator derivatif fraktal, seperti
+\[ \nabla^\alpha f(x) := (x/x_0)^{1-\alpha}(\nabla + \frac{1-\alpha}{2x})f(x) \]
+
+yang digunakan untuk memodelkan dinamika harga aset dalam dimensi fraktal, memberikan generalisasi yang lebih akurat daripada kalkulus standar untuk sistem yang tidak kontinu atau memiliki memori jangka panjang.
+
+Secara empiris, nilai Hurst Exponent ($H$) diestimasi menggunakan metode \textbf{Analisis Rescaled Range (R/S)}. Metode ini, yang diperkenalkan oleh Harold Edwin Hurst, membandingkan rentang fluktuasi data ($R$) terhadap standar deviasinya ($S$) pada berbagai skala waktu ($n$). Hubungan skala ini mengikuti hukum pangkat:
+
+\[ (R/S)_n = c \cdot n^H \]
+
+Di mana $c$ adalah konstanta. Analisis ini mendeteksi keberadaan memori jangka panjang dalam data runtun waktu; nilai $H > 0.5$ menunjukkan persistensi (tren positif/negatif yang berlanjut), sedangkan $H < 0.5$ menunjukkan anti-persistensi (kembali ke rata-rata).
+
+\subsubsection{Dinamika Mean-Reverting dan Arbitrase Statistik}
+\textbf{Arbitrase statistik} adalah strategi perdagangan yang mengeksploitasi inefisiensi harga jangka pendek antara sekuritas yang saling terkait secara statistik. Strategi ini sering bergantung pada konsep \textbf{kointegrasi}, di mana kombinasi linear dari dua atau lebih deret waktu harga aset yang tidak stasioner menjadi stasioner (mean-reverting) \citep{li_statistical_2022}.
+
+Misalkan $S_t^1$ dan $S_t^2$ adalah harga dua saham yang kointegrasi. Maka terdapat koefisien $\beta$ sehingga \textit{spread} $Z_t = \ln S_t^1 - \beta \ln S_t^2$ bersifat stasioner. Dinamika \textit{spread} ini sering dimodelkan menggunakan proses \textbf{Ornstein-Uhlenbeck (OU)}:
+
+\[ dZ_t = \kappa (\theta - Z_t) dt + \eta dW_t \]
+
+di mana $\kappa$ adalah kecepatan \textit{mean-reversion}, $\theta$ adalah rata-rata jangka panjang, dan $\eta$ adalah volatilitas \textit{spread}. Strategi perdagangan melibatkan pembelian portofolio \textit{spread} ketika $Z_t$ menyimpang secara signifikan dari $\theta$ dan menutup posisi ketika kembali ke rata-rata, memanfaatkan sifat \textit{mean-reverting} tersebut. Pendekatan ini memungkinkan konstruksi portofolio ``market-neutral'' yang kebal terhadap pergerakan pasar secara umum namun tetap menghasilkan \textit{alpha}.

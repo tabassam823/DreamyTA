@@ -1,0 +1,26 @@
+\section{Metodologi Reduksi pada Kerangka HJM}
+
+\begin{frame}{Konstruksi Matriks Densitas dan Volatilitas Finansial}
+    \begin{itemize}
+        \item Parameter observasi diturunkan dari data riwayat \textit{forward rates} yang membedah spektrum tenor komersial 1, 3, dan 6 bulan berturut-turut.
+        \item Fluktuasi \textit{forward rates} diagregasi untuk mengonstruksi matriks korelasi silang empiris. Komposisi elemen untuk maturitas dimensi dua (1 dan 3 bulan) dijabarkan sebagai berikut:
+        $$ \sigma_2 = \begin{pmatrix} 0.6407 & 0.3288 \\ 0.3288 & 0.3593 \end{pmatrix} \times 10^{-4} $$
+        \item Komposisi matriks tersebut direkayasa lebih lanjut melalui normalisasi eksak ($\text{tr}[\rho] = 1$) guna mematuhi aksioma pemetaan pada fungsi gelombang \textit{quantum state}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Analisis Spektral melalui \textit{Principal Component Analysis}}
+    \begin{itemize}
+        \item Dekomposisi ortogonal matriks densitas $\rho_2$ membuktikan disparitas absolut pada tingkat komponen spektral utama:
+        $$ \lambda_1 = 0.8576 \gg \lambda_2 = 0.1424 $$
+        \item Kesenjangan \textit{eigenvalue} ($\lambda_{max} \gg \lambda_2$) melegitimasi fenomena bahwa migrasi sentral kurva suku bunga (\textit{parallel shift}) merepresentasikan fraksi esensial pergerakan pasar.
+        \item Pemangkasan sisa dimensi menjadi hanya 1 komponen ekuator mampu mereduksi kompleksitas sirkuit secara linier untuk menangkal laju dekoherensi yang umum pada teknologi NISQ kontemporer.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Arsitektur Algoritma Kuantum Iteratif}
+    \begin{itemize}
+        \item \textbf{Fase Ekstraksi (Estimasi \textit{Eigenvector}):} Registrasi dimulai dengan injeksi \textit{random state} probabilitas homogen $\ket{b_0}$, diproyeksikan pada target nilai biner 2-bit. Hasil iterasi dieksekusi secara sirkular sebagai substitusi \textit{input state} baru hingga mencapai titik saturasi stabilitas komputasi.
+        \item \textbf{Fase Refinasi (\textit{Eigenvalue Precision}):} Menjadikan isolat \textit{eigenvector} dominan $\ket{u_{max}}$ sebagai state referensi untuk dimasukkan kembali pada modul \textit{Quantum Phase Estimation} (QPE) berdimensi 3-bit, membangkitkan komputasi dengan fidelitas optimal mencapai $\approx 0.965$.
+    \end{itemize}
+\end{frame}

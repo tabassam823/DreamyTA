@@ -1,0 +1,15 @@
+\begin{frame}{4.1 Inisialisasi Register dan State Target $| \psi_4 \rangle$}
+    Sistem menggunakan register fase $n=1$ ($q_0$) dan register target 2-qubit ($q_1, q_2$). State target disiapkan menggunakan data \textit{counts} historis ($N_{total} = 5456$):
+    \begin{equation}
+        | \psi_4 \rangle = \begin{pmatrix} c_{00} \\ c_{01} \\ c_{10} \\ c_{11} \end{pmatrix} = \frac{1}{\sqrt{5456}} \begin{pmatrix} \sqrt{3087} \\ \sqrt{906} \\ \sqrt{1405} \\ \sqrt{58} \end{pmatrix} \approx \begin{pmatrix} 0.752 \\ 0.407 \\ 0.507 \\ 0.103 \end{pmatrix}
+    \end{equation}
+    Vektor ini merepresentasikan estimasi \textit{eigenvector} utama dalam basis komputasi $\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}$.
+\end{frame}
+
+\begin{frame}{4.2 Konstruksi $|\Phi_0\rangle$ melalui Walsh-Hadamard}
+    Register fase diinisialisasi menggunakan gerbang Hadamard tunggal pada $q_0$ untuk menciptakan superposisi biner yang akan menampung informasi \textit{eigenvalue}:
+    \begin{equation}
+        |\Phi_0\rangle = H_{q_0} |0\rangle \otimes |\psi_4\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |\psi_4\rangle
+    \end{equation}
+    Pada tahap ini, qubit $q_0$ berada dalam state $|+\rangle$, siap untuk menerima \textit{phase kickback} dari interaksi kompleks dengan register target $| \psi_4 \rangle$.
+\end{frame}

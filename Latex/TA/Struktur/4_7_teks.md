@@ -1,0 +1,10 @@
+# 4.7 Evolusi Entropi Von Neumann dan Distribusi Probabilitas
+
+## Landasan Teoretis Entropi Informasi
+### Paragraf 1 (Definisi Entropi dan Konversi Bit)
+Konsep entropi secara fundamental merepresentasikan ukuran derajat ketidakpastian atau keacakan informasi yang terkandung di dalam suatu sistem stokastik melalui kuantifikasi matematis yang presisi. Secara teoretis, keacakan ini dikonversi menjadi satuan informasi digital berupa *bit* melalui penggunaan logaritma berbasis dua dalam formulasi entropi *Shannon*. Satuan *bit* tersebut mencerminkan jumlah minimum pertanyaan biner yang diperlukan untuk mengidentifikasi suatu keadaan sistem dari distribusi probabilitas yang diberikan secara objektif. Formulasi matematis entropi *Shannon* ($H$) didefinisikan sebagai $H = -\sum_{i} p_i \log_2 p_i$, di mana nilai $-\log_2 p_i$ merepresentasikan kandungan informasi atau kejutan (*surprisal*) dari setiap kejadian individu. Dengan demikian, nilai entropi total merupakan nilai harapan (*expected value*) dari kandungan informasi tersebut, yang secara fisis menunjukkan batas teoretis kompresi data dalam sistem informasi digital.
+
+### Paragraf 2 (Transisi ke Entropi Von Neumann)
+Dalam mekanika kuantum, paradigma ketidakpastian tersebut diperluas menjadi entropi *Von Neumann* guna mengakomodasi sifat dualitas dan superposisi yang melekat pada operator densitas sistem. Entropi *Von Neumann* ($S$) didefinisikan melalui *trace* dari perkalian matriks densitas ($\rho$) dengan logaritma matriks tersebut, yang secara matematis merepresentasikan derajat kemurnian suatu keadaan kuantum dalam ruang Hilbert. Jika matriks densitas didiagonalisasi menjadi kumpulan nilai eigen ($\lambda_i$), maka formulasi entropi ini bertransformasi menjadi bentuk yang analog dengan entropi *Shannon* namun bekerja pada spektrum *eigenstate* kuantum. Nilai entropi ini menjadi indikator kritis bagi integritas informasi sistem, di mana nilai yang mendekati nol menunjukkan keadaan murni yang stabil, sementara nilai tinggi mengonfirmasi adanya keterikatan (*entanglement*) atau campuran statistik yang kompleks.
+
+...
