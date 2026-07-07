@@ -39,6 +39,19 @@ format:
 <!-- include Fase_8.qmd -->
 <!-- include Fase_9.qmd -->
 
+
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh; text-align: center; padding: 0 100px;">
+  <h3 style="color: #d9534f; margin-bottom: 20px;">⚠️ PERHATIAN ⚠️</h3>
+  <p style="font-size: 1.2em; line-height: 1.6;">
+    Materi yang disajikan dalam presentasi ini murni untuk <strong>tujuan akademis dan penelitian keilmuan</strong>. Presentasi ini <strong>bukan</strong> merupakan bentuk rekomendasi, ajakan, maupun nasihat finansial profesional.
+  </p>
+  <p style="font-size: 1em; color: #555; margin-top: 30px;">
+    Audiens diharapkan untuk selalu bertindak bijak, melakukan riset mandiri (<i>Do Your Own Research</i>), dan bertanggung jawab penuh atas segala bentuk keputusan investasi serta risiko pertumbuhan modalnya masing-masing.
+  </p>
+</div>
+
+
 {{< include Fase_LatarBelakang.qmd >}}
 {{< include Fase_Metodologi.qmd >}}
 {{< include Fase_Hasil.qmd >}}
