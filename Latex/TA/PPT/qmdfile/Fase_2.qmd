@@ -1,42 +1,46 @@
 # Fase 2: Strategi Analisis Investasi
 
-## Analisis Fundamental
-:::: {.columns}
-::: {.column width="55%"}
-* **Ekonometrik Perusahaan**
-    * Laporan keuangan
-    * Kapitalisasi pasar
-    * Peran tokoh-tokoh yang terlibat
-* **Kesehatan Fiskal**
-    * *Price-to-Earnings Ratio* (PER)
-    * *Debt-to-Equity Ratio* (DER)
-* **Sentimen Pasar**
-    * Berita ekonomi
-    * Kebijakan pemerintah
-    * Tren media sosial
-:::
-::: {.column width="45%"}
-![](../Gambar/221_Cashflow_statement.png)
+## Analisis Fundamental dan Teknikal
 
-<div style="font-size: 0.7em; text-align: center;">Struktur laporan arus kas fundamental.</div>
+:::: {.columns}
+::: {.column width="45%"}
+**Analisis Fundamental**
+
+<div style="text-align: center;">
+![](../Gambar/221_Cashflow_statement.png){width="60%"}
+<div style="font-size: 0.7em;">Struktur laporan arus kas fundamental.</div>
+</div>
+
+::: {style="font-size: 0.85em; margin-top: 15px;"}
+* Ekonometrik Perusahaan
+* Kesehatan Fiskal
+* Sentimen Pasar
+:::
+:::
+
+::: {.column width="55%"}
+**Analisis Teknikal**
+
+:::: {style="display: flex; justify-content: space-between; align-items: flex-end; text-align: center;"}
+::: {style="width: 32%;"}
+![](../Gambar/222_Candle.png)
+<div style="font-size: 0.6em;">*Candlestick*</div>
+:::
+::: {style="width: 32%;"}
+![](../Gambar/222_Chart.png)
+<div style="font-size: 0.6em;">*Price Chart*</div>
+:::
+::: {style="width: 32%;"}
+![](../Gambar/222_SnR.png)
+<div style="font-size: 0.6em;">*Support & Resistance*</div>
 :::
 ::::
 
----
+<br><br><br>
 
-## Analisis Teknikal
-:::: {.columns}
-::: {.column width="33%"}
-![](../Gambar/222_Candle.png)
-<div style="font-size: 0.7em; text-align: center;">*Candlestick*</div>
+::: {style="font-size: 0.85em; margin-top: 15px;"}
+* Representasi Psikologi Kolektif dari Agen Pasar
 :::
-::: {.column width="33%"}
-![](../Gambar/222_Chart.png)
-<div style="font-size: 0.7em; text-align: center;">*Price Chart*</div>
-:::
-::: {.column width="33%"}
-![](../Gambar/222_SnR.png)
-<div style="font-size: 0.7em; text-align: center;">*Support & Resistance*</div>
 :::
 ::::
 
@@ -44,20 +48,38 @@
 
 ## Analisis Kuantitatif
 ::::: {.columns}
-:::: {.column width="50%"}
-::: {style="font-size: 0.75em;"}
+:::: {.column width="35%"}
+::: {style="font-size: 0.6em;"}
 * **Simple Return ($R$):**
   $$ R_t = \frac{P_t - P_{t-1}}{P_{t-1}} $$
+* **Expected Return ($\bar{R}$):**
+  $$ \bar{R} = \frac{1}{n} \sum_{t=1}^n R_t $$
 * **Variance ($\sigma^2$):**
   $$ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (R_t - \bar{R})^2 $$
 * **Covariance ($\sigma_{ij}$):**
   $$ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) $$
-* $P_t$: Harga pada waktu $t$
 :::
 ::::
-:::: {.column width="50%"}
-![](../Gambar/223_Price_log.png)
-<div style="font-size: 0.7em; text-align: center;">Transformasi pergerakan harga saham.</div>
+:::: {.column width="35%"}
+::: {style="font-size: 0.6em;"}
+* **Log Return ($r$):**
+  $$ r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) $$
+* **Expected Return ($\bar{r}$):**
+  $$ \bar{r} = \frac{1}{n} \sum_{t=1}^n r_t $$
+* **Variance ($\sigma^2$):**
+  $$ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (r_t - \bar{r})^2 $$
+* **Covariance ($\sigma_{ij}$):**
+  $$ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j) $$
+:::
+::::
+:::: {.column width="30%"}
+<div style="text-align: center; margin-top: 10px;">
+![](../Gambar/223_Price_log.png){width="100%"}
+<div style="font-size: 0.6em;">Transformasi pergerakan harga saham.</div>
+</div>
+::: {style="font-size: 0.6em; margin-top: 15px;"}
+* $P_t$: Harga pada waktu $t$
+:::
 ::::
 :::::
 
@@ -68,7 +90,7 @@
 ::: {.panel-tabset}
 ### Rumus Utama
 ::::: {.columns}
-:::: {.column width="55%"}
+:::: {.column width="60%"}
 ::: {style="font-size: 0.75em;"}
 * **Mean-Variance:**
   $$ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i $$
@@ -86,8 +108,15 @@
 <br><br>
 ::::
 :::: {.column width="45%"}
-![](../Gambar/224_Efficient_Frontier.png)
-<div style="font-size: 0.7em; text-align: center;">Grafik Efficient Frontier</div>
+<div style="text-align: center;">
+![](../Gambar/224_Efficient_Frontier.png){width="75%"}
+<div style="font-size: 0.7em;">Grafik Efficient Frontier</div>
+</div>
+<br>
+
+::: {style="font-size: 0.75em;"}
+* Investor cenderung mencari portofolio pada *Efficient Frontier* untuk memaksimalkan *return* dengan risiko yang minimal.
+:::
 ::::
 :::::
 
@@ -130,7 +159,6 @@ Nilai $x_i = 1$ merepresentasikan **beli**, sedangkan $x_i = 0$ merepresentasika
 |:---:|:---:|:---:|
 | Variabel keputusan | $\omega_i \in [0, 1]$ | $x_i \in \{0, 1\}$ |
 | Kendala | $\sum \omega_i = 1$ | $\sum x_i = K$ |
-| Bobot per aset | $\omega_i$ (kontinu) | $1/K$ (seragam) |
 
 <br><br><br>
 </div>

@@ -1,0 +1,15 @@
+:::: {.panel-tabset}
+
+### Rumus Utama
+
+::: {style="font-size: 0.75em; text-align: center; padding-top: 15px;"}
+
+**Mean-Variance:**
+
+---
+
+$\mu_i$
+
+:::
+
+::::

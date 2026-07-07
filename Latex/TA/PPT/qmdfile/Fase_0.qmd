@@ -3,39 +3,29 @@
 ## Latar Belakang Masalah
 :::: {.columns}
 
-::: {.column width="30%"}
+::: {.column width="50%"}
 <div style="text-align: center;">
 
 ::: {.fragment .fade-in}
-![](../Gambar/Markowitz_Foto.png){width="80%" style="border-radius: 10px; margin-bottom: 10px;"}
+![](../Gambar/Markowitz_Foto.png){width="30%" style="border-radius: 10px; margin-bottom: 10px;"}
 :::
 
 ::: {.fragment .fade-in}
-![](../Gambar/Porto_selection.png){width="100%" style="border-radius: 10px;"}
+![](../Gambar/Porto_selection.png){width="45%" style="border-radius: 10px;"}
 :::
 
 </div>
 :::
 
-::: {.column width="30%"}
+::: {.column width="50%"}
 <div style="text-align: center;">
 
 ::: {.fragment .fade-in}
-![](../Gambar/Mantegna_Foto.png){width="80%" style="border-radius: 10px; margin-bottom: 10px;"}
+![](../Gambar/Mantegna_Foto.png){width="30%" style="border-radius: 10px; margin-bottom: 10px;"}
 :::
 
 ::: {.fragment .fade-in}
-![](../Gambar/intro_econophys.png){width="100%" style="border-radius: 10px;"}
-:::
-
-</div>
-:::
-
-::: {.column width="30%"}
-<div style="text-align: center;">
-
-::: {.fragment .fade-in}
-![](../Gambar/komputer_kuantum.png){width="100%" style="border-radius: 10px;"}
+![](../Gambar/intro_econophys.png){width="45%" style="border-radius: 10px;"}
 :::
 
 </div>
@@ -79,7 +69,7 @@ border:2px solid #cc3333;
 background:#fff6f6;
 }
 
-.solution{
+.solusi{
 border:2px solid #2e8b57;
 background:#f3fff5;
 }
@@ -188,7 +178,7 @@ yang rentan mengalami
 
 ::: {.column width="23%"}
 
-<div class="card solution">
+<div class="card solusi">
 
 <div class="title">
 Solusi

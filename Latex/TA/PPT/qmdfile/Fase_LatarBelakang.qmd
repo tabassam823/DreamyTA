@@ -1,0 +1,184 @@
+# Fase Latar Belakang
+
+## Ekonomi dan Investasi
+
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 30px;">
+
+:::: {.column width="33%"}
+
+![](../Gambar/nixxon_shock.png){width="100%"}
+![](../Gambar/212_Inflasi.png){width="100%"}
+<div style="font-size: 0.7em; text-align: center; margin-top:10px;">Inflasi & Guncangan Ekonomi</div>
+
+::::
+
+:::: {.column width="33%"}
+
+![](../Gambar/213_Investasi.png){width="100%"}
+<div style="font-size: 0.7em; text-align: center; margin-top:10px;">Urgensi Investasi</div>
+
+::::
+
+:::: {.column width="33%"}
+
+![](../Gambar/Diversifikasi.png){width="100%"}
+<div style="font-size: 0.7em; text-align: center; margin-top:10px;">Diversifikasi Portofolio</div>
+
+::::
+
+</div>
+
+---
+
+## Model Markowitz dan Ising
+
+<div class="85em" style="font-size: 0;">
+
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+**Model Markowitz & Pareto Optimum**
+
+* **Mean-Variance:**
+<div class="85em" style="font-size: 0;">
+  $$ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i $$
+
+</div>
+
+* Investor mencari portofolio pada *Efficient Frontier* (Pareto Optimum) untuk memaksimalkan *return* pada tingkat risiko tertentu.
+
+<div style="text-align: center; margin-top: 0px;">
+![](../Gambar/224_Efficient_Frontier.png){width="55%"}
+<div style="font-size: 0.7em;">Grafik Efficient Frontier</div>
+
+</div>
+
+::::
+
+:::: {.column width="50%"}
+
+**Formulasi ke Hamiltonian Ising**
+
+* Model Markowitz diubah menjadi variabel biner (beli/tidak beli), lalu dipetakan ke *spin* $\{-1, 1\}$.
+* **Hamiltonian Ising Umum:**
+  $$ \hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C $$
+* $h_i$ merepresentasikan kecenderungan harga pasar, dan $J_{ij}$ menggambarkan korelasi antar aset.
+
+::::
+
+:::::
+
+</div>
+
+---
+
+## Sirkuit Kuantum Berparameter (PQC)
+
+::::: {.columns}
+
+:::: {.column width="45%"}
+
+**Representasi *Ansatz* Hibrida**
+
+* **Eksplorasi Ruang Solusi (*Ansatz*):** PQC bertindak sebagai rangkaian gerbang kuantum dengan parameter kontinu yang mengeksplorasi ruang parameter untuk mencari kandidat solusi.
+* **Optimasi Hibrida Kuantum-Klasik:** Kualitas keadaan keluaran sirkuit dievaluasi melalui fungsi biaya dan parameternya diperbarui secara iteratif oleh algoritma optimasi klasik.
+
+::::
+
+:::: {.column width="55%"}
+
+<div style="text-align: center; margin-top: 10px;">
+![](../Gambar/PQC_VQDNN.png){width="100%"}
+</div>
+<div style="font-size: 0.7em; text-align: center; margin-top: 5px;">Alur Kerja Sirkuit Kuantum Berparameter (PQC)</div>
+
+::::
+
+:::::
+
+---
+
+## Hamiltonian Ising ke Komputer Kuantum
+
+* **Variational Quantum Eigensolver (VQE):**
+  Algoritma hibrida kuantum-klasik untuk mencari konfigurasi energi terendah (*ground state*).
+* **Proses Pengerjaan:**
+  1. Hamiltonian Ising $\hat{\mathcal{H}}$ yang mewakili masalah portofolio digunakan sebagai *observable* kuantum.
+  2. Sirkuit Kuantum Berparameter menyiapkan status *ansatz* $|\psi(\theta)\rangle$.
+  3. Komputer kuantum mengukur nilai ekspektasi energi $\langle\psi(\theta)|\hat{\mathcal{H}}|\psi(\theta)\rangle$.
+  4. Komputer klasik mengoptimalkan parameter rotasi $\theta$ secara iteratif untuk meminimalkan energi, yang berkorespondensi dengan konfigurasi portofolio terbaik.
+
+---
+
+## Tantangan Efisiensi dan Solusi *Nash Equilibrium*
+
+::::: {.columns}
+
+:::: {.column width="60%"}
+
+**Masalah Efisiensi (*Barren Plateau*)**
+
+* Inisialisasi parameter acak pada sirkuit kuantum rentan terjebak di area datar (*Barren Plateau*), menghambat VQE mencapai solusi optimal.
+
+**Solusi: *Warm-Start Strategy***
+
+* Memanfaatkan kondisi **Nash Equilibrium** dari konsep *Game Theory* (dalam skema *Exact Potential Game*).
+* Titik Nash bertindak sebagai tebakan awal (*warm-start*) yang sudah efisien secara rasional, mempercepat optimasi kuantum.
+
+::::
+
+:::: {.column width="40%"}
+
+![](../Gambar/barren_plateau.png){width="70%"}
+![](../Gambar/nasheq.png){width="60%"}
+
+::::
+
+:::::
+
+---
+
+## Metode Evaluasi Performa (Backtesting)
+
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+![](../Gambar/backtest.png)
+<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">Simulasi riwayat harga dan rebalance portofolio secara periodik</div>
+
+::::
+
+:::: {.column width="50%"}
+
+![](../Gambar/strategi_1_vs_2.png)
+<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">Diagram perbandingan Strategi 1 vs Strategi 2</div>
+
+::::
+
+:::::
+
+---
+
+## Tujuan Penelitian
+
+1. Menganalisis formulasi bias aset sebagai parameter medan lokal ($h_i$) dan interaksi antar aset sebagai koefisien kopling ($J_{ij}$) melalui pendekatan fungsi potensial dalam sistem Hamiltonian berbasis *Exact Potential Game* (EPG).
+2. Mengevaluasi kontribusi strategi *warm-start* berbasis *Nash Equilibrium* dalam meningkatkan efisiensi pencarian solusi optimal pada algoritma VQE.
+3. Menguji kapabilitas algoritma VQE yang menggunakan optimasi SPSA dan *Ansatz EfficientSU(2)* untuk menghasilkan keputusan alokasi aset yang optimal dalam kondisi pasar yang kompleks.
+
+---
+
+## Batasan Masalah (1/2)
+
+1. Portofolio yang dianalisis dibatasi pada pemilihan 1 aset dari 2 pilihan aset pada sistem $N=2$ dan 2 aset dari 4 pilihan aset pada sistem $N=4$.
+2. Model permainan yang digunakan adalah skema *non zero-sum game* dalam kerangka *Exact Potential Game*.
+3. Simulasi dan implementasi algoritma dilakukan menggunakan simulator *Pennylane* tanpa mempertimbangkan *noise*.
+
+---
+
+## Batasan Masalah (2/2)
+
+4. Tugas akhir ini hanya merupakan *proof-of-concept* dari implementasi *warm-start* ekuilibrium Nash terhadap performa algoritma VQE dalam menemukan solusi *ground state* pada model portofolio hibrida.
+5. Analisis Entropi Von Neumann dibatasi sebagai indikator perubahan distribusi probabilitas keadaan kuantum selama proses optimasi VQE dan tidak digunakan sebagai kajian mendalam mengenai sifat keterbelitan dari *ansatz*.
+6. Analisis berfokus pada pengaruh *warm-start* ekuilibrium Nash terhadap proses optimasi VQE, bukan untuk membuktikan keunggulan komputasi kuantum terhadap metode klasik.

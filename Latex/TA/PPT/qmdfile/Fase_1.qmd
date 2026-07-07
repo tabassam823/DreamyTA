@@ -1,6 +1,6 @@
 # Fase 1: Landasan Finansial
 
-## Konsep Uang {auto-animate="true"}
+<!-- ## Konsep Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh;"}
 :::
@@ -59,19 +59,21 @@
 ![](../Gambar/211_Logam_depositphotos.com.png){data-id="img2" width="20%"}
 ![](../Gambar/211_Fiat_depositphotos.com.png){data-id="img3" width="20%"}
 ![](../Gambar/211_Digital_klasika.kompas.id.png){data-id="img4" width="20%"}
-:::
+::: -->
 
 ## Inflasi
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 50px;"}
 ![](../Gambar/nixxon_shock.png){width="40%"}
-![](../Gambar/212_Inflasi.png){width="40%"}
+![](../Gambar/212_Inflasi.png){width="50%"}
 :::
 
 ## Investasi
 
 :::: {.columns style="display: flex; align-items: center; height: 70vh;"}
 ::: {.column width="50%"}
+Investasi merupakan usaha untuk memperoleh keuntungan dari penempatan dana pada aset tertentu yang memiliki tujuan:
+
 * **Proteksi Aset**
 * **Pemutar Ekonomi**
 * **Risk-Return & Risk Profile**
@@ -85,9 +87,17 @@
 
 :::: {.columns style="display: flex; align-items: center; height: 70vh;"}
 ::: {.column width="50%"}
-* **Loss Aversion (Teori Prospek)**
+* **Loss Aversion (Teori Prospek)**: 
+
+Individu cenderung merasakan sakit kerugian lebih besar daripada kebahagiaan atas keuntungan walaupun nilainya kerugian dan keuntungannya sama.
 :::
 ::: {.column width="50%"}
 ![](../Gambar/214_RiskAversion_invespcro.com.png){width="100%"}
 :::
 ::::
+
+<div style="font-size:0.45em;margin-top:20px;color:#666;text-align:center;">
+
+Sumber: Kahneman & Tversky (1979)
+
+</div>

@@ -33,5 +33,5 @@
 # Fase 8 
 
 # Fase 9
-1. masih bisa lebih lengkap
+1. Dikasih keterangan, sharpe ratio, maximum drawdown, SLSQP, lalu masukkan ke kesimpulan pada bobotnya
 2. 

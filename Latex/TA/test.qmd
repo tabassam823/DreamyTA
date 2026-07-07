@@ -1,0 +1,16 @@
+:::: {.panel-tabset}
+
+### Penurunan Rumus
+
+::: {.scrollable style="max-height: 450px; font-size: 0.7em;"}
+
+| Simbol | Domain Kontinu | Domain Biner |
+|:---:|:---:|:---:|
+| Variabel keputusan | $\omega_i \in [0, 1]$ | $x_i \in \{0, 1\}$ |
+| Kendala | $\sum \omega_i = 1$ | $\sum x_i = K$ |
+
+<br><br><br>
+
+:::
+
+::::

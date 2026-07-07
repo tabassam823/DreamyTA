@@ -1,0 +1,282 @@
+# Fase Hasil dan Pembahasan
+
+## Simulasi Interaktif Konvergensi VQE
+
+<iframe src="interactive_vqe.html" width="100%" height="600px" style="border:none; border-radius:15px; background:transparent;"></iframe>
+
+<div class="55em" style="font-size:0; text-align:center; color:#666; margin-top:5px;">
+Silakan sesuaikan parameter bias dan interaksi ($h_i$, $J_{ij}$) lalu klik <b>Mulai SPSA</b> untuk melihat simulasi konvergensi.
+
+</div>
+
+---
+
+## Analisis Entropi Von Neumann
+
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+**Entropi Tinggi (Solusi Tidak Optimal)**
+<div style="text-align: center; margin-top: 10px;">
+![](../Gambar/Entropi_tinggi.png){width="100%"}
+
+</div>
+
+<div style="font-size: 0.6em; text-align: justify; margin-top: 10px;">
+Probabilitas (*state*) tersebar merata. Hal ini menunjukkan indikasi *barren plateau* atau kondisi di mana VQE belum menemukan *ground state*.
+
+</div>
+
+::::
+
+:::: {.column width="50%"}
+
+**Entropi Rendah (Solusi Optimal)**
+<div style="text-align: center; margin-top: 10px;">
+![](../Gambar/Entropi_rendah.png){width="100%"}
+
+</div>
+
+<div style="font-size: 0.6em; text-align: justify; margin-top: 10px;">
+Probabilitas mengkristal di satu *state* dominan. Solusi telah konvergen ke titik minimum energi global.
+
+</div>
+
+::::
+
+:::::
+
+---
+
+## Pergerakan Harga Saham ($N=4$)
+
+Kombinasi saham BBCA, ADRO, TLKM, dan SMGR (2021-2023) dievaluasi dengan mekanisme *rebalancing* bulanan.
+
+![](../Gambar/pergerakan_harga_asli_N4.png)
+
+---
+
+## Perbandingan Pertumbuhan Modal Benchmark ($N=2$)
+
+Perbandingan performa *backtesting* antara Portofolio Nash murni (tanpa VQE) dan optimasi portofolio klasik SLSQP untuk 2 aset.
+
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+**Portofolio Nash Murni**
+![](../Gambar/hasil_backtest_nash_N2.png)
+
+::::
+
+:::: {.column width="50%"}
+
+**Optimasi Klasik (SLSQP)**
+![](../Gambar/slsqp_vs_benchmarks_N2.png)
+
+::::
+
+:::::
+
+---
+
+## Perbandingan Pertumbuhan Modal Benchmark ($N=4$)
+
+Perbandingan performa *backtesting* antara Portofolio Nash murni (tanpa VQE) dan optimasi portofolio klasik SLSQP untuk 4 aset.
+
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+**Portofolio Nash Murni**
+![](../Gambar/hasil_backtest_nash_N4.png)
+
+::::
+
+:::: {.column width="50%"}
+
+**Optimasi Klasik (SLSQP)**
+![](../Gambar/slsqp_vs_benchmarks_N4.png)
+
+::::
+
+:::::
+
+---
+
+## Perbandingan Pertumbuhan Modal ($N=2$)
+
+Perbandingan antara VQE Murni (Tanpa GT) dan Algoritma GT-VQE (Hibrida) untuk 2 aset.
+
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+**VQE Murni (Tanpa GT)**
+![](../Gambar/NoGT_hasil_backtest_vqe_N2.png)
+
+::::
+
+:::: {.column width="50%"}
+
+**GT-VQE (Hibrida)**
+![](../Gambar/GT_hasil_backtest_vqe_N2.png)
+
+::::
+
+:::::
+
+---
+
+## Perbandingan Pertumbuhan Modal ($N=4$)
+
+Perbandingan antara VQE Murni (Tanpa GT) dan Algoritma GT-VQE (Hibrida) untuk 4 aset.
+
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+**VQE Murni (Tanpa GT)**
+![](../Gambar/NoGT_hasil_backtest_vqe_N4.png)
+
+::::
+
+:::: {.column width="50%"}
+
+**GT-VQE (Hibrida)**
+![](../Gambar/GT_hasil_backtest_vqe_N4.png)
+
+::::
+
+:::::
+
+---
+
+## Ringkasan Performa Simulasi Finansial
+
+Tabel perbandingan *backtesting* strategi Kuantum, SLSQP, dan *Equal Weight* untuk Sistem $N=2$ dan $N=4$.
+
+| Strategi Algoritma | Return ($N=2$) | Sharpe ($N=2$) | MDD ($N=2$) | Return ($N=4$) | Sharpe ($N=4$) | MDD ($N=4$) |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **GT-VQE (Hibrida)** | **145,07%** | **1,0185** | 30,33% | **73,15%** | **1,0107** | **16,68%** |
+| VQE (Tanpa GT) | 121,30% | 0,9331 | 30,33% | 16,89% | 0,3592 | 20,89% |
+| SLSQP (Klasik) | 51,34% | 0,6736 | **15,91%** | 12,91% | 0,2810 | 21,12% |
+| *Equal Weight* | 97,88% | 0,9764 | 27,49% | 35,57% | 0,6790 | 18,42% |
+
+**Catatan:** GT-VQE mendominasi performa pengembalian maupun rasio *Sharpe* karena inisialisasi *Nash Equilibrium* berhasil mengeksploitasi informasi struktural pasar.
+
+---
+
+## Kesimpulan
+
+::::: {.columns}
+
+:::: {.column width="28%"}
+
+### Formulasi EPG
+
+<div style="font-size: 0.6em; text-align: justify;">
+Formulasi model Markowitz ke dalam kerangka <i>Exact Potential Game</i> (EPG) telah berhasil memetakan utilitas ekonomi menjadi sistem Hamiltonian fisis secara akurat. Penggunaan <i>log return</i> efektif menjaga simetri interaksi risiko tanpa distorsi, sementara implementasi suku penalti mencegah sirkuit kuantum terjebak pada status portofolio yang melanggar diversifikasi.
+
+</div>
+
+::::
+
+:::: {.column width="8%"}
+
+<div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">&#10140;</div>
+
+::::
+
+:::: {.column width="28%"}
+
+### Warm-Start Nash
+
+<div style="font-size: 0.6em; text-align: justify;">
+Penerapan <i>Pure Strategy Nash Equilibrium</i> (PSNE) terbukti meningkatkan efisiensi algoritma VQE. Injeksi solusi Nash memandu sirkuit melewati area <i>barren plateaus</i> dan memicu keruntuhan entropi <i>Von Neumann</i>, memungkinkan pencapaian <i>ground state</i> pada kedalaman sirkuit yang sangat dangkal ($L=2$ hingga $L=3$).
+
+</div>
+
+::::
+
+:::: {.column width="8%"}
+
+<div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">&#10140;</div>
+
+::::
+
+:::: {.column width="28%"}
+
+### Performa GT-VQE
+
+<div style="font-size: 0.6em; text-align: justify;">
+Kombinasi arsitektur <i>Hardware-Efficient Ansatz</i> dengan optimasi SPSA memungkinkan sistem merespons volatilitas pasar melalui mekanisme rebalancing dinamis. Hasil <i>backtesting</i> memvalidasi bahwa algoritma GT-VQE menghasilkan pertumbuhan modal superior dibandingkan VQE murni dan metode klasik dengan <i>Sharpe Ratio</i> 1,0107 ($N=4$).
+
+</div>
+
+::::
+
+:::::
+
+---
+
+## Saran Pengembangan
+
+::::: {.columns}
+
+:::: {.column width="28%"}
+
+### Noise Sirkuit
+
+<div style="font-size: 0.6em; text-align: justify;">
+Mempertimbangkan parameter <i>noise</i> sirkuit, seperti dekoherensi qubit dan <i>gate fidelity</i> dalam mengeksekusi algoritma ini agar divalidasi dan diaplikasikan pada infrastruktur perangkat keras kuantum sesungguhnya.
+
+</div>
+
+::::
+
+:::: {.column width="8%"}
+
+<div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">&#10140;</div>
+
+::::
+
+:::: {.column width="28%"}
+
+### Variasi Ansatz
+
+<div style="font-size: 0.6em; text-align: justify;">
+Menggunakan variasi struktur <i>ansatz</i> lain (seperti <i>Qubit-Efficient</i> atau <i>Variational Quantum Circuit</i>) serta membandingkan performa berbagai algoritma optimasi klasik lainnya untuk menemukan kombinasi hibrida dengan laju konvergensi paling efisien.
+
+</div>
+
+::::
+
+:::: {.column width="8%"}
+
+<div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">&#10140;</div>
+
+::::
+
+:::: {.column width="28%"}
+
+### Black Swan
+
+<div style="font-size: 0.6em; text-align: justify;">
+Menggunakan rentang periode data historis yang lebih panjang dan melakukan pengujian pada periode fenomena <i>Black Swan</i> atau krisis ekonomi untuk mengevaluasi agilitas dan reliabilitas algoritma dalam mempertahankan stabilitas portofolio di pasar ekstrem.
+
+</div>
+
+::::
+
+:::::
+
+---
+
+<br><br>
+<div style="text-align: center;">
+  <h1>Terima Kasih</h1>
+  <p>Ada Pertanyaan?</p>
+
+</div>

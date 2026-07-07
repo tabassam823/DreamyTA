@@ -46,12 +46,38 @@ $$
 lalu 
 $$
 \begin{align}
-U_{1q}(\theta) &= R_z(\theta_z) R_y(\theta_y)\\
-&= \begin{pmatrix} e^{-i\theta_z/2} & 0 \\ 0 & e^{i\theta_z/2} \end{pmatrix} \begin{pmatrix} \cos(\theta_y/2) & -\sin(\theta_y/2) \\ \sin(\theta_y/2) & \cos(\theta_y/2) \end{pmatrix}\\
-&= \begin{pmatrix} e^{-i\theta_z/2} \cos(\theta_y/2) & -e^{-i\theta_z/2} \sin(\theta_y/2) \\ e^{i\theta_z/2} \sin(\theta_y/2) & e^{i\theta_z/2} \cos(\theta_y/2) \end{pmatrix}
+U_{1q}(\theta) &= R_z(\theta_{1z}) R_y(\theta_{1y}) \\
+&= \begin{pmatrix} e^{-i\theta_{1z}/2} & 0 \\ 0 & e^{i\theta_{1z}/2} \end{pmatrix} \begin{pmatrix} \cos(\theta_{1y}/2) & -\sin(\theta_{1y}/2) \\ \sin(\theta_{1y}/2) & \cos(\theta_{1y}/2) \end{pmatrix} \\
+&= \begin{pmatrix} e^{-i\theta_{1z}/2} \cos(\theta_{1y}/2) & -e^{-i\theta_{1z}/2} \sin(\theta_{1y}/2) \\ e^{i\theta_{1z}/2} \sin(\theta_{1y}/2) & e^{i\theta_{1z}/2} \cos(\theta_{1y}/2) \end{pmatrix}
 \end{align}
 $$
+sehingga untuk 2 qubit
+lalu 
+$$
+\begin{align}
+U_{q}(\theta) &= [R_z(\theta_{1z}) R_y(\theta_{1y})] \otimes [R_z(\theta_{2z}) R_y(\theta_{2y})]\\
+&= \begin{pmatrix} e^{-i\theta_{1z}/2} \cos(\theta_{1y}/2) & -e^{-i\theta_{1z}/2} \sin(\theta_{1y}/2) \\ e^{i\theta_{1z}/2} \sin(\theta_{1y}/2) & e^{i\theta_{1z}/2} \cos(\theta_{1y}/2) \end{pmatrix} \otimes \begin{pmatrix} e^{-i\theta_{2z}/2} \cos(\theta_{2y}/2) & -e^{-i\theta_{2z}/2} \sin(\theta_{2y}/2) \\ e^{i\theta_{2z}/2} \sin(\theta_{2y}/2) & e^{i\theta_{2z}/2} \cos(\theta_{2y}/2) \end{pmatrix} \\
+&= \begin{pmatrix} e^{-i(\theta_{1z}+\theta_{2z})/2} c_1c_2 & e^{-i(\theta_{1z}+\theta_{2z})/2} c_1s_2 & e^{-i(\theta_{1z}+\theta_{2z})/2} s_1c_2 & e^{-i(\theta_{1z}+\theta_{2z})/2}  s_1s_2  \\ e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2} c_1s_2& e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2}  c_1c_2& e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2}  s_1s_2& e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2}  s_1c_2  \\ e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2} s_1c_2& e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2} s_1s_2& e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2} c_1c_2& e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2}  c_1s_2  \\ e^{i(\theta_{1z}+\theta_{2z})/2}  s_1s_2& e^{i(\theta_{1z}+\theta_{2z})/2}  s_1c_2& e^{i(\theta_{1z}+\theta_{2z})/2}  c_1s_2& e^{i(\theta_{1z}+\theta_{2z})/2} c_1c_2 \end{pmatrix} \end{align}
+$$
 
+dengan
+
+$$ c_i=\cos\frac{\theta_{iy}}2,\qquad s_i=\sin\frac{\theta_{iy}}2.  
+$$
+
+---
+
+## Saran untuk penulisan skripsi
+
+Saya justru **tidak menyarankan** menuliskan matriks (4\times4) penuh kecuali memang diperlukan. Dalam konteks ansatz VQE atau PQC, biasanya cukup dituliskan
+
+# [  
+U_q(\theta)
+
+U_{1q}(\theta_1)\otimes U_{1q}(\theta_2),  
+]
+
+kemudian dijelaskan bahwa karena tensor product dua matriks (2\times2) menghasilkan matriks (4\times4), operator tersebut bekerja pada ruang Hilbert dua qubit berdimensi empat. Bentuk eksplisit matriks penuh umumnya hanya memperpanjang naskah tanpa memberikan wawasan tambahan, kecuali Anda memang akan menggunakan elemen-elemennya untuk penurunan matematis berikutnya.
 sedangkan untuk entanglement layer 
 $$
 U_{ent} = CNOT_{(N-1,0)} \prod_{q=0}^{N-2} CNOT_{(q,q+1)}

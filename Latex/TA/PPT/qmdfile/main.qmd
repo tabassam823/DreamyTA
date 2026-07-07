@@ -28,22 +28,17 @@ format:
     include-after-body: template/header.html
 ---
 
-{{< include Fase_0.qmd >}}
+<!-- include Fase_0.qmd -->
+<!-- include Fase_1.qmd -->
+<!-- include Fase_2.qmd -->
+<!-- include Fase_3.qmd -->
+<!-- include Fase_4.qmd -->
+<!-- include Fase_5.qmd -->
+<!-- include Fase_6.qmd -->
+<!-- include Fase_7.qmd -->
+<!-- include Fase_8.qmd -->
+<!-- include Fase_9.qmd -->
 
-{{< include Fase_1.qmd >}}
-
-{{< include Fase_2.qmd >}}
-
-{{< include Fase_3.qmd >}}
-
-{{< include Fase_4.qmd >}}
-
-{{< include Fase_5.qmd >}}
-
-{{< include Fase_6.qmd >}}
-
-{{< include Fase_7.qmd >}}
-
-{{< include Fase_8.qmd >}}
-
-{{< include Fase_9.qmd >}}
+{{< include Fase_LatarBelakang.qmd >}}
+{{< include Fase_Metodologi.qmd >}}
+{{< include Fase_Hasil.qmd >}}
