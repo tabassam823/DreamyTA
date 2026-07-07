@@ -1,9 +1,0 @@
-* list item 1
-* list item 2
-:::::::: {.columns}
-::::::: {.column width="35%"}
-:::::: {style="font-size: 0.6em;"}
-Test
-::::::
-:::::::
-::::::::
