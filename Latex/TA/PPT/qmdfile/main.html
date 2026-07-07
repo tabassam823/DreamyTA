@@ -287,39 +287,43 @@ Grafik Efficient Frontier
 </div></div>
 </div>
 </section>
-<section id="pengenalan-komputer-kuantum-qubit" class="slide level2">
-<h2>Pengenalan Komputer Kuantum: Qubit</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><strong>Qubit dan Superposisi</strong></p>
-<ul>
-<li>Qubit memanfaatkan prinsip superposisi, memungkinkan representasi kombinasi linear state 0 dan 1 sekaligus. <span class="math display">\[ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle \]</span></li>
-<li><strong>Geometri Qubit (Bola Bloch):</strong> Status qubit dapat divisualisasikan dalam <em>Bloch Sphere</em> dengan sudut polar <span class="math inline">\(\theta\)</span> (probabilitas basis) dan azimuthal <span class="math inline">\(\phi\)</span> (fase kuantum).</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<iframe src="bloch_interactive.html" width="100%" height="450px" style="border:none;">
-</iframe>
-<div style="font-size: 0.7em; text-align: center;">
-Visualisasi status Qubit
-</div>
-</div></div>
-</section>
-<section id="proses-solusi-ising-ke-komputer-kuantum" class="slide level2">
-<h2>Proses Solusi: Ising ke Komputer Kuantum</h2>
+<section id="ising-ke-komputer-kuantum" class="slide level2">
+<h2>Ising ke Komputer Kuantum</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div style="text-align: center; margin-top: 10px;">
-<p><img data-src="../Gambar/241_Ising_to_Quantum.png" style="width:90.0%"></p>
+<img data-src="../Gambar/PQC_VQDNN.png" style="width:90.0%">
+<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">
+Parameterized Quantum Circuit
+</div>
 </div>
 </div><div class="column" style="width:50%;">
-<div style="font-size: 0.8em; margin-top: 20px;">
-<p><strong>Alur Transformasi:</strong></p>
-<ol type="1">
-<li><strong>Definisi Masalah:</strong> Variabel portofolio (biner) diformulasikan.</li>
-<li><strong>Model Ising:</strong> Matriks QUBO dipetakan menjadi Hamiltonian Ising.</li>
-<li><strong>Pemetaan Kuantum:</strong> Variabel biner <span class="math inline">\(\to\)</span> Qubit, Hamiltonian Ising <span class="math inline">\(\to\)</span> Hamiltonan Kuantum (<span class="math inline">\(\hat{\mathcal{H}}\)</span>).</li>
-<li><strong>Optimasi VQE:</strong> Variational Quantum Eigensolver digunakan untuk mencari <em>Ground State</em> (solusi optimal).</li>
-</ol>
+<div style="font-size: 0.7em; margin-top: 10px;">
+<p><strong>Alur Mekanisme PQC:</strong></p>
+<ul>
+<li><strong>Penyandian Data (Encoding):</strong> Data klasik dipetakan ke dalam keadaan kuantum awal <span class="math inline">\(|\psi_0\rangle\)</span> melalui fungsi prapemrosesan dan operasi penyandian.</li>
+<li><strong>Sirkuit Variasional:</strong> Keadaan kuantum ditransformasi oleh sirkuit berparameter <span class="math inline">\(U(\boldsymbol{\theta})\)</span> untuk mengeksplorasi ruang solusi permasalahan.</li>
+<li><strong>Pengukuran &amp; Fungsi Biaya:</strong> Hasil diukur untuk mendapatkan probabilitas observabel, yang dievaluasi menjadi nilai fungsi biaya <span class="math inline">\(L(\boldsymbol{\theta})\)</span>.</li>
+<li><strong>Optimasi Klasik (Update Parameter):</strong> Algoritma optimasi klasik mengevaluasi biaya dan memperbarui parameter <span class="math inline">\(\boldsymbol{\theta}\)</span> secara iteratif hingga konvergen pada solusi optimal <span class="math inline">\(\boldsymbol{\theta}^*\)</span>.</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section id="implementasi-simulasi-kuantum-pennylane" class="slide level2">
+<h2>Implementasi Simulasi Kuantum: Pennylane</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div style="text-align: center; margin-top: 20px;">
+<p><img data-src="../Gambar/Pennylane.png" style="width:90.0%"></p>
+</div>
+</div><div class="column" style="width:55%;">
+<div style="font-size: 0.8em; margin-top: 25px;">
+<p><strong>Mengapa Pennylane?</strong></p>
+<ul>
+<li><strong>Antrean (<em>Queue</em>) Panjang:</strong> Akses publik gratis pada <em>hardware</em> kuantum riil sangat lambat.</li>
+<li><strong>Biaya Eksekusi Tinggi:</strong> VQE menuntut ribuan iterasi. Eksekusi <em>cloud</em> riil menguras kuota akses secara instan.</li>
+<li><strong>Simulasi Aljabar Linear:</strong> Komputer klasik mampu menghitung matriks uniter dan vektor kompleks secara presisi (<em>noiseless</em>), mereplika hukum fisika kuantum tanpa bergantung pada <em>hardware</em> riil.</li>
+</ul>
 </div>
 </div></div>
 </section>
@@ -331,7 +335,11 @@ Visualisasi status Qubit
 <ul>
 <li>Inisialisasi parameter acak pada sirkuit kuantum rentan terjebak di area datar (<em>Barren Plateau</em>), menghambat VQE mencapai solusi optimal.</li>
 </ul>
-<p><strong>Solusi: <em>Warm-Start Strategy</em></strong> * Memanfaatkan kondisi <strong>Nash Equilibrium</strong> dari konsep <em>Game Theory</em> (dalam skema <em>Exact Potential Game</em>). * Titik Nash bertindak sebagai tebakan awal (<em>warm-start</em>) yang sudah efisien secara rasional, mempercepat optimasi kuantum.</p>
+<p><strong>Solusi: <em>Warm-Start Strategy</em></strong></p>
+<ul>
+<li>Memanfaatkan kondisi <strong>Nash Equilibrium</strong> dari konsep <em>Game Theory</em> (dalam skema <em>Exact Potential Game</em>).</li>
+<li>Titik Nash bertindak sebagai tebakan awal (<em>warm-start</em>) yang sudah efisien secara rasional, mempercepat optimasi kuantum.</li>
+</ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="../Gambar/barren_plateau.png" style="width:70.0%"> <img data-src="../Gambar/nasheq.png" style="width:60.0%"></p>
 </div></div>
@@ -354,19 +362,25 @@ Data backtesting pada sebuah strategi trading
 <section id="tujuan-penelitian" class="slide level2">
 <h2>Tujuan Penelitian</h2>
 <ol type="1">
-<li><strong>Memformulasikan portofolio Markowitz ke dalam <em>Exact Potential Game</em> (EPG) dan Hamiltonian Ising.</strong></li>
-<li><strong>Merancang sirkuit kuantum (<em>Hardware-Efficient Ansatz</em>) yang optimal untuk masalah QUBO portofolio saham.</strong></li>
-<li><strong>Mengevaluasi kecepatan konvergensi <em>Variational Quantum Eigensolver</em> (VQE) dengan inisialisasi <em>Nash Equilibrium</em>.</strong></li>
-<li><strong>Membandingkan performa finansial algoritma GT-VQE dengan VQE murni dan optimasi klasik (SLSQP).</strong></li>
+<li>Menganalisis formulasi bias aset sebagai parameter medan lokal (<span class="math inline">\(h_i\)</span>) dan interaksi antar aset sebagai koefisien kopling (<span class="math inline">\(J_{ij}\)</span>) melalui pendekatan fungsi potensial dalam sistem Hamiltonian berbasis <em>Exact Potential Game</em> (EPG).</li>
+<li>Mengevaluasi kontribusi strategi <em>warm-start</em> berbasis <em>Nash Equilibrium</em> dalam meningkatkan efisiensi pencarian solusi optimal pada algoritma VQE.</li>
+<li>Menguji kapabilitas algoritma VQE yang menggunakan optimasi SPSA dan <em>Ansatz EfficientSU(2)</em> untuk menghasilkan keputusan alokasi aset yang optimal dalam kondisi pasar yang kompleks.</li>
 </ol>
 </section>
-<section id="batasan-masalah" class="slide level2">
-<h2>Batasan Masalah</h2>
+<section id="batasan-masalah-12" class="slide level2">
+<h2>Batasan Masalah (1/2)</h2>
 <ol type="1">
-<li><strong>Aset:</strong> Simulasi dilakukan untuk kombinasi <strong>2 hingga 4 saham</strong> di Bursa Efek Indonesia (BBCA, ADRO, TLKM, SMGR) periode 2021-2023.</li>
-<li><strong>Algoritma:</strong> Algoritma yang digunakan adalah <em>Variational Quantum Eigensolver</em> (VQE) dengan <em>optimizer</em> SPSA.</li>
-<li><strong>Simulasi Kuantum:</strong> Simulasi dilakukan menggunakan <em>statevector simulator</em> tanpa <em>noise</em> (<em>noiseless</em>) dari <em>Qiskit</em>.</li>
-<li><strong>Transaksi:</strong> Tidak memperhitungkan biaya transaksi (<em>transaction fee</em>), pajak, dan slippage harga pasar.</li>
+<li>Portofolio yang dianalisis dibatasi pada pemilihan 1 aset dari 2 pilihan aset pada sistem <span class="math inline">\(N=2\)</span> dan 2 aset dari 4 pilihan aset pada sistem <span class="math inline">\(N=4\)</span>.</li>
+<li>Model permainan yang digunakan adalah skema <em>non zero-sum game</em> dalam kerangka <em>Exact Potential Game</em>.</li>
+<li>Simulasi dan implementasi algoritma dilakukan menggunakan simulator <em>Pennylane</em> tanpa mempertimbangkan <em>noise</em>.</li>
+</ol>
+</section>
+<section id="batasan-masalah-22" class="slide level2">
+<h2>Batasan Masalah (2/2)</h2>
+<ol start="4" type="1">
+<li>Tugas akhir ini hanya merupakan <em>proof-of-concept</em> dari implementasi <em>warm-start</em> ekuilibrium Nash terhadap performa algoritma VQE dalam menemukan solusi <em>ground state</em> pada model portofolio hibrida.</li>
+<li>Analisis Entropi Von Neumann dibatasi sebagai indikator perubahan distribusi probabilitas keadaan kuantum selama proses optimasi VQE dan tidak digunakan sebagai kajian mendalam mengenai sifat keterbelitan dari <em>ansatz</em>.</li>
+<li>Analisis berfokus pada pengaruh <em>warm-start</em> ekuilibrium Nash terhadap proses optimasi VQE, bukan untuk membuktikan keunggulan komputasi kuantum terhadap metode klasik.</li>
 </ol>
 </section></section>
 <section>
@@ -377,7 +391,7 @@ Data backtesting pada sebuah strategi trading
 <section id="diagram-alir-utama" class="slide level2">
 <h2>Diagram Alir Utama</h2>
 
-<img data-src="../Gambar/31_Dialir.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
+<img data-src="../Gambar/Dialir.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
 <section id="analisis-kuantitatif" class="slide level2">
 <h2>Analisis Kuantitatif</h2>
 <div class="columns">
@@ -413,6 +427,89 @@ Transformasi pergerakan harga saham.
 </div>
 </div></div>
 </section>
+<section id="model-markowitz" class="slide level2 scrollable">
+<h2>Model Markowitz</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Rumus Utama</a></li><li><a href="#tabset-1-2">Penurunan Rumus</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="font-size: 0.75em;">
+<ul>
+<li><strong>Mean-Variance:</strong> <span class="math display">\[ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i \]</span></li>
+<li><strong>Binerisasi:</strong> <span class="math display">\[ \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} \]</span></li>
+</ul>
+</div>
+<div style="font-size: 0.75em">
+<ul>
+<li><span class="math inline">\(\mu_i\)</span>: Imbal hasil rata-rata aset ke-<span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\sigma_{ij}\)</span>: Kovarians antara aset <span class="math inline">\(i\)</span> dan <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(\omega_i\)</span>: Proporsi bobot kontinu aset ke-<span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\lambda\)</span>: Parameter toleransi risiko</li>
+</ul>
+</div>
+<p><br><br></p>
+</div><div class="column" style="width:45%;">
+<div style="text-align: center;">
+<img data-src="../Gambar/224_Efficient_Frontier.png" style="width:75.0%">
+<div style="font-size: 0.7em;">
+Grafik Efficient Frontier
+</div>
+</div>
+<p><br></p>
+<div style="font-size: 0.75em;">
+<ul>
+<li>Investor cenderung mencari portofolio pada <em>Efficient Frontier</em> untuk memaksimalkan <em>return</em> dengan risiko yang minimal.</li>
+</ul>
+</div>
+</div></div>
+</div>
+<div id="tabset-1-2">
+<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
+<p><strong>Langkah 1 — Formulasi Lagrangian Kontinu (Markowitz):</strong></p>
+<p>Fungsi biaya Markowitz dalam domain bobot <span class="math inline">\(\omega_i\)</span>:</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i\]</span></p>
+<p>dengan syarat <span class="math inline">\(\sum_i \omega_i = 1\)</span> dan <span class="math inline">\(\omega_i \geq 0\)</span>.</p>
+<hr>
+<p><strong>Langkah 2 — Substitusi Variabel Biner:</strong></p>
+<p>Variabel bobot kontinu <span class="math inline">\(\omega_i\)</span> diubah menjadi variabel biner <span class="math inline">\(x_i \in \{0, 1\}\)</span> melalui hubungan:</p>
+<p><span class="math display">\[\omega_i = \frac{x_i}{K}\]</span></p>
+<p>di mana <span class="math inline">\(K\)</span> adalah jumlah aset yang dipilih dari total <span class="math inline">\(N\)</span> kandidat.</p>
+<hr>
+<p><strong>Langkah 3 — Substitusi ke Lagrangian:</strong></p>
+<p>Substitusi <span class="math inline">\(\omega_i = x_i/K\)</span> ke dalam fungsi Lagrangian:</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
+<p><span class="math display">\[\therefore \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
+<p>Nilai <span class="math inline">\(x_i = 1\)</span> merepresentasikan <strong>beli</strong>, sedangkan <span class="math inline">\(x_i = 0\)</span> merepresentasikan <strong>tidak membeli</strong>.</p>
+<hr>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Simbol</th>
+<th style="text-align: center;">Domain Kontinu</th>
+<th style="text-align: center;">Domain Biner</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Variabel keputusan</td>
+<td style="text-align: center;"><span class="math inline">\(\omega_i \in [0, 1]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x_i \in \{0, 1\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Kendala</td>
+<td style="text-align: center;"><span class="math inline">\(\sum \omega_i = 1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\sum x_i = K\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br><br><br></p>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="exact-potential-game-epg" class="slide level2">
 <h2>Exact Potential Game (EPG)</h2>
 <div class="r-stack">
@@ -437,15 +534,15 @@ Transformasi pergerakan harga saham.
 <section id="epg-pada-alokasi-portofolio" class="slide level2 scrollable">
 <h2>EPG pada Alokasi Portofolio</h2>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Rumus Utama</a></li><li><a href="#tabset-1-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Rumus Utama</a></li><li><a href="#tabset-2-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1">
+<div id="tabset-2-1">
 <ul>
 <li>Transformasi persamaan utilitas Markowitz biner menjadi fungsi potensial global EPG: <span class="math display">\[ \Phi(\mathbf{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{K} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} \]</span></li>
 <li>dengan <span class="math inline">\(\gamma\)</span> mendefinisikan faktor penghindaran risiko (<em>risk aversion</em>) pada fungsi utilitas agen.</li>
 </ul>
 </div>
-<div id="tabset-1-2">
+<div id="tabset-2-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Penurunan: Dari Model Markowitz Biner ke Fungsi Potensial EPG</strong></p>
 <p><strong>Langkah 1 — Lagrangian Biner Markowitz:</strong></p>
@@ -486,17 +583,15 @@ Transformasi pergerakan harga saham.
 <section id="transformasi-epg-ke-model-ising" class="slide level2 scrollable">
 <h2>Transformasi EPG ke Model Ising</h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Transformasi QUBO</a></li><li><a href="#tabset-2-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Transformasi QUBO</a></li><li><a href="#tabset-3-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-2-1">
+<div id="tabset-3-1">
 <div style="font-size: 0.75em;">
 <p><strong>Fungsi Energi dari Potensial (Markowitz Biner):</strong> <span class="math display">\[E(\mathbf{x}) = \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i\]</span></p>
-<p><strong>Penambahan Fungsi Penalti (QUBO):</strong> Penalti untuk memastikan tepat <span class="math inline">\(K\)</span> aset yang dipilih: <span class="math display">\[P(\mathbf{x}) = A\left(\sum_{i=1}^N x_i - K\right)^2\]</span></p>
-<p><strong>Bentuk Total Hamiltonian QUBO:</strong> <span class="math display">\[E_{total}(\mathbf{x}) = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2\]</span></p>
 <p><strong>Hamiltonian Ising Akhir:</strong> Setelah memetakan variabel biner <span class="math inline">\(x_i \in \{0,1\}\)</span> ke variabel spin <span class="math inline">\(s_i \in \{-1,1\}\)</span>: <span class="math display">\[\boxed{\hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i&lt;j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C}\]</span></p>
 </div>
 </div>
-<div id="tabset-2-2">
+<div id="tabset-3-2">
 <div class="scrollable" style="max-height: 500px; font-size: 0.7em;">
 <p><strong>Penurunan: Dari Fungsi Potensial Game ke Hamiltonian Ising</strong></p>
 <p><strong>Langkah 1 — Fungsi Energi dari Potensial:</strong></p>
@@ -576,15 +671,15 @@ Transformasi pergerakan harga saham.
 <section id="desain-sirkuit-kuantum" class="slide level2 scrollable">
 <h2>Desain Sirkuit Kuantum</h2>
 <div class="panel-tabset">
-<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Arsitektur Sirkuit</a></li><li><a href="#tabset-3-2">Gerbang Rotasi Total</a></li><li><a href="#tabset-3-3">Gerbang CNOT Total</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Arsitektur Sirkuit</a></li><li><a href="#tabset-4-2">Gerbang Rotasi Total</a></li><li><a href="#tabset-4-3">Gerbang CNOT Total</a></li></ul>
 <div class="tab-content">
-<div id="tabset-3-1">
+<div id="tabset-4-1">
 <img data-src="../Gambar/rangkaian1depth.png" class="quarto-figure quarto-figure-center" style="width:80.0%">
 <div style="font-size: 0.7em; text-align: center;">
 Arsitektur <em>Hardware-Efficient Ansatz</em> dengan <em>depth</em> <span class="math inline">\(D=1\)</span>
 </div>
 </div>
-<div id="tabset-3-2">
+<div id="tabset-4-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Matriks Rotasi <span class="math inline">\(U_q(\theta)\)</span> untuk 2 Qubit</strong></p>
 <p>Berdasarkan definisi gerbang rotasi <span class="math inline">\(R_y(\theta)\)</span> dan <span class="math inline">\(R_z(\theta)\)</span>: <span class="math display">\[
@@ -602,7 +697,7 @@ U_{q}(\theta) &amp;= [R_z(\theta_{1z}) R_y(\theta_{1y})] \otimes [R_z(\theta_{2z
 \]</span> dengan <span class="math display">\[ c_i=\cos\frac{\theta_{iy}}2,\qquad s_i=\sin\frac{\theta_{iy}}2.  \]</span> <br><br><br><br></p>
 </div>
 </div>
-<div id="tabset-3-3">
+<div id="tabset-4-3">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Matriks Gerbang Keterbelitan (<span class="math inline">\(U_{ent}\)</span>) untuk 2 Qubit</strong></p>
 <p>Untuk lapisan keterbelitan, secara umum didefinisikan: <span class="math display">\[
@@ -625,16 +720,16 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <section id="optimizer-spsa" class="slide level2 scrollable">
 <h2>Optimizer SPSA</h2>
 <div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Rumus Utama</a></li><li><a href="#tabset-4-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Rumus Utama</a></li><li><a href="#tabset-5-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-4-1">
+<div id="tabset-5-1">
 <p><strong>SPSA (Simultaneous Perturbation Stochastic Approximation)</strong></p>
 <ul>
 <li><strong>Inovasi:</strong> Mengestimasi gradien <em>seluruh</em> parameter secara simultan hanya menggunakan dua pengukuran (satu vektor perturbasi acak <span class="math inline">\(\Delta\)</span>). <span class="math display">\[ \hat{g}_k = \frac{E(\theta_k + c_k \Delta_k) - E(\theta_k - c_k \Delta_k)}{2 c_k \Delta_k} \]</span></li>
 <li>Dengan ekspektasi estimasi gradien yang terbukti ekuivalen dengan gradien eksak: <span class="math display">\[ \mathbb{E} \left[ \hat{g}_k \right] = \nabla E(\theta_k) \]</span></li>
 </ul>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-5-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Penurunan: Estimator Gradien SPSA</strong></p>
 <p><strong>Langkah 1 — Vektor Perturbasi Acak:</strong></p>
@@ -672,9 +767,9 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <section id="evaluasi-distribusi-probabilitas-entropi" class="slide level2 scrollable">
 <h2>Evaluasi Distribusi Probabilitas (Entropi)</h2>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Evolusi Entropi: Studi Kasus Numerik</a></li><li><a href="#tabset-5-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Evolusi Entropi: Studi Kasus Numerik</a></li><li><a href="#tabset-6-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-6-1">
 <div style="font-size: 0.7em;">
 <p>Pemanfaatan Entropi Von Neumann dalam memantau jejak persebaran probabilitas di titik konvergensi akhir VQE.</p>
 </div>
@@ -727,7 +822,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </div>
 </div></div>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-6-2">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Generalisasi: Dari Entropi Shannon ke Entropi Von Neumann</strong></p>
 <p><strong>Langkah 1 — Entropi Shannon (Klasik):</strong></p>
@@ -782,15 +877,19 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <section id="perhitungan-metrik-performa-finansial" class="slide level2 scrollable">
 <h2>Perhitungan Metrik Performa Finansial</h2>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Metrik Finansial</a></li><li><a href="#tabset-6-2">Optimasi Klasik SLSQP</a></li></ul>
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Metrik Finansial</a></li><li><a href="#tabset-7-2">Optimasi Klasik SLSQP</a></li><li><a href="#tabset-7-3">Contoh Numerik</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
+<div id="tabset-7-1">
+<div style="font-size: 0.7em;">
 <p>Untuk membandingkan performa model GT-VQE dengan <em>Equal Weight</em> dan optimasi klasik (SLSQP), parameter evaluasi yang dihitung mencakup:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
 <li><strong>Return Kumulatif:</strong> Mengukur total pertumbuhan persentase modal selama periode simulasi. <span class="math display">\[ R_{cum} = \prod_{t=1}^T (1 + R_t) - 1 \]</span></li>
-<li><strong>Sharpe Ratio:</strong> Rasio antara <em>return</em> ekspektasi terhadap risiko volatilitas portofolio (<span class="math inline">\(\sigma_p\)</span>). <span class="math display">\[ \text{Sharpe} = \frac{\bar{R}_p - R_f}{\sigma_p} \]</span></li>
+<li><strong>Sharpe Ratio:</strong> Rasio antara <em>return</em> ekspektasi terhadap risiko volatilitas portofolio (<span class="math inline">\(\sigma_p\)</span>). <span class="math display">\[ \text{Sharpe} = \frac{\bar{R}_p - R_f}{\sigma_p} \]</span>
+<div style="font-size: 0.8em; margin-top: -15px;">
+<p><span class="math inline">\(\bar{R}_p\)</span>: Rata-rata <em>return</em> portofolio<br> <span class="math inline">\(R_f\)</span>: Suku bunga bebas risiko (<em>risk-free rate</em>)<br> <span class="math inline">\(\sigma_p\)</span>: Volatilitas <em>return</em> portofolio</p>
+</div></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <ul>
@@ -799,7 +898,8 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </ul>
 </div></div>
 </div>
-<div id="tabset-6-2">
+</div>
+<div id="tabset-7-2">
 <p>Algoritma <em>Sequential Least Squares Programming</em> untuk menyelesaikan sub-masalah pemrograman kuadratik sebagai standar komparasi.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>Procedure SLSQPOptimizer(mu, Sigma, gamma)</span>
 <span id="cb2-2"><a href=""></a>  1. w_0 &lt;- InitialWeights(1/N)</span>
@@ -813,6 +913,54 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <span id="cb2-10"><a href=""></a>  9.     B_{k+1} &lt;- UpdateBFGS(B_k, s_k, y_k)</span>
 <span id="cb2-11"><a href=""></a>  10. Return w_final</span>
 <span id="cb2-12"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-7-3">
+<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
+<p><strong>Contoh Perhitungan SLSQP (Kasus <span class="math inline">\(N=2\)</span>)</strong></p>
+<p>Misalkan <span class="math inline">\(\mu=\begin{pmatrix}0.10\\0.05\end{pmatrix},\qquad\Sigma=\begin{pmatrix}0.04 &amp; 0.01\\0.01 &amp; 0.02\end{pmatrix},\qquad\gamma=1.\)</span></p>
+<p><strong>Inisialisasi</strong></p>
+<p><span class="math inline">\(w_0=\begin{pmatrix}0.5\\0.5\end{pmatrix},\qquad B_0=\begin{pmatrix}1&amp;0\\0&amp;1\end{pmatrix}.\)</span></p>
+<p><strong>1. Hitung Gradien</strong></p>
+<p><span class="math inline">\(g_0=\gamma\Sigma w_0-\mu.\)</span></p>
+<p>Karena</p>
+<p><span class="math inline">\(\Sigma w_0=\begin{pmatrix}0.025\\0.015\end{pmatrix},\)</span></p>
+<p>maka</p>
+<p><span class="math inline">\(g_0=\begin{pmatrix}-0.075\\-0.035\end{pmatrix}.\)</span></p>
+<hr>
+<p><strong>2. Selesaikan Sub-masalah Quadratic Programming</strong></p>
+<p>Sub-QP yang diselesaikan adalah</p>
+<p><span class="math inline">\(\min_d\left(g_0^Td+\frac12 d^TB_0d\right),\)</span></p>
+<p>dengan kendala</p>
+<p><span class="math inline">\(d_1+d_2=0.\)</span></p>
+<p>Karena</p>
+<p><span class="math inline">\(d_2=-d_1,\)</span></p>
+<p>fungsi objektif menjadi</p>
+<p><span class="math inline">\(g(d_1)=-0.040d_1+d_1^2.\)</span></p>
+<p>Turunan pertama</p>
+<p><span class="math inline">\(\frac{dg}{dd_1}=-0.040+2d_1=0\)</span></p>
+<p>memberikan solusi</p>
+<p><span class="math inline">\(d=\begin{pmatrix}0.02\\-0.02\end{pmatrix}.\)</span></p>
+<hr>
+<p><strong>3. Line Search</strong></p>
+<p>Misalkan hasil <em>line search</em> menghasilkan</p>
+<p><span class="math inline">\(\alpha_0=1.\)</span></p>
+<hr>
+<p><strong>4. Update Bobot</strong></p>
+<p><span class="math inline">\(w_1=w_0+\alpha_0d=\begin{pmatrix}0.52\\0.48\end{pmatrix}.\)</span></p>
+<hr>
+<p><strong>5. Update Hessian (BFGS)</strong></p>
+<p>Hitung</p>
+<p><span class="math inline">\(s_0=w_1-w_0=\begin{pmatrix}0.02\\-0.02\end{pmatrix},\)</span></p>
+<p>kemudian gradien baru</p>
+<p><span class="math inline">\(g_1=\Sigma w_1-\mu=\begin{pmatrix}-0.0744\\-0.0352\end{pmatrix},\)</span></p>
+<p>sehingga</p>
+<p><span class="math inline">\(y_0=g_1-g_0=\begin{pmatrix}0.0006\\-0.0002\end{pmatrix}.\)</span></p>
+<p>Selanjutnya matriks Hessian diperbarui menggunakan rumus BFGS</p>
+<p><span class="math inline">\(B_1=B_0-\frac{B_0s_0s_0^TB_0}{s_0^TB_0s_0}+\frac{y_0y_0^T}{y_0^Ts_0},\)</span></p>
+<p>yang kemudian digunakan pada iterasi berikutnya.</p>
+<p><strong>Iterasi selanjutnya mengulangi langkah yang sama hingga memenuhi kriteria konvergensi dan menghasilkan bobot portofolio optimal.</strong></p>
+<p><br><br><br></p>
+</div>
 </div>
 </div>
 </div>
@@ -896,6 +1044,26 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <p><strong>GT-VQE (Hibrida)</strong> <img data-src="../Gambar/GT_hasil_backtest_vqe_N4.png"></p>
 </div></div>
 </section>
+<section id="dinamika-adaptasi-kedalaman-sirkuit-n2" class="slide level2">
+<h2>Dinamika Adaptasi Kedalaman Sirkuit (<span class="math inline">\(N=2\)</span>)</h2>
+<p>Efektivitas <em>warm-start</em> terlihat dari dominasi operasional GT-VQE pada kedalaman dangkal, mengurangi fluktuasi <em>depth</em> antar jendela observasi.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>VQE Murni (<span class="math inline">\(N=2\)</span>)</strong> <img data-src="../Gambar/NoGT_grafik_depth_per_window_N2.png"></p>
+</div><div class="column" style="width:50%;">
+<p><strong>GT-VQE Hibrida (<span class="math inline">\(N=2\)</span>)</strong> <img data-src="../Gambar/GT_grafik_depth_per_window_N2.png"></p>
+</div></div>
+</section>
+<section id="dinamika-adaptasi-kedalaman-sirkuit-n4" class="slide level2">
+<h2>Dinamika Adaptasi Kedalaman Sirkuit (<span class="math inline">\(N=4\)</span>)</h2>
+<p>Efektivitas <em>warm-start</em> terlihat dari dominasi operasional GT-VQE pada kedalaman dangkal, mengurangi fluktuasi <em>depth</em> antar jendela observasi.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>VQE Murni (<span class="math inline">\(N=4\)</span>)</strong> <img data-src="../Gambar/NoGT_grafik_depth_per_window_N4.png"></p>
+</div><div class="column" style="width:50%;">
+<p><strong>GT-VQE Hibrida (<span class="math inline">\(N=4\)</span>)</strong> <img data-src="../Gambar/GT_grafik_depth_per_window_N4.png"></p>
+</div></div>
+</section>
 <section id="ringkasan-performa-simulasi-finansial" class="slide level2">
 <h2>Ringkasan Performa Simulasi Finansial</h2>
 <p>Tabel perbandingan <em>backtesting</em> strategi Kuantum, SLSQP, dan <em>Equal Weight</em> untuk Sistem <span class="math inline">\(N=2\)</span> dan <span class="math inline">\(N=4\)</span>.</p>
@@ -967,7 +1135,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <div class="column" style="width:28%;">
 <h3 id="formulasi-epg">Formulasi EPG</h3>
 <div style="font-size: 0.6em; text-align: justify;">
-<p>Formulasi model Markowitz ke dalam kerangka <i>Exact Potential Game</i> (EPG) telah berhasil memetakan utilitas ekonomi menjadi sistem Hamiltonian fisis secara akurat. Penggunaan <i>log return</i> efektif menjaga simetri interaksi risiko tanpa distorsi, sementara implementasi suku penalti mencegah sirkuit kuantum terjebak pada status portofolio yang melanggar diversifikasi.</p>
+<p>Formulasi model Markowitz ke dalam kerangka <em>Exact Potential Game</em> (EPG) telah berhasil memetakan utilitas ekonomi menjadi sistem Hamiltonian fisis secara akurat. Penggunaan <em>log return</em> efektif menjaga simetri interaksi risiko tanpa distorsi, sementara implementasi suku penalti mencegah sirkuit kuantum terjebak pada status portofolio yang melanggar diversifikasi.</p>
 </div>
 </div><div class="column" style="width:8%;">
 <div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">
@@ -976,7 +1144,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </div><div class="column" style="width:28%;">
 <h3 id="warm-start-nash">Warm-Start Nash</h3>
 <div style="font-size: 0.6em; text-align: justify;">
-<p>Penerapan <i>Pure Strategy Nash Equilibrium</i> (PSNE) terbukti meningkatkan efisiensi algoritma VQE. Injeksi solusi Nash memandu sirkuit melewati area <i>barren plateaus</i> dan memicu keruntuhan entropi <i>Von Neumann</i>, memungkinkan pencapaian <i>ground state</i> pada kedalaman sirkuit yang sangat dangkal (<span class="math inline">\(L=2\)</span> hingga <span class="math inline">\(L=3\)</span>).</p>
+<p>Penerapan <em>Nash Equilibrium</em> sebagai <em>warm-start</em> terbukti meningkatkan efisiensi algoritma VQE. Solusi <em>Nash</em> yang diinjeksikan ke awal sirkuit membantu optimasi lolos dari area <em>barren plateaus</em> dan memicu keruntuhan entropi <em>Von Neumann</em>, sehingga memungkinkan pencapaian <em>ground state</em> pada kedalaman sirkuit dengan rata-rata yang lebih dangkal.</p>
 </div>
 </div><div class="column" style="width:8%;">
 <div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">
@@ -985,7 +1153,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </div><div class="column" style="width:28%;">
 <h3 id="performa-gt-vqe">Performa GT-VQE</h3>
 <div style="font-size: 0.6em; text-align: justify;">
-<p>Kombinasi arsitektur <i>Hardware-Efficient Ansatz</i> dengan optimasi SPSA memungkinkan sistem merespons volatilitas pasar melalui mekanisme rebalancing dinamis. Hasil <i>backtesting</i> memvalidasi bahwa algoritma GT-VQE menghasilkan pertumbuhan modal superior dibandingkan VQE murni dan metode klasik dengan <i>Sharpe Ratio</i> 1,0107 (<span class="math inline">\(N=4\)</span>).</p>
+<p>Kombinasi arsitektur <em>Hardware-Efficient Ansatz</em> dengan optimasi SPSA memungkinkan sistem merespons volatilitas pasar secara dinamis. Hasil <em>backtesting</em> memvalidasi bahwa algoritma GT-VQE mampu memaksimalkan <em>Return</em> secara superior (73,15%) namun tetap meminimalkan risiko kerugian secara optimal (MDD 16,68%) dibandingkan VQE murni dan metode klasik (<span class="math inline">\(N=4\)</span>).</p>
 </div>
 </div></div>
 </section>
@@ -995,7 +1163,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <div class="column" style="width:28%;">
 <h3 id="noise-sirkuit">Noise Sirkuit</h3>
 <div style="font-size: 0.6em; text-align: justify;">
-<p>Mempertimbangkan parameter <i>noise</i> sirkuit, seperti dekoherensi qubit dan <i>gate fidelity</i> dalam mengeksekusi algoritma ini agar divalidasi dan diaplikasikan pada infrastruktur perangkat keras kuantum sesungguhnya.</p>
+<p>Mempertimbangkan parameter <em>noise</em> sirkuit, seperti dekoherensi qubit dan <em>gate fidelity</em> dalam mengeksekusi algoritma ini agar divalidasi dan diaplikasikan pada infrastruktur perangkat keras kuantum sesungguhnya.</p>
 </div>
 </div><div class="column" style="width:8%;">
 <div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">
@@ -1004,7 +1172,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </div><div class="column" style="width:28%;">
 <h3 id="variasi-ansatz">Variasi Ansatz</h3>
 <div style="font-size: 0.6em; text-align: justify;">
-<p>Menggunakan variasi struktur <i>ansatz</i> lain (seperti <i>Qubit-Efficient</i> atau <i>Variational Quantum Circuit</i>) serta membandingkan performa berbagai algoritma optimasi klasik lainnya untuk menemukan kombinasi hibrida dengan laju konvergensi paling efisien.</p>
+<p>Menggunakan variasi struktur <em>ansatz</em> lain (seperti <em>Qubit-Efficient</em> atau <em>Variational Quantum Circuit</em>) serta membandingkan performa berbagai algoritma optimasi klasik lainnya untuk menemukan kombinasi hibrida dengan laju konvergensi paling efisien.</p>
 </div>
 </div><div class="column" style="width:8%;">
 <div style="font-size: 3em; color: #555; margin-top: 20px; text-align: center;">
@@ -1013,7 +1181,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </div><div class="column" style="width:28%;">
 <h3 id="black-swan">Black Swan</h3>
 <div style="font-size: 0.6em; text-align: justify;">
-<p>Menggunakan rentang periode data historis yang lebih panjang dan melakukan pengujian pada periode fenomena <i>Black Swan</i> atau krisis ekonomi untuk mengevaluasi agilitas dan reliabilitas algoritma dalam mempertahankan stabilitas portofolio di pasar ekstrem.</p>
+<p>Menggunakan rentang periode data historis yang lebih panjang dan melakukan pengujian pada periode fenomena <em>Black Swan</em> atau krisis ekonomi untuk mengevaluasi agilitas dan reliabilitas algoritma dalam mempertahankan stabilitas portofolio di pasar ekstrem.</p>
 </div>
 </div></div>
 </section>

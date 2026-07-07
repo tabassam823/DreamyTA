@@ -2,7 +2,7 @@
 
 ## Diagram Alir Utama
 
-![](../Gambar/31_Dialir.png){fig-align="center" width=45%}
+![](../Gambar/Dialir.png){fig-align="center" width=45%}
 
 ---
 
@@ -42,6 +42,87 @@
 :::
 ::::
 :::::
+
+---
+
+## Model Markowitz {.scrollable}
+
+::: {.panel-tabset}
+### Rumus Utama
+::::: {.columns}
+:::: {.column width="60%"}
+::: {style="font-size: 0.75em;"}
+* **Mean-Variance:**
+  $$ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i $$
+* **Binerisasi:**
+  $$ \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} $$
+:::
+
+::: {style="font-size: 0.75em"}
+* $\mu_i$: Imbal hasil rata-rata aset ke-$i$
+* $\sigma_{ij}$: Kovarians antara aset $i$ dan $j$
+* $\omega_i$: Proporsi bobot kontinu aset ke-$i$
+* $\lambda$: Parameter toleransi risiko
+:::
+
+<br><br>
+::::
+:::: {.column width="45%"}
+<div style="text-align: center;">
+![](../Gambar/224_Efficient_Frontier.png){width="75%"}
+<div style="font-size: 0.7em;">Grafik Efficient Frontier</div>
+</div>
+<br>
+
+::: {style="font-size: 0.75em;"}
+* Investor cenderung mencari portofolio pada *Efficient Frontier* untuk memaksimalkan *return* dengan risiko yang minimal.
+:::
+::::
+:::::
+
+### Penurunan Rumus
+<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
+
+**Langkah 1 — Formulasi Lagrangian Kontinu (Markowitz):**
+
+Fungsi biaya Markowitz dalam domain bobot $\omega_i$:
+
+$$\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i$$
+
+dengan syarat $\sum_i \omega_i = 1$ dan $\omega_i \geq 0$.
+
+---
+
+**Langkah 2 — Substitusi Variabel Biner:**
+
+Variabel bobot kontinu $\omega_i$ diubah menjadi variabel biner $x_i \in \{0, 1\}$ melalui hubungan:
+
+$$\omega_i = \frac{x_i}{K}$$
+
+di mana $K$ adalah jumlah aset yang dipilih dari total $N$ kandidat.
+
+---
+
+**Langkah 3 — Substitusi ke Lagrangian:**
+
+Substitusi $\omega_i = x_i/K$ ke dalam fungsi Lagrangian:
+
+$$\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
+
+$$\therefore \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
+
+Nilai $x_i = 1$ merepresentasikan **beli**, sedangkan $x_i = 0$ merepresentasikan **tidak membeli**.
+
+---
+
+| Simbol | Domain Kontinu | Domain Biner |
+|:---:|:---:|:---:|
+| Variabel keputusan | $\omega_i \in [0, 1]$ | $x_i \in \{0, 1\}$ |
+| Kendala | $\sum \omega_i = 1$ | $\sum x_i = K$ |
+
+<br><br><br>
+</div>
+:::
 
 ---
 
@@ -148,13 +229,6 @@ dengan $\bar{\mu}_l$ dan $\bar{\sigma}_l$ dari *log returns*.
 
 **Fungsi Energi dari Potensial (Markowitz Biner):**
 $$E(\mathbf{x}) = \frac{\gamma}{2K^2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} x_i x_j - \sum_{i=1}^N \frac{\mu_i}{K} x_i$$
-
-**Penambahan Fungsi Penalti (QUBO):**
-Penalti untuk memastikan tepat $K$ aset yang dipilih:
-$$P(\mathbf{x}) = A\left(\sum_{i=1}^N x_i - K\right)^2$$
-
-**Bentuk Total Hamiltonian QUBO:**
-$$E_{total}(\mathbf{x}) = \sum_i Q_{ii} x_i + \sum_{i\ne j} Q_{ij} x_ix_j + AK^2$$
 
 **Hamiltonian Ising Akhir:**
 Setelah memetakan variabel biner $x_i \in \{0,1\}$ ke variabel spin $s_i \in \{-1,1\}$:
@@ -514,7 +588,7 @@ EndProcedure
 
 ::: {.panel-tabset}
 ### Metrik Finansial
-
+<div style="font-size: 0.7em;">
 Untuk membandingkan performa model GT-VQE dengan *Equal Weight* dan optimasi klasik (SLSQP), parameter evaluasi yang dihitung mencakup:
 
 ::::: {.columns}
@@ -525,6 +599,11 @@ Untuk membandingkan performa model GT-VQE dengan *Equal Weight* dan optimasi kla
 * **Sharpe Ratio:**
   Rasio antara *return* ekspektasi terhadap risiko volatilitas portofolio ($\sigma_p$).
   $$ \text{Sharpe} = \frac{\bar{R}_p - R_f}{\sigma_p} $$
+  <div style="font-size: 0.8em; margin-top: -15px;">
+  $\bar{R}_p$: Rata-rata *return* portofolio<br>
+  $R_f$: Suku bunga bebas risiko (*risk-free rate*)<br>
+  $\sigma_p$: Volatilitas *return* portofolio
+  </div>
 ::::
 :::: {.column width="50%"}
 * **Maximum Drawdown (MDD):**
@@ -534,6 +613,7 @@ Untuk membandingkan performa model GT-VQE dengan *Equal Weight* dan optimasi kla
   Sebagai *benchmark*, nilai metrik juga dievaluasi untuk portofolio $w_i = 1/K$ (*Equal Weight*) dan penyelesaian Lagrangian kontinu berbasis *Sequential Least Squares Programming* (SLSQP).
 ::::
 :::::
+</div>
 
 ### Optimasi Klasik SLSQP
 Algoritma *Sequential Least Squares Programming* untuk menyelesaikan sub-masalah pemrograman kuadratik sebagai standar komparasi.
@@ -552,4 +632,97 @@ Procedure SLSQPOptimizer(mu, Sigma, gamma)
   10. Return w_final
 EndProcedure
 ```
+
+### Contoh Numerik
+<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
+
+**Contoh Perhitungan SLSQP (Kasus $N=2$)**
+
+Misalkan
+$\mu=\begin{pmatrix}0.10\\0.05\end{pmatrix},\qquad\Sigma=\begin{pmatrix}0.04 & 0.01\\0.01 & 0.02\end{pmatrix},\qquad\gamma=1.$
+
+**Inisialisasi**
+
+$w_0=\begin{pmatrix}0.5\\0.5\end{pmatrix},\qquad B_0=\begin{pmatrix}1&0\\0&1\end{pmatrix}.$
+
+**1. Hitung Gradien**
+
+$g_0=\gamma\Sigma w_0-\mu.$
+
+Karena
+
+$\Sigma w_0=\begin{pmatrix}0.025\\0.015\end{pmatrix},$
+
+maka
+
+$g_0=\begin{pmatrix}-0.075\\-0.035\end{pmatrix}.$
+
+---
+
+**2. Selesaikan Sub-masalah Quadratic Programming**
+
+Sub-QP yang diselesaikan adalah
+
+$\min_d\left(g_0^Td+\frac12 d^TB_0d\right),$
+
+dengan kendala
+
+$d_1+d_2=0.$
+
+Karena
+
+$d_2=-d_1,$
+
+fungsi objektif menjadi
+
+$g(d_1)=-0.040d_1+d_1^2.$
+
+Turunan pertama
+
+$\frac{dg}{dd_1}=-0.040+2d_1=0$
+
+memberikan solusi
+
+$d=\begin{pmatrix}0.02\\-0.02\end{pmatrix}.$
+
+---
+
+**3. Line Search**
+
+Misalkan hasil *line search* menghasilkan
+
+$\alpha_0=1.$
+
+---
+
+**4. Update Bobot**
+
+$w_1=w_0+\alpha_0d=\begin{pmatrix}0.52\\0.48\end{pmatrix}.$
+
+---
+
+**5. Update Hessian (BFGS)**
+
+Hitung
+
+$s_0=w_1-w_0=\begin{pmatrix}0.02\\-0.02\end{pmatrix},$
+
+kemudian gradien baru
+
+$g_1=\Sigma w_1-\mu=\begin{pmatrix}-0.0744\\-0.0352\end{pmatrix},$
+
+sehingga
+
+$y_0=g_1-g_0=\begin{pmatrix}0.0006\\-0.0002\end{pmatrix}.$
+
+Selanjutnya matriks Hessian diperbarui menggunakan rumus BFGS
+
+$B_1=B_0-\frac{B_0s_0s_0^TB_0}{s_0^TB_0s_0}+\frac{y_0y_0^T}{y_0^Ts_0},$
+
+yang kemudian digunakan pada iterasi berikutnya.
+
+**Iterasi selanjutnya mengulangi langkah yang sama hingga memenuhi kriteria konvergensi dan menghasilkan bobot portofolio optimal.**
+
+<br><br><br>
+</div>
 :::

@@ -153,6 +153,40 @@ Perbandingan antara VQE Murni (Tanpa GT) dan Algoritma GT-VQE (Hibrida) untuk 4 
 
 ---
 
+## Dinamika Adaptasi Kedalaman Sirkuit ($N=2$)
+
+Efektivitas *warm-start* terlihat dari dominasi operasional GT-VQE pada kedalaman dangkal, mengurangi fluktuasi *depth* antar jendela observasi.
+
+:::: {.columns}
+::: {.column width="50%"}
+**VQE Murni ($N=2$)**
+![](../Gambar/NoGT_grafik_depth_per_window_N2.png)
+:::
+::: {.column width="50%"}
+**GT-VQE Hibrida ($N=2$)**
+![](../Gambar/GT_grafik_depth_per_window_N2.png)
+:::
+::::
+
+---
+
+## Dinamika Adaptasi Kedalaman Sirkuit ($N=4$)
+
+Efektivitas *warm-start* terlihat dari dominasi operasional GT-VQE pada kedalaman dangkal, mengurangi fluktuasi *depth* antar jendela observasi.
+
+:::: {.columns}
+::: {.column width="50%"}
+**VQE Murni ($N=4$)**
+![](../Gambar/NoGT_grafik_depth_per_window_N4.png)
+:::
+::: {.column width="50%"}
+**GT-VQE Hibrida ($N=4$)**
+![](../Gambar/GT_grafik_depth_per_window_N4.png)
+:::
+::::
+
+---
+
 ## Ringkasan Performa Simulasi Finansial
 
 Tabel perbandingan *backtesting* strategi Kuantum, SLSQP, dan *Equal Weight* untuk Sistem $N=2$ dan $N=4$.
@@ -177,7 +211,7 @@ Tabel perbandingan *backtesting* strategi Kuantum, SLSQP, dan *Equal Weight* unt
 ### Formulasi EPG
 
 <div style="font-size: 0.6em; text-align: justify;">
-Formulasi model Markowitz ke dalam kerangka <i>Exact Potential Game</i> (EPG) telah berhasil memetakan utilitas ekonomi menjadi sistem Hamiltonian fisis secara akurat. Penggunaan <i>log return</i> efektif menjaga simetri interaksi risiko tanpa distorsi, sementara implementasi suku penalti mencegah sirkuit kuantum terjebak pada status portofolio yang melanggar diversifikasi.
+Formulasi model Markowitz ke dalam kerangka *Exact Potential Game* (EPG) telah berhasil memetakan utilitas ekonomi menjadi sistem Hamiltonian fisis secara akurat. Penggunaan *log return* efektif menjaga simetri interaksi risiko tanpa distorsi, sementara implementasi suku penalti mencegah sirkuit kuantum terjebak pada status portofolio yang melanggar diversifikasi.
 
 </div>
 
@@ -194,7 +228,7 @@ Formulasi model Markowitz ke dalam kerangka <i>Exact Potential Game</i> (EPG) te
 ### Warm-Start Nash
 
 <div style="font-size: 0.6em; text-align: justify;">
-Penerapan <i>Pure Strategy Nash Equilibrium</i> (PSNE) terbukti meningkatkan efisiensi algoritma VQE. Injeksi solusi Nash memandu sirkuit melewati area <i>barren plateaus</i> dan memicu keruntuhan entropi <i>Von Neumann</i>, memungkinkan pencapaian <i>ground state</i> pada kedalaman sirkuit yang sangat dangkal ($L=2$ hingga $L=3$).
+Penerapan *Nash Equilibrium* sebagai *warm-start* terbukti meningkatkan efisiensi algoritma VQE. Solusi *Nash* yang diinjeksikan ke awal sirkuit membantu optimasi lolos dari area *barren plateaus* dan memicu keruntuhan entropi *Von Neumann*, sehingga memungkinkan pencapaian *ground state* pada kedalaman sirkuit dengan rata-rata yang lebih dangkal.
 
 </div>
 
@@ -211,7 +245,7 @@ Penerapan <i>Pure Strategy Nash Equilibrium</i> (PSNE) terbukti meningkatkan efi
 ### Performa GT-VQE
 
 <div style="font-size: 0.6em; text-align: justify;">
-Kombinasi arsitektur <i>Hardware-Efficient Ansatz</i> dengan optimasi SPSA memungkinkan sistem merespons volatilitas pasar melalui mekanisme rebalancing dinamis. Hasil <i>backtesting</i> memvalidasi bahwa algoritma GT-VQE menghasilkan pertumbuhan modal superior dibandingkan VQE murni dan metode klasik dengan <i>Sharpe Ratio</i> 1,0107 ($N=4$).
+Kombinasi arsitektur *Hardware-Efficient Ansatz* dengan optimasi SPSA memungkinkan sistem merespons volatilitas pasar secara dinamis. Hasil *backtesting* memvalidasi bahwa algoritma GT-VQE mampu memaksimalkan *Return* secara superior (73,15%) namun tetap meminimalkan risiko kerugian secara optimal (MDD 16,68%) dibandingkan VQE murni dan metode klasik ($N=4$).
 
 </div>
 
@@ -230,7 +264,7 @@ Kombinasi arsitektur <i>Hardware-Efficient Ansatz</i> dengan optimasi SPSA memun
 ### Noise Sirkuit
 
 <div style="font-size: 0.6em; text-align: justify;">
-Mempertimbangkan parameter <i>noise</i> sirkuit, seperti dekoherensi qubit dan <i>gate fidelity</i> dalam mengeksekusi algoritma ini agar divalidasi dan diaplikasikan pada infrastruktur perangkat keras kuantum sesungguhnya.
+Mempertimbangkan parameter *noise* sirkuit, seperti dekoherensi qubit dan *gate fidelity* dalam mengeksekusi algoritma ini agar divalidasi dan diaplikasikan pada infrastruktur perangkat keras kuantum sesungguhnya.
 
 </div>
 
@@ -247,7 +281,7 @@ Mempertimbangkan parameter <i>noise</i> sirkuit, seperti dekoherensi qubit dan <
 ### Variasi Ansatz
 
 <div style="font-size: 0.6em; text-align: justify;">
-Menggunakan variasi struktur <i>ansatz</i> lain (seperti <i>Qubit-Efficient</i> atau <i>Variational Quantum Circuit</i>) serta membandingkan performa berbagai algoritma optimasi klasik lainnya untuk menemukan kombinasi hibrida dengan laju konvergensi paling efisien.
+Menggunakan variasi struktur *ansatz* lain (seperti *Qubit-Efficient* atau *Variational Quantum Circuit*) serta membandingkan performa berbagai algoritma optimasi klasik lainnya untuk menemukan kombinasi hibrida dengan laju konvergensi paling efisien.
 
 </div>
 
@@ -264,7 +298,7 @@ Menggunakan variasi struktur <i>ansatz</i> lain (seperti <i>Qubit-Efficient</i> 
 ### Black Swan
 
 <div style="font-size: 0.6em; text-align: justify;">
-Menggunakan rentang periode data historis yang lebih panjang dan melakukan pengujian pada periode fenomena <i>Black Swan</i> atau krisis ekonomi untuk mengevaluasi agilitas dan reliabilitas algoritma dalam mempertahankan stabilitas portofolio di pasar ekstrem.
+Menggunakan rentang periode data historis yang lebih panjang dan melakukan pengujian pada periode fenomena *Black Swan* atau krisis ekonomi untuk mengevaluasi agilitas dan reliabilitas algoritma dalam mempertahankan stabilitas portofolio di pasar ekstrem.
 
 </div>
 

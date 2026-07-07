@@ -26,15 +26,16 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         \node (c1b) [connector, right of=start, xshift=4.0cm] {1};
         \node (vqe_init) [process, below of=c1b, yshift=-0.2cm] {Inisialisasi State Awal \\ $|0\dots0\rangle \to |\text{bitstring}_{NE}\rangle$ \\ \& Parameter $\theta$};
         \node (spsa) [process, below of=vqe_init, yshift=-0.5cm] {Optimasi SPSA};
-        \node (conv) [decision, below of=spsa, yshift=-0.5cm] {Konvergen?};
+        \node (entropy) [process, below of=spsa, yshift=-0.5cm] {Kalkulasi Entropi};
+        \node (conv) [decision, below of=entropy, yshift=-0.5cm] {Konvergen?};
         \node (layer_eval) [process, below of=conv, yshift=-0.6cm] {Simpan Energi $E_d$ \\ pada \textit{Depth} $d$};
         \node (layer_dec) [decision, below of=layer_eval, yshift=-0.5cm] {$d < D_{max}$?};
-        \node (best_state) [process, below of=layer_dec, yshift=-0.7cm] {Pilih Bitstring \\ dengan $E_{min}$};
-        \node (c2a) [connector, below of=best_state, yshift=-0.3cm] {2};
+        \node (c2a) [connector, below of=layer_dec, yshift=-0.7cm] {2};
         
         % KOLOM 3: Evaluasi & Backtesting
         \node (c2b) [connector, right of=c1b, xshift=4.0cm] {2};
-        \node (rebal) [process, below of=c2b, yshift=-0.5cm] {Eksekusi \textit{Rebalancing} \\ Portofolio};
+        \node (best_state) [process, below of=c2b, yshift=-0.2cm] {Pilih Bitstring \\ dengan $E_{min}$};
+        \node (rebal) [process, below of=best_state, yshift=-0.5cm] {Eksekusi \textit{Rebalancing} \\ Portofolio};
         \node (end_dec) [decision, below of=rebal, yshift=-1cm] {Akhir \\ Periode?};
         \node (eval) [process, below of=end_dec, yshift=-1cm] {Kalkulasi Metrik \\ Kinerja Akhir};
         \node (stop) [startstop, below of=eval, yshift=-0.5cm] {Selesai};
@@ -51,16 +52,18 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         % Alur Kolom 2
         \draw [arrow] (c1b) -- (vqe_init);
         \draw [arrow] (vqe_init) -- (spsa);
-        \draw [arrow] (spsa) -- (conv);
+        \draw [arrow] (spsa) -- (entropy);
+        \draw [arrow] (entropy) -- (conv);
         \draw [arrow] (conv) -- node[anchor=east] {Ya} (layer_eval);
-        \draw [arrow] (conv.west) -- ++(-0.6,0) |- (spsa.west) node[pos=0.25, anchor=west] {Tidak};
+        \draw [arrow] (conv.west) -- ++(-0.6,0) |- (spsa.west) node[pos=0.1, anchor=west] {Tidak};
         \draw [arrow] (layer_eval) -- (layer_dec);
-        \draw [arrow] (layer_dec) -- node[anchor=east] {Tidak} (best_state);
-        \draw [arrow] (layer_dec.east) -- ++(0.7,0) |- (vqe_init.east) node[pos=0.25, anchor=west] {Ya (Tambah \\ \textit{Depth})};
-        \draw [arrow] (best_state) -- (c2a);
+        \draw [arrow] (layer_dec) -- node[anchor=east] {Tidak} (c2a);
+        \draw [arrow] (layer_dec.east) -- ++(0.7,0) |- (vqe_init.east) node[pos=0, anchor=west] {Ya (Tambah \\ \textit{Depth})};
+
 
         % Alur Kolom 3
-        \draw [arrow] (c2b) -- (rebal);
+        \draw [arrow] (c2b) -- (best_state);
+        \draw [arrow] (best_state) -- (rebal);
         \draw [arrow] (rebal) -- (end_dec);
         \draw [arrow] (end_dec) -- node[anchor=east] {Ya} (eval);
         \draw [arrow] (eval) -- (stop);
