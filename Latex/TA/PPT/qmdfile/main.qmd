@@ -42,7 +42,7 @@ format:
 
 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh; text-align: center; padding: 0 100px;">
-  <h3 style="color: #d9534f; margin-bottom: 20px;">⚠️ PERHATIAN ⚠️</h3>
+  <h3 style="color: #d9534f; margin-bottom: 20px;">⚠️ DISCLAIMER ⚠️</h3>
   <p style="font-size: 1.2em; line-height: 1.6;">
     Materi yang disajikan dalam presentasi ini murni untuk <strong>tujuan akademis dan penelitian keilmuan</strong>. Presentasi ini <strong>bukan</strong> merupakan bentuk rekomendasi, ajakan, maupun nasihat finansial profesional.
   </p>

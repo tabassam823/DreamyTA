@@ -2,131 +2,51 @@
 
 ## Diagram Alir Utama
 
-![](../Gambar/Dialir.png){fig-align="center" width=45%}
+:::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 15px;"}
+![](../Gambar/dialir1.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
+
+![](../Gambar/dialir2.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
+
+![](../Gambar/dialir3.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
+::::
 
 ---
 
-## Analisis Kuantitatif
-::::: {.columns}
-:::: {.column width="35%"}
-::: {style="font-size: 0.6em;"}
-* **Simple Return ($R$):**
-  $$ R_t = \frac{P_t - P_{t-1}}{P_{t-1}} $$
-* **Expected Return ($\bar{R}$):**
-  $$ \bar{R} = \frac{1}{n} \sum_{t=1}^n R_t $$
-* **Variance ($\sigma^2$):**
-  $$ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (R_t - \bar{R})^2 $$
-* **Covariance ($\sigma_{ij}$):**
-  $$ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) $$
-:::
-::::
-:::: {.column width="35%"}
-::: {style="font-size: 0.6em;"}
-* **Log Return ($r$):**
-  $$ r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) $$
-* **Expected Return ($\bar{r}$):**
-  $$ \bar{r} = \frac{1}{n} \sum_{t=1}^n r_t $$
-* **Variance ($\sigma^2$):**
-  $$ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (r_t - \bar{r})^2 $$
-* **Covariance ($\sigma_{ij}$):**
-  $$ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j) $$
-:::
-::::
-:::: {.column width="30%"}
-<div style="text-align: center; margin-top: 10px;">
-![](../Gambar/223_Price_log.png){width="100%"}
-<div style="font-size: 0.6em;">Transformasi pergerakan harga saham.</div>
-</div>
-::: {style="font-size: 0.6em; margin-top: 15px;"}
-* $P_t$: Harga pada waktu $t$
-:::
-::::
-:::::
+## Teori Permainan
 
----
-
-## Model Markowitz {.scrollable}
-
-::: {.panel-tabset}
-### Rumus Utama
-::::: {.columns}
-:::: {.column width="60%"}
-::: {style="font-size: 0.75em;"}
-* **Mean-Variance:**
-  $$ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i $$
-* **Binerisasi:**
-  $$ \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} $$
-:::
-
-::: {style="font-size: 0.75em"}
-* $\mu_i$: Imbal hasil rata-rata aset ke-$i$
-* $\sigma_{ij}$: Kovarians antara aset $i$ dan $j$
-* $\omega_i$: Proporsi bobot kontinu aset ke-$i$
-* $\lambda$: Parameter toleransi risiko
-:::
-
+<div style="text-align: left; padding-right: 20px; font-size: 1.0em;">
+* **Teori Permainan:** Cabang matematika terapan yang mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan tindakan agen yang lain.
 <br><br>
-::::
-:::: {.column width="45%"}
-<div style="text-align: center;">
-![](../Gambar/224_Efficient_Frontier.png){width="75%"}
-<div style="font-size: 0.7em;">Grafik Efficient Frontier</div>
+* **Komponen Utama:** Agen (Pemain), Himpunan Strategi, dan Fungsi Utilitas (*Payoff*).
+<br><br>
+* **Nash Equilibrium:** Kondisi paling stabil di mana tidak ada satu pun agen yang bisa meningkatkan utilitasnya dengan mengubah strateginya sendiri secara sepihak.
 </div>
+
+## Jenis-Jenis Permainan (*Game Types*)
+
+:::: {.columns}
+::: {.column width="33%"}
+![](../Gambar/232_payoff_SH.png)
+<div style="font-size: 0.7em; text-align: center;">*Stag Hunt*</div>
+:::
+::: {.column width="33%"}
+![](../Gambar/232_payoff_PD.png)
+<div style="font-size: 0.7em; text-align: center;">*Prisoner's Dilemma*</div>
+:::
+::: {.column width="33%"}
+![](../Gambar/232_payoff_BoS.png)
+<div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">*Battle of the Sexes*</div>
 <br>
-
-::: {style="font-size: 0.75em;"}
-* Investor cenderung mencari portofolio pada *Efficient Frontier* untuk memaksimalkan *return* dengan risiko yang minimal.
+![](../Gambar/nasheq.png){width="70%"}
+<div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">*Nash Equilibrium*</div>
 :::
 ::::
-:::::
-
-### Penurunan Rumus
-<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-
-**Langkah 1 — Formulasi Lagrangian Kontinu (Markowitz):**
-
-Fungsi biaya Markowitz dalam domain bobot $\omega_i$:
-
-$$\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i$$
-
-dengan syarat $\sum_i \omega_i = 1$ dan $\omega_i \geq 0$.
-
----
-
-**Langkah 2 — Substitusi Variabel Biner:**
-
-Variabel bobot kontinu $\omega_i$ diubah menjadi variabel biner $x_i \in \{0, 1\}$ melalui hubungan:
-
-$$\omega_i = \frac{x_i}{K}$$
-
-di mana $K$ adalah jumlah aset yang dipilih dari total $N$ kandidat.
-
----
-
-**Langkah 3 — Substitusi ke Lagrangian:**
-
-Substitusi $\omega_i = x_i/K$ ke dalam fungsi Lagrangian:
-
-$$\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
-
-$$\therefore \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
-
-Nilai $x_i = 1$ merepresentasikan **beli**, sedangkan $x_i = 0$ merepresentasikan **tidak membeli**.
-
----
-
-| Simbol | Domain Kontinu | Domain Biner |
-|:---:|:---:|:---:|
-| Variabel keputusan | $\omega_i \in [0, 1]$ | $x_i \in \{0, 1\}$ |
-| Kendala | $\sum \omega_i = 1$ | $\sum x_i = K$ |
-
-<br><br><br>
-</div>
-:::
 
 ---
 
 ## Exact Potential Game (EPG)
+
+<div style="font-size: 0.6em; text-align: right; margin-top: -20px; margin-bottom: 20px; color: #666;">*Referensi: Monderer & Shapley (1996)*</div>
 
 ::: {.r-stack}
 :::: {.fragment .fade-out data-fragment-index="1" style="width: 100%;"}
@@ -177,11 +97,9 @@ $$U(\mathbf{x}) = \sum_i \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} \sum_{i,j} \s
 
 **Langkah 3 — Utilitas Individu Agen ke-$i$:**
 
-$$u_i(\mathbf{x}) = \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} x_i \left( \sum_{j \neq i} \sigma_{ij} x_j \right)$$
-
 Jika varians dipisah dari matriks kovarians:
 
-$$u_i(\mathbf{x}) = \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} x_i \left( \sigma_{ii} + 2\sum_{j \neq i} \sigma_{ij} x_j \right)$$
+$$u_i(\mathbf{x}) = \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} x_i \left( \sigma_{ii} + \sum_{j \neq i} \sigma_{ij} x_j \right)$$
 
 ---
 
@@ -197,7 +115,7 @@ $$\Phi(\mathbf{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{K} - \frac{\gamma}{2}\sum_{i=
 
 Dekomposisi suku yang mengandung $x_i$ (dengan $x_i^2 = x_i$):
 
-$$\Phi(\mathbf{x}) = \frac{\mu_i}{K}x_i - \frac{\gamma}{2} \left( \frac{\sigma_{ii}}{K^2}x_i + \frac{2}{K^2}x_i \sum_{j \neq i} \sigma_{ij}x_j \right) + \underbrace{\sum_{l \neq i} \frac{\mu_l}{K}x_l - \frac{\gamma}{2} \sum_{l \neq i} \sum_{m \neq i} \frac{\sigma_{lm}}{K^2}x_l x_m}_{\text{tidak bergantung pada } x_i}$$
+$$\Phi(\mathbf{x}) = \frac{\mu_i}{K}x_i - \frac{\gamma}{2} \left( \frac{\sigma_{ii}}{K^2}x_i + \frac{1}{K^2}x_i \sum_{j \neq i} \sigma_{ij}x_j \right) + \underbrace{\sum_{l \neq i} \frac{\mu_l}{K}x_l - \frac{\gamma}{2} \sum_{l \neq i} \sum_{m \neq i} \frac{\sigma_{lm}}{K^2}x_l x_m}_{\text{tidak bergantung pada } x_i}$$
 
 ---
 
@@ -320,9 +238,87 @@ $$\therefore E_{total}(\mathbf{s}) = \sum_i \left(- \frac{Q_{ii}}{2} - \sum_{j \
 
 $$\boxed{\hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C}$$
 
-<br><br>
+<br><br><br>
 </div>
 :::
+
+---
+
+## Analogi Keputusan Investasi dan Ising
+
+<div style="font-size: 0.6em; text-align: right; margin-top: -20px; margin-bottom: 20px; color: #666;">*Referensi: Lucas (2014); Galam & Walliser (2010)*</div>
+
+Memetakan fungsi biaya portofolio ke dalam struktur Hamiltonian sistem fisik.
+
+| Komponen Investasi | Analogi Sistem Ising (Fisika) |
+|:---:|:---:|
+| Aset Keuangan | Partikel *Spin* (Atas/Bawah) |
+| Keputusan Investasi (Beli/Jual) | Orientasi *Spin* (+1 / -1) |
+| Tren/Ekspektasi Pasar | Medan Magnet Lokal ($h_i$) |
+| Korelasi/Kovariansi Antar Aset | Interaksi Kopling Antar *Spin* ($J_{ij}$) |
+| Alokasi Modal Paling Efisien | Konfigurasi Energi Terendah (*Ground State*) |
+
+---
+
+## Bit Klasik vs Qubit Kuantum
+:::: {.columns}
+::: {.column width="45%"}
+**Bit Klasik:**
+
+* Unit informasi fundamental komputer konvensional.
+* Hanya bernilai 0 atau 1.
+* 0 (tidak ada arus listrik), 1 (ada arus listrik).
+
+```{=html}
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 15px;">
+  <div style="border: 2px solid #555; border-radius: 5px; padding: 10px; background: #f0f0f0; color: black; font-weight: bold; width: 40px; text-align: center;">0</div>
+  <div style="font-size: 1.5em;">⇄</div>
+  <div style="border: 2px solid #555; border-radius: 5px; padding: 10px; background: #f0f0f0; color: black; font-weight: bold; width: 40px; text-align: center;">1</div>
+</div>
+<div style="font-size: 0.7em; text-align: center; margin-top: 5px;">Transistor: 1 dan 0 secara bergantian</div>
+```
+:::
+::: {.column width="50%"}
+**Qubit Kuantum:**
+
+* Unit informasi fundamental komputer kuantum.
+* Memanfaatkan prinsip Superposisi: 0, 1, atau kombinasi linear keduanya.
+  $$ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle $$
+
+```{=html}
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
+  <div style="border: 2px solid #555; border-radius: 50%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: black; font-weight: bold; text-align: center; width: 140px; height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <span style="font-size: 1.2em;">0 &amp; 1</span>
+    <span style="font-size: 0.7em; margin-top: 5px;">Bersamaan</span>
+  </div>
+</div>
+<div style="font-size: 0.7em; text-align: center; margin-top: 5px;">Qubit: 1 dan 0 secara bersamaan</div>
+```
+:::
+::::
+
+---
+
+
+## Representasi & Geometri Qubit
+:::: {.columns}
+::: {.column width="60%"}
+<div style="font-size: 0.85em;">
+* **Basis Komputasi:**
+  $$ |0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix} $$
+* **Syarat Normalisasi:** Total probabilitas harus bernilai 1 ($|\alpha|^2 + |\beta|^2 = 1$).
+* Dua parameter sudut:
+  * $\theta$ (Polar): Menentukan probabilitas $|0\rangle$ vs $|1\rangle$.
+  * $\phi$ (Azimuthal): Menentukan fase kuantum.
+* Fungsi gelombang qubit:
+  $$ |\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle $$
+</div>
+:::
+::: {.column width="40%"}
+<iframe src="bloch_interactive.html" width="100%" height="550px" style="border:none;"></iframe>
+<div style="font-size: 0.7em; text-align: center;">Interaktif: Atur parameter & putar objek 3D</div>
+:::
+::::
 
 ---
 
@@ -388,6 +384,8 @@ $$
 ---
 
 ## Optimizer SPSA {.scrollable}
+
+<div style="font-size: 0.6em; text-align: right; margin-top: -20px; margin-bottom: 20px; color: #666;">*Referensi: Spall (1998)*</div>
 
 ::: {.panel-tabset}
 ### Rumus Utama
@@ -580,7 +578,7 @@ Procedure BacktestLoop(Data, K)
 EndProcedure
 ```
 
-* Siklus dieksekusi secara iteratif melalui jendela waktu berjalan (*sliding window*) untuk mengevaluasi adaptabilitas model terhadap fluktuasi riil data historis pasar.
+* Siklus dieksekusi secara iteratif melalui jendela waktu berjalan (*sliding window*).
 
 ---
 
@@ -589,7 +587,6 @@ EndProcedure
 ::: {.panel-tabset}
 ### Metrik Finansial
 <div style="font-size: 0.7em;">
-Untuk membandingkan performa model GT-VQE dengan *Equal Weight* dan optimasi klasik (SLSQP), parameter evaluasi yang dihitung mencakup:
 
 ::::: {.columns}
 :::: {.column width="50%"}
@@ -638,86 +635,86 @@ EndProcedure
 
 **Contoh Perhitungan SLSQP (Kasus $N=2$)**
 
-Misalkan
-$\mu=\begin{pmatrix}0.10\\0.05\end{pmatrix},\qquad\Sigma=\begin{pmatrix}0.04 & 0.01\\0.01 & 0.02\end{pmatrix},\qquad\gamma=1.$
+Misalkan:
+$$ \mu=\begin{pmatrix}0.10\\0.05\end{pmatrix},\qquad\Sigma=\begin{pmatrix}0.04 & 0.01\\0.01 & 0.02\end{pmatrix},\qquad\gamma=1 $$
 
 **Inisialisasi**
 
-$w_0=\begin{pmatrix}0.5\\0.5\end{pmatrix},\qquad B_0=\begin{pmatrix}1&0\\0&1\end{pmatrix}.$
+$$ w_0=\begin{pmatrix}0.5\\0.5\end{pmatrix},\qquad B_0=\begin{pmatrix}1&0\\0&1\end{pmatrix} $$
 
 **1. Hitung Gradien**
 
-$g_0=\gamma\Sigma w_0-\mu.$
+$$ g_0=\gamma\Sigma w_0-\mu $$
 
-Karena
+Karena:
 
-$\Sigma w_0=\begin{pmatrix}0.025\\0.015\end{pmatrix},$
+$$ \Sigma w_0=\begin{pmatrix}0.025\\0.015\end{pmatrix} $$
 
-maka
+maka:
 
-$g_0=\begin{pmatrix}-0.075\\-0.035\end{pmatrix}.$
+$$ g_0=\begin{pmatrix}-0.075\\-0.035\end{pmatrix} $$
 
 ---
 
 **2. Selesaikan Sub-masalah Quadratic Programming**
 
-Sub-QP yang diselesaikan adalah
+Sub-QP yang diselesaikan adalah:
 
-$\min_d\left(g_0^Td+\frac12 d^TB_0d\right),$
+$$ \min_d\left(g_0^Td+\frac12 d^TB_0d\right) $$
 
-dengan kendala
+dengan kendala:
 
-$d_1+d_2=0.$
+$$ d_1+d_2=0 $$
 
-Karena
+Karena:
 
-$d_2=-d_1,$
+$$ d_2=-d_1 $$
 
-fungsi objektif menjadi
+fungsi objektif menjadi:
 
-$g(d_1)=-0.040d_1+d_1^2.$
+$$ g(d_1)=-0.040d_1+d_1^2 $$
 
-Turunan pertama
+Turunan pertama:
 
-$\frac{dg}{dd_1}=-0.040+2d_1=0$
+$$ \frac{dg}{dd_1}=-0.040+2d_1=0 $$
 
-memberikan solusi
+memberikan solusi:
 
-$d=\begin{pmatrix}0.02\\-0.02\end{pmatrix}.$
+$$ d=\begin{pmatrix}0.02\\-0.02\end{pmatrix} $$
 
 ---
 
 **3. Line Search**
 
-Misalkan hasil *line search* menghasilkan
+Misalkan hasil *line search* menghasilkan:
 
-$\alpha_0=1.$
+$$ \alpha_0=1 $$
 
 ---
 
 **4. Update Bobot**
 
-$w_1=w_0+\alpha_0d=\begin{pmatrix}0.52\\0.48\end{pmatrix}.$
+$$ w_1=w_0+\alpha_0d=\begin{pmatrix}0.52\\0.48\end{pmatrix} $$
 
 ---
 
 **5. Update Hessian (BFGS)**
 
-Hitung
+Hitung:
 
-$s_0=w_1-w_0=\begin{pmatrix}0.02\\-0.02\end{pmatrix},$
+$$ s_0=w_1-w_0=\begin{pmatrix}0.02\\-0.02\end{pmatrix} $$
 
-kemudian gradien baru
+kemudian gradien baru:
 
-$g_1=\Sigma w_1-\mu=\begin{pmatrix}-0.0744\\-0.0352\end{pmatrix},$
+$$ g_1=\Sigma w_1-\mu=\begin{pmatrix}-0.0744\\-0.0352\end{pmatrix} $$
 
-sehingga
+sehingga:
 
-$y_0=g_1-g_0=\begin{pmatrix}0.0006\\-0.0002\end{pmatrix}.$
+$$ y_0=g_1-g_0=\begin{pmatrix}0.0006\\-0.0002\end{pmatrix} $$
 
-Selanjutnya matriks Hessian diperbarui menggunakan rumus BFGS
+Selanjutnya matriks Hessian diperbarui menggunakan rumus BFGS:
 
-$B_1=B_0-\frac{B_0s_0s_0^TB_0}{s_0^TB_0s_0}+\frac{y_0y_0^T}{y_0^Ts_0},$
+$$ B_1=B_0-\frac{B_0s_0s_0^TB_0}{s_0^TB_0s_0}+\frac{y_0y_0^T}{y_0^Ts_0} $$
 
 yang kemudian digunakan pada iterasi berikutnya.
 

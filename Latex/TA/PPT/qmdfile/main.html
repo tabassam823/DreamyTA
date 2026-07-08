@@ -193,6 +193,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="main_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="main_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="main_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -234,7 +237,7 @@ Putra Naufal Tabassam
 <!-- include Fase_9.qmd -->
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh; text-align: center; padding: 0 100px;">
 <h3 style="color: #d9534f; margin-bottom: 20px;">
-⚠️ PERHATIAN ⚠️
+⚠️ DISCLAIMER ⚠️
 </h3>
 <p style="font-size: 1.2em; line-height: 1.6;">
 Materi yang disajikan dalam presentasi ini murni untuk <strong>tujuan akademis dan penelitian keilmuan</strong>. Presentasi ini <strong>bukan</strong> merupakan bentuk rekomendasi, ajakan, maupun nasihat finansial profesional.
@@ -248,6 +251,152 @@ Audiens diharapkan untuk selalu bertindak bijak, melakukan riset mandiri (<i>Do 
 <section id="fase-latar-belakang" class="title-slide slide level1 center">
 <h1>Fase Latar Belakang</h1>
 
+</section>
+<section id="tokoh-penting-yang-terlibat" class="slide level2">
+<h2>Tokoh Penting yang Terlibat</h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px;">
+<div style="text-align: center; width: 28%;">
+<img data-src="../Gambar/Markowitz_Foto.png" style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+<div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">
+Harry Markowitz
+</div>
+</div>
+<div style="text-align: center; width: 28%;">
+<img data-src="../Gambar/LenzIsing_Foto.png" style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+<div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">
+Wilhelm Lenz &amp; Ernst Ising
+</div>
+</div>
+<div style="text-align: center; width: 28%;">
+<img data-src="../Gambar/Onsager_Foto.png" style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+<div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">
+Lars Onsager
+</div>
+</div>
+<div style="text-align: center; width: 28%;">
+<img data-src="../Gambar/VonNeumann_Foto.png" style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+<div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">
+John von Neumann
+</div>
+</div>
+<div style="text-align: center; width: 28%;">
+<img data-src="../Gambar/Morgenstern_Foto.png" style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+<div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">
+Oskar Morgenstern
+</div>
+</div>
+<div style="text-align: center; width: 28%;">
+<img data-src="../Gambar/Mantegna_Foto.png" style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+<div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">
+Rosario N. Mantegna
+</div>
+</div>
+</div>
+</section>
+<section id="penelitian-terdahulu-dan-research-gap" class="slide level2">
+<h2>Penelitian Terdahulu dan Research Gap</h2>
+<style>
+.card{
+border:2px solid #d9d9d9;
+border-radius:12px;
+padding:12px;
+min-height:340px;
+background:#fafafa;
+box-shadow:2px 2px 6px rgba(0,0,0,.08);
+text-align:center;
+font-size:0.9em;
+}
+
+.arrow{
+font-size:2em;
+text-align:center;
+margin-top:120px;
+color:#666;
+}
+
+.title{
+font-weight:bold;
+font-size:1.05em;
+margin-top:8px;
+margin-bottom:8px;
+color:#003366;
+}
+
+.gap{
+border:2px solid #cc3333;
+background:#fff6f6;
+}
+
+.solusi{
+border:2px solid #2e8b57;
+background:#f3fff5;
+}
+
+.metric{
+border:2px solid #5b3cc4;
+background:#faf7ff;
+}
+</style>
+<div class="columns">
+<div class="column" style="width:23%;">
+<div class="card">
+<div class="title">
+<p>Penelitian Terdahulu</p>
+</div>
+<p><img src="../Gambar/wang_pct.png" width="350"></p>
+<div style="margin-top: 20px;">
+<p><strong>Wang dkk. (2025)</strong></p>
+<p>VQE + WCVaR + CMA-ES</p>
+<p>Stabilisasi konvergensi energi.</p>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+<div class="arrow">
+<p>➜</p>
+</div>
+</div><div class="column" style="width:23%;">
+<div class="card">
+<div class="title">
+<p>Penelitian Terdahulu</p>
+</div>
+<p><img src="../Gambar/wei_pct.png" width="350"></p>
+<div style="margin-top: 20px;">
+<p><strong>Wei dkk. (2025)</strong></p>
+<p>Quantum-Classical Hybrid Annealing</p>
+<p>Memecah masalah QUBO kompleks menjadi submasalah.</p>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+<div class="arrow">
+<p>➜</p>
+</div>
+</div><div class="column" style="width:23%;">
+<div class="card gap">
+<div class="title">
+<p>Research Gap</p>
+</div>
+<p><img src="../Gambar/barren_plateau.png" width="350"></p>
+<div style="margin-top: 20px;">
+<p>Masih bergantung pada</p>
+<p><strong>inisialisasi acak</strong></p>
+<p>yang rentan mengalami</p>
+<p><strong>Barren Plateau</strong></p>
+</div>
+</div>
+</div><div class="column" style="width:23%;">
+<div class="card solusi">
+<div class="title">
+<p>Solusi</p>
+</div>
+<p><img src="../Gambar/GT_pct.png" width="150"></p>
+<div style="margin-top: 20px;">
+<p>Menggunakan <strong>Nash Equilibrium</strong> sebagai <strong>Warm-Start Initialization</strong></p>
+</div>
+</div>
+</div></div>
+<div style="font-size:0.45em;margin-top:20px;color:#666;text-align:center;">
+<p>Sumber: Wang <em>et al.</em> (2025); Wei <em>et al.</em> (2025)</p>
+</div>
 </section>
 <section id="ekonomi-dan-investasi" class="slide level2">
 <h2>Ekonomi dan Investasi</h2>
@@ -269,140 +418,54 @@ Diversifikasi Portofolio
 </div>
 </div></div>
 </section>
-<section id="model-markowitz-dan-ising" class="slide level2">
-<h2>Model Markowitz dan Ising</h2>
-<div style="font-size: 0.85em;">
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Model Markowitz &amp; Pareto Optimum</strong></p>
-<ul>
-<li><strong>Mean-Variance:</strong>
-<div style="font-size: 0.85em;">
-<p><span class="math display">\[ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i \]</span></p>
-</div></li>
-<li>Investor mencari portofolio pada <em>Efficient Frontier</em> (Pareto Optimum) untuk memaksimalkan <em>return</em> pada tingkat risiko tertentu.</li>
-</ul>
-<div style="text-align: center; margin-top: 5px;">
-<img data-src="../Gambar/224_Efficient_Frontier.png" style="width:55.0%">
-<div style="font-size: 0.7em;">
-Grafik Efficient Frontier
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><strong>Formulasi ke Hamiltonian Ising</strong></p>
-<ul>
-<li>Model Markowitz diubah menjadi variabel biner (beli/tidak beli), lalu dipetakan ke <em>spin</em> <span class="math inline">\(\{-1, 1\}\)</span>.</li>
-<li><strong>Hamiltonian Ising Umum:</strong> <span class="math display">\[ \hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i&lt;j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C \]</span></li>
-<li><span class="math inline">\(h_i\)</span> merepresentasikan kecenderungan harga pasar, dan <span class="math inline">\(J_{ij}\)</span> menggambarkan korelasi antar aset.</li>
-</ul>
-</div></div>
-</div>
-</section>
-<section id="ising-ke-komputer-kuantum" class="slide level2">
-<h2>Ising ke Komputer Kuantum</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div style="text-align: center; margin-top: 10px;">
-<img data-src="../Gambar/PQC_VQDNN.png" style="width:90.0%">
-<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">
-Parameterized Quantum Circuit
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div style="font-size: 0.7em; margin-top: 10px;">
-<p><strong>Alur Mekanisme PQC:</strong></p>
-<ul>
-<li><strong>Penyandian Data (Encoding):</strong> Data klasik dipetakan ke dalam keadaan kuantum awal <span class="math inline">\(|\psi_0\rangle\)</span> melalui fungsi prapemrosesan dan operasi penyandian.</li>
-<li><strong>Sirkuit Variasional:</strong> Keadaan kuantum ditransformasi oleh sirkuit berparameter <span class="math inline">\(U(\boldsymbol{\theta})\)</span> untuk mengeksplorasi ruang solusi permasalahan.</li>
-<li><strong>Pengukuran &amp; Fungsi Biaya:</strong> Hasil diukur untuk mendapatkan probabilitas observabel, yang dievaluasi menjadi nilai fungsi biaya <span class="math inline">\(L(\boldsymbol{\theta})\)</span>.</li>
-<li><strong>Optimasi Klasik (Update Parameter):</strong> Algoritma optimasi klasik mengevaluasi biaya dan memperbarui parameter <span class="math inline">\(\boldsymbol{\theta}\)</span> secara iteratif hingga konvergen pada solusi optimal <span class="math inline">\(\boldsymbol{\theta}^*\)</span>.</li>
-</ul>
-</div>
-</div></div>
-</section>
-<section id="implementasi-simulasi-kuantum-pennylane" class="slide level2">
-<h2>Implementasi Simulasi Kuantum: Pennylane</h2>
+<section id="analisis-fundamental-dan-teknikal" class="slide level2">
+<h2>Analisis Fundamental dan Teknikal</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
-<div style="text-align: center; margin-top: 20px;">
-<p><img data-src="../Gambar/Pennylane.png" style="width:90.0%"></p>
+<p><strong>Analisis Fundamental</strong></p>
+<div style="text-align: center;">
+<img data-src="../Gambar/221_Cashflow_statement.png" style="width:60.0%">
+<div style="font-size: 0.7em;">
+Struktur laporan arus kas fundamental.
+</div>
+</div>
+<div style="font-size: 0.85em; margin-top: 15px;">
+<ul>
+<li>Ekonometrik Perusahaan</li>
+<li>Kesehatan Fiskal</li>
+<li>Sentimen Pasar</li>
+</ul>
 </div>
 </div><div class="column" style="width:55%;">
-<div style="font-size: 0.8em; margin-top: 25px;">
-<p><strong>Mengapa Pennylane?</strong></p>
+<p><strong>Analisis Teknikal</strong></p>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; text-align: center;">
+<div style="width: 32%;">
+<img data-src="../Gambar/222_Candle.png">
+<div style="font-size: 0.6em;">
+<em>Candlestick</em>
+</div>
+</div>
+<div style="width: 32%;">
+<img data-src="../Gambar/222_Chart.png">
+<div style="font-size: 0.6em;">
+<em>Price Chart</em>
+</div>
+</div>
+<div style="width: 32%;">
+<img data-src="../Gambar/222_SnR.png">
+<div style="font-size: 0.6em;">
+<em>Support &amp; Resistance</em>
+</div>
+</div>
+</div>
+<p><br><br><br></p>
+<div style="font-size: 0.85em; margin-top: 15px;">
 <ul>
-<li><strong>Antrean (<em>Queue</em>) Panjang:</strong> Akses publik gratis pada <em>hardware</em> kuantum riil sangat lambat.</li>
-<li><strong>Biaya Eksekusi Tinggi:</strong> VQE menuntut ribuan iterasi. Eksekusi <em>cloud</em> riil menguras kuota akses secara instan.</li>
-<li><strong>Simulasi Aljabar Linear:</strong> Komputer klasik mampu menghitung matriks uniter dan vektor kompleks secara presisi (<em>noiseless</em>), mereplika hukum fisika kuantum tanpa bergantung pada <em>hardware</em> riil.</li>
+<li>Representasi Psikologi Kolektif dari Agen Pasar</li>
 </ul>
 </div>
 </div></div>
 </section>
-<section id="tantangan-efisiensi-dan-solusi-nash-equilibrium" class="slide level2">
-<h2>Tantangan Efisiensi dan Solusi <em>Nash Equilibrium</em></h2>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><strong>Masalah Efisiensi (<em>Barren Plateau</em>)</strong></p>
-<ul>
-<li>Inisialisasi parameter acak pada sirkuit kuantum rentan terjebak di area datar (<em>Barren Plateau</em>), menghambat VQE mencapai solusi optimal.</li>
-</ul>
-<p><strong>Solusi: <em>Warm-Start Strategy</em></strong></p>
-<ul>
-<li>Memanfaatkan kondisi <strong>Nash Equilibrium</strong> dari konsep <em>Game Theory</em> (dalam skema <em>Exact Potential Game</em>).</li>
-<li>Titik Nash bertindak sebagai tebakan awal (<em>warm-start</em>) yang sudah efisien secara rasional, mempercepat optimasi kuantum.</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<p><img data-src="../Gambar/barren_plateau.png" style="width:70.0%"> <img data-src="../Gambar/nasheq.png" style="width:60.0%"></p>
-</div></div>
-</section>
-<section id="metode-evaluasi-performa-backtesting" class="slide level2">
-<h2>Metode Evaluasi Performa (Backtesting)</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<img data-src="../Gambar/backtest.png">
-<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">
-Simulasi riwayat harga dan rebalance portofolio secara periodik
-</div>
-</div><div class="column" style="width:50%;">
-<img data-src="../Gambar/backtest_data.png">
-<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">
-Data backtesting pada sebuah strategi trading
-</div>
-</div></div>
-</section>
-<section id="tujuan-penelitian" class="slide level2">
-<h2>Tujuan Penelitian</h2>
-<ol type="1">
-<li>Menganalisis formulasi bias aset sebagai parameter medan lokal (<span class="math inline">\(h_i\)</span>) dan interaksi antar aset sebagai koefisien kopling (<span class="math inline">\(J_{ij}\)</span>) melalui pendekatan fungsi potensial dalam sistem Hamiltonian berbasis <em>Exact Potential Game</em> (EPG).</li>
-<li>Mengevaluasi kontribusi strategi <em>warm-start</em> berbasis <em>Nash Equilibrium</em> dalam meningkatkan efisiensi pencarian solusi optimal pada algoritma VQE.</li>
-<li>Menguji kapabilitas algoritma VQE yang menggunakan optimasi SPSA dan <em>Ansatz EfficientSU(2)</em> untuk menghasilkan keputusan alokasi aset yang optimal dalam kondisi pasar yang kompleks.</li>
-</ol>
-</section>
-<section id="batasan-masalah-12" class="slide level2">
-<h2>Batasan Masalah (1/2)</h2>
-<ol type="1">
-<li>Portofolio yang dianalisis dibatasi pada pemilihan 1 aset dari 2 pilihan aset pada sistem <span class="math inline">\(N=2\)</span> dan 2 aset dari 4 pilihan aset pada sistem <span class="math inline">\(N=4\)</span>.</li>
-<li>Model permainan yang digunakan adalah skema <em>non zero-sum game</em> dalam kerangka <em>Exact Potential Game</em>.</li>
-<li>Simulasi dan implementasi algoritma dilakukan menggunakan simulator <em>Pennylane</em> tanpa mempertimbangkan <em>noise</em>.</li>
-</ol>
-</section>
-<section id="batasan-masalah-22" class="slide level2">
-<h2>Batasan Masalah (2/2)</h2>
-<ol start="4" type="1">
-<li>Tugas akhir ini hanya merupakan <em>proof-of-concept</em> dari implementasi <em>warm-start</em> ekuilibrium Nash terhadap performa algoritma VQE dalam menemukan solusi <em>ground state</em> pada model portofolio hibrida.</li>
-<li>Analisis Entropi Von Neumann dibatasi sebagai indikator perubahan distribusi probabilitas keadaan kuantum selama proses optimasi VQE dan tidak digunakan sebagai kajian mendalam mengenai sifat keterbelitan dari <em>ansatz</em>.</li>
-<li>Analisis berfokus pada pengaruh <em>warm-start</em> ekuilibrium Nash terhadap proses optimasi VQE, bukan untuk membuktikan keunggulan komputasi kuantum terhadap metode klasik.</li>
-</ol>
-</section></section>
-<section>
-<section id="fase-metodologi" class="title-slide slide level1 center">
-<h1>Fase Metodologi</h1>
-
-</section>
-<section id="diagram-alir-utama" class="slide level2">
-<h2>Diagram Alir Utama</h2>
-
-<img data-src="../Gambar/Dialir.png" class="quarto-figure quarto-figure-center r-stretch" style="width:45.0%"></section>
 <section id="analisis-kuantitatif" class="slide level2">
 <h2>Analisis Kuantitatif</h2>
 <div class="columns">
@@ -460,19 +523,55 @@ Transformasi pergerakan harga saham.
 <li><span class="math inline">\(\lambda\)</span>: Parameter toleransi risiko</li>
 </ul>
 </div>
-<p><br><br></p>
-</div><div class="column" style="width:45%;">
-<div style="text-align: center;">
-<img data-src="../Gambar/224_Efficient_Frontier.png" style="width:75.0%">
-<div style="font-size: 0.7em;">
-Grafik Efficient Frontier
+</div><div class="column" style="width:40%;">
+<div style="text-align: center; font-size: 0.8em; font-weight: bold; margin-bottom: 5px;">
+Contoh Alokasi Modal (Rp 10 Juta)
+</div>
+<div style="display: flex; justify-content: center; margin-bottom: -10px;">
+<div class="cell" data-reveal="true" data-fig-width="4.5" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"themeVariables": {"pieSectionTextSize": "36px", "pieLegendTextSize": "20px"}}}%%
+pie 
+  "Cash" : 40
+  "BBCA" : 30
+  "ADRO" : 30
+</pre>
+</div>
+<p></p></figure><p></p>
 </div>
 </div>
-<p><br></p>
-<div style="font-size: 0.75em;">
-<ul>
-<li>Investor cenderung mencari portofolio pada <em>Efficient Frontier</em> untuk memaksimalkan <em>return</em> dengan risiko yang minimal.</li>
-</ul>
+</div>
+</div>
+<div style="font-size: 0.65em; display: flex; justify-content: center;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Aset</th>
+<th style="text-align: center;">Persentase</th>
+<th style="text-align: left;">Nominal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Cash</strong></td>
+<td style="text-align: center;">40%</td>
+<td style="text-align: left;">Rp 4.000.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>BBCA</strong></td>
+<td style="text-align: center;">30%</td>
+<td style="text-align: left;">Rp 3.000.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>ADRO</strong></td>
+<td style="text-align: center;">30%</td>
+<td style="text-align: left;">Rp 3.000.000</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div></div>
 </div>
@@ -521,8 +620,97 @@ Grafik Efficient Frontier
 </div>
 </div>
 </section>
+<section id="metode-evaluasi-performa-backtesting" class="slide level2">
+<h2>Metode Evaluasi Performa (Backtesting)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="../Gambar/backtest.png">
+<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">
+Simulasi riwayat harga dan rebalance portofolio secara periodik
+</div>
+</div><div class="column" style="width:50%;">
+<img data-src="../Gambar/backtest_data.png">
+<div style="font-size: 0.7em; text-align: center; margin-top: 10px;">
+Data backtesting pada sebuah strategi trading
+</div>
+</div></div>
+</section>
+<section id="tujuan-penelitian" class="slide level2">
+<h2>Tujuan Penelitian</h2>
+<ol type="1">
+<li>Menganalisis formulasi bias aset sebagai parameter medan lokal (<span class="math inline">\(h_i\)</span>) dan interaksi antar aset sebagai koefisien kopling (<span class="math inline">\(J_{ij}\)</span>) melalui pendekatan fungsi potensial dalam sistem Hamiltonian berbasis <em>Exact Potential Game</em> (EPG).</li>
+<li>Mengevaluasi kontribusi strategi <em>warm-start</em> berbasis <em>Nash Equilibrium</em> dalam meningkatkan efisiensi pencarian solusi optimal pada algoritma VQE.</li>
+<li>Menguji kapabilitas algoritma VQE yang menggunakan optimasi SPSA dan <em>Ansatz EfficientSU(2)</em> untuk menghasilkan keputusan alokasi aset yang optimal dalam kondisi pasar yang kompleks.</li>
+</ol>
+</section>
+<section id="batasan-masalah-12" class="slide level2">
+<h2>Batasan Masalah (1/2)</h2>
+<ol type="1">
+<li>Portofolio yang dianalisis dibatasi pada pemilihan 1 aset dari 2 pilihan aset pada sistem <span class="math inline">\(N=2\)</span> dan 2 aset dari 4 pilihan aset pada sistem <span class="math inline">\(N=4\)</span>.</li>
+<li>Model permainan yang digunakan adalah skema <em>non zero-sum game</em> dalam kerangka <em>Exact Potential Game</em>.</li>
+<li>Simulasi dan implementasi algoritma dilakukan menggunakan simulator <em>Pennylane</em> tanpa mempertimbangkan <em>noise</em>.</li>
+</ol>
+</section>
+<section id="batasan-masalah-22" class="slide level2">
+<h2>Batasan Masalah (2/2)</h2>
+<ol start="4" type="1">
+<li>Tugas akhir ini hanya merupakan <em>proof-of-concept</em> dari implementasi <em>warm-start</em> ekuilibrium Nash terhadap performa algoritma VQE dalam menemukan solusi <em>ground state</em> pada model portofolio hibrida.</li>
+<li>Analisis Entropi Von Neumann dibatasi sebagai indikator perubahan distribusi probabilitas keadaan kuantum selama proses optimasi VQE dan tidak digunakan sebagai kajian mendalam mengenai sifat keterbelitan dari <em>ansatz</em>.</li>
+<li>Analisis berfokus pada pengaruh <em>warm-start</em> ekuilibrium Nash terhadap proses optimasi VQE, bukan untuk membuktikan keunggulan komputasi kuantum terhadap metode klasik.</li>
+</ol>
+</section></section>
+<section>
+<section id="fase-metodologi" class="title-slide slide level1 center">
+<h1>Fase Metodologi</h1>
+
+</section>
+<section id="diagram-alir-utama" class="slide level2">
+<h2>Diagram Alir Utama</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 15px;">
+<p><img data-src="../Gambar/dialir1.png" style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"></p>
+<p><img data-src="../Gambar/dialir2.png" style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"></p>
+<p><img data-src="../Gambar/dialir3.png" style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"></p>
+</div>
+</section>
+<section id="teori-permainan" class="slide level2">
+<h2>Teori Permainan</h2>
+<div style="text-align: left; padding-right: 20px; font-size: 1.0em;">
+<ul>
+<li><strong>Teori Permainan:</strong> Cabang matematika terapan yang mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan tindakan agen yang lain. <br><br></li>
+<li><strong>Komponen Utama:</strong> Agen (Pemain), Himpunan Strategi, dan Fungsi Utilitas (<em>Payoff</em>). <br><br></li>
+<li><strong>Nash Equilibrium:</strong> Kondisi paling stabil di mana tidak ada satu pun agen yang bisa meningkatkan utilitasnya dengan mengubah strateginya sendiri secara sepihak.</li>
+</ul>
+</div>
+</section>
+<section id="jenis-jenis-permainan-game-types" class="slide level2">
+<h2>Jenis-Jenis Permainan (<em>Game Types</em>)</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<img data-src="../Gambar/232_payoff_SH.png">
+<div style="font-size: 0.7em; text-align: center;">
+<em>Stag Hunt</em>
+</div>
+</div><div class="column" style="width:33%;">
+<img data-src="../Gambar/232_payoff_PD.png">
+<div style="font-size: 0.7em; text-align: center;">
+<em>Prisoner’s Dilemma</em>
+</div>
+</div><div class="column" style="width:33%;">
+<img data-src="../Gambar/232_payoff_BoS.png">
+<div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">
+<em>Battle of the Sexes</em>
+</div>
+<br> <img data-src="../Gambar/nasheq.png" style="width:70.0%">
+<div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">
+<em>Nash Equilibrium</em>
+</div>
+</div></div>
+</section>
 <section id="exact-potential-game-epg" class="slide level2">
 <h2>Exact Potential Game (EPG)</h2>
+<div style="font-size: 0.6em; text-align: right; margin-top: -20px; margin-bottom: 20px; color: #666;">
+<em>Referensi: Monderer &amp; Shapley (1996)</em>
+</div>
 <div class="r-stack">
 <div class="fragment fade-out" data-fragment-index="1" style="width: 100%;">
 <ul>
@@ -566,9 +754,8 @@ Grafik Efficient Frontier
 <p><span class="math display">\[U(\mathbf{x}) = \sum_i \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j\]</span></p>
 <hr>
 <p><strong>Langkah 3 — Utilitas Individu Agen ke-<span class="math inline">\(i\)</span>:</strong></p>
-<p><span class="math display">\[u_i(\mathbf{x}) = \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} x_i \left( \sum_{j \neq i} \sigma_{ij} x_j \right)\]</span></p>
 <p>Jika varians dipisah dari matriks kovarians:</p>
-<p><span class="math display">\[u_i(\mathbf{x}) = \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} x_i \left( \sigma_{ii} + 2\sum_{j \neq i} \sigma_{ij} x_j \right)\]</span></p>
+<p><span class="math display">\[u_i(\mathbf{x}) = \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} x_i \left( \sigma_{ii} + \sum_{j \neq i} \sigma_{ij} x_j \right)\]</span></p>
 <hr>
 <p><strong>Langkah 4 — Fungsi Potensial Global <span class="math inline">\(\Phi\)</span>:</strong></p>
 <p>Dari utilitas sistem, fungsi potensial EPG:</p>
@@ -576,7 +763,7 @@ Grafik Efficient Frontier
 <hr>
 <p><strong>Langkah 5 — Dekomposisi untuk Verifikasi <span class="math inline">\(\Delta u_i = \Delta \Phi\)</span>:</strong></p>
 <p>Dekomposisi suku yang mengandung <span class="math inline">\(x_i\)</span> (dengan <span class="math inline">\(x_i^2 = x_i\)</span>):</p>
-<p><span class="math display">\[\Phi(\mathbf{x}) = \frac{\mu_i}{K}x_i - \frac{\gamma}{2} \left( \frac{\sigma_{ii}}{K^2}x_i + \frac{2}{K^2}x_i \sum_{j \neq i} \sigma_{ij}x_j \right) + \underbrace{\sum_{l \neq i} \frac{\mu_l}{K}x_l - \frac{\gamma}{2} \sum_{l \neq i} \sum_{m \neq i} \frac{\sigma_{lm}}{K^2}x_l x_m}_{\text{tidak bergantung pada } x_i}\]</span></p>
+<p><span class="math display">\[\Phi(\mathbf{x}) = \frac{\mu_i}{K}x_i - \frac{\gamma}{2} \left( \frac{\sigma_{ii}}{K^2}x_i + \frac{1}{K^2}x_i \sum_{j \neq i} \sigma_{ij}x_j \right) + \underbrace{\sum_{l \neq i} \frac{\mu_l}{K}x_l - \frac{\gamma}{2} \sum_{l \neq i} \sum_{m \neq i} \frac{\sigma_{lm}}{K^2}x_l x_m}_{\text{tidak bergantung pada } x_i}\]</span></p>
 <hr>
 <p><strong>Langkah 6 — Insentif Marginal:</strong></p>
 <p><span class="math display">\[\Delta \Phi = \Phi(1, \mathbf{x}_{-i}) - \Phi(0, \mathbf{x}_{-i}) = \frac{\mu_i}{K} - \frac{\gamma \sigma_{ii}}{2K^2} - \frac{\gamma}{K^2} \sum_{j \neq i} \sigma_{ij} x_j\]</span></p>
@@ -673,11 +860,107 @@ Grafik Efficient Frontier
 </table>
 <p><strong>Hasil Akhir — Hamiltonian Ising:</strong></p>
 <p><span class="math display">\[\boxed{\hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i&lt;j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C}\]</span></p>
-<p><br><br></p>
+<p><br><br><br></p>
 </div>
 </div>
 </div>
 </div>
+</section>
+<section id="analogi-keputusan-investasi-dan-ising" class="slide level2">
+<h2>Analogi Keputusan Investasi dan Ising</h2>
+<div style="font-size: 0.6em; text-align: right; margin-top: -20px; margin-bottom: 20px; color: #666;">
+<em>Referensi: Lucas (2014); Galam &amp; Walliser (2010)</em>
+</div>
+<p>Memetakan fungsi biaya portofolio ke dalam struktur Hamiltonian sistem fisik.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Komponen Investasi</th>
+<th style="text-align: center;">Analogi Sistem Ising (Fisika)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Aset Keuangan</td>
+<td style="text-align: center;">Partikel <em>Spin</em> (Atas/Bawah)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Keputusan Investasi (Beli/Jual)</td>
+<td style="text-align: center;">Orientasi <em>Spin</em> (+1 / -1)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Tren/Ekspektasi Pasar</td>
+<td style="text-align: center;">Medan Magnet Lokal (<span class="math inline">\(h_i\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Korelasi/Kovariansi Antar Aset</td>
+<td style="text-align: center;">Interaksi Kopling Antar <em>Spin</em> (<span class="math inline">\(J_{ij}\)</span>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Alokasi Modal Paling Efisien</td>
+<td style="text-align: center;">Konfigurasi Energi Terendah (<em>Ground State</em>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bit-klasik-vs-qubit-kuantum" class="slide level2">
+<h2>Bit Klasik vs Qubit Kuantum</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Bit Klasik:</strong></p>
+<ul>
+<li>Unit informasi fundamental komputer konvensional.</li>
+<li>Hanya bernilai 0 atau 1.</li>
+<li>0 (tidak ada arus listrik), 1 (ada arus listrik).</li>
+</ul>
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 15px;">
+  <div style="border: 2px solid #555; border-radius: 5px; padding: 10px; background: #f0f0f0; color: black; font-weight: bold; width: 40px; text-align: center;">0</div>
+  <div style="font-size: 1.5em;">⇄</div>
+  <div style="border: 2px solid #555; border-radius: 5px; padding: 10px; background: #f0f0f0; color: black; font-weight: bold; width: 40px; text-align: center;">1</div>
+</div>
+<div style="font-size: 0.7em; text-align: center; margin-top: 5px;">Transistor: 1 dan 0 secara bergantian</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Qubit Kuantum:</strong></p>
+<ul>
+<li>Unit informasi fundamental komputer kuantum.</li>
+<li>Memanfaatkan prinsip Superposisi: 0, 1, atau kombinasi linear keduanya. <span class="math display">\[ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle \]</span></li>
+</ul>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
+  <div style="border: 2px solid #555; border-radius: 50%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: black; font-weight: bold; text-align: center; width: 140px; height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <span style="font-size: 1.2em;">0 &amp; 1</span>
+    <span style="font-size: 0.7em; margin-top: 5px;">Bersamaan</span>
+  </div>
+</div>
+<div style="font-size: 0.7em; text-align: center; margin-top: 5px;">Qubit: 1 dan 0 secara bersamaan</div>
+</div></div>
+</section>
+<section id="representasi-geometri-qubit" class="slide level2">
+<h2>Representasi &amp; Geometri Qubit</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="font-size: 0.85em;">
+<ul>
+<li><strong>Basis Komputasi:</strong> <span class="math display">\[ |0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad |1\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \]</span></li>
+<li><strong>Syarat Normalisasi:</strong> Total probabilitas harus bernilai 1 (<span class="math inline">\(|\alpha|^2 + |\beta|^2 = 1\)</span>).</li>
+<li>Dua parameter sudut:
+<ul>
+<li><span class="math inline">\(\theta\)</span> (Polar): Menentukan probabilitas <span class="math inline">\(|0\rangle\)</span> vs <span class="math inline">\(|1\rangle\)</span>.</li>
+<li><span class="math inline">\(\phi\)</span> (Azimuthal): Menentukan fase kuantum.</li>
+</ul></li>
+<li>Fungsi gelombang qubit: <span class="math display">\[ |\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle \]</span></li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<iframe src="bloch_interactive.html" width="100%" height="550px" style="border:none;">
+</iframe>
+<div style="font-size: 0.7em; text-align: center;">
+Interaktif: Atur parameter &amp; putar objek 3D
+</div>
+</div></div>
 </section>
 <section id="desain-sirkuit-kuantum" class="slide level2 scrollable">
 <h2>Desain Sirkuit Kuantum</h2>
@@ -730,6 +1013,9 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </section>
 <section id="optimizer-spsa" class="slide level2 scrollable">
 <h2>Optimizer SPSA</h2>
+<div style="font-size: 0.6em; text-align: right; margin-top: -20px; margin-bottom: 20px; color: #666;">
+<em>Referensi: Spall (1998)</em>
+</div>
 <div class="panel-tabset">
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Rumus Utama</a></li><li><a href="#tabset-5-2">Penurunan Rumus</a></li></ul>
 <div class="tab-content">
@@ -882,7 +1168,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <span id="cb1-8"><a href=""></a>  7. Return PerformanceMetrics</span>
 <span id="cb1-9"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Siklus dieksekusi secara iteratif melalui jendela waktu berjalan (<em>sliding window</em>) untuk mengevaluasi adaptabilitas model terhadap fluktuasi riil data historis pasar.</li>
+<li>Siklus dieksekusi secara iteratif melalui jendela waktu berjalan (<em>sliding window</em>).</li>
 </ul>
 </section>
 <section id="perhitungan-metrik-performa-finansial" class="slide level2 scrollable">
@@ -892,7 +1178,6 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <div class="tab-content">
 <div id="tabset-7-1">
 <div style="font-size: 0.7em;">
-<p>Untuk membandingkan performa model GT-VQE dengan <em>Equal Weight</em> dan optimasi klasik (SLSQP), parameter evaluasi yang dihitung mencakup:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -928,46 +1213,46 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <div id="tabset-7-3">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Contoh Perhitungan SLSQP (Kasus <span class="math inline">\(N=2\)</span>)</strong></p>
-<p>Misalkan <span class="math inline">\(\mu=\begin{pmatrix}0.10\\0.05\end{pmatrix},\qquad\Sigma=\begin{pmatrix}0.04 &amp; 0.01\\0.01 &amp; 0.02\end{pmatrix},\qquad\gamma=1.\)</span></p>
+<p>Misalkan: <span class="math display">\[ \mu=\begin{pmatrix}0.10\\0.05\end{pmatrix},\qquad\Sigma=\begin{pmatrix}0.04 &amp; 0.01\\0.01 &amp; 0.02\end{pmatrix},\qquad\gamma=1 \]</span></p>
 <p><strong>Inisialisasi</strong></p>
-<p><span class="math inline">\(w_0=\begin{pmatrix}0.5\\0.5\end{pmatrix},\qquad B_0=\begin{pmatrix}1&amp;0\\0&amp;1\end{pmatrix}.\)</span></p>
+<p><span class="math display">\[ w_0=\begin{pmatrix}0.5\\0.5\end{pmatrix},\qquad B_0=\begin{pmatrix}1&amp;0\\0&amp;1\end{pmatrix} \]</span></p>
 <p><strong>1. Hitung Gradien</strong></p>
-<p><span class="math inline">\(g_0=\gamma\Sigma w_0-\mu.\)</span></p>
-<p>Karena</p>
-<p><span class="math inline">\(\Sigma w_0=\begin{pmatrix}0.025\\0.015\end{pmatrix},\)</span></p>
-<p>maka</p>
-<p><span class="math inline">\(g_0=\begin{pmatrix}-0.075\\-0.035\end{pmatrix}.\)</span></p>
+<p><span class="math display">\[ g_0=\gamma\Sigma w_0-\mu \]</span></p>
+<p>Karena:</p>
+<p><span class="math display">\[ \Sigma w_0=\begin{pmatrix}0.025\\0.015\end{pmatrix} \]</span></p>
+<p>maka:</p>
+<p><span class="math display">\[ g_0=\begin{pmatrix}-0.075\\-0.035\end{pmatrix} \]</span></p>
 <hr>
 <p><strong>2. Selesaikan Sub-masalah Quadratic Programming</strong></p>
-<p>Sub-QP yang diselesaikan adalah</p>
-<p><span class="math inline">\(\min_d\left(g_0^Td+\frac12 d^TB_0d\right),\)</span></p>
-<p>dengan kendala</p>
-<p><span class="math inline">\(d_1+d_2=0.\)</span></p>
-<p>Karena</p>
-<p><span class="math inline">\(d_2=-d_1,\)</span></p>
-<p>fungsi objektif menjadi</p>
-<p><span class="math inline">\(g(d_1)=-0.040d_1+d_1^2.\)</span></p>
-<p>Turunan pertama</p>
-<p><span class="math inline">\(\frac{dg}{dd_1}=-0.040+2d_1=0\)</span></p>
-<p>memberikan solusi</p>
-<p><span class="math inline">\(d=\begin{pmatrix}0.02\\-0.02\end{pmatrix}.\)</span></p>
+<p>Sub-QP yang diselesaikan adalah:</p>
+<p><span class="math display">\[ \min_d\left(g_0^Td+\frac12 d^TB_0d\right) \]</span></p>
+<p>dengan kendala:</p>
+<p><span class="math display">\[ d_1+d_2=0 \]</span></p>
+<p>Karena:</p>
+<p><span class="math display">\[ d_2=-d_1 \]</span></p>
+<p>fungsi objektif menjadi:</p>
+<p><span class="math display">\[ g(d_1)=-0.040d_1+d_1^2 \]</span></p>
+<p>Turunan pertama:</p>
+<p><span class="math display">\[ \frac{dg}{dd_1}=-0.040+2d_1=0 \]</span></p>
+<p>memberikan solusi:</p>
+<p><span class="math display">\[ d=\begin{pmatrix}0.02\\-0.02\end{pmatrix} \]</span></p>
 <hr>
 <p><strong>3. Line Search</strong></p>
-<p>Misalkan hasil <em>line search</em> menghasilkan</p>
-<p><span class="math inline">\(\alpha_0=1.\)</span></p>
+<p>Misalkan hasil <em>line search</em> menghasilkan:</p>
+<p><span class="math display">\[ \alpha_0=1 \]</span></p>
 <hr>
 <p><strong>4. Update Bobot</strong></p>
-<p><span class="math inline">\(w_1=w_0+\alpha_0d=\begin{pmatrix}0.52\\0.48\end{pmatrix}.\)</span></p>
+<p><span class="math display">\[ w_1=w_0+\alpha_0d=\begin{pmatrix}0.52\\0.48\end{pmatrix} \]</span></p>
 <hr>
 <p><strong>5. Update Hessian (BFGS)</strong></p>
-<p>Hitung</p>
-<p><span class="math inline">\(s_0=w_1-w_0=\begin{pmatrix}0.02\\-0.02\end{pmatrix},\)</span></p>
-<p>kemudian gradien baru</p>
-<p><span class="math inline">\(g_1=\Sigma w_1-\mu=\begin{pmatrix}-0.0744\\-0.0352\end{pmatrix},\)</span></p>
-<p>sehingga</p>
-<p><span class="math inline">\(y_0=g_1-g_0=\begin{pmatrix}0.0006\\-0.0002\end{pmatrix}.\)</span></p>
-<p>Selanjutnya matriks Hessian diperbarui menggunakan rumus BFGS</p>
-<p><span class="math inline">\(B_1=B_0-\frac{B_0s_0s_0^TB_0}{s_0^TB_0s_0}+\frac{y_0y_0^T}{y_0^Ts_0},\)</span></p>
+<p>Hitung:</p>
+<p><span class="math display">\[ s_0=w_1-w_0=\begin{pmatrix}0.02\\-0.02\end{pmatrix} \]</span></p>
+<p>kemudian gradien baru:</p>
+<p><span class="math display">\[ g_1=\Sigma w_1-\mu=\begin{pmatrix}-0.0744\\-0.0352\end{pmatrix} \]</span></p>
+<p>sehingga:</p>
+<p><span class="math display">\[ y_0=g_1-g_0=\begin{pmatrix}0.0006\\-0.0002\end{pmatrix} \]</span></p>
+<p>Selanjutnya matriks Hessian diperbarui menggunakan rumus BFGS:</p>
+<p><span class="math display">\[ B_1=B_0-\frac{B_0s_0s_0^TB_0}{s_0^TB_0s_0}+\frac{y_0y_0^T}{y_0^Ts_0} \]</span></p>
 <p>yang kemudian digunakan pada iterasi berikutnya.</p>
 <p><strong>Iterasi selanjutnya mengulangi langkah yang sama hingga memenuhi kriteria konvergensi dan menghasilkan bobot portofolio optimal.</strong></p>
 <p><br><br><br></p>

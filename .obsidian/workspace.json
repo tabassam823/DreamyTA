@@ -48,7 +48,7 @@
             }
           },
           {
-            "id": "83e083c0f0e0e623",
+            "id": "77e4109996add570",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -59,6 +59,20 @@
               },
               "icon": "lucide-file",
               "title": "Revisi2_BrandNew"
+            }
+          },
+          {
+            "id": "83e083c0f0e0e623",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Latex/TA/PPT/Revisi3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Revisi3"
             }
           },
           {
@@ -90,7 +104,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -157,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Latex/TA/PPT/Revisi2_BrandNew.md",
+                "file": "Latex/TA/PPT/Revisi3.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Revisi2_BrandNew"
+              "title": "Outline of Revisi3"
             }
           }
         ]
@@ -291,12 +305,19 @@
   "active": "83e083c0f0e0e623",
   "lastOpenFiles": [
     "Latex/TA/PPT/qmdfile/main_files/mediabag",
+    "Latex/TA/PPT/Gambar/dialir2.png",
+    "Latex/TA/PPT/Gambar/Pasted image.png",
+    "Latex/TA/PPT/Gambar/dialir3.png",
+    "Latex/TA/PPT/Gambar/dialir1.png",
+    "Latex/TA/PPT/Gambar/backtest.png",
+    "Latex/TA/PPT/Revisi2_BrandNew.md",
+    "Latex/TA/PPT/Revisi3.md",
+    "Latex/TA/MD_File/Main/12_QGate.md",
     "Latex/TA/PPT/Gambar/GT_grafik_depth_per_window_N2.png",
     "Latex/TA/PPT/Gambar/grafik_depth_per_window_N2.png",
     "Latex/TA/PPT/Gambar/_NoGT_grafik_depth_per_window_N2.png",
     "Latex/TA/PPT/Gambar/NoGT_grafik_depth_per_window_N2.png",
     "Latex/TA/PPT/Gambar/NoGT_grafik_depth_per_window_N4.png",
-    "Latex/TA/PPT/Gambar/_grafik_depth_per_window_N2.png",
     "Latex/TA/PPT/qmdfile/test3.qmd",
     "Latex/TA/PPT/qmdfile/test3.html",
     "Latex/TA/PPT/qmdfile/test2.qmd",
@@ -308,16 +329,10 @@
     "Latex/TA/PPT/qmdfile/temp.md",
     "Latex/TA/PPT/qmdfile/revert_divs.py",
     "Latex/TA/PPT/qmdfile/normalize_colons.py",
-    "Latex/TA/PPT/Gambar/backtest_data.png",
-    "Latex/TA/PPT/Gambar/Pasted image.png",
-    "Latex/TA/PPT/Gambar/backtest.png",
     "Latex/TA/MD_File/Main/5_QUBO.md",
     "Latex/TA/MD_File/Main/6_Gradient_Descent.md",
-    "Latex/TA/MD_File/Main/12_QGate.md",
     "Latex/TA/MD_File/Main/8_Ansatz.md",
     "Latex/TA/Filtered_Paper/Quantum_Circuit/Parameterized_quantum_circuits_as_machine.md",
-    "Latex/TA/PPT/Gambar/Diversifikasi.png",
-    "Latex/TA/PPT/Revisi2_BrandNew.md",
     "Latex/TA/PPT/Revisi1.md",
     "Latex/TA/GTQuantumInvest/README.md",
     "Latex/TA/GTQuantumInvest/evaluasi_performa.md",
@@ -334,7 +349,6 @@
     "Latex/TA/MD_File/Main/13_SLSQP.md",
     "Untitled 1.md",
     "Latex/TA/MD_File/Main/7_SPSA.md",
-    "Latex/TA/MD_File/Main/4_EPG.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "paper/Relation.canvas"
