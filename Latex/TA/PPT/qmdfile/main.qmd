@@ -4,6 +4,7 @@ subtitle: "Tugas Akhir SF234801"
 author: 
   - name: "Putra Naufal Tabassam"
     affiliations:
+      - "NRP : 5001221120"
       - "Pembimbing : Dr. Heru Sukamto, M.Si."
       - "Ko-Pembimbing : Dr. Gagus K. Sunnardianto"
       - "Departemen Fisika, Institut Teknologi Sepuluh Nopember"
