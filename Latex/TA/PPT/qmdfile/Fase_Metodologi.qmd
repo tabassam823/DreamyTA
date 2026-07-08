@@ -14,6 +14,8 @@
 
 ## Teori Permainan
 
+:::: {.columns style="display: flex; align-items: center;"}
+::: {.column width="65%"}
 <div style="text-align: left; padding-right: 20px; font-size: 1.0em;">
 * **Teori Permainan:** Cabang matematika terapan yang mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan tindakan agen yang lain.
 <br><br>
@@ -21,6 +23,14 @@
 <br><br>
 * **Nash Equilibrium:** Kondisi paling stabil di mana tidak ada satu pun agen yang bisa meningkatkan utilitasnya dengan mengubah strateginya sendiri secara sepihak.
 </div>
+:::
+::: {.column width="35%"}
+<div style="text-align: center;">
+![](../Gambar/nasheq.png){width="100%"}
+<div style="font-size: 0.7em; margin-top: 10px;">*Nash Equilibrium*</div>
+</div>
+:::
+::::
 
 ## Jenis-Jenis Permainan (*Game Types*)
 
@@ -36,9 +46,6 @@
 ::: {.column width="33%"}
 ![](../Gambar/232_payoff_BoS.png)
 <div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">*Battle of the Sexes*</div>
-<br>
-![](../Gambar/nasheq.png){width="70%"}
-<div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">*Nash Equilibrium*</div>
 :::
 ::::
 
@@ -134,6 +141,98 @@ $$\gamma = \frac{1}{1 + e^{(\bar{\mu}_l/\bar{\sigma}_l)}}$$
 dengan $\bar{\mu}_l$ dan $\bar{\sigma}_l$ dari *log returns*.
 
 <br><br><br>
+</div>
+
+### Contoh Numerik
+<div class="scrollable" style="max-height: 450px; font-size: 0.70em;">
+
+**Contoh Pencarian *Nash Equilibrium* dengan SBR**
+
+Misalkan terdapat tiga aset dengan parameter:
+
+$$ \gamma = 1,\qquad \mu = \begin{bmatrix} 12\\ 11\\ 8 \end{bmatrix},\qquad \Sigma=\begin{bmatrix} 10 & 8 & 2\\ 8 & 10 & -2\\ 2 & -2 & 10 \end{bmatrix} $$
+
+dan jumlah aset yang harus dipilih adalah:
+
+$$ K=2 $$
+
+Fungsi potensial didefinisikan sebagai:
+
+$$ \Phi(x)=\frac{1}{K}\sum_i\mu_i x_i -\frac{\gamma}{2K^2}\sum_{i,j}\Sigma_{ij}x_ix_j $$
+
+---
+
+**Langkah 1 — Inisialisasi**
+
+Sesuai algoritma:
+
+$$ x=(1,1,0) $$
+
+sehingga:
+
+$$ S_{in}=\{1,2\},\qquad S_{out}=\{3\} $$
+
+Nilai fungsi potensial awal adalah:
+
+$$ \Phi(110)=\frac{12+11}{2}-\frac{1}{8}(10+10+8+8)=7 $$
+
+---
+
+**Langkah 2 — Evaluasi Kandidat Swap**
+
+**Swap (1,3)**
+
+$$ 110\rightarrow 011 $$
+
+$$ \Phi(011)=\frac{11+8}{2}-\frac18(10+10-2-2)=7.5 $$
+
+Karena:
+
+$$ 7.5>7 $$
+
+swap **diterima**.
+
+---
+
+**Langkah 3 — Pembaruan Sekuensial**
+
+Bitstring diperbarui menjadi:
+
+$$ x=(0,1,1) $$
+
+Sekarang:
+
+$$ S_{in}=\{2,3\},\qquad S_{out}=\{1\} $$
+
+Kandidat berikutnya:
+
+$$ 011\rightarrow101 $$
+
+Diperoleh:
+
+$$ \Phi(101)=\frac{12+8}{2}-\frac18(10+10+2+2)=7 $$
+
+Karena:
+
+$$ 7<7.5 $$
+
+swap **ditolak**.
+
+---
+
+**Langkah 4 — Terminasi**
+
+Tidak terdapat lagi *swap* yang meningkatkan nilai fungsi potensial:
+
+$$ \Phi' \le \Phi $$
+
+Oleh karena itu algoritma berhenti dan menghasilkan:
+
+$$ \boxed{x=(0,1,1)} $$
+
+sebagai kandidat *Nash Equilibrium* yang akan digunakan sebagai strategi *warm-start* bagi VQE.
+
+<br><br><br><br>
 </div>
 :::
 
@@ -452,6 +551,8 @@ dengan hiperparameter peluruhan:
 
 $$a_k = \frac{a}{(A+k+1)^\alpha}, \quad c_k = \frac{c}{(k+1)^\gamma}$$
 
+dengan nilai $\alpha = 0.602$ dan $\gamma = 0.101$.
+
 <br><br><br>
 </div>
 :::
@@ -460,11 +561,8 @@ $$a_k = \frac{a}{(A+k+1)^\alpha}, \quad c_k = \frac{c}{(k+1)^\gamma}$$
 
 ## Evaluasi Distribusi Probabilitas (Entropi) {.scrollable}
 
-::: {.panel-tabset}
-### Evolusi Entropi: Studi Kasus Numerik
-
-<div style="font-size: 0.7em;">
-Pemanfaatan Entropi Von Neumann dalam memantau jejak persebaran probabilitas di titik konvergensi akhir VQE.
+<div style="font-size: 0.8em; text-align: center; margin-bottom: 25px; padding: 15px; background-color: #f8f9fa; border-radius: 10px; border: 1px solid #dee2e6;">
+$$ S(\rho) = -\sum_i \lambda_i \log_2 (\lambda_i) $$
 </div>
 
 :::: {.columns}
@@ -479,7 +577,6 @@ Pemanfaatan Entropi Von Neumann dalam memantau jejak persebaran probabilitas di 
 
 **Kalkulasi:**
 $$ S = -(0{,}98 \cdot \log_2(0{,}98) + 0{,}02 \cdot \log_2(0{,}02)) \approx 0{,}1414 \text{ bit} $$
-→ Probabilitas sangat tersentralisasi dan stabil.
 </div>
 :::
 ::: {.column width="50%"}
@@ -493,72 +590,9 @@ $$ S = -(0{,}98 \cdot \log_2(0{,}98) + 0{,}02 \cdot \log_2(0{,}02)) \approx 0{,}
 
 **Kalkulasi:**
 $$ S = -\left(0{,}94 \log_2(0{,}94) + 3 \times (0{,}02 \log_2(0{,}02))\right) \approx 0{,}4225 \text{ bit} $$
-→ Jauh di bawah batas entropi maksimum $\log_2(4) = 2$ bit → deteksi *ground state* handal.
 </div>
 :::
 ::::
-
-### Penurunan Rumus
-<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-**Generalisasi: Dari Entropi Shannon ke Entropi Von Neumann**
-
-**Langkah 1 — Entropi Shannon (Klasik):**
-
-Untuk distribusi probabilitas diskrit $p_i$, entropi informasi didefinisikan sebagai:
-
-$$H = - \sum_i p_i \log_2 (p_i)$$
-
----
-
-**Langkah 2 — Definisi Entropi Von Neumann:**
-
-Dalam mekanika kuantum, probabilitas digantikan oleh operator densitas $\rho$. Entropi Von Neumann didefinisikan langsung melalui fungsi operator tersebut:
-
-$$S(\rho) = -\text{Tr}(\rho \log_2 \rho)$$
-
----
-
-**Langkah 3 — Teorema Spektral:**
-
-Karena operator densitas $\rho$ bersifat Hermitian, ia selalu dapat didiagonalisasi (dekomposisi spektral):
-
-$$\rho = U \Lambda U^\dagger$$
-
-dengan $\Lambda$ adalah matriks diagonal yang berisi nilai eigen $\lambda_i$, dan $U$ adalah matriks uniter.
-
----
-
-**Langkah 4 — Logaritma Matriks:**
-
-Berdasarkan definisi fungsi matriks, logaritma diterapkan pada nilai eigennya:
-
-$$\log_2(\rho) = U (\log_2 \Lambda) U^\dagger$$
-
----
-
-**Langkah 5 — Operasi *Trace* dan Invariansi:**
-
-Kita kalikan $\rho$ dengan $\log_2(\rho)$:
-
-$$\rho \log_2(\rho) = (U \Lambda U^\dagger) (U (\log_2 \Lambda) U^\dagger) = U (\Lambda \log_2 \Lambda) U^\dagger$$
-
-Gunakan sifat invariansi *trace* ($\text{Tr}(U A U^\dagger) = \text{Tr}(A)$):
-
-$$S(\rho) = -\text{Tr}(U (\Lambda \log_2 \Lambda) U^\dagger) = -\text{Tr}(\Lambda \log_2 \Lambda)$$
-
-Karena $\Lambda$ adalah matriks diagonal, perhitungan *trace*-nya hanyalah jumlahan dari elemen diagonal:
-
-$$\boxed{S(\rho) = -\sum_i \lambda_i \log_2 (\lambda_i)}$$
-
----
-
-**Langkah 6 — Reduksi ke Bentuk Klasik:**
-
-Jika $\rho$ sudah dalam bentuk diagonal murni di mana matriksnya mewakili campuran klasik murni, maka nilai eigen $\lambda_i$ akan sama dengan probabilitas $p_i$, sehingga rumusnya akan mereduksi secara identik menjadi Entropi Shannon biasa.
-
-<br><br>
-</div>
-:::
 
 ---
 

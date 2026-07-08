@@ -55,3 +55,4 @@ format:
 {{< include Fase_LatarBelakang.qmd >}}
 {{< include Fase_Metodologi.qmd >}}
 {{< include Fase_Hasil.qmd >}}
+{{< include Fase_Lampiran.qmd >}}

@@ -17,16 +17,16 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         \node (start) [startstop] {Mulai};
         \node (data) [process, below of=start, yshift=-0.5cm] {Akuisisi Data \& \\ Setup Jendela Waktu};
         \node (param) [process, below of=data, yshift=-0.5cm] {Hitung $\mu$, $\Sigma$ \& \\ \textit{Risk Aversion} endogen ($\gamma$)};
-        \node (hamil) [process, below of=param, yshift=-0.5cm] {Formulasi QUBO \& \\ Hamiltonian ($h_i, J_{ij}$)};
-        \node (nash) [process, below of=hamil, yshift=-0.5cm] {Pencarian \\ \textit{Nash Equilibrium (SBR)}};
-        \node (c1a) [connector, below of=nash, yshift=-0.5cm] {1};
+        \node (nash) [process, below of=param, yshift=-0.5cm] {Pencarian \textit{Nash Equilibrium} \\ dengan Kerangka EPG};
+        \node (hamil) [process, below of=nash, yshift=-0.5cm] {Formulasi QUBO \& \\ Hamiltonian ($h_i, J_{ij}$)};
+        \node (c1a) [connector, below of=hamil, yshift=-0.5cm] {1};
         \node (c3b) [connector, left of=data, xshift=-1cm] {3};
         
         % KOLOM 2: Optimasi Kuantum (VQE)
         \node (c1b) [connector, right of=start, xshift=4.0cm] {1};
         \node (vqe_init) [process, below of=c1b, yshift=-0.2cm] {Inisialisasi State Awal \\ $|0\dots0\rangle \to |\text{bitstring}_{NE}\rangle$ \\ \& Parameter $\theta$};
-        \node (spsa) [process, below of=vqe_init, yshift=-0.5cm] {Optimasi SPSA};
-        \node (entropy) [process, below of=spsa, yshift=-0.5cm] {Kalkulasi Entropi};
+        \node (spsa) [process, below of=vqe_init, yshift=-0.5cm] {Optimasi SPSA dan \\ Pengukuran Energi};
+        \node (entropy) [process, below of=spsa, yshift=-0.5cm] {Kalkulasi Entropi dari \\ Konfigurasi Probabilitas};
         \node (conv) [decision, below of=entropy, yshift=-0.5cm] {Konvergen?};
         \node (layer_eval) [process, below of=conv, yshift=-0.6cm] {Simpan Energi $E_d$ \\ pada \textit{Depth} $d$};
         \node (layer_dec) [decision, below of=layer_eval, yshift=-0.5cm] {$d < D_{max}$?};
@@ -44,9 +44,9 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         % Alur Kolom 1
         \draw [arrow] (start) -- (data);
         \draw [arrow] (data) -- (param);
-        \draw [arrow] (param) -- (hamil);
-        \draw [arrow] (hamil) -- (nash);
-        \draw [arrow] (nash) -- (c1a);
+        \draw [arrow] (param) -- (nash);
+        \draw [arrow] (nash) -- (hamil);
+        \draw [arrow] (hamil) -- (c1a);
         \draw [arrow] (c3b) -- (data);
 
         % Alur Kolom 2

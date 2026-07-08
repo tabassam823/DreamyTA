@@ -11,38 +11,38 @@ Silakan sesuaikan parameter bias dan interaksi ($h_i$, $J_{ij}$) lalu klik <b>Mu
 
 ---
 
-## Analisis Entropi Von Neumann
+## Analisis Entropi: Solusi Optimal (Entropi Rendah)
 
-::::: {.columns}
+::::: {.columns style="display: flex; align-items: center;"}
 
-:::: {.column width="50%"}
-
-**Entropi Tinggi (Solusi Tidak Optimal)**
-<div style="text-align: center; margin-top: 10px;">
-![](../Gambar/Entropi_tinggi.png){width="100%"}
-
-</div>
-
-<div style="font-size: 0.6em; text-align: justify; margin-top: 10px;">
-Probabilitas (*state*) tersebar merata. Hal ini menunjukkan indikasi *barren plateau* atau kondisi di mana VQE belum menemukan *ground state*.
-
-</div>
-
+:::: {.column width="70%"}
+![](../Gambar/Entropi_rendah.png){width="100%"}
 ::::
 
-:::: {.column width="50%"}
-
-**Entropi Rendah (Solusi Optimal)**
-<div style="text-align: center; margin-top: 10px;">
-![](../Gambar/Entropi_rendah.png){width="100%"}
-
+:::: {.column width="30%"}
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+* Probabilitas runtuh di satu *state* dominan
+* Solusi telah konvergen ke titik minimum energi global
 </div>
+::::
 
-<div style="font-size: 0.6em; text-align: justify; margin-top: 10px;">
-Probabilitas mengkristal di satu *state* dominan. Solusi telah konvergen ke titik minimum energi global.
+:::::
 
+---
+
+## Analisis Entropi: Barren Plateau (Entropi Tinggi)
+
+::::: {.columns style="display: flex; align-items: center;"}
+
+:::: {.column width="70%"}
+![](../Gambar/Entropi_tinggi.png){width="100%"}
+::::
+
+:::: {.column width="30%"}
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+* Probabilitas tersebar merata
+* Menunjukkan indikasi *barren plateau*
 </div>
-
 ::::
 
 :::::
@@ -311,6 +311,5 @@ Menggunakan rentang periode data historis yang lebih panjang dan melakukan pengu
 <br><br>
 <div style="text-align: center;">
   <h1>Terima Kasih</h1>
-  <p>Ada Pertanyaan?</p>
 
 </div>

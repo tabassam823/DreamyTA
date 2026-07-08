@@ -674,6 +674,8 @@ Data backtesting pada sebuah strategi trading
 </section>
 <section id="teori-permainan" class="slide level2">
 <h2>Teori Permainan</h2>
+<div class="columns" style="display: flex; align-items: center;">
+<div class="column" style="width:65%;">
 <div style="text-align: left; padding-right: 20px; font-size: 1.0em;">
 <ul>
 <li><strong>Teori Permainan:</strong> Cabang matematika terapan yang mengkaji bagaimana agen rasional membuat keputusan strategis di bawah ketergantungan tindakan agen yang lain. <br><br></li>
@@ -681,6 +683,14 @@ Data backtesting pada sebuah strategi trading
 <li><strong>Nash Equilibrium:</strong> Kondisi paling stabil di mana tidak ada satu pun agen yang bisa meningkatkan utilitasnya dengan mengubah strateginya sendiri secara sepihak.</li>
 </ul>
 </div>
+</div><div class="column" style="width:35%;">
+<div style="text-align: center;">
+<img data-src="../Gambar/nasheq.png" style="width:100.0%">
+<div style="font-size: 0.7em; margin-top: 10px;">
+<em>Nash Equilibrium</em>
+</div>
+</div>
+</div></div>
 </section>
 <section id="jenis-jenis-permainan-game-types" class="slide level2">
 <h2>Jenis-Jenis Permainan (<em>Game Types</em>)</h2>
@@ -699,10 +709,6 @@ Data backtesting pada sebuah strategi trading
 <img data-src="../Gambar/232_payoff_BoS.png">
 <div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">
 <em>Battle of the Sexes</em>
-</div>
-<br> <img data-src="../Gambar/nasheq.png" style="width:70.0%">
-<div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">
-<em>Nash Equilibrium</em>
 </div>
 </div></div>
 </section>
@@ -733,7 +739,7 @@ Data backtesting pada sebuah strategi trading
 <section id="epg-pada-alokasi-portofolio" class="slide level2 scrollable">
 <h2>EPG pada Alokasi Portofolio</h2>
 <div class="panel-tabset">
-<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Rumus Utama</a></li><li><a href="#tabset-2-2">Penurunan Rumus</a></li></ul>
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Rumus Utama</a></li><li><a href="#tabset-2-2">Penurunan Rumus</a></li><li><a href="#tabset-2-3">Contoh Numerik</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1">
 <ul>
@@ -773,6 +779,54 @@ Data backtesting pada sebuah strategi trading
 <p><span class="math display">\[\gamma = \frac{1}{1 + e^{(\bar{\mu}_l/\bar{\sigma}_l)}}\]</span></p>
 <p>dengan <span class="math inline">\(\bar{\mu}_l\)</span> dan <span class="math inline">\(\bar{\sigma}_l\)</span> dari <em>log returns</em>.</p>
 <p><br><br><br></p>
+</div>
+</div>
+<div id="tabset-2-3">
+<div class="scrollable" style="max-height: 450px; font-size: 0.70em;">
+<p><strong>Contoh Pencarian <em>Nash Equilibrium</em> dengan SBR</strong></p>
+<p>Misalkan terdapat tiga aset dengan parameter:</p>
+<p><span class="math display">\[ \gamma = 1,\qquad \mu = \begin{bmatrix} 12\\ 11\\ 8 \end{bmatrix},\qquad \Sigma=\begin{bmatrix} 10 &amp; 8 &amp; 2\\ 8 &amp; 10 &amp; -2\\ 2 &amp; -2 &amp; 10 \end{bmatrix} \]</span></p>
+<p>dan jumlah aset yang harus dipilih adalah:</p>
+<p><span class="math display">\[ K=2 \]</span></p>
+<p>Fungsi potensial didefinisikan sebagai:</p>
+<p><span class="math display">\[ \Phi(x)=\frac{1}{K}\sum_i\mu_i x_i -\frac{\gamma}{2K^2}\sum_{i,j}\Sigma_{ij}x_ix_j \]</span></p>
+<hr>
+<p><strong>Langkah 1 — Inisialisasi</strong></p>
+<p>Sesuai algoritma:</p>
+<p><span class="math display">\[ x=(1,1,0) \]</span></p>
+<p>sehingga:</p>
+<p><span class="math display">\[ S_{in}=\{1,2\},\qquad S_{out}=\{3\} \]</span></p>
+<p>Nilai fungsi potensial awal adalah:</p>
+<p><span class="math display">\[ \Phi(110)=\frac{12+11}{2}-\frac{1}{8}(10+10+8+8)=7 \]</span></p>
+<hr>
+<p><strong>Langkah 2 — Evaluasi Kandidat Swap</strong></p>
+<p><strong>Swap (1,3)</strong></p>
+<p><span class="math display">\[ 110\rightarrow 011 \]</span></p>
+<p><span class="math display">\[ \Phi(011)=\frac{11+8}{2}-\frac18(10+10-2-2)=7.5 \]</span></p>
+<p>Karena:</p>
+<p><span class="math display">\[ 7.5&gt;7 \]</span></p>
+<p>swap <strong>diterima</strong>.</p>
+<hr>
+<p><strong>Langkah 3 — Pembaruan Sekuensial</strong></p>
+<p>Bitstring diperbarui menjadi:</p>
+<p><span class="math display">\[ x=(0,1,1) \]</span></p>
+<p>Sekarang:</p>
+<p><span class="math display">\[ S_{in}=\{2,3\},\qquad S_{out}=\{1\} \]</span></p>
+<p>Kandidat berikutnya:</p>
+<p><span class="math display">\[ 011\rightarrow101 \]</span></p>
+<p>Diperoleh:</p>
+<p><span class="math display">\[ \Phi(101)=\frac{12+8}{2}-\frac18(10+10+2+2)=7 \]</span></p>
+<p>Karena:</p>
+<p><span class="math display">\[ 7&lt;7.5 \]</span></p>
+<p>swap <strong>ditolak</strong>.</p>
+<hr>
+<p><strong>Langkah 4 — Terminasi</strong></p>
+<p>Tidak terdapat lagi <em>swap</em> yang meningkatkan nilai fungsi potensial:</p>
+<p><span class="math display">\[ \Phi' \le \Phi \]</span></p>
+<p>Oleh karena itu algoritma berhenti dan menghasilkan:</p>
+<p><span class="math display">\[ \boxed{x=(0,1,1)} \]</span></p>
+<p>sebagai kandidat <em>Nash Equilibrium</em> yang akan digunakan sebagai strategi <em>warm-start</em> bagi VQE.</p>
+<p><br><br><br><br></p>
 </div>
 </div>
 </div>
@@ -1055,6 +1109,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <p><span class="math display">\[\boldsymbol{\theta}_{k+1} = \boldsymbol{\theta}_k - a_k \hat{\mathbf{g}}_k\]</span></p>
 <p>dengan hiperparameter peluruhan:</p>
 <p><span class="math display">\[a_k = \frac{a}{(A+k+1)^\alpha}, \quad c_k = \frac{c}{(k+1)^\gamma}\]</span></p>
+<p>dengan nilai <span class="math inline">\(\alpha = 0.602\)</span> dan <span class="math inline">\(\gamma = 0.101\)</span>.</p>
 <p><br><br><br></p>
 </div>
 </div>
@@ -1063,12 +1118,8 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </section>
 <section id="evaluasi-distribusi-probabilitas-entropi" class="slide level2 scrollable">
 <h2>Evaluasi Distribusi Probabilitas (Entropi)</h2>
-<div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Evolusi Entropi: Studi Kasus Numerik</a></li><li><a href="#tabset-6-2">Penurunan Rumus</a></li></ul>
-<div class="tab-content">
-<div id="tabset-6-1">
-<div style="font-size: 0.7em;">
-<p>Pemanfaatan Entropi Von Neumann dalam memantau jejak persebaran probabilitas di titik konvergensi akhir VQE.</p>
+<div style="font-size: 0.8em; text-align: center; margin-bottom: 25px; padding: 15px; background-color: #f8f9fa; border-radius: 10px; border: 1px solid #dee2e6;">
+<p><span class="math display">\[ S(\rho) = -\sum_i \lambda_i \log_2 (\lambda_i) \]</span></p>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1092,7 +1143,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </tr>
 </tbody>
 </table>
-<p><strong>Kalkulasi:</strong> <span class="math display">\[ S = -(0{,}98 \cdot \log_2(0{,}98) + 0{,}02 \cdot \log_2(0{,}02)) \approx 0{,}1414 \text{ bit} \]</span> → Probabilitas sangat tersentralisasi dan stabil.</p>
+<p><strong>Kalkulasi:</strong> <span class="math display">\[ S = -(0{,}98 \cdot \log_2(0{,}98) + 0{,}02 \cdot \log_2(0{,}02)) \approx 0{,}1414 \text{ bit} \]</span></p>
 </div>
 </div><div class="column" style="width:50%;">
 <div style="font-size: 0.6em;">
@@ -1115,45 +1166,9 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </tr>
 </tbody>
 </table>
-<p><strong>Kalkulasi:</strong> <span class="math display">\[ S = -\left(0{,}94 \log_2(0{,}94) + 3 \times (0{,}02 \log_2(0{,}02))\right) \approx 0{,}4225 \text{ bit} \]</span> → Jauh di bawah batas entropi maksimum <span class="math inline">\(\log_2(4) = 2\)</span> bit → deteksi <em>ground state</em> handal.</p>
+<p><strong>Kalkulasi:</strong> <span class="math display">\[ S = -\left(0{,}94 \log_2(0{,}94) + 3 \times (0{,}02 \log_2(0{,}02))\right) \approx 0{,}4225 \text{ bit} \]</span></p>
 </div>
 </div></div>
-</div>
-<div id="tabset-6-2">
-<div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
-<p><strong>Generalisasi: Dari Entropi Shannon ke Entropi Von Neumann</strong></p>
-<p><strong>Langkah 1 — Entropi Shannon (Klasik):</strong></p>
-<p>Untuk distribusi probabilitas diskrit <span class="math inline">\(p_i\)</span>, entropi informasi didefinisikan sebagai:</p>
-<p><span class="math display">\[H = - \sum_i p_i \log_2 (p_i)\]</span></p>
-<hr>
-<p><strong>Langkah 2 — Definisi Entropi Von Neumann:</strong></p>
-<p>Dalam mekanika kuantum, probabilitas digantikan oleh operator densitas <span class="math inline">\(\rho\)</span>. Entropi Von Neumann didefinisikan langsung melalui fungsi operator tersebut:</p>
-<p><span class="math display">\[S(\rho) = -\text{Tr}(\rho \log_2 \rho)\]</span></p>
-<hr>
-<p><strong>Langkah 3 — Teorema Spektral:</strong></p>
-<p>Karena operator densitas <span class="math inline">\(\rho\)</span> bersifat Hermitian, ia selalu dapat didiagonalisasi (dekomposisi spektral):</p>
-<p><span class="math display">\[\rho = U \Lambda U^\dagger\]</span></p>
-<p>dengan <span class="math inline">\(\Lambda\)</span> adalah matriks diagonal yang berisi nilai eigen <span class="math inline">\(\lambda_i\)</span>, dan <span class="math inline">\(U\)</span> adalah matriks uniter.</p>
-<hr>
-<p><strong>Langkah 4 — Logaritma Matriks:</strong></p>
-<p>Berdasarkan definisi fungsi matriks, logaritma diterapkan pada nilai eigennya:</p>
-<p><span class="math display">\[\log_2(\rho) = U (\log_2 \Lambda) U^\dagger\]</span></p>
-<hr>
-<p><strong>Langkah 5 — Operasi <em>Trace</em> dan Invariansi:</strong></p>
-<p>Kita kalikan <span class="math inline">\(\rho\)</span> dengan <span class="math inline">\(\log_2(\rho)\)</span>:</p>
-<p><span class="math display">\[\rho \log_2(\rho) = (U \Lambda U^\dagger) (U (\log_2 \Lambda) U^\dagger) = U (\Lambda \log_2 \Lambda) U^\dagger\]</span></p>
-<p>Gunakan sifat invariansi <em>trace</em> (<span class="math inline">\(\text{Tr}(U A U^\dagger) = \text{Tr}(A)\)</span>):</p>
-<p><span class="math display">\[S(\rho) = -\text{Tr}(U (\Lambda \log_2 \Lambda) U^\dagger) = -\text{Tr}(\Lambda \log_2 \Lambda)\]</span></p>
-<p>Karena <span class="math inline">\(\Lambda\)</span> adalah matriks diagonal, perhitungan <em>trace</em>-nya hanyalah jumlahan dari elemen diagonal:</p>
-<p><span class="math display">\[\boxed{S(\rho) = -\sum_i \lambda_i \log_2 (\lambda_i)}\]</span></p>
-<hr>
-<p><strong>Langkah 6 — Reduksi ke Bentuk Klasik:</strong></p>
-<p>Jika <span class="math inline">\(\rho\)</span> sudah dalam bentuk diagonal murni di mana matriksnya mewakili campuran klasik murni, maka nilai eigen <span class="math inline">\(\lambda_i\)</span> akan sama dengan probabilitas <span class="math inline">\(p_i\)</span>, sehingga rumusnya akan mereduksi secara identik menjadi Entropi Shannon biasa.</p>
-<p><br><br></p>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="algoritma-evaluasi-backtesting" class="slide level2">
 <h2>Algoritma Evaluasi: <em>Backtesting</em></h2>
@@ -1174,9 +1189,9 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <section id="perhitungan-metrik-performa-finansial" class="slide level2 scrollable">
 <h2>Perhitungan Metrik Performa Finansial</h2>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Metrik Finansial</a></li><li><a href="#tabset-7-2">Optimasi Klasik SLSQP</a></li><li><a href="#tabset-7-3">Contoh Numerik</a></li></ul>
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Metrik Finansial</a></li><li><a href="#tabset-6-2">Optimasi Klasik SLSQP</a></li><li><a href="#tabset-6-3">Contoh Numerik</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
+<div id="tabset-6-1">
 <div style="font-size: 0.7em;">
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1195,7 +1210,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 </div></div>
 </div>
 </div>
-<div id="tabset-7-2">
+<div id="tabset-6-2">
 <p>Algoritma <em>Sequential Least Squares Programming</em> untuk menyelesaikan sub-masalah pemrograman kuadratik sebagai standar komparasi.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource pseudocode number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>Procedure SLSQPOptimizer(mu, Sigma, gamma)</span>
 <span id="cb2-2"><a href=""></a>  1. w_0 &lt;- InitialWeights(1/N)</span>
@@ -1210,7 +1225,7 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <span id="cb2-11"><a href=""></a>  10. Return w_final</span>
 <span id="cb2-12"><a href=""></a>EndProcedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-7-3">
+<div id="tabset-6-3">
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Contoh Perhitungan SLSQP (Kasus <span class="math inline">\(N=2\)</span>)</strong></p>
 <p>Misalkan: <span class="math display">\[ \mu=\begin{pmatrix}0.10\\0.05\end{pmatrix},\qquad\Sigma=\begin{pmatrix}0.04 &amp; 0.01\\0.01 &amp; 0.02\end{pmatrix},\qquad\gamma=1 \]</span></p>
@@ -1274,24 +1289,31 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <p>Silakan sesuaikan parameter bias dan interaksi (<span class="math inline">\(h_i\)</span>, <span class="math inline">\(J_{ij}\)</span>) lalu klik <b>Mulai SPSA</b> untuk melihat simulasi konvergensi.</p>
 </div>
 </section>
-<section id="analisis-entropi-von-neumann" class="slide level2">
-<h2>Analisis Entropi Von Neumann</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<strong>Entropi Tinggi (Solusi Tidak Optimal)</strong>
-<div style="text-align: center; margin-top: 10px;">
-<p><img data-src="../Gambar/Entropi_tinggi.png" style="width:100.0%"></p>
-</div>
-<div style="font-size: 0.6em; text-align: justify; margin-top: 10px;">
-<p>Probabilitas (<em>state</em>) tersebar merata. Hal ini menunjukkan indikasi <em>barren plateau</em> atau kondisi di mana VQE belum menemukan <em>ground state</em>.</p>
-</div>
-</div><div class="column" style="width:50%;">
-<strong>Entropi Rendah (Solusi Optimal)</strong>
-<div style="text-align: center; margin-top: 10px;">
+<section id="analisis-entropi-solusi-optimal-entropi-rendah" class="slide level2">
+<h2>Analisis Entropi: Solusi Optimal (Entropi Rendah)</h2>
+<div class="columns" style="display: flex; align-items: center;">
+<div class="column" style="width:70%;">
 <p><img data-src="../Gambar/Entropi_rendah.png" style="width:100.0%"></p>
+</div><div class="column" style="width:30%;">
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+<ul>
+<li>Probabilitas runtuh di satu <em>state</em> dominan</li>
+<li>Solusi telah konvergen ke titik minimum energi global</li>
+</ul>
 </div>
-<div style="font-size: 0.6em; text-align: justify; margin-top: 10px;">
-<p>Probabilitas mengkristal di satu <em>state</em> dominan. Solusi telah konvergen ke titik minimum energi global.</p>
+</div></div>
+</section>
+<section id="analisis-entropi-barren-plateau-entropi-tinggi" class="slide level2">
+<h2>Analisis Entropi: Barren Plateau (Entropi Tinggi)</h2>
+<div class="columns" style="display: flex; align-items: center;">
+<div class="column" style="width:70%;">
+<p><img data-src="../Gambar/Entropi_tinggi.png" style="width:100.0%"></p>
+</div><div class="column" style="width:30%;">
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+<ul>
+<li>Probabilitas tersebar merata</li>
+<li>Menunjukkan indikasi <em>barren plateau</em></li>
+</ul>
 </div>
 </div></div>
 </section>
@@ -1488,10 +1510,34 @@ U_{ent} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1
 <h1>
 Terima Kasih
 </h1>
-<p>
-Ada Pertanyaan?
-</p>
 </div>
+</section></section>
+<section>
+<section id="lampiran" class="title-slide slide level1 center">
+<h1>Lampiran</h1>
+
+</section>
+<section id="lampiran-grafik-simulasi-gt-vqe-n4" class="slide level2">
+<h2>Lampiran: Grafik Simulasi GT-VQE (<span class="math inline">\(N=4\)</span>)</h2>
+<div class="columns" style="display: flex; align-items: center;">
+<div class="column" style="width:70%;">
+<p><img data-src="../Gambar/GT_N4_22_1_10.png" style="width:100.0%"></p>
+</div><div class="column" style="width:30%;">
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+
+</div>
+</div></div>
+</section>
+<section id="lampiran-grafik-simulasi-vqe-murni-n4" class="slide level2">
+<h2>Lampiran: Grafik Simulasi VQE Murni (<span class="math inline">\(N=4\)</span>)</h2>
+<div class="columns" style="display: flex; align-items: center;">
+<div class="column" style="width:70%;">
+<p><img data-src="../Gambar/NoGT_N4_22_1_10.png" style="width:100.0%"></p>
+</div><div class="column" style="width:30%;">
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+
+</div>
+</div></div>
 
 </section></section>
     </div>

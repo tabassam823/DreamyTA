@@ -1,0 +1,33 @@
+# Lampiran
+
+## Lampiran: Grafik Simulasi GT-VQE ($N=4$)
+
+::::: {.columns style="display: flex; align-items: center;"}
+
+:::: {.column width="70%"}
+![](../Gambar/GT_N4_22_1_10.png){width="100%"}
+::::
+
+:::: {.column width="30%"}
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+</div>
+::::
+
+:::::
+
+---
+
+## Lampiran: Grafik Simulasi VQE Murni ($N=4$)
+
+::::: {.columns style="display: flex; align-items: center;"}
+
+:::: {.column width="70%"}
+![](../Gambar/NoGT_N4_22_1_10.png){width="100%"}
+::::
+
+:::: {.column width="30%"}
+<div style="font-size: 0.7em; text-align: justify; padding-left: 20px;">
+</div>
+::::
+
+:::::
