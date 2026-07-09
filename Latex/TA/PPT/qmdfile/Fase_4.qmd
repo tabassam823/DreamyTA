@@ -3,9 +3,9 @@
 ## Sejarah Ising
 
 <div style="text-align: center;">
-  <img src="../Gambar/LenzIsing_Foto.png" style="height: 350px; margin-bottom: 20px;">
+  <img src="Gambar/LenzIsing_Foto.png" style="height: 350px; margin-bottom: 20px;">
   <br>
-  <img src="../Gambar/1D_Model_atT.png" style="height: 120px;">
+  <img src="Gambar/1D_Model_atT.png" style="height: 120px;">
   <div style="font-size: 0.7em; margin-top: 10px;">Model Ising 1D</div>
 </div>
 
@@ -15,10 +15,10 @@
 
 :::: {.columns}
 ::: {.column width="50%"}
-![](../Gambar/Onsager_Foto.png){fig-align="center" height="200px"}
+![](Gambar/Onsager_Foto.png){fig-align="center" height="200px"}
 :::
 ::: {.column width="50%"}
-![](../Gambar/Spin2D.png){fig-align="center" height="200px"}
+![](Gambar/Spin2D.png){fig-align="center" height="200px"}
 :::
 ::::
 

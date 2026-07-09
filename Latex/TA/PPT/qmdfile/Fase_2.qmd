@@ -7,7 +7,7 @@
 **Analisis Fundamental**
 
 <div style="text-align: center;">
-![](../Gambar/221_Cashflow_statement.png){width="60%"}
+![](Gambar/221_Cashflow_statement.png){width="60%"}
 <div style="font-size: 0.7em;">Struktur laporan arus kas fundamental.</div>
 </div>
 
@@ -23,15 +23,15 @@
 
 :::: {style="display: flex; justify-content: space-between; align-items: flex-end; text-align: center;"}
 ::: {style="width: 32%;"}
-![](../Gambar/222_Candle.png)
+![](Gambar/222_Candle.png)
 <div style="font-size: 0.6em;">*Candlestick*</div>
 :::
 ::: {style="width: 32%;"}
-![](../Gambar/222_Chart.png)
+![](Gambar/222_Chart.png)
 <div style="font-size: 0.6em;">*Price Chart*</div>
 :::
 ::: {style="width: 32%;"}
-![](../Gambar/222_SnR.png)
+![](Gambar/222_SnR.png)
 <div style="font-size: 0.6em;">*Support & Resistance*</div>
 :::
 ::::
@@ -74,7 +74,7 @@
 ::::
 :::: {.column width="30%"}
 <div style="text-align: center; margin-top: 10px;">
-![](../Gambar/223_Price_log.png){width="100%"}
+![](Gambar/223_Price_log.png){width="100%"}
 <div style="font-size: 0.6em;">Transformasi pergerakan harga saham.</div>
 </div>
 ::: {style="font-size: 0.6em; margin-top: 15px;"}
@@ -109,7 +109,7 @@
 ::::
 :::: {.column width="45%"}
 <div style="text-align: center;">
-![](../Gambar/224_Efficient_Frontier.png){width="75%"}
+![](Gambar/224_Efficient_Frontier.png){width="75%"}
 <div style="font-size: 0.7em;">Grafik Efficient Frontier</div>
 </div>
 <br>

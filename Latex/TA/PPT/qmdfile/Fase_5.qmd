@@ -274,7 +274,7 @@ $$ \begin{split} &|00\rangle \to |00\rangle \\ &|01\rangle \to |11\rangle \\ &|1
 ::: {.panel-tabset}
 ### Konsep & Dekoherensi
 
-![Gambar: Dekoherensi dan Keruntuhan Keadaan Kuantum](../Gambar/Collapse_Measurement.png){width=80% fig-align="center"}
+![Gambar: Dekoherensi dan Keruntuhan Keadaan Kuantum](Gambar/Collapse_Measurement.png){width=80% fig-align="center"}
 
 ### Penurunan Rumus
 
@@ -340,6 +340,6 @@ flowchart TD
 :::
 ::: {.column width="50%"}
 <br><br>
-![Gambar: Alur Kerja Sirkuit Kuantum Berparameter (PQC)](../Gambar/PQC_VQDNN.png){width=100% fig-align="center"}
+![Gambar: Alur Kerja Sirkuit Kuantum Berparameter (PQC)](Gambar/PQC_VQDNN.png){width=100% fig-align="center"}
 :::
 ::::

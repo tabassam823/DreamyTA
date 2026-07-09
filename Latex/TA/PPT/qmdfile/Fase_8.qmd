@@ -1,7 +1,7 @@
 # Fase 8: Metodologi Penelitian
 
 ## Alur Penelitian
-![](../Gambar/31_Dialir.png){fig-align="center" width=45%}
+![](Gambar/31_Dialir.png){fig-align="center" width=45%}
 
 ---
 

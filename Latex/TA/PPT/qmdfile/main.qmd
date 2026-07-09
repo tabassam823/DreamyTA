@@ -17,9 +17,9 @@ open-graph:
 twitter-card: true
 format:
   revealjs:
-    embed-resources: true
     theme: [simple, template/custom.scss]
     slide-number: true
+    chalkboard: true
     navigation-mode: vertical
     transition: fade
     background-transition: fade

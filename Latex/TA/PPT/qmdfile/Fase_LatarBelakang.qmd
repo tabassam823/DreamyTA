@@ -5,32 +5,32 @@
 :::: {style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px;"}
 
 ::: {style="text-align: center; width: 28%;"}
-![](../Gambar/Markowitz_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
+![](Gambar/Markowitz_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
 <div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">Harry Markowitz</div>
 :::
 
 ::: {style="text-align: center; width: 28%;"}
-![](../Gambar/LenzIsing_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
+![](Gambar/LenzIsing_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
 <div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">Wilhelm Lenz & Ernst Ising</div>
 :::
 
 ::: {style="text-align: center; width: 28%;"}
-![](../Gambar/Onsager_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
+![](Gambar/Onsager_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
 <div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">Lars Onsager</div>
 :::
 
 ::: {style="text-align: center; width: 28%;"}
-![](../Gambar/VonNeumann_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
+![](Gambar/VonNeumann_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
 <div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">John von Neumann</div>
 :::
 
 ::: {style="text-align: center; width: 28%;"}
-![](../Gambar/Morgenstern_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
+![](Gambar/Morgenstern_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
 <div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">Oskar Morgenstern</div>
 :::
 
 ::: {style="text-align: center; width: 28%;"}
-![](../Gambar/Mantegna_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
+![](Gambar/Mantegna_Foto.png){style="border-radius: 15px; height: 220px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"}
 <div style="font-size: 0.8em; margin-top: 10px; font-weight: bold; color: #003366;">Rosario N. Mantegna</div>
 :::
 
@@ -93,7 +93,7 @@ background:#faf7ff;
 Penelitian Terdahulu
 </div>
 
-<img src="../Gambar/wang_pct.png" width="350">
+<img src="Gambar/wang_pct.png" width="350">
 
 <div style="margin-top: 20px;">
 
@@ -127,7 +127,7 @@ Stabilisasi konvergensi energi.
 Penelitian Terdahulu
 </div>
 
-<img src="../Gambar/wei_pct.png" width="350">
+<img src="Gambar/wei_pct.png" width="350">
 
 <div style="margin-top: 20px;">
 
@@ -161,7 +161,7 @@ Memecah masalah QUBO kompleks menjadi submasalah.
 Research Gap
 </div>
 
-<img src="../Gambar/barren_plateau.png" width="350">
+<img src="Gambar/barren_plateau.png" width="350">
 
 <div style="margin-top: 20px;">
 
@@ -187,7 +187,7 @@ yang rentan mengalami
 Solusi
 </div>
 
-<img src="../Gambar/GT_pct.png" width="150">
+<img src="Gambar/GT_pct.png" width="150">
 
 <div style="margin-top: 20px;">
 
@@ -210,16 +210,16 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 
 :::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 30px;"}
 ::: {.column width="33%"}
-![](../Gambar/nixxon_shock.png){width="100%"}
-![](../Gambar/212_Inflasi.png){width="100%"}
+![](Gambar/nixxon_shock.png){width="100%"}
+![](Gambar/212_Inflasi.png){width="100%"}
 <div style="font-size: 0.7em; text-align: center; margin-top:10px;">Inflasi & Guncangan Ekonomi</div>
 :::
 ::: {.column width="33%"}
-![](../Gambar/213_Investasi.png){width="100%"}
+![](Gambar/213_Investasi.png){width="100%"}
 <div style="font-size: 0.7em; text-align: center; margin-top:10px;">Urgensi Investasi</div>
 :::
 ::: {.column width="33%"}
-![](../Gambar/Diversifikasi.png){width="100%"}
+![](Gambar/Diversifikasi.png){width="100%"}
 <div style="font-size: 0.7em; text-align: center; margin-top:10px;">Diversifikasi Portofolio</div>
 :::
 ::::
@@ -233,7 +233,7 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 **Analisis Fundamental**
 
 <div style="text-align: center;">
-![](../Gambar/221_Cashflow_statement.png){width="60%"}
+![](Gambar/221_Cashflow_statement.png){width="60%"}
 <div style="font-size: 0.7em;">Struktur laporan arus kas fundamental.</div>
 </div>
 
@@ -249,15 +249,15 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 
 :::: {style="display: flex; justify-content: space-between; align-items: flex-end; text-align: center;"}
 ::: {style="width: 32%;"}
-![](../Gambar/222_Candle.png)
+![](Gambar/222_Candle.png)
 <div style="font-size: 0.6em;">*Candlestick*</div>
 :::
 ::: {style="width: 32%;"}
-![](../Gambar/222_Chart.png)
+![](Gambar/222_Chart.png)
 <div style="font-size: 0.6em;">*Price Chart*</div>
 :::
 ::: {style="width: 32%;"}
-![](../Gambar/222_SnR.png)
+![](Gambar/222_SnR.png)
 <div style="font-size: 0.6em;">*Support & Resistance*</div>
 :::
 ::::
@@ -300,7 +300,7 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 ::::
 :::: {.column width="30%"}
 <div style="text-align: center; margin-top: 10px;">
-![](../Gambar/223_Price_log.png){width="100%"}
+![](Gambar/223_Price_log.png){width="100%"}
 <div style="font-size: 0.6em;">Transformasi pergerakan harga saham.</div>
 </div>
 ::: {style="font-size: 0.6em; margin-top: 15px;"}
@@ -406,11 +406,11 @@ Nilai $x_i = 1$ merepresentasikan **beli**, sedangkan $x_i = 0$ merepresentasika
 
 :::: {.columns}
 ::: {.column width="50%"}
-![](../Gambar/backtest.png)
+![](Gambar/backtest.png)
 <div style="font-size: 0.7em; text-align: center; margin-top: 10px;">Simulasi riwayat harga dan rebalance portofolio secara periodik</div>
 :::
 ::: {.column width="50%"}
-![](../Gambar/backtest_data.png)
+![](Gambar/backtest_data.png)
 <div style="font-size: 0.7em; text-align: center; margin-top: 10px;">Data backtesting pada sebuah strategi trading</div>
 :::
 ::::

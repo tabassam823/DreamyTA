@@ -7,11 +7,11 @@
 <div style="text-align: center;">
 
 ::: {.fragment .fade-in}
-![](../Gambar/Markowitz_Foto.png){width="30%" style="border-radius: 10px; margin-bottom: 10px;"}
+![](Gambar/Markowitz_Foto.png){width="30%" style="border-radius: 10px; margin-bottom: 10px;"}
 :::
 
 ::: {.fragment .fade-in}
-![](../Gambar/Porto_selection.png){width="45%" style="border-radius: 10px;"}
+![](Gambar/Porto_selection.png){width="45%" style="border-radius: 10px;"}
 :::
 
 </div>
@@ -21,11 +21,11 @@
 <div style="text-align: center;">
 
 ::: {.fragment .fade-in}
-![](../Gambar/Mantegna_Foto.png){width="30%" style="border-radius: 10px; margin-bottom: 10px;"}
+![](Gambar/Mantegna_Foto.png){width="30%" style="border-radius: 10px; margin-bottom: 10px;"}
 :::
 
 ::: {.fragment .fade-in}
-![](../Gambar/intro_econophys.png){width="45%" style="border-radius: 10px;"}
+![](Gambar/intro_econophys.png){width="45%" style="border-radius: 10px;"}
 :::
 
 </div>
@@ -90,7 +90,7 @@ background:#faf7ff;
 Penelitian Terdahulu
 </div>
 
-<img src="../Gambar/wang_pct.png" width="350">
+<img src="Gambar/wang_pct.png" width="350">
 
 <div style="margin-top: 20px;">
 
@@ -124,7 +124,7 @@ Stabilisasi konvergensi energi.
 Penelitian Terdahulu
 </div>
 
-<img src="../Gambar/wei_pct.png" width="350">
+<img src="Gambar/wei_pct.png" width="350">
 
 <div style="margin-top: 20px;">
 
@@ -158,7 +158,7 @@ Memecah masalah QUBO kompleks menjadi submasalah.
 Research Gap
 </div>
 
-<img src="../Gambar/barren_plateau.png" width="350">
+<img src="Gambar/barren_plateau.png" width="350">
 
 <div style="margin-top: 20px;">
 
@@ -184,7 +184,7 @@ yang rentan mengalami
 Solusi
 </div>
 
-<img src="../Gambar/GT_pct.png" width="150">
+<img src="Gambar/GT_pct.png" width="150">
 
 <div style="margin-top: 20px;">
 

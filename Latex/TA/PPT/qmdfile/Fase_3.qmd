@@ -8,7 +8,7 @@
 ::::: {style="display: flex; flex-direction: column; align-items: center; gap: 20px;"}
 :::::: {style="display: flex; justify-content: center; gap: 40px;"}
 ::::::: {style="text-align: center;"}
-![](../Gambar/VonNeumann_Foto.png){height="250px"}
+![](Gambar/VonNeumann_Foto.png){height="250px"}
 
 :::::::: {style="font-size: 0.8em; margin-top: 10px;"}
 John von Neumann
@@ -16,7 +16,7 @@ John von Neumann
 :::::::
 
 ::::::: {style="text-align: center;"}
-![](../Gambar/Morgenstern_Foto.png){height="250px"}
+![](Gambar/Morgenstern_Foto.png){height="250px"}
 
 :::::::: {style="font-size: 0.8em; margin-top: 10px;"}
 Oskar Morgenstern
@@ -24,7 +24,7 @@ Oskar Morgenstern
 :::::::
 ::::::
 
-![](../Gambar/GT_pct.png){height="250px"}
+![](Gambar/GT_pct.png){height="250px"}
 :::::
 
 ::::
@@ -41,7 +41,7 @@ Oskar Morgenstern
 </div>
 :::
 ::: {.column width="40%"}
-![](../Gambar/nasheq.png){width="100%"}
+![](Gambar/nasheq.png){width="100%"}
 :::
 :::::
 ::::
@@ -52,15 +52,15 @@ Contoh klasik *Game Theory* dengan matriks *payoff*:
 
 :::: {.columns}
 ::: {.column width="33%"}
-![](../Gambar/232_payoff_SH.png)
+![](Gambar/232_payoff_SH.png)
 <div style="font-size: 0.7em; text-align: center;">*Stag Hunt*</div>
 :::
 ::: {.column width="33%"}
-![](../Gambar/232_payoff_PD.png)
+![](Gambar/232_payoff_PD.png)
 <div style="font-size: 0.7em; text-align: center;">*Prisoner's Dilemma*</div>
 :::
 ::: {.column width="33%"}
-![](../Gambar/232_payoff_BoS.png)
+![](Gambar/232_payoff_BoS.png)
 <div style="font-size: 0.7em; text-align: center;">*Battle of the Sexes*</div>
 :::
 ::::

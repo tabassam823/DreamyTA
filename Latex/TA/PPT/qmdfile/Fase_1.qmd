@@ -8,22 +8,22 @@
 ## Konsep Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh;"}
-![](../Gambar/Kebutuhan.jpeg){data-id="uang1" width="50%"}
+![](Gambar/Kebutuhan.jpeg){data-id="uang1" width="50%"}
 :::
 
 ## Konsep Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 50px;"}
-![](../Gambar/Kebutuhan.jpeg){data-id="uang1" width="30%"}
-![](../Gambar/Keinginan.jpeg){data-id="uang2" width="30%"}
+![](Gambar/Kebutuhan.jpeg){data-id="uang1" width="30%"}
+![](Gambar/Keinginan.jpeg){data-id="uang2" width="30%"}
 :::
 
 ## Konsep Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 20px;"}
-![](../Gambar/Kebutuhan.jpeg){data-id="uang1" width="30%"}
-![](../Gambar/Keinginan.jpeg){data-id="uang2" width="30%"}
-![](../Gambar/KeinginanBatas.jpeg){data-id="uang3" width="30%"}
+![](Gambar/Kebutuhan.jpeg){data-id="uang1" width="30%"}
+![](Gambar/Keinginan.jpeg){data-id="uang2" width="30%"}
+![](Gambar/KeinginanBatas.jpeg){data-id="uang3" width="30%"}
 :::
 
 ## Sejarah dan Evolusi Uang {auto-animate="true"}
@@ -34,38 +34,38 @@
 ## Sejarah dan Evolusi Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh;"}
-![](../Gambar/211_Barter_marketeers.com.png){data-id="img1" width="50%"}
+![](Gambar/211_Barter_marketeers.com.png){data-id="img1" width="50%"}
 :::
 
 ## Sejarah dan Evolusi Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 50px;"}
-![](../Gambar/211_Barter_marketeers.com.png){data-id="img1" width="25%"}
-![](../Gambar/211_Logam_depositphotos.com.png){data-id="img2" width="25%"}
+![](Gambar/211_Barter_marketeers.com.png){data-id="img1" width="25%"}
+![](Gambar/211_Logam_depositphotos.com.png){data-id="img2" width="25%"}
 :::
 
 ## Sejarah dan Evolusi Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 30px;"}
-![](../Gambar/211_Barter_marketeers.com.png){data-id="img1" width="20%"}
-![](../Gambar/211_Logam_depositphotos.com.png){data-id="img2" width="20%"}
-![](../Gambar/211_Fiat_depositphotos.com.png){data-id="img3" width="20%"}
+![](Gambar/211_Barter_marketeers.com.png){data-id="img1" width="20%"}
+![](Gambar/211_Logam_depositphotos.com.png){data-id="img2" width="20%"}
+![](Gambar/211_Fiat_depositphotos.com.png){data-id="img3" width="20%"}
 :::
 
 ## Sejarah dan Evolusi Uang {auto-animate="true"}
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 20px;"}
-![](../Gambar/211_Barter_marketeers.com.png){data-id="img1" width="20%"}
-![](../Gambar/211_Logam_depositphotos.com.png){data-id="img2" width="20%"}
-![](../Gambar/211_Fiat_depositphotos.com.png){data-id="img3" width="20%"}
-![](../Gambar/211_Digital_klasika.kompas.id.png){data-id="img4" width="20%"}
+![](Gambar/211_Barter_marketeers.com.png){data-id="img1" width="20%"}
+![](Gambar/211_Logam_depositphotos.com.png){data-id="img2" width="20%"}
+![](Gambar/211_Fiat_depositphotos.com.png){data-id="img3" width="20%"}
+![](Gambar/211_Digital_klasika.kompas.id.png){data-id="img4" width="20%"}
 ::: -->
 
 ## Inflasi
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 50px;"}
-![](../Gambar/nixxon_shock.png){width="40%"}
-![](../Gambar/212_Inflasi.png){width="50%"}
+![](Gambar/nixxon_shock.png){width="40%"}
+![](Gambar/212_Inflasi.png){width="50%"}
 :::
 
 ## Investasi
@@ -79,7 +79,7 @@ Investasi merupakan usaha untuk memperoleh keuntungan dari penempatan dana pada 
 * **Risk-Return & Risk Profile**
 :::
 ::: {.column width="50%"}
-![](../Gambar/213_Investasi.png){width="80%"}
+![](Gambar/213_Investasi.png){width="80%"}
 :::
 ::::
 
@@ -92,7 +92,7 @@ Investasi merupakan usaha untuk memperoleh keuntungan dari penempatan dana pada 
 Individu cenderung merasakan sakit kerugian lebih besar daripada kebahagiaan atas keuntungan walaupun nilainya kerugian dan keuntungannya sama.
 :::
 ::: {.column width="50%"}
-![](../Gambar/214_RiskAversion_invespcro.com.png){width="100%"}
+![](Gambar/214_RiskAversion_invespcro.com.png){width="100%"}
 :::
 ::::
 

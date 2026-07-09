@@ -4,10 +4,10 @@
 
 :::: {.columns}
 ::: {.column width="50%"}
-![](../Gambar/BarrenPlateau.jpeg)
+![](Gambar/BarrenPlateau.jpeg)
 :::
 ::: {.column width="50%"}
-![](../Gambar/barren_plateau.png)
+![](Gambar/barren_plateau.png)
 :::
 ::::
 
@@ -23,7 +23,7 @@
 * **Solusi Simulasi:** Inisialisasi parameter (*warm-start*) menggunakan *Nash Equilibrium* terbukti menghindari jebakan *barren plateau* pada sistem $N=4$.
 :::
 ::: {.column width="40%"}
-![](../Gambar/grafik_depth_per_window_N4.png)
+![](Gambar/grafik_depth_per_window_N4.png)
 <div style="font-size: 0.7em; text-align: center;">Visualisasi pemilihan kedalaman sirkuit (Depth) optimal.</div>
 :::
 ::::
@@ -37,7 +37,7 @@
 
 :::: {.columns}
 ::: {.column width="25%"}
-![](../Gambar/Shannon_Foto.png)
+![](Gambar/Shannon_Foto.png)
 <div style="font-size: 0.5em; text-align: center; margin-top: 5px;">Claude Shannon (Bapak Teori Informasi)</div>
 :::
 ::: {.column width="75%"}

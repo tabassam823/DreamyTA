@@ -5,7 +5,7 @@
 ::::: {.columns style="display: flex; align-items: center;"}
 
 :::: {.column width="70%"}
-![](../Gambar/GT_N4_22_1_10.png){width="100%"}
+![](Gambar/GT_N4_22_1_10.png){width="100%"}
 ::::
 
 :::: {.column width="30%"}
@@ -22,7 +22,7 @@
 ::::: {.columns style="display: flex; align-items: center;"}
 
 :::: {.column width="70%"}
-![](../Gambar/NoGT_N4_22_1_10.png){width="100%"}
+![](Gambar/NoGT_N4_22_1_10.png){width="100%"}
 ::::
 
 :::: {.column width="30%"}

@@ -15,7 +15,7 @@ Silakan sesuaikan parameter bias dan interaksi ($h_i$, $J_{ij}$) lalu klik <b>Mu
 
 Kombinasi saham BBCA, ADRO, TLKM, dan SMGR (2021-2023) dievaluasi dengan mekanisme *rebalancing* bulanan.
 
-![](../Gambar/pergerakan_harga_asli_N4.png)
+![](Gambar/pergerakan_harga_asli_N4.png)
 
 ---
 
@@ -39,11 +39,11 @@ Tabel perbandingan *backtesting* strategi Kuantum, SLSQP, dan *Equal Weight* unt
 :::: {.columns}
 ::: {.column width="50%"}
 **SLSQP (Optimasi Klasik)**
-![](../Gambar/slsqp_vs_benchmarks_N2.png)
+![](Gambar/slsqp_vs_benchmarks_N2.png)
 :::
 ::: {.column width="50%"}
 **Nash Equilibrium (Klasik)**
-![](../Gambar/hasil_backtest_nash_N2.png)
+![](Gambar/hasil_backtest_nash_N2.png)
 :::
 ::::
 
@@ -54,11 +54,11 @@ Tabel perbandingan *backtesting* strategi Kuantum, SLSQP, dan *Equal Weight* unt
 :::: {.columns}
 ::: {.column width="50%"}
 **SLSQP (Optimasi Klasik)**
-![](../Gambar/slsqp_vs_benchmarks_N4.png)
+![](Gambar/slsqp_vs_benchmarks_N4.png)
 :::
 ::: {.column width="50%"}
 **Nash Equilibrium (Klasik)**
-![](../Gambar/hasil_backtest_nash_N4.png)
+![](Gambar/hasil_backtest_nash_N4.png)
 :::
 ::::
 
@@ -69,11 +69,11 @@ Tabel perbandingan *backtesting* strategi Kuantum, SLSQP, dan *Equal Weight* unt
 :::: {.columns}
 ::: {.column width="50%"}
 **VQE Murni (Tanpa GT)**
-![](../Gambar/NoGT_hasil_backtest_vqe_N2.png)
+![](Gambar/NoGT_hasil_backtest_vqe_N2.png)
 :::
 ::: {.column width="50%"}
 **GT-VQE (Hibrida)**
-![](../Gambar/GT_hasil_backtest_vqe_N2.png)
+![](Gambar/GT_hasil_backtest_vqe_N2.png)
 :::
 ::::
 
@@ -86,11 +86,11 @@ Efektivitas *warm-start* terlihat dari dominasi operasional GT-VQE pada kedalama
 :::: {.columns}
 ::: {.column width="50%"}
 **VQE Murni ($N=2$)**
-![](../Gambar/GT_grafik_depth_per_window_N2.png)
+![](Gambar/GT_grafik_depth_per_window_N2.png)
 :::
 ::: {.column width="50%"}
 **GT-VQE Hibrida ($N=2$)**
-![](../Gambar/NoGT_grafik_depth_per_window_N2.png)
+![](Gambar/NoGT_grafik_depth_per_window_N2.png)
 :::
 ::::
 
@@ -101,11 +101,11 @@ Efektivitas *warm-start* terlihat dari dominasi operasional GT-VQE pada kedalama
 :::: {.columns}
 ::: {.column width="50%"}
 **VQE Murni (Tanpa GT)**
-![](../Gambar/NoGT_hasil_backtest_vqe_N4.png)
+![](Gambar/NoGT_hasil_backtest_vqe_N4.png)
 :::
 ::: {.column width="50%"}
 **GT-VQE (Hibrida)**
-![](../Gambar/GT_hasil_backtest_vqe_N4.png)
+![](Gambar/GT_hasil_backtest_vqe_N4.png)
 :::
 ::::
 
@@ -118,11 +118,11 @@ Efektivitas *warm-start* terlihat dari dominasi operasional GT-VQE pada kedalama
 :::: {.columns}
 ::: {.column width="50%"}
 **VQE Murni ($N=4$)**
-![](../Gambar/NoGT_grafik_depth_per_window_N4.png)
+![](Gambar/NoGT_grafik_depth_per_window_N4.png)
 :::
 ::: {.column width="50%"}
 **GT-VQE Hibrida ($N=4$)**
-![](../Gambar/GT_grafik_depth_per_window_N4.png)
+![](Gambar/GT_grafik_depth_per_window_N4.png)
 :::
 ::::
 

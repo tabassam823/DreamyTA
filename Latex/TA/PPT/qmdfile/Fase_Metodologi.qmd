@@ -3,11 +3,11 @@
 ## Diagram Alir Utama
 
 :::: {style="display: flex; justify-content: center; align-items: center; height: 70vh; gap: 15px;"}
-![](../Gambar/dialir1.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
+![](Gambar/dialir1.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
 
-![](../Gambar/dialir2.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
+![](Gambar/dialir2.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
 
-![](../Gambar/dialir3.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
+![](Gambar/dialir3.png){style="height: 100%; max-height: 550px; width: auto; object-fit: contain;"}
 ::::
 
 ---
@@ -26,7 +26,7 @@
 :::
 ::: {.column width="35%"}
 <div style="text-align: center;">
-![](../Gambar/nasheq.png){width="100%"}
+![](Gambar/nasheq.png){width="100%"}
 <div style="font-size: 0.7em; margin-top: 10px;">*Nash Equilibrium*</div>
 </div>
 :::
@@ -36,15 +36,15 @@
 
 :::: {.columns}
 ::: {.column width="33%"}
-![](../Gambar/232_payoff_SH.png)
+![](Gambar/232_payoff_SH.png)
 <div style="font-size: 0.7em; text-align: center;">*Stag Hunt*</div>
 :::
 ::: {.column width="33%"}
-![](../Gambar/232_payoff_PD.png)
+![](Gambar/232_payoff_PD.png)
 <div style="font-size: 0.7em; text-align: center;">*Prisoner's Dilemma*</div>
 :::
 ::: {.column width="33%"}
-![](../Gambar/232_payoff_BoS.png)
+![](Gambar/232_payoff_BoS.png)
 <div style="font-size: 0.7em; text-align: center; margin-bottom: 15px;">*Battle of the Sexes*</div>
 :::
 ::::
@@ -425,7 +425,7 @@ Memetakan fungsi biaya portofolio ke dalam struktur Hamiltonian sistem fisik.
 
 ::: {.panel-tabset}
 ### Arsitektur Sirkuit
-![](../Gambar/rangkaian1depth.png){fig-align="center" width="80%"}
+![](Gambar/rangkaian1depth.png){fig-align="center" width="80%"}
 <div style="font-size: 0.7em; text-align: center;">Arsitektur *Hardware-Efficient Ansatz* dengan *depth* $D=1$</div>
 
 ### Gerbang Rotasi Total
