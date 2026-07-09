@@ -15,6 +15,9 @@ open-graph:
   description: "Presentasi riset mengenai implementasi Variational Quantum Eigensolver untuk mencari Nash Equilibrium pada pasar modal"
   image: "Gambar/GT_hasil_backtest_vqe_N4.png"
 twitter-card: true
+resources:
+  - "Gambar/**"
+  - "logo/**"
 format:
   revealjs:
     theme: [simple, template/custom.scss]
