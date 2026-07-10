@@ -1,0 +1,20 @@
+---
+title: "<span style='font-size: 0.8em;'>OPTIMASI</span>"
+subtitle: "Tugas Akhir SF234801<br><span style='font-size: 0.8em;'>9 Juli 2026</span>"
+author: 
+  - name: "Putra Naufal Tabassam"
+    affiliations:
+      - "NRP : 5001221120"
+  - name: "Pembimbing:"
+    affiliations:
+      - "Dr. Heru Sukamto, M.Si."
+      - "Dr. Gagus K. Sunnardianto"
+  - name: "Penguji:"
+    affiliations:
+      - "Prof. Agus Purwanto, D.Sc."
+      - "Fahmi Astuti, M.Si., Ph.D."
+institute: "Departemen Fisika, Institut Teknologi Sepuluh Nopember"
+format: revealjs
+---
+## Slide 1
+Test

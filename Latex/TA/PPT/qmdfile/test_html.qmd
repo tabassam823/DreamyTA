@@ -1,0 +1,28 @@
+---
+title: "OPTIMASI"
+subtitle: "Tugas Akhir SF234801<br>9 Juli 2026"
+author: |
+  <div style="font-size: 1.1em; font-weight: normal; margin-bottom: 20px;">
+    <strong>Putra Naufal Tabassam</strong><br>
+    NRP : 5001221120
+  </div>
+  <div style="display: flex; justify-content: center; gap: 80px; margin-bottom: 20px;">
+    <div style="text-align: left;">
+      <strong>Pembimbing:</strong><br>
+      Dr. Heru Sukamto, M.Si.<br>
+      Dr. Gagus K. Sunnardianto
+    </div>
+    <div style="text-align: left;">
+      <strong>Penguji:</strong><br>
+      Prof. Agus Purwanto, D.Sc.<br>
+      Fahmi Astuti, M.Si., Ph.D.
+    </div>
+  </div>
+  <div style="font-size: 0.9em;">
+    Departemen Fisika, Institut Teknologi Sepuluh Nopember
+  </div>
+format: revealjs
+---
+
+## Slide 1
+Test

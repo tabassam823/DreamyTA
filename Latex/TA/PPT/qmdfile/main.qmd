@@ -1,13 +1,18 @@
 ---
-title: "OPTIMASI PORTOFOLIO BERBASIS MODEL MARKOWITZ MENGGUNAKAN METODE VARIATIONAL QUANTUM EIGENSOLVER"
-subtitle: "Tugas Akhir SF234801"
+title: "<span style='font-size: 0.85em;'>OPTIMASI PORTOFOLIO BERBASIS MODEL MARKOWITZ MENGGUNAKAN METODE VARIATIONAL QUANTUM EIGENSOLVER</span>"
+subtitle: "Tugas Akhir SF234801<br><span style='font-size: 0.8em;'>9 Juli 2026</span>"
 author: 
   - name: "Putra Naufal Tabassam"
     affiliations:
       - "NRP : 5001221120"
-      - "Pembimbing : Dr. Heru Sukamto, M.Si."
-      - "Ko-Pembimbing : Dr. Gagus K. Sunnardianto"
-      - "Departemen Fisika, Institut Teknologi Sepuluh Nopember"
+  - name: "Pembimbing:"
+    affiliations:
+      - "Dr. Heru Sukamto, M.Si."
+      - "Dr. Gagus K. Sunnardianto"
+  - name: "Penguji:"
+    affiliations:
+      - "Prof. Agus Purwanto, D.Sc."
+      - "Fahmi Astuti, M.Si., Ph.D."
 description: "Presentasi Tugas Akhir mengenai optimasi portofolio dengan Quantum Computing (VQE), Model Markowitz, dan Game Theory (Nash Equilibrium)."
 keywords: ["Quantum Computing", "VQE", "Markowitz", "Game Theory", "Econophysics", "Ekonofisika", "Tugas Akhir Fisika ITS"]
 open-graph:
@@ -31,6 +36,28 @@ format:
     height: 900
     include-after-body: template/header.html
 ---
+
+<style>
+  div.quarto-title-authors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 60px;
+    row-gap: 10px;
+    margin-top: 20px;
+  }
+  div.quarto-title-authors > div:nth-child(1) {
+    width: 100%;
+    margin-bottom: 0px;
+  }
+  div.quarto-title-authors::after {
+    content: "Departemen Fisika, Institut Teknologi Sepuluh Nopember";
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 0.9em;
+  }
+</style>
 
 <!-- include Fase_0.qmd -->
 <!-- include Fase_1.qmd -->
