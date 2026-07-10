@@ -1,6 +1,6 @@
 ---
 title: "<span style='font-size: 0.85em;'>OPTIMASI PORTOFOLIO BERBASIS MODEL MARKOWITZ MENGGUNAKAN METODE VARIATIONAL QUANTUM EIGENSOLVER</span>"
-subtitle: "Tugas Akhir SF234801<br><span style='font-size: 0.8em;'>9 Juli 2026</span>"
+subtitle: "Tugas Akhir SF234801<br><span style='font-size: 0.8em;'>Kamis, 9 Juli 2026</span>"
 author: 
   - name: "Putra Naufal Tabassam"
     affiliations:
