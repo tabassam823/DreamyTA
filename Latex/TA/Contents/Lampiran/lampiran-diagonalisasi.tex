@@ -1,0 +1,164 @@
+\chapter{Penurunan Diagonalisasi Operator Densitas dan Fungsi Logaritma Operator}
+\label{app:diagonalisasi_operator}
+
+Operator densitas $\rho$ merupakan operator Hermitian sehingga memenuhi
+\begin{equation}
+    \rho^\dagger=\rho.
+\end{equation}
+Berdasarkan Teorema Spektral, setiap operator Hermitian memiliki himpunan nilai eigen real beserta vektor-vektor eigen ortonormal yang memenuhi persamaan eigen
+\begin{equation}
+    \label{eq:persamaan-eigen-operator-densitas}
+    \rho |e_j\rangle
+    =
+    \lambda_j |e_j\rangle,
+\end{equation}
+dengan $\lambda_j$ merupakan nilai eigen dan $|e_j\rangle$ merupakan vektor eigen ke-$j$. Ortonormalitas seluruh vektor eigen dinyatakan sebagai
+\begin{equation}
+    \langle e_i|e_j\rangle
+    =
+    \delta_{ij}.
+\end{equation}
+Seluruh vektor eigen kemudian disusun sebagai kolom-kolom suatu matriks
+\begin{equation}
+    U=
+    \begin{bmatrix}
+        |e_1\rangle &
+        |e_2\rangle &
+        \cdots &
+        |e_n\rangle
+    \end{bmatrix}.
+\end{equation}
+Karena seluruh vektor eigen saling ortonormal, maka berlaku
+\begin{equation}
+    U^\dagger U
+    =
+    I,
+\end{equation}
+sehingga
+\begin{equation}
+    U^{-1}=U^\dagger.
+\end{equation}
+
+Dengan mengalikan operator densitas terhadap matriks $U$, maka diperoleh
+\begin{equation}
+\begin{split}
+    \rho U
+    &=
+    \rho
+    \begin{bmatrix}
+        |e_1\rangle &
+        |e_2\rangle &
+        \cdots &
+        |e_n\rangle
+    \end{bmatrix}
+    \\
+    &=
+    \begin{bmatrix}
+        \rho|e_1\rangle &
+        \rho|e_2\rangle &
+        \cdots &
+        \rho|e_n\rangle
+    \end{bmatrix}.
+\end{split}
+\end{equation}
+Sesuai dengan persamaan \eqref{eq:persamaan-eigen-operator-densitas}, diperoleh
+\begin{equation}
+\begin{split}
+    \rho U
+    &=
+    \begin{bmatrix}
+        \lambda_1|e_1\rangle &
+        \lambda_2|e_2\rangle &
+        \cdots &
+        \lambda_n|e_n\rangle
+    \end{bmatrix}
+    \\
+    &=
+    \begin{bmatrix}
+        |e_1\rangle &
+        |e_2\rangle &
+        \cdots &
+        |e_n\rangle
+    \end{bmatrix}
+    \begin{pmatrix}
+        \lambda_1 &0&\cdots&0\\
+        0&\lambda_2&\cdots&0\\
+        \vdots&\vdots&\ddots&\vdots\\
+        0&0&\cdots&\lambda_n
+    \end{pmatrix}.
+\end{split}
+\end{equation}
+Matriks diagonal tersebut dapat dinotasikan sebagai
+\begin{equation}
+    D=
+    \operatorname{diag}
+    (\lambda_1,\lambda_2,\ldots,\lambda_n),
+\end{equation}
+agar diperoleh hubungan
+\begin{equation}
+    \rho U
+    =
+    UD.
+\end{equation}
+Kemudian kedua ruas dikalikan dengan $U^\dagger$ sehingga diperoleh
+\begin{equation}
+    \rho UU^\dagger
+    =
+    UDU^\dagger.
+\end{equation}
+Karena $UU^\dagger=I$, maka diperoleh bentuk diagonalisasi operator
+\begin{equation}
+    \rho
+    =
+    UDU^\dagger.
+\end{equation}
+
+Apabila suatu fungsi $f(\rho)$ diterapkan pada operator yang telah didiagonalisasi, maka fungsi tersebut cukup diterapkan pada setiap elemen diagonal matriks $D$, sehingga
+\begin{equation}
+    f(\rho)=U f(D) U^\dagger,
+\end{equation}
+dengan
+\begin{equation}
+    f(D)=
+    \begin{pmatrix}
+        f(\lambda_1) & 0 & \cdots & 0\\
+        0 & f(\lambda_2) & \cdots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \cdots & f(\lambda_n)
+    \end{pmatrix}.
+\end{equation}
+Jika dipilih fungsi $f(x)=\log_2(x)$, maka diperoleh
+\begin{equation}
+    \log_2(\rho)
+    =
+    U
+    \begin{pmatrix}
+        \log_2(\lambda_1) & 0 & \cdots & 0\\
+        0 & \log_2(\lambda_2) & \cdots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \cdots & \log_2(\lambda_n)
+    \end{pmatrix}
+    U^\dagger.
+\end{equation}
+Karena
+\begin{equation}
+    U
+    \begin{pmatrix}
+        a_1 & 0 & \cdots & 0\\
+        0 & a_2 & \cdots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \cdots & a_n
+    \end{pmatrix}
+    U^\dagger
+    =
+    \sum_j a_j |e_j\rangle\langle e_j|,
+\end{equation}
+maka dengan mengambil $a_j=\log_2(\lambda_j)$ diperoleh bentuk
+\begin{equation}
+    \log_2(\rho)
+    =
+    \sum_j
+    \log_2(\lambda_j)
+    |e_j\rangle
+    \langle e_j|.
+\end{equation}

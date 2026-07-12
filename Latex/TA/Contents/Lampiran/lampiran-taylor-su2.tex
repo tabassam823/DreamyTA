@@ -1,0 +1,172 @@
+\chapter{Penurunan Operator Rotasi \texorpdfstring{$SU(2)$}{SU(2)} dari Ekspansi Taylor}
+\label{app:su2_taylor}
+
+Operator rotasi pada ruang Hilbert dua dimensi didefinisikan sebagai
+\begin{equation}
+U(\theta,\hat{n})
+=
+e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})},
+\end{equation}
+dengan
+\begin{equation}
+    \label{eq:ndef}
+\hat{n}\cdot\vec{\sigma}
+=
+n_xX+n_yY+n_zZ,
+\end{equation}
+di mana $\hat{n}=(n_x,n_y,n_z)$ merupakan vektor satuan yang memenuhi
+\begin{equation}
+n_x^2+n_y^2+n_z^2=1,
+\end{equation}
+untuk normalisasi radius bernilai 1 yang diperoleh dari jumalahan kuadrat tiap komponennya dan $\vec{\sigma}=(X,Y,Z)$ menyatakan vektor matriks Pauli. Untuk memperoleh bentuk tertutup dari operator tersebut, maka perlu dihitung kuadrat dari operator $\hat{n}\cdot\vec{\sigma}$ terlebih dahulu menggunakan sifat distributif 
+\begin{equation}
+\begin{aligned}
+(\hat{n}\cdot\vec{\sigma})^2
+=& (n_xX+n_yY+n_zZ)^2 \\
+=& n_x^2X^2 + n_y^2Y^2 + n_z^2Z^2 + n_xn_y(XY+YX) \\
+&+ n_xn_z(XZ+ZX) + n_yn_z(YZ+ZY).
+\end{aligned}
+\end{equation}
+Lalu dengan sifat-sifat dasar matriks Pauli,
+\begin{equation}
+X^2=Y^2=Z^2=I,
+\end{equation}
+dan relasi antikomutator
+\begin{equation}
+XY+YX=0,
+\end{equation}
+\begin{equation}
+XZ+ZX=0,
+\end{equation}
+\begin{equation}
+YZ+ZY=0,
+\end{equation}
+maka diperoleh
+\begin{equation}
+\begin{aligned}
+(\hat{n}\cdot\vec{\sigma})^2
+&=
+n_x^2I+n_y^2I+n_z^2I \\
+&=
+(n_x^2+n_y^2+n_z^2)I.
+\end{aligned}
+\end{equation}
+Karena $\hat n$ merupakan vektor satuan yang mana memenuhi
+\begin{equation}
+n_x^2+n_y^2+n_z^2=1,
+\end{equation}
+maka
+\begin{equation}
+(\hat{n}\cdot\vec{\sigma})^2=I.
+\end{equation}
+Sehingga seluruh pangkat genap dan ganjil dari operator tersebut dapat dituliskan sebagai
+\begin{equation}
+(\hat{n}\cdot\vec{\sigma})^{2k}=I,
+\end{equation}
+dan
+\begin{equation}
+(\hat{n}\cdot\vec{\sigma})^{2k+1}
+=
+\hat{n}\cdot\vec{\sigma},
+\end{equation}
+dengan $k=0,1,2,\ldots$.
+
+Operator eksponensial yang digunakan dalam rumus rotasi diekspansi menggunakan deret Taylor,
+\begin{equation}
+e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})}
+=
+\sum_{m=0}^{\infty}
+\frac{\left(-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})\right)^m}{m!}.
+\end{equation}
+Deret tersebut kemudian dipisahkan menjadi suku berpangkat genap dan ganjil,
+\begin{equation}
+\begin{aligned}
+e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})}
+&=
+\sum_{k=0}^{\infty}
+\frac{\left(-i\frac{\theta}{2}\right)^{2k}
+(\hat{n}\cdot\vec{\sigma})^{2k}}
+{(2k)!} \\
+&\quad+
+\sum_{k=0}^{\infty}
+\frac{\left(-i\frac{\theta}{2}\right)^{2k+1}
+(\hat{n}\cdot\vec{\sigma})^{2k+1}}
+{(2k+1)!}.
+\end{aligned}
+\end{equation}
+Jika disubstitusikan kembali identitas pangkat genap dan ganjil, maka akan diperoleh
+\begin{equation}
+\begin{aligned}
+e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})}
+&=
+I
+\sum_{k=0}^{\infty}
+\frac{\left(-i\frac{\theta}{2}\right)^{2k}}
+{(2k)!}
++
+(\hat{n}\cdot\vec{\sigma})
+\sum_{k=0}^{\infty}
+\frac{\left(-i\frac{\theta}{2}\right)^{2k+1}}
+{(2k+1)!}.
+\end{aligned}
+\end{equation}
+Lalu, karena
+\begin{equation}
+(-i)^{2k}=(-1)^k,
+\end{equation}
+dan
+\begin{equation}
+(-i)^{2k+1}
+=
+-i(-1)^k,
+\end{equation}
+maka
+\begin{equation}
+\begin{aligned}
+e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})}
+&=
+I
+\sum_{k=0}^{\infty}
+\frac{(-1)^k(\theta/2)^{2k}}
+{(2k)!} \\
+&\quad
+-i(\hat{n}\cdot\vec{\sigma})
+\sum_{k=0}^{\infty}
+\frac{(-1)^k(\theta/2)^{2k+1}}
+{(2k+1)!}.
+\end{aligned}
+\end{equation}
+Bentuk tersebut dapat dikenali bahwa kedua deret tersebut merupakan definisi dari fungsi kosinus dan sinus,
+\begin{equation}
+\cos x
+=
+\sum_{k=0}^{\infty}
+\frac{(-1)^k x^{2k}}
+{(2k)!},
+\end{equation}
+\begin{equation}
+\sin x
+=
+\sum_{k=0}^{\infty}
+\frac{(-1)^k x^{2k+1}}
+{(2k+1)!}.
+\end{equation}
+Dengan mengambil $x=\theta/2$, maka diperoleh
+\begin{equation}
+e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})}
+=
+I
+\cos\left(\frac{\theta}{2}\right)
+-
+i(\hat{n}\cdot\vec{\sigma})
+\sin\left(\frac{\theta}{2}\right).
+\end{equation}
+Sehingga dengan mensubstitusikan kembali persamaan \eqref{eq:ndef}, maka bentuk eksplisit operator rotasi menjadi
+\begin{equation}
+U(\theta,\hat{n})
+=
+\cos\left(\frac{\theta}{2}\right)I
+-
+i\sin\left(\frac{\theta}{2}\right)
+\left(n_xX+n_yY+n_zZ\right).
+\end{equation}

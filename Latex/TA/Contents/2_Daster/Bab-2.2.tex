@@ -23,7 +23,7 @@ Representasi \textit{candlestick} yang ditunjukkan pada Gambar \ref{fig:Candle1}
     \caption{Struktur anatomi \textit{bullish} dan \textit{bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}
     \label{fig:Candle1}
 \end{figure}
-Saat \textit{candlestick} dideretkan menjadi sebuah deret waktu, akan terbentuk pola-pola yang merepresentasikan psikologi kolektif pelaku pasar. Titik-titik balik penting dalam grafik di mana pergerakan harga tertahan atau berbalik arah didefinisikan sebagai \textit{Support} dan \textit{Resistance}. \textit{Support} merupakan tingkat harga di mana tekanan beli cukup kuat untuk mengatasi tekanan jual sehingga mencegah harga jatuh lebih jauh, sementara \textit{Resistance} merujuk pada tingkat di mana tekanan jual mendominasi sehingga mencegah harga naik lebih tinggi. Kedua konsep tersebut mencerminkan keseimbangan kekuatan dinamis antara penawaran dan permintaan dalam pasar, sehingga berfungsi sebagai indikator krusial bagi investor dalam pengambilan keputusan teknis. Analogi ilustrasi interaksi pasar tersebut dapat dilihat pada Gambar \ref{fig:SnR}., di mana harga sering kali mengalami pantulan pada level \textit{support} sebelum akhirnya berhasil menembus level \textit{resistance} untuk selanjutnya membentuk tren kenaikan yang baru di pasar.
+Saat \textit{candlestick} dideretkan menjadi sebuah deret waktu, akan terbentuk pola-pola yang merepresentasikan psikologi kolektif pelaku pasar. Titik-titik balik penting dalam grafik di mana pergerakan harga tertahan atau berbalik arah didefinisikan sebagai \textit{Support} dan \textit{Resistance}. \textit{Support} merupakan tingkat harga di mana tekanan beli cukup kuat untuk mengatasi tekanan jual sehingga mencegah harga jatuh lebih jauh, sementara \textit{Resistance} merujuk pada tingkat di mana tekanan jual mendominasi sehingga mencegah harga naik lebih tinggi. Kedua konsep tersebut mencerminkan keseimbangan kekuatan dinamis antara penawaran dan permintaan dalam pasar, sehingga berfungsi sebagai indikator krusial bagi investor dalam pengambilan keputusan teknis. Analogi ilustrasi interaksi pasar tersebut dapat dilihat pada Gambar \ref{fig:SnR}, di mana harga sering kali mengalami pantulan pada level \textit{support} sebelum akhirnya berhasil menembus level \textit{resistance} untuk selanjutnya membentuk tren kenaikan yang baru di pasar.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/SnR.png}
@@ -33,27 +33,39 @@ Saat \textit{candlestick} dideretkan menjadi sebuah deret waktu, akan terbentuk 
 Identifikasi pola teknikal tersebut berfungsi sebagai instrumen untuk mendeteksi fenomena perilaku \textit{herding} (\textit{herding behavior}) yang menjadi pemicu utama munculnya volatilitas ekstrem dan perubahan rezim dalam sistem pasar finansial \cite{hidalgo_quantum_2006}.
 
 \subsection{Analisis Kuantitatif}
-Analisis kuantitatif merupakan metode yang sering digunakan oleh para \textit{quantitative analyst} atau biasa disingkat \textit{quants} untuk menentukan alokasi portofolio optimal selain analisis fundamental dan teknikal. Analisis kuantitatif dimulai dari proses transformasi data harga mentah menjadi variabel imbal hasil sederhana (\textit{simple returns}) untuk mengurangi efek non-stasioneritas yang sering kali menghambat analisis statistik. Penggunaan imbal hasil logaritmik (\textit{log returns}) lebih diutamakan oleh para peneliti karena memungkinkan agregasi nilai secara matematis serta memberikan kemudahan dalam analisis numerik yang kompleks \cite{saslow_economic_1999}. Imbal hasil sederhana harian ($R_{i,t}$) dihitung sebagai rasio perubahan harga terhadap hargal awal
+Analisis kuantitatif merupakan metode yang sering digunakan oleh para analis kuantitatif atau biasa disebut \textit{quants} untuk menentukan alokasi portofolio optimal selain analisis fundamental dan teknikal. Analisis kuantitatif dimulai dari proses transformasi data harga mentah menjadi variabel imbal hasil sederhana (\textit{simple return}) untuk mengurangi efek non-stasioneritas yang sering kali menghambat analisis statistik. Penggunaan imbal hasil logaritmik (\textit{log return}) lebih diutamakan oleh para peneliti karena memungkinkan agregasi nilai secara matematis serta memberikan kemudahan dalam analisis numerik yang kompleks \cite{saslow_economic_1999}. Imbal hasil sederhana aset ke-i pada hari ke-t  ($R_{i,t}$) dihitung sebagai rasio perubahan harga terhadap hargal awal
 \begin{equation}
     R_{i,t} = \frac{P_{i,t} - P_{i,t-1}}{P_{i,t-1}}.
 \end{equation}
-Sedangkan \textit{log return} digunakan untuk menjamin properti stasioneritas pada runtun waktu yang didefinisikan sebagai fungsi logaritma natural dari rasio harga dengan bentuk
+Sedangkan imbal hasil logaritmik digunakan untuk menjamin properti stasioneritas pada runtun waktu yang didefinisikan sebagai fungsi logaritma natural dari rasio harga dengan bentuk
 \begin{equation}
     r_{i,t} = \ln(1 + R_{i,t}) = \ln \left( \frac{P_{i,t}}{P_{i,t-1}} \right).
 \end{equation}
-Dari kedua data tersebut, dapat diperoleh proses data selanjutnya yakni ekspektasi imbal hasil ($\mu_i$) dan varians ($\sigma_i^2$) untuk setiap aset. Ekspektasi imbal hasil diperoleh melalui rata-rata dari satu semester perdagangan dengan $n=126$ data sebagai data pelatihan untuk algoritma
+Dari kedua data tersebut, dapat diperoleh proses data selanjutnya yakni ekspektasi imbal hasil ($\mu_i$) dan varians ($\sigma_i^2$) untuk setiap aset. Ekspektasi imbal hasil diperoleh melalui rata-rata data satu semester perdagangan yang mana memiliki 126 hari perdagangan ($n=126$) sebagai data pelatihan untuk algoritma dengan rumus
 \begin{equation}
-    \mu_i = \frac{1}{n} \sum_{t=1}^n R_{i,t}.
+    \mu_i = \bar{R}_i = \frac{1}{n} \sum_{t=1}^n R_{i,t}.
 \end{equation}
-Sedangkan untuk varians dengan bentuk 
+Jika menggunakan imbal hasil logaritmik pada aset ke-i, rumusnya menjadi
 \begin{equation}
-    \sigma_i^2 = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)^2,
+    \mu_{i,l} = \bar{r}_i = \frac{1}{n} \sum_{t=1}^n r_{i,t}.
 \end{equation}
-merepresentasikan risiko karena semakin besar varians maka semakin besar pula potensi kerugian yang dapat terjadi. Selain itu, kovariansi dengan bentuk 
+Sedangkan untuk varians yang merepresentasikan risiko karena semakin besar varians maka semakin besar pula potensi kerugian yang dapat terjadi, diperoleh dengan bentuk 
 \begin{equation}
-    \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j),
+    \sigma_i^2 = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)^2.
 \end{equation}
-juga digunakan untuk mengukur tingkat keterkaitan antara dua aset saham. Kovariansi positif menunjukkan bahwa kedua aset bergerak searah, sedangkan kovariansi negatif menunjukkan bahwa kedua aset bergerak berlawanan arah. Sebelum masuk ke dalam formulasi optimasi portofolio, perlu dipahami konsep efisiensi alokasi sumber daya melalui kerangka \textit{Pareto Optimum}. Sebuah alokasi portofolio dikatakan optimal secara Pareto jika tidak ada cara untuk meningkatkan ekspektasi imbal hasil tanpa meningkatkan risiko, atau sebaliknya, tidak ada cara untuk menurunkan risiko tanpa menurunkan imbal hasil yang diharapkan.
+Jika mengunakan imbal hasil logaritmik, rumus variansnya menjadi
+\begin{equation}
+    \sigma_{i,l}^2 = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)^2.
+\end{equation}
+Selain itu, kovariansi yang digunakan untuk mengukur tingkat keterkaitan antara dua aset saham memiliki bentuk 
+\begin{equation}
+    \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j).
+\end{equation}
+Jika mengunakan imbal hasil logaritmik, rumus kovariansinya menjadi
+\begin{equation}
+    \sigma_{ij,l} = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j).
+\end{equation}
+Kovariansi positif menunjukkan bahwa kedua aset bergerak searah, sedangkan kovariansi negatif menunjukkan bahwa kedua aset bergerak berlawanan arah. Sebelum masuk ke dalam formulasi optimasi portofolio, perlu dipahami konsep efisiensi alokasi sumber daya melalui kerangka \textit{Pareto Optimum}. Sebuah alokasi portofolio dikatakan optimal secara Pareto jika tidak ada cara untuk meningkatkan ekspektasi imbal hasil tanpa meningkatkan risiko, atau sebaliknya, tidak ada cara untuk menurunkan risiko tanpa menurunkan imbal hasil yang diharapkan.
 
 Dalam ekonomi kesejahteraan, \textit{Pareto Optimum} merepresentasikan titik-titik di mana utilitas sistem tidak dapat ditingkatkan lagi melalui realokasi aset sederhana tanpa merugikan salah satu parameter objektif~\shortcite{ahmed_international_2017}. Konsep ini mendasari pembentukan \textit{Efficient Frontier} dalam teori portofolio, yang merupakan kumpulan dari semua portofolio yang menawarkan imbal hasil tertinggi untuk tingkat risiko tertentu~\shortcite{cohen_portfolio_2020}. Bagi investor rasional, pemilihan alokasi modal harus selalu berada pada kurva efisiensi ini guna memastikan penggunaan sumber daya finansial yang maksimal di tengah ketidakpastian pasar~\shortcite{innan_quantum_2025}.
 
@@ -66,19 +78,18 @@ Model \textit{mean-variance} yang diperkenalkan oleh Harry Markowitz pada tahun 
     \label{fig:efficient_frontier}
 \end{figure}
 
-Sebagai bentuk formulasi matematis dari gambar kurva \textit{Efficient Frontier} tersebut, analisis kuantitatif pada model ini bertujuan untuk menentukan bobot alokasi modal yang tepat pada setiap instrumen untuk memaksimalkan utilitas portofolio \cite{abdul_hali_markowitz_2020}. Fungsi biaya dalam model Markowitz menggabungkan matriks kovarians yang merepresentasikan risiko dan vektor ekspektasi imbal hasil dari semua aset yang ingin dipilih~\cite{schwert_chapter_2003}. Formulasi Lagrangian dari fungsi objektif Markowitz dapat dinyatakan secara formal melalui persamaan
+Sebagai bentuk formulasi matematis dari gambar kurva \textit{Efficient Frontier} tersebut, analisis kuantitatif pada model ini bertujuan untuk menentukan bobot alokasi modal yang tepat pada setiap instrumen untuk memaksimalkan utilitas portofolio \cite{abdul_hali_markowitz_2020}. Fungsi biaya dalam model Markowitz menggabungkan matriks kovarians yang merepresentasikan risiko dan vektor ekspektasi imbal hasil dari semua aset yang ingin dipilih~\cite{schwert_chapter_2003}. Fungsi objektif model Markowitz dapat dinyatakan dalam bentuk fungsi biaya (cost function) sebagai
 \begin{equation}
 \label{eq:lagrangian_markowitz}
-\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i
+f(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i
 \end{equation}
-dengan $\omega_i$ merepresentasikan bobot untuk setiap aset $i$, $\sigma_{ij}$ merupakan elemen matriks kovarians, dan $\mu_i$ menunjukkan ekspektasi imbal hasil aset. Parameter $\lambda$ berfungsi sebagai tingkat toleransi risiko yang mana secara matematis menentukan gradien utilitas investor pada kurva efisiensi tersebut. Untuk mempermudah optimasi model, parameter $\omega_i$ yang memiliki syarat $\sum \omega_i = 1$ dapat diubah menjadi variabel biner $x_i$ yang merepresentasikan apakah aset $i$ dipilih atau tidak dengan hubungan
+dengan $\omega_i$ merepresentasikan bobot untuk setiap aset $i$, $\sigma_{ij}$ merupakan elemen matriks kovarians, dan $\mu_i$ menunjukkan ekspektasi imbal hasil aset. Parameter $\lambda$ berfungsi sebagai tingkat toleransi risiko yang mana secara matematis menentukan gradien utilitas investor pada kurva efisiensi tersebut. Untuk mempermudah optimasi model, parameter $\omega_i$ yang memiliki nilai kontinu antara 0 hingga 1 dan memiliki syarat $\sum \omega_i = 1$, dapat diubah menjadi variabel biner $x_i$ yang hanya bernilai 0 dan 1 untuk menyatakan aset ke-$i$ dibeli jika bernilai 1 dan tidak dibeli jika bernilai 0. Hubungan perubahan variabel tersebut dinyatakan dengan bentuk
 \begin{equation}
 \label{eq:binary_optimization}
 \omega_i = \frac{x_i}{K}
 \end{equation}
-dimana $K$ merepresentasikan jumlah aset yang dipilih dari total pilihan aset yang ada. Sehingga formulasi Lagrangian dapat diubah menjadi
+dimana $K$ merepresentasikan jumlah aset yang dipilih dari total pilihan aset yang ada ($N$). Jika jumlah aset yang dipilih adalah setengah dari pilihan aset maka $K = N/2$. Sehingga, fungsi objektif dapat diubah menjadi
 \begin{equation}
 \label{eq:lagrangian_markowitz_binary}
-\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}
+f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}.
 \end{equation}
-Dimana nilai $x_i$ hanya dapat bernilai 1 yang merepresentasikan beli atau 0 yang merepresentasikan tidak membeli.

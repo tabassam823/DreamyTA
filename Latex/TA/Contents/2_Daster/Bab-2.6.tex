@@ -4,13 +4,13 @@ Dalam pemodelan sistem makroskopik, pencarian titik ekuilibrium pada algoritma k
 Metode optimasi yang tepat memungkinkan sistem untuk mencapai konvergensi energi minimum meskipun beroperasi di tengah keterbatasan koherensi sirkuit~\shortcite{fontana_evaluating_2021}. Algoritma gradien klasik konvensional sering kali mengalami kendala teknis saat diterapkan langsung pada lanskap energi kuantum yang bergejolak akibat \textit{noise} pengukuran~\shortcite{sharma_noise_2020}. Ketidakstabilan numerik ini dapat diatasi dengan menerapkan teknik estimasi gradien yang mengeksploitasi properti analitis dari operator uniter tanpa memperburuk eror yang terjadi pada sistem~\shortcite{wierichs_general_2022}. Bab ini akan menguraikan implementasi teknis dari metode \textit{Parameter Shift Rule} dan optimasi stokastik \textit{SPSA} sebagai pilar utama dalam pembaruan parameter sirkuit secara efisien dan akurat.
 
 \subsection{Metode Pergeseran Parameter (\textit{Parameter Shift Rule})}
-Dalam setiap proses optimasi berparameter pada arsitektur komputasi kuantum, diperlukan perhitungan gradien analitis yang cepat dan tepat untuk mengarahkan pembaruan matriks parameter menuju titik konfigurasi energi minimum. Pendekatan konvensional dengan menggunakan metode diferensiasi beda hingga (\textit{finite difference}) sering kali sulit diimplementasikan karena algoritma tersebut sangat bergantung pada presisi pengukuran selisih ruang parameter berskala sangat kecil. Ketergantungan terhadap interval pergeseran fasa infinitesimal pada perangkat keras sirkuit dunia nyata selalu memicu munculnya ketidakstabilan akibat derau statistik yang merusak akurasi perhitungan gradien. Untuk mengatasi hambatan teknis tersebut, metode \textit{Parameter Shift Rule} diimplementasikan ke dalam simulasi karena mampu mengeksploitasi sifat periodik dari operator uniter pada gerbang rotasi kuantum secara eksak \shortcite{mitarai_quantum_2018}. Penerapan algoritma perhitungan analitis ini diawali secara sistematis dengan merumuskan turunan parsial dari nilai ekspektasi energi terhadap variabel sudut representasi $\theta_j$ melalui hubungan:
+Dalam setiap proses optimasi berparameter pada arsitektur komputasi kuantum, diperlukan perhitungan gradien analitis yang cepat dan tepat untuk mengarahkan pembaruan matriks parameter menuju titik konfigurasi energi minimum. Pendekatan konvensional dengan menggunakan metode diferensiasi beda hingga (\textit{finite difference}) sering kali sulit diimplementasikan karena algoritma tersebut sangat bergantung pada presisi pengukuran selisih ruang parameter berskala sangat kecil. Ketergantungan terhadap interval pergeseran fasa infinitesimal pada perangkat keras sirkuit dunia nyata selalu memicu munculnya ketidakstabilan akibat derau statistik yang merusak akurasi perhitungan gradien. Untuk mengatasi hambatan teknis tersebut, metode \textit{Parameter Shift Rule} diimplementasikan ke dalam simulasi karena mampu mengeksploitasi sifat periodik dari operator uniter pada gerbang rotasi kuantum secara eksak \shortcite{mitarai_quantum_2018}. Penerapan algoritma perhitungan analitis ini diawali secara sistematis dengan merumuskan turunan parsial dari nilai ekspektasi energi terhadap variabel sudut representasi $\theta$ melalui hubungan:
 \begin{equation}
     \begin{split}
-    \frac{\partial E(\theta)}{\partial \theta_j}
-    &= \frac{\partial}{\partial \theta_j}
+    \frac{\partial E(\theta)}{\partial \theta}
+    &= \frac{\partial}{\partial \theta}
     \langle \psi(\theta)|\hat{\mathcal{H}}|\psi(\theta)\rangle \\
-    &= \left\langle \frac{\partial \psi(\theta)}{\partial \theta_j}
+    &= \left\langle \frac{\partial \psi(\theta)}{\partial \theta}
     \right|
     \hat{\mathcal{H}}
     |\psi(\theta)\rangle
@@ -18,7 +18,7 @@ Dalam setiap proses optimasi berparameter pada arsitektur komputasi kuantum, dip
     \langle \psi(\theta)|
     \hat{\mathcal{H}}
     \left|
-    \frac{\partial \psi(\theta)}{\partial \theta_j}
+    \frac{\partial \psi(\theta)}{\partial \theta}
     \right\rangle.
     \end{split}
 \end{equation}
@@ -30,23 +30,23 @@ Untuk suatu gerbang rotasi yang bergantung pada parameter $\theta$, keadaan kuan
     \hat{U}_B
     \hat{U}(\theta)
     \hat{U}_A
-    |00\rangle,
+    |0\rangle,
     \qquad
     \hat{U}(\theta)
     =
     e^{-i\frac{\theta}{2}\sigma},
 \end{equation}
-dengan $\sigma$ merupakan generator gerbang rotasi. Definisikan
+dengan $\hat U(\theta)$ merupakan generator gerbang rotasi yang berbasis pada generator pauli $\sigma\in\{I,X,Y,Z\}$ sebagaimana persamaan \eqref{eq:gerbang_rotasi_spesifik} dengan ukuran matriks sebesar $2^n\times2^n$ dengan $n$ merupakan jumlah qubit. Definisikan
 \begin{equation}
-    |\phi\rangle=\hat{U}_A|00\rangle,
+    |\phi\rangle=\hat{U}_A|0\rangle,
     \qquad
     \hat{M}
     =
     \hat{U}_B^\dagger
     \hat{\mathcal{H}}
-    \hat{U}_B.
+    \hat{U}_B
 \end{equation}
-Nilai ekspektasi energi kemudian dapat ditulis ulang sebagai
+di mana $\hat U_A$ merupakan operator uniter sebelum gerbang rotasi dan $\hat U_B$ merupakan operator uniter sesudah gerbang rotasi. Nilai ekspektasi energi kemudian dapat ditulis ulang sebagai
 \begin{equation}
     \begin{split}
     E(\theta)
@@ -201,7 +201,7 @@ Persamaan \eqref{eq:parameter_shift_rule} menunjukkan bahwa gradien dapat dihitu
 
 Algoritma utama yang menggunakan prinsip dari parameter shift rule adalah algoritma Gradient Descent (GD). Algoritma GD merupakan metode optimasi yang memperbarui parameter pada setiap langkah iterasi ke-$t$ menggunakan vektor gradien energi $\nabla E(\theta_t)$ dan laju pembelajaran $\eta$. Proses pembaruan parameter ini dilakukan secara repetitif untuk mengarahkan sistem menuju lembah fungsi biaya dengan mengikuti arah kemiringan negatif dari permukaan energi. Secara matematis, prosedur iteratif untuk memperbarui konfigurasi parameter sirkuit dinyatakan melalui persamaan pembaruan berikut:
 \begin{equation}
-\theta_{t+1} = \theta_t − \eta \nabla E(\theta_t).
+\theta_{t+1} = \theta_t + \eta \nabla E(\theta_t).
 \end{equation}
 Meskipun Gradient Descent yang dikombinasikan dengan \textit{Parameter Shift Rule} memberikan hasil yang sangat akurat, implementasinya pada sistem berdimensi tinggi sering kali kurang efisien dalam penggunaan sumber daya. Hal ini disebabkan oleh kebutuhan dua kali evaluasi sirkuit untuk setiap komponen parameter tunggal yang ingin dioptimasi dalam jaringan sirkuit berukuran besar.
 

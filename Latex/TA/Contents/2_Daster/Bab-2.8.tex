@@ -13,7 +13,7 @@ Secara etimologi, \textit{barren plateau} berasal dari kata barren yang berarti 
 dengan $C$ merupakan konstanta yang bergantung pada Hamiltonian sistem dan struktur Hamiltonian yang digunakan. Persamaan tersebut menunjukkan bahwa peningkatan jumlah qubit maupun kedalaman sirkuit menyebabkan sinyal gradien menyusut secara eksponensial~\shortcite{ortiz_marrero_entanglement-induced_2021}. Dalam batas tertentu, nilai gradien menjadi sangat kecil sehingga hampir tidak memberikan informasi yang berguna bagi proses optimasi~\cite{barron_minimum_1991}.
 
 \subsection{Entropi Von Neumann}
-Entropi Von Neumann digunakan untuk mengukur tingkat ketidakpastian dan keterbelitan dalam sistem kuantum. Konsep ini merupakan generalisasi dari Entropi Shannon pada teori informasi klasik~\shortcite{shin_estimating_2024}. Untuk suatu distribusi probabilitas diskrit $p_i$, Entropi Shannon didefinisikan sebagai
+Entropi Von Neumann digunakan untuk mengukur tingkat ketidakpastian dan keterbelitan dalam sistem kuantum. Konsep ini merupakan generalisasi dari Entropi Shannon pada teori informasi klasik~\cite{shannon_mathematical_1948}. Untuk suatu distribusi probabilitas diskrit $p_i$, Entropi Shannon didefinisikan sebagai
 \begin{equation}
     H = - \sum_i p_i \log_2 (p_i).
 \end{equation}
@@ -21,7 +21,7 @@ Logaritma berbasis 2 digunakan karena satuan informasi yang dihasilkan dinyataka
 \begin{equation}
     \rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|.
 \end{equation}
-Operator densitas memiliki beberapa sifat penting, yaitu bersifat Hermitian, memiliki jejak bernilai satu, dan bersifat semidefinit positif~\cite{shannon_mathematical_1948}. Sifat Hermitian tersebut dapat ditunjukkan melalui hubungan
+Operator densitas memiliki beberapa sifat penting, yaitu bersifat Hermitian, memiliki jejak bernilai satu, dan bersifat semidefinit positif~\shortcite{shin_estimating_2024}. Sifat Hermitian tersebut dapat ditunjukkan melalui hubungan
 
 \begin{equation}
 \rho^\dagger
@@ -41,20 +41,23 @@ Karena $\rho$ merupakan operator Hermitian, maka berdasarkan Teorema Spektral op
 
 Karena fungsi suatu operator dapat dievaluasi melalui nilai eigennya, logaritma berbasis dua dari operator densitas dapat dituliskan sebagai
 \begin{equation}
-    \log_2(\rho) = \sum_j \log_2 (\lambda_j) |e_j\rangle \langle e_j|.
+    \log_2(\rho) = \sum_j \log_2 (\lambda_j) |e_j\rangle \langle e_j|
 \end{equation}
-Dengan memanfaatkan ortonormalitas basis
+Menggunakan proses penurunan lengkap yang ada pada Lampiran \ref{app:diagonalisasi_operator}. Dengan sifat ortonormalitas basis
 \begin{equation}
     \langle e_j | e_k \rangle = \delta_{jk}
 \end{equation}
-perkalian antara operator densitas dan logaritmanya dapat disederhanakan menjadi
+yang akan bernilai 0 jika $j \neq k$ dan bernilai 1 jika $j = k$. Maka perkalian antara operator densitas dan logaritmanya dapat disederhanakan menjadi
 \begin{equation}
 \begin{split}
     \rho \log_2(\rho) &= \left(\sum_j \lambda_j |e_j\rangle \langle e_j|\right) \left( \sum_k \log_2 (\lambda_k) |e_k\rangle \langle e_k|\right) \\
     &= \sum_j \sum_k \lambda_j \log_2(\lambda_k) |e_j\rangle \langle e_j | e_k\rangle \langle e_k| \\
-    &= \sum_j \sum_k \lambda_j \log_2(\lambda_k) |e_j\rangle \delta_{jk} \langle e_k| \\
-    &= \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j|.
+    &= \sum_j \sum_k \lambda_j \log_2(\lambda_k) |e_j\rangle \delta_{jk} \langle e_k|.
 \end{split}
+\end{equation}
+Karena $\delta_{jk}=0$ ketika $j \neq k$, maka suku yang tersisa hanya ketika $j = k$, maka
+\begin{equation}
+\rho \log_2(\rho) = \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j|.
 \end{equation}
 
 Langkah berikutnya adalah menerapkan operasi \textit{trace} untuk memperoleh besaran skalar yang merepresentasikan total informasi statistik sistem
@@ -63,9 +66,13 @@ Langkah berikutnya adalah menerapkan operasi \textit{trace} untuk memperoleh bes
     \text{Tr}(\rho \log_2(\rho)) &= \text{Tr} \left( \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j| \right) \\
     &= \sum_k \langle e_k | \left( \sum_j \lambda_j \log_2(\lambda_j) |e_j\rangle \langle e_j| \right) |e_k\rangle \\
     &= \sum_k \sum_j \lambda_j \log_2(\lambda_j) \langle e_k | e_j \rangle \langle e_j | e_k \rangle \\
-    &= \sum_j \lambda_j \log_2(\lambda_j) \delta_{kj} \delta_{jk} \\
-    &= \sum_j \lambda_j \log_2(\lambda_j).
+    &= \sum_k \lambda_k \log_2(\lambda_k) \delta_{kk} \delta_{kk} \\
+    &= \sum_k \lambda_k \log_2(\lambda_k).
 \end{split}
+\end{equation}
+Namun karena $j=k$, maka dapat dinotasikan juga dengan bentuk
+\begin{equation}
+    \text{Tr}(\rho \log_2(\rho)) = \sum_j \lambda_j \log_2(\lambda_j).
 \end{equation}
 Berdasarkan penjabaran struktur operasi tersebut, perumusan persamaan Entropi \textit{Von Neumann} $S(\rho)$ diperoleh dari
 \begin{equation}
