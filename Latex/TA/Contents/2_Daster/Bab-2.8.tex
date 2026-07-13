@@ -1,7 +1,6 @@
 \section{Validasi \textit{Barren Plateau}}
 \label{sec:barren_plateau}
-Keberhasilan algoritma hibrida kuantum-klasik pada era NISQ sangat bergantung pada efektivitas proses optimasi parameter. Salah satu tantangan utama
-dalam pelatihan sirkuit variasional adalah fenomena Barren Plateau, yaitu kondisi ketika informasi gradien menghilang sehingga proses optimasi mengalami stagnasi \shortcite{mcclean_barren_2018}. Untuk mendeteksi kondisi tersebut, penelitian ini memanfaatkan Entropi Von Neumann sebagai indikator keterbelitan sistem kuantum. Pada Bab ini, akan dibahas landasan teoretis fenomena \textit{Barren Plateau} dan formulasi Entropi Von Neumann yang digunakan sebagai metrik validasi keterbelitan sistem kuantum.
+Keberhasilan algoritma hibrida kuantum-klasik pada era NISQ sangat bergantung pada efektivitas proses optimasi parameter. Salah satu tantangan utama dalam pelatihan sirkuit variasional adalah fenomena Barren Plateau, yaitu kondisi ketika informasi gradien menghilang sehingga proses optimasi mengalami stagnasi \shortcite{mcclean_barren_2018}. Untuk mendeteksi kondisi tersebut, penelitian ini memanfaatkan Entropi Von Neumann sebagai indikator keterbelitan sistem kuantum. Pada Bab ini, akan dibahas landasan teoretis fenomena \textit{Barren Plateau} dan formulasi Entropi Von Neumann yang digunakan sebagai metrik validasi keterbelitan sistem kuantum.
 
 \subsection{\textit{Barren Plateau}}
 Ketika algoritma kuantum variasional semakin berkembang, muncul pertanyaan mengenai kemampuan algoritma tersebut dalam mengatasi sistem ketika kuantum semakin besar saat algoritma dilatih. Pada tahap awal pengembangannya, banyak penelitian berfokus pada peningkatan ekspresivitas ansatz melalui penambahan jumlah qubit dan kedalaman sirkuit. Namun, pendekatan tersebut ternyata memunculkan tantangan baru berupa hilangnya informasi gradien yang dibutuhkan selama proses optimasi. Fenomena ini pertama kali dianalisis oleh \shortcite{mcclean_barren_2018}, yang menunjukkan bahwa lanskap Hamiltonian pada sirkuit kuantum acak dapat menjadi sangat datar sehingga pelatihan parameter menjadi semakin sulit. Fenomena tersebut dikenal sebagai barren plateau, yaitu kondisi ketika lanskap Hamiltonian pada algoritma kuantum variasional menjadi semakin datar seiring bertambahnya jumlah qubit ($N$) dan kedalaman sirkuit ($L$). Pada kondisi ini, perubahan kecil pada parameter klasik hanya menghasilkan perubahan yang sangat kecil pada nilai fungsi energi.
@@ -17,7 +16,7 @@ Entropi Von Neumann digunakan untuk mengukur tingkat ketidakpastian dan keterbel
 \begin{equation}
     H(p_i) = - \sum_i p_i \log_2 (p_i).
 \end{equation}
-Logaritma berbasis 2 digunakan karena satuan informasi yang dihasilkan dinyatakan dalam \textit{bit} sebagai satuan dasar informasi pada sistem komputasi biner. Entropi Shannon merepresentasikan jumlah rata-rata informasi yang diperoleh ketika hasil suatu peristiwa acak diketahui~\cite{page_information_1993}. Semakin besar nilai entropi, semakin tinggi pula tingkat ketidakpastian distribusi probabilitas yang mendeskripsikan sistem tersebut~\cite{ohya_fundamentals_1998}. Dalam mekanika kuantum, distribusi probabilitas tersebut direpresentasikan menggunakan operator densitas $\rho$, yang mana untuk suatu ansambel keadaan dapat dituliskan sebagai
+Logaritma berbasis 2 digunakan karena satuan informasi yang dihasilkan dinyatakan dalam bit sebagai satuan dasar informasi pada sistem komputasi biner. Entropi Shannon merepresentasikan jumlah rata-rata informasi yang diperoleh ketika hasil suatu peristiwa acak diketahui~\cite{page_information_1993}. Semakin besar nilai entropi, semakin tinggi pula tingkat ketidakpastian distribusi probabilitas yang mendeskripsikan sistem tersebut~\cite{ohya_fundamentals_1998}. Dalam mekanika kuantum, distribusi probabilitas tersebut direpresentasikan menggunakan operator densitas $\rho$, yang mana untuk suatu ansambel keadaan dapat dituliskan sebagai
 \begin{equation}
     \rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|.
 \end{equation}
@@ -74,7 +73,7 @@ Namun karena $j=k$, maka dapat dinotasikan juga dengan bentuk
 \begin{equation}
     \text{Tr}(\rho \log_2(\rho)) = \sum_j \lambda_j \log_2(\lambda_j).
 \end{equation}
-Berdasarkan penjabaran struktur operasi tersebut, perumusan persamaan Entropi \textit{Von Neumann} $S(\rho)$ diperoleh dari
+Berdasarkan penjabaran struktur operasi tersebut, perumusan persamaan Entropi Von Neumann $S(\rho)$ diperoleh dari
 \begin{equation}
 \label{eq:entropi_von_neumann}
     S(\rho) = -\text{Tr}(\rho \log_2(\rho)) = -\sum_j \lambda_j \log_2 (\lambda_j).

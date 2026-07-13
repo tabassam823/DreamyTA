@@ -1,5 +1,5 @@
 \section{Alur Penelitian}
-Penelitian ini diawali dengan merumuskan alur metodologi yang komprehensif untuk memecahkan masalah optimasi portofolio biner menggunakan pendekatan hibrida kuantum. Struktur metodologis ini dipetakan secara sistematis untuk menghubungkan tahap ekstraksi data finansial historis dengan perumusan model Hamiltonian Ising yang merepresentasikan lanskap energi sistem. Lanskap energi tersebut selanjutnya dikalibrasi menggunakan prinsip \textit{Exact Potential Game} guna menemukan titik ekuilibrium strategis sebelum diproses secara intensif oleh perangkat keras kuantum. Titik ekuilibrium strategis ini bertindak sebagai basis inisialisasi awal bagi algoritma \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE) dalam menemukan konfigurasi portofolio dengan energi paling minimum. Keseluruhan alur kerja komputasi kuantum tersebut kemudian dievaluasi menggunakan simulasi \textit{backtesting} berkelanjutan untuk mengukur ketahanan strategi investasi pada kondisi pasar riil yang sangat dinamis.
+Penelitian ini diawali dengan merumuskan alur metodologi yang komprehensif untuk memecahkan masalah optimasi portofolio biner menggunakan pendekatan hibrida kuantum. Struktur metodologis ini dipetakan secara sistematis untuk menghubungkan tahap ekstraksi data finansial historis dengan perumusan model Hamiltonian Ising yang merepresentasikan lanskap energi sistem. Lanskap energi tersebut selanjutnya dikalibrasi menggunakan prinsip EPG guna menemukan titik ekuilibrium strategis sebelum diproses secara intensif oleh perangkat keras kuantum. Titik ekuilibrium strategis ini bertindak sebagai basis inisialisasi awal bagi algoritma Pencari Nilai Eigen Kuantum Variasional yang efisien terhadap perangkaat keras atau \textit{Hardware-Efficient Variational Quantum Eigensolver} (HE-VQE) dalam menemukan konfigurasi portofolio dengan energi paling minimum. Keseluruhan alur kerja komputasi kuantum tersebut kemudian dievaluasi menggunakan simulasi pengujian historis (\textit{backtesting}) berkelanjutan untuk mengukur ketahanan strategi investasi pada kondisi pasar riil dengan penyimbangan kembali (\textit{rebalancing}) portofolio tiap bulan.
 
 Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_vqe} menjabarkan keterkaitan fungsional antar setiap modul komputasi secara sekuensial dari awal hingga evaluasi akhir. Modul pra-pemrosesan data klasik berperan krusial dalam menghasilkan parameter fundamental seperti vektor imbal hasil dan matriks kovariansi yang mutlak dibutuhkan untuk membentuk operator kuantum. Proses optimasi kuantum yang divisualisasikan secara eksplisit mencakup siklus iteratif penyesuaian sudut gerbang rotasi kuantum serta mekanisme adaptasi kedalaman sirkuit secara bertahap sesuai kebutuhan. Parameter pinalti dinamis turut diintegrasikan ke dalam rangkaian siklus optimasi untuk membatasi ruang pencarian sehingga konfigurasi portofolio yang dihasilkan selalu terjamin memenuhi kendala kardinalitas. Keterpaduan struktural antara ekstraksi parameter klasik, inisialisasi teori permainan, dan optimasi kuantum adaptif ini dikonstruksi secara logis untuk menjamin keandalan operasional metodologi secara keseluruhan.
 
@@ -16,8 +16,8 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         % KOLOM 1: Pra-pemrosesan & Parameterisasi
         \node (start) [startstop] {Mulai};
         \node (data) [process, below of=start, yshift=-0.5cm] {Akuisisi Data \& \\ Setup Jendela Waktu};
-        \node (param) [process, below of=data, yshift=-0.5cm] {Hitung $\mu$, $\Sigma$ \& \\ \textit{Risk Aversion} endogen ($\gamma$)};
-        \node (nash) [process, below of=param, yshift=-0.5cm] {Pencarian \textit{Nash Equilibrium} \\ dengan Kerangka EPG};
+        \node (param) [process, below of=data, yshift=-0.5cm] {Hitung $\mu$, $\Sigma$ \& \\ penghindaran risiko endogen ($\gamma$)};
+        \node (nash) [process, below of=param, yshift=-0.5cm] {Pencarian ekuilibrium nash \\ dengan Kerangka EPG};
         \node (hamil) [process, below of=nash, yshift=-0.5cm] {Formulasi QUBO \& \\ Hamiltonian ($h_i, J_{ij}$)};
         \node (c1a) [connector, below of=hamil, yshift=-0.5cm] {1};
         \node (c3b) [connector, left of=data, xshift=-1cm] {3};
@@ -28,14 +28,14 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         \node (spsa) [process, below of=vqe_init, yshift=-0.5cm] {Optimasi SPSA dan \\ Pengukuran Energi};
         \node (entropy) [process, below of=spsa, yshift=-0.5cm] {Kalkulasi Entropi dari \\ Konfigurasi Probabilitas};
         \node (conv) [decision, below of=entropy, yshift=-0.5cm] {Konvergen?};
-        \node (layer_eval) [process, below of=conv, yshift=-0.6cm] {Simpan Energi $E_d$ \\ pada \textit{Depth} $d$};
+        \node (layer_eval) [process, below of=conv, yshift=-0.6cm] {Simpan Energi $E_d$ \\ pada kedalaman $d$};
         \node (layer_dec) [decision, below of=layer_eval, yshift=-0.5cm] {$d < D_{max}$?};
         \node (c2a) [connector, below of=layer_dec, yshift=-0.7cm] {2};
         
         % KOLOM 3: Evaluasi & Backtesting
         \node (c2b) [connector, right of=c1b, xshift=4.0cm] {2};
         \node (best_state) [process, below of=c2b, yshift=-0.2cm] {Pilih Bitstring \\ dengan $E_{min}$};
-        \node (rebal) [process, below of=best_state, yshift=-0.5cm] {Eksekusi \textit{Rebalancing} \\ Portofolio};
+        \node (rebal) [process, below of=best_state, yshift=-0.5cm] {Eksekusi penyeimbangan kembali \\ Portofolio};
         \node (end_dec) [decision, below of=rebal, yshift=-1cm] {Akhir \\ Periode?};
         \node (eval) [process, below of=end_dec, yshift=-1cm] {Kalkulasi Metrik \\ Kinerja Akhir};
         \node (stop) [startstop, below of=eval, yshift=-0.5cm] {Selesai};
@@ -58,7 +58,7 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         \draw [arrow] (conv.west) -- ++(-0.6,0) |- (spsa.west) node[pos=0.1, anchor=west] {Tidak};
         \draw [arrow] (layer_eval) -- (layer_dec);
         \draw [arrow] (layer_dec) -- node[anchor=east] {Tidak} (c2a);
-        \draw [arrow] (layer_dec.east) -- ++(0.7,0) |- (vqe_init.east) node[pos=0, anchor=west] {Ya (Tambah \\ \textit{Depth})};
+        \draw [arrow] (layer_dec.east) -- ++(0.7,0) |- (vqe_init.east) node[pos=0, anchor=west] {Ya (Tambah \\ kedalaman)};
 
 
         % Alur Kolom 3

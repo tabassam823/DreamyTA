@@ -1,10 +1,10 @@
 \section{Optimasi Parameter pada Sistem Klasik}
-Dalam pemodelan sistem makroskopik, pencarian titik ekuilibrium pada algoritma kuantum merupakan proses yang sangat rentan terhadap pengaruh derau atau \textit{noise} lingkungan. Komputasi pada perangkat keras kuantum era NISQ sering kali menghasilkan distorsi sinyal informasi yang signifikan sehingga memerlukan metode optimasi parameter yang stabil untuk menavigasi kompleksitas ruang solusi secara kokoh. Algoritma optimasi klasik digunakan sebagai pendukung sistem hibrida untuk melakukan kalibrasi model secara iteratif untuk meminimalkan fungsi biaya yang ditentukan. Oleh karena itu, diperlukan pemilihan metodologi evaluasi gradien dengan mempertimbangkan efisiensi sumber daya dan ketahanan terhadap fluktuasi statistik yang melekat pada pengukuran observabel kuantum skala industri \cite{spall_implementation_1998}.
+Dalam pemodelan sistem makroskopik, pencarian titik ekuilibrium pada algoritma kuantum merupakan proses yang sangat rentan terhadap pengaruh derau (\textit{noise}) lingkungan. Komputasi pada perangkat keras kuantum era NISQ sering kali menghasilkan distorsi sinyal informasi yang signifikan sehingga memerlukan metode optimasi parameter yang stabil untuk menavigasi kompleksitas ruang solusi secara kokoh. Algoritma optimasi klasik digunakan sebagai pendukung sistem hibrida untuk melakukan kalibrasi model secara iteratif untuk meminimalkan fungsi biaya yang ditentukan. Oleh karena itu, diperlukan pemilihan metodologi evaluasi gradien dengan mempertimbangkan efisiensi sumber daya dan ketahanan terhadap fluktuasi statistik yang melekat pada pengukuran observabel kuantum skala industri \cite{spall_implementation_1998}.
 
-Metode optimasi yang tepat memungkinkan sistem untuk mencapai konvergensi energi minimum meskipun beroperasi di tengah keterbatasan koherensi sirkuit~\shortcite{fontana_evaluating_2021}. Algoritma gradien klasik konvensional sering kali mengalami kendala teknis saat diterapkan langsung pada lanskap energi kuantum yang bergejolak akibat \textit{noise} pengukuran~\shortcite{sharma_noise_2020}. Ketidakstabilan numerik ini dapat diatasi dengan menerapkan teknik estimasi gradien yang mengeksploitasi properti analitis dari operator uniter tanpa memperburuk eror yang terjadi pada sistem~\shortcite{wierichs_general_2022}. Bab ini akan menguraikan implementasi teknis dari metode \textit{Parameter Shift Rule} dan optimasi stokastik \textit{SPSA} sebagai pilar utama dalam pembaruan parameter sirkuit secara efisien dan akurat.
+Metode optimasi yang tepat memungkinkan sistem untuk mencapai konvergensi energi minimum meskipun beroperasi di tengah keterbatasan koherensi sirkuit~\shortcite{fontana_evaluating_2021}. Algoritma gradien klasik konvensional sering kali mengalami kendala teknis saat diterapkan langsung pada lanskap energi kuantum yang bergejolak akibat derau pengukuran~\shortcite{sharma_noise_2020}. Ketidakstabilan numerik ini dapat diatasi dengan menerapkan teknik estimasi gradien yang mengeksploitasi properti analitis dari operator uniter tanpa memperburuk eror yang terjadi pada sistem~\shortcite{wierichs_general_2022}. Bab ini akan menguraikan implementasi teknis dari metode aturan pergeseran parameter (\textit{Parameter Shift Rule}) dan optimasi SPSA sebagai pilar utama dalam pembaruan parameter sirkuit secara efisien dan akurat.
 
 \subsection{Metode Pergeseran Parameter (\textit{Parameter Shift Rule})}
-Dalam setiap proses optimasi berparameter pada arsitektur komputasi kuantum, diperlukan perhitungan gradien analitis yang cepat dan tepat untuk mengarahkan pembaruan matriks parameter menuju titik konfigurasi energi minimum. Pendekatan konvensional dengan menggunakan metode diferensiasi beda hingga (\textit{finite difference}) sering kali sulit diimplementasikan karena algoritma tersebut sangat bergantung pada presisi pengukuran selisih ruang parameter berskala sangat kecil. Ketergantungan terhadap interval pergeseran fasa infinitesimal pada perangkat keras sirkuit dunia nyata selalu memicu munculnya ketidakstabilan akibat derau statistik yang merusak akurasi perhitungan gradien. Untuk mengatasi hambatan teknis tersebut, metode \textit{Parameter Shift Rule} diimplementasikan ke dalam simulasi karena mampu mengeksploitasi sifat periodik dari operator uniter pada gerbang rotasi kuantum secara eksak \shortcite{mitarai_quantum_2018}. Penerapan algoritma perhitungan analitis ini diawali secara sistematis dengan merumuskan turunan parsial dari nilai ekspektasi energi terhadap variabel sudut representasi $\theta$ melalui hubungan:
+Dalam setiap proses optimasi berparameter pada arsitektur komputasi kuantum, diperlukan perhitungan gradien analitis yang cepat dan tepat untuk mengarahkan pembaruan matriks parameter menuju titik konfigurasi energi minimum. Pendekatan konvensional dengan menggunakan metode diferensiasi beda hingga (\textit{finite difference}) sering kali sulit diimplementasikan karena algoritma tersebut sangat bergantung pada presisi pengukuran selisih ruang parameter berskala sangat kecil. Ketergantungan terhadap interval pergeseran fasa infinitesimal pada perangkat keras sirkuit dunia nyata selalu memicu munculnya ketidakstabilan akibat derau statistik yang merusak akurasi perhitungan gradien. Untuk mengatasi hambatan teknis tersebut, metode pergeseran parameter diimplementasikan ke dalam simulasi karena mampu mengeksploitasi sifat periodik dari operator uniter pada gerbang rotasi kuantum secara eksak \shortcite{mitarai_quantum_2018}. Penerapan algoritma perhitungan analitis ini diawali secara sistematis dengan merumuskan turunan parsial dari nilai ekspektasi energi terhadap variabel sudut representasi $\theta$ melalui hubungan:
 \begin{equation}
     \begin{split}
     \frac{\partial E(\theta)}{\partial \theta}
@@ -203,16 +203,16 @@ Algoritma utama yang menggunakan prinsip dari parameter shift rule adalah algori
 \begin{equation}
 \theta_{t+1} = \theta_t + \eta \nabla E(\theta_t).
 \end{equation}
-Meskipun Gradient Descent yang dikombinasikan dengan \textit{Parameter Shift Rule} memberikan hasil yang sangat akurat, implementasinya pada sistem berdimensi tinggi sering kali kurang efisien dalam penggunaan sumber daya. Hal ini disebabkan oleh kebutuhan dua kali evaluasi sirkuit untuk setiap komponen parameter tunggal yang ingin dioptimasi dalam jaringan sirkuit berukuran besar.
+Meskipun Gradient Descent yang dikombinasikan dengan metode pergeseran parameter memberikan hasil yang sangat akurat, implementasinya pada sistem berdimensi tinggi sering kali kurang efisien dalam penggunaan sumber daya. Hal ini disebabkan oleh kebutuhan dua kali evaluasi sirkuit untuk setiap komponen parameter tunggal yang ingin dioptimasi dalam jaringan sirkuit berukuran besar.
 
 \subsection{Optimasi SPSA (\textit{Simultaneous Perturbation Stochastic Approximation})}
-Untuk mengatasi keterbatasan kendala efisiensi yang melekat pada algoritma GD tersebut, algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) digunakan sebagai metode optimasi stokastik yang mampu mengestimasi seluruh komponen gradien hanya menggunakan dua evaluasi fungsi biaya pada setiap iterasi \cite{spall_implementation_1998}. Pada iterasi ke-$k$, SPSA membangkitkan vektor perturbasi acak
+Untuk mengatasi keterbatasan kendala efisiensi yang melekat pada algoritma GD tersebut, algoritma SPSA digunakan sebagai metode optimasi stokastik yang mampu mengestimasi seluruh komponen gradien hanya menggunakan dua evaluasi fungsi biaya pada setiap iterasi \cite{spall_implementation_1998}. Pada iterasi ke-$k$, SPSA membangkitkan vektor perturbasi acak
 \begin{equation}
 \Delta_k
 =
 (\Delta_{k,1},\Delta_{k,2},\ldots,\Delta_{k,p}),
 \end{equation}
-dengan setiap komponen perturbasi mengikuti distribusi \textit{Rademacher}
+dengan setiap komponen perturbasi mengikuti distribusi Rademacher
 \begin{equation}
 \Delta_{k,i}
 =
@@ -346,7 +346,7 @@ Dengan mensubstitusikan Persamaan \eqref{eq:spsa_difference} ke dalam Persamaan 
 \end{split}
 \label{eq:spsa_unbiased}
 \end{equation}
-Karena setiap komponen perturbasi bersifat independen dan mengikuti distribusi \textit{Rademacher}, maka berlaku
+Karena setiap komponen perturbasi bersifat independen dan mengikuti distribusi Rademacher, maka berlaku
 \begin{equation}
 \mathbb{E}
 \left[
@@ -396,4 +396,4 @@ c_k
 \frac{c}{(k+1)^\gamma},
 \label{eq:spsa_decay}
 \end{equation}
-dengan $a$, $A$, $c$, $\alpha$, dan $\gamma$ merupakan konstanta yang ditentukan sebelum proses optimasi dimulai. Karena jumlah evaluasi fungsi biaya pada setiap iterasi tidak bergantung pada banyaknya parameter sirkuit, kompleksitas estimasi gradien SPSA tetap konstan terhadap dimensi ruang parameter. Karakteristik ini menjadikan SPSA sangat sesuai untuk optimasi \textit{Parameterized Quantum Circuit} (PQC) berskala besar pada perangkat NISQ yang rentan terhadap derau statistik dan memiliki keterbatasan sumber daya pengukuran \cite{spall_implementation_1998}.
+dengan $a$, $A$, $c$, $\alpha$, dan $\gamma$ merupakan konstanta yang ditentukan sebelum proses optimasi dimulai. Karena jumlah evaluasi fungsi biaya pada setiap iterasi tidak bergantung pada banyaknya parameter sirkuit, kompleksitas estimasi gradien SPSA tetap konstan terhadap dimensi ruang parameter. Karakteristik ini menjadikan SPSA sangat sesuai untuk optimasi PQC berskala besar pada perangkat NISQ yang rentan terhadap derau statistik dan memiliki keterbatasan sumber daya pengukuran \cite{spall_implementation_1998}.

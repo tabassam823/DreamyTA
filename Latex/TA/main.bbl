@@ -310,40 +310,6 @@ Cohen, J.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Coyle%
-\ \protect \BOthers {.}}{%
-Coyle%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2021}}%
-}]{%
-coyle_quantum_2021}
-\APACinsertmetastar {%
-coyle_quantum_2021}%
-\begin{APACrefauthors}%
-Coyle, B.%
-, Henderson, M.%
-, Chan Jin~Le, J.%
-, Kumar, N.%
-, Paini, M.%
-\BCBL {}\ \BBA {} Kashefi, E.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2021}{{\APACmonth{04}}}{}.
-\newblock
-{\BBOQ}\APACrefatitle {Quantum versus classical generative modelling in
-  finance} {Quantum versus classical generative modelling in finance}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Quantum Science and Technology}{6}{2}{024013}.
-\newblock
-\begin{APACrefURL}
-  [{2026-03-26}]\url{https://iopscience.iop.org/article/10.1088/2058-9565/abd3db}
-  \end{APACrefURL}
-\newblock
-\begin{APACrefDOI} \doi{10.1088/2058-9565/abd3db} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 Crosato%
 \ \BBA {} Morris%
 }{%

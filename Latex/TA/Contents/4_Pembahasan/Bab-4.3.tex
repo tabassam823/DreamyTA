@@ -1,6 +1,6 @@
 \section{Pemetaan Hamiltonian Ising}
 \label{sec:4_3_pemetaan_hamiltonian}
-Transformasi permasalahan optimasi portofolio ke dalam domain komputasi kuantum dilakukan melalui formulasi \textit{Quadratic Unconstrained Binary Optimization} (QUBO). Pada tahap ini, fungsi potensial pada teori permainan ditransformasikan menjadi fungsi energi sehingga sesuai dengan prinsip minimisasi energi yang digunakan oleh algoritma \textit{Variational Quantum Eigensolver} (VQE). Hubungan tersebut dinyatakan sebagai
+Transformasi permasalahan optimasi portofolio ke dalam domain komputasi kuantum dilakukan melalui formulasi QUBO. Pada tahap ini, fungsi potensial pada teori permainan ditransformasikan menjadi fungsi energi sehingga sesuai dengan prinsip minimisasi energi yang digunakan oleh algoritma VQE. Hubungan tersebut dinyatakan sebagai
 \begin{equation}
 \begin{split}
 E(\vec{x})
@@ -30,15 +30,15 @@ C,
 dengan \(h_i\) menyatakan koefisien bias linear, \(J_{ij}\) menyatakan koefisien interaksi antar-spin, dan \(C\) merupakan konstanta pergeseran energi. Operator Hamiltonian inilah yang kemudian digunakan sebagai fungsi objektif kuantum pada proses optimasi VQE.
 
 \subsection{Implementasi Numerik Hamiltonian Ising}
-Setelah parameter QUBO dipetakan ke model Ising, Hamiltonian kuantum dapat dinyatakan dalam bentuk operator Pauli-(Z). Untuk sistem dengan dua aset (\(N=2\)) dan kendala kardinalitas (\(k=1\)), Hamiltonian memiliki bentuk
+Setelah parameter QUBO dipetakan ke model Ising, Hamiltonian kuantum dapat dinyatakan dalam bentuk operator Pauli-Z. Untuk sistem dengan dua aset (\(N=2\)) dan kendala kardinalitas (\(k=1\)), Hamiltonian memiliki bentuk
 \begin{equation}
 \hat{\mathcal{H}}_{N2}
 =
 h_1 \hat{Z}_1
 +
-h_2 \hat{Z}*2
+h_2 \hat{Z}_2
 +
-J*{12}\hat{Z}_1\hat{Z}_2
+J_{12}\hat{Z}_1\hat{Z}_2
 +
 C.
 \end{equation}
@@ -86,11 +86,11 @@ Persamaan di atas menunjukkan bahwa setiap aset direpresentasikan oleh sebuah qu
 +
 0,2320.
 \end{equation}
-Koefisien linear \(h_1=0,1735\) dan \(h_2=0,0931\) merepresentasikan bias energi yang terkait dengan masing-masing aset, sedangkan koefisien interaksi \(J_{12}=0,5014\) menunjukkan adanya kopling yang relatif lebih dominan dibandingkan kontribusi linear individual. Sementara itu, konstanta \(C=0,2320\) berfungsi sebagai pergeseran energi global dan tidak memengaruhi posisi keadaan dasar (\textit{ground state}) sistem. Besarnya nilai koefisien interaksi menunjukkan bahwa struktur Hamiltonian tidak hanya dipengaruhi oleh ekspektasi imbal hasil dan kovariansi aset, tetapi juga oleh komponen penalti yang digunakan untuk menegakkan kendala kardinalitas portofolio. Dengan demikian, konfigurasi yang melanggar kendala pemilihan aset akan memperoleh energi yang lebih tinggi dibandingkan konfigurasi yang memenuhi batasan investasi yang telah ditetapkan. Hamiltonian hasil pemetaan inilah yang selanjutnya digunakan sebagai fungsi objektif kuantum pada algoritma VQE. Hamiltonian inilah yang selanjutnya digunakan sebagai masukan utama pada algoritma \textit{Variational Quantum Eigensolver} untuk mencari konfigurasi portofolio berenergi minimum.
+Koefisien linear \(h_1=0,1735\) dan \(h_2=0,0931\) merepresentasikan bias energi yang terkait dengan masing-masing aset, sedangkan koefisien interaksi \(J_{12}=0,5014\) menunjukkan adanya kopling yang relatif lebih dominan dibandingkan kontribusi linear individual. Sementara itu, konstanta \(C=0,2320\) berfungsi sebagai pergeseran energi global dan tidak memengaruhi posisi keadaan dasar dari sistem. Besarnya nilai koefisien interaksi menunjukkan bahwa struktur Hamiltonian tidak hanya dipengaruhi oleh ekspektasi imbal hasil dan kovariansi aset, tetapi juga oleh komponen penalti yang digunakan untuk menegakkan kendala kardinalitas portofolio. Dengan demikian, konfigurasi yang melanggar kendala pemilihan aset akan memperoleh energi yang lebih tinggi dibandingkan konfigurasi yang memenuhi batasan investasi yang telah ditetapkan. Hamiltonian hasil pemetaan inilah yang selanjutnya digunakan sebagai fungsi objektif kuantum pada algoritma VQE. Hamiltonian inilah yang selanjutnya digunakan sebagai masukan utama pada algoritma VQE untuk mencari konfigurasi portofolio berenergi minimum.
 
 Hamiltonian Ising diimplementasikakn ke dalam simulator kuantum menggunakan pustaka \textit{PennyLane}. Fungsi yang dikembangkan menerima masukan berupa himpunan koefisien bias linear \((h_i)\), koefisien interaksi \((J_{ij})\), jumlah aset, serta konstanta pergeseran energi \(C\). Selanjutnya, setiap koefisien dipetakan ke operator Pauli-\(Z\) yang sesuai sehingga terbentuk Hamiltonian Ising dalam format yang dapat dievaluasi secara langsung oleh algoritma VQE. Koefisien yang bernilai sangat kecil (\(<10^{-12}\)) dapat diabaikan untuk menghindari penambahan operator yang tidak memberikan kontribusi signifikan terhadap energi sistem. Implementasi lengkap prosedur perakitan Hamiltonian tersebut ditunjukkan pada Daftar Kode \ref{lst:build_hamiltonian}.
 
-\begin{lstlisting}[language=Python, caption={Skrip perakitan operator Hamiltonian Ising dinamis menggunakan pustaka \textit{PennyLane}}, label={lst:build_hamiltonian}]
+\begin{lstlisting}[language=Python, caption={Skrip perakitan operator Hamiltonian Ising dinamis menggunakan pustaka \texttt{PennyLane}}, label={lst:build_hamiltonian}]
 import pennylane as qml
 
 def build_hamiltonian_total(h_total, J_total, n_assets, offset=0.0):

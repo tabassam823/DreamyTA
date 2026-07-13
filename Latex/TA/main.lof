@@ -2,30 +2,30 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Contoh ikhtisar laporan posisi keuangan konsolidasian yang merepresentasikan struktur aset dan kesehatan fiskal entitas.}}{9}{figure.caption.15}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Struktur anatomi \textit {bullish} dan \textit {bearish candlestick} yang merangkum fluktuasi harga dalam satu periode waktu.}}{10}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Struktur anatomi grafik lilin dari kenaikan (\textit {bullish}) dan penurunan (\textit {bearish}) yang merangkum fluktuasi harga dalam satu periode waktu.}}{10}{figure.caption.16}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Representasi visual level \textit {support} dan \textit {resistance} sebagai batas memori sosial dalam dinamika harga aset.}}{11}{figure.caption.17}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Kurva \textit {Efficient Frontier} sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{13}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Kurva batas efisien sebagai representasi batas efisiensi alokasi aset dalam kerangka kerja model Markowitz.}}{13}{figure.caption.18}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Matriks imbal hasil pada model permainan klasik}}{15}{figure.caption.19}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Representasi visual model Ising satu dimensi (1D)}}{20}{figure.caption.21}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Representasi Bola Bloch sebagai visualisasi geometris keadaan murni sebuah \textit {qubit}. Posisi vektor keadaan ditentukan oleh sudut polar $\theta $ dan sudut azimutal $\phi $, yang dipetakan ke koordinat Kartesian $(x,y,z)$.}}{26}{figure.caption.22}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Simbolisme gerbang Pauli dan gerbang Hadamard pada sirkuit kuantum yang merepresentasikan transformasi uniter dasar $X$, $Y$, $Z$, dan $H$ pada satu \textit {qubit}.}}{29}{figure.caption.23}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Representasi visual model Ising satu dimensi (1D)}}{21}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Representasi Bola Bloch sebagai visualisasi geometris keadaan murni sebuah qubit. Posisi vektor keadaan ditentukan oleh sudut polar $\theta $ dan sudut azimutal $\phi $, yang dipetakan ke koordinat Kartesian $(x,y,z)$.}}{26}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Simbolisme gerbang Pauli dan gerbang Hadamard pada sirkuit kuantum yang merepresentasikan transformasi uniter dasar $X$, $Y$, $Z$, dan $H$ pada satu qubit.}}{29}{figure.caption.23}%
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Simbolisme gerbang rotasi pada sirkuit kuantum yang merepresentasikan rotasi parameter tunggal pada sumbu-X, sumbu-Y, dan sumbu-Z di bola Bloch.}}{30}{figure.caption.24}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Representasi simbolik gerbang keterbelitan (\textit {Controlled-NOT}) yang mengilustrasikan interaksi non-lokal antar \textit {qubit} dalam sistem sirkuit.}}{32}{figure.caption.25}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Representasi simbolik gerbang keterbelitan CNOT yang mengilustrasikan interaksi non-lokal antar qubit dalam sistem sirkuit.}}{32}{figure.caption.25}%
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Representasi alur kerja sirkuit kuantum berparameter (PQC) yang mengilustrasikan tahap penyandian data, sirkuit variasional, pengukuran, dan pembaruan parameter oleh algoritma optimasi klasik.}}{34}{figure.caption.26}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{50}{figure.caption.28}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{51}{figure.caption.28}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum \textit {Hardware-Efficient Ansatz} dengan Kedalaman ($L$) = 1.}}{70}{figure.caption.30}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Pergerakan Harga Saham Individual (\textit {Raw Price}) pada Sistem N=4 (2021--2023).}}{81}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum HEA \textit {EfficientSU2} dengan Kedalaman ($d$) = 1.}}{70}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Pergerakan Harga Saham Individual (\textit {Raw Price}) pada Sistem N=4 (2021--2023).}}{80}{figure.caption.31}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Visualisasi Pertumbuhan Modal Optimasi Klasik SLSQP pada Sistem N=2.}}{83}{figure.caption.33}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi \textit {Nash} (Klasik) pada Sistem N=2.}}{83}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi Nash (Klasik) pada Sistem N=2.}}{83}{figure.caption.34}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Visualisasi Pertumbuhan Modal VQE Murni (Tanpa GT) pada Sistem N=2.}}{84}{figure.caption.35}%
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi GT-VQE (Hibrida) pada Sistem N=2.}}{84}{figure.caption.36}%
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Visualisasi Pertumbuhan Modal Optimasi Klasik SLSQP pada Sistem N=4.}}{85}{figure.caption.37}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi \textit {Nash} (Klasik) pada Sistem N=4.}}{85}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi Nash (Klasik) pada Sistem N=4.}}{85}{figure.caption.38}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Visualisasi Pertumbuhan Modal VQE Murni (Tanpa GT) pada Sistem N=4.}}{86}{figure.caption.39}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi GT-VQE (Hibrida) pada Sistem N=4.}}{86}{figure.caption.40}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (\textit {Depth}) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}}{87}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Perbandingan Dinamika Adaptasi Kedalaman Sirkuit (kedalaman) per Jendela Simulasi antara VQE Murni dan GT-VQE untuk Berbagai Konfigurasi Aset.}}{87}{figure.caption.41}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

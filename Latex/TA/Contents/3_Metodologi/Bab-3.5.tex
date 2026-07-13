@@ -15,7 +15,7 @@ Proses penyelesaian operator Hamiltonian portofolio dieksekusi menggunakan keran
             \State $g_k \gets \text{SPSA\_Gradient}(\mathcal{L}, \theta, c_k)$
             \State $\theta \gets \theta - a_k g_k$ \Comment{Update Parameter}
         \EndFor
-        \State $\theta \gets \text{LayerExpansion}(\theta)$ \Comment{Tambah \textit{Depth} (Adaptif)}
+        \State $\theta \gets \text{LayerExpansion}(\theta)$ \Comment{Tambah Kedalaman (Adaptif)}
         \If{$\text{Converged}(\theta)$} \textbf{break} \EndIf
     \EndFor
     \State $probs \gets |\langle x | \psi(\theta_{final}) \rangle|^2$ \Comment{Pengukuran Probabilitas}

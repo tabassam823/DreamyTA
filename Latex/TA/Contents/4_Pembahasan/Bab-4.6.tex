@@ -2,7 +2,7 @@
 \label{sec:4_6_optimasi_spsa}
 
 \subsection{Dinamika Pembaruan Parameter SPSA}
-Setelah struktur \textit{ansatz} variasional berhasil dibangun, tahap berikutnya dalam algoritma \textit{Variational Quantum Eigensolver} (VQE) adalah menentukan himpunan parameter rotasi $\boldsymbol{\theta}$ yang meminimalkan nilai ekspektasi energi Hamiltonian. Permasalahan optimasi ini secara matematis dapat dituliskan sebagai pencarian solusi
+Setelah struktur ansatz variasional berhasil dibangun, tahap berikutnya dalam algoritma VQE adalah menentukan himpunan parameter rotasi $\boldsymbol{\theta}$ yang meminimalkan nilai ekspektasi energi Hamiltonian. Permasalahan optimasi ini secara matematis dapat dituliskan sebagai pencarian solusi
 \begin{equation}
     \boldsymbol{\theta}^{*}
     =
@@ -27,7 +27,7 @@ dengan fungsi biaya yang didefinisikan sebagai energi ekspektasi keadaan kuantum
     \psi(\boldsymbol{\theta})
     \right\rangle .
 \end{equation}
-Pada sistem berdimensi tinggi, jumlah parameter rotasi yang harus dioptimasi meningkat seiring bertambahnya jumlah qubit dan kedalaman sirkuit. Kondisi tersebut menyebabkan evaluasi gradien eksak menjadi semakin mahal karena memerlukan banyak pengukuran sirkuit kuantum pada setiap iterasi optimasi. Untuk mengatasi kendala tersebut, penelitian ini menggunakan algoritma \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) sebagai prosedur pembaruan parameter utama \cite{spall_implementation_1998}.
+Pada sistem berdimensi tinggi, jumlah parameter rotasi yang harus dioptimasi meningkat seiring bertambahnya jumlah qubit dan kedalaman sirkuit. Kondisi tersebut menyebabkan evaluasi gradien eksak menjadi semakin mahal karena memerlukan banyak pengukuran sirkuit kuantum pada setiap iterasi optimasi. Untuk mengatasi kendala tersebut, penelitian ini menggunakan algoritma Aproksimasi Stokastik dengan Perturbasi Simultan atau \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) sebagai prosedur pembaruan parameter utama \cite{spall_implementation_1998}.
 
 Prinsip dasar SPSA adalah memperkirakan seluruh komponen gradien menggunakan hanya dua evaluasi fungsi biaya pada setiap iterasi, terlepas dari banyaknya parameter yang dimiliki sirkuit. Pada iterasi ke-$k$, dibangkitkan sebuah vektor gangguan acak
 \begin{equation}
@@ -104,7 +104,7 @@ dengan operasi invers dilakukan secara elemen-per-elemen sehingga
     2c_k \Delta_{k,i}
     }.
 \end{equation}
-Karena setiap komponen $\Delta_{k,i}$ hanya bernilai $\pm1$, proses perhitungan estimator gradien menjadi sangat sederhana dan tidak memerlukan evaluasi parsial terhadap masing-masing parameter secara terpisah. Karakteristik inilah yang membuat SPSA jauh lebih efisien dibandingkan metode diferensiasi numerik konvensional yang memerlukan sedikitnya $2p$ evaluasi fungsi biaya untuk sistem dengan $p$ parameter.
+Karena setiap komponen $\Delta_{k,i}$ hanya bernilai $\pm1$, proses perhitungan estimator gradien menjadi sangat sederhana dan tidak memerlukan evaluasi parsial terhadap masing-masing parameter secara terpisah. Karakteristik inilah yang membuat SPSA jauh lebih efisien dibandingkan metode diferensiasi numerik konvensional yang memerlukan setidaknya $2p$ evaluasi fungsi biaya untuk sistem dengan $p$ parameter.
 
 Setelah estimator gradien diperoleh, parameter sirkuit diperbarui menggunakan aturan iteratif
 \begin{equation}
@@ -115,7 +115,7 @@ Setelah estimator gradien diperoleh, parameter sirkuit diperbarui menggunakan at
     a_k
     \hat{\mathbf{g}}_k,
 \end{equation}
-dengan $a_k$ menyatakan laju pembelajaran (\textit{learning rate}) yang nilainya diperkecil secara bertahap sepanjang iterasi. Dalam implementasi SPSA, koefisien pembaruan dan amplitudo gangguan umumnya mengikuti bentuk
+dengan $a_k$ menyatakan laju pembelajaran yang nilainya diperkecil secara bertahap sepanjang iterasi. Dalam implementasi SPSA, koefisien pembaruan dan amplitudo gangguan umumnya mengikuti bentuk
 \begin{equation}
     a_k
     =
@@ -142,7 +142,7 @@ Untuk memberikan gambaran yang lebih konkret mengenai mekanisme optimasi SPSA, p
     +
     0,2320.
 \end{equation}
-Hamiltonian tersebut mendefinisikan lanskap energi yang harus diminimalkan oleh algoritma VQE melalui penyesuaian parameter rotasi sirkuit kuantum. Dalam praktiknya, energi ekspektasi dihitung melalui pengukuran keadaan variasional $|\psi(\boldsymbol{\theta})\rangle$ yang dibangkitkan oleh \textit{hardware-efficient ansatz}. Namun, untuk mempermudah ilustrasi matematis, energi ekspektasi pada contoh ini direpresentasikan menggunakan hubungan sederhana $\langle \hat{Z}_i \rangle = \cos(\theta_i)$ sehingga fungsi biaya dapat dituliskan sebagai
+Hamiltonian tersebut mendefinisikan lanskap energi yang harus diminimalkan oleh algoritma VQE melalui penyesuaian parameter rotasi sirkuit kuantum. Dalam praktiknya, energi ekspektasi dihitung melalui pengukuran keadaan variasional $|\psi(\boldsymbol{\theta})\rangle$ yang dibangkitkan oleh HEA. Namun, untuk mempermudah ilustrasi matematis, energi ekspektasi pada contoh ini direpresentasikan menggunakan hubungan sederhana $\langle \hat{Z}_i \rangle = \cos(\theta_i)$ sehingga fungsi biaya dapat dituliskan sebagai
 \begin{equation}
     E(\boldsymbol{\theta})
     =
@@ -245,11 +245,11 @@ Dengan menggunakan laju pembelajaran $\eta=0,1$, parameter kemudian diperbarui m
         1,5627
     \end{pmatrix}.
 \end{equation}
-Siklus perturbasi, estimasi gradien, dan pembaruan parameter tersebut diulang secara terus-menerus hingga perubahan energi antar iterasi menjadi sangat kecil. Pada implementasi penelitian ini, proses optimasi dilakukan secara penuh terhadap energi ekspektasi yang dihitung langsung dari simulasi sirkuit kuantum VQE, sehingga seluruh parameter rotasi pada \textit{hardware-efficient ansatz} diperbarui secara simultan menuju keadaan energi minimum. Konvergensi energi yang dicapai pada akhir proses optimasi kemudian diinterpretasikan sebagai pendekatan terhadap \textit{ground state} Hamiltonian Ising yang merepresentasikan solusi portofolio optimal.
+Siklus perturbasi, estimasi gradien, dan pembaruan parameter tersebut diulang secara terus-menerus hingga perubahan energi antar iterasi menjadi sangat kecil. Pada implementasi penelitian ini, proses optimasi dilakukan secara penuh terhadap energi ekspektasi yang dihitung langsung dari simulasi sirkuit kuantum VQE, sehingga seluruh parameter rotasi pada HEA diperbarui secara simultan menuju keadaan energi minimum. Konvergensi energi yang dicapai pada akhir proses optimasi kemudian diinterpretasikan sebagai pendekatan terhadap keadaan dasar Hamiltonian Ising yang merepresentasikan solusi portofolio optimal.
 
-Untuk mengotomatisasi proses optimasi tersebut pada seluruh jendela data pengamatan, algoritma SPSA diimplementasikan menggunakan pustaka \textit{NumPy}. Implementasi ini membangkitkan vektor perturbasi Rademacher secara acak pada setiap iterasi, mengevaluasi energi ekspektasi pada dua titik perturbasi yang simetris, lalu memperbarui parameter sirkuit menggunakan estimator gradien SPSA. Selain itu, koefisien pembelajaran $a_k$ dan amplitudo perturbasi $c_k$ dibuat menurun secara adaptif mengikuti formulasi standar SPSA sehingga proses optimasi tetap stabil ketika mendekati titik minimum energi. Struktur algoritma lengkap yang digunakan pada penelitian ini ditunjukkan pada Daftar Kode \ref{lst:run_spsa_test}.
+Untuk mengotomatisasi proses optimasi tersebut pada seluruh jendela data pengamatan, algoritma SPSA diimplementasikan menggunakan pustaka NumPy. Implementasi ini membangkitkan vektor perturbasi Rademacher secara acak pada setiap iterasi, mengevaluasi energi ekspektasi pada dua titik perturbasi yang simetris, lalu memperbarui parameter sirkuit menggunakan estimator gradien SPSA. Selain itu, koefisien pembelajaran $a_k$ dan amplitudo perturbasi $c_k$ dibuat menurun secara adaptif mengikuti formulasi standar SPSA sehingga proses optimasi tetap stabil ketika mendekati titik minimum energi. Struktur algoritma lengkap yang digunakan pada penelitian ini ditunjukkan pada Daftar Kode \ref{lst:run_spsa_test}.
 
-\begin{lstlisting}[language=Python, caption={Implementasi algoritma dasar \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA)}, label={lst:run_spsa_test}]
+\begin{lstlisting}[language=Python, caption={Implementasi algoritma dasar SPSA}, label={lst:run_spsa_test}]
 import numpy as np
 
 def run_spsa_test(cost_circuit, n_params, init_params=None, a_base=0.1, c_base=0.1, max_iters=30, batch_size=25):

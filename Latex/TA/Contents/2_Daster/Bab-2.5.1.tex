@@ -26,12 +26,12 @@ Matriks Pauli dapat dihimpun dan dinotasikan dengan $\sigma_x$, $\sigma_y$, dan 
 \label{eq:matriks_pauli}
 \sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad \sigma_y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad \text{dan} \quad \sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}.
 \end{equation}
-Setiap representasi matriks Pauli tersebut difungsikan secara komputasional untuk memanipulasi informasi pada suatu \textit{qubit} tunggal melalui mekanisme pemetaan basis keadaan secara deterministik. Secara fungsional, gerbang Pauli-X setara dengan gerbang NOT pada sistem komputasi klasik, di mana status keadaan dari $|0\rangle$ ditukar menjadi $|1\rangle$ dan sebaliknya melalui operasi uniter tersebut. Secara aljabar, aksi pemetaan fisis dari operator Pauli-X terhadap himpunan basis komputasi tersebut dapat dinyatakan secara komprehensif melalui relasi kesamaan fisis berikut:
+Setiap representasi matriks Pauli tersebut difungsikan secara komputasional untuk memanipulasi informasi pada suatu qubit tunggal melalui mekanisme pemetaan basis keadaan secara deterministik. Secara fungsional, gerbang Pauli-X setara dengan gerbang NOT pada sistem komputasi klasik, di mana status keadaan dari $|0\rangle$ ditukar menjadi $|1\rangle$ dan sebaliknya melalui operasi uniter tersebut. Secara aljabar, aksi pemetaan fisis dari operator Pauli-X terhadap himpunan basis komputasi tersebut dapat dinyatakan secara komprehensif melalui relasi kesamaan fisis berikut:
 \begin{equation}
 \label{eq:aksi_paulix}
 X|0\rangle = |1\rangle, \quad X|1\rangle = |0\rangle.
 \end{equation}
-Di sisi lain, gerbang Pauli-Y melakukan pertukaran status keadaan komputasi sekaligus memberikan fase kompleks imajiner pada konfigurasi amplitudo probabilitas \textit{qubit}. Karakteristik operasional dari gerbang Pauli-Y tersebut secara geometris merepresentasikan rotasi fisis sebesar $180^\circ$ terhadap sumbu-y pada koordinat bola Bloch, yang aksi pemetaannya secara matematis dirumuskan sebagai:
+Di sisi lain, gerbang Pauli-Y melakukan pertukaran status keadaan komputasi sekaligus memberikan fase kompleks imajiner pada konfigurasi amplitudo probabilitas qubit. Karakteristik operasional dari gerbang Pauli-Y tersebut secara geometris merepresentasikan rotasi fisis sebesar $180^\circ$ terhadap sumbu-y pada koordinat bola Bloch, yang aksi pemetaannya secara matematis dirumuskan sebagai:
 \begin{equation}
 \label{eq:aksi_pauliy}
 Y|0\rangle = i|1\rangle, \quad Y|1\rangle = -i|0\rangle.
@@ -42,7 +42,7 @@ Sementara itu, stabilitas nilai amplitudo probabilitas pada setiap basis komputa
 Z|0\rangle = |0\rangle, \quad Z|1\rangle = -|1\rangle.
 \end{equation}
 
-Selain variasi gerbang Pauli, gerbang Hadamard ($H$) direpresentasikan sebagai gerbang logika satu \textit{qubit} yang  mana berasal dari pencarian vektor eigen dari gerbang Pauli-X. Pencarian vektor eigen tersebut diawali dengan persamaan untuk mencari nilai eigen $\lambda$ dari matriks Pauli-X yang beroperasi di dalam ruang Hilbert dua dimensi. Nilai eigen dari sebuah operator kuantum dapat diperoleh dengan menghitung nilai determinan dari selisih antara matriks Pauli-X dan perkalian skalar matriks identitas yang disamakan dengan nilai nol~\shortcite{sim_expressibility_2019}. Pencarian himpunan nilai eigen tersebut dapat dirumuskan melalui persamaan
+Selain variasi gerbang Pauli, gerbang Hadamard ($H$) direpresentasikan sebagai gerbang logika satu qubit yang  mana berasal dari pencarian vektor eigen dari gerbang Pauli-X. Pencarian vektor eigen tersebut diawali dengan persamaan untuk mencari nilai eigen $\lambda$ dari matriks Pauli-X yang beroperasi di dalam ruang Hilbert dua dimensi. Nilai eigen dari sebuah operator kuantum dapat diperoleh dengan menghitung nilai determinan dari selisih antara matriks Pauli-X dan perkalian skalar matriks identitas yang disamakan dengan nilai nol~\shortcite{sim_expressibility_2019}. Pencarian himpunan nilai eigen tersebut dapat dirumuskan melalui persamaan
 \begin{equation}
 \label{eq:eigen_value_x}
 \det(X - \lambda I) = \det \begin{pmatrix} -\lambda & 1 \\ 1 & -\lambda \end{pmatrix} = \lambda^2 - 1 = 0.
@@ -91,7 +91,7 @@ Representasi skematis dari operasi matriks Pauli dan gerbang Hadamard tersebut d
         \draw (9,1) -- (11,1);
         \draw[fill=white] (9.6,0.7) rectangle (10.4,1.3) node[midway] {$H$};
     \end{tikzpicture}
-    \caption{Simbolisme gerbang Pauli dan gerbang Hadamard pada sirkuit kuantum yang merepresentasikan transformasi uniter dasar $X$, $Y$, $Z$, dan $H$ pada satu \textit{qubit}.}
+    \caption{Simbolisme gerbang Pauli dan gerbang Hadamard pada sirkuit kuantum yang merepresentasikan transformasi uniter dasar $X$, $Y$, $Z$, dan $H$ pada satu qubit.}
     \label{fig:gerbang_pauli}
 \end{figure}
 

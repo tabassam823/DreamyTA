@@ -90,45 +90,45 @@ ptr=1, stack=
 ---the literal stack isn't empty for entry wang_achieving_2025
 while executing---line 5079 of file apacite.bst
 Warning--No journal in jain_multi-portfolio_2012
-You've used 82 entries,
+You've used 81 entries,
             6951 wiz_defined-function locations,
-            1904 strings with 32520 characters,
-and the built_in function-call counts, 168417 in all, are:
-= -- 19747
-> -- 1463
-< -- 8524
-+ -- 8653
-- -- 168
-* -- 11960
-:= -- 31547
-add.period$ -- 323
-call.type$ -- 82
-change.case$ -- 1526
+            1897 strings with 32215 characters,
+and the built_in function-call counts, 166152 in all, are:
+= -- 19498
+> -- 1436
+< -- 8416
++ -- 8538
+- -- 166
+* -- 11794
+:= -- 31148
+add.period$ -- 319
+call.type$ -- 81
+change.case$ -- 1507
 chr.to.int$ -- 0
-cite$ -- 186
-duplicate$ -- 4756
-empty$ -- 6706
-format.name$ -- 2607
-if$ -- 30930
+cite$ -- 184
+duplicate$ -- 4672
+empty$ -- 6610
+format.name$ -- 2553
+if$ -- 30519
 int.to.chr$ -- 0
-int.to.str$ -- 246
+int.to.str$ -- 243
 missing$ -- 0
-newline$ -- 2386
-num.names$ -- 656
-pop$ -- 2062
+newline$ -- 2355
+num.names$ -- 648
+pop$ -- 2031
 preamble$ -- 1
-purify$ -- 460
+purify$ -- 454
 quote$ -- 0
-skip$ -- 10401
+skip$ -- 10267
 stack$ -- 0
-substring$ -- 9299
-swap$ -- 2843
-text.length$ -- 298
+substring$ -- 9177
+swap$ -- 2794
+text.length$ -- 294
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 6560
+type$ -- 6480
 warning$ -- 22
-while$ -- 1021
+while$ -- 1002
 width$ -- 0
-write$ -- 2983
+write$ -- 2942
 (There were 11 error messages)

@@ -1,8 +1,8 @@
-\section{Validasi Solusi Eksak Brute Force}
-Metode pencarian solusi eksak berbasis \textit{brute force} diterapkan sebagai instrumen verifikasi absolut untuk menentukan kebenaran mutlak dari titik minimum global pada model energi Ising. Prosedur penelusuran solusi mutlak melalui perhitungan fungsi biaya Hamiltonian pada seluruh elemen ruang keadaan biner diformalkan ke dalam kerangka Algoritma \ref{alg:brute_force}. Algoritma komputasi eksak ini menerima parameter bias linier dan parameter kopling kuadratik untuk mengeksekusi perhitungan utilitas energi secara langsung pada setiap iterasi kombinasi aset. Mekanisme pencatatan nilai minimum dijalankan dengan memperbarui variabel energi terbaik setiap kali algoritma menemukan konfigurasi aset dengan ukuran energi yang lebih rendah secara numerik. Hasil keluaran berupa bitstring optimal dan energi terendah mutlak dari prosedur eksak ini dicatat secara permanen untuk memvalidasi tingkat akurasi konvergensi model hibrida kuantum.
+\section{Validasi Solusi Eksak \textit{Brute Force}}
+Metode pencarian solusi eksak secara menyeluruh (\textit{brute force}) diterapkan sebagai instrumen verifikasi absolut untuk menentukan kebenaran mutlak dari titik minimum global pada model energi Ising. Prosedur penelusuran solusi mutlak melalui perhitungan fungsi biaya Hamiltonian pada seluruh elemen ruang keadaan biner diformalkan ke dalam kerangka Algoritma \ref{alg:brute_force}. Algoritma komputasi eksak ini menerima parameter bias linier dan parameter kopling kuadratik untuk mengeksekusi perhitungan utilitas energi secara langsung pada setiap iterasi kombinasi aset. Mekanisme pencatatan nilai minimum dijalankan dengan memperbarui variabel energi terbaik setiap kali algoritma menemukan konfigurasi aset dengan ukuran energi yang lebih rendah secara numerik. Hasil keluaran berupa bitstring optimal dan energi terendah mutlak dari prosedur eksak ini dicatat secara permanen untuk memvalidasi tingkat akurasi konvergensi model hibrida kuantum.
 
 \begin{algorithm}[ht]
-\caption{Pencarian Solusi Eksak Brute Force}
+\caption{Pencarian Solusi Eksak secara Menyeluruh}
 \label{alg:brute_force}
 \begin{algorithmic}[1]
 \Procedure{BruteForceValidation}{$h, J, C, N, K$}
