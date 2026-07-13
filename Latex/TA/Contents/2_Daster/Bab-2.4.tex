@@ -21,6 +21,75 @@ Energi Total ($H$) & Fungsi Biaya atau Risiko Portofolio \\ \hline
 \subsection{Sejarah dan Evolusi Model Ising}
 Model Ising pada awalnya dikonseptualisasikan oleh Wilhelm Lenz dan diselesaikan oleh Ernst Ising pada awal tahun 1925 sebagai instrumen teoretis revolusioner untuk menyelidiki asal-usul mikroskopis dari fenomena feromagnetisme \cite{niss_history_2005}. Fokus fundamental dari model ini terletak pada penyederhanaan interaksi fisik antara momen magnetik diskrit yang disusun dalam kisi reguler guna mengevaluasi munculnya keteraturan makroskopik dari fluktuasi termal lokal. Melalui pendekatan mekanika statistik, model ini berupaya menjawab pertanyaan krusial mengenai bagaimana orientasi mandiri dari partikel-partikel \textit{spin} yang saling bertetangga dapat memicu transisi fase sistemik pada suhu kritis tertentu. Keberhasilan awal dalam merumuskan kerangka kerja tersebut memberikan fondasi yang sangat kokoh bagi pengembangan teori fenomena kooperatif yang menjadi pilar utama dalam fisika statistik modern~\cite{feynman_simulating_1981}.
 
+Secara matematis, Lenz dan Ising memodelkan material feromagnetik sebagai sekumpulan variabel \textit{spin} biner yang hanya dapat berada pada dua orientasi, yaitu sejajar ($+1$) atau berlawanan ($-1$) terhadap suatu arah acuan. Model ini berangkat dari energi potensial sebuah dipol magnetik yang berada di dalam medan magnet eksternal, yaitu
+\begin{equation}
+E_i=-\boldsymbol{\mu}_i\cdot\mathbf{B},
+\label{eq:magnetic_dipole_energy}
+\end{equation}
+dengan $\boldsymbol{\mu}_i$ menyatakan momen magnetik partikel ke-$i$ dan $\mathbf{B}$ merupakan medan magnet luar. Sistem akan mencapai keadaan energi minimum ketika arah momen magnetik sejajar dengan medan magnet yang diberikan sehingga diberikan tanda negatif pada persamaan. Momen magnetik suatu partikel memiliki nilai yang sebanding dengan operator spin-nya, sehingga dapat dinyatakan sebagai
+\begin{equation}
+\boldsymbol{\mu}_i=-\gamma\mathbf{S}_i,
+\end{equation}
+dengan $\gamma$ adalah rasio giromagnetik dan $\mathbf{S}_i$ merupakan operator spin. Apabila medan magnet hanya diberikan pada arah sumbu-$z$, yaitu $\mathbf{B}=(0,0,B_z)$, maka Persamaan~(\ref{eq:magnetic_dipole_energy}) menjadi
+\begin{equation}
+    \label{eq:energy_spin}
+E_i=\gamma B_zS_i^z.
+\end{equation}
+
+Karena komponen operator spin sepanjang sumbu-$z$ memenuhi hubungan
+\begin{equation}
+S_i^z=\frac{\hbar}{2}\sigma_i^z,
+\end{equation}
+maka energi pada Persamaan~\eqref{eq:energy_spin} dapat dituliskan sebagai
+\begin{equation}
+    \label{eq:energy_spin_z}
+E_i=\frac{\gamma\hbar B_z}{2}\sigma_i^z.
+\end{equation}
+Dapat didefinisikan pula parameter medan efektif sebagai
+\begin{equation}
+    \label{eq:effective_field}
+h_i=-\frac{\gamma\hbar B_z}{2},
+\end{equation}
+sehingga kontribusi energi akibat medan magnet eksternal dapat disederhanakan menjadi
+\begin{equation}
+    \label{eq:energy_field_spin}
+E_i=-h_i s_i,
+\end{equation}
+dengan $s_i=\pm1$ menyatakan orientasi spin pada lokasi ke-$i$. Selain dipengaruhi oleh medan luar, model Ising juga mengasumsikan bahwa setiap pasangan spin saling berinteraksi. Energi interaksi antar pasangan spin dinyatakan sebagai
+\begin{equation}
+    \label{eq:energy_interaction}
+E_{ij}=-J_{ij}s_is_j,
+\end{equation}
+dengan $J_{ij}$ merupakan konstanta kopling antara spin ke-$i$ dan ke-$j$. Ketika kedua spin memiliki orientasi yang sama, maka nilai $s_is_j$ akan bernilai 1 yang mana merepresentasikan konfigurasi sejajar sempurna, sedangkan apabila keduanya berlawanan arah maka $s_is_j$ akan bernilai -1 yang mana merepresentasikan konfigurasi anti-sejajar sempurna. 
+
+Dengan menjumlahkan seluruh kontribusi energi medan luar dan interaksi antar pasangan spin, maka diperoleh Hamiltonian Ising pada sistem klasik berbentuk
+\begin{equation}
+\mathcal{H}
+=
+-
+\sum_{i=1}^{N}h_is_i
+-
+\sum_{i<j}^{N}J_{ij}s_is_j.
+\end{equation}
+Pada formulasi mekanika kuantum, variabel klasik $s_i$ dapat digantikan oleh operator Pauli-$Z$ berbentuk
+\begin{equation}
+\hat{Z}
+=
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix},
+\end{equation}
+karena operator tersebut memiliki nilai eigen $\pm1$ yang sesuai dengan orientasi spin pada model Ising klasik. Melalui substitusi tersebut, Hamiltonian Ising akhir untuk sistem kuantum dapat  dituliskan dalam bentuk
+\begin{equation}
+\hat{\mathcal{H}}
+=
+-
+\sum_{i=1}^{N}h_i\hat{Z}_i
+-
+\sum_{i<j}^{N}J_{ij}\hat{Z}_i\hat{Z}_j.
+\end{equation}
+
 Meskipun memiliki landasan yang kuat, studi orisinal oleh Ernst Ising pada sistem satu dimensi (1D) menghasilkan kesimpulan pesimistis bahwa model tersebut tidak mampu mendemonstrasikan transisi fase pada suhu di atas nol mutlak. Analisis terhadap rantai interaksi biner berukuran hingga menunjukkan bahwa fluktuasi termal selalu mendominasi energi interaksi sehingga mencegah terbentuknya keteraturan magnetik yang stabil dalam skala makroskopik \cite{chamberlin_nanothermodynamics_2024}. Figure \ref{fig:1D_Ising} mengilustrasikan konfigurasi \textit{spin} pada model satu dimensi tersebut, di mana distribusi orientasi partikel cenderung bersifat acak akibat lemahnya korelasi jangka panjang pada dimensi yang rendah. Representasi visual ini merinci interaksi antar-partikel melalui tiga simbol utama, yaitu titik hitam ($\bullet$) untuk interaksi energi rendah, tanda silang ($\mathbf{X}$) untuk interaksi energi tinggi, serta lingkaran biru kosong (\textcolor{blue}{$\circ$}) sebagai pemutusan (\textit{break}) tanpa energi. Titik hitam merepresentasikan pasangan \textit{spin} paralel yang meminimalkan energi sistem, sedangkan tanda silang menunjukkan konfigurasi anti-paralel yang memicu peningkatan tegangan energi lokal \cite{chamberlin_nanothermodynamics_2024}. Lingkaran biru (\textcolor{blue}{$\circ$}) secara khusus menandai adanya pemutusan jalinan (\textit{subdivision}) yang memisahkan rantai menjadi subsistem independen guna mencapai kestabilan termal pada skala nanoskala. Pemetaan parameter interaksi mikroskopis ini memungkinkan pemodelan perilaku kolektif dan transisi fase pada sistem berukuran terbatas melalui perhitungan energi total yang mengombinasikan jumlah interaksi dan pemutusan tersebut secara sistematis.
 \begin{figure}[htbp]
     \centering

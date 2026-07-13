@@ -13,9 +13,9 @@ Secara etimologi, \textit{barren plateau} berasal dari kata barren yang berarti 
 dengan $C$ merupakan konstanta yang bergantung pada Hamiltonian sistem dan struktur Hamiltonian yang digunakan. Persamaan tersebut menunjukkan bahwa peningkatan jumlah qubit maupun kedalaman sirkuit menyebabkan sinyal gradien menyusut secara eksponensial~\shortcite{ortiz_marrero_entanglement-induced_2021}. Dalam batas tertentu, nilai gradien menjadi sangat kecil sehingga hampir tidak memberikan informasi yang berguna bagi proses optimasi~\cite{barron_minimum_1991}.
 
 \subsection{Entropi Von Neumann}
-Entropi Von Neumann digunakan untuk mengukur tingkat ketidakpastian dan keterbelitan dalam sistem kuantum. Konsep ini merupakan generalisasi dari Entropi Shannon pada teori informasi klasik~\cite{shannon_mathematical_1948}. Untuk suatu distribusi probabilitas diskrit $p_i$, Entropi Shannon didefinisikan sebagai
+Entropi Von Neumann digunakan untuk mengukur tingkat ketidakpastian dan keterbelitan dalam sistem kuantum. Konsep ini merupakan generalisasi dari Entropi Shannon pada teori informasi klasik~\cite{shannon_mathematical_1948}. Untuk suatu distribusi probabilitas diskrit $p_i$, Entropi Shannon ($H(p_i)$) didefinisikan sebagai
 \begin{equation}
-    H = - \sum_i p_i \log_2 (p_i).
+    H(p_i) = - \sum_i p_i \log_2 (p_i).
 \end{equation}
 Logaritma berbasis 2 digunakan karena satuan informasi yang dihasilkan dinyatakan dalam \textit{bit} sebagai satuan dasar informasi pada sistem komputasi biner. Entropi Shannon merepresentasikan jumlah rata-rata informasi yang diperoleh ketika hasil suatu peristiwa acak diketahui~\cite{page_information_1993}. Semakin besar nilai entropi, semakin tinggi pula tingkat ketidakpastian distribusi probabilitas yang mendeskripsikan sistem tersebut~\cite{ohya_fundamentals_1998}. Dalam mekanika kuantum, distribusi probabilitas tersebut direpresentasikan menggunakan operator densitas $\rho$, yang mana untuk suatu ansambel keadaan dapat dituliskan sebagai
 \begin{equation}

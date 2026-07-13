@@ -97,6 +97,7 @@ Representasi skematis dari operasi matriks Pauli dan gerbang Hadamard tersebut d
 
 Matriks-matriks generator Pauli tersebut selanjutnya dapat digunakan sebagai basis operator untuk merepresentasikan arah rotasi dari vektor keadaan qubit pada koordinat bola Bloch. Setiap elemen dari grup khusus uniter $SU(2)$ dapat diekspresikan melalui kombinasi linier dari matriks Pauli:
 \begin{equation}
+    \label{eq:gerbang_pauli_basis}
 U = e^{-i\frac{\theta}{2}(n_x X + n_y Y + n_z Z)} = e^{-i\frac{\theta}{2}(\hat{n}\cdot\vec{\sigma})},
 \end{equation}
 dengan $\vec{\sigma} = (X, Y, Z)$ merupakan vektor matriks Pauli dan $\hat{n} = (n_x, n_y, n_z)$ menyatakan parameter vektor satuan arah rotasi fisis. Evolusi uniter dari keadaan kuantum di bawah pengaruh generator Pauli tersebut dinyatakan dalam bentuk fungsi eksponensial dari operator proyeksi terkait $\hat{p} = \hat{n}\cdot\vec{\sigma}$. Menggunakan ekspansi deret Taylor dan pemisahan suku ganjil-genap dengan sifat $\hat{p}^2=I$, operator eksponensial tersebut dapat ditransformasikan menjadi bentuk identitas Euler kuantum melalui proses berikut:
@@ -118,7 +119,7 @@ Dengan mensubstitusikan operator proyeksi arah $\hat{p}$ dengan masing-masing ma
     R_z(\theta) &= e^{-i \theta Z/2} = \cos\frac{\theta}{2} I - i\sin\frac{\theta}{2} Z = \begin{pmatrix} e^{-i\theta/2} & 0 \\ 0 & e^{i\theta/2} \end{pmatrix}.
 \end{split}
 \end{equation}
-Ketersediaan parameter sudut rotasi $\theta$ ini menjadi landasan utama bagi algoritma optimasi klasik untuk mencari konfigurasi energi terendah pada lanskap Hamiltonian Ising yang sangat kompleks. Representasi skematik dari gerbang rotasi satu parameter tersebut divisualisasikan pada Gambar \ref{fig:gerbang_rotasi}, di mana kotak berlabel $R_x(\theta)$, $R_y(\theta)$, dan $R_z(\theta)$ menunjukkan masing-masing operasi transformasi uniter yang bekerja pada alur data qubit.
+Penurunan rumus penuh dari persamaan \eqref{eq:gerbang_pauli_basis} menjadi persamaan \eqref{eq:gerbang_rotasi_spesifik} dapat ditinjau pada Lampiran \ref{app:su2_taylor}. Parameter sudut rotasi $\theta$ tersebut menjadi parameter yang dioptimasi bagi algoritma klasik untuk mencari konfigurasi energi terendah dari Hamiltonian Ising. Representasi skematik dari gerbang rotasi satu qubit divisualisasikan pada Gambar \ref{fig:gerbang_rotasi}, di mana kotak berlabel $R_x(\theta)$, $R_y(\theta)$, dan $R_z(\theta)$ menunjukkan masing-masing operasi transformasi uniter yang bekerja pada alur data qubit.
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}[scale=1.3, >=stealth]

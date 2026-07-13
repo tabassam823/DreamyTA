@@ -22,8 +22,7 @@ dengan \(L\) menyatakan kedalaman (\textit{depth}) sirkuit, \(U_{\mathrm{rot}}\)
 \end{figure}
 
 \subsection{Implementasi Sirkuit Kuantum Variasional}
-
-Pada arsitektur \textit{Hardware-Efficient Ansatz} yang digunakan, setiap lapisan rotasi dibangun dari kombinasi gerbang \(\hat{R}_Y\) dan \(\hat{R}_Z\) yang diterapkan pada seluruh qubit. Untuk lapisan ke-(l), operator rotasi dapat dinyatakan sebagai
+Pada arsitektur \textit{Hardware-Efficient Ansatz} yang digunakan, setiap lapisan rotasi dibangun dari kombinasi gerbang \(\hat{R}_Y\) dan \(\hat{R}_Z\) yang diterapkan pada seluruh qubit. Untuk lapisan ke-$l$, operator rotasi dapat dinyatakan sebagai
 \begin{equation}
 \hat{U}_{\mathrm{rot}}^{(l)}(\boldsymbol{\theta})
 =
@@ -33,9 +32,55 @@ Pada arsitektur \textit{Hardware-Efficient Ansatz} yang digunakan, setiap lapisa
 \hat{R}_Z(\theta_{l,j,z})
 \right],
 \end{equation}
-dengan \(N\) menyatakan jumlah qubit yang merepresentasikan aset portofolio, sedangkan \(\theta_{l,j,y}\) dan \(\theta_{l,j,z}\) merupakan parameter variasional yang dioptimasi selama proses VQE. Lapisan rotasi ini berfungsi untuk mengatur amplitudo dan fase keadaan kuantum sehingga ruang solusi dapat dieksplorasi secara fleksibel.
+dengan \(N\) menyatakan jumlah qubit yang merepresentasikan aset portofolio, sedangkan \(\theta_{l,j,y}\) dan \(\theta_{l,j,z}\) merupakan parameter variasional yang dioptimasi selama proses VQE. Lapisan rotasi ini berfungsi untuk mengatur amplitudo dan fase keadaan kuantum sehingga ruang solusi dapat dieksplorasi secara fleksibel. Berdasarkan definisi gerbang rotasi $R_y(\theta)$ dan $R_z(\theta)$:
+\begin{equation}
+\begin{align}
+U_{1q}(\theta) &= R_z(\theta_{1z}) R_y(\theta_{1y}) \\
+&= \begin{pmatrix} e^{-i\theta_{1z}/2} & 0 \\ 0 & e^{i\theta_{1z}/2} \end{pmatrix} \begin{pmatrix} \cos(\theta_{1y}/2) & -\sin(\theta_{1y}/2) \\ \sin(\theta_{1y}/2) & \cos(\theta_{1y}/2) \end{pmatrix} \\
+&= \begin{pmatrix} e^{-i\theta_{1z}/2} \cos(\theta_{1y}/2) & -e^{-i\theta_{1z}/2} \sin(\theta_{1y}/2) \\ e^{i\theta_{1z}/2} \sin(\theta_{1y}/2) & e^{i\theta_{1z}/2} \cos(\theta_{1y}/2) \end{pmatrix}
+\end{align}
+\end{equation}
+Maka untuk sistem 2 qubit bentuknya menjadi
+\begin{equation}
+\begin{align}
+U_{q}(\theta) &= [R_z(\theta_{1z}) R_y(\theta_{1y})] \otimes [R_z(\theta_{2z}) R_y(\theta_{2y})]\\
+&= \begin{pmatrix} e^{-i\theta_{1z}/2} \cos(\theta_{1y}/2) & -e^{-i\theta_{1z}/2} \sin(\theta_{1y}/2) \\ e^{i\theta_{1z}/2} \sin(\theta_{1y}/2) & e^{i\theta_{1z}/2} \cos(\theta_{1y}/2) \end{pmatrix} \otimes \begin{pmatrix} e^{-i\theta_{2z}/2} \cos(\theta_{2y}/2) & -e^{-i\theta_{2z}/2} \sin(\theta_{2y}/2) \\ e^{i\theta_{2z}/2} \sin(\theta_{2y}/2) & e^{i\theta_{2z}/2} \cos(\theta_{2y}/2) \end{pmatrix} \\
+&= \begin{pmatrix} e^{-i(\theta_{1z}+\theta_{2z})/2} c_1c_2 & e^{-i(\theta_{1z}+\theta_{2z})/2} c_1s_2 & e^{-i(\theta_{1z}+\theta_{2z})/2} s_1c_2 & e^{-i(\theta_{1z}+\theta_{2z})/2}  s_1s_2  \\ e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2} c_1s_2& e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2}  c_1c_2& e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2}  s_1s_2& e^{-i\theta_{1z}/2}e^{i\theta_{2z}/2}  s_1c_2  \\ e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2} s_1c_2& e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2} s_1s_2& e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2} c_1c_2& e^{i\theta_{1z}/2}e^{-i\theta_{2z}/2}  c_1s_2  \\ e^{i(\theta_{1z}+\theta_{2z})/2}  s_1s_2& e^{i(\theta_{1z}+\theta_{2z})/2}  s_1c_2& e^{i(\theta_{1z}+\theta_{2z})/2}  c_1s_2& e^{i(\theta_{1z}+\theta_{2z})/2} c_1c_2 \end{pmatrix} \end{align}
+\end{equation}
+dengan
+$$ c_i=\cos\frac{\theta_{iy}}2,\qquad s_i=\sin\frac{\theta_{iy}}2.  $$
 
-Setelah seluruh qubit mengalami rotasi parametrik, diterapkan lapisan keterikatan (\textit{entanglement}) menggunakan gerbang CNOT. Pada sistem dua aset (\(N=2\)), keterikatan dibangun melalui hubungan langsung antara kedua qubit. Sementara itu, pada sistem empat aset (\(N=4\)), gerbang CNOT disusun dalam pola melingkar (\textit{circular entanglement}) sehingga setiap qubit terhubung dengan qubit tetangganya. Struktur ini memungkinkan informasi kuantum dan korelasi antar aset disebarkan ke seluruh sistem selama proses optimasi. Kombinasi lapisan rotasi dan lapisan keterikatan menghasilkan keadaan variasional ($\ket{\psi(\boldsymbol{\theta})}$) yang selanjutnya digunakan untuk menghitung nilai energi ekspektasi Hamiltonian Ising. Melalui pembaruan parameter ($\boldsymbol{\theta}$) secara iteratif, algoritma VQE menelusuri ruang keadaan kuantum untuk menemukan konfigurasi dengan energi minimum yang merepresentasikan solusi optimasi portofolio.
+Setelah seluruh qubit mengalami rotasi parametrik, diterapkan lapisan keterikatan (\textit{entanglement}) menggunakan gerbang CNOT. Secara umum, lapisan keterbelitan didefinisikan sebagai
+\begin{equation}
+\label{eq:entanglement_layer}
+U_{ent} = CNOT_{(N-1,0)} \prod_{q=0}^{N-2} CNOT_{(q,q+1)}
+\end{equation}
+menggunakan konvensi
+\begin{equation}
+\prod_{q=0}^{N-2} A_{(q)}=A_{N-2}A_{N-3}\cdots A_{1}A_{0}
+\end{equation}
+karena operator yang paling kanan bekerja terlebih dulu pada keadaan kuantum. Untuk sistem dua aset (\(N=2\)), keterikatan dibangun melalui hubungan langsung antara kedua qubit sehingga bentuknya menjadi
+\begin{equation}
+U_{ent} = CNOT_{(1,0)} \cdot CNOT_{(0,1)}
+\end{equation}
+dengan matriks untuk masing-masing gerbang adalah:
+\begin{equation}
+CNOT_{(1,0)} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix} \quad CNOT_{(0,1)} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}.
+\end{equation}
+Sehingga matriks total keterbelitannya pada sistem 2 aset berbentuk
+\begin{equation}
+U_{ent} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \\ 0 & 1 & 0 & 0 \end{pmatrix} \cdot \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 1 & 0 & 0 \end{pmatrix}
+\end{equation}
+Sementara itu, pada sistem empat qubit (\(N=4\)), operator keterikatan dibentuk oleh rangkaian gerbang CNOT yang disusun secara melingkar sehingga diperoleh
+\begin{equation}
+U_{\mathrm{ent}}
+=
+CNOT_{(3,0)}
+\,CNOT_{(2,3)}
+\,CNOT_{(1,2)}
+\,CNOT_{(0,1)}.
+\end{equation}
+Karena sistem terdiri atas empat qubit, maka ruang Hilbert yang dihasilkan memiliki dimensi $2^4$. Artinya, setiap operator \(CNOT_{(i,j)}\) direpresentasikan oleh matriks uniter berukuran \(16\times16\), sehingga operator keseluruhan \(U_{\mathrm{ent}}\) juga merupakan matriks uniter berukuran \(16\times16\). Kombinasi lapisan rotasi dan lapisan keterikatan menghasilkan keadaan variasional ($\ket{\psi(\boldsymbol{\theta})}$) yang selanjutnya digunakan untuk menghitung nilai energi ekspektasi Hamiltonian Ising. Melalui pembaruan parameter ($\boldsymbol{\theta}$) secara iteratif, algoritma VQE menelusuri ruang keadaan kuantum untuk menemukan konfigurasi dengan energi minimum yang merepresentasikan solusi optimasi portofolio.
 
 \textit{Hardware-Efficient Ansatz} juga diimplementasikan menggunakan pustaka \textit{PennyLane}. Fungsi ansatz menerima vektor parameter variasional yang kemudian diorganisasikan ke dalam beberapa lapisan rotasi sesuai kedalaman sirkuit yang ditentukan. Pada setiap lapisan, seluruh qubit dikenai gerbang RY dan RZ, kemudian dihubungkan melalui rangkaian gerbang CNOT dengan pola keterikatan melingkar. Struktur ini menghasilkan rangkaian kuantum yang bersifat fleksibel namun tetap efisien dari sisi jumlah parameter. Selain mampu merepresentasikan berbagai konfigurasi keadaan kuantum kandidat, arsitektur tersebut juga memungkinkan pembentukan keterbelitan antar-qubit yang diperlukan untuk memodelkan korelasi antar aset pada proses optimasi portofolio. Implementasi lengkap konstruksi \textit{ansatz} ditunjukkan pada Daftar Kode \ref{lst:ansatz_construction}.
 

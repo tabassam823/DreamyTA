@@ -21,7 +21,7 @@
 
 # Halaman 28 **MUCH**
 - [x] kasih lampiran lagi untuk $\hat{p} = \hat{n} \cdot \vec{\sigma}$
-- [ ] tambahin penyebutan ke lampiran
+- [x] tambahin penyebutan ke lampiran
 
 ---
 # Halaman 33 **MEDIUM**
@@ -36,7 +36,7 @@
 - [ ] apa maksud dari "menjadi semakin ortogonal" pada hal 35
 ---
 # Halaman 35 **HARD**
-- [ ] ada ??? di atas halaman (mungkin paragraf pengantarnya gak masuk)
+- [x] ada ??? di atas halaman (mungkin paragraf pengantarnya gak masuk)
 - [x] ubah $\ket{00}$ menjadi $\ket{0}$
 - [x] pada $\sigma$ tambahin menjadi $\sigma_{nxn}$
 - [x] $\theta_j$ itu sudut di apa? dan j-nya sebagai apa
@@ -46,7 +46,7 @@
 # Halaman 47 **HARD**
 - [x] tambahkan asal dari pers. 2.129 sehingga 2.130 berlaku
 - [x] perbaiki 2.133
-- [ ] pada halaman 46, ganti simbol shannon atau didefinisikan dengan jelas agar berbeda dengan hamiltonian yang digunakan
+- [x] pada halaman 46, ganti simbol shannon atau didefinisikan dengan jelas agar berbeda dengan hamiltonian yang digunakan
 
 # Halaman 105 **HARD**
 - [x] definisikan bellstate
@@ -58,7 +58,7 @@ foto-foto
 
 ---
 # Bu Fahmi
-- [ ] tambahkan penurunan ising menjadi hamiltonian ising
+- [x] tambahkan penurunan ising menjadi hamiltonian ising
 
 # Sendiri
-- [ ] tambahin bentuk matriks 4x4 di halaman 70
+- [x] tambahin bentuk matriks 4x4 di halaman 70

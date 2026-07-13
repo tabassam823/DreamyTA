@@ -28,11 +28,6 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: Referensi.bib
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
-Warning--No journal in anshu_sample-efficient_2020
-ptr=1, stack=
-
----the literal stack isn't empty for entry anshu_sample-efficient_2020
-while executing---line 5079 of file apacite.bst
 Warning--No journal in baaquie_quantum_2003
 Warning--No journal in cohen_portfolio_2020
 ptr=1, stack=
@@ -95,45 +90,45 @@ ptr=1, stack=
 ---the literal stack isn't empty for entry wang_achieving_2025
 while executing---line 5079 of file apacite.bst
 Warning--No journal in jain_multi-portfolio_2012
-You've used 86 entries,
+You've used 82 entries,
             6951 wiz_defined-function locations,
-            1930 strings with 33570 characters,
-and the built_in function-call counts, 176768 in all, are:
-= -- 20721
-> -- 1542
-< -- 8953
-+ -- 9077
-- -- 176
-* -- 12558
-:= -- 33097
-add.period$ -- 339
-call.type$ -- 86
-change.case$ -- 1600
+            1904 strings with 32520 characters,
+and the built_in function-call counts, 168417 in all, are:
+= -- 19747
+> -- 1463
+< -- 8524
++ -- 8653
+- -- 168
+* -- 11960
+:= -- 31547
+add.period$ -- 323
+call.type$ -- 82
+change.case$ -- 1526
 chr.to.int$ -- 0
-cite$ -- 195
-duplicate$ -- 4992
-empty$ -- 7037
-format.name$ -- 2745
-if$ -- 32472
+cite$ -- 186
+duplicate$ -- 4756
+empty$ -- 6706
+format.name$ -- 2607
+if$ -- 30930
 int.to.chr$ -- 0
-int.to.str$ -- 258
+int.to.str$ -- 246
 missing$ -- 0
-newline$ -- 2509
-num.names$ -- 688
-pop$ -- 2163
+newline$ -- 2386
+num.names$ -- 656
+pop$ -- 2062
 preamble$ -- 1
-purify$ -- 482
+purify$ -- 460
 quote$ -- 0
-skip$ -- 10911
+skip$ -- 10401
 stack$ -- 0
-substring$ -- 9750
-swap$ -- 2983
-text.length$ -- 312
+substring$ -- 9299
+swap$ -- 2843
+text.length$ -- 298
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 6880
-warning$ -- 23
-while$ -- 1074
+type$ -- 6560
+warning$ -- 22
+while$ -- 1021
 width$ -- 0
-write$ -- 3143
-(There were 12 error messages)
+write$ -- 2983
+(There were 11 error messages)
