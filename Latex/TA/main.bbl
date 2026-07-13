@@ -106,6 +106,40 @@ Ahmed, S.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Anshu%
+, Arunachalam%
+, Kuwahara%
+\BCBL {}\ \BBA {} Soleimanifar%
+}{%
+Anshu%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+anshu_sample-efficient_2020}
+\APACinsertmetastar {%
+anshu_sample-efficient_2020}%
+\begin{APACrefauthors}%
+Anshu, A.%
+, Arunachalam, S.%
+, Kuwahara, T.%
+\BCBL {}\ \BBA {} Soleimanifar, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Sample-efficient learning of quantum many-body systems}
+  {Sample-efficient learning of quantum many-body systems}.{\BBCQ}
+\newblock
+\begin{APACrefURL} [{2026-03-11}]\url{https://arxiv.org/abs/2004.07266}
+  \end{APACrefURL}
+\newblock
+\APACrefnote{Version Number: 1}
+\newblock
+\begin{APACrefDOI} \doi{10.48550/ARXIV.2004.07266} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Baaquie%
 , Corianò%
 \BCBL {}\ \BBA {} Srikant%
@@ -171,6 +205,41 @@ Barron, A.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1109/18.86996} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Benedetti%
+, Lloyd%
+, Sack%
+\BCBL {}\ \BBA {} Fiorentini%
+}{%
+Benedetti%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+benedetti_parameterized_2019}
+\APACinsertmetastar {%
+benedetti_parameterized_2019}%
+\begin{APACrefauthors}%
+Benedetti, M.%
+, Lloyd, E.%
+, Sack, S.%
+\BCBL {}\ \BBA {} Fiorentini, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{{\APACmonth{11}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Parameterized quantum circuits as machine learning
+  models} {Parameterized quantum circuits as machine learning models}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Quantum Science and Technology}{4}{4}{043001}.
+\newblock
+\begin{APACrefURL}
+  [{2026-05-20}]\url{https://iopscience.iop.org/article/10.1088/2058-9565/ab4eb5}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1088/2058-9565/ab4eb5} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -307,6 +376,40 @@ Cohen, J.%
 \APACrefnote{Version Number: 1}
 \newblock
 \begin{APACrefDOI} \doi{10.48550/ARXIV.2007.01430} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Coyle%
+\ \protect \BOthers {.}}{%
+Coyle%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2021}}%
+}]{%
+coyle_quantum_2021}
+\APACinsertmetastar {%
+coyle_quantum_2021}%
+\begin{APACrefauthors}%
+Coyle, B.%
+, Henderson, M.%
+, Chan Jin~Le, J.%
+, Kumar, N.%
+, Paini, M.%
+\BCBL {}\ \BBA {} Kashefi, E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{{\APACmonth{04}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum versus classical generative modelling in
+  finance} {Quantum versus classical generative modelling in finance}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Quantum Science and Technology}{6}{2}{024013}.
+\newblock
+\begin{APACrefURL}
+  [{2026-03-26}]\url{https://iopscience.iop.org/article/10.1088/2058-9565/abd3db}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1088/2058-9565/abd3db} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -1874,6 +1977,40 @@ Reifenstein, S.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Revythi%
+\ \BBA {} Koukiou%
+}{%
+Revythi%
+\ \BBA {} Koukiou%
+}{%
+{\protect \APACyear {2025}}%
+}]{%
+revythi_quantum_2025}
+\APACinsertmetastar {%
+revythi_quantum_2025}%
+\begin{APACrefauthors}%
+Revythi, M.%
+\BCBT {}\ \BBA {} Koukiou, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{08}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Quantum {Machine} {Learning} and {Deep} {Learning}:
+  {Fundamentals}, {Algorithms}, {Techniques}, and {Real}-{World}
+  {Applications}} {Quantum {Machine} {Learning} and {Deep} {Learning}:
+  {Fundamentals}, {Algorithms}, {Techniques}, and {Real}-{World}
+  {Applications}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Machine Learning and Knowledge Extraction}{7}{3}{75}.
+\newblock
+\begin{APACrefURL} [{2026-06-18}]\url{https://www.mdpi.com/2504-4990/7/3/75}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.3390/make7030075} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Sarkar%
 \ \BBA {} Benjamin%
 }{%
@@ -2385,6 +2522,39 @@ Tilly, J.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1016/j.physrep.2022.08.003} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Tomaz%
+, Mattos%
+\BCBL {}\ \BBA {} Barbatti%
+}{%
+Tomaz%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2025}}%
+}]{%
+tomaz_quantum_2025}
+\APACinsertmetastar {%
+tomaz_quantum_2025}%
+\begin{APACrefauthors}%
+Tomaz, A\BPBI A.%
+, Mattos, R\BPBI S.%
+\BCBL {}\ \BBA {} Barbatti, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2025}{{\APACmonth{12}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The quantum measurement problem: a review of recent
+  trends} {The quantum measurement problem: a review of recent trends}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Philosophical Magazine}{}{}{1--38}.
+\newblock
+\begin{APACrefURL}
+  [{2026-06-21}]\url{https://www.tandfonline.com/doi/full/10.1080/14786435.2025.2601922}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1080/14786435.2025.2601922} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

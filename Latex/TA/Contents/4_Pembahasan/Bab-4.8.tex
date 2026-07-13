@@ -1,7 +1,7 @@
 \section{Analisis Kedalaman Sirkuit}
 \label{sec:4_8_depth_analysis}
 
-Fenomena dataran tandus merupakan salah satu tantangan fundamental dalam implementasi algoritma kuantum pada era NISQ. Fenomina ini terjadi ketika gradien fungsi biaya yang hilang secara eksponensial seiring dengan bertambahnya kedalaman sirkuit. Hal ini berkaitan erat dengan daya representasi sirkuit atau \textit{expressibility}, yakni kemampuan sirkuit ansatz untuk menjangkau wilayah dalam ruang Hilbert yang relevan dengan solusi \shortcite{sim_expressibility_2019}. Meskipun sirkuit dengan daya representasi tinggi mampu merepresentasikan status dasar dengan lebih presisi, perluasan ruang parameter yang tidak terkontrol dapat mengakibatkan nilai gradien terkonsentrasi di sekitar nilai rata-rata global sehingga melumpuhkan sinyal gradien dengan hubungan 
+Fenomena dataran tandus merupakan salah satu tantangan fundamental dalam implementasi algoritma kuantum pada era NISQ. Fenomina ini terjadi ketika gradien fungsi biaya yang hilang secara eksponensial seiring dengan bertambahnya kedalaman sirkuit. Hal ini berkaitan erat dengan daya representasi sirkuit atau \textit{expressibility}, yakni kemampuan sirkuit Ansatz untuk menjangkau wilayah dalam ruang Hilbert yang relevan dengan solusi \shortcite{sim_expressibility_2019}. Meskipun sirkuit dengan daya representasi tinggi mampu merepresentasikan status dasar dengan lebih presisi, perluasan ruang parameter yang tidak terkontrol dapat mengakibatkan nilai gradien terkonsentrasi di sekitar nilai rata-rata global sehingga melumpuhkan sinyal gradien dengan hubungan 
 \begin{equation}
     \text{Var}[\partial_{\theta} E] \approx \frac{\mathcal{C}}{2^{N+L}},
     \label{eq:4_8_gradient_variance}

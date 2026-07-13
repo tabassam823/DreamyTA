@@ -17,8 +17,8 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         \node (start) [startstop] {Mulai};
         \node (data) [process, below of=start, yshift=-0.5cm] {Akuisisi Data \& \\ Setup Jendela Waktu};
         \node (param) [process, below of=data, yshift=-0.5cm] {Hitung $\mu$, $\Sigma$ \& \\ penghindaran risiko endogen ($\gamma$)};
-        \node (nash) [process, below of=param, yshift=-0.5cm] {Pencarian ekuilibrium nash \\ dengan Kerangka EPG};
-        \node (hamil) [process, below of=nash, yshift=-0.5cm] {Formulasi QUBO \& \\ Hamiltonian ($h_i, J_{ij}$)};
+        \node (Nash) [process, below of=param, yshift=-0.5cm] {Pencarian ekuilibrium Nash \\ dengan Kerangka EPG};
+        \node (hamil) [process, below of=Nash, yshift=-0.5cm] {Formulasi QUBO \& \\ Hamiltonian ($h_i, J_{ij}$)};
         \node (c1a) [connector, below of=hamil, yshift=-0.5cm] {1};
         \node (c3b) [connector, left of=data, xshift=-1cm] {3};
         
@@ -44,8 +44,8 @@ Diagram alir metodologi yang divisualisasikan pada Gambar \ref{fig:flowchart_gt_
         % Alur Kolom 1
         \draw [arrow] (start) -- (data);
         \draw [arrow] (data) -- (param);
-        \draw [arrow] (param) -- (nash);
-        \draw [arrow] (nash) -- (hamil);
+        \draw [arrow] (param) -- (Nash);
+        \draw [arrow] (Nash) -- (hamil);
         \draw [arrow] (hamil) -- (c1a);
         \draw [arrow] (c3b) -- (data);
 

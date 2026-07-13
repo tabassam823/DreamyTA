@@ -2,7 +2,7 @@
 \contentsline {lstlisting}{\numberline {4.2}{\ignorespaces Fungsi prapemrosesan imbal hasil dan ekspektasi pertumbuhan portofolio}}{61}{lstlisting.4.2}%
 \contentsline {lstlisting}{\numberline {4.3}{\ignorespaces Algoritma kalkulasi parameter penghindaran risiko dinamis berbasis Rasio Sharpe agregat}}{64}{lstlisting.4.3}%
 \contentsline {lstlisting}{\numberline {4.4}{\ignorespaces Algoritma kalkulasi ekspektasi imbal hasil strategis berbasis observasi probabilitas keadaan mikro}}{65}{lstlisting.4.4}%
-\contentsline {lstlisting}{\numberline {4.5}{\ignorespaces Skrip implementasi SBR untuk pencarian konvergensi ekuilibrium nash}}{66}{lstlisting.4.5}%
+\contentsline {lstlisting}{\numberline {4.5}{\ignorespaces Skrip implementasi SBR untuk pencarian konvergensi ekuilibrium Nash}}{66}{lstlisting.4.5}%
 \contentsline {lstlisting}{\numberline {4.6}{\ignorespaces Skrip perakitan operator Hamiltonian Ising dinamis menggunakan pustaka \texttt {PennyLane}}}{69}{lstlisting.4.6}%
 \contentsline {lstlisting}{\numberline {4.7}{\ignorespaces Fungsi penyusunan arsitektur HEA pada iterasi sirkuit kuantum VQE}}{72}{lstlisting.4.7}%
 \contentsline {lstlisting}{\numberline {4.8}{\ignorespaces Implementasi algoritma dasar SPSA}}{75}{lstlisting.4.8}%

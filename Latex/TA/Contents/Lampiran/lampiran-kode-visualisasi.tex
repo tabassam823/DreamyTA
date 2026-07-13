@@ -171,7 +171,7 @@ def plot_quantum_circuit(N, depth, filename, params=None, title=None):
     if params is None:
         params = np.zeros(N * 2 * (depth + 1))
     
-    # Reshape parameter sesuai struktur ansatz (layer, qubit, gate_type)
+    # Reshape parameter sesuai struktur Ansatz (layer, qubit, gate_type)
     w = params.reshape((depth + 1, N, 2))
     
     for layer in range(depth + 1):

@@ -49,11 +49,11 @@ Setelah fungsi potensial sistem diperoleh, langkah berikutnya adalah menentukan 
     \end{tabular}
 \end{table}
 
-Pada sistem dengan \(N=4\), jumlah konfigurasi yang memenuhi kendala \(k=2\) meningkat secara signifikan sehingga evaluasi seluruh kemungkinan strategi menjadi lebih kompleks. Oleh karena itu, pencarian kesetimbangan harus dilakukan menggunakan prosedur SBR yang menelusuri ruang solusi melalui serangkaian pertukaran aset sampai pada titik konfigurasi yang tidak mengalami peningkatan fungsi potensial lagi. Riwayat iterasi dan konfigurasi yang dihasilkan pada setiap periode pengamatan disajikan pada Lampiran \ref{appendix:numerical_data_n4}. Konfigurasi ekuilibrium nash yang diperoleh memiliki peran penting dalam penelitian ini karena digunakan sebagai titik inisialisasi bagi algoritma VQE. Pemanfaatan solusi hasil teori permainan sebagai tebakan awal memungkinkan proses optimasi kuantum dimulai dari wilayah solusi yang telah memiliki kualitas utilitas tinggi sehingga mempercepat konvergensi menuju keadaan energi minimum.
+Pada sistem dengan \(N=4\), jumlah konfigurasi yang memenuhi kendala \(k=2\) meningkat secara signifikan sehingga evaluasi seluruh kemungkinan strategi menjadi lebih kompleks. Oleh karena itu, pencarian kesetimbangan harus dilakukan menggunakan prosedur SBR yang menelusuri ruang solusi melalui serangkaian pertukaran aset sampai pada titik konfigurasi yang tidak mengalami peningkatan fungsi potensial lagi. Riwayat iterasi dan konfigurasi yang dihasilkan pada setiap periode pengamatan disajikan pada Lampiran \ref{appendix:numerical_data_n4}. Konfigurasi ekuilibrium Nash yang diperoleh memiliki peran penting dalam penelitian ini karena digunakan sebagai titik inisialisasi bagi algoritma VQE. Pemanfaatan solusi hasil teori permainan sebagai tebakan awal memungkinkan proses optimasi kuantum dimulai dari wilayah solusi yang telah memiliki kualitas utilitas tinggi sehingga mempercepat konvergensi menuju keadaan energi minimum.
 
-Implementasi pencarian ekuilibrium nash dilakukan menggunakan Python melalui algoritma SBR. Fungsi yang dikembangkan menerima masukan berupa vektor ekspektasi imbal hasil, matriks kovariansi, dan parameter penghindaran risiko, kemudian mengevaluasi fungsi potensial untuk setiap kandidat pertukaran aset yang memenuhi kendala portofolio. Selama masih terdapat pertukaran yang meningkatkan fungsi potensial, konfigurasi portofolio akan diperbarui secara iteratif hingga tercapai kondisi konvergen. Selain menghasilkan konfigurasi kesetimbangan akhir, algoritma juga merekam seluruh riwayat iterasi sehingga proses konvergensi dapat dianalisis lebih lanjut. Implementasi lengkap prosedur tersebut ditunjukkan pada Daftar Kode \ref{lst:find_nash_sbr}.
+Implementasi pencarian ekuilibrium Nash dilakukan menggunakan Python melalui algoritma SBR. Fungsi yang dikembangkan menerima masukan berupa vektor ekspektasi imbal hasil, matriks kovariansi, dan parameter penghindaran risiko, kemudian mengevaluasi fungsi potensial untuk setiap kandidat pertukaran aset yang memenuhi kendala portofolio. Selama masih terdapat pertukaran yang meningkatkan fungsi potensial, konfigurasi portofolio akan diperbarui secara iteratif hingga tercapai kondisi konvergen. Selain menghasilkan konfigurasi kesetimbangan akhir, algoritma juga merekam seluruh riwayat iterasi sehingga proses konvergensi dapat dianalisis lebih lanjut. Implementasi lengkap prosedur tersebut ditunjukkan pada Daftar Kode \ref{lst:find_nash_sbr}.
 
-\begin{lstlisting}[language=Python, caption={Skrip implementasi SBR untuk pencarian konvergensi ekuilibrium nash}, label={lst:find_nash_sbr}]
+\begin{lstlisting}[language=Python, caption={Skrip implementasi SBR untuk pencarian konvergensi ekuilibrium Nash}, label={lst:find_nash_sbr}]
 import numpy as np
 import pandas as pd
 import os
@@ -134,7 +134,7 @@ def find_nash_sbr(mu, sigma_matrix, gamma, curr_date, N=4, K=2, max_iters=100, h
         if not improved:
             break
             
-    # --- EKSPOR RIWAYAT NASH SBR ---
+    # --- EKSPOR RIWAYAT Nash SBR ---
     df_history = pd.DataFrame(history)
     if not os.path.exists(history_file):
         df_history.to_csv(history_file, index=False)

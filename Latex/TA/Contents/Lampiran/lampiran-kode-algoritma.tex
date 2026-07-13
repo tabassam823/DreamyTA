@@ -75,7 +75,7 @@ def run_vqe_adaptive(H_obj, H_pen, n_qubits, curr_date, ne_bitstring=None, K=2, 
         os.remove(file_config['riwayat_iterasi'])
 
     def make_circuit(depth):
-        def ansatz(params):
+        def Ansatz(params):
             w = params.reshape((depth + 1, n_qubits, 2))
             for layer in range(depth + 1):
                 for q in range(n_qubits):
@@ -88,18 +88,18 @@ def run_vqe_adaptive(H_obj, H_pen, n_qubits, curr_date, ne_bitstring=None, K=2, 
 
         @qml.qnode(dev)
         def cost_circuit(params, p_scale=1.0):
-            ansatz(params)
+            Ansatz(params)
             # H_total dinamis: H_obj + scale * H_pen
             return qml.expval(H_obj + p_scale * H_pen)
 
         @qml.qnode(dev)
         def prob_circuit(params):
-            ansatz(params)
+            Ansatz(params)
             return qml.probs(wires=range(n_qubits))
             
         @qml.qnode(dev)
         def state_circuit(params):
-            ansatz(params)
+            Ansatz(params)
             return qml.state()
 
         return cost_circuit, prob_circuit, state_circuit
