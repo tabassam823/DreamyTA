@@ -1,0 +1,88 @@
+%=====================================================================
+%  I. PENDAHULUAN
+%=====================================================================
+\section{PENDAHULUAN}
+
+\lettrine[lines=2, findent=2pt, nindent=0pt]{I}{saac} Newton memandang gravitasi
+sebagai gaya mekanis yang menarik dua benda bermassa satu sama lain. Einstein
+mengubah pandangan tersebut secara mendasar: gravitasi bukanlah gaya, melainkan
+manifestasi geometris dari kelengkungan ruang-waktu yang disebabkan oleh
+distribusi materi dan energi \cite{einstein1916}. Terdapat hubungan timbal balik
+di dalamnya, yakni materi dan energi menentukan bagaimana ruang-waktu melengkung,
+dan sebaliknya kelengkungan ruang-waktu menentukan bagaimana materi bergerak
+melaluinya. Hubungan tersebut dirumuskan secara matematis melalui persamaan medan
+Einstein, yang mengaitkan tensor Einstein sebagai representasi geometri dengan
+tensor energi-momentum sebagai representasi kandungan materi \cite{wald1984}.
+
+Persamaan medan Einstein bersifat sangat umum dan tidak mudah diselesaikan secara
+langsung untuk sembarang distribusi materi. Kasus paling sederhana yang dapat
+ditinjau adalah kondisi vakum, yaitu ketika tidak terdapat materi maupun energi di
+luar suatu objek masif, sehingga ruas kanan persamaan medan Einstein lenyap.
+Penyelesaian persamaan medan Einstein pada kondisi vakum dengan asumsi ruang-waktu
+statis dan bersimetri bola inilah yang pertama kali diperoleh sebagai solusi eksak,
+yaitu solusi Schwarzschild \cite{schwarzschild1916}. Solusi ini menggambarkan
+geometri ruang-waktu di sekitar objek masif bersimetri bola melalui sebuah fungsi
+metrik tunggal yang hanya bergantung pada massa objek \cite{carroll2004}.
+
+Solusi Schwarzschild tidak hanya mendeskripsikan geometri di luar suatu bintang,
+tetapi juga mendeskripsikan lubang hitam paling sederhana, yakni lubang hitam yang
+tidak berotasi dan tidak bermuatan. Lubang hitam merupakan daerah ruang-waktu
+dengan medan gravitasi sedemikian kuat sehingga tidak ada benda apa pun, termasuk
+cahaya, yang dapat lepas dari dalamnya setelah melewati suatu batas tertentu
+\cite{frolov1998, misner1973}. Batas tersebut dikenal sebagai horizon peristiwa,
+yaitu permukaan yang memisahkan daerah yang masih dapat berkomunikasi dengan
+pengamat di kejauhan dari daerah di baliknya yang tidak lagi dapat melakukannya.
+Berbeda dengan horizon peristiwa yang semata-mata merupakan batas kausal,
+singularitas fisis yang sesungguhnya terletak di pusat lubang hitam, tempat
+kelengkungan ruang-waktu menjadi tak hingga dan deskripsi geometri klasik tidak
+lagi berlaku \cite{frolov1998}.
+
+Karena sifat ekstremnya, lubang hitam menjadi sistem yang ideal untuk mempelajari
+karakteristik ruang-waktu secara lebih mendalam. Salah satu cara paling alami untuk
+menyelidiki karakteristik tersebut adalah dengan memberikan gangguan kecil pada
+sistem, lalu meninjau bagaimana ruang-waktu meresponsnya. Pendekatan inilah yang
+dikenal sebagai teori perturbasi lubang hitam. Regge dan Wheeler (1957) mengawali
+pendekatan tersebut dengan menuliskan metrik yang terganggu sebagai jumlah dari
+metrik latar belakang dan suku gangguan kecil, kemudian menunjukkan bahwa gangguan
+kecil pada lubang hitam Schwarzschild menghasilkan sebuah persamaan gelombang
+dengan potensial efektif \cite{regge1957}. Temuan ini membuka perspektif bahwa
+respons dinamis lubang hitam terhadap gangguan dapat dipelajari secara sistematis
+melalui analisis perturbasi linier \cite{vishveshwara1970}.
+
+Gangguan pada lubang hitam dapat dibedakan berdasarkan spin medan yang meninjaunya,
+yaitu medan skalar (spin $s = 0$), medan elektromagnetik ($s = 1$), dan medan
+gravitasi ($s = 2$) \cite{konoplya2011}. Ketiganya memiliki tingkat kerumitan
+analisis yang berbeda. Medan skalar merupakan jenis gangguan yang paling sederhana
+karena dinamikanya tidak memberikan pengaruh balik terhadap geometri ruang-waktu
+latar belakang, sehingga medan skalar dapat diperlakukan sebagai medan uji.
+Kesederhanaan inilah yang menjadikan medan skalar sebagai titik awal yang wajar
+sebelum meninjau jenis gangguan yang lebih kompleks, sekaligus tetap
+mempertahankan seluruh struktur matematis pokok dari persoalan perturbasi lubang
+hitam \cite{chandrasekhar1983, berti2016}.
+
+Ciri utama dari struktur matematis tersebut adalah bahwa persamaan gerak medan uji
+pada latar belakang statis dan bersimetri bola dapat direduksi menjadi sebuah
+persamaan diferensial biasa berbentuk persamaan gelombang satu dimensi. Reduksi ini
+dimungkinkan karena simetri latar belakang memungkinkan pemisahan variabel sudut
+melalui basis harmonik sferis, sedangkan sifat statis memungkinkan pemisahan
+variabel waktu melalui bergantungan harmonik \cite{schutz2009}. Bagian radial yang
+tersisa kemudian dapat diubah bentuknya menjadi persamaan yang menyerupai persamaan
+Schr\"{o}dinger tak gayut waktu melalui pengenalan koordinat \textit{tortoise},
+sehingga seluruh pengaruh geometri lubang hitam terangkum di dalam sebuah potensial
+efektif \cite{konoplya2011, kokkotas1999}.
+
+Potensial efektif inilah yang menjadi objek fisis pokok dalam teori perturbasi
+lubang hitam. Potensial tersebut berperan sebagai penghalang (\textit{barrier})
+yang menghamburkan gelombang yang datang dari horizon peristiwa maupun dari jarak
+jauh, sehingga bentuk, ketinggian, dan letak puncaknya menentukan bagaimana energi
+gangguan ditransmisikan, dipantulkan, dan pada akhirnya diluruhkan oleh lubang
+hitam \cite{nollert1999}. Dengan demikian, karakterisasi potensial efektif merupakan
+langkah yang harus dituntaskan lebih dahulu sebelum kajian dinamis apa pun terhadap
+respons lubang hitam dapat dilakukan \cite{teukolsky1973}.
+
+Berdasarkan uraian tersebut, penelitian ini bertujuan untuk menurunkan persamaan
+perturbasi medan skalar pada ruang-waktu Schwarzschild secara analitik, mulai dari
+persamaan Klein-Gordon dalam ruang-waktu lengkung hingga diperoleh bentuk persamaan
+master beserta potensial efektifnya, serta untuk menganalisis karakteristik
+potensial efektif tersebut terhadap variasi bilangan momentum sudut, massa lubang
+hitam, dan massa medan skalar itu sendiri.

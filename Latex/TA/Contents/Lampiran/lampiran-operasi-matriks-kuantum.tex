@@ -1,7 +1,7 @@
 \chapter{Operasi Aljabar Linier pada Ruang Hilbert}
 
-\section{Notasi \textit{Bra-Ket}}
-Pada mekanika kuantum, keadaan suatu sistem direpresentasikan sebagai vektor pada ruang Hilbert. Notasi yang umum digunakan untuk menyatakan vektor keadaan adalah notasi \textit{bra-ket} yang diperkenalkan oleh Paul Dirac. Sebuah vektor keadaan dinyatakan dalam bentuk \textit{ket} dan direpresentasikan sebagai vektor kolom
+\section{Notasi Bra dan Ket}
+Pada mekanika kuantum, keadaan suatu sistem direpresentasikan sebagai vektor pada ruang Hilbert. Notasi yang umum digunakan untuk menyatakan vektor keadaan adalah notasi bra dan ket yang diperkenalkan oleh Paul Dirac. Sebuah vektor keadaan dinyatakan dalam bentuk ket dan direpresentasikan sebagai vektor kolom
 \begin{equation}
     |\psi\rangle =
     \begin{pmatrix}
@@ -11,7 +11,7 @@ Pada mekanika kuantum, keadaan suatu sistem direpresentasikan sebagai vektor pad
         \psi_N
     \end{pmatrix},
 \end{equation}
-dengan $\psi_i \in \mathbb{C}$ menyatakan komponen-komponen kompleks dari vektor keadaan pada ruang Hilbert berdimensi $N$. Pasangan dual dari \textit{ket} disebut \textit{bra}, yang diperoleh melalui operasi transpose konjugat (\textit{Hermitian adjoint}) terhadap \textit{ket}. Secara matematis, \textit{bra} didefinisikan sebagai
+dengan $\psi_i \in \mathbb{C}$ menyatakan komponen-komponen kompleks dari vektor keadaan pada ruang Hilbert berdimensi $N$. Pasangan dual dari ket disebut bra, yang diperoleh melalui operasi sekawan Hermit (Hermitian Adjoint) terhadap ket. Secara matematis, bra didefinisikan sebagai
 \begin{equation}
     \langle \psi | =
     \begin{pmatrix}
@@ -23,7 +23,7 @@ dengan $\psi_i \in \mathbb{C}$ menyatakan komponen-komponen kompleks dari vektor
 \end{equation}
 dengan simbol $^*$ menyatakan operasi konjugasi kompleks.
 
-Hubungan antara \textit{bra} dan \textit{ket} dapat dituliskan sebagai
+Hubungan antara bra dan ket dapat dituliskan sebagai
 \begin{equation}
     \langle \psi |
     =
@@ -31,7 +31,7 @@ Hubungan antara \textit{bra} dan \textit{ket} dapat dituliskan sebagai
     |\psi\rangle
     \right)^{\dagger},
 \end{equation}
-di mana simbol $\dagger$ menyatakan operasi transpose konjugat. Sebagai contoh, dua keadaan dasar sebuah \textit{qubit} dapat direpresentasikan dalam notasi \textit{bra-ket} sebagai
+di mana simbol $\dagger$ menyatakan operasi sekawan Hermit. Sebagai contoh, dua keadaan dasar sebuah qubit dapat direpresentasikan dalam notasi bra dan ket sebagai
 \begin{equation}
     |0\rangle =
     \begin{pmatrix}
@@ -45,7 +45,7 @@ di mana simbol $\dagger$ menyatakan operasi transpose konjugat. Sebagai contoh, 
         1
     \end{pmatrix}.
 \end{equation}
-Representasi \textit{bra} untuk kedua keadaan tersebut diperoleh dengan mengambil transpose konjugatnya, yaitu
+Representasi bra untuk kedua keadaan tersebut diperoleh dengan mengambil sekawan Hermitnya, yaitu
 \begin{equation}
     \langle 0| =
     \begin{pmatrix}
@@ -57,10 +57,10 @@ Representasi \textit{bra} untuk kedua keadaan tersebut diperoleh dengan mengambi
         0 & 1
     \end{pmatrix}.
 \end{equation}
-Notasi \textit{bra-ket} menjadi dasar bagi berbagai operasi aljabar linier pada ruang Hilbert, seperti \textit{inner product}, \textit{outer product}, representasi operator, serta pembentukan matriks densitas yang digunakan dalam komputasi dan informasi kuantum.
+Notasi bra dan ket menjadi dasar bagi berbagai operasi aljabar linier pada ruang Hilbert, seperti perkalian dalam, perkalian luar, representasi operator, serta pembentukan matriks densitas yang digunakan dalam komputasi dan informasi kuantum.
 
 \section{Operasi Perkalian Dalam (\textit{Inner Product})}
-Perkalian dalam (\textit{inner product}) merupakan operasi yang memetakan dua vektor pada ruang Hilbert menjadi sebuah skalar kompleks. Operasi ini digunakan untuk menentukan hubungan antara dua keadaan kuantum, termasuk ortogonalitas dan normalisasi suatu vektor keadaan. Untuk dua buah vektor keadaan $|\psi\rangle$ dan $|\phi\rangle$ yang didefinisikan pada ruang Hilbert berdimensi $N$, \textit{inner product} dinyatakan sebagai
+Perkalian dalam (\textit{inner product}) merupakan operasi yang memetakan dua vektor pada ruang Hilbert menjadi sebuah skalar kompleks. Operasi ini digunakan untuk menentukan hubungan antara dua keadaan kuantum, termasuk ortogonalitas dan normalisasi suatu vektor keadaan. Untuk dua buah vektor keadaan $|\psi\rangle$ dan $|\phi\rangle$ yang didefinisikan pada ruang Hilbert berdimensi $N$, perkalian dalam dinyatakan sebagai
 \begin{equation}
 \label{eq:inner_product_def}
     \langle \psi | \phi \rangle =
@@ -80,7 +80,7 @@ Perkalian dalam (\textit{inner product}) merupakan operasi yang memetakan dua ve
     \sum_{i=1}^{N}
     \psi_i^* \phi_i.
 \end{equation}
-Salah satu penggunaan penting \textit{inner product} adalah untuk menentukan ortogonalitas dua keadaan kuantum. Dua vektor dikatakan ortogonal apabila hasil \textit{inner product}-nya bernilai nol. Sebagai contoh,
+Salah satu penggunaan penting perkalian dalam adalah untuk menentukan ortogonalitas dua keadaan kuantum. Dua vektor dikatakan ortogonal apabila hasil perkalian dalamnya bernilai nol. Sebagai contoh,
 \begin{equation}
 \label{eq:inner_product_orthogonal}
     \langle 0 | 1 \rangle
@@ -97,7 +97,7 @@ Salah satu penggunaan penting \textit{inner product} adalah untuk menentukan ort
     =
     0.
 \end{equation}
-Selain itu, \textit{inner product} juga digunakan untuk memeriksa normalisasi suatu keadaan kuantum. Sebuah vektor keadaan dikatakan ternormalisasi apabila memenuhi
+Selain itu, perkalian dalam juga digunakan untuk memeriksa normalisasi suatu keadaan kuantum. Sebuah vektor keadaan dikatakan ternormalisasi apabila memenuhi
 \begin{equation}
     \langle \psi | \psi \rangle = 1.
 \end{equation}
@@ -121,7 +121,7 @@ Sebagai contoh, keadaan dasar \textit{qubit} $|0\rangle$ memenuhi
 Sehingga keadaan $|0\rangle$ merupakan vektor yang telah ternormalisasi.
 
 \section{Operasi Perkalian Luar (\textit{Outer Product})}
-Perkalian luar (\textit{outer product}) bertujuan menghasilkan sebuah matriks atau operator linier yang mana diperoleh melalui perkalian antara sebuah \textit{ket} dan sebuah \textit{bra} Operasi ini banyak digunakan dalam pembentukan operator proyeksi, matriks densitas, dan representasi operator kuantum. Untuk dua buah vektor keadaan $|\psi\rangle$ dan $|\phi\rangle$, \textit{outer product} didefinisikan sebagai
+Perkalian luar (\textit{outer product}) bertujuan menghasilkan sebuah matriks atau operator linier yang mana diperoleh melalui perkalian antara sebuah ket dan sebuah bra. Operasi ini banyak digunakan dalam pembentukan operator proyeksi, matriks densitas, dan representasi operator kuantum. Untuk dua buah vektor keadaan $|\psi\rangle$ dan $|\phi\rangle$, perkalian luar didefinisikan sebagai
 \begin{equation}
 \label{eq:outer_product_def}
     |\psi\rangle\langle\phi|
@@ -217,7 +217,7 @@ Pada vektor atau matriks, operasi konjugasi kompleks diterapkan pada setiap elem
     \end{pmatrix}.
 \end{equation}
 
-\subsection{Transpose dan Adjoin Hermitian}
+\subsection{Transpose dan Sekawan Hermit}
 Untuk suatu matriks $A$, transpose didefinisikan sebagai pertukaran baris menjadi kolom sehingga diperoleh $A^T$.Sebagai contoh,
 \begin{equation}
     A=
@@ -264,8 +264,8 @@ dan
     \end{pmatrix}.
 \end{equation}
 
-\section{Operasi \textit{Partial Trace}}
-Misalkan sistem komposit terdiri atas dua subsistem $A$ dan $B$ dengan matriks densitas gabungan $\rho_{AB}$. Matriks densitas tereduksi untuk subsistem $A$ diperoleh melalui operasi
+\section{Operasi \textit{Trace} Tereduksi}
+Misalkan sistem kuantum terdiri atas dua subsistem $A$ dan $B$ dengan matriks densitas gabungan $\rho_{AB}$. Matriks densitas tereduksi untuk subsistem $A$ diperoleh melalui operasi
 \begin{equation}
 \label{eq:partial_trace_def}
     \rho_A
@@ -278,7 +278,7 @@ sedangkan matriks densitas tereduksi untuk subsistem $B$ diberikan oleh
     =
     \mathrm{Tr}_A(\rho_{AB}).
 \end{equation}
-Secara umum, \textit{partial trace} terhadap subsistem $B$ didefinisikan sebagai
+Secara umum, \textit{trace} tereduksi terhadap subsistem $B$ didefinisikan sebagai
 \begin{equation}
 \label{eq:partial_trace_general}
     \rho_A
@@ -294,7 +294,7 @@ Secara umum, \textit{partial trace} terhadap subsistem $B$ didefinisikan sebagai
 \end{equation}
 dengan $\{|j_B\rangle\}$ merupakan basis ortonormal pada subsistem $B$ dan $I_A$ adalah operator identitas pada subsistem $A$.
 
-\subsection{Langkah Perhitungan \textit{Partial Trace}}
+\subsection{Langkah Perhitungan \textit{Trace} Tereduksi}
 Untuk sistem dua qubit, basis komputasional yang umum digunakan adalah
 \begin{equation}
     \{
@@ -323,7 +323,7 @@ Kita tinjau keadaan Bell
     |00\rangle + |11\rangle
     \right).
 \end{equation}
-Matriks densitasnya diperoleh dari \textit{outer product}
+Matriks densitasnya diperoleh dari perkalian luar
 \begin{equation}
     \rho_{AB}
     =

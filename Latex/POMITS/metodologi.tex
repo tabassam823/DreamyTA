@@ -1,0 +1,91 @@
+%=====================================================================
+%  II. METODOLOGI PENELITIAN
+%=====================================================================
+\section{METODOLOGI PENELITIAN}
+
+\subsection{Jenis Penelitian}
+
+Penelitian ini merupakan penelitian analitik-komputasional dengan pendekatan
+deduktif-matematis. Formulasi fisika diturunkan secara analitik dari prinsip dasar
+tanpa melibatkan pengambilan data eksperimental, kemudian dilanjutkan dengan
+komputasi numerik sederhana untuk memvisualisasikan besaran yang diperoleh.
+Pelaksanaan penelitian diawali dengan studi literatur mengenai teori relativitas
+umum, karakteristik metrik Schwarzschild, dan perturbasi medan uji pada latar
+belakang ruang-waktu yang melengkung.
+
+\subsection{Objek dan Asumsi Penelitian}
+
+Objek penelitian ini adalah medan skalar uji $\phi$ yang merambat pada latar
+belakang ruang-waktu Schwarzschild. Medan skalar diperlakukan sebagai medan uji,
+yakni amplitudo gangguannya dianggap cukup kecil sehingga tidak memberikan pengaruh
+balik terhadap geometri latar belakang. Konsekuensinya, metrik latar belakang
+diperlakukan tetap dan hanya persamaan gerak medan skalar yang diselesaikan.
+Seluruh perhitungan menggunakan \textit{natural unit} $G = c = 1$, sehingga massa
+lubang hitam $M$ memiliki dimensi yang sama dengan koordinat radial $r$. Konstanta
+Kosmologi diambil bernilai nol, sehingga ruang-waktu bersifat datar secara
+asimtotik.
+
+\subsection{Tahapan Penelitian}
+
+Penelitian dilaksanakan melalui lima tahap. Pertama, dituliskan persamaan gerak
+medan skalar dalam ruang-waktu lengkung, yaitu persamaan Klein-Gordon, yang
+diperoleh dari prinsip aksi minimal. Kedua, komponen tensor metrik Schwarzschild
+disubstitusikan ke dalam persamaan tersebut sehingga diperoleh bentuk eksplisitnya
+dalam koordinat $(t, r, \theta, \varphi)$. Ketiga, dilakukan separasi variabel
+dengan memanfaatkan sifat statis dan simetri bola latar belakang, sehingga
+diperoleh persamaan radial. Keempat, persamaan radial ditransformasikan ke dalam
+koordinat \textit{tortoise} dan disubstitusi dengan fungsi radial yang telah
+diskalakan, sehingga diperoleh persamaan master beserta bentuk eksplisit potensial
+efektifnya. Kelima, potensial efektif yang diperoleh dievaluasi dan divisualisasikan
+secara numerik menggunakan bahasa pemrograman Python dengan pustaka NumPy dan
+Matplotlib, untuk variasi bilangan momentum sudut $\ell$, massa lubang hitam $M$,
+dan massa medan skalar $\mu$.
+
+\subsection{Persamaan yang Digunakan}
+
+Ruang-waktu Schwarzschild dideskripsikan oleh elemen garis
+\begin{equation}
+  ds^{2} = -f(r)\,dt^{2} + \frac{dr^{2}}{f(r)}
+           + r^{2}\left(d\theta^{2} + \sin^{2}\theta\, d\varphi^{2}\right),
+  \label{eq:metrik}
+\end{equation}
+dengan fungsi metrik
+\begin{equation}
+  f(r) = 1 - \frac{2M}{r},
+  \label{eq:fungsi-metrik}
+\end{equation}
+sehingga horizon peristiwa terletak pada $r_{h} = 2M$, yakni akar dari $f(r) = 0$.
+
+Dinamika medan skalar uji tak bermassa pada latar belakang tersebut mematuhi
+persamaan Klein-Gordon dalam ruang-waktu lengkung,
+\begin{equation}
+  \Box \phi = \frac{1}{\sqrt{-g}}\,
+  \partial_{\mu}\left(\sqrt{-g}\, g^{\mu\nu} \partial_{\nu} \phi\right) = 0,
+  \label{eq:kg}
+\end{equation}
+sedangkan untuk medan skalar bermassa ditambahkan suku massa $\mu$ sehingga
+\begin{equation}
+  \partial_{\mu}\left(\sqrt{-g}\, g^{\mu\nu} \partial_{\nu} \phi\right)
+  - \sqrt{-g}\,\mu^{2}\phi = 0,
+  \label{eq:kg-bermassa}
+\end{equation}
+dengan $\mu$ menyatakan massa medan skalar itu sendiri, yang perlu dibedakan dari
+massa lubang hitam $M$.
+
+Separasi variabel dilakukan dengan ansatz
+\begin{equation}
+  \phi(t, r, \theta, \varphi)
+  = e^{-i\omega t}\, R(r)\, Y_{\ell m}(\theta, \varphi),
+  \label{eq:ansatz}
+\end{equation}
+dengan $Y_{\ell m}$ adalah harmonik sferis dan $\ell$ bilangan momentum sudut.
+Adapun koordinat \textit{tortoise} $r_{*}$ didefinisikan melalui hubungan
+\begin{equation}
+  \frac{dr_{*}}{dr} = \frac{1}{f(r)},
+  \label{eq:tortoise-def}
+\end{equation}
+yang untuk latar belakang Schwarzschild memberikan
+\begin{equation}
+  r_{*} = r + 2M \ln\left(\frac{r}{2M} - 1\right).
+  \label{eq:tortoise}
+\end{equation}

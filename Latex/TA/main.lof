@@ -15,7 +15,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE (Nash SBR dan Adaptive VQE dengan Penalty Annealing).}}{51}{figure.caption.28}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum HEA \textit {EfficientSU2} dengan Kedalaman ($d$) = 1.}}{70}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Rangkaian Sirkuit Kuantum HEA EfficientSU2 dengan Kedalaman ($d$) = 1.}}{70}{figure.caption.30}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Pergerakan Harga Saham Individual (\textit {Raw Price}) pada Sistem N=4 (2021--2023).}}{80}{figure.caption.31}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Visualisasi Pertumbuhan Modal Optimasi Klasik SLSQP pada Sistem N=2.}}{83}{figure.caption.33}%
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Visualisasi Pertumbuhan Modal Strategi Nash (Klasik) pada Sistem N=2.}}{83}{figure.caption.34}%
