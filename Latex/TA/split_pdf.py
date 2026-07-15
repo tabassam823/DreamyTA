@@ -56,7 +56,7 @@ def main():
     element_pages = image_pages.union(python_pages)
     
     # Tambahan manual untuk memastikan halaman tertentu masuk
-    element_pages.update([35, 61, 97, 98])
+    element_pages.update([39, 51, 101, 102])
     
     # Aturan baru:
     # 1. jika elemen berwarna ada di halaman genap, maka masukkan halaman ganjil sebelumnya (p - 1)
@@ -72,9 +72,9 @@ def main():
                 color_set.add(p + 1)
     
     # Explicit exclusions requested by user
-    # Document labels: iii (5), xviii (47), 1 (61), 6 (125), 35 (173)
-    # Note: 61 has been removed from explicit exclusions per user request.
-    explicit_exclude = {5, 47, 125, 173}
+    # Document labels: iii (9), 1 (65), 6 (129), 35 (177)
+    # Note: 45, 46, 63, 64, 65, 66 excluded per user request.
+    explicit_exclude = {9, 45, 46, 63, 64, 65, 66, 129, 177}
     color_set = color_set - explicit_exclude
             
     color_pages = sorted(list(color_set))

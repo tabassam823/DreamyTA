@@ -62,3 +62,27 @@ foto-foto
 
 # Sendiri
 - [x] tambahin bentuk matriks 4x4 di halaman 70
+
+Revisi kedua
+
+1. halaman 116 masih belum trivial (coba lihat laporan tugas akhir mas hermawan)
+	1. masih kompas di D.12 ke D.13
+2. persamaan C.4 dari baris satu ke dua ada penjelasan (tidak melompat)
+	1. harusnya perkalian silang
+	2. yang diagonal dan off-diagoanl perlu penjelasan
+	3. kenapa nx ny nya diubah sedangkan xy nya enggak
+	4. (sendiri) kyknya antikomutator perlu dijelasin lagi deh
+	5. C.19 harusnya cukup satu baris saja
+3. 2.23 ke 2.24 ke 2.25 harusnya ada indeksnya 
+	1. harusnya dari tetapan dirac kemudian dikasih medan eksternal dan berlaku untuk semua partiikel
+	2. jadi harusnya 2.25 h s_i
+	3. h_i di 2.24 harus dikroeksi: ndak boleh dikasih indeks
+	4. kalo diindeks interaksi antara partikel harusnya beda jadi gaboleh diindeks dan interaksinya jadi lokal seharusnya (pada 2.24)
+4. persamaan 2.19 - 2. perlu diluruskan
+	1. gimana bisa teori medan bisa jadi kuantum yang awalnya skalar jadi operator (S_i)
+	2. harus dijelaskan lebih rinci agar tidak rancu (dengan alasan poin 1)
+	3. harusnya teori medan aja gausah dijadiin operator kuantum
+	4. tiba-tiba di 2.29 jadi operator
+	5. persamaan 2.28 harus disebut saja "sebagaimana yang dijelaskan pada bab..."
+5. gambarnya dikasih medan eksternal (?)
+6. di lampirkan 
