@@ -112,12 +112,23 @@ Karena $UU^\dagger=I$, maka diperoleh bentuk diagonalisasi operator
     =
     UDU^\dagger.
 \end{equation}
+Mengalikan kedua ruas persamaan di atas dari sebelah kiri dengan $U^\dagger$ dan dari sebelah kanan dengan $U$ menghasilkan bentuk ekuivalen
+\begin{equation}
+\begin{split}
+    U^\dagger \rho U
+    &= U^\dagger (UDU^\dagger) U \\
+    &= (U^\dagger U)D(U^\dagger U) \\
+    &= IDI \\
+    &= D.
+\end{split}
+\end{equation}
+Persamaan tersebut menunjukkan bahwa matriks diagonal $D$ merupakan representasi operator densitas pada basis yang dibentuk oleh vektor-vektor eigennya. Oleh karena itu, seluruh informasi spektral operator densitas termuat pada elemen-elemen diagonal matriks $D$.
 
-Apabila suatu fungsi $f(\rho)$ diterapkan pada operator yang telah didiagonalisasi, maka fungsi tersebut cukup diterapkan pada setiap elemen diagonal matriks $D$, sehingga
+Apabila suatu fungsi analitik $f(x)$ diterapkan pada operator yang telah didiagonalisasi, maka fungsi tersebut bekerja pada setiap nilai eigen tanpa mengubah basis eigennya. Oleh karena itu,
 \begin{equation}
     f(\rho)=U f(D) U^\dagger,
 \end{equation}
-dengan
+sehingga fungsi operator cukup diterapkan pada setiap elemen diagonal matriks tersebut dan menghasilkan bentuk
 \begin{equation}
     f(D)=
     \begin{pmatrix}
@@ -140,20 +151,53 @@ Jika dipilih fungsi $f(x)=\log_2(x)$, maka diperoleh
     \end{pmatrix}
     U^\dagger.
 \end{equation}
-Karena
+Misalkan
 \begin{equation}
-    U
-    \begin{pmatrix}
-        a_1 & 0 & \cdots & 0\\
-        0 & a_2 & \cdots & 0\\
-        \vdots & \vdots & \ddots & \vdots\\
-        0 & 0 & \cdots & a_n
-    \end{pmatrix}
-    U^\dagger
-    =
-    \sum_j a_j |e_j\rangle\langle e_j|,
+    A=
+    \operatorname{diag}
+    (a_1,a_2,\ldots,a_n),
 \end{equation}
-maka dengan mengambil $a_j=\log_2(\lambda_j)$ diperoleh bentuk
+dengan $a_j$ merupakan suatu konstanta. Berdasarkan definisi matriks $U$, diperoleh
+\begin{equation}
+\begin{split}
+    UA
+    &=
+    \begin{bmatrix}
+        |e_1\rangle &
+        |e_2\rangle &
+        \cdots &
+        |e_n\rangle
+    \end{bmatrix}
+    \begin{pmatrix}
+        a_1&0&\cdots&0\\
+        0&a_2&\cdots&0\\
+        \vdots&\vdots&\ddots&\vdots\\
+        0&0&\cdots&a_n
+    \end{pmatrix}
+    \\
+    &=
+    \begin{bmatrix}
+        a_1|e_1\rangle &
+        a_2|e_2\rangle &
+        \cdots &
+        a_n|e_n\rangle
+    \end{bmatrix}.
+\end{split}
+\end{equation}
+
+Karena operator densitas bersifat semidefinit positif, seluruh nilai eigennya memenuhi
+\[
+0\le\lambda_j\le1,
+\]
+dengan
+\[
+\sum_j\lambda_j=1.
+\]
+Apabila terdapat nilai eigen $\lambda_j=0$, fungsi $\log_2(\lambda_j)$ memang tidak terdefinisi. Akan tetapi, pada Entropi Von Neumann suku yang muncul adalah hasil kali $\lambda_j\log_2(\lambda_j)$ sehingga nilainya didefinisikan melalui limit
+\begin{equation}
+    \lim_{x\rightarrow0^+}x\log_2x=0.
+\end{equation}
+Oleh karena itu, keberadaan nilai eigen nol tidak menimbulkan singularitas pada perhitungan Entropi Von Neumann. Dengan demikian, untuk fungsi $f(x)=\log_2(x)$ diperoleh
 \begin{equation}
     \log_2(\rho)
     =

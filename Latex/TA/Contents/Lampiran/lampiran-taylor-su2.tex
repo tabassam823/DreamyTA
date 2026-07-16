@@ -18,16 +18,137 @@ di mana $\hat{n}=(n_x,n_y,n_z)$ merupakan vektor satuan yang memenuhi
 \begin{equation}
 n_x^2+n_y^2+n_z^2=1,
 \end{equation}
-untuk normalisasi radius bernilai 1 yang diperoleh dari jumalahan kuadrat tiap komponennya dan $\vec{\sigma}=(X,Y,Z)$ menyatakan vektor matriks Pauli. Untuk memperoleh bentuk tertutup dari operator tersebut, maka perlu dihitung kuadrat dari operator $\hat{n}\cdot\vec{\sigma}$ terlebih dahulu menggunakan sifat distributif 
+untuk normalisasi radius bernilai 1 yang diperoleh dari jumalahan kuadrat tiap komponennya dan $\vec{\sigma}=(X,Y,Z)$ menyatakan vektor matriks Pauli. Untuk memperoleh bentuk tertutup dari operator tersebut, maka perlu dihitung kuadrat dari operator $\hat{n}\cdot\vec{\sigma}$ terlebih dahulu menggunakan sifat distributif karena $n_x$, $n_y$, dan $n_z$ merupakan skalar bernilai real, maka ketiga koefisien tersebut bersifat komutatif terhadap sesama skalar maupun terhadap operator matriks Pauli. Dengan demikian berlaku
+\begin{equation}
+n_i\sigma_j=\sigma_jn_i,
+\qquad
+n_in_j=n_jn_i,
+\end{equation}
+untuk setiap $i,j\in\{x,y,z\}$. Akan tetapi, sifat komutatif tersebut tidak berlaku pada matriks Pauli sehingga secara umum
+\begin{equation}
+\sigma_i\sigma_j\neq\sigma_j\sigma_i,
+\qquad i\neq j.
+\end{equation}
+Oleh karena itu, pada proses pengembangan berikut hanya koefisien skalarnya saja yang dipertukarkan, sedangkan urutan perkalian matriks Pauli tetap dipertahankan. Dengan menggunakan sifat distributif diperoleh
 \begin{equation}
 \begin{aligned}
-(\hat{n}\cdot\vec{\sigma})^2
-=& (n_xX+n_yY+n_zZ)^2 \\
-=& n_x^2X^2 + n_y^2Y^2 + n_z^2Z^2 + n_xn_y(XY+YX) \\
-&+ n_xn_z(XZ+ZX) + n_yn_z(YZ+ZY).
+(\hat n\cdot\vec\sigma)^2
+={}&
+(n_xX+n_yY+n_zZ)
+(n_xX+n_yY+n_zZ)\\
+={}&
+n_xX\,n_xX
++n_xX\,n_yY
++n_xX\,n_zZ\\
+&
++n_yY\,n_xX
++n_yY\,n_yY
++n_yY\,n_zZ\\
+&
++n_zZ\,n_xX
++n_zZ\,n_yY
++n_zZ\,n_zZ.
 \end{aligned}
 \end{equation}
-Lalu dengan sifat-sifat dasar matriks Pauli,
+Karena koefisien $n_x$, $n_y$, dan $n_z$ merupakan skalar, maka seluruh koefisien tersebut dapat dipindahkan ke bagian depan tanpa mengubah urutan perkalian matriks Pauli, sehingga
+\begin{equation}
+\begin{aligned}
+(\hat n\cdot\vec\sigma)^2
+={}&
+n_x^2XX
++n_xn_yXY
++n_xn_zXZ\\
+&
++n_xn_yYX
++n_y^2YY
++n_yn_zYZ\\
+&
++n_xn_zZX
++n_yn_zZY
++n_z^2ZZ.
+\end{aligned}
+\end{equation}
+Selanjutnya suku-suku yang memiliki koefisien sama dapat dikelompokkan sehingga diperoleh
+\begin{equation}
+\begin{aligned}
+(\hat n\cdot\vec\sigma)^2
+={}&
+n_x^2X^2
++n_y^2Y^2
++n_z^2Z^2\\
+&
++n_xn_y(XY+YX)\\
+&
++n_xn_z(XZ+ZX)\\
+&
++n_yn_z(YZ+ZY).
+\end{aligned}
+\end{equation}
+Lalu dengan sifat-sifat dasar matriks Pauli, Relasi antikomutator tersebut diperoleh dari hasil perkalian masing-masing matriks Pauli. Sebagai contoh,
+\begin{equation}
+\begin{aligned}
+XY
+&=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}
+\begin{pmatrix}
+0&-i\\
+i&0
+\end{pmatrix}\\
+&=
+\begin{pmatrix}
+i&0\\
+0&-i
+\end{pmatrix}
+=iZ,
+\end{aligned}
+\end{equation}
+sedangkan
+\begin{equation}
+\begin{aligned}
+YX
+&=
+\begin{pmatrix}
+0&-i\\
+i&0
+\end{pmatrix}
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix}\\
+&=
+\begin{pmatrix}
+-i&0\\
+0&i
+\end{pmatrix}
+=-iZ.
+\end{aligned}
+\end{equation}
+Dengan demikian diperoleh
+\begin{equation}
+XY+YX=iZ-iZ=0.
+\end{equation}
+Melalui cara yang sama diperoleh pula
+\begin{equation}
+XZ=-iY,\qquad
+ZX=iY,
+\end{equation}
+sehingga
+\begin{equation}
+XZ+ZX=0,
+\end{equation}
+serta
+\begin{equation}
+YZ=iX,\qquad
+ZY=-iX,
+\end{equation}
+yang menghasilkan
+\begin{equation}
+YZ+ZY=0.
+\end{equation}
+Dengan demikian seluruh suku silang pada Persamaan sebelumnya saling meniadakan akibat sifat antikomutasi matriks Pauli. Perlu diperhatikan bahwa suku-suku tersebut tidak diabaikan, melainkan bernilai nol setelah dipasangkan dengan hasil perkalian yang memiliki urutan kebalikan.
 \begin{equation}
 X^2=Y^2=Z^2=I,
 \end{equation}
@@ -59,7 +180,7 @@ maka
 \begin{equation}
 (\hat{n}\cdot\vec{\sigma})^2=I.
 \end{equation}
-Sehingga seluruh pangkat genap dan ganjil dari operator tersebut dapat dituliskan sebagai
+Hasil tersebut menunjukkan bahwa operator $\hat n\cdot\vec\sigma$ bersifat involutif, yaitu kuadrat operatornya menghasilkan matriks identitas. Konsekuensinya, seluruh pangkat genap operator tersebut selalu bernilai $I$, sedangkan seluruh pangkat ganjil selalu kembali menjadi $\hat n\cdot\vec\sigma$. Sifat inilah yang menyebabkan deret Taylor dari operator eksponensial dapat dipisahkan menjadi deret fungsi kosinus dan sinus, sebagaimana identitas Euler pada bilangan kompleks. Sehingga seluruh pangkat genap dan ganjil dari operator tersebut dapat dituliskan sebagai
 \begin{equation}
 (\hat{n}\cdot\vec{\sigma})^{2k}=I,
 \end{equation}

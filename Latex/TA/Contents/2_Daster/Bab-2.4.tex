@@ -26,35 +26,20 @@ Secara matematis, Lenz dan Ising memodelkan material feromagnetik sebagai sekump
 E_i=-\boldsymbol{\mu}_i\cdot\mathbf{B},
 \label{eq:magnetic_dipole_energy}
 \end{equation}
-dengan $\boldsymbol{\mu}_i$ menyatakan momen magnetik partikel ke-$i$ dan $\mathbf{B}$ merupakan medan magnet luar. Sistem akan mencapai keadaan energi minimum ketika arah momen magnetik sejajar dengan medan magnet yang diberikan sehingga diberikan tanda negatif pada persamaan. Momen magnetik suatu partikel memiliki nilai yang sebanding dengan operator spin-nya, sehingga dapat dinyatakan sebagai
+dengan $\boldsymbol{\mu}_i$ menyatakan momen magnetik partikel ke-$i$ dan $\mathbf{B}$ merupakan medan magnet luar. Sistem akan mencapai keadaan energi minimum ketika arah momen magnetik sejajar dengan medan magnet yang diberikan sehingga diberikan tanda negatif pada persamaan. Pada Model Ising klasik, setiap momen magnetik diasumsikan hanya dapat memiliki dua orientasi terhadap arah medan magnet, yaitu sejajar atau berlawanan arah. Kedua keadaan tersebut direpresentasikan oleh variabel spin biner
 \begin{equation}
-\boldsymbol{\mu}_i=-\gamma\mathbf{S}_i,
+s_i=\pm1,
 \end{equation}
-dengan $\gamma$ adalah rasio giromagnetik dan $\mathbf{S}_i$ merupakan operator spin. Apabila medan magnet hanya diberikan pada arah sumbu-$z$, yaitu $\mathbf{B}=(0,0,B_z)$, maka Persamaan~(\ref{eq:magnetic_dipole_energy}) menjadi
+dengan $s_i=+1$ menyatakan spin sejajar terhadap medan magnet, sedangkan $s_i=-1$ menyatakan spin yang berlawanan arah. Dengan mengasumsikan medan magnet eksternal homogen dan hanya bekerja sepanjang sumbu-$z$, maka besar energi setiap spin hanya bergantung pada orientasi spin tersebut terhadap medan. Oleh karena itu, kontribusi energi akibat medan magnet eksternal dapat dituliskan dalam bentuk
 \begin{equation}
-    \label{eq:energy_spin}
-E_i=\gamma B_zS_i^z.
+E_i=-hs_i,
+\label{eq:energy_field_spin}
 \end{equation}
-
-Karena komponen operator spin sepanjang sumbu-$z$ memenuhi hubungan
+dengan
 \begin{equation}
-S_i^z=\frac{\hbar}{2}\sigma_i^z,
+h=\frac{\gamma\hbar B_z}{2}
 \end{equation}
-maka energi pada Persamaan~\eqref{eq:energy_spin} dapat dituliskan sebagai
-\begin{equation}
-    \label{eq:energy_spin_z}
-E_i=\frac{\gamma\hbar B_z}{2}\sigma_i^z.
-\end{equation}
-Dapat didefinisikan pula parameter medan efektif sebagai
-\begin{equation}
-    \label{eq:effective_field}
-h_i=-\frac{\gamma\hbar B_z}{2},
-\end{equation}
-sehingga kontribusi energi akibat medan magnet eksternal dapat disederhanakan menjadi
-\begin{equation}
-    \label{eq:energy_field_spin}
-E_i=-h_i s_i,
-\end{equation}
+merupakan parameter medan efektif yang nilainya sama untuk seluruh spin karena rasio giromagnetik $\gamma$, konstanta Planck tereduksi $\hbar$, dan medan magnet eksternal $B_z$ diasumsikan homogen pada seluruh sistem.
 dengan $s_i=\pm1$ menyatakan orientasi spin pada lokasi ke-$i$. Selain dipengaruhi oleh medan luar, model Ising juga mengasumsikan bahwa setiap pasangan spin saling berinteraksi. Energi interaksi antar pasangan spin dinyatakan sebagai
 \begin{equation}
     \label{eq:energy_interaction}
@@ -64,14 +49,18 @@ dengan $J_{ij}$ merupakan konstanta kopling antara spin ke-$i$ dan ke-$j$. Ketik
 
 Dengan menjumlahkan seluruh kontribusi energi medan luar dan interaksi antar pasangan spin, maka diperoleh Hamiltonian Ising pada sistem klasik berbentuk
 \begin{equation}
-\mathcal{H}
+\mathcal H
 =
 -
-\sum_{i=1}^{N}h_is_i
--
-\sum_{i<j}^{N}J_{ij}s_is_j.
+h\sum_{i=1}^{N}s_i
 \end{equation}
-Pada formulasi mekanika kuantum, variabel klasik $s_i$ dapat digantikan oleh operator Pauli-$Z$ berbentuk
+yang mana merupakan bentuk asli Model Ising yang diperkenalkan oleh Lenz dan Ising dalam kerangka mekanika statistik klasik. Pada formulasi mekanika kuantum, variabel spin klasik $s_i$ dipromosikan menjadi operator yang bekerja pada ruang Hilbert dua dimensi. Untuk sistem spin-$\frac{1}{2}$, operator spin sepanjang sumbu-$z$ memenuhi hubungan
+\begin{equation}
+\hat{S}_z
+=
+\frac{\hbar}{2}\hat{Z},
+\end{equation}
+dengan $\hat{Z}$ merupakan operator Pauli-$Z$. Karena operator tersebut memiliki nilai eigen $\pm1$, sama seperti variabel spin pada Model Ising klasik, maka setiap variabel spin klasik $s_i$ dapat direpresentasikan oleh operator $\hat{Z}_i$. Proses ini merupakan bentuk kuantisasi dari Model Ising klasik sehingga Hamiltonian dapat dituliskan dalam bentuk operator kuantum. Operator Pauli-$Z$ untuk sebuah spin-$\frac{1}{2}$ dinyatakan sebagai
 \begin{equation}
 \hat{Z}
 =
@@ -82,13 +71,14 @@ Pada formulasi mekanika kuantum, variabel klasik $s_i$ dapat digantikan oleh ope
 \end{equation}
 karena operator tersebut memiliki nilai eigen $\pm1$ yang sesuai dengan orientasi spin pada model Ising klasik. Melalui substitusi tersebut, Hamiltonian Ising akhir untuk sistem kuantum dapat  dituliskan dalam bentuk
 \begin{equation}
-\hat{\mathcal{H}}
+\hat{\mathcal H}
 =
 -
-\sum_{i=1}^{N}h_i\hat{Z}_i
+h\sum_{i=1}^{N}\hat Z_i
 -
-\sum_{i<j}^{N}J_{ij}\hat{Z}_i\hat{Z}_j.
+\sum_{i<j}^{N}J_{ij}\hat Z_i\hat Z_j.
 \end{equation}
+Pada pengembangan selanjutnya, parameter medan luar homogen $h$ dapat diperumum menjadi parameter lokal $h_i$ sehingga setiap spin memiliki bias energi yang berbeda. Bentuk Hamiltonian tersebut banyak digunakan pada formulasi optimisasi kombinatorial, termasuk representasi masalah QUBO yang menjadi dasar implementasi algoritma kuantum seperti VQE.
 
 Meskipun memiliki landasan yang kuat, studi orisinal oleh Ernst Ising pada sistem satu dimensi (1D) menghasilkan kesimpulan pesimistis bahwa model tersebut tidak mampu mendemonstrasikan transisi fase pada suhu di atas nol mutlak. Analisis terhadap rantai interaksi biner berukuran hingga menunjukkan bahwa fluktuasi termal selalu mendominasi energi interaksi sehingga mencegah terbentuknya keteraturan magnetik yang stabil dalam skala makroskopik \cite{chamberlin_nanothermodynamics_2024}. Figure \ref{fig:1D_Ising} mengilustrasikan konfigurasi spin pada model satu dimensi tersebut, di mana distribusi orientasi partikel cenderung bersifat acak akibat lemahnya korelasi jangka panjang pada dimensi yang rendah. Representasi visual ini merinci interaksi antar-partikel melalui tiga simbol utama, yaitu titik hitam ($\bullet$) untuk interaksi energi rendah, tanda silang ($\mathbf{X}$) untuk interaksi energi tinggi, serta lingkaran biru kosong (\textcolor{blue}{$\circ$}) sebagai pemutusan (\textit{break}) tanpa energi. Titik hitam merepresentasikan pasangan spin paralel yang meminimalkan energi sistem, sedangkan tanda silang menunjukkan konfigurasi anti-paralel yang memicu peningkatan tegangan energi lokal \cite{chamberlin_nanothermodynamics_2024}. Lingkaran biru (\textcolor{blue}{$\circ$}) secara khusus menandai adanya pemutusan jalinan (\textit{subdivision}) yang memisahkan rantai menjadi subsistem independen agar dapat mencapai kestabilan termal pada skala nano. Pemetaan parameter interaksi mikroskopis ini memungkinkan pemodelan perilaku kolektif dan transisi fase pada sistem berukuran terbatas melalui perhitungan energi total yang mengombinasikan jumlah interaksi dan pemutusan tersebut secara sistematis.
 \begin{figure}[htbp]

@@ -10,10 +10,10 @@
 \contentsline {lstlisting}{\numberline {4.10}{\ignorespaces Skrip komputasi algoritma \textit {brute force} untuk validasi lanskap energi portofolio pada arsitektur kuantum}}{79}{lstlisting.4.10}%
 \contentsline {lstlisting}{\numberline {4.11}{\ignorespaces Skrip komputasional untuk eksekusi simulasi pengujian historis dengan iterasi jendela bergulir (\texttt {backtest\_runner.py})}}{87}{lstlisting.4.11}%
 \contentsline {lstlisting}{\numberline {4.12}{\ignorespaces Fungsi operasional untuk penyesuaian bobot portofolio pada momen evaluasi (\texttt {rebalance\_portfolio.py})}}{90}{lstlisting.4.12}%
-\contentsline {lstlisting}{\numberline {J.1}{\ignorespaces Skrip utama generator grafik evaluasi portofolio (\texttt {plot\_generator.py})}}{187}{lstlisting.a.J.1}%
-\contentsline {lstlisting}{\numberline {J.2}{\ignorespaces Skrip visualisasi distribusi probabilitas status VQE (\texttt {render\_vqe\_probs.py})}}{191}{lstlisting.a.J.2}%
-\contentsline {lstlisting}{\numberline {J.3}{\ignorespaces Skrip visualisasi grafik interaksi antar aset (\texttt {project\_graph.py})}}{193}{lstlisting.a.J.3}%
-\contentsline {lstlisting}{\numberline {J.4}{\ignorespaces Skrip utilitas untuk pengeksporan hasil graf fisis (\texttt {export\_graph.py})}}{194}{lstlisting.a.J.4}%
-\contentsline {lstlisting}{\numberline {K.1}{\ignorespaces Skrip utama orkestrasi keseluruhan parameter dan eksekusi pada sistem N=4 (\texttt {main\_N4.py})}}{197}{lstlisting.a.K.1}%
-\contentsline {lstlisting}{\numberline {K.2}{\ignorespaces Skrip inti loop VQE adaptif (\texttt {run\_vqe\_adaptive.py})}}{197}{lstlisting.a.K.2}%
-\contentsline {lstlisting}{\numberline {K.3}{\ignorespaces Skrip eksekusi langkah strategi yang memadukan teori permainan klasik dengan VQE kuantum (\texttt {run\_strategy\_step.py})}}{201}{lstlisting.a.K.3}%
+\contentsline {lstlisting}{\numberline {J.1}{\ignorespaces Skrip utama generator grafik evaluasi portofolio (\texttt {plot\_generator.py})}}{189}{lstlisting.a.J.1}%
+\contentsline {lstlisting}{\numberline {J.2}{\ignorespaces Skrip visualisasi distribusi probabilitas status VQE (\texttt {render\_vqe\_probs.py})}}{193}{lstlisting.a.J.2}%
+\contentsline {lstlisting}{\numberline {J.3}{\ignorespaces Skrip visualisasi grafik interaksi antar aset (\texttt {project\_graph.py})}}{195}{lstlisting.a.J.3}%
+\contentsline {lstlisting}{\numberline {J.4}{\ignorespaces Skrip utilitas untuk pengeksporan hasil graf fisis (\texttt {export\_graph.py})}}{196}{lstlisting.a.J.4}%
+\contentsline {lstlisting}{\numberline {K.1}{\ignorespaces Skrip utama orkestrasi keseluruhan parameter dan eksekusi pada sistem N=4 (\texttt {main\_N4.py})}}{199}{lstlisting.a.K.1}%
+\contentsline {lstlisting}{\numberline {K.2}{\ignorespaces Skrip inti loop VQE adaptif (\texttt {run\_vqe\_adaptive.py})}}{199}{lstlisting.a.K.2}%
+\contentsline {lstlisting}{\numberline {K.3}{\ignorespaces Skrip eksekusi langkah strategi yang memadukan teori permainan klasik dengan VQE kuantum (\texttt {run\_strategy\_step.py})}}{203}{lstlisting.a.K.3}%
