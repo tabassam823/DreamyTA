@@ -18,18 +18,18 @@ di mana $\hat{n}=(n_x,n_y,n_z)$ merupakan vektor satuan yang memenuhi
 \begin{equation}
 n_x^2+n_y^2+n_z^2=1,
 \end{equation}
-untuk normalisasi radius bernilai 1 yang diperoleh dari jumalahan kuadrat tiap komponennya dan $\vec{\sigma}=(X,Y,Z)$ menyatakan vektor matriks Pauli. Untuk memperoleh bentuk tertutup dari operator tersebut, maka perlu dihitung kuadrat dari operator $\hat{n}\cdot\vec{\sigma}$ terlebih dahulu menggunakan sifat distributif karena $n_x$, $n_y$, dan $n_z$ merupakan skalar bernilai real, maka ketiga koefisien tersebut bersifat komutatif terhadap sesama skalar maupun terhadap operator matriks Pauli. Dengan demikian berlaku
+untuk normalisasi radius bernilai 1 dan $\vec{\sigma}=(X,Y,Z)$ menyatakan vektor matriks Pauli. Untuk memperoleh bentuk tertutup dari operator tersebut, maka perlu dihitung kuadrat dari operator $\hat{n}\cdot\vec{\sigma}$ terlebih dahulu menggunakan sifat distributif karena $n_x$, $n_y$, dan $n_z$ merupakan skalar bernilai real. Ketiga koefisien tersebut akan bersifat komutatif terhadap sesama skalar maupun terhadap operator matriks Pauli sehingga berlaku
 \begin{equation}
 n_i\sigma_j=\sigma_jn_i,
 \qquad
 n_in_j=n_jn_i,
 \end{equation}
-untuk setiap $i,j\in\{x,y,z\}$. Akan tetapi, sifat komutatif tersebut tidak berlaku pada matriks Pauli sehingga secara umum
+untuk setiap $i,j\in\{x,y,z\}$. Namun sifat komutatif tersebut tidak berlaku pada matriks Pauli sehingga secara umum
 \begin{equation}
 \sigma_i\sigma_j\neq\sigma_j\sigma_i,
 \qquad i\neq j.
 \end{equation}
-Oleh karena itu, pada proses pengembangan berikut hanya koefisien skalarnya saja yang dipertukarkan, sedangkan urutan perkalian matriks Pauli tetap dipertahankan. Dengan menggunakan sifat distributif diperoleh
+Oleh karena itu, hanya koefisien skalar yang dipertukarkan, sedangkan urutan perkalian matriks Pauli tetap dipertahankan. Dengan menggunakan sifat distributif diperoleh
 \begin{equation}
 \begin{aligned}
 (\hat n\cdot\vec\sigma)^2
@@ -126,7 +126,7 @@ i&0
 =-iZ.
 \end{aligned}
 \end{equation}
-Dengan demikian diperoleh
+Sehingga diperoleh
 \begin{equation}
 XY+YX=iZ-iZ=0.
 \end{equation}
@@ -148,7 +148,7 @@ yang menghasilkan
 \begin{equation}
 YZ+ZY=0.
 \end{equation}
-Dengan demikian seluruh suku silang pada Persamaan sebelumnya saling meniadakan akibat sifat antikomutasi matriks Pauli. Perlu diperhatikan bahwa suku-suku tersebut tidak diabaikan, melainkan bernilai nol setelah dipasangkan dengan hasil perkalian yang memiliki urutan kebalikan.
+Seluruh suku silang pada persamaan sebelumnya akan saling meniadakan akibat sifat antikomutasi matriks Pauli.
 \begin{equation}
 X^2=Y^2=Z^2=I,
 \end{equation}
@@ -180,7 +180,7 @@ maka
 \begin{equation}
 (\hat{n}\cdot\vec{\sigma})^2=I.
 \end{equation}
-Hasil tersebut menunjukkan bahwa operator $\hat n\cdot\vec\sigma$ bersifat involutif, yaitu kuadrat operatornya menghasilkan matriks identitas. Konsekuensinya, seluruh pangkat genap operator tersebut selalu bernilai $I$, sedangkan seluruh pangkat ganjil selalu kembali menjadi $\hat n\cdot\vec\sigma$. Sifat inilah yang menyebabkan deret Taylor dari operator eksponensial dapat dipisahkan menjadi deret fungsi kosinus dan sinus, sebagaimana identitas Euler pada bilangan kompleks. Sehingga seluruh pangkat genap dan ganjil dari operator tersebut dapat dituliskan sebagai
+Seluruh pangkat genap operator tersebut akan selalu bernilai $I$, sedangkan seluruh pangkat ganjil akan selalu kembali menjadi $\hat n\cdot\vec\sigma$. Dari sifat tersebut, deret Taylor dari operator eksponensial dapat dipisahkan menjadi deret fungsi kosinus dan sinus. Sehingga seluruh pangkat genap dan ganjil dari operator tersebut dapat dituliskan sebagai
 \begin{equation}
 (\hat{n}\cdot\vec{\sigma})^{2k}=I,
 \end{equation}
