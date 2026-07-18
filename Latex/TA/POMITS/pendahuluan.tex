@@ -1,88 +1,13 @@
-%=====================================================================
-%  I. PENDAHULUAN
-%=====================================================================
 \section{PENDAHULUAN}
 
-\lettrine[lines=2, findent=2pt, nindent=0pt]{I}{saac} Newton memandang gravitasi
-sebagai gaya mekanis yang menarik dua benda bermassa satu sama lain. Einstein
-mengubah pandangan tersebut secara mendasar: gravitasi bukanlah gaya, melainkan
-manifestasi geometris dari kelengkungan ruang-waktu yang disebabkan oleh
-distribusi materi dan energi \cite{einstein1916}. Terdapat hubungan timbal balik
-di dalamnya, yakni materi dan energi menentukan bagaimana ruang-waktu melengkung,
-dan sebaliknya kelengkungan ruang-waktu menentukan bagaimana materi bergerak
-melaluinya. Hubungan tersebut dirumuskan secara matematis melalui persamaan medan
-Einstein, yang mengaitkan tensor Einstein sebagai representasi geometri dengan
-tensor energi-momentum sebagai representasi kandungan materi \cite{wald1984}.
+\lettrine{P}{asar} keuangan modern sangat dipengaruhi oleh dinamika nilai tukar, harga komoditas, dan tingkat suku bunga sehingga sering terdistorsi oleh korelasi antar aset, terutama selama periode krisis ekonomi global yang tidak terduga. Model \textit{Mean-Variance} (MV) yang diperkenalkan oleh Markowitz menjadi fondasi utama \textit{Modern Portfolio Theory} (MPT) untuk mengoptimasi keputusan investasi dengan menyeimbangkan ekspektasi imbal hasil dan risiko volatilitas. Namun, ketidakmampuan metode klasik dalam menangani ruang pencarian yang sangat luas mendorong perlunya transformasi diskritisasi fungsi objektif portofolio menjadi kerangka \textit{Quadratic Unconstrained Binary Optimization} (QUBO), yang memungkinkan pemanfaatan komputasi kuantum dalam mengidentifikasi konfigurasi aset optimal. Inisialisasi parameter yang murni acak pada algoritma \textit{Variational Quantum Eigensolver} (VQE) sangat rentan terjebak fenomena \textit{barren plateaus}, yaitu kondisi ketika gradien fungsi biaya meluruh secara eksponensial mendekati nol. Penelitian ini bertujuan mengevaluasi kemampuan algoritma hibrida GT-VQE yang mengintegrasikan ekuilibrium Nash dari \textit{Exact Potential Game} (EPG) sebagai strategi inisialisasi awal (\textit{warm-start}) guna memitigasi anomali \textit{barren plateaus}, mengakselerasi konvergensi VQE, dan menghasilkan keputusan alokasi aset yang lebih optimal pada sistem portofolio berskala $N=2$ dan $N=4$.
 
-Persamaan medan Einstein bersifat sangat umum dan tidak mudah diselesaikan secara
-langsung untuk sembarang distribusi materi. Kasus paling sederhana yang dapat
-ditinjau adalah kondisi vakum, yaitu ketika tidak terdapat materi maupun energi di
-luar suatu objek masif, sehingga ruas kanan persamaan medan Einstein lenyap.
-Penyelesaian persamaan medan Einstein pada kondisi vakum dengan asumsi ruang-waktu
-statis dan bersimetri bola inilah yang pertama kali diperoleh sebagai solusi eksak,
-yaitu solusi Schwarzschild \cite{schwarzschild1916}. Solusi ini menggambarkan
-geometri ruang-waktu di sekitar objek masif bersimetri bola melalui sebuah fungsi
-metrik tunggal yang hanya bergantung pada massa objek \cite{carroll2004}.
+Kerangka teoritis pertama yang mendasari penelitian ini adalah \textit{Teori Permainan} (\textit{Game Theory}) dan \textit{Exact Potential Game} (EPG). Teori permainan merupakan kerangka kerja matematis aksiomatik yang digunakan untuk menganalisis interaksi strategis di antara sekumpulan agen rasional melalui tiga komponen fundamental: himpunan pemain ($N$), ruang strategi ($S$), dan fungsi utilitas ($U$). Kerangka EPG hadir untuk mengidentifikasi ekuilibrium Nash secara efisien, yakni kelas permainan strategis khusus di mana perubahan utilitas marginal setiap pemain selaras dengan variasi sebuah fungsi potensial global $\Phi(\mathbf{x})$. Dalam sistem pasar finansial, EPG berfungsi sebagai algoritma pencarian ekuilibrium Nash yang andal melalui mekanisme dinamika respons-terbaik (\textit{Best-Response Dynamics}) secara iteratif, di mana konfigurasi ekuilibrium biner yang diperoleh selanjutnya dimanfaatkan sebagai tebakan awal untuk memandu proses optimasi kuantum pada tahap berikutnya.
 
-Solusi Schwarzschild tidak hanya mendeskripsikan geometri di luar suatu bintang,
-tetapi juga mendeskripsikan lubang hitam paling sederhana, yakni lubang hitam yang
-tidak berotasi dan tidak bermuatan. Lubang hitam merupakan daerah ruang-waktu
-dengan medan gravitasi sedemikian kuat sehingga tidak ada benda apa pun, termasuk
-cahaya, yang dapat lepas dari dalamnya setelah melewati suatu batas tertentu
-\cite{frolov1998, misner1973}. Batas tersebut dikenal sebagai horizon peristiwa,
-yaitu permukaan yang memisahkan daerah yang masih dapat berkomunikasi dengan
-pengamat di kejauhan dari daerah di baliknya yang tidak lagi dapat melakukannya.
-Berbeda dengan horizon peristiwa yang semata-mata merupakan batas kausal,
-singularitas fisis yang sesungguhnya terletak di pusat lubang hitam, tempat
-kelengkungan ruang-waktu menjadi tak hingga dan deskripsi geometri klasik tidak
-lagi berlaku \cite{frolov1998}.
+Kerangka teoritis kedua adalah \textit{Model Ising} dan penurunannya menuju Hamiltonian sebagai representasi sistem kuantum. Model Ising dikonseptualisasikan oleh Wilhelm Lenz dan diselesaikan oleh Ernst Ising pada tahun 1925 sebagai instrumen teoretis untuk menyelidiki asal-usul mikroskopis fenomena feromagnetisme, dengan memodelkan setiap partikel sebagai variabel spin biner $s_i \in \{-1,+1\}$ yang saling berinteraksi dalam kisi reguler. Meskipun solusi satu dimensi Ising gagal mendemonstrasikan transisi fase, paradigma ini berubah total setelah Lars Onsager merumuskan solusi eksak dua dimensi pada tahun 1944, yang membuktikan bahwa interaksi jarak pendek yang sederhana mampu memunculkan perilaku kolektif yang sangat kaya. Relevansi model Ising kemudian berkembang jauh melampaui magnetisme: dalam kerangka ekonofisika, setiap aset investasi dapat dianalogikan sebagai partikel spin, di mana korelasi antar pergerakan harga berperan sebagai koefisien kopling antar spin dan ekspektasi imbal hasil berperan sebagai pengaruh medan lokal. Transformasi inilah yang menjadi jembatan antara permasalahan optimasi portofolio diskret dan sistem fisik kuantum, karena fungsi energi total model Ising dapat diangkat menjadi operator Hamiltonian kuantum berbasis operator Pauli-$Z$ yang nilai eigen minimumnya --- yakni keadaan dasar (\textit{ground state}) --- langsung berkorespondensi dengan konfigurasi portofolio yang paling optimal.
 
-Karena sifat ekstremnya, lubang hitam menjadi sistem yang ideal untuk mempelajari
-karakteristik ruang-waktu secara lebih mendalam. Salah satu cara paling alami untuk
-menyelidiki karakteristik tersebut adalah dengan memberikan gangguan kecil pada
-sistem, lalu meninjau bagaimana ruang-waktu meresponsnya. Pendekatan inilah yang
-dikenal sebagai teori perturbasi lubang hitam. Regge dan Wheeler (1957) mengawali
-pendekatan tersebut dengan menuliskan metrik yang terganggu sebagai jumlah dari
-metrik latar belakang dan suku gangguan kecil, kemudian menunjukkan bahwa gangguan
-kecil pada lubang hitam Schwarzschild menghasilkan sebuah persamaan gelombang
-dengan potensial efektif \cite{regge1957}. Temuan ini membuka perspektif bahwa
-respons dinamis lubang hitam terhadap gangguan dapat dipelajari secara sistematis
-melalui analisis perturbasi linier \cite{vishveshwara1970}.
+Kerangka teoritis ketiga adalah metode optimasi parameter pada sistem klasik, yaitu \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA). Algoritma SPSA digunakan karena mampu mengestimasi seluruh komponen gradien hanya menggunakan dua evaluasi fungsi biaya pada setiap iterasi, terlepas dari banyaknya parameter yang dimiliki sirkuit. Pada setiap iterasi ke-$k$, SPSA membangkitkan vektor perturbasi acak $\Delta_k$ berdistribusi Rademacher untuk membentuk dua titik evaluasi simetris $\boldsymbol{\theta}_k^{(\pm)} = \boldsymbol{\theta}_k \pm c_k\Delta_k$, yang menghasilkan estimator gradien tak-bias $\hat{g}_{k,i} = (E_k^{(+)} - E_k^{(-)})/(2c_k\Delta_{k,i})$. Karakteristik efisiensi evaluasi fungsi biaya yang konstan terhadap dimensi ruang parameter menjadikan SPSA sangat sesuai untuk optimasi sirkuit variasional berskala besar pada perangkat kuantum NISQ.
 
-Gangguan pada lubang hitam dapat dibedakan berdasarkan spin medan yang meninjaunya,
-yaitu medan skalar (spin $s = 0$), medan elektromagnetik ($s = 1$), dan medan
-gravitasi ($s = 2$) \cite{konoplya2011}. Ketiganya memiliki tingkat kerumitan
-analisis yang berbeda. Medan skalar merupakan jenis gangguan yang paling sederhana
-karena dinamikanya tidak memberikan pengaruh balik terhadap geometri ruang-waktu
-latar belakang, sehingga medan skalar dapat diperlakukan sebagai medan uji.
-Kesederhanaan inilah yang menjadikan medan skalar sebagai titik awal yang wajar
-sebelum meninjau jenis gangguan yang lebih kompleks, sekaligus tetap
-mempertahankan seluruh struktur matematis pokok dari persoalan perturbasi lubang
-hitam \cite{chandrasekhar1983, berti2016}.
+Kerangka teoritis keempat adalah algoritma VQE itu sendiri beserta arsitektur \textit{Ansatz} yang digunakan. VQE merupakan algoritma komputasi kuantum hibrida yang menggabungkan kemampuan pemrosesan kuantum dan optimasi klasik berdasarkan prinsip variasi Rayleigh-Ritz, yang menyatakan bahwa nilai ekspektasi energi $E(\boldsymbol{\theta}) = \langle\psi(\boldsymbol{\theta})|\hat{\mathcal{H}}|\psi(\boldsymbol{\theta})\rangle$ selalu merupakan batas atas energi keadaan dasar. Dalam penelitian ini, keadaan kuantum berparameter direpresentasikan menggunakan \textit{Hardware-Efficient Ansatz} EfficientSU(2), yang dibangun dari kombinasi gerbang rotasi satu-qubit ($\hat{R}_y$ dan $\hat{R}_z$) dan lapisan keterbelitan berbasis gerbang CNOT secara berulang. Ansatz ini dipilih karena menghasilkan sirkuit yang lebih dangkal dan lebih sesuai untuk perangkat kuantum era NISQ dibandingkan Ansatz berbasis \textit{Unitary Coupled Cluster} (UCC) yang memerlukan jumlah gerbang yang jauh lebih besar.
 
-Ciri utama dari struktur matematis tersebut adalah bahwa persamaan gerak medan uji
-pada latar belakang statis dan bersimetri bola dapat direduksi menjadi sebuah
-persamaan diferensial biasa berbentuk persamaan gelombang satu dimensi. Reduksi ini
-dimungkinkan karena simetri latar belakang memungkinkan pemisahan variabel sudut
-melalui basis harmonik sferis, sedangkan sifat statis memungkinkan pemisahan
-variabel waktu melalui bergantungan harmonik \cite{schutz2009}. Bagian radial yang
-tersisa kemudian dapat diubah bentuknya menjadi persamaan yang menyerupai persamaan
-Schr\"{o}dinger tak gayut waktu melalui pengenalan koordinat \textit{tortoise},
-sehingga seluruh pengaruh geometri lubang hitam terangkum di dalam sebuah potensial
-efektif \cite{konoplya2011, kokkotas1999}.
-
-Potensial efektif inilah yang menjadi objek fisis pokok dalam teori perturbasi
-lubang hitam. Potensial tersebut berperan sebagai penghalang (\textit{barrier})
-yang menghamburkan gelombang yang datang dari horizon peristiwa maupun dari jarak
-jauh, sehingga bentuk, ketinggian, dan letak puncaknya menentukan bagaimana energi
-gangguan ditransmisikan, dipantulkan, dan pada akhirnya diluruhkan oleh lubang
-hitam \cite{nollert1999}. Dengan demikian, karakterisasi potensial efektif merupakan
-langkah yang harus dituntaskan lebih dahulu sebelum kajian dinamis apa pun terhadap
-respons lubang hitam dapat dilakukan \cite{teukolsky1973}.
-
-Berdasarkan uraian tersebut, penelitian ini bertujuan untuk menurunkan persamaan
-perturbasi medan skalar pada ruang-waktu Schwarzschild secara analitik, mulai dari
-persamaan Klein-Gordon dalam ruang-waktu lengkung hingga diperoleh bentuk persamaan
-master beserta potensial efektifnya, serta untuk menganalisis karakteristik
-potensial efektif tersebut terhadap variasi bilangan momentum sudut, massa lubang
-hitam, dan massa medan skalar itu sendiri.
+Kerangka teoritis kelima adalah validasi \textit{barren plateaus} menggunakan Entropi Von Neumann. Fenomena \textit{barren plateaus} merupakan kondisi ketika lanskap energi algoritma kuantum variasional menjadi sangat datar seiring bertambahnya jumlah qubit $N$ dan kedalaman sirkuit $L$, yang secara formal dapat dituliskan melalui hubungan $\text{Var}[\partial_\theta E] \approx C/2^{N+L}$. Untuk mendeteksi kondisi tersebut, penelitian ini memanfaatkan Entropi Von Neumann $S(\rho) = -\text{Tr}(\rho \log_2 \rho) = -\sum_j \lambda_j \log_2(\lambda_j)$ sebagai indikator tingkat keterbelitan dan distribusi probabilitas keadaan kuantum selama optimasi berlangsung. Peningkatan nilai entropi yang mendekati batas maksimumnya mengindikasikan bahwa keadaan kuantum menjadi semakin terdistribusi secara merata di dalam ruang Hilbert, sehingga sensitivitas Hamiltonian terhadap perubahan parameter menjadi sangat kecil yang secara empiris tercermin sebagai penurunan varians gradien pada proses optimasi.

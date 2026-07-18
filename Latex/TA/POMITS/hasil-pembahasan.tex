@@ -1,231 +1,64 @@
-%=====================================================================
-%  III. HASIL DAN PEMBAHASAN
-%=====================================================================
 \section{HASIL DAN PEMBAHASAN}
 
-\subsection{Persamaan Klein-Gordon dalam Ruang-Waktu Schwarzschild}
+\subsection{Akuisisi Data dan Prapemrosesan}
 
-Dari elemen garis pada Persamaan~\eqref{eq:metrik}, komponen tensor metrik invers
-yang tak nol adalah $g^{tt} = -1/f(r)$, $g^{rr} = f(r)$, $g^{\theta\theta} = 1/r^{2}$,
-dan $g^{\varphi\varphi} = 1/(r^{2}\sin^{2}\theta)$, sedangkan determinan metriknya
-memberikan $\sqrt{-g} = r^{2}\sin\theta$. Substitusi besaran-besaran tersebut ke
-dalam Persamaan~\eqref{eq:kg}, kemudian membagi hasilnya dengan $r^{2}\sin\theta$,
-menghasilkan bentuk eksplisit persamaan Klein-Gordon,
-\begin{align}
-  -\frac{1}{f}\,\partial_{t}^{2}\phi
-  &+ \frac{1}{r^{2}}\,\partial_{r}\!\left(f r^{2}\, \partial_{r}\phi\right)
-   + \frac{1}{r^{2}\sin\theta}\,\partial_{\theta}
-     \!\left(\sin\theta\, \partial_{\theta}\phi\right) \nonumber \\
-  &+ \frac{1}{r^{2}\sin^{2}\theta}\,\partial_{\varphi}^{2}\phi = 0.
-  \label{eq:kg-eksplisit}
-\end{align}
-Persamaan tersebut masih berupa persamaan diferensial parsial dengan empat variabel
-bebas, sehingga belum dapat diselesaikan secara langsung.
+Proses prapemrosesan data harga historis saham menghasilkan dua parameter utama yang menjadi masukan formulasi Markowitz: ekspektasi imbal hasil sederhana $\mu_i$ dan matriks kovarians $\Sigma$ yang dihitung menggunakan imbal hasil logaritmik pada jendela pelatihan $n=126$ hari perdagangan. Penggunaan imbal hasil sederhana untuk $\mu_i$ didasarkan pada sifat liniernya terhadap bobot aset, sedangkan imbal hasil logaritmik untuk $\Sigma$ dipilih karena memiliki distribusi yang lebih mendekati asumsi normalitas. Analisis melalui aproksimasi deret Taylor orde kedua menunjukkan bahwa kedua representasi menghasilkan estimasi kovariansi yang hampir identik untuk data saham harian, yakni $\text{Cov}(r_A, r_B) \approx \text{Cov}(R_A, R_B)$, karena suku koreksi berada pada orde $10^{-6}$ hingga $10^{-8}$ yang jauh lebih kecil dari suku utamanya. Pada sistem $N=2$ dengan jendela pelatihan pertama, diperoleh matriks kovarians $\Sigma_{N2} = \begin{pmatrix} 0{,}0915 & 0{,}0202 \\ 0{,}0202 & 0{,}0367 \end{pmatrix}$, sedangkan parameter penghindaran risiko endogen $\gamma$ dihitung secara adaptif menggunakan fungsi sigmoid $\gamma = 1/(1+e^{\bar{\mu}_l/\bar{\sigma}_l}) \approx 0{,}2697$ pada jendela pertama.
 
-\subsection{Separasi Variabel dan Persamaan Radial}
+\subsection{Formulasi EPG dan Pencarian Ekuilibrium Nash}
 
-Karena latar belakang bersifat statis dan bersimetri bola, penyelesaian
-Persamaan~\eqref{eq:kg-eksplisit} dapat dipisahkan dengan ansatz~\eqref{eq:ansatz}.
-Bergantungan waktu yang bersifat harmonik memberikan faktor $-\omega^{2}/f$ pada
-suku temporal, sedangkan suku sudut memenuhi persamaan eigen harmonik sferis,
-\begin{equation}
-  \frac{1}{\sin\theta}\,\partial_{\theta}
-  \!\left(\sin\theta\, \partial_{\theta} Y_{\ell m}\right)
-  + \frac{1}{\sin^{2}\theta}\,\partial_{\varphi}^{2} Y_{\ell m}
-  = -\ell(\ell + 1)\, Y_{\ell m},
-  \label{eq:eigen-harmonik}
-\end{equation}
-dengan $\ell(\ell+1)$ sebagai nilai eigennya \cite{riley2006}. Dengan demikian, seluruh
-bergantungan sudut tereduksi menjadi sebuah konstanta pemisah, sehingga yang
-tersisa hanyalah persamaan radial
-\begin{equation}
-  \frac{1}{r^{2}} \frac{d}{dr}\!\left(f r^{2} \frac{dR}{dr}\right)
-  + \left(\frac{\omega^{2}}{f} - \frac{\ell(\ell+1)}{r^{2}}\right) R = 0.
-  \label{eq:radial}
-\end{equation}
-Persamaan~\eqref{eq:radial} memperlihatkan bahwa persoalan empat dimensi telah
-tereduksi menjadi persoalan satu dimensi dalam koordinat radial, yang merupakan
-konsekuensi langsung dari simetri latar belakang.
+Transformasi model Markowitz ke dalam kerangka EPG dilakukan dengan mendefinisikan fungsi potensial global $\Phi(\mathbf{x}) = \sum_l \mu_l x_l/K - (\gamma/2)\sum_{i,j} \sigma_{ij} x_i x_j / K^2$ yang merangkum seluruh interaksi strategis antar aset. Pencarian ekuilibrium Nash dilaksanakan menggunakan algoritma \textit{Sequential Best Response} (SBR) yang bekerja melalui mekanisme pertukaran aset secara iteratif: pada setiap iterasi, seluruh kandidat pertukaran antara aset yang ada di dalam dan di luar portofolio dievaluasi, kemudian pertukaran yang memberikan kenaikan fungsi potensial terbesar dipilih hingga tidak ada lagi pertukaran yang meningkatkan $\Phi$. Sebagai ilustrasi pada sistem $N=2$ periode Januari 2021, evaluasi seluruh kombinasi strategi mengidentifikasi bahwa keadaan $|10\rangle$ (memilih BBCA, tidak ADRO) menghasilkan utilitas sistem tertinggi sehingga ditetapkan sebagai titik ekuilibrium Nash. Konfigurasi biner yang dihasilkan EPG ini selanjutnya dikonversi menjadi \textit{bitstring} inisialisasi yang memandu proses optimasi VQE dari wilayah ruang solusi yang telah memiliki kualitas utilitas tinggi.
 
-\subsection{Persamaan Master dan Potensial Efektif}
+\subsection{Pemetaan Hamiltonian dan Inisialisasi Sirkuit Kuantum}
 
-Persamaan~\eqref{eq:radial} masih memuat suku turunan pertama dan koefisien yang
-bergantung pada $r$, sehingga bentuknya belum sederhana. Kedua hal tersebut dapat
-dihilangkan sekaligus melalui dua langkah. Pertama, fungsi radial diskalakan dengan
-substitusi $R(r) = \Psi(r)/r$, yang menghasilkan
-\begin{equation}
-  \frac{f}{r}\frac{d^{2}\Psi}{dr^{2}} - \frac{f'}{r^{2}}\Psi
-  + \left(\frac{\omega^{2}}{f} - \frac{\ell(\ell+1)}{r^{2}}\right)\frac{\Psi}{r} = 0.
-  \label{eq:radial-Psi}
-\end{equation}
-Kedua, digunakan koordinat \textit{tortoise} pada Persamaan~\eqref{eq:tortoise-def},
-sehingga operator turunan bertransformasi menurut $d/dr = f\, d/dr_{*}$. Dengan
-mengalikan Persamaan~\eqref{eq:radial-Psi} dengan $r/f$ dan menerapkan transformasi
-tersebut, diperoleh persamaan master
-\begin{equation}
-  \frac{d^{2}\Psi}{dr_{*}^{2}} + \left(\omega^{2} - V(r)\right)\Psi = 0,
-  \label{eq:master}
-\end{equation}
-dengan potensial efektif
-\begin{equation}
-  V(r) = f(r)\left(\frac{\ell(\ell+1)}{r^{2}} + \frac{f'(r)}{r}\right).
-  \label{eq:potensial}
-\end{equation}
-Persamaan~\eqref{eq:master} memiliki bentuk yang identik dengan persamaan
-Schr\"{o}dinger tak gayut waktu, sehingga persoalan perturbasi lubang hitam dapat
-diperlakukan sebagai persoalan hamburan gelombang satu dimensi oleh sebuah
-potensial. Dengan menyubstitusikan fungsi metrik Schwarzschild pada
-Persamaan~\eqref{eq:fungsi-metrik} beserta turunannya $f'(r) = 2M/r^{2}$, potensial
-efektif memperoleh bentuk eksplisit
-\begin{equation}
-  V(r) = \left(1 - \frac{2M}{r}\right)
-         \left(\frac{\ell(\ell+1)}{r^{2}} + \frac{2M}{r^{3}}\right).
-  \label{eq:potensial-schw}
-\end{equation}
+Fungsi potensial EPG ditransformasi menjadi fungsi energi QUBO melalui relasi $E(\mathbf{x}) = -\Phi(\mathbf{x})$, yang kemudian diperluas dengan suku penalti kuadratik $P(\mathbf{x}) = A(\sum_i x_i - K)^2$ untuk menegakkan batasan kardinalitas seleksi aset. Pemetaan domain spin melalui substitusi $x_i = (1-s_i)/2$ mengekstraksi parameter Hamiltonian Ising berupa koefisien bias lokal $h_i = -(Q_{ii}/2 + \sum_{j\neq i} Q_{ij}/2)$ dan parameter kopling $J_{ij} = Q_{ij}/4$. Sebagai contoh numerik pada sistem $N=2$ jendela pertama, Hamiltonian yang diperoleh adalah $\hat{\mathcal{H}}_{N2} = 0{,}1735\hat{Z}_1 + 0{,}0931\hat{Z}_2 + 0{,}5014\hat{Z}_1\hat{Z}_2 + 0{,}2320$. Inisialisasi sirkuit kuantum kemudian dilakukan dengan merotasi keadaan dasar $|00\ldots0\rangle$ menuju \textit{bitstring} ekuilibrium Nash melalui gerbang-$X$ pada qubit yang terpilih, sehingga sirkuit memulai optimasi dari representasi kuantum keadaan yang telah terbukti memiliki utilitas finansial tinggi.
 
-Untuk kasus medan skalar bermassa, kehadiran suku massa pada
-Persamaan~\eqref{eq:kg-bermassa} tidak mengubah simetri latar belakang, sehingga
-prosedur separasi variabel dan transformasi yang sama tetap berlaku dan bentuk
-persamaan master pada Persamaan~\eqref{eq:master} tidak berubah. Perbedaannya
-muncul pada potensial efektif, yang memperoleh suku massa tambahan,
-\begin{equation}
-  V(r) = \left(1 - \frac{2M}{r}\right)
-         \left(\frac{\ell(\ell+1)}{r^{2}} + \frac{2M}{r^{3}} + \mu^{2}\right).
-  \label{eq:potensial-bermassa}
-\end{equation}
+\subsection{Konvergensi Energi dan Optimasi SPSA}
 
-\subsection{Karakteristik Potensial Efektif}
+Proses optimasi VQE menggunakan algoritma SPSA menunjukkan dinamika konvergensi yang berbeda secara signifikan antara skenario GT (dengan inisialisasi Nash) dan NoGT (inisialisasi acak). Pada skenario GT-VQE, konvergensi energi ekspektasi $E(\boldsymbol{\theta})$ menuju nilai minimum umumnya tercapai pada kedalaman sirkuit yang dangkal ($L=2$ hingga $L=3$), karena parameter awal yang diperoleh dari ekuilibrium Nash telah berada di wilayah dekat minimum energi sejati. Sebaliknya, pada skenario NoGT, VQE sering membutuhkan kedalaman yang lebih tinggi dan jumlah iterasi yang lebih banyak untuk mencapai konvergensi serupa, bahkan pada beberapa jendela observasi gagal menemukan keadaan dasar yang benar. Dinamika adaptasi kedalaman sirkuit per jendela simulasi disajikan pada Lampiran, di mana dapat diamati bahwa GT-VQE secara dominan beroperasi pada kedalaman 2, sementara VQE murni mengalami fluktuasi kedalaman yang lebih tinggi terutama pada sistem $N=4$.
 
-Potensial efektif pada Persamaan~\eqref{eq:potensial-schw} lenyap pada kedua ujung
-domain fisis, yakni pada horizon peristiwa ($r \to 2M$, atau $r_{*} \to -\infty$)
-karena faktor $f(r)$ lenyap di sana, dan pada jarak tak hingga
-($r \to \infty$, atau $r_{*} \to +\infty$) karena kedua suku dalam kurung meluruh
-sebagai $r^{-2}$ dan $r^{-3}$. Di antara kedua ujung tersebut potensial bernilai
-positif, sehingga terbentuk sebuah penghalang potensial tunggal dengan satu puncak.
-Bentuk inilah yang ditampilkan pada Gambar~\ref{fig:potensial-l}.
+\subsection{Analisis Entropi Von Neumann}
 
-\begin{figure}[t]
+\begin{figure*}[t!]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Entropi_tinggi.png}
+        \caption{Distribusi probabilitas merata yang mengindikasikan jebakan \textit{barren plateaus} (Entropi Tinggi).}
+        \label{fig:entropi_tinggi}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Entropi_rendah.png}
+        \caption{Kolaps probabilitas pada keadaan dominan akibat inisialisasi \textit{Nash Equilibrium} (Entropi Rendah).}
+        \label{fig:entropi_rendah}
+    \end{minipage}
+\end{figure*}
+
+Entropi Von Neumann $S(\rho) = -\text{Tr}(\rho\log_2\rho)$ digunakan sebagai indikator kuantitatif untuk mendeteksi keberhasilan proses optimasi dalam menghindari fenomena \textit{barren plateaus}. Pada skenario inisialisasi acak (NoGT), nilai entropi cenderung bertahan tinggi sepanjang iterasi karena distribusi probabilitas tetap tersebar merata di seluruh basis state, sebagaimana diilustrasikan pada Gambar~\ref{fig:entropi_tinggi}. Kondisi ini secara analitik mengonfirmasi bahwa sirkuit terperangkap dalam jebakan \textit{barren plateaus}, di mana gradien ekspektasi fungsi biaya meluruh menuju nol sehingga SPSA tidak mampu menghasilkan pembaruan parameter yang efektif. Sebaliknya, implementasi strategi \textit{warm-start} berbasis ekuilibrium Nash pada skenario GT-VQE memicu keruntuhan entropi yang signifikan sejak iterasi awal, ditandai oleh pemusatan distribusi probabilitas pada satu \textit{bitstring} dominan sebagaimana ditunjukkan pada Gambar~\ref{fig:entropi_rendah}. Fenomena kolaps entropi ini memvalidasi secara fisis bahwa sistem berhasil keluar dari superposisi yang terlalu menyebar menuju keadaan kuantum yang terlokalisasi, yang secara langsung berkorelasi dengan keberhasilan menemukan konfigurasi portofolio optimal.
+
+\subsection{Performa Finansial dan Backtesting Portofolio}
+
+Evaluasi performa metrik simulasi pengujian historis pada periode 2021 hingga 2023 dengan mekanisme penyeimbangan kembali bulanan mengungkapkan keunggulan strategi GT-VQE secara konsisten pada kedua skala sistem. Pada sistem $N=2$, algoritma GT-VQE mencatatkan imbal hasil kumulatif sebesar $145{,}07\%$ dengan rasio Sharpe $1{,}0185$, melampaui VQE murni ($121{,}30\%$, Sharpe $0{,}9331$), strategi \textit{Equal Weight} ($97{,}88\%$, Sharpe $0{,}9764$), maupun optimasi klasik SLSQP ($51{,}34\%$, Sharpe $0{,}6736$). Keunggulan ini semakin teramplifikasi pada sistem $N=4$ yang memiliki ruang solusi lebih kompleks: VQE murni mengalami degradasi performa yang signifikan dengan imbal hasil hanya $16{,}89\%$ dan Sharpe $0{,}3592$, sedangkan GT-VQE mampu mempertahankan imbal hasil $73{,}15\%$ dengan Sharpe $1{,}0107$ dan \textit{Maximum Drawdown} terendah sebesar $16{,}68\%$. Hasil lengkap perbandingan keempat strategi disajikan pada Tabel~\ref{tab:performa}, sedangkan visualisasi kurva pertumbuhan modal untuk seluruh skenario dapat ditinjau pada Lampiran.
+
+\begin{table}[t!]
   \centering
-  \includegraphics[width=\columnwidth]{potensial-l.png}
-  \caption{Potensial Efektif Medan Skalar Tak Bermassa terhadap Koordinat
-  \textit{Tortoise} untuk Variasi Bilangan Momentum Sudut ($M = 1$)}
-  \label{fig:potensial-l}
-\end{figure}
-
-Terlihat bahwa kenaikan bilangan momentum sudut $\ell$ meningkatkan ketinggian
-puncak penghalang secara signifikan, sebagaimana dirangkum pada
-Tabel~\ref{tab:puncak-l}. Hal ini merupakan konsekuensi langsung dari suku
-$\ell(\ell+1)/r^{2}$ pada Persamaan~\eqref{eq:potensial-schw}, yang berperan sebagai
-penghalang sentrifugal dan tumbuh secara kuadratik terhadap $\ell$. Secara fisis,
-gangguan dengan momentum sudut yang lebih besar menghadapi penghalang yang lebih
-tinggi, sehingga lebih sulit menembus daerah di sekitar lubang hitam. Letak puncak
-juga bergeser sedikit menjauhi horizon dan mendekati $r = 3M$ seiring bertambahnya
-$\ell$, yakni radius orbit lingkaran foton, karena pada $\ell$ besar suku
-sentrifugal mendominasi suku kelengkungan $2M/r^{3}$.
-
-\begin{table}[h]
-  \centering
-  \caption{Letak dan Ketinggian Puncak Potensial Efektif untuk Variasi $\ell$
-  ($M = 1$, $\mu = 0$)}
-  \label{tab:puncak-l}
-  \fontsize{9}{11}\selectfont
-  \begin{tabular}{ccc}
-    \toprule
-    $\boldsymbol{\ell}$ & $\boldsymbol{r_{\text{puncak}}}$
-      & $\boldsymbol{V_{\text{maks}}}$ \\
-    \midrule
-    0 & 2,667 & 0,0264 \\
-    1 & 2,886 & 0,0993 \\
-    2 & 2,952 & 0,2471 \\
-    3 & 2,974 & 0,4692 \\
-    \bottomrule
-  \end{tabular}
+  \caption{Ringkasan Performa Simulasi Finansial ($N=2$ dan $N=4$)}
+  \label{tab:performa}
+  \resizebox{\columnwidth}{!}{%
+  \begin{tabular}{lcccccc}
+  \toprule
+  \multirow{2}{*}{\textbf{Strategi Algoritma}} & \multicolumn{3}{c}{\textbf{Sistem $N=2$}} & \multicolumn{3}{c}{\textbf{Sistem $N=4$}} \\
+  \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+  & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} & \textbf{Return} & \textbf{Sharpe} & \textbf{MDD} \\
+  \midrule
+  \textbf{GT-VQE (Hibrida)} & \textbf{145,07\%} & \textbf{1,0185} & 30,33\% & \textbf{73,15\%} & \textbf{1,0107} & \textbf{16,68\%} \\
+  VQE (Tanpa GT) & 121,30\% & 0,9331 & 30,33\% & 16,89\% & 0,3592 & 20,89\% \\
+  SLSQP (Klasik) & 51,34\% & 0,6736 & \textbf{15,91\%} & 12,91\% & 0,2810 & 21,12\% \\
+  \textit{Equal Weight} & 97,88\% & 0,9764 & 27,49\% & 35,57\% & 0,6790 & 18,42\% \\
+  \bottomrule
+  \end{tabular}%
+  }
 \end{table}
 
-Pengaruh massa lubang hitam ditampilkan pada Gambar~\ref{fig:potensial-M}.
-Bertambahnya $M$ menyebabkan penghalang potensial menjadi lebih rendah sekaligus
-lebih lebar, dan letak puncaknya bergeser menjauh dari pusat. Perilaku ini dapat
-dipahami dari sifat penskalaan Persamaan~\eqref{eq:potensial-schw}: potensial hanya
-bergantung pada kombinasi $r/M$, sehingga $V \propto M^{-2}$ sedangkan letak
-puncaknya $r_{\text{puncak}} \propto M$. Dengan kata lain, lubang hitam yang lebih
-masif tidak menghadirkan penghalang dengan bentuk yang berbeda, melainkan
-penghalang yang sama yang direntangkan pada skala panjang yang lebih besar dan
-diturunkan ketinggiannya. Konsekuensinya, lubang hitam yang lebih masif memiliki
-skala waktu karakteristik yang lebih panjang, sehingga gangguan yang terjadi
-padanya berkembang lebih lambat.
+Keunggulan finansial GT-VQE merupakan konsekuensi langsung dari mekanisme inisialisasi awal berbasis ekuilibrium Nash yang mempersempit ruang eksplorasi SPSA menuju wilayah solusi berkualitas tinggi. Pada sistem $N=4$, ketika VQE murni mengalami fluktuasi kedalaman sirkuit yang tinggi dan sering gagal menemukan keadaan dasar Hamiltonian yang akurat, GT-VQE secara dominan berhasil mengkonvergenkan parameter pada kedalaman dangkal $L=2$ berkat titik awal yang lebih dekat terhadap minimum energi sejati. Integrasi antara formulasi Hamiltonian portofolio yang akurat, optimasi variasional SPSA yang efisien, dan mekanisme inisialisasi Nash yang cerdas membentuk kerangka pengambilan keputusan investasi yang saling melengkapi, sehingga mampu mengeksploitasi informasi struktural pasar yang tidak sepenuhnya dapat ditangkap oleh pendekatan optimasi konvensional berbasis SLSQP maupun oleh VQE dengan inisialisasi acak.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{potensial-M.png}
-  \caption{Potensial Efektif Medan Skalar Tak Bermassa untuk Variasi Massa Lubang
-  Hitam ($\ell = 2$)}
-  \label{fig:potensial-M}
-\end{figure}
-
-Adapun pengaruh massa medan skalar ditampilkan pada Gambar~\ref{fig:potensial-mu}.
-Berbeda dengan kedua parameter sebelumnya, kehadiran $\mu$ mengubah perilaku
-asimtotik potensial. Pada Persamaan~\eqref{eq:potensial-bermassa}, ketika
-$r \to \infty$ faktor $f(r)$ menuju satu dan kedua suku pertama dalam kurung
-lenyap, sehingga potensial tidak lagi menuju nol melainkan menuju nilai konstan
-$\mu^{2}$. Penghalang potensial dengan demikian tidak lagi berdiri di atas dasar
-yang nol, melainkan di atas sebuah dataran (\textit{plateau}) setinggi $\mu^{2}$.
-Secara fisis, hal ini menunjukkan bahwa medan skalar bermassa tidak dapat merambat
-bebas menuju jarak yang sangat jauh sebagaimana medan tak bermassa; keberadaan
-potensial yang tidak lenyap pada jarak jauh cenderung menahan sebagian medan tetap
-berada di sekitar lubang hitam alih-alih meloloskannya sepenuhnya menuju tak
-hingga.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{potensial-mu.png}
-  \caption{Potensial Efektif Medan Skalar Bermassa untuk Variasi $\mu$
-  ($\ell = 1$, $M = 1$)}
-  \label{fig:potensial-mu}
-\end{figure}
-
-Selain menaikkan dasar potensial, penambahan $\mu$ juga menaikkan puncak penghalang
-dan menggesernya menjauhi horizon peristiwa. Perhitungan menunjukkan bahwa untuk
-$\ell = 1$ dan $M = 1$, puncak penghalang terletak pada $r \approx 2{,}89$ ketika
-$\mu = 0$, lalu bergeser ke $r \approx 3{,}21$ ketika $\mu = 0{,}3$, dan ke
-$r \approx 3{,}67$ ketika $\mu = 0{,}4$. Bersamaan dengan itu, muncul lembah dangkal
-di antara puncak penghalang dan dataran asimtotik. Ketika $\mu$ terus dinaikkan,
-lembah tersebut semakin dangkal hingga akhirnya lenyap sama sekali pada
-$\mu \approx 0{,}45$; di atas nilai tersebut potensial menjadi fungsi yang naik
-secara monoton dari nol pada horizon peristiwa menuju $\mu^{2}$ pada jarak tak
-hingga, sehingga struktur penghalang tunggal yang khas pada medan tak bermassa
-tidak lagi terbentuk. Nilai ambang ini bergantung pada $\ell$, karena suku
-sentrifugal turut menentukan seberapa menonjol puncak penghalang dibandingkan
-dataran asimtotiknya.
-
-\subsection{Pembahasan}
-
-Hasil-hasil di atas memperlihatkan bahwa seluruh pengaruh geometri ruang-waktu
-Schwarzschild terhadap dinamika medan skalar terangkum sepenuhnya di dalam satu
-besaran, yaitu potensial efektif pada Persamaan~\eqref{eq:potensial-schw}. Struktur
-persamaan master pada Persamaan~\eqref{eq:master} tidak bergantung pada latar
-belakang mana pun yang ditinjau; yang berubah dari satu latar belakang ke latar
-belakang lain hanyalah fungsi metrik $f(r)$ yang masuk ke dalam potensial. Sifat
-ini menjelaskan mengapa perturbasi medan skalar dapat dipandang sebagai persoalan
-hamburan gelombang satu dimensi yang standar, dan mengapa potensial efektif menjadi
-objek fisis yang paling informatif dalam kajian ini.
-
-Ketiga parameter yang ditinjau memberikan pengaruh yang secara kualitatif berbeda.
-Bilangan momentum sudut $\ell$ mengubah ketinggian penghalang tanpa mengubah
-perilaku asimtotiknya, massa lubang hitam $M$ mengubah skala panjang dan skala
-ketinggian penghalang tanpa mengubah bentuknya, sedangkan massa medan skalar $\mu$
-mengubah perilaku asimtotik potensial itu sendiri. Perbedaan ini penting karena
-hanya $\mu$ yang mengubah watak persoalan secara struktural, yakni mengubah dasar
-potensial pada jarak jauh dari nol menjadi $\mu^{2}$, sehingga medan tidak lagi
-sepenuhnya bebas pada daerah asimtotik.
-
-Perlu dicatat bahwa penurunan ini bertumpu pada dua asumsi pokok. Pertama, medan
-skalar diperlakukan sebagai medan uji, sehingga pengaruh baliknya terhadap metrik
-latar belakang diabaikan; asumsi ini hanya sahih selama amplitudo gangguan cukup
-kecil. Kedua, latar belakang diasumsikan statis dan bersimetri bola, yang merupakan
-syarat agar separasi variabel dapat dilakukan sebagaimana pada
-Persamaan~\eqref{eq:eigen-harmonik}. Apabila salah satu asumsi tersebut dilanggar,
-misalnya pada lubang hitam yang berotasi, persamaan gerak tidak lagi tereduksi
-menjadi bentuk sesederhana Persamaan~\eqref{eq:master} dan diperlukan formalisme
-yang lebih umum \cite{teukolsky1973}. Dalam kerangka asumsi tersebut, potensial
-efektif yang diperoleh dalam penelitian ini konsisten dengan bentuk baku yang
-dilaporkan dalam literatur perturbasi lubang hitam \cite{konoplya2011, berti2016}.

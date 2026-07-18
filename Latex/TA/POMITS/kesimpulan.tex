@@ -1,35 +1,9 @@
-%=====================================================================
-%  IV. KESIMPULAN
-%=====================================================================
 \section{KESIMPULAN}
 
-Berdasarkan penelitian yang telah dilakukan, diperoleh beberapa kesimpulan sebagai
-berikut:
-
+Berdasarkan analisis hasil simulasi dan evaluasi komprehensif yang telah dilakukan, penelitian ini menghasilkan tiga kesimpulan utama sebagai berikut:
 \begin{enumerate}
-  \item Persamaan perturbasi medan skalar pada ruang-waktu Schwarzschild dapat
-        diturunkan secara analitik dari persamaan Klein-Gordon dalam ruang-waktu
-        lengkung. Sifat statis dan simetri bola latar belakang memungkinkan
-        separasi variabel waktu dan sudut, sedangkan penskalaan fungsi radial
-        $R(r) = \Psi(r)/r$ bersama koordinat \textit{tortoise} membawa persamaan
-        radial ke dalam bentuk persamaan master yang menyerupai persamaan
-        Schr\"{o}dinger tak gayut waktu, sehingga seluruh pengaruh geometri
-        lubang hitam terangkum di dalam sebuah potensial efektif tunggal.
-
-  \item Potensial efektif medan skalar tak bermassa berbentuk penghalang tunggal
-        yang lenyap pada horizon peristiwa maupun pada jarak tak hingga.
-        Ketinggian puncaknya meningkat secara signifikan terhadap bilangan
-        momentum sudut akibat kontribusi suku sentrifugal, sedangkan letak
-        puncaknya bergeser mendekati radius orbit foton $r = 3M$ untuk $\ell$ yang
-        besar. Terhadap massa lubang hitam, potensial hanya bergantung pada
-        kombinasi $r/M$, sehingga penambahan massa merendahkan dan melebarkan
-        penghalang tanpa mengubah bentuknya.
-
-  \item Kehadiran massa medan skalar mengubah perilaku asimtotik potensial efektif,
-        yakni nilainya pada jarak jauh tidak lagi menuju nol melainkan menuju
-        $\mu^{2}$. Akibatnya, penghalang potensial berdiri di atas dataran setinggi
-        $\mu^{2}$ dan medan skalar bermassa tidak dapat merambat bebas menuju tak
-        hingga. Pada nilai $\mu$ yang cukup besar, struktur penghalang tunggal
-        bahkan lenyap dan potensial berubah menjadi fungsi yang naik secara
-        monoton dari horizon peristiwa menuju dataran asimtotiknya.
+    \item Formulasi model Markowitz ke dalam kerangka \textit{Exact Potential Game} (EPG) berhasil memetakan utilitas ekonomi menjadi sistem Hamiltonian Ising secara akurat dan konsisten. Penggunaan imbal hasil logaritmik untuk matriks kovarians terbukti efektif menjaga simetri interaksi risiko ($J_{ij}$), sementara imbal hasil sederhana mempertahankan linieritas bias ekspektasi imbal hasil ($h_i$). Implementasi suku penalti anggaran ($A$) mampu mendominasi koefisien kopling sehingga mencegah sirkuit kuantum terjebak pada portofolio yang melanggar aturan diversifikasi.
+    \item Penerapan ekuilibrium Nash sebagai inisialisasi awal (\textit{warm-start}) terbukti meningkatkan efisiensi dan stabilitas konvergensi algoritma VQE secara signifikan. Injeksi solusi Nash memandu sirkuit melewati area dataran tandus yang dicirikan oleh kelenyapan varians gradien, memungkinkan algoritma mencapai keadaan dasar pada kedalaman sirkuit dangkal ($L=2$ hingga $L=3$). Hal ini memicu keruntuhan Entropi Von Neumann menuju konfigurasi probabilitas tunggal yang paling optimal, mereduksi beban komputasi secara substansial.
+    \item Arsitektur HEA dengan optimasi SPSA menunjukkan performa komputasi yang efisien dalam mengeksekusi optimasi portofolio pada kedua skala sistem. Algoritma GT-VQE menghasilkan pertumbuhan modal yang superior dibandingkan VQE murni dan optimasi klasik SLSQP, dengan nilai rasio Sharpe mencapai $1{,}0185$ pada sistem $N=2$ dan $1{,}0107$ pada sistem $N=4$. Temuan ini secara empiris membuktikan bahwa integrasi teori permainan dan komputasi kuantum memberikan kontribusi nyata terhadap peningkatan kualitas keputusan alokasi aset.
 \end{enumerate}
+

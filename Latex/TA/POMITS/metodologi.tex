@@ -1,91 +1,127 @@
-%=====================================================================
-%  II. METODOLOGI PENELITIAN
-%=====================================================================
-\section{METODOLOGI PENELITIAN}
+\section{METODOLOGI}
 
-\subsection{Jenis Penelitian}
+Data historis harga saham yang digunakan dalam penelitian ini diperoleh secara otomatis melalui \textit{Application Programming Interface} (API) Yahoo Finance menggunakan pustaka \texttt{yfinance} pada bahasa pemrograman Python. Akuisisi data difokuskan pada saham-saham unggulan indeks IHSG dalam dua konfigurasi sistem, yaitu sistem $N=2$ yang terdiri atas saham BBCA dan TLKM, serta sistem $N=4$ yang mencakup BBCA, ADRO, SMGR, dan TLKM, pada periode Januari 2021 hingga Desember 2023. Data yang diunduh berupa harga penutupan harian yang kemudian dibersihkan dari nilai yang hilang (\textit{missing values}) dan diurutkan berdasarkan indeks waktu untuk menjaga konsistensi deret waktu. Rentang waktu tersebut dipilih untuk merepresentasikan dinamika pasar modal Indonesia pada fase pemulihan pasca-pandemi yang mencakup kondisi volatilitas yang beragam.
 
-Penelitian ini merupakan penelitian analitik-komputasional dengan pendekatan
-deduktif-matematis. Formulasi fisika diturunkan secara analitik dari prinsip dasar
-tanpa melibatkan pengambilan data eksperimental, kemudian dilanjutkan dengan
-komputasi numerik sederhana untuk memvisualisasikan besaran yang diperoleh.
-Pelaksanaan penelitian diawali dengan studi literatur mengenai teori relativitas
-umum, karakteristik metrik Schwarzschild, dan perturbasi medan uji pada latar
-belakang ruang-waktu yang melengkung.
+Implementasi seluruh alur komputasi penelitian ini dibangun di atas ekosistem pustaka Python yang telah mapan. Pustaka \texttt{PennyLane} digunakan sebagai \textit{framework} utama untuk simulasi sirkuit kuantum, konstruksi Ansatz EfficientSU(2), serta evaluasi nilai ekspektasi Hamiltonian secara diferensiabel. Pustaka \texttt{Pandas} digunakan untuk manajemen dan praproses data deret waktu saham, sedangkan \texttt{NumPy} menangani seluruh komputasi numerik matriks kovarians, ekspektasi imbal hasil, dan kalkulasi parameter Hamiltonian Ising. Modul \texttt{Matplotlib} digunakan untuk visualisasi kurva konvergensi energi, distribusi probabilitas, dan kinerja portofolio, sementara fungsi \texttt{scipy.optimize} diterapkan sebagai pembanding dengan metode \textit{Sequential Least Squares Programming} (SLSQP) pada skenario optimasi klasik. Integrasi seluruh komponen tersebut membentuk sebuah \textit{pipeline} komputasi hibrida yang dapat dieksekusi secara penuh pada lingkungan simulator perangkat kuantum virtual tanpa derau.
 
-\subsection{Objek dan Asumsi Penelitian}
+Alur pengolahan data penelitian ini mencakup beberapa fase yang dapat ditinjau pada diagram alir Gambar~\ref{fig:flowchart_gt_vqe}. Fase pra-pemrosesan dimulai dari akuisisi data harga saham, transformasi ke imbal hasil sederhana dan logaritmik, kalkulasi matriks kovarians $\Sigma$ dan ekspektasi imbal hasil $\mu$, serta penentuan parameter penghindaran risiko endogen $\gamma$ menggunakan fungsi sigmoid. Fase selanjutnya adalah pencarian ekuilibrium Nash melalui kerangka EPG dan konstruksi Hamiltonian Ising berbasis QUBO. Setelah Hamiltonian terbentuk, fase optimasi kuantum dengan VQE-SPSA dijalankan secara iteratif, diikuti evaluasi entropi Von Neumann sebagai indikator konvergensi. Terakhir, fase backtesting \textit{rolling window} dilakukan untuk mengeksekusi penyeimbangan kembali portofolio secara bulanan dan mengkalkulasi metrik kinerja akhir berupa \textit{Cumulative Return}, \textit{Sharpe Ratio}, dan \textit{Maximum Drawdown}.
 
-Objek penelitian ini adalah medan skalar uji $\phi$ yang merambat pada latar
-belakang ruang-waktu Schwarzschild. Medan skalar diperlakukan sebagai medan uji,
-yakni amplitudo gangguannya dianggap cukup kecil sehingga tidak memberikan pengaruh
-balik terhadap geometri latar belakang. Konsekuensinya, metrik latar belakang
-diperlakukan tetap dan hanya persamaan gerak medan skalar yang diselesaikan.
-Seluruh perhitungan menggunakan \textit{natural unit} $G = c = 1$, sehingga massa
-lubang hitam $M$ memiliki dimensi yang sama dengan koordinat radial $r$. Konstanta
-Kosmologi diambil bernilai nol, sehingga ruang-waktu bersifat datar secara
-asimtotik.
+\begin{figure*}[t!]
+    \centering
+    \begin{tikzpicture}[node distance=1.3cm, every node/.style={fill=white, font=\footnotesize}, align=center]
+        % Styles
+        \tikzstyle{startstop} = [ellipse, minimum width=2.5cm, minimum height=0.6cm, text centered, draw=black, fill=white]
+        \tikzstyle{process} = [rectangle, minimum width=3.2cm, minimum height=0.8cm, text centered, draw=black, fill=white]
+        \tikzstyle{decision} = [diamond, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=white, aspect=2]
+        \tikzstyle{connector} = [circle, draw=black, minimum size=0.5cm, text centered, inner sep=2pt]
+        \tikzstyle{arrow} = [thick,->,>=stealth]
+        
+        % KOLOM 1: Pra-pemrosesan & Parameterisasi
+        \node (start) [startstop] {Mulai};
+        \node (data) [process, below of=start, yshift=-0.5cm] {Akuisisi Data \& \\ Setup Jendela Waktu};
+        \node (param) [process, below of=data, yshift=-0.5cm] {Hitung $\mu$, $\Sigma$ \& \\ penghindaran risiko ($\gamma$)};
+        \node (Nash) [process, below of=param, yshift=-0.5cm] {Pencarian ekuilibrium Nash \\ dengan Kerangka EPG};
+        \node (hamil) [process, below of=Nash, yshift=-0.5cm] {Formulasi QUBO \& \\ Hamiltonian ($h_i, J_{ij}$)};
+        \node (c1a) [connector, below of=hamil, yshift=-0.5cm] {1};
+        \node (c3b) [connector, left of=data, xshift=-1cm] {3};
+        
+        % KOLOM 2: Optimasi Kuantum (VQE)
+        \node (c1b) [connector, right of=start, xshift=4.0cm] {1};
+        \node (vqe_init) [process, below of=c1b, yshift=-0.2cm] {Inisialisasi State Awal \\ $|0\dots0\rangle \to |\text{bitstring}_{NE}\rangle$ \\ \& Parameter $\theta$};
+        \node (spsa) [process, below of=vqe_init, yshift=-0.5cm] {Optimasi SPSA dan \\ Pengukuran Energi};
+        \node (entropy) [process, below of=spsa, yshift=-0.5cm] {Kalkulasi Entropi dari \\ Konfigurasi Probabilitas};
+        \node (conv) [decision, below of=entropy, yshift=-0.5cm] {Konvergen?};
+        \node (layer_eval) [process, below of=conv, yshift=-0.6cm] {Simpan Energi $E_d$ \\ pada kedalaman $d$};
+        \node (layer_dec) [decision, below of=layer_eval, yshift=-0.5cm] {$d < D_{max}$?};
+        \node (c2a) [connector, below of=layer_dec, yshift=-0.7cm] {2};
+        
+        % KOLOM 3: Evaluasi & Backtesting
+        \node (c2b) [connector, right of=c1b, xshift=4.0cm] {2};
+        \node (best_state) [process, below of=c2b, yshift=-0.2cm] {Pilih Bitstring \\ dengan $E_{min}$};
+        \node (rebal) [process, below of=best_state, yshift=-0.5cm] {Eksekusi penyeimbangan kembali \\ Portofolio};
+        \node (end_dec) [decision, below of=rebal, yshift=-1cm] {Akhir \\ Periode?};
+        \node (eval) [process, below of=end_dec, yshift=-1cm] {Kalkulasi Metrik \\ Kinerja Akhir};
+        \node (stop) [startstop, below of=eval, yshift=-0.5cm] {Selesai};
+        \node (c3a) [connector, right of=end_dec, xshift=2.1cm] {3};
 
-\subsection{Tahapan Penelitian}
+        % Alur Kolom 1
+        \draw [arrow] (start) -- (data);
+        \draw [arrow] (data) -- (param);
+        \draw [arrow] (param) -- (Nash);
+        \draw [arrow] (Nash) -- (hamil);
+        \draw [arrow] (hamil) -- (c1a);
+        \draw [arrow] (c3b) -- (data);
 
-Penelitian dilaksanakan melalui lima tahap. Pertama, dituliskan persamaan gerak
-medan skalar dalam ruang-waktu lengkung, yaitu persamaan Klein-Gordon, yang
-diperoleh dari prinsip aksi minimal. Kedua, komponen tensor metrik Schwarzschild
-disubstitusikan ke dalam persamaan tersebut sehingga diperoleh bentuk eksplisitnya
-dalam koordinat $(t, r, \theta, \varphi)$. Ketiga, dilakukan separasi variabel
-dengan memanfaatkan sifat statis dan simetri bola latar belakang, sehingga
-diperoleh persamaan radial. Keempat, persamaan radial ditransformasikan ke dalam
-koordinat \textit{tortoise} dan disubstitusi dengan fungsi radial yang telah
-diskalakan, sehingga diperoleh persamaan master beserta bentuk eksplisit potensial
-efektifnya. Kelima, potensial efektif yang diperoleh dievaluasi dan divisualisasikan
-secara numerik menggunakan bahasa pemrograman Python dengan pustaka NumPy dan
-Matplotlib, untuk variasi bilangan momentum sudut $\ell$, massa lubang hitam $M$,
-dan massa medan skalar $\mu$.
+        % Alur Kolom 2
+        \draw [arrow] (c1b) -- (vqe_init);
+        \draw [arrow] (vqe_init) -- (spsa);
+        \draw [arrow] (spsa) -- (entropy);
+        \draw [arrow] (entropy) -- (conv);
+        \draw [arrow] (conv) -- node[anchor=east] {Ya} (layer_eval);
+        \draw [arrow] (conv.west) -- ++(-0.6,0) |- (spsa.west) node[pos=0.1, anchor=west] {Tidak};
+        \draw [arrow] (layer_eval) -- (layer_dec);
+        \draw [arrow] (layer_dec) -- node[anchor=east] {Tidak} (c2a);
+        \draw [arrow] (layer_dec.east) -- ++(0.7,0) |- (vqe_init.east) node[pos=0, anchor=west] {Ya (Tambah \\ kedalaman)};
 
-\subsection{Persamaan yang Digunakan}
 
-Ruang-waktu Schwarzschild dideskripsikan oleh elemen garis
+        % Alur Kolom 3
+        \draw [arrow] (c2b) -- (best_state);
+        \draw [arrow] (best_state) -- (rebal);
+        \draw [arrow] (rebal) -- (end_dec);
+        \draw [arrow] (end_dec) -- node[anchor=east] {Ya} (eval);
+        \draw [arrow] (eval) -- (stop);
+        \draw [arrow] (end_dec.east) -- (c3a.west) node[midway, anchor=south] {Tidak};
+
+    \end{tikzpicture}
+    \caption{Diagram Alir Metodologi Optimasi Portofolio Berbasis GT-VQE.}
+    \label{fig:flowchart_gt_vqe}
+\end{figure*}
+
+\subsection{Fungsi Objektif Markowitz dan Formulasi Biner}
+
+Titik awal matematis seluruh alur metodologi penelitian ini adalah fungsi objektif portofolio \textit{Mean-Variance} Markowitz. Model Markowitz berupaya meminimalkan varians portofolio sambil mempertahankan ekspektasi imbal hasil pada level tertentu, yang dalam formulasi Lagrangian dapat dinyatakan sebagai
 \begin{equation}
-  ds^{2} = -f(r)\,dt^{2} + \frac{dr^{2}}{f(r)}
-           + r^{2}\left(d\theta^{2} + \sin^{2}\theta\, d\varphi^{2}\right),
-  \label{eq:metrik}
+    f(\mathbf{w}) = \frac{\lambda}{2} \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \sum_i \mu_i \omega_i,
 \end{equation}
-dengan fungsi metrik
+dengan $\omega_i$ adalah vektor bobot aset kontinu, $\mu_i$ adalah ekspektasi imbal hasil aset ke-$i$, $\sigma_{ij}$ adalah elemen matriks kovarians, dan $\lambda$ adalah parameter penghindaran risiko. Karena penyelesaian langsung pada ruang bobot kontinu menjadi \textit{NP-Hard} ketika batasan kardinalitas diberlakukan, bobot kontinu $\omega_i$ didiskritisasi menjadi variabel biner $x_i \in \{0, 1\}$ dengan bobot portofolio $\omega_i = x_i/K$, sehingga fungsi objektif Lagrangian berubah menjadi bentuk biner
 \begin{equation}
-  f(r) = 1 - \frac{2M}{r},
-  \label{eq:fungsi-metrik}
+    f(\mathbf{x}) = \frac{\lambda}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j - \frac{1}{K}\sum_i \mu_i x_i,
+    \label{eq:lagrangian_markowitz_binary}
 \end{equation}
-sehingga horizon peristiwa terletak pada $r_{h} = 2M$, yakni akar dari $f(r) = 0$.
+di mana $K$ adalah jumlah aset yang dipilih ke dalam portofolio. Representasi biner inilah yang menjadi titik masuk transformasi ke dalam kerangka \textit{Exact Potential Game} dan selanjutnya ke dalam formulasi QUBO untuk komputasi kuantum.
 
-Dinamika medan skalar uji tak bermassa pada latar belakang tersebut mematuhi
-persamaan Klein-Gordon dalam ruang-waktu lengkung,
-\begin{equation}
-  \Box \phi = \frac{1}{\sqrt{-g}}\,
-  \partial_{\mu}\left(\sqrt{-g}\, g^{\mu\nu} \partial_{\nu} \phi\right) = 0,
-  \label{eq:kg}
-\end{equation}
-sedangkan untuk medan skalar bermassa ditambahkan suku massa $\mu$ sehingga
-\begin{equation}
-  \partial_{\mu}\left(\sqrt{-g}\, g^{\mu\nu} \partial_{\nu} \phi\right)
-  - \sqrt{-g}\,\mu^{2}\phi = 0,
-  \label{eq:kg-bermassa}
-\end{equation}
-dengan $\mu$ menyatakan massa medan skalar itu sendiri, yang perlu dibedakan dari
-massa lubang hitam $M$.
+\subsection{Fungsi Potensial Global dan Keseimbangan Nash}
 
-Separasi variabel dilakukan dengan ansatz
+Tahap fundamental pertama dalam menyusun struktur komputasi alokasi aset adalah mentransformasikan persamaan Lagrangian Markowitz biner standar menjadi sebuah model \textit{Exact Potential Game} (EPG) \cite{monderer_potential_1996}. Transformasi matematis ini dilakukan dengan menyubstitusikan variabel bobot kontinu ke dalam representasi diskret $x_i \in \{0, 1\}$, yang mengindikasikan status keterpilihan suatu instrumen aset di dalam konfigurasi portofolio. Integrasi faktor penghindaran risiko, yang disimbolkan dengan $\gamma$, diinjeksikan secara fungsional ke dalam model permainan guna mengendalikan sensitivitas matriks kovarians, yang merepresentasikan ukuran interaksi antara aset di dalam sistem pasar yang kompetitif. Dinamika utilitas yang beroperasi pada setiap aset tunggal akibat interaksi strategis tersebut kemudian dirangkum sepenuhnya menjadi sebuah fungsi skalar tunggal yang dikenal sebagai fungsi potensial global ($\Phi(\mathbf{x})$). Fungsi potensial ini secara eksplisit merangkum seluruh kalkulasi imbal hasil historis ($\mu$) serta menyeimbangkannya dengan tingkat risiko volatilitas absolut dari keseluruhan kombinasi strategis agen yang saling bersinggungan.
+
 \begin{equation}
-  \phi(t, r, \theta, \varphi)
-  = e^{-i\omega t}\, R(r)\, Y_{\ell m}(\theta, \varphi),
-  \label{eq:ansatz}
+\Phi(\mathbf{x}) = \sum_{l=1}^N \mu_l \frac{x_l}{K} - \frac{\gamma}{2}\sum_{i=1}^N\sum_{j=1}^N \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K}
 \end{equation}
-dengan $Y_{\ell m}$ adalah harmonik sferis dan $\ell$ bilangan momentum sudut.
-Adapun koordinat \textit{tortoise} $r_{*}$ didefinisikan melalui hubungan
+
+Eksistensi fungsi potensial global ini menjamin bahwa model alokasi investasi yang diusulkan memiliki lintasan konvergensi matematis yang stabil dan deterministik \cite{jain_multi-portfolio_2012}. Setiap transisi strategi dari agen individu yang berhasil meningkatkan utilitas lokalnya akan serta merta berkontribusi pada peningkatan nilai fungsi potensial makroskopis sistem dengan kuantitas deviasi yang presisi ekuivalen ($\Delta u_i = \Delta \Phi$). Evolusi pergerakan dinamis ini akan otomatis terhenti ketika sistem mencapai konfigurasi optimum lokal, yang direpresentasikan oleh ketiadaan perubahan strategis alternatif yang mampu memberikan peningkatan nilai fungsi lebih lanjut. Kondisi stabil puncak dari evolusi fungsi potensial ini dalam literatur fisika sosial direpresentasikan sebagai ekuilibrium \textit{Nash}, yang posisinya akan dideteksi secara heuristik menggunakan algoritma \textit{Sequential Best Response} sebelum diumpankan ke fase evaluasi kuantum. Keseimbangan strategis yang berhasil diidentifikasi akan direkonstruksi kembali ke dalam bentuk vektor biner, berfungsi sebagai basis parameter pemicu awal yang esensial dalam kerangka operasional algoritma VQE secara keseluruhan.
+
+\subsection{Transformasi Hamiltonian Ising}
+
+Untuk memungkinkan pemrosesan algoritma VQE pada infrastruktur perangkat keras kuantum, bentuk fungsi potensial EPG harus diproyeksikan secara presisi ke dalam struktur matriks Hamiltonian \textit{Ising} \cite{lucas_ising_2014}. Tahapan proyektif ini diawali dengan mengonversi rumusan maksimisasi potensial global menjadi terminologi minimisasi fungsional energi mekanika analitik ($E(\mathbf{x}) = -\Phi(\mathbf{x})$). Persamaan struktural energi kemudian dielaborasi lebih lanjut ke dalam model \textit{Quadratic Unconstrained Binary Optimization} (QUBO) dengan menambahkan fungsi penalti kuadratik $P(\mathbf{x}) = A\left(\sum_{i=1}^N x_i - K\right)^2$. Variabel penalti tambahan $A$ didesain secara adaptif guna memastikan bahwa matriks solusi algoritma secara ketat memenuhi batasan seleksi kardinalitas absolut berjumlah tepat $K$ aset yang didefinisikan oleh pengguna di awal eksperimen. Sintesis fungsional dari variabel energi potensial dan fungsi penalti tersebut memformulasikan koefisien matriks relasional yang komprehensif pada variabel $Q_{ii}$ serta elemen korelatif interaksi $Q_{ij}$.
+
+Transisi final ke ranah komputasi kuantum dilaksanakan melalui pemetaan variabel keputusan relasional dari dominan representasi biner menuju domain mekanika \textit{spin} yang didefinisikan dengan vektor spektral $s_i \in \{-1, 1\}$. Implementasi pemetaan affine, yang berbunyi $x_i = (1 - s_i)/2$, diintegrasikan secara komprehensif pada setiap koefisien QUBO yang ada guna mengekstraksi nilai parameter operator uniter lokal Pauli-Z \cite{nakahara_quantum_2008}. Ekstraksi operasional ini membuahkan definisi analitik untuk komponen medan bias lokal ($h_i$) pada setiap \textit{qubit} individual dan matriks kopling keterbelitan ($J_{ij}$) antar sepasang interaksi \textit{qubit} spesifik di dalam jaringan.
 \begin{equation}
-  \frac{dr_{*}}{dr} = \frac{1}{f(r)},
-  \label{eq:tortoise-def}
+\hat{\mathcal{H}} = - \sum_{i=1}^N h_i \hat{Z}_i - \sum_{i<j}^N J_{ij} \hat{Z}_i \hat{Z}_j + C
 \end{equation}
-yang untuk latar belakang Schwarzschild memberikan
+Komponen bias linier $h_i$ menganalogikan representasi sentimen fundamental pasar, sedangkan distribusi nilai kopling $J_{ij}$ memetakan fungsi korelasi harga dari matriks risiko \textit{Markovian}. Hamiltonian Ising akhir (\ref{eq:ising}) ini selanjutnya digunakan sebagai deskriptor observabel objektif dari VQE untuk mencari konfigurasi probabilitas status minimum dasar (\textit{ground state}) sistem yang paling mendekati solusi aktual konseptual.
+
+\subsection{Desain Sirkuit VQE dan SPSA}
+
+Algoritma hibrida \textit{Variational Quantum Eigensolver} (VQE) memerlukan komposisi blok \textit{Ansatz} terstruktur, yang bertindak sebagai modul pemancar superposisi fungsi gelombang berparameter. Dalam riset optimasi portofolio dengan rentang konektivitas yang penuh, penggunaan arsitektur \textit{Hardware-Efficient Ansatz} diterapkan secara masif \cite{mitarai_quantum_2018}. Arsitektur komputasional ini mendemonstrasikan penyusunan modul parameter rotasi spasial secara paralel pada sumbu representasi Y dan sumbu Z guna menginisialisasi parameter rotasi amplitudo $U_{q}(\theta)$ bagi setiap agen \textit{qubit}. Lapisan transformasional dari operator pelibatan uniter disusun secara bertahap melalui matriks \textit{Controlled-NOT} (CNOT) yang dieksekusi secara linear terhadap sepasang titik \textit{qubit} yang bersebelahan. Struktur repetisi dari kombinasi blok fungsional pelibatan tersebut diiterasi secara rekursif sebanyak jumlah kedalaman (\textit{depth} sirkuit) optimal, memungkinkan modul heuristik VQE untuk membangun korelasi fisis mekanika kuantum yang representatif di seluruh area ruang sampel keadaan. 
+
+Fase pembaruan parameter uniter yang dikandung oleh blok sirkuit VQE dipasrahkan kepada kapabilitas modul mesin klasik pengoptimal parametrik yang adaptif. Optimizer \textit{Simultaneous Perturbation Stochastic Approximation} (SPSA) diimplementasikan secara strategis untuk mendegradasi ekspektasi biaya fungsional tanpa membebani sistem dengan beban penghitungan matriks turunan \textit{Hessian} penuh \cite{spall_implementation_1998}. Inovasi paling transformasional dari SPSA adalah metode kalkulasi yang mampu mengestimasi besaran skalar gradien dari seluruh vektor rotasi parameter secara simultan eksklusif berbekal pada sepasang varian nilai ukur fungsional objektif yang dipengaruhi oleh vektor variabel perturbasi \textit{Rademacher} distribusional acak.
 \begin{equation}
-  r_{*} = r + 2M \ln\left(\frac{r}{2M} - 1\right).
-  \label{eq:tortoise}
+\hat{g}_k = \frac{E(\boldsymbol{\theta}_k + c_k \Delta_k) - E(\boldsymbol{\theta}_k - c_k \Delta_k)}{2 c_k \Delta_k}
 \end{equation}
+Berdasarkan pembuktian matematis ekspektasi fungsional, estimasi nilai gradien stokastik ini memvalidasi trajektori konvergensi yang terbukti ekuivalen secara probabilitas konseptual terhadap fungsi gradien analitis murni. Kumpulan vektor modifikasi parameter sirkuit secara konsisten diakumulasi dalam setiap tahap pelatihan hingga menembus garis batas ambang toleransi kesalahan yang dipatok. 
+
+\subsection{Kerangka Backtesting dan Benchmarking}
+
+Sistem analisis dari portofolio model hibrida dieksekusi mengacu pada mekanisme validasi \textit{backtesting} berkonsep \textit{rolling window}. Pada prosedur empiris tersebut, serangkaian pergerakan matriks harga logaritmik saham-saham likuid dari indeks LQ45 (yakni kombinasi BBCA, ADRO, TLKM, SMGR) diekstrak secara serial untuk mendefinisikan matriks imbal hasil ($\mu$) dan dispersi matriks kovarians ($\Sigma$). Tiap jeda periode rotasi waktu berjalan menuntut kalkulasi ulang fungsi matriks \textit{Ising} baru dengan disusul pengaktifan metode injeksi \textit{Nash} yang menyisipkan tebakan heuristik \textit{warm-start} dari mekanisme \textit{Exact Potential Game}. Sinyal investasi berupa rekomendasi biner (berisi instruksi Beli atau Tahan) yang diterjemahkan ulang dari kejatuhan \textit{ground state} akhir algoritma VQE dieksekusi secara bertahap untuk mengatur perimbangan komposisi persentase dana dari nilai modal aktual (\textit{rebalancing}). Hasil kinerja performa akhir yang dihimpun pada seluruh tahapan akan disintesis lebih jauh ke dalam profil pengembalian agregat, sehingga metrik profitabilitas nyata portofolio kuantum ini tervalidasi dengan ketelitian tingkat tinggi.
+
+Validitas keandalan optimasi portofolio GT-VQE juga membutuhkan standarisasi performa (\textit{benchmarking}) eksternal melalui analisis komparatif yang ketat. Proses kalibrasi referensi mengandalkan pengaplikasian algoritma klasik mapan berjenis \textit{Sequential Least Squares Programming} (SLSQP), yang merupakan pengoptimal diferensial fungsi kuadratik standar pada model Markowitz linear. Evaluasi SLSQP dilakukan secara ekuivalen pada sekuen linimasa siklus berjalan \textit{backtesting} historis guna menyajikan dasar referensi yang transparan. Selain model konvensional optimasi tersebut, sistem komparasi juga meninjau kinerja pergerakan aset konstan berwujud bobot terdistribusi rata secara seragam (\textit{Equal Weight Portfolio}) dengan vektor matriks pembagian fraksi sebesar $\omega_i = 1/N$ \cite{demiguel_optimal_2009}. Integrasi metrik \textit{Cumulative Return}, \textit{Sharpe Ratio}, dan \textit{Maximum Drawdown} diimplementasikan sepenuhnya pada ketiga blok strategis guna membuktikan secara ilmiah keberadaan ruang keunggulan dari pendekatan kuantum hibrida terhadap kerangka operasional standar pasar saat ini.
