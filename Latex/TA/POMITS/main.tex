@@ -68,16 +68,15 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows, positioning}
 
+\usepackage{lastpage}
+
 %---------------------------------------------------------------------
 %  HEADER HALAMAN
 %---------------------------------------------------------------------
-\newcommand{\headerjurnal}{JURNAL SAINS DAN SENI POMITS Vol. 1, No. 1, (2025) 1-6}
-
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-\fancyhead[C]{\fontsize{8}{10}\selectfont \headerjurnal}
-\fancyfoot[C]{\fontsize{8}{10}\selectfont \thepage}
+\fancyhead[R]{\fontsize{8}{10}\selectfont \textbf{\thepage{} - 8}}
 
 %---------------------------------------------------------------------
 %  FORMAT JUDUL BAB (I. PENDAHULUAN -- kapital kecil, rata tengah)
@@ -145,9 +144,12 @@
       OPTIMASI PORTOFOLIO BERBASIS MODEL MARKOWITZ MENGGUNAKAN METODE VARIATIONAL QUANTUM EIGENSOLVER\par}
       \vspace{2ex}
       {\fontsize{10}{12}\selectfont
-      Putra Naufal Tabassam, Dr. Heru Sukamto, M.Si., dan Dr. Gagus K. Sunnardianto\\
-      Departemen Fisika, Fakultas Sains dan Analitika Data,
-      Institut Teknologi Sepuluh Nopember\\
+      Putra Naufal Tabassam$^1$, Dr. Heru Sukamto, M.Si.$^1$, dan Gagus Ketut Sunnardianto, Ph.D.$^2$\\
+      $^1$Departemen Fisika, Fakultas Sains dan Analitika Data,
+      Institut Teknologi Sepuluh Nopember (ITS) \\
+      Jl. Arief Rahman Hakim, Surabaya 60111, Indonesia\\
+      $^2$Badan Riset dan Inovasi Nasional (BRIN)\\
+      Gedung BJ Habibie, Jl. MH Thamrin No. 8, Jakarta 10340, Indonesia\\
       \textit{e-mail}: 5001221120@student.its.ac.id\par}
       \vspace{3ex}
     \end{center}

@@ -21,48 +21,9 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{markowitz_portfolio_1952}
-\BIBentryALTinterwordspacing
-H.~Markowitz, ``\BIBforeignlanguage{en}{{PORTFOLIO} {SELECTION}*},''
-  \emph{\BIBforeignlanguage{en}{The Journal of Finance}}, vol.~7, no.~1, pp.
-  77--91, Mar. 1952. [Online]. Available:
-  \url{https://onlinelibrary.wiley.com/doi/10.1111/j.1540-6261.1952.tb01525.x}
-\BIBentrySTDinterwordspacing
-
-\bibitem{nielsen_quantum_2010}
-M.~A. Nielsen and I.~L. Chuan, ``Quantum {Computation} and {Quantum}
-  {Information},'' 2010.
-
-\bibitem{preskill_quantum_2018}
-\BIBentryALTinterwordspacing
-J.~Preskill, ``Quantum {Computing} in the {NISQ} era and beyond,''
-  \emph{Quantum}, vol.~2, p.~79, Aug. 2018, arXiv:1801.00862 [quant-ph].
-  [Online]. Available: \url{http://arxiv.org/abs/1801.00862}
-\BIBentrySTDinterwordspacing
-
-\bibitem{wei_solving_2025}
-\BIBentryALTinterwordspacing
-H.~Wei, Y.~J. Wang, H.~Yang, X.~Yang, M.~Cao, Q.~Xu, M.~Cai, Y.~Wang, Z.~Mao,
-  X.~Cao, Q.~Mei, J.~Wang, X.~Zhou, L.~Yao, and W.~Zhao,
-  ``\BIBforeignlanguage{en}{Solving {Multiple} {Discretization} {Portfolio}
-  {Optimization} {Problem} with {Quantum}-{Classical} {Hybrid} {Algorithms}},''
-  \emph{\BIBforeignlanguage{en}{Computational Economics}}, Jul. 2025. [Online].
-  Available: \url{https://link.springer.com/10.1007/s10614-025-11061-5}
-\BIBentrySTDinterwordspacing
-
-\bibitem{wang_variational_2025}
-\BIBentryALTinterwordspacing
-S.~Wang, P.~Wang, G.~Li, S.~Zhao, D.~Zhao, J.~Wang, Y.~Fang, M.~Dou, Y.~Gu,
-  Y.-C. Wu, and G.-P. Guo, ``\BIBforeignlanguage{en}{Variational quantum
-  eigensolver with linear depth problem-inspired ansatz for solving portfolio
-  optimization in finance},'' \emph{\BIBforeignlanguage{en}{Science China
-  Information Sciences}}, vol.~68, no.~8, p. 180504, Aug. 2025. [Online].
-  Available: \url{https://link.springer.com/10.1007/s11432-024-4185-1}
-\BIBentrySTDinterwordspacing
-
-\bibitem{dixit_variational_2025}
-A.~Dixit and A.~Kumari, ``\BIBforeignlanguage{en}{Variational {Principle} 2.0:
-  {The} {Variational} {Quantum} {Eigensolver}},'' Sep. 2025.
+\bibitem{john_von_neumann_theory_1953}
+{John Von Neumann} and {Oskar Morgenster}, ``Theory of {Game} and {Economic}
+  {Behavior},'' 1953.
 
 \bibitem{monderer_potential_1996}
 \BIBentryALTinterwordspacing
@@ -81,11 +42,88 @@ Y.~Yang, F.~Rubio, G.~Scutari, and D.~Palomar, ``Multi-portfolio
   \url{http://link.springer.com/10.1007/978-3-642-30373-9_13}
 \BIBentrySTDinterwordspacing
 
+\bibitem{freitas_game_2024}
+\BIBentryALTinterwordspacing
+J.~C. Freitas, A.~A. Pinto, and Ã.~Felgueiras, ``\BIBforeignlanguage{en}{Game
+  {Theory} for {Predicting} {Stocks}â€™ {Closing} {Prices}},''
+  \emph{\BIBforeignlanguage{en}{Mathematics}}, vol.~12, no.~17, p. 2676, Aug.
+  2024. [Online]. Available: \url{https://www.mdpi.com/2227-7390/12/17/2676}
+\BIBentrySTDinterwordspacing
+
 \bibitem{lucas_ising_2014}
 \BIBentryALTinterwordspacing
 A.~Lucas, ``Ising formulations of many {NP} problems,'' \emph{Frontiers in
   Physics}, vol.~2, 2014. [Online]. Available:
   \url{http://journal.frontiersin.org/article/10.3389/fphy.2014.00005/abstract}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mantegna_introduction_2000}
+\BIBentryALTinterwordspacing
+R.~N. Mantegna, H.~E. Stanley, and N.~A. Chriss,
+  ``\BIBforeignlanguage{en}{\textit{{An} {Introduction} to {Econophysics}:
+  {Correlations} and {Complexity} in {Finance}}},''
+  \emph{\BIBforeignlanguage{en}{Physics Today}}, vol.~53, no.~12, pp. 70--70,
+  Dec. 2000. [Online]. Available:
+  \url{https://pubs.aip.org/physicstoday/article/53/12/70/411205/An-Introduction-to-Econophysics-Correlations-and}
+\BIBentrySTDinterwordspacing
+
+\bibitem{galam_ising_2010}
+\BIBentryALTinterwordspacing
+S.~Galam and B.~Walliser, ``\BIBforeignlanguage{en}{Ising model versus normal
+  form game},'' \emph{\BIBforeignlanguage{en}{Physica A: Statistical Mechanics
+  and its Applications}}, vol. 389, no.~3, pp. 481--489, Feb. 2010. [Online].
+  Available:
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0378437109007821}
+\BIBentrySTDinterwordspacing
+
+\bibitem{spall_implementation_1998}
+J.~C. Spall, ``Implementation of the {Simulateous} {Perturbation} {Algorithm}
+  for {Stochastic} {Optimization},'' vol.~34, no.~3, Jul. 1998.
+
+\bibitem{preskill_quantum_2018}
+\BIBentryALTinterwordspacing
+J.~Preskill, ``Quantum {Computing} in the {NISQ} era and beyond,''
+  \emph{Quantum}, vol.~2, p.~79, Aug. 2018, arXiv:1801.00862 [quant-ph].
+  [Online]. Available: \url{http://arxiv.org/abs/1801.00862}
+\BIBentrySTDinterwordspacing
+
+\bibitem{fedorov_vqe_2022}
+\BIBentryALTinterwordspacing
+D.~A. Fedorov, B.~Peng, N.~Govind, and Y.~Alexeev,
+  ``\BIBforeignlanguage{en}{{VQE} method: a short survey and recent
+  developments},'' \emph{\BIBforeignlanguage{en}{Materials Theory}}, vol.~6,
+  no.~1, p.~2, Jan. 2022. [Online]. Available:
+  \url{https://materialstheory.springeropen.com/articles/10.1186/s41313-021-00032-6}
+\BIBentrySTDinterwordspacing
+
+\bibitem{dixit_variational_2025}
+A.~Dixit and A.~Kumari, ``\BIBforeignlanguage{en}{Variational {Principle} 2.0:
+  {The} {Variational} {Quantum} {Eigensolver}},'' Sep. 2025.
+
+\bibitem{dao_exploring_2025}
+\BIBentryALTinterwordspacing
+H.~L. Dao, ``\BIBforeignlanguage{en}{Exploring new variational quantum circuit
+  ansatzes for solving {SU}(2) matrix models},''
+  \emph{\BIBforeignlanguage{en}{The European Physical Journal C}}, vol.~85,
+  no.~6, p. 705, Jun. 2025. [Online]. Available:
+  \url{https://link.springer.com/10.1140/epjc/s10052-025-14322-7}
+\BIBentrySTDinterwordspacing
+
+\bibitem{ohya_fundamentals_1998}
+\BIBentryALTinterwordspacing
+M.~Ohya, ``Fundamentals of quantum mutual entropy and capacity,'' 1998, version
+  Number: 2. [Online]. Available: \url{https://arxiv.org/abs/quant-ph/9806042}
+\BIBentrySTDinterwordspacing
+
+\bibitem{crosato_shannon_2023}
+E.~Crosato and R.~G. Morris, ``\BIBforeignlanguage{en}{Shannon entropy and
+  mutual information},'' Sep. 2023.
+
+\bibitem{serafini_symplectic_2003}
+\BIBentryALTinterwordspacing
+A.~Serafini, F.~Illuminati, and S.~De~Siena, ``Symplectic invariants, entropic
+  measures and correlations of {Gaussian} states,'' 2003, version Number: 4.
+  [Online]. Available: \url{https://arxiv.org/abs/quant-ph/0307073}
 \BIBentrySTDinterwordspacing
 
 \bibitem{nakahara_quantum_2008}
@@ -94,19 +132,6 @@ M.~Nakahara, ``\BIBforeignlanguage{en}{Quantum {Computing}: {From} {Linear}
   {Algebra} to {Physical} {Realizations}},'' Mar. 2008. [Online]. Available:
   \url{https://www.taylorfrancis.com/articles/9781420012293}
 \BIBentrySTDinterwordspacing
-
-\bibitem{mitarai_quantum_2018}
-\BIBentryALTinterwordspacing
-K.~Mitarai, M.~Negoro, M.~Kitagawa, and K.~Fujii,
-  ``\BIBforeignlanguage{en}{Quantum circuit learning},''
-  \emph{\BIBforeignlanguage{en}{Physical Review A}}, vol.~98, no.~3, p. 032309,
-  Sep. 2018. [Online]. Available:
-  \url{https://link.aps.org/doi/10.1103/PhysRevA.98.032309}
-\BIBentrySTDinterwordspacing
-
-\bibitem{spall_implementation_1998}
-J.~C. Spall, ``Implementation of the {Simulateous} {Perturbation} {Algorithm}
-  for {Stochastic} {Optimization},'' vol.~34, no.~3, Jul. 1998.
 
 \bibitem{demiguel_optimal_2009}
 \BIBentryALTinterwordspacing

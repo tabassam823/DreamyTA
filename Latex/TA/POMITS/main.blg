@@ -11,52 +11,55 @@ Database file #1: ../Referensi.bib
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
-Warning--empty journal in nielsen_quantum_2010
-Warning--empty journal in dixit_variational_2025
+Warning--empty journal in john_von_neumann_theory_1953
 Warning--empty journal in jain_multi-portfolio_2012
-Warning--empty journal in nakahara_quantum_2008
 Warning--empty journal in spall_implementation_1998
+Warning--empty journal in dixit_variational_2025
+Warning--empty journal in ohya_fundamentals_1998
+Warning--empty journal in crosato_shannon_2023
+Warning--empty journal in serafini_symplectic_2003
+Warning--empty journal in nakahara_quantum_2008
 
 Done.
-You've used 13 entries,
+You've used 17 entries,
             4087 wiz_defined-function locations,
-            909 strings with 10295 characters,
-and the built_in function-call counts, 9116 in all, are:
-= -- 769
-> -- 232
-< -- 54
-+ -- 120
-- -- 48
-* -- 534
-:= -- 1510
-add.period$ -- 26
-call.type$ -- 13
-change.case$ -- 15
-chr.to.int$ -- 96
-cite$ -- 18
-duplicate$ -- 673
-empty$ -- 645
-format.name$ -- 56
-if$ -- 2032
+            938 strings with 10749 characters,
+and the built_in function-call counts, 10694 in all, are:
+= -- 944
+> -- 195
+< -- 68
++ -- 102
+- -- 36
+* -- 629
+:= -- 1861
+add.period$ -- 34
+call.type$ -- 17
+change.case$ -- 21
+chr.to.int$ -- 120
+cite$ -- 25
+duplicate$ -- 803
+empty$ -- 770
+format.name$ -- 47
+if$ -- 2363
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 124
-newline$ -- 82
-num.names$ -- 13
-pop$ -- 260
+int.to.str$ -- 17
+missing$ -- 136
+newline$ -- 100
+num.names$ -- 17
+pop$ -- 265
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 679
+skip$ -- 802
 stack$ -- 0
-substring$ -- 269
-swap$ -- 565
-text.length$ -- 22
+substring$ -- 325
+swap$ -- 655
+text.length$ -- 28
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 13
-warning$ -- 5
-while$ -- 32
-width$ -- 15
-write$ -- 175
-(There were 5 warnings)
+type$ -- 17
+warning$ -- 8
+while$ -- 41
+width$ -- 19
+write$ -- 221
+(There were 8 warnings)
