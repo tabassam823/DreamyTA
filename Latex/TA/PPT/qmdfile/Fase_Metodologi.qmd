@@ -88,7 +88,7 @@
 
 Dari transformasi $\omega_i = x_i/K$, diperoleh fungsi Lagrangian biner:
 
-$$\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
+$$f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
 
 ---
 
@@ -96,7 +96,7 @@ $$\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda
 
 Definisikan faktor penghindaran risiko $\gamma = 2/\lambda$, sehingga:
 
-$$U(\mathbf{x}) = - \frac{1}{\lambda} \mathcal{L}(\mathbf{x})$$
+$$U(\mathbf{x}) = - \frac{1}{\lambda} f(\mathbf{x})$$
 
 $$U(\mathbf{x}) = \sum_i \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j$$
 

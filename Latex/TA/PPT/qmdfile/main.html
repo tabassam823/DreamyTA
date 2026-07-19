@@ -205,7 +205,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title"><span style="font-size: 0.85em;">OPTIMASI PORTOFOLIO BERBASIS MODEL MARKOWITZ MENGGUNAKAN METODE VARIATIONAL QUANTUM EIGENSOLVER</span></h1>
-  <p class="subtitle">Tugas Akhir SF234801<br><span style="font-size: 0.8em;">9 Juli 2026</span></p>
+  <p class="subtitle">Tugas Akhir SF234801<br><span style="font-size: 0.8em;">Kamis, 9 Juli 2026</span></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -511,18 +511,18 @@ Struktur laporan arus kas fundamental.
 <div class="column" style="width:35%;">
 <div style="font-size: 0.6em;">
 <ul>
-<li><strong>Simple Return (<span class="math inline">\(R\)</span>):</strong> <span class="math display">\[ R_t = \frac{P_t - P_{t-1}}{P_{t-1}} \]</span></li>
-<li><strong>Expected Return (<span class="math inline">\(\bar{R}\)</span>):</strong> <span class="math display">\[ \bar{R} = \frac{1}{n} \sum_{t=1}^n R_t \]</span></li>
-<li><strong>Variance (<span class="math inline">\(\sigma^2\)</span>):</strong> <span class="math display">\[ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (R_t - \bar{R})^2 \]</span></li>
+<li><strong>Simple Return (<span class="math inline">\(R\)</span>):</strong> <span class="math display">\[ R_{i,t} = \frac{P_{i,t} - P_{i,t-1}}{P_{i,t-1}} \]</span></li>
+<li><strong>Expected Return (<span class="math inline">\(\bar{R}\)</span>):</strong> <span class="math display">\[ \bar{R}_i = \frac{1}{n} \sum_{t=1}^n R_{i,t} \]</span></li>
+<li><strong>Variance (<span class="math inline">\(\sigma^2\)</span>):</strong> <span class="math display">\[ \sigma_{i}^2 = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)^2 \]</span></li>
 <li><strong>Covariance (<span class="math inline">\(\sigma_{ij}\)</span>):</strong> <span class="math display">\[ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) \]</span></li>
 </ul>
 </div>
 </div><div class="column" style="width:35%;">
 <div style="font-size: 0.6em;">
 <ul>
-<li><strong>Log Return (<span class="math inline">\(r\)</span>):</strong> <span class="math display">\[ r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) \]</span></li>
-<li><strong>Expected Return (<span class="math inline">\(\bar{r}\)</span>):</strong> <span class="math display">\[ \bar{r} = \frac{1}{n} \sum_{t=1}^n r_t \]</span></li>
-<li><strong>Variance (<span class="math inline">\(\sigma^2\)</span>):</strong> <span class="math display">\[ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (r_t - \bar{r})^2 \]</span></li>
+<li><strong>Log Return (<span class="math inline">\(r\)</span>):</strong> <span class="math display">\[ r_{i,t} = \ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) \]</span></li>
+<li><strong>Expected Return (<span class="math inline">\(\bar{r}\)</span>):</strong> <span class="math display">\[ \bar{r}_i = \frac{1}{n} \sum_{t=1}^n r_{i,t} \]</span></li>
+<li><strong>Variance (<span class="math inline">\(\sigma^2\)</span>):</strong> <span class="math display">\[ \sigma_{i}^2 = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_{i})^2 \]</span></li>
 <li><strong>Covariance (<span class="math inline">\(\sigma_{ij}\)</span>):</strong> <span class="math display">\[ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j) \]</span></li>
 </ul>
 </div>
@@ -535,7 +535,7 @@ Transformasi pergerakan harga saham.
 </div>
 <div style="font-size: 0.6em; margin-top: 15px;">
 <ul>
-<li><span class="math inline">\(P_t\)</span>: Harga pada waktu <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(P_{i,t}\)</span>: Harga pada waktu <span class="math inline">\(t\)</span> untuk aset ke-<span class="math inline">\(i\)</span></li>
 </ul>
 </div>
 </div></div>
@@ -550,8 +550,8 @@ Transformasi pergerakan harga saham.
 <div class="column" style="width:60%;">
 <div style="font-size: 0.75em;">
 <ul>
-<li><strong>Mean-Variance:</strong> <span class="math display">\[ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i \]</span></li>
-<li><strong>Binerisasi:</strong> <span class="math display">\[ \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} \]</span></li>
+<li><strong>Mean-Variance:</strong> <span class="math display">\[ f(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i \]</span></li>
+<li><strong>Binerisasi:</strong> <span class="math display">\[ f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} \]</span></li>
 </ul>
 </div>
 <div style="font-size: 0.75em">
@@ -618,7 +618,7 @@ pie
 <div class="scrollable" style="max-height: 450px; font-size: 0.7em;">
 <p><strong>Langkah 1 — Formulasi Lagrangian Kontinu (Markowitz):</strong></p>
 <p>Fungsi biaya Markowitz dalam domain bobot <span class="math inline">\(\omega_i\)</span>:</p>
-<p><span class="math display">\[\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i\]</span></p>
+<p><span class="math display">\[f(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i\]</span></p>
 <p>dengan syarat <span class="math inline">\(\sum_i \omega_i = 1\)</span> dan <span class="math inline">\(\omega_i \geq 0\)</span>.</p>
 <hr>
 <p><strong>Langkah 2 — Substitusi Variabel Biner:</strong></p>
@@ -628,8 +628,8 @@ pie
 <hr>
 <p><strong>Langkah 3 — Substitusi ke Lagrangian:</strong></p>
 <p>Substitusi <span class="math inline">\(\omega_i = x_i/K\)</span> ke dalam fungsi Lagrangian:</p>
-<p><span class="math display">\[\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
-<p><span class="math display">\[\therefore \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
+<p><span class="math display">\[f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
+<p><span class="math display">\[\therefore f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
 <p>Nilai <span class="math inline">\(x_i = 1\)</span> merepresentasikan <strong>beli</strong>, sedangkan <span class="math inline">\(x_i = 0\)</span> merepresentasikan <strong>tidak membeli</strong>.</p>
 <hr>
 <table class="caption-top">
@@ -791,11 +791,11 @@ Data backtesting pada sebuah strategi trading
 <p><strong>Penurunan: Dari Model Markowitz Biner ke Fungsi Potensial EPG</strong></p>
 <p><strong>Langkah 1 — Lagrangian Biner Markowitz:</strong></p>
 <p>Dari transformasi <span class="math inline">\(\omega_i = x_i/K\)</span>, diperoleh fungsi Lagrangian biner:</p>
-<p><span class="math display">\[\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
+<p><span class="math display">\[f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}\]</span></p>
 <hr>
 <p><strong>Langkah 2 — Konversi ke Fungsi Utilitas:</strong></p>
 <p>Definisikan faktor penghindaran risiko <span class="math inline">\(\gamma = 2/\lambda\)</span>, sehingga:</p>
-<p><span class="math display">\[U(\mathbf{x}) = - \frac{1}{\lambda} \mathcal{L}(\mathbf{x})\]</span></p>
+<p><span class="math display">\[U(\mathbf{x}) = - \frac{1}{\lambda} f(\mathbf{x})\]</span></p>
 <p><span class="math display">\[U(\mathbf{x}) = \sum_i \frac{\mu_i}{K} x_i - \frac{\gamma}{2K^2} \sum_{i,j} \sigma_{ij} x_i x_j\]</span></p>
 <hr>
 <p><strong>Langkah 3 — Utilitas Individu Agen ke-<span class="math inline">\(i\)</span>:</strong></p>

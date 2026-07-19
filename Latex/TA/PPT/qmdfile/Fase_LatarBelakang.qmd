@@ -277,11 +277,11 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 :::: {.column width="35%"}
 ::: {style="font-size: 0.6em;"}
 * **Simple Return ($R$):**
-  $$ R_t = \frac{P_t - P_{t-1}}{P_{t-1}} $$
+  $$ R_{i,t} = \frac{P_{i,t} - P_{i,t-1}}{P_{i,t-1}} $$
 * **Expected Return ($\bar{R}$):**
-  $$ \bar{R} = \frac{1}{n} \sum_{t=1}^n R_t $$
+  $$ \bar{R}_i = \frac{1}{n} \sum_{t=1}^n R_{i,t} $$
 * **Variance ($\sigma^2$):**
-  $$ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (R_t - \bar{R})^2 $$
+  $$ \sigma_{i}^2 = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)^2 $$
 * **Covariance ($\sigma_{ij}$):**
   $$ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (R_{i,t} - \bar{R}_i)(R_{j,t} - \bar{R}_j) $$
 :::
@@ -289,11 +289,11 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 :::: {.column width="35%"}
 ::: {style="font-size: 0.6em;"}
 * **Log Return ($r$):**
-  $$ r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) $$
+  $$ r_{i,t} = \ln\left(\frac{P_{i,t}}{P_{i,t-1}}\right) $$
 * **Expected Return ($\bar{r}$):**
-  $$ \bar{r} = \frac{1}{n} \sum_{t=1}^n r_t $$
+  $$ \bar{r}_i = \frac{1}{n} \sum_{t=1}^n r_{i,t} $$
 * **Variance ($\sigma^2$):**
-  $$ \sigma^2 = \frac{1}{n-1} \sum_{t=1}^n (r_t - \bar{r})^2 $$
+  $$ \sigma_{i}^2 = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_{i})^2 $$
 * **Covariance ($\sigma_{ij}$):**
   $$ \sigma_{ij} = \frac{1}{n-1} \sum_{t=1}^n (r_{i,t} - \bar{r}_i)(r_{j,t} - \bar{r}_j) $$
 :::
@@ -304,7 +304,7 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 <div style="font-size: 0.6em;">Transformasi pergerakan harga saham.</div>
 </div>
 ::: {style="font-size: 0.6em; margin-top: 15px;"}
-* $P_t$: Harga pada waktu $t$
+* $P_{i,t}$: Harga pada waktu $t$ untuk aset ke-$i$
 :::
 ::::
 :::::
@@ -319,9 +319,9 @@ Sumber: Wang *et al.* (2025); Wei *et al.* (2025)
 :::: {.column width="60%"}
 ::: {style="font-size: 0.75em;"}
 * **Mean-Variance:**
-  $$ \mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i $$
+  $$ f(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i $$
 * **Binerisasi:**
-  $$ \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} $$
+  $$ f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K} $$
 :::
 
 ::: {style="font-size: 0.75em"}
@@ -363,7 +363,7 @@ pie
 
 Fungsi biaya Markowitz dalam domain bobot $\omega_i$:
 
-$$\mathcal{L}(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i$$
+$$f(\mathbf{\omega}) = \sum_{i,j} \sigma_{ij} \omega_i \omega_j - \lambda \sum_i \mu_i \omega_i$$
 
 dengan syarat $\sum_i \omega_i = 1$ dan $\omega_i \geq 0$.
 
@@ -383,9 +383,9 @@ di mana $K$ adalah jumlah aset yang dipilih dari total $N$ kandidat.
 
 Substitusi $\omega_i = x_i/K$ ke dalam fungsi Lagrangian:
 
-$$\mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
+$$f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i}{K} \frac{x_j}{K} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
 
-$$\therefore \mathcal{L}(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
+$$\therefore f(\mathbf{x}) = \sum_{i,j} \sigma_{ij} \frac{x_i x_j}{K^2} - \lambda \sum_i \mu_i \frac{x_i}{K}$$
 
 Nilai $x_i = 1$ merepresentasikan **beli**, sedangkan $x_i = 0$ merepresentasikan **tidak membeli**.
 
