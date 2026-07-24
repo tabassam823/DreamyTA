@@ -2,16 +2,11 @@ This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 A level-1 auxiliary file: Contents/0_BagianDepan/Cover_Dalam.aux
-A level-1 auxiliary file: Contents/0_BagianDepan/Lembar_Pengesahan.aux
-A level-1 auxiliary file: Contents/0_BagianDepan/Approval_Page.aux
-White space in argument---line 24 of file main.aux
- : \@input{Contents/0_BagianDepan/Lembar
- :                                       Orisinalitas.aux}
-I'm skipping whatever remains of this command
-White space in argument---line 28 of file main.aux
- : \@input{Contents/0_BagianDepan/Lembar
- :                                       Originality.aux}
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: Contents/0_BagianDepan/Cover_Inside.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Lembar_Pengesahan_1.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Approval_Page_1.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Lembar_Orisinalitas_1.aux
+A level-1 auxiliary file: Contents/0_BagianDepan/Lembar_Originality_1.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstrak.aux
 A level-1 auxiliary file: Contents/Abstrak/Abstract.aux
 A level-1 auxiliary file: Contents/0_BagianDepan/Kata_Pengantar.aux
@@ -102,7 +97,7 @@ while executing---line 5079 of file apacite.bst
 Warning--No journal in jain_multi-portfolio_2012
 You've used 86 entries,
             6951 wiz_defined-function locations,
-            1931 strings with 33610 characters,
+            1934 strings with 33748 characters,
 and the built_in function-call counts, 176768 in all, are:
 = -- 20721
 > -- 1542
@@ -141,4 +136,4 @@ warning$ -- 23
 while$ -- 1074
 width$ -- 0
 write$ -- 3143
-(There were 13 error messages)
+(There were 11 error messages)

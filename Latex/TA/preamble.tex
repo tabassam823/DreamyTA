@@ -27,8 +27,10 @@
 \usepackage[nosectionbib]{apacite}
 
 % --- Menerjemahkan 'et al.' menjadi 'dkk.' pada apacite ---
-\renewcommand{\BOthers}[1]{dkk.\hbox{}}
-\renewcommand{\BOthersStar}[1]{dkk.\hbox{}}
+\makeatletter
+\@ifundefined{BOthers}{\newcommand{\BOthers}[1]{dkk.\hbox{}}}{\renewcommand{\BOthers}[1]{dkk.\hbox{}}}
+\@ifundefined{BOthersStar}{\newcommand{\BOthersStar}[1]{dkk.\hbox{}}}{\renewcommand{\BOthersStar}[1]{dkk.\hbox{}}}
+\makeatother
 
 \usepackage{background}
 \usepackage{tabularx}
